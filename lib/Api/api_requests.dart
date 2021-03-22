@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 
 class ApiRequests {
-  // Gets list of torrents for a particular account
+  // Gets list of torrents
   static Stream<List<TorrentModel>> getAllTorrents() async* {
     while (true) {
       try {
