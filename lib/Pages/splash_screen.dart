@@ -1,12 +1,11 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flood_mobile/Constants/AppColor.dart';
-import 'package:flood_mobile/Route/routes.dart';
+import 'package:flood_mobile/Route/router.gr.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
-  SplashScreen({Key key}) : super(key: key);
-
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -20,8 +19,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> onEnd() async {
-    Navigator.of(context).pushNamedAndRemoveUntil(
-        Routes.loginScreenRoute, (Route<dynamic> route) => false);
+    context.router.pushAndRemoveUntil(LoginRoute(),
+        predicate: (Route<dynamic> route) => false);
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // String token = prefs.getString('token');
     // print('Token: ' + token);

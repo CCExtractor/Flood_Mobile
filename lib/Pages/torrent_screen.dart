@@ -23,11 +23,11 @@ class _TorrentScreenState extends State<TorrentScreen> {
           builder: (BuildContext context,
               AsyncSnapshot<List<TorrentModel>> snapshot) {
             return ListView.builder(
-              itemCount: snapshot.data.length,
+              itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                    title: Text(snapshot.data[index].name),
-                    subtitle: Text(snapshot.data[index].percentComplete
+                    title: Text(snapshot.data![index].name),
+                    subtitle: Text(snapshot.data![index].percentComplete
                             .toStringAsFixed(2) +
                         " %"),
                     onTap: () => print("ListTile"));

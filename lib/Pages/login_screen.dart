@@ -1,12 +1,240 @@
 import 'package:flood_mobile/Constants/AppColor.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool showPass = true;
+  bool showSpinner = false;
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColor.primaryColor,
-      body: SingleChildScrollView(),
+    double hp = MediaQuery.of(context).size.height;
+    double wp = MediaQuery.of(context).size.width;
+    return ModalProgressHUD(
+      inAsyncCall: showSpinner,
+      child: Scaffold(
+        backgroundColor: AppColor.primaryColor,
+        body: SafeArea(
+          child: Form(
+            key: _formKey,
+            child: Container(
+              height: double.infinity,
+              child: SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: wp * 0.08, right: wp * 0.08, top: hp * 0.08),
+                  child: Column(
+                    children: <Widget>[
+                      Image(
+                        image: AssetImage(
+                          'assets/images/icon.png',
+                        ),
+                        width: 100,
+                        height: 100,
+                      ),
+                      Text(
+                        'Welcome to Flood',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 28),
+                      ),
+                      Text(
+                        'Sign in to your account',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 16),
+                      ),
+                      SizedBox(
+                        height: hp * 0.02,
+                      ),
+                      Container(
+                        child: TextFormField(
+                          controller: emailController,
+                          style: TextStyle(
+                            color: AppColor.textColor,
+                          ),
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.person,
+                              color: Colors.white,
+                            ),
+                            labelText: 'Username',
+                            labelStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColor.accentColor,
+                              ),
+                            ),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            disabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Field cannot be empty';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: hp * 0.01,
+                      ),
+                      Container(
+                        child: Stack(
+                          children: <Widget>[
+                            TextFormField(
+                              controller: passwordController,
+                              style: TextStyle(
+                                color: AppColor.textColor,
+                              ),
+                              obscureText: showPass,
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.lock_outline,
+                                  color: Colors.white,
+                                ),
+                                labelText: 'Password',
+                                labelStyle: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: AppColor.accentColor,
+                                  ),
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                disabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Field cannot be empty';
+                                }
+                                return null;
+                              },
+                            ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    showPass = !showPass;
+                                  });
+                                  print(showPass);
+                                },
+                                icon: Icon(
+                                  (showPass)
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: hp * 0.06,
+                      ),
+                      Container(
+                        height: hp * 0.07,
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              setState(() {
+                                showSpinner = true;
+                              });
+                              // bool isLoginSuccessful =
+                              //     await Provider.of<AuthProvider>(context,
+                              //             listen: false)
+                              //         .loginUser(
+                              //             email: 'ankit2632000@gmai.com',
+                              //             password: 'Test@123',
+                              //             username: 'astast');
+                              // if (isLoginSuccessful) {
+                              //   Toasts.showSuccessToast(
+                              //       msg: 'Login Successful');
+                              //   Navigator.of(context).pushNamedAndRemoveUntil(
+                              //       homePageRoute,
+                              //       (Route<dynamic> route) => false);
+                              // } else {
+                              //   Toasts.showFailToast(msg: 'Login Error');
+                              // }
+                              setState(() {
+                                showSpinner = false;
+                              });
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14.0),
+                            ),
+                            primary: AppColor.accentColor,
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Login",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w900),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: hp * 0.02,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

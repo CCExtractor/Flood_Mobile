@@ -33,7 +33,7 @@ class ApiRequests {
         response = await dio.get(
           'http://192.168.43.251:3000/api/torrents',
         );
-        List<TorrentModel> torrentList = new List<TorrentModel>();
+        List<TorrentModel> torrentList = <TorrentModel>[];
         for (var hash in response.data['torrents'].keys) {
           try {
             TorrentModel torrentModel =
@@ -46,7 +46,7 @@ class ApiRequests {
         yield torrentList;
       } catch (e) {
         print('Exception caught in Api Request ' + e.toString());
-        yield null;
+        yield [];
       }
       await Future.delayed(Duration(seconds: 1), () {});
     }
