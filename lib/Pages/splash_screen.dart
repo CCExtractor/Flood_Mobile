@@ -23,6 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token') ?? '';
     print('Token: ' + token);
+    prefs.setString('token', '');
 
     if (token != '') {
       Provider.of<UserDetailProvider>(context, listen: false).setToken(token);

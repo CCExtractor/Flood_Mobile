@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: Colors.white),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: AppColor.accentColor,
+                                color: AppColor.greenAccentColor,
                               ),
                             ),
                             border: UnderlineInputBorder(
@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     color: Colors.white),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: AppColor.accentColor,
+                                    color: AppColor.greenAccentColor,
                                   ),
                                 ),
                                 border: UnderlineInputBorder(
@@ -212,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14.0),
                             ),
-                            primary: AppColor.accentColor,
+                            primary: AppColor.greenAccentColor,
                           ),
                           child: Center(
                             child: Text(

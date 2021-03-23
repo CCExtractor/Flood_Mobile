@@ -124,19 +124,33 @@ class _MenuState extends State<Menu> {
                 },
                 title: 'Torrents'),
             NavDrawerListTile(
-                icon: Icons.check,
+                icon: Icons.rss_feed,
                 onTap: () {
                   controller.position = 1;
                   controller.toggle();
                 },
-                title: 'Completed'),
+                title: 'Feed'),
             NavDrawerListTile(
-                icon: Icons.star,
+                icon: Icons.settings,
                 onTap: () {
                   controller.position = 2;
                   controller.toggle();
                 },
-                title: 'Starred'),
+                title: 'Settings'),
+            NavDrawerListTile(
+                icon: Icons.speed,
+                onTap: () {
+                  controller.position = 2;
+                  controller.toggle();
+                },
+                title: 'Speed Limits'),
+            NavDrawerListTile(
+                icon: Icons.exit_to_app,
+                onTap: () {
+                  controller.position = 2;
+                  controller.toggle();
+                },
+                title: 'Logout'),
             NavDrawerListTile(
                 icon: Icons.info,
                 onTap: () {

@@ -29,12 +29,14 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   dio: ^4.0.0-prev1
+  duration: ^3.0.6
   flutter_keyboard_visibility: ^5.0.0
   flutter_svg: ^0.21.0-nullsafety.0
   fluttertoast: ^8.0.3
   hidden_drawer_menu: ^2.0.1
   json_annotation: 3.1.1
   loading_overlay: ^0.3.0
+  percent_indicator: ^2.1.9+1
   provider: ^5.0.0
   shared_preferences: ^2.0.5
 

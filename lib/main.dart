@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           theme: ThemeData.dark().copyWith(
             primaryColor: AppColor.primaryColor,
-            accentColor: AppColor.accentColor,
+            accentColor: AppColor.greenAccentColor,
           ),
           initialRoute: Routes.splashScreenRoute,
           onGenerateRoute: RouteGenerator.generateRoute,
