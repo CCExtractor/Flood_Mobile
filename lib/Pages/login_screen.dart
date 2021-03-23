@@ -1,10 +1,7 @@
-import 'package:auto_route/annotations.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Components/toast_component.dart';
 import 'package:flood_mobile/Constants/AppColor.dart';
-import 'package:flood_mobile/Pages/torrent_screen.dart';
-import 'package:flood_mobile/Route/router.gr.dart';
+import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
@@ -102,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           validator: (value) {
-                            if (value!.isEmpty) {
+                            if (value.isEmpty) {
                               return 'Field cannot be empty';
                             }
                             return null;
@@ -152,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               validator: (value) {
-                                if (value!.isEmpty) {
+                                if (value.isEmpty) {
                                   return 'Field cannot be empty';
                                 }
                                 return null;
@@ -189,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(20)),
                         child: ElevatedButton(
                           onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
+                            if (_formKey.currentState.validate()) {
                               setState(() {
                                 showSpinner = true;
                               });
@@ -200,9 +197,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (isLoginSuccessful) {
                                 Toasts.showSuccessToast(
                                     msg: 'Login Successful');
-                                context.router.pushAndRemoveUntil(
-                                    TorrentRoute(),
-                                    predicate: (Route<dynamic> route) => false);
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    Routes.homeScreenRoute,
+                                    (Route<dynamic> route) => false);
                               } else {
                                 Toasts.showFailToast(msg: 'Login Error');
                               }

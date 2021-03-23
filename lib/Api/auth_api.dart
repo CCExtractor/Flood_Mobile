@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:auto_route/annotations.dart';
 import 'package:dio/dio.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,9 +9,9 @@ import 'api.dart';
 
 class AuthApi {
   static Future<bool> loginUser(
-      {required String username,
-      required String password,
-      required BuildContext context}) async {
+      {@required String username,
+      @required String password,
+      @required BuildContext context}) async {
     try {
       String url = Api.baseUrl + Api.authenticateUrl;
       print('---LOGIN USER---');
@@ -36,7 +34,7 @@ class AuthApi {
         //Successfully Logged in
         print(response.data);
         String token =
-            response.headers['Set-Cookie']![0].toString().split(';')[0];
+            response.headers['Set-Cookie'][0].toString().split(';')[0];
         print('Token ' + token);
         // Setting token in shared preference
         SharedPreferences prefs = await SharedPreferences.getInstance();
