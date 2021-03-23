@@ -1,9 +1,11 @@
 import 'dart:async';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flood_mobile/Constants/AppColor.dart';
+import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -19,34 +21,18 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> onEnd() async {
-    context.router.pushAndRemoveUntil(LoginRoute(),
-        predicate: (Route<dynamic> route) => false);
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // String token = prefs.getString('token');
-    // print('Token: ' + token);
-    // if (token != null && token != '') {
-    //   Provider.of<AuthProvider>(context, listen: false)
-    //       .changeGuestStatus(false);
-    //   Navigator.of(context).pushNamedAndRemoveUntil(
-    //       homePageRoute, (Route<dynamic> route) => false);
-    // } else {
-    //   Navigator.of(context).pushNamedAndRemoveUntil(
-    //       onboardingRoute, (Route<dynamic> route) => false);
-    //   // Navigator.of(context).pushReplacement(
-    //   //   new PageRouteBuilder(
-    //   //     maintainState: true,
-    //   //     opaque: true,
-    //   //     pageBuilder: (context, _, __) => OnboardingPage(),
-    //   //     transitionDuration: const Duration(seconds: 1),
-    //   //     transitionsBuilder: (context, anim1, anim2, child) {
-    //   //       return new FadeTransition(
-    //   //         child: child,
-    //   //         opacity: anim1,
-    //   //       );
-    //   //     },
-    //   //   ),
-    //   // );
-    // }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token') ?? '';
+    print('Token: ' + token);
+
+    if (token != '') {
+      Provider.of<UserDetailProvider>(context, listen: false).setToken(token);
+      context.router.pushAndRemoveUntil(TorrentRoute(),
+          predicate: (Route<dynamic> route) => false);
+    } else {
+      context.router.pushAndRemoveUntil(LoginRoute(),
+          predicate: (Route<dynamic> route) => false);
+    }
   }
 
   @override

@@ -1,6 +1,12 @@
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flood_mobile/Api/auth_api.dart';
+import 'package:flood_mobile/Components/toast_component.dart';
 import 'package:flood_mobile/Constants/AppColor.dart';
+import 'package:flood_mobile/Pages/torrent_screen.dart';
+import 'package:flood_mobile/Route/router.gr.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -10,15 +16,16 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool showPass = true;
   bool showSpinner = false;
-  TextEditingController emailController = new TextEditingController();
+  TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
     double wp = MediaQuery.of(context).size.width;
-    return ModalProgressHUD(
-      inAsyncCall: showSpinner,
+    return LoadingOverlay(
+      color: AppColor.primaryColor,
+      isLoading: showSpinner,
       child: Scaffold(
         backgroundColor: AppColor.primaryColor,
         body: SafeArea(
@@ -55,11 +62,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontSize: 16),
                       ),
                       SizedBox(
-                        height: hp * 0.02,
+                        height: hp * 0.06,
                       ),
                       Container(
                         child: TextFormField(
-                          controller: emailController,
+                          controller: usernameController,
                           style: TextStyle(
                             color: AppColor.textColor,
                           ),
@@ -186,22 +193,19 @@ class _LoginScreenState extends State<LoginScreen> {
                               setState(() {
                                 showSpinner = true;
                               });
-                              // bool isLoginSuccessful =
-                              //     await Provider.of<AuthProvider>(context,
-                              //             listen: false)
-                              //         .loginUser(
-                              //             email: 'ankit2632000@gmai.com',
-                              //             password: 'Test@123',
-                              //             username: 'astast');
-                              // if (isLoginSuccessful) {
-                              //   Toasts.showSuccessToast(
-                              //       msg: 'Login Successful');
-                              //   Navigator.of(context).pushNamedAndRemoveUntil(
-                              //       homePageRoute,
-                              //       (Route<dynamic> route) => false);
-                              // } else {
-                              //   Toasts.showFailToast(msg: 'Login Error');
-                              // }
+                              bool isLoginSuccessful = await AuthApi.loginUser(
+                                  username: usernameController.text,
+                                  password: passwordController.text,
+                                  context: context);
+                              if (isLoginSuccessful) {
+                                Toasts.showSuccessToast(
+                                    msg: 'Login Successful');
+                                context.router.pushAndRemoveUntil(
+                                    TorrentRoute(),
+                                    predicate: (Route<dynamic> route) => false);
+                              } else {
+                                Toasts.showFailToast(msg: 'Login Error');
+                              }
                               setState(() {
                                 showSpinner = false;
                               });
