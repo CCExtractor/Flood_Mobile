@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^4.0.0-prev1
   duration: ^3.0.6
+  expansion_tile_card: ^1.1.0
   flutter_keyboard_visibility: ^5.0.0
   flutter_svg: ^0.21.0-nullsafety.0
   fluttertoast: ^8.0.3
