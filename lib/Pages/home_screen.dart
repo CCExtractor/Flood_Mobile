@@ -1,10 +1,13 @@
+import 'dart:convert';
+
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Constants/AppColor.dart';
+import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Pages/torrent_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/controllers/animated_drawer_controller.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,6 +15,51 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  http.Client _client;
+  subscribe() async {
+    print("Subscribing..");
+    try {
+      _client = http.Client();
+      var request = new http.Request(
+          "GET",
+          Uri.parse(
+              "http://192.168.43.251:3000/api/activity-stream?historySnapshot=FIVE_MINUTE"));
+      request.headers["Cache-Control"] = "no-cache";
+      request.headers["Accept"] = "text/event-stream";
+      request.headers["Cookie"] =
+          "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2MTY4NjQzOTMsImV4cCI6MTYxNzQ2OTE5M30.wqKTZ2TPMuwJj9YEAGJRh5pbAv9D4arPhxTywa2KJMU";
+
+      Future<http.StreamedResponse> response = _client.send(request);
+
+      response.asStream().listen((streamedResponse) {
+        print(
+            "Received streamedResponse.statusCode:${streamedResponse.statusCode}");
+        streamedResponse.stream.listen((data) {
+          final parsedData = utf8.decode(data);
+          final eventType = parsedData.split("\n")[1];
+          if (eventType != null && eventType != '') {
+            if (eventType.split(':')[1] == 'TORRENT_LIST_DIFF_CHANGE') {
+              String data = parsedData.split("\n")[2].split('data:')[1];
+            }
+          }
+        });
+      });
+    } catch (e) {
+      print("Caught $e");
+    }
+  }
+
+  unsubscribe() {
+    _client.close();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    //subscribe();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;

@@ -78,7 +78,7 @@ class _TorrentTileState extends State<TorrentTile> {
                 Row(
                   children: [
                     Text(
-                      (widget.model.status.contains('active'))
+                      (widget.model.status.contains('downloading'))
                           ? 'Downloading  '
                           : 'Stopped  ',
                       style: TextStyle(
@@ -125,7 +125,7 @@ class _TorrentTileState extends State<TorrentTile> {
         trailing: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            (widget.model.status.contains('active'))
+            (widget.model.status.contains('downloading'))
                 ? GestureDetector(
                     child: Container(
                       width: 30,
