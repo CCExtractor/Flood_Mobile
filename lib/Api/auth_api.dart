@@ -38,7 +38,7 @@ class AuthApi {
         print('Token ' + token);
         // Setting token in shared preference
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('token', token);
+        await prefs.setString('floodToken', token);
         Provider.of<UserDetailProvider>(context, listen: false).setToken(token);
         return true;
       } else {

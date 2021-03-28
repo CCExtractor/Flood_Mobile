@@ -21,9 +21,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> onEnd() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString('token') ?? '';
+    String token = prefs.getString('floodToken') ?? '';
     print('Token: ' + token);
-    prefs.setString('token', '');
 
     if (token != '') {
       Provider.of<UserDetailProvider>(context, listen: false).setToken(token);
