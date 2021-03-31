@@ -1,16 +1,33 @@
-# flood_mobile
-
-A new Flutter application.
+# Flood Mobile App
+<img src="https://user-images.githubusercontent.com/52864956/112930174-70679f00-9137-11eb-9563-947e0a3ff5a8.png" alt="ruTorrent Mobile" height=200px>
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Clone the repository from GitHub:
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+git clone https://github.com/pratikbaid3/flood_mobile
+```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+2. Navigate to project's root directory:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+cd flood_mobile
+```
+
+3. Check for Flutter setup and connected devices:
+
+```bash
+flutter doctor
+```
+
+4. For IOS
+- Uncomment ```platform :ios, '9.0'``` from ios/Podfile
+- Cd into the new ios directory```cd ios```
+- From the ios directory ```pod install --verbose```
+
+5. Run the app:
+
+```bash
+flutter run
+```
