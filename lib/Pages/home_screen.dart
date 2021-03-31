@@ -7,6 +7,7 @@ import 'package:flood_mobile/Pages/torrent_screen.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 import 'package:http/http.dart' as http;
@@ -31,59 +32,61 @@ class _HomeScreenState extends State<HomeScreen> {
     double hp = MediaQuery.of(context).size.height;
     double wp = MediaQuery.of(context).size.width;
 
-    return SimpleHiddenDrawer(
-      withShadow: true,
-      slidePercent: wp * 0.15,
-      contentCornerRadius: 40,
-      menu: Menu(),
-      screenSelectedBuilder: (position, controller) {
-        Widget screenCurrent;
-        switch (position) {
-          case 0:
-            screenCurrent = TorrentScreen();
-            break;
-          case 1:
-            screenCurrent = TorrentScreen();
-            break;
-          case 2:
-            screenCurrent = TorrentScreen();
-            break;
-        }
+    return KeyboardDismissOnTap(
+      child: SimpleHiddenDrawer(
+        withShadow: true,
+        slidePercent: wp * 0.15,
+        contentCornerRadius: 40,
+        menu: Menu(),
+        screenSelectedBuilder: (position, controller) {
+          Widget screenCurrent;
+          switch (position) {
+            case 0:
+              screenCurrent = TorrentScreen();
+              break;
+            case 1:
+              screenCurrent = TorrentScreen();
+              break;
+            case 2:
+              screenCurrent = TorrentScreen();
+              break;
+          }
 
-        return Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(
-                Icons.menu,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                controller.toggle();
-              },
-            ),
-            title: Image(
-              image: AssetImage(
-                'assets/images/icon.png',
-              ),
-              width: 60,
-              height: 60,
-            ),
-            centerTitle: true,
-            backgroundColor: AppColor.primaryColor,
-            elevation: 0,
-            actions: [
-              IconButton(
+          return Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
                 icon: Icon(
-                  Icons.notifications,
+                  Icons.menu,
                   color: Colors.white,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  controller.toggle();
+                },
               ),
-            ],
-          ),
-          body: screenCurrent,
-        );
-      },
+              title: Image(
+                image: AssetImage(
+                  'assets/images/icon.png',
+                ),
+                width: 60,
+                height: 60,
+              ),
+              centerTitle: true,
+              backgroundColor: AppColor.primaryColor,
+              elevation: 0,
+              actions: [
+                IconButton(
+                  icon: Icon(
+                    Icons.notifications,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+            body: screenCurrent,
+          );
+        },
+      ),
     );
   }
 }
