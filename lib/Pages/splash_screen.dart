@@ -23,7 +23,6 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('floodToken') ?? '';
     print('Token: ' + token);
-
     if (token != '') {
       Provider.of<UserDetailProvider>(context, listen: false).setToken(token);
       Navigator.of(context).pushNamedAndRemoveUntil(

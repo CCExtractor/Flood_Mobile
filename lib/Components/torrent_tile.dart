@@ -104,14 +104,14 @@ class _TorrentTileState extends State<TorrentTile> {
                 Row(
                   children: [
                     Text(
-                      byteToGbMbConverter(byte: widget.model.bytesDone),
+                      byteToGbMbKbConverter(byte: widget.model.bytesDone),
                       style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
                     Text(' / '),
                     Text(
-                      byteToGbMbConverter(byte: widget.model.sizeBytes),
+                      byteToGbMbKbConverter(byte: widget.model.sizeBytes),
                       style: TextStyle(
                         color: Colors.white,
                       ),

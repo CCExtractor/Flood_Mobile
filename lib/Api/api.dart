@@ -4,4 +4,6 @@ class Api {
   static String startTorrent = '/api/torrents/start';
   static String getTorrentList = '/api/torrents';
   static String stopTorrent = '/api/torrents/stop';
+  static String eventsStream =
+      '/api/activity-stream?historySnapshot=FIVE_MINUTE';
 }

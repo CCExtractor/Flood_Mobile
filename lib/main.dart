@@ -1,4 +1,5 @@
 import 'package:flood_mobile/Constants/AppColor.dart';
+import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<UserDetailProvider>(
           create: (context) => UserDetailProvider(),
+        ),
+        ChangeNotifierProvider<HomeProvider>(
+          create: (context) => HomeProvider(),
         ),
       ],
       child: KeyboardDismissOnTap(
