@@ -1,6 +1,5 @@
-import 'dart:convert';
-
-import 'package:flood_mobile/Api/server_sent_events_api.dart';
+import 'package:client_sse/client_sse.dart';
+import 'package:flood_mobile/Api/api.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Constants/AppColor.dart';
 import 'package:flood_mobile/Pages/torrent_screen.dart';
@@ -10,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flood_mobile/Api/server_sent_events_api.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -22,8 +21,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     SSEApi.subscribeToSSE(context);
+    // SSEClient.subscribeToSSE(Api.baseUrl + Api.eventsStream,
+    //         'jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2MTc2MzA1MzgsImV4cCI6MTYxODIzNTMzOH0.XUQC5Uup_rIuVpMohpGDUgGnmoNu0xRBbjy82-qz_4w')
+    //     .listen((event) {
+    //   print('Id: ' + event.id);
+    //   print('Event: ' + event.event);
+    //   print('Data: ' + event.data);
+    // });
     super.initState();
   }
 
