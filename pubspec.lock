@@ -120,15 +120,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
-  client_sse:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "56d3417d022b5823bcd677eb1e1d423810d347d3"
-      url: "https://github.com/pratikbaid3/client_sse"
-    source: git
-    version: "0.0.1"
   clock:
     dependency: transitive
     description:
@@ -232,6 +223,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_client_sse:
+    dependency: "direct main"
+    description:
+      path: "packages/flutter_client_sse"
+      relative: true
+    source: path
+    version: "0.0.1"
   flutter_keyboard_visibility:
     dependency: "direct main"
     description:
@@ -340,6 +338,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.1"
+  json_patch:
+    dependency: "direct main"
+    description:
+      name: json_patch
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0+1"
   json_serializable:
     dependency: "direct dev"
     description:

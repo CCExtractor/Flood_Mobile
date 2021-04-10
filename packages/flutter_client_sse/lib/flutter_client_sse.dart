@@ -1,4 +1,4 @@
-library client_sse;
+library flutter_client_sse;
 
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';

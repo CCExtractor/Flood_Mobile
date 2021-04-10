@@ -1,4 +1,4 @@
-part of client_sse;
+part of flutter_client_sse;
 
 class SSEModel {
   String id = '';
