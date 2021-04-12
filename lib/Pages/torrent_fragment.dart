@@ -1,7 +1,5 @@
-import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Components/torrent_tile.dart';
-import 'package:flood_mobile/Constants/AppColor.dart';
-import 'package:flood_mobile/Model/torrent_model.dart';
+import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -14,8 +12,7 @@ class TorrentScreen extends StatefulWidget {
 }
 
 class _TorrentScreenState extends State<TorrentScreen> {
-  TextEditingController searchTextEditingController =
-      new TextEditingController();
+  String keyword = '';
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
@@ -82,7 +79,11 @@ class _TorrentScreenState extends State<TorrentScreen> {
                       top: hp * 0.01,
                       bottom: hp * 0.02),
                   child: TextField(
-                    controller: searchTextEditingController,
+                    onChanged: (value) {
+                      setState(() {
+                        keyword = value;
+                      });
+                    },
                     decoration: InputDecoration(
                       hintText: 'Search Torrent',
                       border: OutlineInputBorder(
@@ -92,31 +93,25 @@ class _TorrentScreenState extends State<TorrentScreen> {
                   ),
                 ),
                 Expanded(
-                  child: StreamBuilder(
-                    stream: TorrentApi.getAllTorrents(context: context),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<List<TorrentModel>> snapshot) {
-                      return (snapshot.hasData && snapshot.data.length != 0)
-                          ? ListView.builder(
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (context, index) {
-                                if (snapshot.data[index].name.contains(
-                                    searchTextEditingController.text)) {
-                                  return TorrentTile(
-                                      model: snapshot.data[index]);
-                                }
-                                return Container();
-                              },
-                            )
-                          : Center(
-                              child: SvgPicture.asset(
-                                'assets/images/empty_dark.svg',
-                                width: 120,
-                                height: 120,
-                              ),
-                            );
-                    },
-                  ),
+                  child: (model.torrentList.length != 0)
+                      ? ListView.builder(
+                          itemCount: model.torrentList.length,
+                          itemBuilder: (context, index) {
+                            if (model.torrentList[index].name
+                                .contains(keyword)) {
+                              return TorrentTile(
+                                  model: model.torrentList[index]);
+                            }
+                            return Container();
+                          },
+                        )
+                      : Center(
+                          child: SvgPicture.asset(
+                            'assets/images/empty_dark.svg',
+                            width: 120,
+                            height: 120,
+                          ),
+                        ),
                 ),
               ],
             ),

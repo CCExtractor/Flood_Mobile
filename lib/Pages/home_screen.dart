@@ -1,18 +1,15 @@
-import 'package:flood_mobile/Api/api.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
-import 'package:flood_mobile/Constants/AppColor.dart';
+import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Pages/torrent_fragment.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_client_sse/flutter_client_sse.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flood_mobile/Api/event_handler_api.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
