@@ -1,7 +1,7 @@
 import 'package:flood_mobile/Api/api.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Constants/AppColor.dart';
-import 'package:flood_mobile/Pages/torrent_screen.dart';
+import 'package:flood_mobile/Pages/torrent_fragment.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';

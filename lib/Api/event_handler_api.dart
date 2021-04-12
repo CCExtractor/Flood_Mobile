@@ -25,10 +25,6 @@ class EventHandlerApi {
           upSpeed = byteToGbMbKbConverter(byte: model.value.toDouble());
         }
       }
-      print('RATE');
-      print(model.event);
-      print(upSpeed);
-      print(downSpeed);
       Provider.of<HomeProvider>(context, listen: false)
           .setSpeed(upSpeed, downSpeed);
     }

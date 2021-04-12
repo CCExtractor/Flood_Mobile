@@ -8,4 +8,8 @@ class HomeProvider extends ChangeNotifier {
     downSpeed = down + '/s';
     notifyListeners();
   }
+
+  void setTorrentList() {
+    //TODO Update the torrent list when the event is encountered
+  }
 }
