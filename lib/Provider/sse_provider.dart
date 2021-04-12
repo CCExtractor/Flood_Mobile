@@ -17,13 +17,19 @@ class SSEProvider extends ChangeNotifier {
     SSEClient.subscribeToSSE(Api.baseUrl + Api.eventsStream,
             Provider.of<UserDetailProvider>(context).token)
         .listen((event) {
-      print('Id: ' + event.id);
-      print('Event: ' + event.event);
-      print('Data: ' + event.data);
+      // print('Id: ' + event.id);
+      // print('Event: ' + event.event);
+      // print('Data: ' + event.data);
       sseModel = event;
       switch (event.event) {
         case Events.TRANSFER_SUMMARY_DIFF_CHANGE:
           EventHandlerApi.setTransferRate(model: event, context: context);
+          break;
+        case Events.TORRENT_LIST_FULL_UPDATE:
+          EventHandlerApi.setFullTorrentList(model: event, context: context);
+          break;
+        case Events.TORRENT_LIST_DIFF_CHANGE:
+          EventHandlerApi.updateFullTorrentList(model: event, context: context);
           break;
       }
       notifyListeners();

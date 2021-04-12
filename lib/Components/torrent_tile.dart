@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:duration/duration.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Api/torrent_api.dart';
-import 'package:flood_mobile/Constants/AppColor.dart';
+import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Services/byte_to_gbmb_converter.dart';
 import 'package:flood_mobile/Services/date_converter.dart';
