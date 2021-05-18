@@ -1,4 +1,4 @@
-import 'package:flood_mobile/Api/api.dart';
+import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Api/event_handler_api.dart';
 import 'package:flood_mobile/Constants/event_names.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
@@ -14,12 +14,14 @@ class SSEProvider extends ChangeNotifier {
   }
 
   void listenToSSE(BuildContext context) {
-    SSEClient.subscribeToSSE(Api.baseUrl + Api.eventsStream,
+    SSEClient.subscribeToSSE(
+            Provider.of<ApiProvider>(context).baseUrl +
+                ApiProvider.eventsStream,
             Provider.of<UserDetailProvider>(context).token)
         .listen((event) {
-      // print('Id: ' + event.id);
-      // print('Event: ' + event.event);
-      // print('Data: ' + event.data);
+      print('Id: ' + event.id);
+      print('Event: ' + event.event);
+      print('Data: ' + event.data);
       sseModel = event;
       switch (event.event) {
         case Events.TRANSFER_SUMMARY_DIFF_CHANGE:

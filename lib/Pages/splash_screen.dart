@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
@@ -23,8 +24,10 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('floodToken') ?? '';
     print('Token: ' + token);
-    if (token != '') {
+    String baseUrl = prefs.getString('baseUrl') ?? '';
+    if (token != '' && baseUrl != '') {
       Provider.of<UserDetailProvider>(context, listen: false).setToken(token);
+      Provider.of<ApiProvider>(context, listen: false).setBaseUrl(baseUrl);
       Navigator.of(context).pushNamedAndRemoveUntil(
           Routes.homeScreenRoute, (Route<dynamic> route) => false);
     } else {

@@ -5,7 +5,7 @@ import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-import 'api.dart';
+import '../Provider/api_provider.dart';
 
 class TorrentApi {
   // Gets list of torrents
@@ -16,7 +16,8 @@ class TorrentApi {
       try {
         Response response;
         Dio dio = new Dio();
-        String url = Api.baseUrl + Api.getTorrentList;
+        String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+            ApiProvider.getTorrentList;
         dio.options.headers['Accept'] = "application/json";
         dio.options.headers['Content-Type'] = "application/json";
         dio.options.headers['Connection'] = "keep-alive";
@@ -45,7 +46,8 @@ class TorrentApi {
   static Future<void> startTorrent(
       {List<String> hashes, BuildContext context}) async {
     try {
-      String url = Api.baseUrl + Api.startTorrent;
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+          ApiProvider.startTorrent;
       print('---START TORRENT---');
       print(url);
       Response response;
@@ -74,7 +76,8 @@ class TorrentApi {
   static Future<void> stopTorrent(
       {List<String> hashes, BuildContext context}) async {
     try {
-      String url = Api.baseUrl + Api.stopTorrent;
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+          ApiProvider.stopTorrent;
       print('---STOP TORRENT---');
       print(url);
       Response response;

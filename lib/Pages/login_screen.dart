@@ -1,9 +1,12 @@
+import 'package:clipboard/clipboard.dart';
+import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Components/toast_component.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_overlay/loading_overlay.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -15,6 +18,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool showSpinner = false;
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  TextEditingController urlController =
+      new TextEditingController(text: 'http://localhost:3000');
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -60,6 +65,75 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       SizedBox(
                         height: hp * 0.06,
+                      ),
+                      Container(
+                        child: Stack(
+                          children: [
+                            TextFormField(
+                              controller: urlController,
+                              style: TextStyle(
+                                color: AppColor.textColor,
+                              ),
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.link,
+                                  color: Colors.white,
+                                ),
+                                labelText: 'URL',
+                                labelStyle: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: AppColor.greenAccentColor,
+                                  ),
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                disabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Field cannot be empty';
+                                }
+                                return null;
+                              },
+                            ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: IconButton(
+                                onPressed: () {
+                                  FlutterClipboard.paste().then((value) {
+                                    setState(() {
+                                      urlController.text = value;
+                                    });
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.paste,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: hp * 0.01,
                       ),
                       Container(
                         child: TextFormField(
@@ -187,6 +261,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: ElevatedButton(
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
+                              Provider.of<ApiProvider>(context, listen: false)
+                                  .setBaseUrl(urlController.text);
                               setState(() {
                                 showSpinner = true;
                               });
