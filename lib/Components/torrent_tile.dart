@@ -3,8 +3,8 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
-import 'package:flood_mobile/Services/byte_to_gbmb_converter.dart';
 import 'package:flood_mobile/Services/date_converter.dart';
+import 'package:flood_mobile/Services/file_size_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -102,14 +102,14 @@ class _TorrentTileState extends State<TorrentTile> {
                 Row(
                   children: [
                     Text(
-                      byteToGbMbKbConverter(byte: widget.model.bytesDone),
+                      filesize(widget.model.bytesDone.toInt()),
                       style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
                     Text(' / '),
                     Text(
-                      byteToGbMbKbConverter(byte: widget.model.sizeBytes),
+                      filesize(widget.model.sizeBytes.toInt()),
                       style: TextStyle(
                         color: Colors.white,
                       ),

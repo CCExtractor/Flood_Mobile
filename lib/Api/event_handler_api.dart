@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flood_mobile/Model/download_rate_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
-import 'package:flood_mobile/Services/byte_to_gbmb_converter.dart';
+import 'package:flood_mobile/Services/file_size_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_client_sse/flutter_client_sse.dart';
 import 'package:json_patch/json_patch.dart';
@@ -23,9 +22,9 @@ class EventHandlerApi {
       }
       for (RateModel model in rateList) {
         if (model.path == '/downRate') {
-          downSpeed = byteToGbMbKbConverter(byte: model.value.toDouble());
+          downSpeed = filesize(model.value);
         } else if (model.path == '/upRate') {
-          upSpeed = byteToGbMbKbConverter(byte: model.value.toDouble());
+          upSpeed = filesize(model.value);
         }
       }
       Provider.of<HomeProvider>(context, listen: false)
