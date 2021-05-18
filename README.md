@@ -1,5 +1,6 @@
 # Flood Mobile App
-![Group 3](https://user-images.githubusercontent.com/52864956/118591767-63c00880-b7c2-11eb-89ab-de7a81ec29cc.png)
+![Group 3](https://user-images.githubusercontent.com/52864956/118592164-24de8280-b7c3-11eb-95f3-f575fd75d356.png)
+
 
 
 ## Getting Started
