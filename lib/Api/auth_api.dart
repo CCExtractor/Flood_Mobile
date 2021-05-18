@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'api.dart';
+import '../Provider/api_provider.dart';
 
 class AuthApi {
   static Future<bool> loginUser(
@@ -13,7 +13,8 @@ class AuthApi {
       @required String password,
       @required BuildContext context}) async {
     try {
-      String url = Api.baseUrl + Api.authenticateUrl;
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+          ApiProvider.authenticateUrl;
       print('---LOGIN USER---');
       print(url);
       Response response;

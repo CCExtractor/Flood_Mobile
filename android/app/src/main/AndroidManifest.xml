@@ -2,7 +2,7 @@
     package="com.hustlecreatives.flood_mobile">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="flood_mobile"
+        android:label="Flood"
        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity

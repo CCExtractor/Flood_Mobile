@@ -33,6 +33,7 @@ class EventHandlerApi {
     }
   }
 
+  //Getting full list of torrents
   static void setFullTorrentList({SSEModel model, BuildContext context}) {
     Map<String, dynamic> data = json.decode(model.data);
     if (data.isNotEmpty) {
@@ -55,6 +56,7 @@ class EventHandlerApi {
     }
   }
 
+  //Updating the full list of torrent
   static void updateFullTorrentList({SSEModel model, BuildContext context}) {
     Map<String, dynamic> oldTorrentList =
         Provider.of<HomeProvider>(context, listen: false).torrentListJson;

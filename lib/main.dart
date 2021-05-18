@@ -1,3 +1,4 @@
+import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<SSEProvider>(
           create: (context) => SSEProvider(),
+        ),
+        ChangeNotifierProvider<ApiProvider>(
+          create: (context) => ApiProvider(),
         ),
       ],
       child: KeyboardDismissOnTap(
