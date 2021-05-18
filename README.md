@@ -1,5 +1,6 @@
 # Flood Mobile App
-<img src="https://user-images.githubusercontent.com/52864956/112930174-70679f00-9137-11eb-9563-947e0a3ff5a8.png" alt="ruTorrent Mobile" height=200px>
+![Group 3](https://user-images.githubusercontent.com/52864956/118591767-63c00880-b7c2-11eb-89ab-de7a81ec29cc.png)
+
 
 ## Getting Started
 
