@@ -37,7 +37,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                         }
                         return Container();
                       },
-                      revealableHeight: 180,
+                      revealableHeight: 160,
                       revealableBuilder: (BuildContext context,
                           RevealableToggler opener,
                           RevealableToggler closer,

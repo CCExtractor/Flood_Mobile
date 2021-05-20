@@ -36,20 +36,22 @@ class SSEClient {
                 .transform(LineSplitter())
                 .listen((dataLine) {
               if (dataLine.isEmpty) {
-                if (currentSSEModel.data != '') {
-                  var match =
-                      removeEndingNewlineRegex.firstMatch(currentSSEModel.data);
-                  currentSSEModel.data = match.group(1);
-                }
                 streamController.add(currentSSEModel);
                 currentSSEModel = SSEModel(data: '', id: '', event: '');
                 return;
               }
               Match match = lineRegex.firstMatch(dataLine);
               var field = match.group(1);
-              var value = match.group(2) ?? '';
               if (field.isEmpty) {
                 return;
+              }
+              var value = '';
+              if (field == 'data') {
+                value = dataLine.substring(
+                  5,
+                );
+              } else {
+                value = match.group(2) ?? '';
               }
               switch (field) {
                 case 'event':
