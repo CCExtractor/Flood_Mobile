@@ -233,12 +233,10 @@ packages:
   flutter_client_sse:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "6c09d5b2fccc81f94ad63f6864341d7b2b164bfc"
-      url: "https://github.com/pratikbaid3/flutter_client_sse"
-    source: git
-    version: "0.0.5"
+      path: "packages/flutter_client_sse"
+      relative: true
+    source: path
+    version: "0.0.1"
   flutter_keyboard_visibility:
     dependency: "direct main"
     description:
@@ -522,6 +520,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.8"
+  pull_to_reveal:
+    dependency: "direct main"
+    description:
+      name: pull_to_reveal
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3-nullsafety.0"
   shared_preferences:
     dependency: "direct main"
     description:

@@ -54,7 +54,7 @@ class _TorrentTileState extends State<TorrentTile> {
                   children: [
                     LinearPercentIndicator(
                       padding: EdgeInsets.all(0),
-                      width: 150,
+                      width: wp * 0.5,
                       lineHeight: 5.0,
                       percent:
                           widget.model.percentComplete.roundToDouble() / 100,
