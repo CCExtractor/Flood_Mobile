@@ -25,6 +25,7 @@ class _TorrentTileState extends State<TorrentTile> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: wp * 0.02),
       child: ExpansionTileCard(
+        key: Key(widget.model.hash),
         onExpansionChanged: (value) {
           setState(() {
             isExpanded = value;
@@ -34,6 +35,7 @@ class _TorrentTileState extends State<TorrentTile> {
         expandedColor: AppColor.primaryColor,
         baseColor: AppColor.primaryColor,
         title: ListTile(
+          key: Key(widget.model.hash),
           contentPadding: EdgeInsets.all(0),
           title: Text(
             widget.model.name,
