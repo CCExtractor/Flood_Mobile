@@ -17,7 +17,7 @@ class TorrentApi {
         Response response;
         Dio dio = new Dio();
         String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-            ApiProvider.getTorrentList;
+            ApiProvider.getTorrentListUrl;
         dio.options.headers['Accept'] = "application/json";
         dio.options.headers['Content-Type'] = "application/json";
         dio.options.headers['Connection'] = "keep-alive";
@@ -47,7 +47,7 @@ class TorrentApi {
       {List<String> hashes, BuildContext context}) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.startTorrent;
+          ApiProvider.startTorrentUrl;
       print('---START TORRENT---');
       print(url);
       Response response;
@@ -77,7 +77,7 @@ class TorrentApi {
       {List<String> hashes, BuildContext context}) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.stopTorrent;
+          ApiProvider.stopTorrentUrl;
       print('---STOP TORRENT---');
       print(url);
       Response response;
