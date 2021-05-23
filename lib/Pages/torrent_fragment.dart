@@ -1,6 +1,6 @@
+import 'package:flood_mobile/Components/add_torrent_sheet.dart';
 import 'package:flood_mobile/Components/torrent_tile.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
-import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
@@ -123,19 +123,6 @@ class _TorrentScreenState extends State<TorrentScreen> {
                           );
                         },
                       )
-                    // ListView.builder(
-                    //         shrinkWrap: true,
-                    //         itemCount: model.torrentList.length,
-                    //         itemBuilder: (context, index) {
-                    //           if (model.torrentList[index].name
-                    //               .toLowerCase()
-                    //               .contains(keyword.toLowerCase())) {
-                    //             return TorrentTile(
-                    //                 model: model.torrentList[index]);
-                    //           }
-                    //           return Container();
-                    //         },
-                    //       )
                     : Center(
                         child: SvgPicture.asset(
                           'assets/images/empty_dark.svg',
@@ -147,24 +134,18 @@ class _TorrentScreenState extends State<TorrentScreen> {
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
                   showModalBottomSheet(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(15),
+                          topLeft: Radius.circular(15),
+                        ),
+                      ),
+                      isScrollControlled: true,
                       context: context,
-                      backgroundColor: Color(0xff07111A),
+                      backgroundColor: AppColor.secondaryColor,
                       builder: (context) {
-                        return Container(
-                          color: Color(0xff07111A),
-                          child: Container(
-                            padding: EdgeInsets.only(bottom: 40),
-                            child: _buildBottomNavigationMenu(
-                                clientModel.clientSettings),
-                            decoration: BoxDecoration(
-                              color: AppColor.secondaryColor,
-                              borderRadius: BorderRadius.only(
-                                topLeft: const Radius.circular(10),
-                                topRight: const Radius.circular(10),
-                              ),
-                            ),
-                          ),
-                        );
+                        return AddTorrentSheet(
+                            clientSettings: clientModel.clientSettings);
                       });
                 },
                 backgroundColor: AppColor.greenAccentColor,
@@ -178,115 +159,5 @@ class _TorrentScreenState extends State<TorrentScreen> {
         });
       },
     );
-  }
-
-  Padding _buildBottomNavigationMenu(ClientSettingsModel model) {
-    TextEditingController directoryController =
-        new TextEditingController(text: model.directoryDefault);
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            child: TextFormField(
-              controller: directoryController,
-              style: TextStyle(
-                color: AppColor.textColor,
-              ),
-              decoration: InputDecoration(
-                prefixIcon: Icon(
-                  Icons.folder,
-                  color: Colors.white,
-                ),
-                labelText: 'Destination',
-                labelStyle: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-                // focusedBorder: UnderlineInputBorder(
-                //   borderSide: BorderSide(
-                //     color: AppColor.greenAccentColor,
-                //   ),
-                // ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                // disabledBorder: UnderlineInputBorder(
-                //   borderSide: BorderSide(
-                //     color: Colors.white,
-                //   ),
-                // ),
-                // enabledBorder: UnderlineInputBorder(
-                //   borderSide: BorderSide(
-                //     color: Colors.white,
-                //   ),
-                // ),
-              ),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Field cannot be empty';
-                }
-                return null;
-              },
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.06,
-            width: MediaQuery.of(context).size.width * 0.8,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-            child: ElevatedButton(
-              onPressed: () async {
-                // if (_formKey.currentState.validate()) {
-                //   Provider.of<ApiProvider>(context, listen: false)
-                //       .setBaseUrl(urlController.text);
-                //   setState(() {
-                //     showSpinner = true;
-                //   });
-                //   bool isLoginSuccessful = await AuthApi.loginUser(
-                //       username: usernameController.text,
-                //       password: passwordController.text,
-                //       context: context);
-                //   if (isLoginSuccessful) {
-                //     Toasts.showSuccessToast(
-                //         msg: 'Login Successful');
-                //     Navigator.of(context).pushNamedAndRemoveUntil(
-                //         Routes.homeScreenRoute,
-                //             (Route<dynamic> route) => false);
-                //   } else {
-                //     Toasts.showFailToast(msg: 'Login Error');
-                //   }
-                //   setState(() {
-                //     showSpinner = false;
-                //   });
-                // }
-              },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14.0),
-                ),
-                primary: AppColor.greenAccentColor,
-              ),
-              child: Center(
-                child: Text(
-                  "Add Torrent",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w900),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _selectItem(String name) {
-    Navigator.pop(context);
   }
 }

@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData.dark().copyWith(
             primaryColor: AppColor.primaryColor,
             accentColor: AppColor.greenAccentColor,
+            canvasColor: Colors.transparent,
           ),
           initialRoute: Routes.splashScreenRoute,
           onGenerateRoute: RouteGenerator.generateRoute,
