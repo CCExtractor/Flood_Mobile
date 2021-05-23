@@ -17,7 +17,7 @@ class TorrentApi {
         Response response;
         Dio dio = new Dio();
         String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-            ApiProvider.getTorrentList;
+            ApiProvider.getTorrentListUrl;
         dio.options.headers['Accept'] = "application/json";
         dio.options.headers['Content-Type'] = "application/json";
         dio.options.headers['Connection'] = "keep-alive";
@@ -47,7 +47,7 @@ class TorrentApi {
       {List<String> hashes, BuildContext context}) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.startTorrent;
+          ApiProvider.startTorrentUrl;
       print('---START TORRENT---');
       print(url);
       Response response;
@@ -77,7 +77,7 @@ class TorrentApi {
       {List<String> hashes, BuildContext context}) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.stopTorrent;
+          ApiProvider.stopTorrentUrl;
       print('---STOP TORRENT---');
       print(url);
       Response response;
@@ -96,6 +96,80 @@ class TorrentApi {
         data: rawBody,
       );
       if (response.statusCode == 200) {
+      } else {}
+    } catch (e) {
+      print('--ERROR--');
+      print(e.toString());
+    }
+  }
+
+  static Future<void> addTorrentMagnet(
+      {String magnetUrl, String destination, BuildContext context}) async {
+    try {
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+          ApiProvider.addTorrentMagnet;
+      print('---ADD TORRENT MAGNET---');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          Provider.of<UserDetailProvider>(context, listen: false).token;
+      Map<String, dynamic> mp = Map();
+      mp['urls'] = [magnetUrl];
+      mp['destination'] = destination;
+      mp['isBasePath'] = false;
+      mp['isCompleted'] = false;
+      mp['isSequential'] = false;
+      mp['start'] = true;
+      mp['tags'] = [];
+      String rawBody = json.encode(mp);
+      response = await dio.post(
+        url,
+        data: rawBody,
+      );
+      if (response.statusCode == 200) {
+        print('--TORRENT ADDED--');
+      } else {}
+    } catch (e) {
+      print('--ERROR--');
+      print(e.toString());
+    }
+  }
+
+  static Future<void> addTorrentFile(
+      {String base64, String destination, BuildContext context}) async {
+    try {
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+          ApiProvider.addTorrentFile;
+      print('---ADD TORRENT FILE---');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          Provider.of<UserDetailProvider>(context, listen: false).token;
+      Map<String, dynamic> mp = Map();
+      mp['files'] = [base64];
+      mp['destination'] = destination;
+      mp['isBasePath'] = false;
+      mp['isCompleted'] = false;
+      mp['isSequential'] = false;
+      mp['start'] = true;
+      mp['tags'] = [];
+      String rawBody = json.encode(mp);
+      response = await dio.post(
+        url,
+        data: rawBody,
+      );
+      if (response.statusCode == 200) {
+        print('--TORRENT ADDED--');
       } else {}
     } catch (e) {
       print('--ERROR--');

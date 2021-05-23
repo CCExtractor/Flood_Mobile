@@ -4,10 +4,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ApiProvider extends ChangeNotifier {
   String baseUrl = 'http://localhost:3000';
   static String authenticateUrl = '/api/auth/authenticate';
-  static String startTorrent = '/api/torrents/start';
-  static String getTorrentList = '/api/torrents';
-  static String stopTorrent = '/api/torrents/stop';
-  static String eventsStream =
+  static String startTorrentUrl = '/api/torrents/start';
+  static String getTorrentListUrl = '/api/torrents';
+  static String stopTorrentUrl = '/api/torrents/stop';
+  static String getClientSettingsUrl = '/api/client/settings';
+  static String addTorrentMagnet = '/api/torrents/add-urls';
+  static String addTorrentFile = '/api/torrents/add-files';
+  static String eventsStreamUrl =
       '/api/activity-stream?historySnapshot=FIVE_MINUTE';
 
   Future<void> setBaseUrl(String url) async {

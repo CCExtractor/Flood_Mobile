@@ -18,13 +18,13 @@ class SSEProvider extends ChangeNotifier {
   void listenToSSE(BuildContext context) {
     SSEClient.subscribeToSSE(
             Provider.of<ApiProvider>(context).baseUrl +
-                ApiProvider.eventsStream,
+                ApiProvider.eventsStreamUrl,
             Provider.of<UserDetailProvider>(context).token)
         .listen((event) {
       if (event.id != '' && event.data != '' && event.event != '') {
-        print('Id: ' + event.id);
-        print('Event: ' + event.event);
-        print('Data: ' + event.data);
+        // print('Id: ' + event.id);
+        // print('Event: ' + event.event);
+        // print('Data: ' + event.data);
         sseModel = event;
         switch (event.event) {
           case Events.TRANSFER_SUMMARY_DIFF_CHANGE:

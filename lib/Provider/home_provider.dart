@@ -16,7 +16,7 @@ class HomeProvider extends ChangeNotifier {
   void setTorrentList(List<TorrentModel> newTorrentList) {
     torrentList = newTorrentList;
     torrentList.sort((a, b) {
-      return a.dateCreated.compareTo(b.dateAdded);
+      return a.dateAdded.compareTo(b.dateAdded);
     });
     notifyListeners();
   }

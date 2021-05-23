@@ -11,8 +11,6 @@ class SSEClient {
   static Stream<SSEModel> subscribeToSSE(String url, String token) {
     //Regex to be used
     var lineRegex = RegExp(r'^([^:]*)(?::)?(?: )?(.*)?$');
-    var removeEndingNewlineRegex = RegExp(r'^((?:.|\n)*)\n$');
-
     //Creating a instance of the SSEModel
     var currentSSEModel = SSEModel(data: '', id: '', event: '');
 

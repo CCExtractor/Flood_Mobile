@@ -1,3 +1,4 @@
+import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Pages/torrent_fragment.dart';
@@ -24,9 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
+    //Initialize the ap
     Provider.of<SSEProvider>(context, listen: false).listenToSSE(context);
-    // SSEApi.subscribeToSSE(context);
+    ClientApi.getClientSettings(context);
     super.didChangeDependencies();
   }
 
