@@ -64,7 +64,7 @@ The way I set it up was using [qBitTorrent](https://www.qbittorrent.org/) as the
      <img width="400" alt="Screenshot 2021-05-25 at 2 06 39 PM" src="https://user-images.githubusercontent.com/52864956/119466727-8aea7d00-bd62-11eb-860c-a85398ef3113.png">
 ### Prerequisites
 * Flutter
-* VSCode / Andrid Studio
+* VSCode / Android Studio
 
 ### Installation
 
