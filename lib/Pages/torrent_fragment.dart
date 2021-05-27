@@ -16,6 +16,7 @@ class TorrentScreen extends StatefulWidget {
 
 class _TorrentScreenState extends State<TorrentScreen> {
   String keyword = '';
+
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
@@ -134,19 +135,20 @@ class _TorrentScreenState extends State<TorrentScreen> {
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
                   showModalBottomSheet(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(15),
-                          topLeft: Radius.circular(15),
-                        ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(15),
+                        topLeft: Radius.circular(15),
                       ),
-                      isScrollControlled: true,
-                      context: context,
-                      backgroundColor: AppColor.secondaryColor,
-                      builder: (context) {
-                        return AddTorrentSheet(
-                            clientSettings: clientModel.clientSettings);
-                      });
+                    ),
+                    isScrollControlled: true,
+                    context: context,
+                    backgroundColor: AppColor.secondaryColor,
+                    builder: (context) {
+                      return AddTorrentSheet(
+                          clientSettings: clientModel.clientSettings);
+                    },
+                  );
                 },
                 backgroundColor: AppColor.greenAccentColor,
                 child: Icon(

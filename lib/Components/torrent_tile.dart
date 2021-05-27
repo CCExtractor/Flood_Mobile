@@ -1,6 +1,7 @@
 import 'package:duration/duration.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Api/torrent_api.dart';
+import 'package:flood_mobile/Components/delete_torrent_sheet.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Services/date_converter.dart';
@@ -14,17 +15,20 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class TorrentTile extends StatefulWidget {
   TorrentModel model;
+
   TorrentTile({@required this.model});
+
   @override
   _TorrentTileState createState() => _TorrentTileState();
 }
 
 class _TorrentTileState extends State<TorrentTile> {
+  bool isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
     double wp = MediaQuery.of(context).size.width;
-    bool isExpanded = false;
     return Slidable(
       actionPane: SlidableBehindActionPane(),
       actionExtentRatio: 0.25,
@@ -86,7 +90,24 @@ class _TorrentTileState extends State<TorrentTile> {
                 Icons.delete,
                 color: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(15),
+                      topLeft: Radius.circular(15),
+                    ),
+                  ),
+                  isScrollControlled: true,
+                  context: context,
+                  backgroundColor: AppColor.secondaryColor,
+                  builder: (context) {
+                    return DeleteTorrentSheet(
+                      torrent: widget.model,
+                    );
+                  },
+                );
+              },
             ),
           ],
           child: ExpansionTileCard(
@@ -376,7 +397,22 @@ class _TorrentTileState extends State<TorrentTile> {
           color: Colors.redAccent,
           icon: Icons.delete,
           onTap: () {
-            //Delete torrent
+            showModalBottomSheet(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(15),
+                  topLeft: Radius.circular(15),
+                ),
+              ),
+              isScrollControlled: true,
+              context: context,
+              backgroundColor: AppColor.secondaryColor,
+              builder: (context) {
+                return DeleteTorrentSheet(
+                  torrent: widget.model,
+                );
+              },
+            );
           },
         ),
       ],
