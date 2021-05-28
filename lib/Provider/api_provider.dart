@@ -10,6 +10,7 @@ class ApiProvider extends ChangeNotifier {
   static String getClientSettingsUrl = '/api/client/settings';
   static String addTorrentMagnet = '/api/torrents/add-urls';
   static String addTorrentFile = '/api/torrents/add-files';
+  static String deleteTorrent='/api/torrents/delete';
   static String eventsStreamUrl =
       '/api/activity-stream?historySnapshot=FIVE_MINUTE';
 

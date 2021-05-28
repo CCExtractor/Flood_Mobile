@@ -34,8 +34,10 @@ dependencies:
   expansion_tile_card: ^2.0.0
   flutter_keyboard_visibility: ^5.0.2
   flutter_svg: ^0.22.0
+  flutter_slidable: ^0.6.0
   fluttertoast: ^8.0.7
   file_picker: ^3.0.1
+  focused_menu: ^1.0.5
   font_awesome_flutter: ^9.0.0
   hidden_drawer_menu: ^3.0.0
   http: ^0.13.3
@@ -47,9 +49,9 @@ dependencies:
   pull_to_reveal: ^0.0.3-nullsafety.0
   shared_preferences: ^2.0.5
   flutter_client_sse:
-#    git:
-#      url: https://github.com/pratikbaid3/flutter_client_sse
-#      path:
+    #    git:
+    #      url: https://github.com/pratikbaid3/flutter_client_sse
+    #      path:
     path: packages/flutter_client_sse
 
 dev_dependencies:

@@ -176,4 +176,37 @@ class TorrentApi {
       print(e.toString());
     }
   }
+
+  static Future<void> deleteTorrent(
+      {String hash, bool deleteWithData, BuildContext context}) async {
+    try {
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+          ApiProvider.deleteTorrent;
+      print('---DELETE TORRENT---');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          Provider.of<UserDetailProvider>(context, listen: false).token;
+      Map<String, dynamic> mp = Map();
+      mp['hashes'] = [hash];
+      mp['deleteData'] = deleteWithData;
+      String rawBody = json.encode(mp);
+      print(rawBody);
+      response = await dio.post(
+        url,
+        data: rawBody,
+      );
+      if (response.statusCode == 200) {
+        print('--TORRENT DELETED--');
+      } else {}
+    } catch (e) {
+      print('--ERROR--');
+      print(e.toString());
+    }
+  }
 }
