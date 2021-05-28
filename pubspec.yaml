@@ -44,15 +44,14 @@ dependencies:
   json_annotation: 3.1.1
   json_patch: ^2.1.1
   loading_overlay: ^0.3.0
-  ndialog: ^4.1.0
   percent_indicator: ^3.0.1
   provider: ^5.0.0
   pull_to_reveal: ^0.0.3-nullsafety.0
   shared_preferences: ^2.0.5
   flutter_client_sse:
-#    git:
-#      url: https://github.com/pratikbaid3/flutter_client_sse
-#      path:
+    #    git:
+    #      url: https://github.com/pratikbaid3/flutter_client_sse
+    #      path:
     path: packages/flutter_client_sse
 
 dev_dependencies:

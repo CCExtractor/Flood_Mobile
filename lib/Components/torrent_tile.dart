@@ -25,6 +25,25 @@ class TorrentTile extends StatefulWidget {
 class _TorrentTileState extends State<TorrentTile> {
   bool isExpanded = false;
 
+  void deleteTorrent() {
+    showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(15),
+          topLeft: Radius.circular(15),
+        ),
+      ),
+      isScrollControlled: true,
+      context: context,
+      backgroundColor: AppColor.secondaryColor,
+      builder: (context) {
+        return DeleteTorrentSheet(
+          torrent: widget.model,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
@@ -91,22 +110,7 @@ class _TorrentTileState extends State<TorrentTile> {
                 color: Colors.white,
               ),
               onPressed: () {
-                showModalBottomSheet(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(15),
-                      topLeft: Radius.circular(15),
-                    ),
-                  ),
-                  isScrollControlled: true,
-                  context: context,
-                  backgroundColor: AppColor.secondaryColor,
-                  builder: (context) {
-                    return DeleteTorrentSheet(
-                      torrent: widget.model,
-                    );
-                  },
-                );
+                deleteTorrent();
               },
             ),
           ],
@@ -397,22 +401,7 @@ class _TorrentTileState extends State<TorrentTile> {
           color: Colors.redAccent,
           icon: Icons.delete,
           onTap: () {
-            showModalBottomSheet(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(15),
-                  topLeft: Radius.circular(15),
-                ),
-              ),
-              isScrollControlled: true,
-              context: context,
-              backgroundColor: AppColor.secondaryColor,
-              builder: (context) {
-                return DeleteTorrentSheet(
-                  torrent: widget.model,
-                );
-              },
-            );
+            deleteTorrent();
           },
         ),
       ],
