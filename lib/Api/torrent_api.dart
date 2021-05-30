@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:flood_mobile/Model/torrent_content_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -207,6 +208,44 @@ class TorrentApi {
     } catch (e) {
       print('--ERROR--');
       print(e.toString());
+    }
+  }
+
+  static Stream<List<TorrentContentModel>> getTorrentContent({
+    BuildContext context,
+    String hash,
+  }) async* {
+    while (true) {
+      await Future.delayed(Duration(milliseconds: 500));
+      try {
+        Response response;
+        Dio dio = new Dio();
+        String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+            ApiProvider.getTorrentContent +
+            hash +
+            '/contents';
+        dio.options.headers['Accept'] = "application/json";
+        dio.options.headers['Content-Type'] = "application/json";
+        dio.options.headers['Connection'] = "keep-alive";
+        dio.options.headers['Cookie'] =
+            Provider.of<UserDetailProvider>(context, listen: false).token;
+        response = await dio.get(url);
+        List<TorrentContentModel> torrentContentList = <TorrentContentModel>[];
+        for (var data in response.data) {
+          try {
+            TorrentContentModel torrentContent =
+                TorrentContentModel.fromJson(data);
+            torrentContentList.add(torrentContent);
+          } catch (e) {
+            print(e.toString());
+          }
+        }
+        yield torrentContentList;
+      } catch (e) {
+        print('Exception caught in Api Request ' + e.toString());
+        yield [];
+      }
+      await Future.delayed(Duration(seconds: 1), () {});
     }
   }
 }
