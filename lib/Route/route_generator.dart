@@ -19,7 +19,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => HomeScreen());
         break;
       case Routes.torrentContentScreenRoute:
-        return MaterialPageRoute(builder: (context) => TorrentContentScreen());
+        return MaterialPageRoute(
+            builder: (context) => TorrentContentScreen(
+                  arguments: args,
+                ));
         break;
     }
   }

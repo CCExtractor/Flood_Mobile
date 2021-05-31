@@ -216,6 +216,7 @@ class TorrentApi {
     String hash,
   }) async* {
     while (true) {
+      print('---GET TORRENT CONTENT---');
       await Future.delayed(Duration(milliseconds: 500));
       try {
         Response response;
@@ -245,7 +246,7 @@ class TorrentApi {
         print('Exception caught in Api Request ' + e.toString());
         yield [];
       }
-      await Future.delayed(Duration(seconds: 1), () {});
+      await Future.delayed(Duration(seconds: 2), () {});
     }
   }
 }

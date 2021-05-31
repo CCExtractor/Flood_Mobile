@@ -4,6 +4,7 @@ import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Components/delete_torrent_sheet.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
+import 'package:flood_mobile/Route/Arguments/torrent_content_page_arguments.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flood_mobile/Services/date_converter.dart';
 import 'package:flood_mobile/Services/file_size_helper.dart';
@@ -396,8 +397,10 @@ class _TorrentTileState extends State<TorrentTile> {
                         height: 60,
                         child: OutlinedButton(
                           onPressed: () {
-                            Navigator.of(context)
-                                .pushNamed(Routes.torrentContentScreenRoute);
+                            Navigator.of(context).pushNamed(
+                                Routes.torrentContentScreenRoute,
+                                arguments: TorrentContentPageArguments(
+                                    hash: widget.model.hash));
                           },
                           style: OutlinedButton.styleFrom(
                             shape: RoundedRectangleBorder(

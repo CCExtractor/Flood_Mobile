@@ -2,17 +2,22 @@ class TorrentContentModel {
   int index;
   String path;
   String filename;
-  int percentComplete;
+  var percentComplete;
   int priority;
   int sizeBytes;
+  int depth;
+  List<String> parentPath;
 
-  TorrentContentModel(
-      {this.filename,
-      this.index,
-      this.path,
-      this.percentComplete,
-      this.priority,
-      this.sizeBytes});
+  TorrentContentModel({
+    this.filename,
+    this.index,
+    this.path,
+    this.percentComplete,
+    this.priority,
+    this.sizeBytes,
+    this.depth,
+    this.parentPath,
+  });
 
   TorrentContentModel.fromJson(Map<String, dynamic> json) {
     index = json['index'];
@@ -21,5 +26,7 @@ class TorrentContentModel {
     percentComplete = json['percentComplete'];
     priority = json['priority'];
     sizeBytes = json['sizeBytes'];
+    depth = path.split('/').length;
+    parentPath = path.split('/');
   }
 }
