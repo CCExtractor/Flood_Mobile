@@ -176,13 +176,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.12"
-  deeply:
-    dependency: "direct main"
-    description:
-      name: deeply
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.0+1"
   dio:
     dependency: "direct main"
     description:
@@ -324,13 +317,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "9.0.0"
-  gato:
-    dependency: "direct main"
-    description:
-      name: gato
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.3+3"
   glob:
     dependency: transitive
     description:
