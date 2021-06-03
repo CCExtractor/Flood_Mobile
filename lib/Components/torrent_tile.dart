@@ -4,6 +4,8 @@ import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Components/delete_torrent_sheet.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
+import 'package:flood_mobile/Route/Arguments/torrent_content_page_arguments.dart';
+import 'package:flood_mobile/Route/routes.dart';
 import 'package:flood_mobile/Services/date_converter.dart';
 import 'package:flood_mobile/Services/file_size_helper.dart';
 import 'package:flutter/material.dart';
@@ -387,6 +389,49 @@ class _TorrentTileState extends State<TorrentTile> {
                           Text(widget.model.isPrivate ? 'Private' : 'Public'),
                         ],
                       ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 60,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(
+                                Routes.torrentContentScreenRoute,
+                                arguments: TorrentContentPageArguments(
+                                    hash: widget.model.hash,
+                                    directory: widget.model.directory));
+                          },
+                          style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
+                            side: BorderSide(
+                              width: 1.0,
+                              color: Colors.white,
+                              style: BorderStyle.solid,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.file_copy_rounded,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Files",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
