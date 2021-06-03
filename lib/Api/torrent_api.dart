@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flood_mobile/Model/torrent_content_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
+import 'package:flood_mobile/Services/file_folder_nester.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -211,7 +212,7 @@ class TorrentApi {
     }
   }
 
-  static Stream<List<TorrentContentModel>> getTorrentContent({
+  static Stream<Map<String, dynamic>> getTorrentContent({
     BuildContext context,
     String hash,
   }) async* {
@@ -241,10 +242,10 @@ class TorrentApi {
             print(e.toString());
           }
         }
-        yield torrentContentList;
+        yield convertToFolder(torrentContentList);
       } catch (e) {
         print('Exception caught in Api Request ' + e.toString());
-        yield [];
+        yield {};
       }
       await Future.delayed(Duration(seconds: 2), () {});
     }

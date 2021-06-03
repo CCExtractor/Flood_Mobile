@@ -400,7 +400,8 @@ class _TorrentTileState extends State<TorrentTile> {
                             Navigator.of(context).pushNamed(
                                 Routes.torrentContentScreenRoute,
                                 arguments: TorrentContentPageArguments(
-                                    hash: widget.model.hash));
+                                    hash: widget.model.hash,
+                                    directory: widget.model.directory));
                           },
                           style: OutlinedButton.styleFrom(
                             shape: RoundedRectangleBorder(
