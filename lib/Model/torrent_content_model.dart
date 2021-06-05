@@ -7,6 +7,7 @@ class TorrentContentModel {
   int sizeBytes;
   int depth;
   List<String> parentPath;
+  bool isMediaFile;
 
   TorrentContentModel({
     this.filename,
@@ -17,6 +18,7 @@ class TorrentContentModel {
     this.sizeBytes,
     this.depth,
     this.parentPath,
+    this.isMediaFile
   });
 
   TorrentContentModel.fromJson(Map<String, dynamic> json) {
@@ -28,5 +30,6 @@ class TorrentContentModel {
     sizeBytes = json['sizeBytes'];
     depth = path.split('/').length;
     parentPath = path.split('/');
+    isMediaFile=(filename.split('.').last=='mp3'||filename.split('.').last=='mp4');
   }
 }

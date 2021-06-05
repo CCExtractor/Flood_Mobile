@@ -4,9 +4,11 @@ import 'package:flood_mobile/Components/base_app_bar.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/torrent_content_model.dart';
 import 'package:flood_mobile/Route/Arguments/torrent_content_page_arguments.dart';
+import 'package:flood_mobile/Services/file_size_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class TorrentContentScreen extends StatefulWidget {
   TorrentContentPageArguments arguments;
@@ -123,6 +125,7 @@ class _FolderFileListViewState extends State<FolderFileListView> {
 
   @override
   Widget build(BuildContext context) {
+    double wp = MediaQuery.of(context).size.width;
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -131,15 +134,62 @@ class _FolderFileListViewState extends State<FolderFileListView> {
         return (folderList.length != 0)
             ? (widget.data[folderList[index]] is TorrentContentModel)
                 ? Padding(
-                    padding: EdgeInsets.only(left: (widget.depth) * 20.0),
+                    padding: EdgeInsets.only(left: (widget.depth) * 10.0),
                     child: ListTile(
                       onTap: () {},
-                      title: Text(widget.data[folderList[index]].filename),
-                      leading: Icon(Icons.insert_drive_file_outlined),
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child:
+                                Text(widget.data[folderList[index]].filename),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            filesize(
+                              widget.data[folderList[index]].sizeBytes,
+                            ),
+                            style: TextStyle(
+                                color: AppColor.textColor, fontSize: 12),
+                          ),
+                        ],
+                      ),
+                      subtitle: Row(
+                        children: [
+                          LinearPercentIndicator(
+                            padding: EdgeInsets.all(0),
+                            width: wp * 0.5,
+                            lineHeight: 5.0,
+                            percent: widget
+                                    .data[folderList[index]].percentComplete
+                                    .roundToDouble() /
+                                100,
+                            backgroundColor:
+                                AppColor.blueAccentColor.withAlpha(80),
+                            progressColor: (widget
+                                        .data[folderList[index]].percentComplete
+                                        .toStringAsFixed(1) ==
+                                    '100.0')
+                                ? AppColor.greenAccentColor
+                                : Colors.blue,
+                          ),
+                          SizedBox(
+                            width: 10,
+                            height: 40,
+                          ),
+                          Text(widget.data[folderList[index]].percentComplete
+                                  .toStringAsFixed(1) +
+                              " %"),
+                        ],
+                      ),
+                      leading: Icon((widget.data[folderList[index]].isMediaFile)
+                          ? Icons.ondemand_video
+                          : Icons.insert_drive_file_outlined),
                     ),
                   )
                 : Padding(
-                    padding: EdgeInsets.only(left: widget.depth * 20),
+                    padding: EdgeInsets.only(left: widget.depth * 10),
                     child: ExpansionTileCard(
                       elevation: 0,
                       expandedColor: AppColor.primaryColor,
