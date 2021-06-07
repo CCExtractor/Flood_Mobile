@@ -1,7 +1,8 @@
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
-import 'package:flood_mobile/Pages/torrent_fragment.dart';
+import 'package:flood_mobile/Pages/settings_screen.dart';
+import 'package:flood_mobile/Pages/torrent_screen.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
@@ -52,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
               screenCurrent = TorrentScreen();
               break;
             case 2:
-              screenCurrent = TorrentScreen();
+              screenCurrent = SettingsScreen();
               break;
           }
 

@@ -2,6 +2,7 @@ import 'package:flood_mobile/Pages/home_screen.dart';
 import 'package:flood_mobile/Pages/login_screen.dart';
 import 'package:flood_mobile/Pages/splash_screen.dart';
 import 'package:flood_mobile/Pages/torrent_content_screen.dart';
+import 'package:flood_mobile/Pages/video_stream_screen.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,9 @@ class RouteGenerator {
             builder: (context) => TorrentContentScreen(
                   arguments: args,
                 ));
+        break;
+      case Routes.streamVideoScreenRoute:
+        return MaterialPageRoute(builder: (context) => VideoStreamScreen());
         break;
     }
   }
