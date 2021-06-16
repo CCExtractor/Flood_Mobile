@@ -21,12 +21,11 @@ class RouteGenerator {
         break;
       case Routes.torrentContentScreenRoute:
         return MaterialPageRoute(
-            builder: (context) => TorrentContentScreen(
-                  arguments: args,
-                ));
+            builder: (context) => TorrentContentScreen(arguments: args));
         break;
       case Routes.streamVideoScreenRoute:
-        return MaterialPageRoute(builder: (context) => VideoStreamScreen());
+        return MaterialPageRoute(
+            builder: (context) => VideoStreamScreen(args: args));
         break;
     }
   }

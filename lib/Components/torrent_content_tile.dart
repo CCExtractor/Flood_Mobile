@@ -1,6 +1,7 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/torrent_content_model.dart';
+import 'package:flood_mobile/Route/Arguments/video_stream_screen_arguments.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flood_mobile/Services/file_size_helper.dart';
 import 'package:flutter/material.dart';
@@ -81,12 +82,15 @@ class TorrentFileTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: (model.depth) * 10.0),
+      padding: EdgeInsets.only(left: (model.depth) * 5.0),
       child: ListTile(
         onTap: () {
           String fileType = model.filename.split('.').last;
           if (fileType == 'mp4') {
-            Navigator.of(context).pushNamed(Routes.streamVideoScreenRoute);
+            Navigator.of(context).pushNamed(Routes.streamVideoScreenRoute,
+                arguments: VideoStreamScreenArguments(
+                    hash: 'E10905B8ADDDF520A38C2CCD00B73C63F2276ADD',
+                    index: model.index.toString()));
           }
         },
         title: Row(
@@ -104,10 +108,11 @@ class TorrentFileTile extends StatelessWidget {
           ],
         ),
         subtitle: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             LinearPercentIndicator(
               padding: EdgeInsets.all(0),
-              width: wp * 0.5,
+              width: wp * 0.45,
               lineHeight: 5.0,
               percent: model.percentComplete.roundToDouble() / 100,
               backgroundColor: AppColor.blueAccentColor.withAlpha(80),
