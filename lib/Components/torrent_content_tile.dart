@@ -108,21 +108,21 @@ class TorrentFileTile extends StatelessWidget {
           ],
         ),
         subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            LinearPercentIndicator(
-              padding: EdgeInsets.all(0),
-              width: wp * 0.45,
-              lineHeight: 5.0,
-              percent: model.percentComplete.roundToDouble() / 100,
-              backgroundColor: AppColor.blueAccentColor.withAlpha(80),
-              progressColor:
-                  (model.percentComplete.toStringAsFixed(1) == '100.0')
-                      ? AppColor.greenAccentColor
-                      : Colors.blue,
+            Expanded(
+              child: LinearPercentIndicator(
+                padding: EdgeInsets.all(0),
+                lineHeight: 5.0,
+                percent: model.percentComplete.roundToDouble() / 100,
+                backgroundColor: AppColor.blueAccentColor.withAlpha(80),
+                progressColor:
+                    (model.percentComplete.toStringAsFixed(1) == '100.0')
+                        ? AppColor.greenAccentColor
+                        : Colors.blue,
+              ),
             ),
             SizedBox(
-              width: 10,
+              width: 30,
               height: 40,
             ),
             Text(model.percentComplete.toStringAsFixed(1) + " %"),

@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return KeyboardDismissOnTap(
       child: SimpleHiddenDrawer(
         withShadow: true,
-        slidePercent: wp * 0.15,
+        slidePercent: wp > 600 ? wp * 0.025 : wp * 0.13,
         contentCornerRadius: 40,
         menu: Menu(),
         screenSelectedBuilder: (position, controller) {
@@ -127,8 +127,8 @@ class _MenuState extends State<Menu> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image(
-                  width: wp * 0.2,
-                  height: wp * 0.2,
+                  width: 80,
+                  height: 80,
                   image: AssetImage(
                     'assets/images/icon.png',
                   ),

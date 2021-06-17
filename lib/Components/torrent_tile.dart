@@ -144,23 +144,24 @@ class _TorrentTileState extends State<TorrentTile> {
                   children: [
                     Row(
                       children: [
-                        LinearPercentIndicator(
-                          padding: EdgeInsets.all(0),
-                          width: wp * 0.5,
-                          lineHeight: 5.0,
-                          percent:
-                              widget.model.percentComplete.roundToDouble() /
-                                  100,
-                          backgroundColor:
-                              AppColor.blueAccentColor.withAlpha(80),
-                          progressColor: (widget.model.percentComplete
-                                      .toStringAsFixed(1) ==
-                                  '100.0')
-                              ? AppColor.greenAccentColor
-                              : Colors.blue,
+                        Expanded(
+                          child: LinearPercentIndicator(
+                            padding: EdgeInsets.all(0),
+                            lineHeight: 5.0,
+                            percent:
+                                widget.model.percentComplete.roundToDouble() /
+                                    100,
+                            backgroundColor:
+                                AppColor.blueAccentColor.withAlpha(80),
+                            progressColor: (widget.model.percentComplete
+                                        .toStringAsFixed(1) ==
+                                    '100.0')
+                                ? AppColor.greenAccentColor
+                                : Colors.blue,
+                          ),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 30,
                         ),
                         Text(widget.model.percentComplete.toStringAsFixed(1) +
                             " %"),
