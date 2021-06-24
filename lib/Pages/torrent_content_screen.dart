@@ -1,15 +1,11 @@
-import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Components/base_app_bar.dart';
 import 'package:flood_mobile/Components/torrent_content_tile.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
-import 'package:flood_mobile/Model/torrent_content_model.dart';
 import 'package:flood_mobile/Route/Arguments/torrent_content_page_arguments.dart';
-import 'package:flood_mobile/Services/file_size_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class TorrentContentScreen extends StatefulWidget {
   TorrentContentPageArguments arguments;
@@ -87,6 +83,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                     FolderFileListView(
                       data: snapshot.data,
                       depth: 0,
+                      hash: widget.arguments.hash,
                     ),
                   ],
                 ),

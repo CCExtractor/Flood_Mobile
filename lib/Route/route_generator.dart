@@ -3,8 +3,10 @@ import 'package:flood_mobile/Pages/login_screen.dart';
 import 'package:flood_mobile/Pages/splash_screen.dart';
 import 'package:flood_mobile/Pages/torrent_content_screen.dart';
 import 'package:flood_mobile/Pages/video_stream_screen.dart';
+import 'package:flood_mobile/Provider/torrent_content_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -19,9 +21,22 @@ class RouteGenerator {
       case Routes.homeScreenRoute:
         return MaterialPageRoute(builder: (context) => HomeScreen());
         break;
+      // ChangeNotifierProvider<UserDetailProvider>(
+      //   create: (context) => UserDetailProvider(),
+      // ),
+
+      // TorrentContentScreen(arguments: args)
       case Routes.torrentContentScreenRoute:
         return MaterialPageRoute(
-            builder: (context) => TorrentContentScreen(arguments: args));
+          builder: (context) => MultiProvider(
+            providers: [
+              ChangeNotifierProvider<TorrentContentProvider>(
+                create: (context) => TorrentContentProvider(),
+              ),
+            ],
+            child: TorrentContentScreen(arguments: args),
+          ),
+        );
         break;
       case Routes.streamVideoScreenRoute:
         return MaterialPageRoute(
