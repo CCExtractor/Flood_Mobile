@@ -6,8 +6,8 @@ class TorrentContentProvider extends ChangeNotifier {
   List<TorrentContentModel> torrentContentList = [];
   List<int> selectedIndexList = [];
 
-  void setSelectionMode() {
-    isSelectionMode = !isSelectionMode;
+  void setSelectionMode({bool newIsSelected = true}) {
+    isSelectionMode = newIsSelected;
     notifyListeners();
   }
 

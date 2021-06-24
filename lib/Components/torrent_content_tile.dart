@@ -119,77 +119,78 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: (widget.model.depth) * 5.0),
-      child: ListTile(
-        onTap: () {
-          String fileType = widget.model.filename.split('.').last;
-          if (fileType == 'mp4') {
-            Navigator.of(context).pushNamed(
-              Routes.streamVideoScreenRoute,
-              arguments: VideoStreamScreenArguments(
-                hash: widget.hash,
-                index: widget.model.index.toString(),
+    return Consumer<TorrentContentProvider>(builder: (context, model, child) {
+      return Padding(
+        padding: EdgeInsets.only(left: (widget.model.depth) * 5.0),
+        child: ListTile(
+          onTap: () {
+            String fileType = widget.model.filename.split('.').last;
+            if (fileType == 'mp4') {
+              Navigator.of(context).pushNamed(
+                Routes.streamVideoScreenRoute,
+                arguments: VideoStreamScreenArguments(
+                  hash: widget.hash,
+                  index: widget.model.index.toString(),
+                ),
+              );
+            }
+          },
+          title: Row(
+            children: [
+              Expanded(
+                child: Text(widget.model.filename),
               ),
-            );
-          }
-        },
-        title: Row(
-          children: [
-            Expanded(
-              child: Text(widget.model.filename),
-            ),
-            SizedBox(
-              width: 8,
-            ),
-            Text(
-              filesize(widget.model.sizeBytes),
-              style: TextStyle(color: AppColor.textColor, fontSize: 12),
-            ),
-          ],
+              SizedBox(
+                width: 8,
+              ),
+              Text(
+                filesize(widget.model.sizeBytes),
+                style: TextStyle(color: AppColor.textColor, fontSize: 12),
+              ),
+            ],
+          ),
+          subtitle: Row(
+            children: [
+              Expanded(
+                child: LinearPercentIndicator(
+                  padding: EdgeInsets.all(0),
+                  lineHeight: 5.0,
+                  percent: widget.model.percentComplete.roundToDouble() / 100,
+                  backgroundColor: AppColor.blueAccentColor.withAlpha(80),
+                  progressColor:
+                      (widget.model.percentComplete.toStringAsFixed(1) ==
+                              '100.0')
+                          ? AppColor.greenAccentColor
+                          : Colors.blue,
+                ),
+              ),
+              SizedBox(
+                width: 30,
+                height: 40,
+              ),
+              Text(widget.model.percentComplete.toStringAsFixed(1) + " %"),
+            ],
+          ),
+          leading: (!model.isSelectionMode)
+              ? Icon((widget.model.isMediaFile)
+                  ? Icons.ondemand_video
+                  : Icons.insert_drive_file_outlined)
+              : Checkbox(
+                  value: isSelected,
+                  activeColor: AppColor.greenAccentColor,
+                  onChanged: (value) {
+                    setState(() {
+                      isSelected = value;
+                    });
+                    if (value == true) {
+                      model.addItemToSelectedIndex(widget.model.index);
+                    } else {
+                      model.removeItemFromSelectedList(widget.model.index);
+                    }
+                  },
+                ),
         ),
-        subtitle: Row(
-          children: [
-            Expanded(
-              child: LinearPercentIndicator(
-                padding: EdgeInsets.all(0),
-                lineHeight: 5.0,
-                percent: widget.model.percentComplete.roundToDouble() / 100,
-                backgroundColor: AppColor.blueAccentColor.withAlpha(80),
-                progressColor:
-                    (widget.model.percentComplete.toStringAsFixed(1) == '100.0')
-                        ? AppColor.greenAccentColor
-                        : Colors.blue,
-              ),
-            ),
-            SizedBox(
-              width: 30,
-              height: 40,
-            ),
-            Text(widget.model.percentComplete.toStringAsFixed(1) + " %"),
-          ],
-        ),
-        leading: (!Provider.of<TorrentContentProvider>(context).isSelectionMode)
-            ? Icon((widget.model.isMediaFile)
-                ? Icons.ondemand_video
-                : Icons.insert_drive_file_outlined)
-            : Checkbox(
-                value: isSelected,
-                activeColor: AppColor.greenAccentColor,
-                onChanged: (value) {
-                  setState(() {
-                    isSelected = value;
-                  });
-                  if (value == true) {
-                    Provider.of<TorrentContentProvider>(context, listen: false)
-                        .addItemToSelectedIndex(widget.model.index);
-                  } else {
-                    Provider.of<TorrentContentProvider>(context, listen: false)
-                        .removeItemFromSelectedList(widget.model.index);
-                  }
-                },
-              ),
-      ),
-    );
+      );
+    });
   }
 }
