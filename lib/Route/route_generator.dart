@@ -21,11 +21,6 @@ class RouteGenerator {
       case Routes.homeScreenRoute:
         return MaterialPageRoute(builder: (context) => HomeScreen());
         break;
-      // ChangeNotifierProvider<UserDetailProvider>(
-      //   create: (context) => UserDetailProvider(),
-      // ),
-
-      // TorrentContentScreen(arguments: args)
       case Routes.torrentContentScreenRoute:
         return MaterialPageRoute(
           builder: (context) => MultiProvider(

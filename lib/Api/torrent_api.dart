@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flood_mobile/Model/torrent_content_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
+import 'package:flood_mobile/Provider/torrent_content_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Services/file_folder_nester.dart';
 import 'package:flutter/cupertino.dart';
@@ -242,6 +243,8 @@ class TorrentApi {
             print(e.toString());
           }
         }
+        Provider.of<TorrentContentProvider>(context, listen: false)
+            .setTorrentContentList(torrentContentList);
         yield convertToFolder(torrentContentList);
       } catch (e) {
         print('Exception caught in Api Request ' + e.toString());

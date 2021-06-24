@@ -30,6 +30,11 @@ void main() {
     data = updateNestedMap(model.parentPath, data, (name) => model);
   }
   print(data);
+  for (TorrentContentModel model in torrentContentList) {
+    if (model.parentPath.contains('0. Websites you may like')) {
+      print(model.index);
+    }
+  }
 }
 
 String testData = '''
@@ -129,38 +134,6 @@ String testData = '''
         "percentComplete": 0,
         "priority": 1,
         "sizeBytes": 1785
-    },
-    {
-        "index": 13,
-        "path": "a/1. Course introduction/5.1 How to ask questions on Stack Overflow (and get answers).html",
-        "filename": "5.1 How to ask questions on Stack Overflow (and get answers).html",
-        "percentComplete": 0,
-        "priority": 1,
-        "sizeBytes": 151
-    },
-    {
-        "index": 14,
-        "path": "a/10. Create Profiles API/1. Plan our Profiles API.mp4",
-        "filename": "1. Plan our Profiles API.mp4",
-        "percentComplete": 0,
-        "priority": 1,
-        "sizeBytes": 19274044
-    },
-    {
-        "index": 15,
-        "path": "a/10. Create Profiles API/1. Plan our Profiles API.vtt",
-        "filename": "1. Plan our Profiles API.vtt",
-        "percentComplete": 0,
-        "priority": 1,
-        "sizeBytes": 2124
-    },
-    {
-        "index": 16,
-        "path": "a/10. Create Profiles API/10. Test searching profiles.mp4",
-        "filename": "10. Test searching profiles.mp4",
-        "percentComplete": 0,
-        "priority": 1,
-        "sizeBytes": 83026667
     }
 ]  
   ''';

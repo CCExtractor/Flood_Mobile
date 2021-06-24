@@ -2,10 +2,13 @@ import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Components/base_app_bar.dart';
 import 'package:flood_mobile/Components/torrent_content_tile.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Provider/torrent_content_provider.dart';
 import 'package:flood_mobile/Route/Arguments/torrent_content_page_arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'dart:math' as math;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class TorrentContentScreen extends StatefulWidget {
   TorrentContentPageArguments arguments;
@@ -19,6 +22,8 @@ class TorrentContentScreen extends StatefulWidget {
 class _TorrentContentScreenState extends State<TorrentContentScreen> {
   @override
   Widget build(BuildContext context) {
+    double hp = MediaQuery.of(context).size.height;
+    double wp = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: BaseAppBar(
         appBar: AppBar(),
@@ -37,56 +42,114 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
               data.forEach((key, value) {
                 folderList.add(key);
               });
-              return SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Text(
-                        'Files',
-                        style: GoogleFonts.notoSans(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(15),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.storage),
-                          SizedBox(
-                            width: 12,
+              return Column(
+                children: [
+                  (Provider.of<TorrentContentProvider>(context).isSelectionMode)
+                      ? Container(
+                          width: double.infinity,
+                          height: hp * 0.06,
+                          color: AppColor.secondaryColor,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Transform.rotate(
+                                    angle: 45 * math.pi / 180,
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                      ),
+                                      onPressed: () {
+                                        Provider.of<TorrentContentProvider>(
+                                                context,
+                                                listen: false)
+                                            .setSelectionMode();
+                                        Provider.of<TorrentContentProvider>(
+                                                context,
+                                                listen: false)
+                                            .removeAllItemsFromList();
+                                      },
+                                    ),
+                                  ),
+                                  // Text(
+                                  //   '[ ${Provider.of<TorrentContentProvider>(context).selectedIndexList.length} ]',
+                                  //   style: TextStyle(
+                                  //       fontWeight: FontWeight.w600,
+                                  //       fontSize: wp * 0.045),
+                                  // ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.more_vert,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: null,
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                          Expanded(
+                        )
+                      : Container(),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(15),
                             child: Text(
-                              widget.arguments.directory,
+                              'Files',
                               style: GoogleFonts.notoSans(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 30,
                               ),
                             ),
                           ),
+                          Container(
+                            margin: const EdgeInsets.all(15),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.storage),
+                                SizedBox(
+                                  width: 12,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    widget.arguments.directory,
+                                    style: GoogleFonts.notoSans(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 12),
+                            decoration: BoxDecoration(
+                              color: AppColor.greenAccentColor,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          FolderFileListView(
+                            data: snapshot.data,
+                            depth: 0,
+                            hash: widget.arguments.hash,
+                          ),
                         ],
                       ),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                      decoration: BoxDecoration(
-                        color: AppColor.greenAccentColor,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
                     ),
-                    FolderFileListView(
-                      data: snapshot.data,
-                      depth: 0,
-                      hash: widget.arguments.hash,
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               );
             }
             return SpinKitFadingCircle(

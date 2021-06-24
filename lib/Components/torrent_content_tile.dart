@@ -62,12 +62,9 @@ class _FolderFileListViewState extends State<FolderFileListView> {
                         elevation: 0,
                         expandedColor: AppColor.primaryColor,
                         baseColor: AppColor.primaryColor,
-                        leading: (!Provider.of<TorrentContentProvider>(context)
-                                .isSelectionMode)
-                            ? Icon(
-                                Icons.folder_rounded,
-                              )
-                            : Checkbox(value: false, onChanged: (value) {}),
+                        leading: Icon(
+                          Icons.folder_rounded,
+                        ),
                         title: ListTile(
                           contentPadding: EdgeInsets.all(0),
                           title: Text(
@@ -93,7 +90,7 @@ class _FolderFileListViewState extends State<FolderFileListView> {
   }
 }
 
-class TorrentFileTile extends StatelessWidget {
+class TorrentFileTile extends StatefulWidget {
   TorrentContentModel model;
   double wp;
   String hash;
@@ -102,18 +99,37 @@ class TorrentFileTile extends StatelessWidget {
       {@required this.model, @required this.wp, @required this.hash});
 
   @override
+  _TorrentFileTileState createState() => _TorrentFileTileState();
+}
+
+class _TorrentFileTileState extends State<TorrentFileTile> {
+  bool isSelected = false;
+
+  @override
+  // ignore: must_call_super
+  void didChangeDependencies() {
+    if (!Provider.of<TorrentContentProvider>(context)
+        .selectedIndexList
+        .contains(widget.model.index)) {
+      setState(() {
+        isSelected = false;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: (model.depth) * 5.0),
+      padding: EdgeInsets.only(left: (widget.model.depth) * 5.0),
       child: ListTile(
         onTap: () {
-          String fileType = model.filename.split('.').last;
+          String fileType = widget.model.filename.split('.').last;
           if (fileType == 'mp4') {
             Navigator.of(context).pushNamed(
               Routes.streamVideoScreenRoute,
               arguments: VideoStreamScreenArguments(
-                hash: hash,
-                index: model.index.toString(),
+                hash: widget.hash,
+                index: widget.model.index.toString(),
               ),
             );
           }
@@ -121,13 +137,13 @@ class TorrentFileTile extends StatelessWidget {
         title: Row(
           children: [
             Expanded(
-              child: Text(model.filename),
+              child: Text(widget.model.filename),
             ),
             SizedBox(
               width: 8,
             ),
             Text(
-              filesize(model.sizeBytes),
+              filesize(widget.model.sizeBytes),
               style: TextStyle(color: AppColor.textColor, fontSize: 12),
             ),
           ],
@@ -138,10 +154,10 @@ class TorrentFileTile extends StatelessWidget {
               child: LinearPercentIndicator(
                 padding: EdgeInsets.all(0),
                 lineHeight: 5.0,
-                percent: model.percentComplete.roundToDouble() / 100,
+                percent: widget.model.percentComplete.roundToDouble() / 100,
                 backgroundColor: AppColor.blueAccentColor.withAlpha(80),
                 progressColor:
-                    (model.percentComplete.toStringAsFixed(1) == '100.0')
+                    (widget.model.percentComplete.toStringAsFixed(1) == '100.0')
                         ? AppColor.greenAccentColor
                         : Colors.blue,
               ),
@@ -150,14 +166,29 @@ class TorrentFileTile extends StatelessWidget {
               width: 30,
               height: 40,
             ),
-            Text(model.percentComplete.toStringAsFixed(1) + " %"),
+            Text(widget.model.percentComplete.toStringAsFixed(1) + " %"),
           ],
         ),
         leading: (!Provider.of<TorrentContentProvider>(context).isSelectionMode)
-            ? Icon((model.isMediaFile)
+            ? Icon((widget.model.isMediaFile)
                 ? Icons.ondemand_video
                 : Icons.insert_drive_file_outlined)
-            : Checkbox(value: false, onChanged: (value) {}),
+            : Checkbox(
+                value: isSelected,
+                activeColor: AppColor.greenAccentColor,
+                onChanged: (value) {
+                  setState(() {
+                    isSelected = value;
+                  });
+                  if (value == true) {
+                    Provider.of<TorrentContentProvider>(context, listen: false)
+                        .addItemToSelectedIndex(widget.model.index);
+                  } else {
+                    Provider.of<TorrentContentProvider>(context, listen: false)
+                        .removeItemFromSelectedList(widget.model.index);
+                  }
+                },
+              ),
       ),
     );
   }
