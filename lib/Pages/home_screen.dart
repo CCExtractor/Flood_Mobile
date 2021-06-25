@@ -1,7 +1,8 @@
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
-import 'package:flood_mobile/Pages/torrent_fragment.dart';
+import 'package:flood_mobile/Pages/settings_screen.dart';
+import 'package:flood_mobile/Pages/torrent_screen.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return KeyboardDismissOnTap(
       child: SimpleHiddenDrawer(
         withShadow: true,
-        slidePercent: wp * 0.15,
+        slidePercent: wp > 600 ? wp * 0.025 : wp * 0.13,
         contentCornerRadius: 40,
         menu: Menu(),
         screenSelectedBuilder: (position, controller) {
@@ -52,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
               screenCurrent = TorrentScreen();
               break;
             case 2:
-              screenCurrent = TorrentScreen();
+              screenCurrent = SettingsScreen();
               break;
           }
 
@@ -126,8 +127,8 @@ class _MenuState extends State<Menu> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image(
-                  width: wp * 0.2,
-                  height: wp * 0.2,
+                  width: 80,
+                  height: 80,
                   image: AssetImage(
                     'assets/images/icon.png',
                   ),

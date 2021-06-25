@@ -3,4 +3,5 @@ class Routes {
   static const String loginScreenRoute = '/loginScreen';
   static const String homeScreenRoute = '/homeScreen';
   static const String torrentContentScreenRoute = '/torrentContentScreen';
+  static const String streamVideoScreenRoute = '/screamVideoScreen';
 }

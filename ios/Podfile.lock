@@ -48,6 +48,8 @@ PODS:
     - Flutter
   - SwiftyGif (5.4.0)
   - Toast (4.0.0)
+  - video_player (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
@@ -56,6 +58,7 @@ DEPENDENCIES:
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - video_player (from `.symlinks/plugins/video_player/ios`)
 
 SPEC REPOS:
   trunk:
@@ -78,6 +81,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
+  video_player:
+    :path: ".symlinks/plugins/video_player/ios"
 
 SPEC CHECKSUMS:
   DKImagePickerController: b5eb7f7a388e4643264105d648d01f727110fc3d
@@ -91,6 +96,7 @@ SPEC CHECKSUMS:
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
 
 PODFILE CHECKSUM: dbf4946ff5db175341f22037ab5e1978c925cafb
 

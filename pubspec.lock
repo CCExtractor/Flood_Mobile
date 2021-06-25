@@ -169,6 +169,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  custom_pop_up_menu:
+    dependency: "direct main"
+    description:
+      name: custom_pop_up_menu
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   dart_style:
     dependency: transitive
     description:
@@ -728,6 +735,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  video_player:
+    dependency: "direct main"
+    description:
+      name: video_player
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.6"
+  video_player_platform_interface:
+    dependency: transitive
+    description:
+      name: video_player_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.1.0"
+  video_player_web:
+    dependency: transitive
+    description:
+      name: video_player_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   watcher:
     dependency: transitive
     description:
