@@ -66,12 +66,69 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                     ),
                     onPressed: () {},
                   ),
-                  IconButton(
+                  PopupMenuButton<String>(
+                    color: AppColor.secondaryColor,
                     icon: Icon(
                       Icons.more_vert,
                       color: Colors.white,
                     ),
-                    onPressed: () {},
+                    onSelected: (value) {
+                      if (value == 'High Priority') {
+                        TorrentApi.setTorrentContentPriority(
+                            context: context,
+                            hash: widget.arguments.hash,
+                            priorityType: 2,
+                            indexList: Provider.of<TorrentContentProvider>(
+                                    context,
+                                    listen: false)
+                                .selectedIndexList);
+                        model.removeAllItemsFromList();
+                        model.setSelectionMode(newIsSelected: false);
+                      }
+                      if (value == 'Normal Priority') {
+                        TorrentApi.setTorrentContentPriority(
+                            context: context,
+                            hash: widget.arguments.hash,
+                            priorityType: 1,
+                            indexList: Provider.of<TorrentContentProvider>(
+                                    context,
+                                    listen: false)
+                                .selectedIndexList);
+                        model.removeAllItemsFromList();
+                        model.setSelectionMode(newIsSelected: false);
+                        print(1);
+                      }
+                      if (value == 'Don\'t Download') {
+                        TorrentApi.setTorrentContentPriority(
+                            context: context,
+                            hash: widget.arguments.hash,
+                            priorityType: 0,
+                            indexList: Provider.of<TorrentContentProvider>(
+                                    context,
+                                    listen: false)
+                                .selectedIndexList);
+                        model.removeAllItemsFromList();
+                        model.setSelectionMode(newIsSelected: false);
+                        print(0);
+                      }
+                    },
+                    itemBuilder: (BuildContext context) {
+                      return {
+                        'High Priority',
+                        'Normal Priority',
+                        'Don\'t Download'
+                      }.map((String choice) {
+                        return PopupMenuItem<String>(
+                          value: choice,
+                          child: Text(choice),
+                        );
+                      }).toList();
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12.0),
+                      ),
+                    ),
                   ),
                 ],
               ),

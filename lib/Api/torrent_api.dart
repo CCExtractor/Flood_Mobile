@@ -253,4 +253,43 @@ class TorrentApi {
       await Future.delayed(Duration(seconds: 2), () {});
     }
   }
+
+  static Future<void> setTorrentContentPriority(
+      {BuildContext context,
+      String hash,
+      int priorityType,
+      List<int> indexList}) async {
+    try {
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+          ApiProvider.setTorrentContentPriorityUrl +
+          hash +
+          '/contents';
+      print('---SET TORRENT PRIORITY---');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          Provider.of<UserDetailProvider>(context, listen: false).token;
+      Map<String, dynamic> mp = Map();
+      mp['indices'] = indexList;
+      mp['priority'] = priorityType;
+      String rawBody = json.encode(mp);
+      print(rawBody);
+      response = await dio.patch(
+        url,
+        data: rawBody,
+      );
+      if (response.statusCode == 200) {
+        print(response);
+        print('--PRIORITY SET--');
+      } else {}
+    } catch (e) {
+      print('--ERROR--');
+      print(e.toString());
+    }
+  }
 }
