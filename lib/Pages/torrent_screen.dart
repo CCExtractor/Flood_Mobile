@@ -64,13 +64,13 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                           Icon(
                                             Icons.arrow_upward_rounded,
                                             color: AppColor.greenAccentColor,
-                                            size: wp * 0.07,
+                                            size: 25,
                                           ),
                                           Text(
                                             model.upSpeed,
                                             style: TextStyle(
                                               color: AppColor.greenAccentColor,
-                                              fontSize: wp * 0.045,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
@@ -81,13 +81,13 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                           Icon(
                                             Icons.arrow_downward_rounded,
                                             color: AppColor.blueAccentColor,
-                                            size: wp * 0.07,
+                                            size: 25,
                                           ),
                                           Text(
                                             model.downSpeed,
                                             style: TextStyle(
                                               color: AppColor.blueAccentColor,
-                                              fontSize: wp * 0.045,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
