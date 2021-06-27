@@ -1,3 +1,4 @@
+import 'package:chewie/chewie.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
@@ -17,7 +18,8 @@ class VideoStreamScreen extends StatefulWidget {
 }
 
 class _VideoStreamScreenState extends State<VideoStreamScreen> {
-  VideoPlayerController _controller;
+  VideoPlayerController videoPlayerController;
+  ChewieController chewieController;
   String url;
 
   @override
@@ -35,17 +37,18 @@ class _VideoStreamScreenState extends State<VideoStreamScreen> {
     url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
         ApiProvider.playTorrentVideo +
         '${widget.args.hash}/contents/${widget.args.index}/data';
-    _controller = VideoPlayerController.network(url, httpHeaders: {
+
+    videoPlayerController = VideoPlayerController.network(url, httpHeaders: {
       'Cookie': Provider.of<UserDetailProvider>(context, listen: false).token
     })
       ..initialize().then((_) {
         setState(() {});
       });
-    while (this.mounted) {
-      //This keeps updating the progress indicator
-      setState(() {});
-      await Future.delayed(Duration(seconds: 1), () {});
-    }
+
+    chewieController = ChewieController(
+      videoPlayerController: videoPlayerController,
+      looping: true,
+    );
   }
 
   @override
@@ -58,62 +61,25 @@ class _VideoStreamScreenState extends State<VideoStreamScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            color: AppColor.primaryColor,
-            child: Center(
-              child: _controller.value.isInitialized
-                  ? AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
-                      child: VideoPlayer(_controller),
-                    )
-                  : Container(),
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(),
-                Container(
-                  child: IconButton(
-                    icon: Icon(_controller.value.isPlaying
-                        ? Icons.pause
-                        : Icons.play_arrow),
-                    color: Colors.white,
-                    iconSize: 50,
-                    onPressed: () {
-                      setState(() {
-                        _controller.value.isPlaying
-                            ? _controller.pause()
-                            : _controller.play();
-                      });
-                    },
-                  ),
+      body: Container(
+        color: AppColor.primaryColor,
+        child: Center(
+          child: chewieController != null &&
+                  chewieController.videoPlayerController.value.isInitialized
+              ? Chewie(
+                  controller: chewieController,
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    CircularProgressIndicator(
+                      color: AppColor.greenAccentColor,
+                    ),
+                    SizedBox(height: 20),
+                    Text('Loading'),
+                  ],
                 ),
-                Slider(
-                  inactiveColor: Colors.grey,
-                  activeColor: Colors.white,
-                  value: _controller.value.position.inSeconds.toDouble(),
-                  min: 0.0,
-                  max: _controller.value.duration == null
-                      ? 1.0
-                      : _controller.value.duration.inSeconds.toDouble(),
-                  onChanged: (progress) {
-                    if (this.mounted) {
-                      setState(() {
-                        _controller.seekTo(Duration(seconds: progress.toInt()));
-                      });
-                    }
-                  },
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -125,6 +91,7 @@ class _VideoStreamScreenState extends State<VideoStreamScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    _controller.dispose();
+    videoPlayerController.dispose();
+    chewieController.dispose();
   }
 }
