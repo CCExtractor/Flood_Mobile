@@ -27,8 +27,8 @@ class MText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 23,
-        fontWeight: FontWeight.bold,
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
       ),
     );
   }
