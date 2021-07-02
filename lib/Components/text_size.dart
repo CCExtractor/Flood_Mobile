@@ -10,9 +10,7 @@ class SText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 18,
-        color: Colors.white70,
-      ),
+          fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
     );
   }
 }

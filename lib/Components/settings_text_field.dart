@@ -5,11 +5,15 @@ class SettingsTextField extends StatefulWidget {
   String labelText;
   String hintText;
   Function validator;
+  String defaultValue;
+  bool isText;
 
   SettingsTextField(
       {@required this.hintText,
       @required this.labelText,
-      @required this.validator});
+      @required this.validator,
+      this.isText = true,
+      this.defaultValue = ''});
 
   @override
   _SettingsTextFieldState createState() => _SettingsTextFieldState();
@@ -18,29 +22,48 @@ class SettingsTextField extends StatefulWidget {
 class _SettingsTextFieldState extends State<SettingsTextField> {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      style: TextStyle(
-        color: AppColor.textColor,
-      ),
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: AppColor.secondaryColor,
-        labelText: widget.labelText,
-        hintText: widget.hintText,
-        labelStyle: TextStyle(
-          fontFamily: 'Montserrat',
-          color: Colors.white,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.labelText,
+          style: TextStyle(
+            color: Colors.white54,
+          ),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderSide:
-              const BorderSide(color: AppColor.secondaryColor, width: 2.0),
-          borderRadius: BorderRadius.circular(8),
+        SizedBox(height: 5),
+        TextFormField(
+          style: TextStyle(
+            color: AppColor.textColor,
+          ),
+          initialValue: widget.defaultValue,
+          keyboardType:
+              (!widget.isText) ? TextInputType.text : TextInputType.number,
+          decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            filled: true,
+            fillColor: AppColor.secondaryColor,
+            // labelText: widget.labelText,
+            // hintText: widget.hintText,
+            labelStyle: TextStyle(
+                fontFamily: 'Montserrat',
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.white),
+            enabledBorder: OutlineInputBorder(
+              borderSide:
+                  const BorderSide(color: AppColor.secondaryColor, width: 0.0),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide:
+                  const BorderSide(color: AppColor.secondaryColor, width: 1.0),
+            ),
+          ),
+          validator: widget.validator,
         ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-      validator: widget.validator,
+      ],
     );
   }
 }

@@ -27,7 +27,7 @@ class ClientApi {
       if (response.statusCode == 200) {
         ClientSettingsModel clientSetting =
             ClientSettingsModel.fromJson(response.data);
-        Provider.of<ClientProvider>(context, listen: false)
+        Provider.of<ClientSettingsProvider>(context, listen: false)
             .setClientSettings(clientSetting);
         print('---CLIENT SETTINGS---');
         print(response);

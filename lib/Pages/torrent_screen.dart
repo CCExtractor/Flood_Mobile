@@ -23,7 +23,8 @@ class _TorrentScreenState extends State<TorrentScreen> {
     double wp = MediaQuery.of(context).size.width;
     return Consumer<HomeProvider>(
       builder: (context, model, child) {
-        return Consumer<ClientProvider>(builder: (context, clientModel, child) {
+        return Consumer<ClientSettingsProvider>(
+            builder: (context, clientModel, child) {
           return KeyboardDismissOnTap(
             child: Scaffold(
               body: Container(
