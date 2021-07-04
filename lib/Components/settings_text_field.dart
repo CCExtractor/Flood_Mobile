@@ -5,15 +5,16 @@ class SettingsTextField extends StatefulWidget {
   String labelText;
   String hintText;
   Function validator;
-  String defaultValue;
   bool isText;
+  TextEditingController controller;
 
-  SettingsTextField(
-      {@required this.hintText,
-      @required this.labelText,
-      @required this.validator,
-      this.isText = true,
-      this.defaultValue = ''});
+  SettingsTextField({
+    @required this.hintText,
+    @required this.labelText,
+    @required this.validator,
+    this.controller,
+    this.isText = true,
+  });
 
   @override
   _SettingsTextFieldState createState() => _SettingsTextFieldState();
@@ -33,10 +34,10 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
         ),
         SizedBox(height: 5),
         TextFormField(
+          controller: widget.controller,
           style: TextStyle(
             color: AppColor.textColor,
           ),
-          initialValue: widget.defaultValue,
           keyboardType:
               (!widget.isText) ? TextInputType.text : TextInputType.number,
           decoration: InputDecoration(
