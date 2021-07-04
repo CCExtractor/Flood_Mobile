@@ -1,7 +1,9 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Components/settings_text_field.dart';
 import 'package:flood_mobile/Components/text_size.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Model/register_user_model.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Provider/torrent_content_provider.dart';
 import 'package:flutter/material.dart';
@@ -389,43 +391,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SText(text: 'User Accounts'),
-                          SizedBox(height: 25),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Current User',
-                            labelText: 'Current User',
-                          ),
-                          SizedBox(height: 22),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: SettingsTextField(
-                                  validator: (value) {},
-                                  hintText: 'Maximum Open Files',
-                                  labelText: 'Maximum Open Files',
-                                ),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Expanded(
-                                child: CheckboxListTile(
-                                  tileColor: AppColor.secondaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  title: Text(
-                                    'Verify Hash',
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                  value: false,
-                                  onChanged: (value) {},
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 25),
+                          // SText(text: 'User Accounts'),
+                          // SizedBox(height: 25),
+                          // SettingsTextField(
+                          //   validator: (value) {},
+                          //   hintText: 'Current User',
+                          //   labelText: 'Current User',
+                          // ),
+                          // SizedBox(height: 22),
+                          // SizedBox(height: 25),
                           SText(text: 'Add User'),
                           SizedBox(height: 25),
                           SettingsTextField(
@@ -486,7 +460,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                         'rTorrent',
                                         'qBittorrent',
                                         'Transmission',
-                                        'Deluge'
                                       ].map<DropdownMenuItem<String>>(
                                           (String value) {
                                         return DropdownMenuItem<String>(
@@ -552,7 +525,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8)),
                                   child: ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      // AuthApi.registerUser(
+                                      //   context: context,
+                                      //   model: RegisterUserModel(
+                                      //       username: 'te',
+                                      //       password: 'te',
+                                      //       client: "qBittorrent",
+                                      //       type: "web",
+                                      //       version: 1,
+                                      //       url: "http://localhost:8080",
+                                      //       clientUsername: "admin",
+                                      //       clientPassword: "adminPass",
+                                      //       level: 10),
+                                      // );
+                                    },
+                                    // {
+                                    //   "username": "te",
+                                    //   "password": "te",
+                                    //   "client": {
+                                    //     "client": "qBittorrent",
+                                    //     "type": "web",
+                                    //     "version": 1,
+                                    //     "url": "http://localhost:8080/",
+                                    //     "username": "admin",
+                                    //     "password": "admin"
+                                    //   },
+                                    //   "level": 5
+                                    // }
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),

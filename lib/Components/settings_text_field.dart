@@ -44,7 +44,7 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
             filled: true,
             fillColor: AppColor.secondaryColor,
             // labelText: widget.labelText,
-            // hintText: widget.hintText,
+            hintText: widget.hintText,
             labelStyle: TextStyle(
                 fontFamily: 'Montserrat',
                 fontSize: 16,
