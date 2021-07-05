@@ -70,10 +70,10 @@ class AuthApi {
           Provider.of<UserDetailProvider>(context, listen: false).token;
       Map<String, dynamic> mp = model.toJson();
       String rawBody = json.encode(mp);
-      // print(rawBody);
+      print(rawBody);
       response = await dio
           .post(url, data: rawBody, queryParameters: {"cookie": false});
-      // print(response);
+      print(response);
       if (response.statusCode == 200) {
       } else {}
     } catch (e) {

@@ -1,8 +1,10 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Components/settings_text_field.dart';
 import 'package:flood_mobile/Components/text_size.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
+import 'package:flood_mobile/Model/register_user_model.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -15,7 +17,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  //Bandwidth Controller
+  // *Bandwidth Controller
   TextEditingController globalDownloadRateController =
       new TextEditingController();
   TextEditingController globalUploadRateController =
@@ -29,7 +31,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   TextEditingController downloadSlotGlobalController =
       new TextEditingController();
 
-  //Connectivity Controller
+  // *Connectivity Controller
   TextEditingController portRangeController = new TextEditingController();
   TextEditingController maxHttpConnectionsController =
       new TextEditingController();
@@ -46,7 +48,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool enableDht = false;
   bool enablePeerExchange = false;
 
-  //Resources Controller
+  // *Resources Controller
   TextEditingController defaultDownloadDirectoryController =
       new TextEditingController();
   TextEditingController maximumOpenFilesController =
@@ -54,16 +56,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
   TextEditingController maxMemoryUsageController = new TextEditingController();
   bool verifyHash = false;
 
-  //Authentication
+  // *Authentication
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   TextEditingController pathController = new TextEditingController();
   TextEditingController clientUsernameController = new TextEditingController();
   TextEditingController clientPasswordController = new TextEditingController();
   TextEditingController urlController = new TextEditingController();
+  TextEditingController hostController = new TextEditingController();
+  TextEditingController portController = new TextEditingController();
   bool isAdmin = false;
-  bool socket = false;
-  bool tcp = false;
+  bool socket = true;
   String client = 'rTorrent';
 
   @override
@@ -72,7 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     ClientSettingsModel model =
         Provider.of<ClientSettingsProvider>(context).clientSettings;
     setState(() {
-      //Bandwidth Initialization
+      // *Bandwidth Initialization
       globalDownloadRateController = new TextEditingController(
           text: model.throttleGlobalDownSpeed.toString());
       globalUploadRateController = new TextEditingController(
@@ -86,7 +89,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       downloadSlotGlobalController = new TextEditingController(
           text: model.throttleMaxDownloadsGlobal.toString());
 
-      //TODO Connectivity Initialization
+      // *Connectivity Initialization
       portRangeController =
           new TextEditingController(text: model.networkPortRange.toString());
       maxHttpConnectionsController =
@@ -108,7 +111,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       enableDht = model.dht;
       enablePeerExchange = model.protocolPex;
 
-      //TODO Resources Initialization
+      // *Resources Initialization
       defaultDownloadDirectoryController =
           new TextEditingController(text: model.directoryDefault.toString());
       maximumOpenFilesController =
@@ -138,7 +141,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   LText(text: 'Settings'),
-                  //TODO:Bandwidth Section
+                  // *Bandwidth Section
                   SizedBox(height: 30),
                   ExpansionTileCard(
                     initiallyExpanded: true,
@@ -208,7 +211,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       )
                     ],
                   ),
-                  //TODO Connectivity
+                  // *Connectivity Section
                   ExpansionTileCard(
                     onExpansionChanged: (value) {},
                     elevation: 0,
@@ -387,7 +390,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       )
                     ],
                   ),
-                  //TODO Resources
+                  // *Resources Section
                   ExpansionTileCard(
                     onExpansionChanged: (value) {},
                     elevation: 0,
@@ -440,8 +443,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                         'Verify Hash',
                                         style: TextStyle(fontSize: 12),
                                       ),
-                                      value: clientSettingsModel.clientSettings
-                                          .piecesHashOnCompletion,
+                                      value: verifyHash,
                                       onChanged: (value) {
                                         setState(() {
                                           verifyHash = value;
@@ -467,7 +469,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       )
                     ],
                   ),
-                  //TODO Authentication
+                  // *Authentication Section
                   ExpansionTileCard(
                     onExpansionChanged: (value) {},
                     elevation: 0,
@@ -609,10 +611,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                               'TCP',
                                               style: TextStyle(fontSize: 12),
                                             ),
-                                            value: tcp,
+                                            value: !socket,
                                             onChanged: (value) {
                                               setState(() {
-                                                tcp = value;
+                                                socket = !value;
                                               });
                                             },
                                           ),
@@ -620,12 +622,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       ],
                                     ),
                                     SizedBox(height: 20),
-                                    SettingsTextField(
-                                      validator: (value) {},
-                                      hintText: 'eg. ~/.local/share/rtorrent',
-                                      labelText: 'Path',
-                                      controller: pathController,
-                                    ),
+                                    (socket)
+                                        ? SettingsTextField(
+                                            validator: (value) {},
+                                            hintText:
+                                                'eg. ~/.local/share/rtorrent',
+                                            labelText: 'Path',
+                                            controller: pathController,
+                                          )
+                                        : Column(
+                                            children: [
+                                              SettingsTextField(
+                                                validator: (value) {},
+                                                hintText: 'Host or IP',
+                                                labelText: 'Host',
+                                                controller: hostController,
+                                              ),
+                                              SizedBox(height: 20),
+                                              SettingsTextField(
+                                                validator: (value) {},
+                                                hintText: 'Port',
+                                                labelText: 'Port',
+                                                controller: portController,
+                                              )
+                                            ],
+                                          ),
                                   ],
                                 )
                               : Column(
@@ -663,33 +684,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       borderRadius: BorderRadius.circular(8)),
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // AuthApi.registerUser(
-                                      //   context: context,
-                                      //   model: RegisterUserModel(
-                                      //       username: 'te',
-                                      //       password: 'te',
-                                      //       client: "qBittorrent",
-                                      //       type: "web",
-                                      //       version: 1,
-                                      //       url: "http://localhost:8080",
-                                      //       clientUsername: "admin",
-                                      //       clientPassword: "adminPass",
-                                      //       level: 10),
-                                      // );
+                                      AuthApi.registerUser(
+                                        context: context,
+                                        model: RegisterUserModel(
+                                            username: usernameController.text,
+                                            password: passwordController.text,
+                                            client: client,
+                                            type: (client == 'rTorrent')
+                                                ? (socket)
+                                                    ? 'socket'
+                                                    : 'tcp'
+                                                : "web",
+                                            version: 1,
+                                            url: urlController.text,
+                                            clientUsername:
+                                                clientUsernameController.text,
+                                            clientPassword:
+                                                clientPasswordController.text,
+                                            level: isAdmin ? 10 : 5,
+                                            path: pathController.text,
+                                            host: hostController.text,
+                                            port:
+                                                int.parse(portController.text)),
+                                      );
                                     },
-                                    // {
-                                    //   "username": "te",
-                                    //   "password": "te",
-                                    //   "client": {
-                                    //     "client": "qBittorrent",
-                                    //     "type": "web",
-                                    //     "version": 1,
-                                    //     "url": "http://localhost:8080/",
-                                    //     "username": "admin",
-                                    //     "password": "admin"
-                                    //   },
-                                    //   "level": 5
-                                    // }
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
