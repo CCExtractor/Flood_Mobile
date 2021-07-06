@@ -10,6 +10,7 @@ class ApiProvider extends ChangeNotifier {
   static String getTorrentListUrl = '/api/torrents';
   static String stopTorrentUrl = '/api/torrents/stop';
   static String getClientSettingsUrl = '/api/client/settings';
+  static String setClientSettingsUrl = '/api/client/settings';
   static String addTorrentMagnet = '/api/torrents/add-urls';
   static String addTorrentFile = '/api/torrents/add-files';
   static String deleteTorrent = '/api/torrents/delete';

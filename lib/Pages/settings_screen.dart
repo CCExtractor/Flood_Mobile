@@ -1,5 +1,6 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
+import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Components/settings_text_field.dart';
 import 'package:flood_mobile/Components/text_size.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
@@ -133,6 +134,71 @@ class _SettingsScreenState extends State<SettingsScreen> {
         builder: (context, clientSettingsModel, child) {
       return KeyboardDismissOnTap(
         child: Scaffold(
+          floatingActionButton: FloatingActionButton.extended(
+            backgroundColor: AppColor.greenAccentColor,
+            onPressed: () {
+              ClientSettingsModel newClientSettingsModel = new ClientSettingsModel(
+                  dht: clientSettingsModel.clientSettings.dht,
+                  dhtPort: clientSettingsModel.clientSettings.dhtPort,
+                  directoryDefault:
+                      clientSettingsModel.clientSettings.directoryDefault,
+                  networkHttpMaxOpen:
+                      clientSettingsModel.clientSettings.networkHttpMaxOpen,
+                  networkLocalAddress:
+                      clientSettingsModel.clientSettings.networkLocalAddress,
+                  networkMaxOpenFiles:
+                      clientSettingsModel.clientSettings.networkMaxOpenFiles,
+                  networkPortOpen:
+                      clientSettingsModel.clientSettings.networkPortOpen,
+                  networkPortRandom:
+                      clientSettingsModel.clientSettings.networkPortRandom,
+                  networkPortRange:
+                      clientSettingsModel.clientSettings.networkPortRange,
+                  piecesHashOnCompletion:
+                      clientSettingsModel.clientSettings.piecesHashOnCompletion,
+                  piecesMemoryMax:
+                      clientSettingsModel.clientSettings.piecesMemoryMax,
+                  protocolPex: clientSettingsModel.clientSettings.protocolPex,
+                  throttleGlobalDownSpeed:
+                      int.parse(globalDownloadRateController.text),
+                  throttleGlobalUpSpeed:
+                      int.parse(globalUploadRateController.text),
+                  throttleMaxDownloads:
+                      int.parse(downloadSlotPerTorrentController.text),
+                  throttleMaxDownloadsGlobal:
+                      int.parse(downloadSlotGlobalController.text),
+                  throttleMaxPeersNormal:
+                      clientSettingsModel.clientSettings.throttleMaxPeersNormal,
+                  throttleMaxPeersSeed:
+                      clientSettingsModel.clientSettings.throttleMaxPeersSeed,
+                  throttleMaxUploads:
+                      int.parse(uploadSlotPerTorrentController.text),
+                  throttleMaxUploadsGlobal:
+                      int.parse(uploadSlotGlobalController.text),
+                  throttleMinPeersNormal:
+                      clientSettingsModel.clientSettings.throttleMinPeersNormal,
+                  throttleMinPeersSeed:
+                      clientSettingsModel.clientSettings.throttleMinPeersSeed,
+                  trackersNumWant:
+                      clientSettingsModel.clientSettings.trackersNumWant);
+              ClientApi.setClientSettings(
+                      context: context, model: newClientSettingsModel)
+                  .then((value) {
+                setState(() {});
+              });
+            },
+            icon: Icon(
+              Icons.save,
+              color: Colors.white,
+            ),
+            label: Text(
+              "Save",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600),
+            ),
+          ),
           backgroundColor: AppColor.primaryColor,
           body: SingleChildScrollView(
             child: Container(

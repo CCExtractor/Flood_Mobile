@@ -29,7 +29,7 @@ class ClientSettingsModel {
   int trackersNumWant;
 
   ClientSettingsModel(
-      this.dht,
+      {this.dht,
       this.dhtPort,
       this.directoryDefault,
       this.networkHttpMaxOpen,
@@ -51,8 +51,10 @@ class ClientSettingsModel {
       this.throttleMaxUploadsGlobal,
       this.throttleMinPeersNormal,
       this.throttleMinPeersSeed,
-      this.trackersNumWant);
+      this.trackersNumWant});
+
   factory ClientSettingsModel.fromJson(Map<String, dynamic> data) =>
       _$ClientSettingsModelFromJson(data);
+
   Map<String, dynamic> toJson() => _$ClientSettingsModelToJson(this);
 }
