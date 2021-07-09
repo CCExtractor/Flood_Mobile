@@ -59,16 +59,18 @@ class ClientApi {
       Map<String, dynamic> mp = model.toJson();
       String rawBody = json.encode(mp);
       print(rawBody);
-      // response = await dio.patch(
-      //   url,
-      //   data: rawBody,
-      // );
-      // if (response.statusCode == 200) {
-      //   print(response);
-      //   print('--SETTINGS CHANGED--');
-      //   // *Getting the client settings again
-      //   getClientSettings(context);
-      // } else {}
+      response = await dio.patch(
+        url,
+        data: rawBody,
+      );
+      if (response.statusCode == 200) {
+        print(response);
+        print('--SETTINGS CHANGED--');
+        // *Getting the client settings again
+        getClientSettings(context);
+      } else {
+        print('Error');
+      }
     } catch (e) {
       print('--ERROR--');
       print(e.toString());
