@@ -1,6 +1,7 @@
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Pages/about_screen.dart';
 import 'package:flood_mobile/Pages/settings_screen.dart';
 import 'package:flood_mobile/Pages/torrent_screen.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
@@ -54,6 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
               break;
             case 2:
               screenCurrent = SettingsScreen();
+              break;
+            case 5:
+              screenCurrent = AboutScreen();
               break;
           }
 
@@ -146,13 +150,6 @@ class _MenuState extends State<Menu> {
                 },
                 title: 'Torrents'),
             NavDrawerListTile(
-                icon: Icons.rss_feed,
-                onTap: () {
-                  controller.position = 1;
-                  controller.toggle();
-                },
-                title: 'Feed'),
-            NavDrawerListTile(
                 icon: Icons.settings,
                 onTap: () {
                   controller.position = 2;
@@ -182,6 +179,7 @@ class _MenuState extends State<Menu> {
             NavDrawerListTile(
                 icon: Icons.info,
                 onTap: () {
+                  controller.position = 5;
                   controller.toggle();
                 },
                 title: 'About'),

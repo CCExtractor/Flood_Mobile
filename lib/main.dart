@@ -38,8 +38,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<ApiProvider>(
           create: (context) => ApiProvider(),
         ),
-        ChangeNotifierProvider<ClientProvider>(
-          create: (context) => ClientProvider(),
+        ChangeNotifierProvider<ClientSettingsProvider>(
+          create: (context) => ClientSettingsProvider(),
         ),
       ],
       child: KeyboardDismissOnTap(

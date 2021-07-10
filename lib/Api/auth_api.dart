@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:flood_mobile/Model/register_user_model.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -49,6 +50,35 @@ class AuthApi {
       print('--ERROR--');
       print(e.toString());
       return false;
+    }
+  }
+
+  static Future<void> registerUser(
+      {RegisterUserModel model, BuildContext context}) async {
+    try {
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+          ApiProvider.registerUser;
+      print('---REGISTER USER---');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          Provider.of<UserDetailProvider>(context, listen: false).token;
+      Map<String, dynamic> mp = model.toJson();
+      String rawBody = json.encode(mp);
+      print(rawBody);
+      response = await dio
+          .post(url, data: rawBody, queryParameters: {"cookie": false});
+      print(response);
+      if (response.statusCode == 200) {
+      } else {}
+    } catch (e) {
+      print('--ERROR--');
+      print(e.toString());
     }
   }
 }
