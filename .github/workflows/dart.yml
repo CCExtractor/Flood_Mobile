@@ -19,7 +19,7 @@ jobs:
         with:
           flutter-version: '2.2.2'
       - run: flutter pub get
-      - run: flutter analyze
+#       - run: flutter analyze
       - run: flutter format -n --set-exit-if-changed .
       - run: flutter build apk
       
