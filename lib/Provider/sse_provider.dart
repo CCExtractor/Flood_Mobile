@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Api/event_handler_api.dart';
 import 'package:flood_mobile/Constants/event_names.dart';
@@ -10,6 +8,7 @@ import 'package:provider/provider.dart';
 
 class SSEProvider extends ChangeNotifier {
   SSEModel sseModel = SSEModel(data: '', id: '', event: '');
+
   void setSSEModel(model) {
     sseModel = model;
     notifyListeners();

@@ -16,7 +16,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class TorrentTile extends StatefulWidget {
-  TorrentModel model;
+  final TorrentModel model;
 
   TorrentTile({@required this.model});
 
@@ -49,7 +49,6 @@ class _TorrentTileState extends State<TorrentTile> {
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
-    double wp = MediaQuery.of(context).size.width;
     return Slidable(
       actionPane: SlidableBehindActionPane(),
       actionExtentRatio: 0.25,

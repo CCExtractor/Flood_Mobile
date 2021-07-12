@@ -35,7 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double hp = MediaQuery.of(context).size.height;
     double wp = MediaQuery.of(context).size.width;
 
     return KeyboardDismissOnTap(
@@ -117,7 +116,6 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
-    double wp = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
         color: AppColor.secondaryColor,

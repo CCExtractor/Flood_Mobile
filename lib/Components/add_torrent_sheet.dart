@@ -10,7 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:io';
 
 class AddTorrentSheet extends StatefulWidget {
-  ClientSettingsModel clientSettings;
+  final ClientSettingsModel clientSettings;
 
   AddTorrentSheet({
     @required this.clientSettings,

@@ -37,6 +37,9 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (context) => VideoStreamScreen(args: args));
         break;
+      default:
+        return MaterialPageRoute(builder: (context) => LoginScreen());
+        break;
     }
   }
 }

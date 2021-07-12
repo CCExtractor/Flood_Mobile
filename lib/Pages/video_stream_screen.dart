@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoStreamScreen extends StatefulWidget {
-  VideoStreamScreenArguments args;
+  final VideoStreamScreenArguments args;
 
   VideoStreamScreen({@required this.args});
 

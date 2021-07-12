@@ -11,9 +11,9 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class FolderFileListView extends StatefulWidget {
-  Map<dynamic, dynamic> data;
-  double depth;
-  String hash;
+  final Map<dynamic, dynamic> data;
+  final double depth;
+  final String hash;
 
   FolderFileListView(
       {@required this.data, @required this.depth, @required this.hash});
@@ -91,9 +91,9 @@ class _FolderFileListViewState extends State<FolderFileListView> {
 }
 
 class TorrentFileTile extends StatefulWidget {
-  TorrentContentModel model;
-  double wp;
-  String hash;
+  final TorrentContentModel model;
+  final double wp;
+  final String hash;
 
   TorrentFileTile(
       {@required this.model, @required this.wp, @required this.hash});

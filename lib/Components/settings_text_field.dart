@@ -2,11 +2,11 @@ import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flutter/material.dart';
 
 class SettingsTextField extends StatefulWidget {
-  String labelText;
-  String hintText;
-  Function validator;
-  bool isText;
-  TextEditingController controller;
+  final String labelText;
+  final String hintText;
+  final Function validator;
+  final bool isText;
+  final TextEditingController controller;
 
   SettingsTextField({
     @required this.hintText,

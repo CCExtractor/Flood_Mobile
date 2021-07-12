@@ -4,7 +4,7 @@ import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flutter/material.dart';
 
 class DeleteTorrentSheet extends StatefulWidget {
-  TorrentModel torrent;
+  final TorrentModel torrent;
 
   DeleteTorrentSheet({@required this.torrent});
 

@@ -11,7 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class TorrentContentScreen extends StatefulWidget {
-  TorrentContentPageArguments arguments;
+  final TorrentContentPageArguments arguments;
 
   TorrentContentScreen({@required this.arguments});
 
@@ -22,8 +22,6 @@ class TorrentContentScreen extends StatefulWidget {
 class _TorrentContentScreenState extends State<TorrentContentScreen> {
   @override
   Widget build(BuildContext context) {
-    double hp = MediaQuery.of(context).size.height;
-    double wp = MediaQuery.of(context).size.width;
     return Consumer<TorrentContentProvider>(builder: (context, model, child) {
       return Scaffold(
         appBar: (!model.isSelectionMode)
