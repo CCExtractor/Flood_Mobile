@@ -107,7 +107,12 @@ class TorrentApi {
   }
 
   static Future<void> addTorrentMagnet(
-      {String magnetUrl, String destination, BuildContext context}) async {
+      {String magnetUrl,
+      String destination,
+      BuildContext context,
+      bool isBasePath,
+      bool isCompleted,
+      bool isSequential}) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.addTorrentMagnet;
@@ -124,9 +129,9 @@ class TorrentApi {
       Map<String, dynamic> mp = Map();
       mp['urls'] = [magnetUrl];
       mp['destination'] = destination;
-      mp['isBasePath'] = false;
-      mp['isCompleted'] = false;
-      mp['isSequential'] = false;
+      mp['isBasePath'] = isBasePath;
+      mp['isCompleted'] = isCompleted;
+      mp['isSequential'] = isSequential;
       mp['start'] = true;
       mp['tags'] = [];
       String rawBody = json.encode(mp);
@@ -144,7 +149,12 @@ class TorrentApi {
   }
 
   static Future<void> addTorrentFile(
-      {String base64, String destination, BuildContext context}) async {
+      {String base64,
+      String destination,
+      BuildContext context,
+      bool isBasePath,
+      bool isSequential,
+      bool isCompleted}) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.addTorrentFile;
@@ -161,9 +171,9 @@ class TorrentApi {
       Map<String, dynamic> mp = Map();
       mp['files'] = [base64];
       mp['destination'] = destination;
-      mp['isBasePath'] = false;
-      mp['isCompleted'] = false;
-      mp['isSequential'] = false;
+      mp['isBasePath'] = isBasePath;
+      mp['isCompleted'] = isCompleted;
+      mp['isSequential'] = isSequential;
       mp['start'] = true;
       mp['tags'] = [];
       String rawBody = json.encode(mp);

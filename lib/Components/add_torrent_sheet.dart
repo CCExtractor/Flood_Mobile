@@ -23,8 +23,12 @@ class AddTorrentSheet extends StatefulWidget {
 class _AddTorrentSheetState extends State<AddTorrentSheet> {
   bool isFileSelected = false;
   bool isMagnetSelected = false;
+  bool useAdBasePath = false;
+  bool completed = false;
+  bool sequentialDownload = false;
+
   TextEditingController directoryController;
-  TextEditingController magnetUrlController;
+  TextEditingController magnetUrlController = new TextEditingController();
   String torrentPath;
   final _formKey = GlobalKey<FormState>();
   String base64;
@@ -109,6 +113,62 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                     },
                   )
                 : Container(),
+            (isMagnetSelected)
+                ? SizedBox(
+                    height: 20,
+                  )
+                : Container(),
+            CheckboxListTile(
+              activeColor: AppColor.greenAccentColor,
+              tileColor: AppColor.secondaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              title: Text(
+                'Use as Base Path',
+                style: TextStyle(fontSize: 14),
+              ),
+              value: useAdBasePath,
+              onChanged: (value) {
+                setState(() {
+                  useAdBasePath = value;
+                });
+              },
+            ),
+            CheckboxListTile(
+              activeColor: AppColor.greenAccentColor,
+              tileColor: AppColor.secondaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              title: Text(
+                'Sequential Download',
+                style: TextStyle(fontSize: 14),
+              ),
+              value: sequentialDownload,
+              onChanged: (value) {
+                setState(() {
+                  sequentialDownload = value;
+                });
+              },
+            ),
+            CheckboxListTile(
+              activeColor: AppColor.greenAccentColor,
+              tileColor: AppColor.secondaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              title: Text(
+                'Completed',
+                style: TextStyle(fontSize: 14),
+              ),
+              value: completed,
+              onChanged: (value) {
+                setState(() {
+                  completed = value;
+                });
+              },
+            ),
             SizedBox(
               height: 15,
             ),
@@ -187,6 +247,9 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                       TorrentApi.addTorrentMagnet(
                           magnetUrl: magnetUrlController.text,
                           destination: directoryController.text,
+                          isBasePath: useAdBasePath,
+                          isSequential: sequentialDownload,
+                          isCompleted: completed,
                           context: context);
                       Navigator.pop(context);
                     } else {
@@ -194,6 +257,9 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                       TorrentApi.addTorrentFile(
                           base64: base64,
                           destination: directoryController.text,
+                          isBasePath: useAdBasePath,
+                          isSequential: sequentialDownload,
+                          isCompleted: completed,
                           context: context);
                       Navigator.pop(context);
                     }
