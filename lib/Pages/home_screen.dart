@@ -9,6 +9,7 @@ import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 import 'package:provider/provider.dart';
@@ -137,6 +138,17 @@ class _MenuState extends State<Menu> {
                 ),
               ],
             ),
+            Padding(
+              padding: EdgeInsets.only(left: 18.0, top: 20, bottom: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SvgPicture.network(
+                    'https://img.shields.io/github/v/release/CCExtractor/Flood_Mobile?include_prereleases',
+                  ),
+                ],
+              ),
+            ),
             SizedBox(
               height: hp * 0.01,
             ),
@@ -154,13 +166,6 @@ class _MenuState extends State<Menu> {
                   controller.toggle();
                 },
                 title: 'Settings'),
-            NavDrawerListTile(
-                icon: Icons.speed,
-                onTap: () {
-                  controller.position = 2;
-                  controller.toggle();
-                },
-                title: 'Speed Limits'),
             NavDrawerListTile(
                 icon: Icons.exit_to_app,
                 onTap: () async {

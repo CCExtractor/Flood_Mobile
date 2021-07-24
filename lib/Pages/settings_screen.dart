@@ -206,79 +206,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   LText(text: 'Settings'),
-                  // *Bandwidth Section
                   SizedBox(height: 30),
-                  ExpansionTileCard(
-                    initiallyExpanded: true,
-                    onExpansionChanged: (value) {},
-                    elevation: 0,
-                    expandedColor: AppColor.primaryColor,
-                    baseColor: AppColor.primaryColor,
-                    title: MText(text: 'Bandwidth'),
-                    leading: Icon(Icons.wifi_rounded),
-                    contentPadding: EdgeInsets.all(0),
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SText(text: 'Transfer Rate Throttles'),
-                          SizedBox(height: 15),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Global Download Rate Throttle',
-                            labelText: 'Global Download Rate Throttle',
-                            isText: false,
-                            controller: globalDownloadRateController,
-                          ),
-                          SizedBox(height: 22),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Global Upload Rate Throttle',
-                            labelText: 'Global Upload Rate Throttle',
-                            isText: false,
-                            controller: globalUploadRateController,
-                          ),
-                          SizedBox(height: 25),
-                          SText(text: 'Slot Availability'),
-                          SizedBox(height: 15),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Upload Slots Per Torrent',
-                            labelText: 'Upload Slots Per Torrent',
-                            isText: false,
-                            controller: uploadSlotPerTorrentController,
-                          ),
-                          SizedBox(height: 22),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Upload Slots Global',
-                            labelText: 'Upload Slots Global',
-                            controller: uploadSlotGlobalController,
-                            isText: false,
-                          ),
-                          SizedBox(height: 22),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Download Slots Per Torrent',
-                            labelText: 'Download Slots Per Torrent',
-                            controller: downloadSlotPerTorrentController,
-                            isText: false,
-                          ),
-                          SizedBox(height: 22),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Download Slots Global',
-                            labelText: 'Download Slots Global',
-                            controller: downloadSlotGlobalController,
-                            isText: false,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                  // *Bandwidth Section
+                  BandwidthSection(
+                      globalDownloadRateController:
+                          globalDownloadRateController,
+                      globalUploadRateController: globalUploadRateController,
+                      uploadSlotPerTorrentController:
+                          uploadSlotPerTorrentController,
+                      uploadSlotGlobalController: uploadSlotGlobalController,
+                      downloadSlotPerTorrentController:
+                          downloadSlotPerTorrentController,
+                      downloadSlotGlobalController:
+                          downloadSlotGlobalController),
                   // *Connectivity Section
                   ExpansionTileCard(
-                    onExpansionChanged: (value) {},
                     elevation: 0,
                     expandedColor: AppColor.primaryColor,
                     baseColor: AppColor.primaryColor,
@@ -529,6 +471,62 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             labelText: 'Max Memory Usage (MB)',
                             controller: maxMemoryUsageController,
                             isText: false,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  // *Speed Limit Section
+                  ExpansionTileCard(
+                    onExpansionChanged: (value) {},
+                    elevation: 0,
+                    expandedColor: AppColor.primaryColor,
+                    baseColor: AppColor.primaryColor,
+                    title: MText(text: 'Speed Limit'),
+                    leading: Icon(Icons.speed_rounded),
+                    contentPadding: EdgeInsets.all(0),
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                          ),
+                          SText(text: 'Download'),
+                          SizedBox(height: 25),
+                          SText(text: 'Memory'),
+                          SizedBox(height: 25),
+                          SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Expanded(child: Container()),
+                              Expanded(
+                                child: Container(
+                                  height: hp * 0.06,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: ElevatedButton(
+                                    onPressed: () {},
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      primary: AppColor.blueAccentColor,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Set",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       )
@@ -807,5 +805,96 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       );
     });
+  }
+}
+
+class BandwidthSection extends StatelessWidget {
+  const BandwidthSection({
+    Key key,
+    @required this.globalDownloadRateController,
+    @required this.globalUploadRateController,
+    @required this.uploadSlotPerTorrentController,
+    @required this.uploadSlotGlobalController,
+    @required this.downloadSlotPerTorrentController,
+    @required this.downloadSlotGlobalController,
+  }) : super(key: key);
+
+  final TextEditingController globalDownloadRateController;
+  final TextEditingController globalUploadRateController;
+  final TextEditingController uploadSlotPerTorrentController;
+  final TextEditingController uploadSlotGlobalController;
+  final TextEditingController downloadSlotPerTorrentController;
+  final TextEditingController downloadSlotGlobalController;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTileCard(
+      initiallyExpanded: true,
+      onExpansionChanged: (value) {},
+      elevation: 0,
+      expandedColor: AppColor.primaryColor,
+      baseColor: AppColor.primaryColor,
+      title: MText(text: 'Bandwidth'),
+      leading: Icon(Icons.wifi_rounded),
+      contentPadding: EdgeInsets.all(0),
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SText(text: 'Transfer Rate Throttles'),
+            SizedBox(height: 15),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Global Download Rate Throttle',
+              labelText: 'Global Download Rate Throttle',
+              isText: false,
+              controller: globalDownloadRateController,
+            ),
+            SizedBox(height: 22),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Global Upload Rate Throttle',
+              labelText: 'Global Upload Rate Throttle',
+              isText: false,
+              controller: globalUploadRateController,
+            ),
+            SizedBox(height: 25),
+            SText(text: 'Slot Availability'),
+            SizedBox(height: 15),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Upload Slots Per Torrent',
+              labelText: 'Upload Slots Per Torrent',
+              isText: false,
+              controller: uploadSlotPerTorrentController,
+            ),
+            SizedBox(height: 22),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Upload Slots Global',
+              labelText: 'Upload Slots Global',
+              controller: uploadSlotGlobalController,
+              isText: false,
+            ),
+            SizedBox(height: 22),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Download Slots Per Torrent',
+              labelText: 'Download Slots Per Torrent',
+              controller: downloadSlotPerTorrentController,
+              isText: false,
+            ),
+            SizedBox(height: 22),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Download Slots Global',
+              labelText: 'Download Slots Global',
+              controller: downloadSlotGlobalController,
+              isText: false,
+            ),
+          ],
+        )
+      ],
+    );
   }
 }
