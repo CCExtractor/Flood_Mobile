@@ -57,6 +57,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
   TextEditingController maxMemoryUsageController = new TextEditingController();
   bool verifyHash = false;
 
+  // *Speed Limit
+  List<String> speedList = [
+    '1 kB/s',
+    '10 kB/s',
+    '100 kB/s',
+    '500 kB/s',
+    '1 MB/s'
+  ];
+
   // *Authentication
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
@@ -274,40 +283,89 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             width: double.infinity,
                           ),
                           SText(text: 'Download'),
-                          SizedBox(height: 25),
-                          SText(text: 'Memory'),
-                          SizedBox(height: 25),
-                          SizedBox(height: 20),
-                          Row(
+                          SizedBox(height: 15),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(child: Container()),
-                              Expanded(
-                                child: Container(
-                                  height: hp * 0.06,
+                              Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  width: double.infinity,
+                                  height: 60,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: ElevatedButton(
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      primary: AppColor.blueAccentColor,
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Set",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
+                                    color: AppColor.secondaryColor,
+                                    border: null,
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
-                                ),
-                              ),
+                                  child: Center(
+                                    child: DropdownButtonFormField(
+                                      dropdownColor: AppColor.secondaryColor,
+                                      isExpanded: true,
+                                      decoration: InputDecoration(
+                                        enabledBorder: InputBorder.none,
+                                      ),
+                                      icon: Icon(
+                                        Icons.arrow_drop_down,
+                                        color: Colors.white,
+                                        size: 25,
+                                      ),
+                                      hint: Text("Download Speed"),
+                                      items: speedList
+                                          .map((e) => DropdownMenuItem(
+                                                value: e,
+                                                child: Text(
+                                                  e,
+                                                ),
+                                              ))
+                                          .toList(),
+                                      onChanged: (value) {},
+                                      value: '1 kB/s',
+                                    ),
+                                  )),
                             ],
                           ),
+                          SizedBox(height: 25),
+                          SText(text: 'Upload'),
+                          SizedBox(height: 15),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  width: double.infinity,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    color: AppColor.secondaryColor,
+                                    border: null,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Center(
+                                    child: DropdownButtonFormField(
+                                      dropdownColor: AppColor.secondaryColor,
+                                      isExpanded: true,
+                                      decoration: InputDecoration(
+                                        enabledBorder: InputBorder.none,
+                                      ),
+                                      icon: Icon(
+                                        Icons.arrow_drop_down,
+                                        color: Colors.white,
+                                        size: 25,
+                                      ),
+                                      hint: Text("Download Speed"),
+                                      items: speedList
+                                          .map((e) => DropdownMenuItem(
+                                                value: e,
+                                                child: Text(
+                                                  e,
+                                                ),
+                                              ))
+                                          .toList(),
+                                      onChanged: (value) {},
+                                      value: '1 kB/s',
+                                    ),
+                                  )),
+                            ],
+                          ),
+                          SizedBox(height: 25),
                         ],
                       )
                     ],
