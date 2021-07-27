@@ -147,12 +147,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       clientSettingsModel.clientSettings.networkLocalAddress,
                   networkMaxOpenFiles:
                       clientSettingsModel.clientSettings.networkMaxOpenFiles,
-                  networkPortOpen:
-                      clientSettingsModel.clientSettings.networkPortOpen,
-                  networkPortRandom:
-                      clientSettingsModel.clientSettings.networkPortRandom,
-                  networkPortRange:
-                      clientSettingsModel.clientSettings.networkPortRange,
+                  networkPortOpen: openPort,
+                  networkPortRandom: randomizePort,
+                  networkPortRange: portController.text,
                   piecesHashOnCompletion:
                       clientSettingsModel.clientSettings.piecesHashOnCompletion,
                   piecesMemoryMax:
@@ -220,262 +217,45 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       downloadSlotGlobalController:
                           downloadSlotGlobalController),
                   // *Connectivity Section
-                  ExpansionTileCard(
-                    elevation: 0,
-                    expandedColor: AppColor.primaryColor,
-                    baseColor: AppColor.primaryColor,
-                    leading: Icon(FontAwesomeIcons.connectdevelop),
-                    title: MText(text: 'Connectivity'),
-                    contentPadding: EdgeInsets.all(0),
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SText(text: 'Incoming Connections'),
-                          SizedBox(height: 15),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Port Range',
-                            labelText: 'Port Range',
-                            isText: false,
-                            controller: portRangeController,
-                          ),
-                          SizedBox(height: 22),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: CheckboxListTile(
-                                  activeColor: AppColor.greenAccentColor,
-                                  tileColor: AppColor.secondaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  title: Text(
-                                    'Randomize Port',
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                  value: clientSettingsModel
-                                      .clientSettings.networkPortRandom,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      randomizePort = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Expanded(
-                                child: CheckboxListTile(
-                                  activeColor: AppColor.greenAccentColor,
-                                  tileColor: AppColor.secondaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  title: Text(
-                                    'Open Port',
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                  value: openPort,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      openPort = value;
-                                    });
-                                  },
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 22),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Maximum HTTP Connections',
-                            labelText: 'Maximum HTTP Connections',
-                            isText: false,
-                            controller: maxHttpConnectionsController,
-                          ),
-                          SizedBox(height: 25),
-                          SText(text: 'Decentralized Peer Discovery'),
-                          SizedBox(height: 15),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'DHT Port',
-                            labelText: 'DHT Port',
-                            controller: dhtPortController,
-                            isText: false,
-                          ),
-                          SizedBox(height: 22),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: CheckboxListTile(
-                                  activeColor: AppColor.greenAccentColor,
-                                  tileColor: AppColor.secondaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  title: Text(
-                                    'Enable DHT',
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                  value: enableDht,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      enableDht = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Expanded(
-                                child: CheckboxListTile(
-                                  activeColor: AppColor.greenAccentColor,
-                                  tileColor: AppColor.secondaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  title: Text(
-                                    'Enable Peer Exchange',
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                  value: enablePeerExchange,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      enablePeerExchange = value;
-                                    });
-                                  },
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 25),
-                          SText(text: 'Peers'),
-                          SizedBox(height: 15),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Minimum Peers',
-                            labelText: 'Minimum Peers',
-                            controller: minimumPeerController,
-                            isText: false,
-                          ),
-                          SizedBox(height: 22),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Maximum Peers',
-                            labelText: 'Maximum Peers',
-                            controller: maximumPeerController,
-                            isText: false,
-                          ),
-                          SizedBox(height: 22),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Minimum Peers Seeding',
-                            labelText: 'Minimum Peers Seeding',
-                            controller: minimumPeerSeedingController,
-                            isText: false,
-                          ),
-                          SizedBox(height: 22),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Maximum Peers Seeding',
-                            labelText: 'Maximum Peers Seeding',
-                            controller: maximumPeerSeedingController,
-                            isText: false,
-                          ),
-                          SizedBox(height: 22),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Peers Desired',
-                            labelText: 'Peers Desired',
-                            controller: peerDesiredController,
-                            isText: false,
-                          ),
-                        ],
-                      )
-                    ],
+                  ConnectivitySection(
+                    clientSettingsModel: clientSettingsModel,
+                    portRangeController: portRangeController,
+                    openPort: openPort,
+                    maxHttpConnectionsController: maxHttpConnectionsController,
+                    dhtPortController: dhtPortController,
+                    enableDht: enableDht,
+                    enablePeerExchange: enablePeerExchange,
+                    minimumPeerController: minimumPeerController,
+                    maximumPeerController: maximumPeerController,
+                    minimumPeerSeedingController: minimumPeerSeedingController,
+                    maximumPeerSeedingController: maximumPeerSeedingController,
+                    peerDesiredController: peerDesiredController,
+                    randomizePort: randomizePort,
+                    setRandomizePort: (value) {
+                      setState(() {
+                        randomizePort = value;
+                      });
+                    },
+                    setEnableDht: null,
+                    setEnablePeerExchange: null,
+                    setOpenPort: (value) {
+                      setState(() {
+                        openPort = value;
+                      });
+                    },
                   ),
                   // *Resources Section
-                  ExpansionTileCard(
-                    onExpansionChanged: (value) {},
-                    elevation: 0,
-                    expandedColor: AppColor.primaryColor,
-                    baseColor: AppColor.primaryColor,
-                    title: MText(text: 'Resources'),
-                    leading: Icon(Icons.settings),
-                    contentPadding: EdgeInsets.all(0),
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SText(text: 'Disk'),
-                          SizedBox(height: 25),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Default Download Directory',
-                            labelText: 'Default Download Directory',
-                            controller: defaultDownloadDirectoryController,
-                          ),
-                          SizedBox(height: 22),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: SettingsTextField(
-                                  validator: (value) {},
-                                  hintText: 'Maximum Open Files',
-                                  labelText: 'Maximum Open Files',
-                                  controller: maximumOpenFilesController,
-                                  isText: false,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(''),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    CheckboxListTile(
-                                      activeColor: AppColor.greenAccentColor,
-                                      tileColor: AppColor.secondaryColor,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      title: Text(
-                                        'Verify Hash',
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                      value: verifyHash,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          verifyHash = value;
-                                        });
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 25),
-                          SText(text: 'Memory'),
-                          SizedBox(height: 25),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Max Memory Usage (MB)',
-                            labelText: 'Max Memory Usage (MB)',
-                            controller: maxMemoryUsageController,
-                            isText: false,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                  ResourceSection(
+                      setVerifyHash: (value) {
+                        setState(() {
+                          verifyHash = value;
+                        });
+                      },
+                      defaultDownloadDirectoryController:
+                          defaultDownloadDirectoryController,
+                      maximumOpenFilesController: maximumOpenFilesController,
+                      verifyHash: verifyHash,
+                      maxMemoryUsageController: maxMemoryUsageController),
                   // *Speed Limit Section
                   ExpansionTileCard(
                     onExpansionChanged: (value) {},
@@ -533,268 +313,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ],
                   ),
                   // *Authentication Section
-                  ExpansionTileCard(
-                    onExpansionChanged: (value) {},
-                    elevation: 0,
-                    expandedColor: AppColor.primaryColor,
-                    baseColor: AppColor.primaryColor,
-                    title: MText(text: 'Authentication'),
-                    leading: Icon(Icons.security),
-                    contentPadding: EdgeInsets.all(0),
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SText(text: 'Add User'),
-                          SizedBox(height: 25),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Username',
-                            labelText: 'Username',
-                            controller: usernameController,
-                          ),
-                          SizedBox(height: 20),
-                          SettingsTextField(
-                            validator: (value) {},
-                            hintText: 'Password',
-                            labelText: 'Password',
-                            controller: passwordController,
-                          ),
-                          SizedBox(height: 20),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Container(),
-                              ),
-                              Expanded(
-                                child: CheckboxListTile(
-                                  activeColor: AppColor.greenAccentColor,
-                                  tileColor: AppColor.secondaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  title: Text(
-                                    'Is Admin',
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                  value: isAdmin,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isAdmin = value;
-                                    });
-                                  },
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: 5),
-                                  decoration: BoxDecoration(
-                                    color: AppColor.secondaryColor,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: ButtonTheme(
-                                    alignedDropdown: true,
-                                    child: DropdownButton<String>(
-                                      isExpanded: true,
-                                      value: client,
-                                      icon: const Icon(
-                                          Icons.keyboard_arrow_down_rounded),
-                                      dropdownColor: AppColor.secondaryColor,
-                                      elevation: 16,
-                                      onChanged: (String newValue) {
-                                        setState(() {
-                                          client = newValue;
-                                        });
-                                      },
-                                      underline: Container(),
-                                      items: <String>[
-                                        'rTorrent',
-                                        'qBittorrent',
-                                        'Transmission',
-                                      ].map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          //Check if the client is rTorrent, qBittorrent or Transmission
-
-                          (client == 'rTorrent')
-                              ? Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: CheckboxListTile(
-                                            tileColor: AppColor.secondaryColor,
-                                            activeColor:
-                                                AppColor.greenAccentColor,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            title: Text(
-                                              'Socket',
-                                              style: TextStyle(fontSize: 12),
-                                            ),
-                                            value: socket,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                socket = value;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 20,
-                                        ),
-                                        Expanded(
-                                          child: CheckboxListTile(
-                                            activeColor:
-                                                AppColor.greenAccentColor,
-                                            tileColor: AppColor.secondaryColor,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            title: Text(
-                                              'TCP',
-                                              style: TextStyle(fontSize: 12),
-                                            ),
-                                            value: !socket,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                socket = !value;
-                                              });
-                                            },
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(height: 20),
-                                    (socket)
-                                        ? SettingsTextField(
-                                            validator: (value) {},
-                                            hintText:
-                                                'eg. ~/.local/share/rtorrent',
-                                            labelText: 'Path',
-                                            controller: pathController,
-                                          )
-                                        : Column(
-                                            children: [
-                                              SettingsTextField(
-                                                validator: (value) {},
-                                                hintText: 'Host or IP',
-                                                labelText: 'Host',
-                                                controller: hostController,
-                                              ),
-                                              SizedBox(height: 20),
-                                              SettingsTextField(
-                                                validator: (value) {},
-                                                hintText: 'Port',
-                                                labelText: 'Port',
-                                                controller: portController,
-                                              )
-                                            ],
-                                          ),
-                                  ],
-                                )
-                              : Column(
-                                  children: [
-                                    SettingsTextField(
-                                      validator: (value) {},
-                                      hintText: 'Client Username',
-                                      labelText: 'Username',
-                                      controller: clientUsernameController,
-                                    ),
-                                    SizedBox(height: 20),
-                                    SettingsTextField(
-                                      validator: (value) {},
-                                      hintText: 'Client Password',
-                                      labelText: 'Password',
-                                      controller: clientPasswordController,
-                                    ),
-                                    SizedBox(height: 20),
-                                    SettingsTextField(
-                                      validator: (value) {},
-                                      hintText: 'eg. http://localhost:8080/',
-                                      labelText: 'URL',
-                                      controller: urlController,
-                                    ),
-                                  ],
-                                ),
-                          SizedBox(height: 20),
-                          Row(
-                            children: [
-                              Expanded(child: Container()),
-                              Expanded(
-                                child: Container(
-                                  height: hp * 0.06,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      AuthApi.registerUser(
-                                        context: context,
-                                        model: RegisterUserModel(
-                                            username: usernameController.text,
-                                            password: passwordController.text,
-                                            client: client,
-                                            type: (client == 'rTorrent')
-                                                ? (socket)
-                                                    ? 'socket'
-                                                    : 'tcp'
-                                                : "web",
-                                            version: 1,
-                                            url: urlController.text,
-                                            clientUsername:
-                                                clientUsernameController.text,
-                                            clientPassword:
-                                                clientPasswordController.text,
-                                            level: isAdmin ? 10 : 5,
-                                            path: pathController.text,
-                                            host: hostController.text,
-                                            port:
-                                                int.parse(portController.text)),
-                                      );
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      primary: AppColor.blueAccentColor,
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Add",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                  AuthenticationSection(
+                      setTCP: (value) {
+                        setState(() {
+                          socket = !value;
+                        });
+                      },
+                      setSocket: (value) {
+                        setState(() {
+                          socket = value;
+                        });
+                      },
+                      setClient: (String newValue) {
+                        setState(() {
+                          client = newValue;
+                        });
+                      },
+                      setIsAdmin: (value) {
+                        setState(() {
+                          isAdmin = value;
+                        });
+                      },
+                      usernameController: usernameController,
+                      passwordController: passwordController,
+                      isAdmin: isAdmin,
+                      client: client,
+                      socket: socket,
+                      pathController: pathController,
+                      hostController: hostController,
+                      portController: portController,
+                      clientUsernameController: clientUsernameController,
+                      clientPasswordController: clientPasswordController,
+                      urlController: urlController,
+                      hp: hp),
                   SizedBox(
                     height: 200,
                   )
@@ -805,6 +356,592 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       );
     });
+  }
+}
+
+class AuthenticationSection extends StatelessWidget {
+  const AuthenticationSection({
+    Key key,
+    @required this.usernameController,
+    @required this.passwordController,
+    @required this.isAdmin,
+    @required this.client,
+    @required this.socket,
+    @required this.pathController,
+    @required this.hostController,
+    @required this.portController,
+    @required this.clientUsernameController,
+    @required this.clientPasswordController,
+    @required this.urlController,
+    @required this.hp,
+    @required this.setClient,
+    @required this.setIsAdmin,
+    @required this.setSocket,
+    @required this.setTCP,
+  }) : super(key: key);
+
+  final TextEditingController usernameController;
+  final TextEditingController passwordController;
+  final bool isAdmin;
+  final String client;
+  final bool socket;
+  final TextEditingController pathController;
+  final TextEditingController hostController;
+  final TextEditingController portController;
+  final TextEditingController clientUsernameController;
+  final TextEditingController clientPasswordController;
+  final TextEditingController urlController;
+  final double hp;
+  final Function setIsAdmin;
+  final Function setClient;
+  final Function setSocket;
+  final Function setTCP;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTileCard(
+      onExpansionChanged: (value) {},
+      elevation: 0,
+      expandedColor: AppColor.primaryColor,
+      baseColor: AppColor.primaryColor,
+      title: MText(text: 'Authentication'),
+      leading: Icon(Icons.security),
+      contentPadding: EdgeInsets.all(0),
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SText(text: 'Add User'),
+            SizedBox(height: 25),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Username',
+              labelText: 'Username',
+              controller: usernameController,
+            ),
+            SizedBox(height: 20),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Password',
+              labelText: 'Password',
+              controller: passwordController,
+            ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(),
+                ),
+                Expanded(
+                  child: CheckboxListTile(
+                    activeColor: AppColor.greenAccentColor,
+                    tileColor: AppColor.secondaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    title: Text(
+                      'Is Admin',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    value: isAdmin,
+                    onChanged: setIsAdmin,
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    decoration: BoxDecoration(
+                      color: AppColor.secondaryColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: ButtonTheme(
+                      alignedDropdown: true,
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        value: client,
+                        icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                        dropdownColor: AppColor.secondaryColor,
+                        elevation: 16,
+                        onChanged: setClient,
+                        underline: Container(),
+                        items: <String>[
+                          'rTorrent',
+                          'qBittorrent',
+                          'Transmission',
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            //Check if the client is rTorrent, qBittorrent or Transmission
+
+            (client == 'rTorrent')
+                ? Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CheckboxListTile(
+                                tileColor: AppColor.secondaryColor,
+                                activeColor: AppColor.greenAccentColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                title: Text(
+                                  'Socket',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                value: socket,
+                                onChanged: setSocket),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Expanded(
+                            child: CheckboxListTile(
+                              activeColor: AppColor.greenAccentColor,
+                              tileColor: AppColor.secondaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              title: Text(
+                                'TCP',
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              value: !socket,
+                              onChanged: setTCP,
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      (socket)
+                          ? SettingsTextField(
+                              validator: (value) {},
+                              hintText: 'eg. ~/.local/share/rtorrent',
+                              labelText: 'Path',
+                              controller: pathController,
+                            )
+                          : Column(
+                              children: [
+                                SettingsTextField(
+                                  validator: (value) {},
+                                  hintText: 'Host or IP',
+                                  labelText: 'Host',
+                                  controller: hostController,
+                                ),
+                                SizedBox(height: 20),
+                                SettingsTextField(
+                                  validator: (value) {},
+                                  hintText: 'Port',
+                                  labelText: 'Port',
+                                  controller: portController,
+                                )
+                              ],
+                            ),
+                    ],
+                  )
+                : Column(
+                    children: [
+                      SettingsTextField(
+                        validator: (value) {},
+                        hintText: 'Client Username',
+                        labelText: 'Username',
+                        controller: clientUsernameController,
+                      ),
+                      SizedBox(height: 20),
+                      SettingsTextField(
+                        validator: (value) {},
+                        hintText: 'Client Password',
+                        labelText: 'Password',
+                        controller: clientPasswordController,
+                      ),
+                      SizedBox(height: 20),
+                      SettingsTextField(
+                        validator: (value) {},
+                        hintText: 'eg. http://localhost:8080/',
+                        labelText: 'URL',
+                        controller: urlController,
+                      ),
+                    ],
+                  ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(child: Container()),
+                Expanded(
+                  child: Container(
+                    height: hp * 0.06,
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        AuthApi.registerUser(
+                          context: context,
+                          model: RegisterUserModel(
+                              username: usernameController.text,
+                              password: passwordController.text,
+                              client: client,
+                              type: (client == 'rTorrent')
+                                  ? (socket)
+                                      ? 'socket'
+                                      : 'tcp'
+                                  : "web",
+                              version: 1,
+                              url: urlController.text,
+                              clientUsername: clientUsernameController.text,
+                              clientPassword: clientPasswordController.text,
+                              level: isAdmin ? 10 : 5,
+                              path: pathController.text,
+                              host: hostController.text,
+                              port: int.parse(portController.text)),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        primary: AppColor.blueAccentColor,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Add",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        )
+      ],
+    );
+  }
+}
+
+class ResourceSection extends StatelessWidget {
+  const ResourceSection({
+    Key key,
+    @required this.defaultDownloadDirectoryController,
+    @required this.maximumOpenFilesController,
+    @required this.verifyHash,
+    @required this.maxMemoryUsageController,
+    @required this.setVerifyHash,
+  }) : super(key: key);
+
+  final TextEditingController defaultDownloadDirectoryController;
+  final TextEditingController maximumOpenFilesController;
+  final bool verifyHash;
+  final TextEditingController maxMemoryUsageController;
+  final Function setVerifyHash;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTileCard(
+      onExpansionChanged: (value) {},
+      elevation: 0,
+      expandedColor: AppColor.primaryColor,
+      baseColor: AppColor.primaryColor,
+      title: MText(text: 'Resources'),
+      leading: Icon(Icons.settings),
+      contentPadding: EdgeInsets.all(0),
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SText(text: 'Disk'),
+            SizedBox(height: 25),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Default Download Directory',
+              labelText: 'Default Download Directory',
+              controller: defaultDownloadDirectoryController,
+            ),
+            SizedBox(height: 22),
+            Row(
+              children: [
+                Expanded(
+                  child: SettingsTextField(
+                    validator: (value) {},
+                    hintText: 'Maximum Open Files',
+                    labelText: 'Maximum Open Files',
+                    controller: maximumOpenFilesController,
+                    isText: false,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text(''),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      CheckboxListTile(
+                        activeColor: AppColor.greenAccentColor,
+                        tileColor: AppColor.secondaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        title: Text(
+                          'Verify Hash',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        value: verifyHash,
+                        onChanged: setVerifyHash,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 25),
+            SText(text: 'Memory'),
+            SizedBox(height: 25),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Max Memory Usage (MB)',
+              labelText: 'Max Memory Usage (MB)',
+              controller: maxMemoryUsageController,
+              isText: false,
+            ),
+          ],
+        )
+      ],
+    );
+  }
+}
+
+class ConnectivitySection extends StatelessWidget {
+  const ConnectivitySection(
+      {Key key,
+      @required this.portRangeController,
+      @required this.openPort,
+      @required this.maxHttpConnectionsController,
+      @required this.dhtPortController,
+      @required this.enableDht,
+      @required this.enablePeerExchange,
+      @required this.minimumPeerController,
+      @required this.maximumPeerController,
+      @required this.minimumPeerSeedingController,
+      @required this.maximumPeerSeedingController,
+      @required this.peerDesiredController,
+      @required this.clientSettingsModel,
+      @required this.setEnableDht,
+      @required this.setEnablePeerExchange,
+      @required this.setOpenPort,
+      @required this.setRandomizePort,
+      @required this.randomizePort})
+      : super(key: key);
+
+  final TextEditingController portRangeController;
+  final bool openPort;
+  final bool randomizePort;
+  final TextEditingController maxHttpConnectionsController;
+  final TextEditingController dhtPortController;
+  final bool enableDht;
+  final bool enablePeerExchange;
+  final TextEditingController minimumPeerController;
+  final TextEditingController maximumPeerController;
+  final TextEditingController minimumPeerSeedingController;
+  final TextEditingController maximumPeerSeedingController;
+  final TextEditingController peerDesiredController;
+  final ClientSettingsProvider clientSettingsModel;
+  final Function setRandomizePort;
+  final Function setOpenPort;
+  final Function setEnableDht;
+  final Function setEnablePeerExchange;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTileCard(
+      elevation: 0,
+      expandedColor: AppColor.primaryColor,
+      baseColor: AppColor.primaryColor,
+      leading: Icon(FontAwesomeIcons.connectdevelop),
+      title: MText(text: 'Connectivity'),
+      contentPadding: EdgeInsets.all(0),
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SText(text: 'Incoming Connections'),
+            SizedBox(height: 15),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Port Range',
+              labelText: 'Port Range',
+              isText: false,
+              controller: portRangeController,
+            ),
+            SizedBox(height: 22),
+            Row(
+              children: [
+                Expanded(
+                  child: CheckboxListTile(
+                    activeColor: AppColor.greenAccentColor,
+                    tileColor: AppColor.secondaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    title: Text(
+                      'Randomize Port',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    value: randomizePort,
+                    onChanged: setRandomizePort,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: CheckboxListTile(
+                    activeColor: AppColor.greenAccentColor,
+                    tileColor: AppColor.secondaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    title: Text(
+                      'Open Port',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    value: openPort,
+                    onChanged: setOpenPort,
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 22),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Maximum HTTP Connections',
+              labelText: 'Maximum HTTP Connections',
+              isText: false,
+              controller: maxHttpConnectionsController,
+            ),
+            SizedBox(height: 25),
+            SText(text: 'Decentralized Peer Discovery'),
+            SizedBox(height: 15),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'DHT Port',
+              labelText: 'DHT Port',
+              controller: dhtPortController,
+              isText: false,
+            ),
+            SizedBox(height: 22),
+            Row(
+              children: [
+                Expanded(
+                  child: CheckboxListTile(
+                    activeColor: AppColor.greenAccentColor,
+                    tileColor: AppColor.secondaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    title: Text(
+                      'Enable DHT',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    value: enableDht,
+                    onChanged: (value) {
+                      // setState(() {
+                      //   enableDht = value;
+                      // });
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: CheckboxListTile(
+                    activeColor: AppColor.greenAccentColor,
+                    tileColor: AppColor.secondaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    title: Text(
+                      'Enable Peer Exchange',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    value: enablePeerExchange,
+                    onChanged: (value) {
+                      // setState(() {
+                      //   enablePeerExchange = value;
+                      // });
+                    },
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 25),
+            SText(text: 'Peers'),
+            SizedBox(height: 15),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Minimum Peers',
+              labelText: 'Minimum Peers',
+              controller: minimumPeerController,
+              isText: false,
+            ),
+            SizedBox(height: 22),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Maximum Peers',
+              labelText: 'Maximum Peers',
+              controller: maximumPeerController,
+              isText: false,
+            ),
+            SizedBox(height: 22),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Minimum Peers Seeding',
+              labelText: 'Minimum Peers Seeding',
+              controller: minimumPeerSeedingController,
+              isText: false,
+            ),
+            SizedBox(height: 22),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Maximum Peers Seeding',
+              labelText: 'Maximum Peers Seeding',
+              controller: maximumPeerSeedingController,
+              isText: false,
+            ),
+            SizedBox(height: 22),
+            SettingsTextField(
+              validator: (value) {},
+              hintText: 'Peers Desired',
+              labelText: 'Peers Desired',
+              controller: peerDesiredController,
+              isText: false,
+            ),
+          ],
+        )
+      ],
+    );
   }
 }
 
