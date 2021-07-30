@@ -1,5 +1,6 @@
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
+import 'package:flood_mobile/Components/popup_dialogue_container.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Pages/about_screen.dart';
 import 'package:flood_mobile/Pages/settings_screen.dart';
@@ -10,6 +11,7 @@ import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 import 'package:provider/provider.dart';
@@ -88,7 +90,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     Icons.notifications,
                     color: Colors.white,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            backgroundColor: AppColor.secondaryColor,
+                            content: popupDialogueContainer(),
+                          );
+                        });
+                  },
                 ),
               ],
             ),
