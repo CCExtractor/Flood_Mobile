@@ -7,6 +7,7 @@ import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flood_mobile/Model/register_user_model.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
+import 'package:flood_mobile/Services/transfer_speed_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -58,13 +59,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool verifyHash = false;
 
   // *Speed Limit
-  List<String> speedList = [
-    '1 kB/s',
-    '10 kB/s',
-    '100 kB/s',
-    '500 kB/s',
-    '1 MB/s'
-  ];
+  String upSpeed = '1 kB/s';
+  String downSpeed = '1 kB/s';
 
   // *Authentication
   TextEditingController usernameController = new TextEditingController();
@@ -130,7 +126,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           new TextEditingController(text: model.piecesMemoryMax.toString());
       verifyHash = model.piecesHashOnCompletion;
 
-      //TODO Authentication Initialization
+      // *Speed Limit Initialization
+      downSpeed =
+          TransferSpeedManager.valToSpeedMap[model.throttleGlobalDownSpeed] ??
+              'Unlimited';
+      upSpeed =
+          TransferSpeedManager.valToSpeedMap[model.throttleGlobalUpSpeed] ??
+              'Unlimited';
     });
     super.didChangeDependencies();
   }
@@ -266,109 +268,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       verifyHash: verifyHash,
                       maxMemoryUsageController: maxMemoryUsageController),
                   // *Speed Limit Section
-                  ExpansionTileCard(
-                    onExpansionChanged: (value) {},
-                    elevation: 0,
-                    expandedColor: AppColor.primaryColor,
-                    baseColor: AppColor.primaryColor,
-                    title: MText(text: 'Speed Limit'),
-                    leading: Icon(Icons.speed_rounded),
-                    contentPadding: EdgeInsets.all(0),
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                          ),
-                          SText(text: 'Download'),
-                          SizedBox(height: 15),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
-                                  width: double.infinity,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.secondaryColor,
-                                    border: null,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Center(
-                                    child: DropdownButtonFormField(
-                                      dropdownColor: AppColor.secondaryColor,
-                                      isExpanded: true,
-                                      decoration: InputDecoration(
-                                        enabledBorder: InputBorder.none,
-                                      ),
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,
-                                        color: Colors.white,
-                                        size: 25,
-                                      ),
-                                      hint: Text("Download Speed"),
-                                      items: speedList
-                                          .map((e) => DropdownMenuItem(
-                                                value: e,
-                                                child: Text(
-                                                  e,
-                                                ),
-                                              ))
-                                          .toList(),
-                                      onChanged: (value) {},
-                                      value: '1 kB/s',
-                                    ),
-                                  )),
-                            ],
-                          ),
-                          SizedBox(height: 25),
-                          SText(text: 'Upload'),
-                          SizedBox(height: 15),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
-                                  width: double.infinity,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.secondaryColor,
-                                    border: null,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Center(
-                                    child: DropdownButtonFormField(
-                                      dropdownColor: AppColor.secondaryColor,
-                                      isExpanded: true,
-                                      decoration: InputDecoration(
-                                        enabledBorder: InputBorder.none,
-                                      ),
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,
-                                        color: Colors.white,
-                                        size: 25,
-                                      ),
-                                      hint: Text("Download Speed"),
-                                      items: speedList
-                                          .map((e) => DropdownMenuItem(
-                                                value: e,
-                                                child: Text(
-                                                  e,
-                                                ),
-                                              ))
-                                          .toList(),
-                                      onChanged: (value) {},
-                                      value: '1 kB/s',
-                                    ),
-                                  )),
-                            ],
-                          ),
-                          SizedBox(height: 25),
-                        ],
-                      )
-                    ],
+                  SpeedLimitSection(
+                    model: clientSettingsModel,
+                    hp: hp,
+                    downSpeed: downSpeed,
+                    upSpeed: upSpeed,
+                    setDownSpeed: (value) {
+                      setState(() {
+                        downSpeed = value;
+                      });
+                    },
+                    setUpSpeed: (value) {
+                      setState(() {
+                        upSpeed = value;
+                      });
+                    },
                   ),
                   // *Authentication Section
                   AuthenticationSection(
@@ -414,6 +328,173 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       );
     });
+  }
+}
+
+class SpeedLimitSection extends StatelessWidget {
+  SpeedLimitSection(
+      {Key key,
+      @required this.hp,
+      @required this.downSpeed,
+      @required this.setDownSpeed,
+      @required this.setUpSpeed,
+      @required this.upSpeed,
+      @required this.model})
+      : super(key: key);
+
+  final double hp;
+  String upSpeed;
+  String downSpeed;
+  Function setUpSpeed;
+  Function setDownSpeed;
+  ClientSettingsProvider model;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTileCard(
+      onExpansionChanged: (value) {},
+      elevation: 0,
+      expandedColor: AppColor.primaryColor,
+      baseColor: AppColor.primaryColor,
+      title: MText(text: 'Speed Limit'),
+      leading: Icon(Icons.speed_rounded),
+      contentPadding: EdgeInsets.all(0),
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+            ),
+            SText(text: 'Download'),
+            SizedBox(height: 15),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    width: double.infinity,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: AppColor.secondaryColor,
+                      border: null,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Center(
+                      child: DropdownButtonFormField(
+                        dropdownColor: AppColor.secondaryColor,
+                        isExpanded: true,
+                        decoration: InputDecoration(
+                          enabledBorder: InputBorder.none,
+                        ),
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+                        hint: Text("Download Speed"),
+                        items: TransferSpeedManager.speedToValMap.keys
+                            .map((e) => DropdownMenuItem(
+                                  value: e,
+                                  child: Text(
+                                    e,
+                                  ),
+                                ))
+                            .toList(),
+                        onChanged: setDownSpeed,
+                        value: TransferSpeedManager.valToSpeedMap[
+                                model.clientSettings.throttleGlobalDownSpeed] ??
+                            'Unlimited',
+                      ),
+                    )),
+              ],
+            ),
+            SizedBox(height: 25),
+            SText(text: 'Upload'),
+            SizedBox(height: 15),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    width: double.infinity,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: AppColor.secondaryColor,
+                      border: null,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Center(
+                      child: DropdownButtonFormField(
+                        dropdownColor: AppColor.secondaryColor,
+                        isExpanded: true,
+                        decoration: InputDecoration(
+                          enabledBorder: InputBorder.none,
+                        ),
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+                        hint: Text("Upload Speed"),
+                        items: TransferSpeedManager.speedToValMap.keys
+                            .map((e) => DropdownMenuItem(
+                                  value: e,
+                                  child: Text(
+                                    e,
+                                  ),
+                                ))
+                            .toList(),
+                        onChanged: setUpSpeed,
+                        value: TransferSpeedManager.valToSpeedMap[
+                                model.clientSettings.throttleGlobalUpSpeed] ??
+                            'Unlimited',
+                      ),
+                    )),
+              ],
+            ),
+            SizedBox(height: 25),
+            Row(
+              children: [
+                Expanded(child: Container()),
+                Expanded(
+                  child: Container(
+                    height: hp * 0.06,
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ClientApi.setSpeedLimit(
+                            context: context,
+                            downSpeed: downSpeed,
+                            upSpeed: upSpeed);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        primary: AppColor.blueAccentColor,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Set",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 25),
+          ],
+        )
+      ],
+    );
   }
 }
 
