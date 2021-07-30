@@ -26,6 +26,9 @@ class ApiProvider extends ChangeNotifier {
   // api/torrents/{hash}/contents
   static String setTorrentContentPriorityUrl = '/api/torrents/';
 
+  //api/notifications?id=notification-tooltip&limit=10&start=0
+  static String notifications = 'api/notifications';
+
   Future<void> setBaseUrl(String url) async {
     baseUrl = url;
     SharedPreferences prefs = await SharedPreferences.getInstance();
