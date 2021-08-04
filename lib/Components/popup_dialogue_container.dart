@@ -158,6 +158,7 @@ Widget popupDialogueContainer() {
               Divider(),
               TextButton(
                 onPressed: () {},
+                style: TextButton.styleFrom(fixedSize: Size(200, 50)),
                 child: Text(
                   'Clear All',
                   style: TextStyle(
