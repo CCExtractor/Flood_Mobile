@@ -1,11 +1,13 @@
+import 'package:badges/badges.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
-import 'package:flood_mobile/Components/popup_dialogue_container.dart';
+import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Pages/about_screen.dart';
 import 'package:flood_mobile/Pages/settings_screen.dart';
 import 'package:flood_mobile/Pages/torrent_screen.dart';
+import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
@@ -87,21 +89,34 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundColor: AppColor.primaryColor,
               elevation: 0,
               actions: [
-                IconButton(
-                  icon: Icon(
-                    Icons.notifications,
-                    color: Colors.white,
+                Badge(
+                  badgeColor: AppColor.blueAccentColor,
+                  badgeContent: Center(
+                    child: Text(
+                      Provider.of<HomeProvider>(context)
+                          .unreadNotifications
+                          .toString(),
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            backgroundColor: AppColor.secondaryColor,
-                            content: popupDialogueContainer(),
-                          );
-                        });
-                  },
+                  position: BadgePosition(top: 0, end: 3),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.notifications,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              backgroundColor: AppColor.secondaryColor,
+                              content: notificationPopupDialogueContainer(
+                                  context: context),
+                            );
+                          });
+                    },
+                  ),
                 ),
               ],
             ),

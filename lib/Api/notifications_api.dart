@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flood_mobile/Model/notification_model.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
+import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +30,11 @@ class NotificationApi {
       });
       if (response.statusCode == 200) {
         print('---NOTIFICATIONS---');
-        print(response.data);
+        NotificationModel model = NotificationModel.fromJson(response.data);
+        Provider.of<HomeProvider>(context, listen: false)
+            .setNotificationModel(model);
+        Provider.of<HomeProvider>(context, listen: false)
+            .setUnreadNotifications(model.unread);
       } else {}
     } catch (e) {
       print('--ERROR--');
