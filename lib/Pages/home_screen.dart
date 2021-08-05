@@ -66,62 +66,61 @@ class _HomeScreenState extends State<HomeScreen> {
               screenCurrent = AboutScreen();
               break;
           }
-
-          return Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                icon: Icon(
-                  Icons.menu,
-                  color: Colors.white,
+          return Consumer<HomeProvider>(builder: (context, homeModel, child) {
+            return Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    controller.toggle();
+                  },
                 ),
-                onPressed: () {
-                  controller.toggle();
-                },
-              ),
-              title: Image(
-                image: AssetImage(
-                  'assets/images/icon.png',
+                title: Image(
+                  image: AssetImage(
+                    'assets/images/icon.png',
+                  ),
+                  width: 60,
+                  height: 60,
                 ),
-                width: 60,
-                height: 60,
-              ),
-              centerTitle: true,
-              backgroundColor: AppColor.primaryColor,
-              elevation: 0,
-              actions: [
-                Badge(
-                  badgeColor: AppColor.blueAccentColor,
-                  badgeContent: Center(
-                    child: Text(
-                      Provider.of<HomeProvider>(context)
-                          .unreadNotifications
-                          .toString(),
-                      style: TextStyle(color: Colors.white),
+                centerTitle: true,
+                backgroundColor: AppColor.primaryColor,
+                elevation: 0,
+                actions: [
+                  Badge(
+                    badgeColor: AppColor.blueAccentColor,
+                    badgeContent: Center(
+                      child: Text(
+                        homeModel.unreadNotifications.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    position: BadgePosition(top: 0, end: 3),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.notifications,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: AppColor.secondaryColor,
+                                content: notificationPopupDialogueContainer(
+                                    context: context),
+                              );
+                            });
+                      },
                     ),
                   ),
-                  position: BadgePosition(top: 0, end: 3),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.notifications,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              backgroundColor: AppColor.secondaryColor,
-                              content: notificationPopupDialogueContainer(
-                                  context: context),
-                            );
-                          });
-                    },
-                  ),
-                ),
-              ],
-            ),
-            body: screenCurrent,
-          );
+                ],
+              ),
+              body: screenCurrent,
+            );
+          });
         },
       ),
     );

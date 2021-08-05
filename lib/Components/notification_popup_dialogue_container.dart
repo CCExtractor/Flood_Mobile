@@ -25,7 +25,7 @@ Widget notificationPopupDialogueContainer({@required BuildContext context}) {
           return Column(
             children: [
               NotificationListTile(
-                  model: Provider.of<HomeProvider>(context)
+                  model: Provider.of<HomeProvider>(context, listen: false)
                       .notificationModel
                       .notifications[index]),
               SizedBox(
