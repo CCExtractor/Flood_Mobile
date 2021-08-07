@@ -6,4 +6,5 @@ class Events {
   static const String TORRENT_LIST_FULL_UPDATE = 'TORRENT_LIST_FULL_UPDATE';
   //Change in the torrent list
   static const String TORRENT_LIST_DIFF_CHANGE = 'TORRENT_LIST_DIFF_CHANGE';
+  static const String NOTIFICATION_COUNT_CHANGE='NOTIFICATION_COUNT_CHANGE';
 }

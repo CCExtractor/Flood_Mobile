@@ -33,9 +33,36 @@ class NotificationApi {
         NotificationModel model = NotificationModel.fromJson(response.data);
         Provider.of<HomeProvider>(context, listen: false)
             .setNotificationModel(model);
-        Provider.of<HomeProvider>(context, listen: false)
-            .setUnreadNotifications(model.unread);
       } else {}
+    } catch (e) {
+      print('--ERROR--');
+      print(e.toString());
+    }
+  }
+
+  static Future<void> clearNotification(
+      {@required BuildContext context}) async {
+    try {
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+          ApiProvider.notifications;
+      print('---CLEAR NOTIFICATIONS---');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          Provider.of<UserDetailProvider>(context, listen: false).token;
+      response = await dio.delete(url);
+      if (response.statusCode == 200) {
+        print('---NOTIFICATIONS CLEARED---');
+        getNotifications(context: context);
+      } else {
+        print('---ERROR---');
+        print(response);
+      }
     } catch (e) {
       print('--ERROR--');
       print(e.toString());

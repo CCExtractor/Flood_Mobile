@@ -55,6 +55,17 @@ class EventHandlerApi {
     }
   }
 
+  //Setting notification count
+  static void setNotificationCount({SSEModel model, BuildContext context}) {
+    Map<String, dynamic> data = json.decode(model.data);
+    if (data.isNotEmpty) {
+      print('---SET UNREAD NOTIFICATION COUNT---');
+      //Set unread notification count
+      Provider.of<HomeProvider>(context, listen: false)
+          .setUnreadNotifications(data['unread']);
+    }
+  }
+
   //Updating the full list of torrent
   static void updateFullTorrentList({SSEModel model, BuildContext context}) {
     Map<String, dynamic> oldTorrentList =
