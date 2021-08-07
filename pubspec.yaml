@@ -53,6 +53,7 @@ dependencies:
   pull_to_reveal: ^0.0.3-nullsafety.0
   shared_preferences: ^2.0.5
   video_player: ^2.1.6
+  badges: ^2.0.1
   flutter_client_sse:
     #    git:
     #      url: https://github.com/pratikbaid3/flutter_client_sse

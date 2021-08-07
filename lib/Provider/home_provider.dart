@@ -1,12 +1,26 @@
+import 'package:flood_mobile/Model/notification_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class HomeProvider extends ChangeNotifier {
   List<TorrentModel> torrentList = [];
   Map<String, dynamic> torrentListJson = {};
+  int unreadNotifications = 0;
+  NotificationModel notificationModel;
 
   String upSpeed = '0 KB/s';
   String downSpeed = '0 KB/s';
+
+  void setUnreadNotifications(int count) {
+    unreadNotifications = count;
+    notifyListeners();
+  }
+
+  void setNotificationModel(NotificationModel newModel) {
+    notificationModel = newModel;
+    notifyListeners();
+  }
+
   void setSpeed(String up, String down) {
     upSpeed = up + '/s';
     downSpeed = down + '/s';

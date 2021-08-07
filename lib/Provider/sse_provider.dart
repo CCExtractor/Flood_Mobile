@@ -36,6 +36,10 @@ class SSEProvider extends ChangeNotifier {
             EventHandlerApi.updateFullTorrentList(
                 model: event, context: context);
             break;
+          case Events.NOTIFICATION_COUNT_CHANGE:
+            EventHandlerApi.setNotificationCount(
+                model: event, context: context);
+            break;
         }
         notifyListeners();
       }

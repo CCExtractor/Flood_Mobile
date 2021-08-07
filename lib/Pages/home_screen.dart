@@ -1,15 +1,20 @@
+import 'package:badges/badges.dart';
 import 'package:flood_mobile/Api/client_api.dart';
+import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
+import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Pages/about_screen.dart';
 import 'package:flood_mobile/Pages/settings_screen.dart';
 import 'package:flood_mobile/Pages/torrent_screen.dart';
+import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //Initialize the ap
     Provider.of<SSEProvider>(context, listen: false).listenToSSE(context);
     ClientApi.getClientSettings(context);
+    NotificationApi.getNotifications(context: context);
     super.didChangeDependencies();
   }
 
@@ -60,40 +66,61 @@ class _HomeScreenState extends State<HomeScreen> {
               screenCurrent = AboutScreen();
               break;
           }
-
-          return Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                icon: Icon(
-                  Icons.menu,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  controller.toggle();
-                },
-              ),
-              title: Image(
-                image: AssetImage(
-                  'assets/images/icon.png',
-                ),
-                width: 60,
-                height: 60,
-              ),
-              centerTitle: true,
-              backgroundColor: AppColor.primaryColor,
-              elevation: 0,
-              actions: [
-                IconButton(
+          return Consumer<HomeProvider>(builder: (context, homeModel, child) {
+            return Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
                   icon: Icon(
-                    Icons.notifications,
+                    Icons.menu,
                     color: Colors.white,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.toggle();
+                  },
                 ),
-              ],
-            ),
-            body: screenCurrent,
-          );
+                title: Image(
+                  image: AssetImage(
+                    'assets/images/icon.png',
+                  ),
+                  width: 60,
+                  height: 60,
+                ),
+                centerTitle: true,
+                backgroundColor: AppColor.primaryColor,
+                elevation: 0,
+                actions: [
+                  Badge(
+                    badgeColor: AppColor.blueAccentColor,
+                    badgeContent: Center(
+                      child: Text(
+                        homeModel.unreadNotifications.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    position: BadgePosition(top: 0, end: 3),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.notifications,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: AppColor.secondaryColor,
+                                content: notificationPopupDialogueContainer(
+                                    context: context),
+                              );
+                            });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              body: screenCurrent,
+            );
+          });
         },
       ),
     );
