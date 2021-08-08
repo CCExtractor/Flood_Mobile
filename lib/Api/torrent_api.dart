@@ -302,4 +302,34 @@ class TorrentApi {
       print(e.toString());
     }
   }
+
+  static Future<void> checkTorrentHash(
+      {List<String> hashes, BuildContext context}) async {
+    try {
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+          ApiProvider.checkHash;
+      print('---CHECK TORRENT HASH---');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          Provider.of<UserDetailProvider>(context, listen: false).token;
+      Map<String, dynamic> mp = Map();
+      mp['hashes'] = hashes;
+      String rawBody = json.encode(mp);
+      response = await dio.post(
+        url,
+        data: rawBody,
+      );
+      if (response.statusCode == 200) {
+      } else {}
+    } catch (e) {
+      print('--ERROR--');
+      print(e.toString());
+    }
+  }
 }
