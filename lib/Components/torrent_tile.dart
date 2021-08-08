@@ -63,19 +63,6 @@ class _TorrentTileState extends State<TorrentTile> {
           menuItems: [
             FocusedMenuItem(
               title: Text(
-                'Torrent Details',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              trailingIcon: Icon(
-                Icons.info_outline,
-                color: Colors.black,
-              ),
-              onPressed: () {},
-            ),
-            FocusedMenuItem(
-              title: Text(
                 'Set Tags',
                 style: TextStyle(
                   color: Colors.black,
@@ -99,7 +86,10 @@ class _TorrentTileState extends State<TorrentTile> {
                 Icons.tag,
                 color: Colors.black,
               ),
-              onPressed: () {},
+              onPressed: () {
+                TorrentApi.checkTorrentHash(
+                    hashes: [widget.model.hash], context: context);
+              },
             ),
             FocusedMenuItem(
               backgroundColor: Colors.redAccent,

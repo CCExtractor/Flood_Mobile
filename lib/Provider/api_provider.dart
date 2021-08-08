@@ -28,6 +28,7 @@ class ApiProvider extends ChangeNotifier {
 
   //api/notifications?id=notification-tooltip&limit=10&start=0
   static String notifications = '/api/notifications';
+  static String checkHash = '/api/torrents/check-hash';
 
   Future<void> setBaseUrl(String url) async {
     baseUrl = url;
