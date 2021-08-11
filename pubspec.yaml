@@ -54,6 +54,9 @@ dependencies:
   shared_preferences: ^2.0.5
   video_player: ^2.1.6
   badges: ^2.0.1
+  flutter_downloader: ^1.6.1
+  path_provider: ^2.0.2
+  permission_handler: ^8.1.4+2
   flutter_client_sse:
     #    git:
     #      url: https://github.com/pratikbaid3/flutter_client_sse

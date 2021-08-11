@@ -1,13 +1,22 @@
+import 'dart:isolate';
+import 'dart:ui';
+
 import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Components/base_app_bar.dart';
+import 'package:flood_mobile/Components/toast_component.dart';
 import 'package:flood_mobile/Components/torrent_content_tile.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/torrent_content_provider.dart';
+import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/Arguments/torrent_content_page_arguments.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:math' as math;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class TorrentContentScreen extends StatefulWidget {
@@ -20,6 +29,15 @@ class TorrentContentScreen extends StatefulWidget {
 }
 
 class _TorrentContentScreenState extends State<TorrentContentScreen> {
+  static downloadingCallback(id, status, progress) {}
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FlutterDownloader.registerCallback(downloadingCallback);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<TorrentContentProvider>(builder: (context, model, child) {
@@ -62,7 +80,26 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                       Icons.download_rounded,
                       color: Colors.white,
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      try {
+                        final status = await Permission.storage.request();
+                        if (status.isGranted) {
+                          final externalDir =
+                              await getExternalStorageDirectory();
+                          FlutterDownloader.enqueue(
+                            url:
+                                "${Provider.of<ApiProvider>(context, listen: false).baseUrl}/api/torrents/${widget.arguments.hash}/contents/0/data?token=${Provider.of<UserDetailProvider>(context, listen: false).token.substring(4)}",
+                            savedDir: externalDir.path,
+                            showNotification: true,
+                            openFileFromNotification: true,
+                          );
+                        } else {
+                          Toasts.showFailToast(msg: 'Permission Denied');
+                        }
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
                   ),
                   PopupMenuButton<String>(
                     color: AppColor.secondaryColor,
