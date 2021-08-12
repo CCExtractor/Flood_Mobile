@@ -84,15 +84,31 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                       try {
                         final status = await Permission.storage.request();
                         if (status.isGranted) {
+                          String downloadFileIndexList = '';
+                          for (int i in (Provider.of<TorrentContentProvider>(
+                                  context,
+                                  listen: false)
+                              .selectedIndexList)) {
+                            if (downloadFileIndexList != '') {
+                              downloadFileIndexList += ',';
+                            }
+                            downloadFileIndexList += i.toString();
+                          }
+                          print(downloadFileIndexList);
                           final externalDir =
                               await getExternalStorageDirectory();
                           FlutterDownloader.enqueue(
-                            url:
-                                "${Provider.of<ApiProvider>(context, listen: false).baseUrl}/api/torrents/${widget.arguments.hash}/contents/0/data?token=${Provider.of<UserDetailProvider>(context, listen: false).token.substring(4)}",
-                            savedDir: externalDir.path,
-                            showNotification: true,
-                            openFileFromNotification: true,
-                          );
+                              url:
+                                  "${Provider.of<ApiProvider>(context, listen: false).baseUrl}/api/torrents/${widget.arguments.hash}/contents/${downloadFileIndexList}/data",
+                              savedDir: externalDir.path,
+                              showNotification: true,
+                              openFileFromNotification: true,
+                              headers: {
+                                'Cookie': Provider.of<UserDetailProvider>(
+                                        context,
+                                        listen: false)
+                                    .token
+                              });
                         } else {
                           Toasts.showFailToast(msg: 'Permission Denied');
                         }

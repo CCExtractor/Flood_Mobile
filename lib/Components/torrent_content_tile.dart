@@ -123,6 +123,12 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
       return Padding(
         padding: EdgeInsets.only(left: (widget.model.depth) * 5.0),
         child: ListTile(
+          onLongPress: () {
+            setState(() {
+              Provider.of<TorrentContentProvider>(context, listen: false)
+                  .setSelectionMode();
+            });
+          },
           onTap: () {
             String fileType = widget.model.filename.split('.').last;
             if (fileType == 'mp4') {
