@@ -34,38 +34,41 @@ dependencies:
   dio: ^4.0.0
   duration: ^3.0.6
   expansion_tile_card: ^2.0.0
-  flutter_keyboard_visibility: ^5.0.2
+  flutter_keyboard_visibility: ^5.0.3
   flutter_svg: ^0.22.0
   flutter_slidable: ^0.6.0
   flutter_spinkit: ^5.0.0
-  fluttertoast: ^8.0.7
-  file_picker: ^3.0.1
+  fluttertoast: ^8.0.8
+  file_picker: ^3.0.4
   focused_menu: ^1.0.5
-  font_awesome_flutter: ^9.0.0
+  font_awesome_flutter: ^9.1.0
   google_fonts: ^2.1.0
   hidden_drawer_menu: ^3.0.0
   http: ^0.13.3
-  json_annotation: 3.1.1
-  json_patch: ^2.1.1
+  json_annotation: ^4.1.0
+  json_patch: ^3.0.0
   loading_overlay: ^0.3.0
   percent_indicator: ^3.0.1
   provider: ^5.0.0
   pull_to_reveal: ^0.0.3-nullsafety.0
-  shared_preferences: ^2.0.5
-  video_player: ^2.1.6
+  shared_preferences: ^2.0.6
+  video_player: ^2.1.12
   badges: ^2.0.1
   flutter_downloader: ^1.6.1
   path_provider: ^2.0.2
   permission_handler: ^8.1.4+2
-  flutter_client_sse:
+  flutter_client_sse: ^0.1.0
     #    git:
     #      url: https://github.com/pratikbaid3/flutter_client_sse
     #      path:
-    path: packages/flutter_client_sse
+    #path: packages/flutter_client_sse
+
+dependency_overrides:
+  meta: ^1.7.0
 
 dev_dependencies:
-  build_runner: ^1.11.5
-  json_serializable: 3.5.1
+  build_runner: ^2.1.1
+  json_serializable: ^5.0.0
   flutter_test:
     sdk: flutter
 
