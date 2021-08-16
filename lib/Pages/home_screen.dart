@@ -136,8 +136,6 @@ class _MenuState extends State<Menu> {
 
   @override
   void initState() {
-    //TODO(): check logic
-    controller = SimpleHiddenDrawerController.of(context);
     super.initState();
   }
 
