@@ -22,9 +22,10 @@ class AuthApi {
       Response response;
       Dio dio = new Dio();
       //Headers
-      dio.options.headers['Accept'] = "application/json";
-      dio.options.headers['Content-Type'] = "application/json";
-      dio.options.headers['Connection'] = "keep-alive";
+      dio.options
+        ..headers['Accept'] = "application/json"
+        ..headers['Content-Type'] = "application/json"
+        ..headers['Connection'] = "keep-alive";
       Map<String, dynamic> mp = Map();
       mp['username'] = username;
       mp['password'] = password;
