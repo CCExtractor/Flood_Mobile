@@ -18,7 +18,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 class TorrentTile extends StatefulWidget {
   final TorrentModel model;
 
-  TorrentTile({@required this.model});
+  TorrentTile({required this.model});
 
   @override
   _TorrentTileState createState() => _TorrentTileState();

@@ -10,27 +10,29 @@ class TorrentContentModel {
   bool isMediaFile;
 
   TorrentContentModel({
-    this.filename,
-    this.index,
-    this.path,
-    this.percentComplete,
-    this.priority,
-    this.sizeBytes,
-    this.depth,
-    this.parentPath,
-    this.isMediaFile,
+    required this.filename,
+    required this.index,
+    required this.path,
+    required this.percentComplete,
+    required this.priority,
+    required this.sizeBytes,
+    required this.depth,
+    required this.parentPath,
+    required this.isMediaFile,
   });
 
-  TorrentContentModel.fromJson(Map<String, dynamic> json) {
-    index = json['index'];
-    path = json['path'];
-    filename = json['filename'];
-    percentComplete = json['percentComplete'];
-    priority = json['priority'];
-    sizeBytes = json['sizeBytes'];
-    depth = path.split('/').length;
-    parentPath = path.split('/');
-    isMediaFile = (filename.split('.').last == 'mp3' ||
-        filename.split('.').last == 'mp4');
+  factory TorrentContentModel.fromJson(Map<String, dynamic> json) {
+    return TorrentContentModel(
+      index: json['index'],
+      path: json['path'],
+      filename: json['filename'],
+      percentComplete: json['percentComplete'],
+      priority: json['priority'],
+      sizeBytes: json['sizeBytes'],
+      depth: json['path'].split('/').length,
+      parentPath: json['path'].split('/'),
+      isMediaFile: (json['filename'].split('.').last == 'mp3' ||
+          json['filename'].split('.').last == 'mp4'),
+    );
   }
 }

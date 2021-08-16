@@ -6,36 +6,37 @@ part of 'torrent_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TorrentModel _$TorrentModelFromJson(Map<String, dynamic> json) {
-  return TorrentModel(
-    (json['bytesDone'] as num)?.toDouble(),
-    (json['dateAdded'] as num)?.toDouble(),
-    (json['dateCreated'] as num)?.toDouble(),
-    json['directory'] as String,
-    (json['downRate'] as num)?.toDouble(),
-    (json['downTotal'] as num)?.toDouble(),
-    (json['eta'] as num)?.toDouble(),
-    json['hash'] as String,
-    json['isInitialSeeding'] as bool,
-    json['isPrivate'] as bool,
-    json['isSequential'] as bool,
-    json['message'] as String,
-    json['name'] as String,
-    (json['peersConnected'] as num)?.toDouble(),
-    (json['peersTotal'] as num)?.toDouble(),
-    (json['percentComplete'] as num)?.toDouble(),
-    (json['priority'] as num)?.toDouble(),
-    (json['ratio'] as num)?.toDouble(),
-    (json['seedsConnected'] as num)?.toDouble(),
-    (json['seedsTotal'] as num)?.toDouble(),
-    (json['sizeBytes'] as num)?.toDouble(),
-    (json['status'] as List)?.map((e) => e as String)?.toList(),
-    (json['tags'] as List)?.map((e) => e as String)?.toList(),
-    (json['trackerURIs'] as List)?.map((e) => e as String)?.toList(),
-    (json['upRate'] as num)?.toDouble(),
-    (json['upTotal'] as num)?.toDouble(),
-  );
-}
+TorrentModel _$TorrentModelFromJson(Map<String, dynamic> json) => TorrentModel(
+      bytesDone: (json['bytesDone'] as num).toDouble(),
+      dateAdded: (json['dateAdded'] as num).toDouble(),
+      dateCreated: (json['dateCreated'] as num).toDouble(),
+      directory: json['directory'] as String,
+      downRate: (json['downRate'] as num).toDouble(),
+      downTotal: (json['downTotal'] as num).toDouble(),
+      eta: (json['eta'] as num).toDouble(),
+      hash: json['hash'] as String,
+      isInitialSeeding: json['isInitialSeeding'] as bool,
+      isPrivate: json['isPrivate'] as bool,
+      isSequential: json['isSequential'] as bool,
+      message: json['message'] as String,
+      name: json['name'] as String,
+      peersConnected: (json['peersConnected'] as num).toDouble(),
+      peersTotal: (json['peersTotal'] as num).toDouble(),
+      percentComplete: (json['percentComplete'] as num).toDouble(),
+      priority: (json['priority'] as num).toDouble(),
+      ratio: (json['ratio'] as num).toDouble(),
+      seedsConnected: (json['seedsConnected'] as num).toDouble(),
+      seedsTotal: (json['seedsTotal'] as num).toDouble(),
+      sizeBytes: (json['sizeBytes'] as num).toDouble(),
+      status:
+          (json['status'] as List<dynamic>).map((e) => e as String).toList(),
+      tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
+      trackerURIs: (json['trackerURIs'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      upRate: (json['upRate'] as num).toDouble(),
+      upTotal: (json['upTotal'] as num).toDouble(),
+    );
 
 Map<String, dynamic> _$TorrentModelToJson(TorrentModel instance) =>
     <String, dynamic>{

@@ -1,8 +1,8 @@
 import 'package:clipboard/clipboard.dart';
-import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Components/toast_component.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_overlay/loading_overlay.dart';
@@ -105,8 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                               ),
-                              validator: (value) {
-                                if (value.isEmpty) {
+                              validator: (String? value) {
+                                if (value != null && value.isEmpty) {
                                   return 'Field cannot be empty';
                                 }
                                 return null;
@@ -172,8 +172,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-                          validator: (value) {
-                            if (value.isEmpty) {
+                          validator: (String? value) {
+                            if (value != null && value.isEmpty) {
                               return 'Field cannot be empty';
                             }
                             return null;
@@ -222,8 +222,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                               ),
-                              validator: (value) {
-                                if (value.isEmpty) {
+                              validator: (String? value) {
+                                if (value != null && value.isEmpty) {
                                   return 'Field cannot be empty';
                                 }
                                 return null;
@@ -260,7 +260,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(20)),
                         child: ElevatedButton(
                           onPressed: () async {
-                            if (_formKey.currentState.validate()) {
+                            if (_formKey.currentState != null &&
+                                _formKey.currentState!.validate()) {
                               Provider.of<ApiProvider>(context, listen: false)
                                   .setBaseUrl(urlController.text);
                               setState(() {

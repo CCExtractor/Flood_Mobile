@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flood_mobile/Model/notification_model.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
@@ -9,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 class NotificationApi {
-  static Future<void> getNotifications({@required BuildContext context}) async {
+  static Future<void> getNotifications({required BuildContext context}) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.notifications;
@@ -40,8 +38,7 @@ class NotificationApi {
     }
   }
 
-  static Future<void> clearNotification(
-      {@required BuildContext context}) async {
+  static Future<void> clearNotification({required BuildContext context}) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.notifications;

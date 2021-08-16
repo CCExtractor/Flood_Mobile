@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flood_mobile/Model/download_rate_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
@@ -10,8 +11,11 @@ import 'package:provider/provider.dart';
 
 class EventHandlerApi {
   //Sets the transfer rate if the event returned is TRANSFER_SUMMARY_DIFF_CHANGE
-  static void setTransferRate({SSEModel model, BuildContext context}) {
-    List<dynamic> data = json.decode(model.data);
+  static void setTransferRate({
+    required SSEModel model,
+    required BuildContext context,
+  }) {
+    List<dynamic> data = json.decode(model.data ?? '');
     if (data != []) {
       String upSpeed = '0';
       String downSpeed = '0';
@@ -33,8 +37,11 @@ class EventHandlerApi {
   }
 
   //Getting full list of torrents
-  static void setFullTorrentList({SSEModel model, BuildContext context}) {
-    Map<String, dynamic> data = json.decode(model.data);
+  static void setFullTorrentList({
+    required SSEModel model,
+    required BuildContext context,
+  }) {
+    Map<String, dynamic> data = json.decode(model.data ?? '');
     if (data.isNotEmpty) {
       //Storing the full list of torrent is string to use it through PATCH
       Provider.of<HomeProvider>(context, listen: false)
@@ -56,8 +63,11 @@ class EventHandlerApi {
   }
 
   //Setting notification count
-  static void setNotificationCount({SSEModel model, BuildContext context}) {
-    Map<String, dynamic> data = json.decode(model.data);
+  static void setNotificationCount({
+    required SSEModel model,
+    required BuildContext context,
+  }) {
+    Map<String, dynamic> data = json.decode(model.data ?? '');
     if (data.isNotEmpty) {
       print('---SET UNREAD NOTIFICATION COUNT---');
       //Set unread notification count
@@ -67,13 +77,16 @@ class EventHandlerApi {
   }
 
   //Updating the full list of torrent
-  static void updateFullTorrentList({SSEModel model, BuildContext context}) {
+  static void updateFullTorrentList({
+    required SSEModel model,
+    required BuildContext context,
+  }) {
     Map<String, dynamic> oldTorrentList =
         Provider.of<HomeProvider>(context, listen: false).torrentListJson;
 
     //Parsing the patch in list<map<String, dynamic> format
     List<Map<String, dynamic>> newTorrentMap = [];
-    List<dynamic> patchList = json.decode(model.data);
+    List<dynamic> patchList = json.decode(model.data ?? '');
     for (var i in patchList) {
       newTorrentMap.add(i);
     }

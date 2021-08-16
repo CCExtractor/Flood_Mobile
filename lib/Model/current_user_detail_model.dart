@@ -2,10 +2,15 @@ class CurrentUserDetailModel {
   String username;
   int level;
 
-  CurrentUserDetailModel({this.username, this.level});
+  CurrentUserDetailModel({
+    required this.username,
+    required this.level,
+  });
 
-  CurrentUserDetailModel.fromJson(Map<String, dynamic> json) {
-    username = json['username'];
-    level = json['level'];
+  factory CurrentUserDetailModel.fromJson(Map<String, dynamic> json) {
+    return CurrentUserDetailModel(
+      username: json['username'],
+      level: json['level'],
+    );
   }
 }

@@ -12,19 +12,20 @@ class RegisterUserModel {
   String host;
   int port;
 
-  RegisterUserModel(
-      {this.username,
-      this.level,
-      this.client,
-      this.clientPassword,
-      this.clientUsername,
-      this.password,
-      this.type,
-      this.url,
-      this.version,
-      this.path,
-      this.host,
-      this.port});
+  RegisterUserModel({
+    required this.username,
+    required this.level,
+    required this.client,
+    required this.clientPassword,
+    required this.clientUsername,
+    required this.password,
+    required this.type,
+    required this.url,
+    required this.version,
+    required this.path,
+    required this.host,
+    required this.port,
+  });
 
   Map<String, dynamic> toJson() {
     if (client == 'rTorrent' && type == 'socket') {
