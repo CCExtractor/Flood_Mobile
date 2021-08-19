@@ -36,7 +36,7 @@
 
 Flood is a monitoring service for various torrent clients. It's a Node.js service that communicates with your favorite
 torrent client and serves a decent mobile UI for administration. The web ap and other relevant documentation can be
-found at [Flood](https://github.com/jesec/floodI).
+found at [Flood](https://github.com/jesec/flood).
 
 #### Supported Clients
 
