@@ -1,4 +1,5 @@
-import 'dart:isolate';
+import 'dart:io';
+import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:flood_mobile/Api/torrent_api.dart';
@@ -13,7 +14,6 @@ import 'package:flood_mobile/Route/Arguments/torrent_content_page_arguments.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'dart:math' as math;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -22,7 +22,7 @@ import 'package:provider/provider.dart';
 class TorrentContentScreen extends StatefulWidget {
   final TorrentContentPageArguments arguments;
 
-  TorrentContentScreen({@required this.arguments});
+  TorrentContentScreen({required this.arguments});
 
   @override
   _TorrentContentScreenState createState() => _TorrentContentScreenState();
@@ -95,20 +95,25 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                             downloadFileIndexList += i.toString();
                           }
                           print(downloadFileIndexList);
-                          final externalDir =
+                          final Directory? externalDir =
                               await getExternalStorageDirectory();
-                          FlutterDownloader.enqueue(
-                              url:
-                                  "${Provider.of<ApiProvider>(context, listen: false).baseUrl}/api/torrents/${widget.arguments.hash}/contents/${downloadFileIndexList}/data",
-                              savedDir: externalDir.path,
-                              showNotification: true,
-                              openFileFromNotification: true,
-                              headers: {
-                                'Cookie': Provider.of<UserDetailProvider>(
-                                        context,
-                                        listen: false)
-                                    .token
-                              });
+                          if (externalDir == null) {
+                            //TODO(pratik): check message
+                            Toasts.showFailToast(msg: 'File not present');
+                          } else {
+                            FlutterDownloader.enqueue(
+                                url:
+                                    "${Provider.of<ApiProvider>(context, listen: false).baseUrl}/api/torrents/${widget.arguments.hash}/contents/${downloadFileIndexList}/data",
+                                savedDir: externalDir.path,
+                                showNotification: true,
+                                openFileFromNotification: true,
+                                headers: {
+                                  'Cookie': Provider.of<UserDetailProvider>(
+                                          context,
+                                          listen: false)
+                                      .token
+                                });
+                          }
                         } else {
                           Toasts.showFailToast(msg: 'Permission Denied');
                         }

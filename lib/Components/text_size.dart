@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SText extends StatelessWidget {
   final String text;
 
-  SText({@required this.text});
+  SText({required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class SText extends StatelessWidget {
 class MText extends StatelessWidget {
   final String text;
 
-  MText({@required this.text});
+  MText({required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class MText extends StatelessWidget {
 class LText extends StatelessWidget {
   final String text;
 
-  LText({@required this.text});
+  LText({required this.text});
 
   @override
   Widget build(BuildContext context) {

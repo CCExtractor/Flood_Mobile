@@ -28,30 +28,31 @@ class ClientSettingsModel {
   int throttleMinPeersSeed;
   int trackersNumWant;
 
-  ClientSettingsModel(
-      {this.dht,
-      this.dhtPort,
-      this.directoryDefault,
-      this.networkHttpMaxOpen,
-      this.networkLocalAddress,
-      this.networkMaxOpenFiles,
-      this.networkPortOpen,
-      this.networkPortRandom,
-      this.networkPortRange,
-      this.piecesHashOnCompletion,
-      this.piecesMemoryMax,
-      this.protocolPex,
-      this.throttleGlobalDownSpeed,
-      this.throttleGlobalUpSpeed,
-      this.throttleMaxDownloads,
-      this.throttleMaxDownloadsGlobal,
-      this.throttleMaxPeersNormal,
-      this.throttleMaxPeersSeed,
-      this.throttleMaxUploads,
-      this.throttleMaxUploadsGlobal,
-      this.throttleMinPeersNormal,
-      this.throttleMinPeersSeed,
-      this.trackersNumWant});
+  ClientSettingsModel({
+    required this.dht,
+    required this.dhtPort,
+    required this.directoryDefault,
+    required this.networkHttpMaxOpen,
+    required this.networkLocalAddress,
+    required this.networkMaxOpenFiles,
+    required this.networkPortOpen,
+    required this.networkPortRandom,
+    required this.networkPortRange,
+    required this.piecesHashOnCompletion,
+    required this.piecesMemoryMax,
+    required this.protocolPex,
+    required this.throttleGlobalDownSpeed,
+    required this.throttleGlobalUpSpeed,
+    required this.throttleMaxDownloads,
+    required this.throttleMaxDownloadsGlobal,
+    required this.throttleMaxPeersNormal,
+    required this.throttleMaxPeersSeed,
+    required this.throttleMaxUploads,
+    required this.throttleMaxUploadsGlobal,
+    required this.throttleMinPeersNormal,
+    required this.throttleMinPeersSeed,
+    required this.trackersNumWant,
+  });
 
   factory ClientSettingsModel.fromJson(Map<String, dynamic> data) =>
       _$ClientSettingsModelFromJson(data);

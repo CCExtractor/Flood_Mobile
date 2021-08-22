@@ -1,4 +1,4 @@
-String dateConverter({int timestamp}) {
+String dateConverter({required int timestamp}) {
   return DateTime.fromMillisecondsSinceEpoch(timestamp * 1000).day.toString() +
       ' / ' +
       DateTime.fromMillisecondsSinceEpoch(timestamp * 1000).month.toString() +

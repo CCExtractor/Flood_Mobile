@@ -9,7 +9,10 @@ import 'notification_popup_dialogue_container.dart';
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBar appBar;
 
-  const BaseAppBar({Key key, this.appBar}) : super(key: key);
+  const BaseAppBar({
+    Key? key,
+    required this.appBar,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

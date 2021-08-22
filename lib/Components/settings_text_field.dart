@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 class SettingsTextField extends StatefulWidget {
   final String labelText;
   final String hintText;
-  final Function validator;
+  final String? Function(String? value) validator;
   final bool isText;
   final TextEditingController controller;
 
   SettingsTextField({
-    @required this.hintText,
-    @required this.labelText,
-    @required this.validator,
-    this.controller,
+    required this.hintText,
+    required this.labelText,
+    required this.validator,
+    required this.controller,
     this.isText = true,
   });
 

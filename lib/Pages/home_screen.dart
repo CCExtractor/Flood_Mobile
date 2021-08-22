@@ -14,7 +14,6 @@ import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
         contentCornerRadius: 40,
         menu: Menu(),
         screenSelectedBuilder: (position, controller) {
-          Widget screenCurrent;
+          Widget screenCurrent = Container();
           switch (position) {
             case 0:
               screenCurrent = TorrentScreen();
@@ -133,7 +132,12 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-  SimpleHiddenDrawerController controller;
+  late SimpleHiddenDrawerController controller;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() {

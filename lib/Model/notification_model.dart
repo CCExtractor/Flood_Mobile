@@ -4,16 +4,26 @@ class NotificationModel {
   int total;
   int unread;
 
-  NotificationModel({this.read, this.notifications, this.total, this.unread});
+  NotificationModel({
+    required this.read,
+    required this.notifications,
+    required this.total,
+    required this.unread,
+  });
 
-  NotificationModel.fromJson(Map<String, dynamic> json) {
-    read = json['count']['read'];
-    total = json['count']['total'];
-    unread = json['count']['unread'];
+  factory NotificationModel.fromJson(Map<String, dynamic> json) {
     dynamic notificationsList = json['notifications'].toList();
+    List<NotificationContentModel> list = [];
     for (var data in notificationsList) {
-      notifications.add(NotificationContentModel.fromJson(data));
+      list.add(NotificationContentModel.fromJson(data));
     }
+
+    return NotificationModel(
+      read: json['count']['read'],
+      notifications: list,
+      total: json['count']['total'],
+      unread: json['count']['unread'],
+    );
   }
 }
 
@@ -25,24 +35,30 @@ class NotificationContentModel {
   String identification;
   String status;
 
-  NotificationContentModel(
-      {this.identification,
-      this.id,
-      this.name,
-      this.read,
-      this.ts,
-      this.status});
+  NotificationContentModel({
+    required this.identification,
+    required this.id,
+    required this.name,
+    required this.read,
+    required this.ts,
+    required this.status,
+  });
 
-  NotificationContentModel.fromJson(Map<String, dynamic> json) {
-    ts = json['ts'];
-    name = json['data']['name'];
-    id = json['id'];
-    read = json['read'];
-    identification = json['_id'];
+  factory NotificationContentModel.fromJson(Map<String, dynamic> json) {
+    String id = json['id'];
+    String status;
     if (id == 'notification.torrent.finished') {
       status = 'Finished Download';
     } else {
       status = 'Notification';
     }
+    return NotificationContentModel(
+      identification: json['_id'],
+      id: json['id'],
+      name: json['data']['name'],
+      read: json['read'],
+      ts: json['ts'],
+      status: status,
+    );
   }
 }

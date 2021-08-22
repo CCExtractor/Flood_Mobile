@@ -2,11 +2,10 @@ import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/notification_model.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
-import 'package:flood_mobile/Services/date_converter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-Widget notificationPopupDialogueContainer({@required BuildContext context}) {
+Widget notificationPopupDialogueContainer({required BuildContext context}) {
   return (Provider.of<HomeProvider>(context)
               .notificationModel
               .notifications
@@ -82,7 +81,7 @@ Widget notificationPopupDialogueContainer({@required BuildContext context}) {
 class NotificationListTile extends StatelessWidget {
   NotificationContentModel model;
 
-  NotificationListTile({@required this.model});
+  NotificationListTile({required this.model});
 
   @override
   Widget build(BuildContext context) {

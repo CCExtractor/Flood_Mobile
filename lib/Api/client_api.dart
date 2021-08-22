@@ -42,8 +42,8 @@ class ClientApi {
   }
 
   static Future<void> setClientSettings(
-      {@required BuildContext context,
-      @required ClientSettingsModel model}) async {
+      {required BuildContext context,
+      required ClientSettingsModel model}) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.setClientSettingsUrl;
@@ -79,9 +79,9 @@ class ClientApi {
   }
 
   static Future<void> setSpeedLimit(
-      {@required BuildContext context,
-      @required String downSpeed,
-      @required String upSpeed}) async {
+      {required BuildContext context,
+      required String downSpeed,
+      required String upSpeed}) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.setClientSettingsUrl;
