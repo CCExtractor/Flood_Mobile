@@ -12,16 +12,16 @@ import 'package:video_player/video_player.dart';
 class VideoStreamScreen extends StatefulWidget {
   final VideoStreamScreenArguments args;
 
-  VideoStreamScreen({@required this.args});
+  VideoStreamScreen({required this.args});
 
   @override
   _VideoStreamScreenState createState() => _VideoStreamScreenState();
 }
 
 class _VideoStreamScreenState extends State<VideoStreamScreen> {
-  VideoPlayerController videoPlayerController;
-  ChewieController chewieController;
-  String url;
+  late VideoPlayerController videoPlayerController;
+  ChewieController? chewieController;
+  late String url;
 
   @override
   void initState() {
@@ -69,9 +69,9 @@ class _VideoStreamScreenState extends State<VideoStreamScreen> {
         color: AppColor.primaryColor,
         child: Center(
           child: chewieController != null &&
-                  chewieController.videoPlayerController.value.isInitialized
+                  chewieController!.videoPlayerController.value.isInitialized
               ? Chewie(
-                  controller: chewieController,
+                  controller: chewieController!,
                 )
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -96,6 +96,6 @@ class _VideoStreamScreenState extends State<VideoStreamScreen> {
       DeviceOrientation.portraitDown,
     ]);
     videoPlayerController.dispose();
-    chewieController.dispose();
+    chewieController?.dispose();
   }
 }

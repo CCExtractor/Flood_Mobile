@@ -244,14 +244,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     randomizePort: randomizePort,
                     setRandomizePort: (value) {
                       setState(() {
-                        randomizePort = value;
+                        randomizePort = value!;
                       });
                     },
                     setEnableDht: null,
                     setEnablePeerExchange: null,
                     setOpenPort: (value) {
                       setState(() {
-                        openPort = value;
+                        openPort = value!;
                       });
                     },
                   ),
@@ -259,7 +259,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ResourceSection(
                       setVerifyHash: (value) {
                         setState(() {
-                          verifyHash = value;
+                          verifyHash = value!;
                         });
                       },
                       defaultDownloadDirectoryController:
@@ -275,12 +275,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     upSpeed: upSpeed,
                     setDownSpeed: (value) {
                       setState(() {
-                        downSpeed = value;
+                        downSpeed = value!;
                       });
                     },
                     setUpSpeed: (value) {
                       setState(() {
-                        upSpeed = value;
+                        upSpeed = value!;
                       });
                     },
                   ),
@@ -288,22 +288,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   AuthenticationSection(
                       setTCP: (value) {
                         setState(() {
-                          socket = !value;
+                          socket = !value!;
                         });
                       },
-                      setSocket: (value) {
+                      setSocket: (bool? value) {
                         setState(() {
-                          socket = value;
+                          socket = value!;
                         });
                       },
-                      setClient: (String newValue) {
+                      setClient: (String? newValue) {
                         setState(() {
-                          client = newValue;
+                          client = newValue!;
                         });
                       },
-                      setIsAdmin: (value) {
+                      setIsAdmin: (bool? value) {
                         setState(() {
-                          isAdmin = value;
+                          isAdmin = value!;
                         });
                       },
                       usernameController: usernameController,
@@ -333,21 +333,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
 class SpeedLimitSection extends StatelessWidget {
   SpeedLimitSection(
-      {Key key,
-      @required this.hp,
-      @required this.downSpeed,
-      @required this.setDownSpeed,
-      @required this.setUpSpeed,
-      @required this.upSpeed,
-      @required this.model})
+      {Key? key,
+      required this.hp,
+      required this.downSpeed,
+      required this.setDownSpeed,
+      required this.setUpSpeed,
+      required this.upSpeed,
+      required this.model})
       : super(key: key);
 
   final double hp;
-  String upSpeed;
-  String downSpeed;
-  Function setUpSpeed;
-  Function setDownSpeed;
-  ClientSettingsProvider model;
+  final String upSpeed;
+  final String downSpeed;
+  final void Function(String? value) setUpSpeed;
+  final void Function(String? value) setDownSpeed;
+  final ClientSettingsProvider model;
 
   @override
   Widget build(BuildContext context) {
@@ -382,7 +382,7 @@ class SpeedLimitSection extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
-                      child: DropdownButtonFormField(
+                      child: DropdownButtonFormField<String>(
                         dropdownColor: AppColor.secondaryColor,
                         isExpanded: true,
                         decoration: InputDecoration(
@@ -426,7 +426,7 @@ class SpeedLimitSection extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
-                      child: DropdownButtonFormField(
+                      child: DropdownButtonFormField<String>(
                         dropdownColor: AppColor.secondaryColor,
                         isExpanded: true,
                         decoration: InputDecoration(
@@ -500,23 +500,23 @@ class SpeedLimitSection extends StatelessWidget {
 
 class AuthenticationSection extends StatelessWidget {
   const AuthenticationSection({
-    Key key,
-    @required this.usernameController,
-    @required this.passwordController,
-    @required this.isAdmin,
-    @required this.client,
-    @required this.socket,
-    @required this.pathController,
-    @required this.hostController,
-    @required this.portController,
-    @required this.clientUsernameController,
-    @required this.clientPasswordController,
-    @required this.urlController,
-    @required this.hp,
-    @required this.setClient,
-    @required this.setIsAdmin,
-    @required this.setSocket,
-    @required this.setTCP,
+    Key? key,
+    required this.usernameController,
+    required this.passwordController,
+    required this.isAdmin,
+    required this.client,
+    required this.socket,
+    required this.pathController,
+    required this.hostController,
+    required this.portController,
+    required this.clientUsernameController,
+    required this.clientPasswordController,
+    required this.urlController,
+    required this.hp,
+    required this.setClient,
+    required this.setIsAdmin,
+    required this.setSocket,
+    required this.setTCP,
   }) : super(key: key);
 
   final TextEditingController usernameController;
@@ -531,10 +531,10 @@ class AuthenticationSection extends StatelessWidget {
   final TextEditingController clientPasswordController;
   final TextEditingController urlController;
   final double hp;
-  final Function setIsAdmin;
-  final Function setClient;
-  final Function setSocket;
-  final Function setTCP;
+  final void Function(bool? value) setIsAdmin;
+  final void Function(String? value) setClient;
+  final void Function(bool? value) setSocket;
+  final void Function(bool? value) setTCP;
 
   @override
   Widget build(BuildContext context) {
@@ -778,19 +778,19 @@ class AuthenticationSection extends StatelessWidget {
 
 class ResourceSection extends StatelessWidget {
   const ResourceSection({
-    Key key,
-    @required this.defaultDownloadDirectoryController,
-    @required this.maximumOpenFilesController,
-    @required this.verifyHash,
-    @required this.maxMemoryUsageController,
-    @required this.setVerifyHash,
+    Key? key,
+    required this.defaultDownloadDirectoryController,
+    required this.maximumOpenFilesController,
+    required this.verifyHash,
+    required this.maxMemoryUsageController,
+    required this.setVerifyHash,
   }) : super(key: key);
 
   final TextEditingController defaultDownloadDirectoryController;
   final TextEditingController maximumOpenFilesController;
   final bool verifyHash;
   final TextEditingController maxMemoryUsageController;
-  final Function setVerifyHash;
+  final void Function(bool? value) setVerifyHash;
 
   @override
   Widget build(BuildContext context) {
@@ -873,24 +873,24 @@ class ResourceSection extends StatelessWidget {
 
 class ConnectivitySection extends StatelessWidget {
   const ConnectivitySection(
-      {Key key,
-      @required this.portRangeController,
-      @required this.openPort,
-      @required this.maxHttpConnectionsController,
-      @required this.dhtPortController,
-      @required this.enableDht,
-      @required this.enablePeerExchange,
-      @required this.minimumPeerController,
-      @required this.maximumPeerController,
-      @required this.minimumPeerSeedingController,
-      @required this.maximumPeerSeedingController,
-      @required this.peerDesiredController,
-      @required this.clientSettingsModel,
-      @required this.setEnableDht,
-      @required this.setEnablePeerExchange,
-      @required this.setOpenPort,
-      @required this.setRandomizePort,
-      @required this.randomizePort})
+      {Key? key,
+      required this.portRangeController,
+      required this.openPort,
+      required this.maxHttpConnectionsController,
+      required this.dhtPortController,
+      required this.enableDht,
+      required this.enablePeerExchange,
+      required this.minimumPeerController,
+      required this.maximumPeerController,
+      required this.minimumPeerSeedingController,
+      required this.maximumPeerSeedingController,
+      required this.peerDesiredController,
+      required this.clientSettingsModel,
+      required this.setEnableDht,
+      required this.setEnablePeerExchange,
+      required this.setOpenPort,
+      required this.setRandomizePort,
+      required this.randomizePort})
       : super(key: key);
 
   final TextEditingController portRangeController;
@@ -906,10 +906,10 @@ class ConnectivitySection extends StatelessWidget {
   final TextEditingController maximumPeerSeedingController;
   final TextEditingController peerDesiredController;
   final ClientSettingsProvider clientSettingsModel;
-  final Function setRandomizePort;
-  final Function setOpenPort;
-  final Function setEnableDht;
-  final Function setEnablePeerExchange;
+  final void Function(bool? value) setRandomizePort;
+  final void Function(bool? value) setOpenPort;
+  final Function? setEnableDht;
+  final Function? setEnablePeerExchange;
 
   @override
   Widget build(BuildContext context) {
@@ -1086,13 +1086,13 @@ class ConnectivitySection extends StatelessWidget {
 
 class BandwidthSection extends StatelessWidget {
   const BandwidthSection({
-    Key key,
-    @required this.globalDownloadRateController,
-    @required this.globalUploadRateController,
-    @required this.uploadSlotPerTorrentController,
-    @required this.uploadSlotGlobalController,
-    @required this.downloadSlotPerTorrentController,
-    @required this.downloadSlotGlobalController,
+    Key? key,
+    required this.globalDownloadRateController,
+    required this.globalUploadRateController,
+    required this.uploadSlotPerTorrentController,
+    required this.uploadSlotGlobalController,
+    required this.downloadSlotPerTorrentController,
+    required this.downloadSlotGlobalController,
   }) : super(key: key);
 
   final TextEditingController globalDownloadRateController;

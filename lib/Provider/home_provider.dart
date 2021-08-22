@@ -6,7 +6,7 @@ class HomeProvider extends ChangeNotifier {
   List<TorrentModel> torrentList = [];
   Map<String, dynamic> torrentListJson = {};
   int unreadNotifications = 0;
-  NotificationModel notificationModel;
+  late NotificationModel notificationModel;
 
   String upSpeed = '0 KB/s';
   String downSpeed = '0 KB/s';

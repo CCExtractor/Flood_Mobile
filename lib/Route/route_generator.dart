@@ -8,6 +8,9 @@ import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'Arguments/torrent_content_page_arguments.dart';
+import 'Arguments/video_stream_screen_arguments.dart';
+
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -29,13 +32,15 @@ class RouteGenerator {
                 create: (context) => TorrentContentProvider(),
               ),
             ],
-            child: TorrentContentScreen(arguments: args),
+            child: TorrentContentScreen(
+                arguments: args as TorrentContentPageArguments),
           ),
         );
         break;
       case Routes.streamVideoScreenRoute:
         return MaterialPageRoute(
-            builder: (context) => VideoStreamScreen(args: args));
+            builder: (context) =>
+                VideoStreamScreen(args: args as VideoStreamScreenArguments));
         break;
       default:
         return MaterialPageRoute(builder: (context) => LoginScreen());

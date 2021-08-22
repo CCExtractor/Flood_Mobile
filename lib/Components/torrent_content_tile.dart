@@ -16,7 +16,7 @@ class FolderFileListView extends StatefulWidget {
   final String hash;
 
   FolderFileListView(
-      {@required this.data, @required this.depth, @required this.hash});
+      {required this.data, required this.depth, required this.hash});
 
   @override
   _FolderFileListViewState createState() => _FolderFileListViewState();
@@ -95,8 +95,7 @@ class TorrentFileTile extends StatefulWidget {
   final double wp;
   final String hash;
 
-  TorrentFileTile(
-      {@required this.model, @required this.wp, @required this.hash});
+  TorrentFileTile({required this.model, required this.wp, required this.hash});
 
   @override
   _TorrentFileTileState createState() => _TorrentFileTileState();
@@ -184,9 +183,9 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
               : Checkbox(
                   value: isSelected,
                   activeColor: AppColor.greenAccentColor,
-                  onChanged: (value) {
+                  onChanged: (bool? value) {
                     setState(() {
-                      isSelected = value;
+                      isSelected = value ?? false;
                     });
                     if (value == true) {
                       model.addItemToSelectedIndex(widget.model.index);

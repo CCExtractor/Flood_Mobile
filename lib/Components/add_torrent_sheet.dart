@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:clipboard/clipboard.dart';
 import 'package:file_picker/file_picker.dart';
@@ -7,13 +8,12 @@ import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'dart:io';
 
 class AddTorrentSheet extends StatefulWidget {
   final ClientSettingsModel clientSettings;
 
   AddTorrentSheet({
-    @required this.clientSettings,
+    required this.clientSettings,
   });
 
   @override
@@ -27,11 +27,11 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
   bool completed = false;
   bool sequentialDownload = false;
 
-  TextEditingController directoryController;
+  late TextEditingController directoryController;
   TextEditingController magnetUrlController = new TextEditingController();
-  String torrentPath;
+  late String torrentPath;
   final _formKey = GlobalKey<FormState>();
-  String base64;
+  late String base64;
 
   @override
   void initState() {
@@ -105,8 +105,9 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    validator: (value) {
-                      if (value.isEmpty && isMagnetSelected) {
+                    validator: (String? value) {
+                      if (value == null ||
+                          (value.isEmpty && isMagnetSelected)) {
                         return 'Field cannot be empty';
                       }
                       return null;
@@ -129,9 +130,9 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                 style: TextStyle(fontSize: 14),
               ),
               value: useAdBasePath,
-              onChanged: (value) {
+              onChanged: (bool? value) {
                 setState(() {
-                  useAdBasePath = value;
+                  useAdBasePath = value ?? false;
                 });
               },
             ),
@@ -146,9 +147,9 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                 style: TextStyle(fontSize: 14),
               ),
               value: sequentialDownload,
-              onChanged: (value) {
+              onChanged: (bool? value) {
                 setState(() {
-                  sequentialDownload = value;
+                  sequentialDownload = value ?? false;
                 });
               },
             ),
@@ -163,9 +164,9 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                 style: TextStyle(fontSize: 14),
               ),
               value: completed,
-              onChanged: (value) {
+              onChanged: (bool? value) {
                 setState(() {
-                  completed = value;
+                  completed = value ?? false;
                 });
               },
             ),
@@ -207,7 +208,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                       isFileSelected = true;
                       isMagnetSelected = false;
                     });
-                    FilePickerResult result = await FilePicker.platform
+                    FilePickerResult? result = await FilePicker.platform
                         .pickFiles(
                             type: FileType.custom,
                             allowedExtensions: ["torrent"]);
@@ -215,7 +216,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                       print('No file selected');
                     } else if (result.files.first.extension == "torrent") {
                       setState(() {
-                        torrentPath = result.files.first.path;
+                        torrentPath = result.files.first.path!;
                       });
                       File torrentFile = new File(torrentPath);
                       List<int> imageBytes = torrentFile.readAsBytesSync();
@@ -240,7 +241,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                   BoxDecoration(borderRadius: BorderRadius.circular(20)),
               child: ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState.validate() &
+                  if (_formKey.currentState!.validate() &
                       (isMagnetSelected || isFileSelected)) {
                     if (isMagnetSelected) {
                       //The magnet link has been chosen

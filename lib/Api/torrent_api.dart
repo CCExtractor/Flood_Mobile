@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flood_mobile/Model/torrent_content_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
@@ -13,7 +14,7 @@ import '../Provider/api_provider.dart';
 class TorrentApi {
   // Gets list of torrents
   static Stream<List<TorrentModel>> getAllTorrents(
-      {BuildContext context}) async* {
+      {required BuildContext context}) async* {
     while (true) {
       await Future.delayed(Duration(milliseconds: 500));
       try {
@@ -47,7 +48,7 @@ class TorrentApi {
   }
 
   static Future<void> startTorrent(
-      {List<String> hashes, BuildContext context}) async {
+      {required List<String> hashes, required BuildContext context}) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.startTorrentUrl;
@@ -77,7 +78,7 @@ class TorrentApi {
   }
 
   static Future<void> stopTorrent(
-      {List<String> hashes, BuildContext context}) async {
+      {required List<String> hashes, required BuildContext context}) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.stopTorrentUrl;
@@ -106,13 +107,14 @@ class TorrentApi {
     }
   }
 
-  static Future<void> addTorrentMagnet(
-      {String magnetUrl,
-      String destination,
-      BuildContext context,
-      bool isBasePath,
-      bool isCompleted,
-      bool isSequential}) async {
+  static Future<void> addTorrentMagnet({
+    required String magnetUrl,
+    required String destination,
+    required BuildContext context,
+    required bool isBasePath,
+    required bool isCompleted,
+    required bool isSequential,
+  }) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.addTorrentMagnet;
@@ -148,13 +150,14 @@ class TorrentApi {
     }
   }
 
-  static Future<void> addTorrentFile(
-      {String base64,
-      String destination,
-      BuildContext context,
-      bool isBasePath,
-      bool isSequential,
-      bool isCompleted}) async {
+  static Future<void> addTorrentFile({
+    required String base64,
+    required String destination,
+    required BuildContext context,
+    required bool isBasePath,
+    required bool isSequential,
+    required bool isCompleted,
+  }) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.addTorrentFile;
@@ -190,8 +193,11 @@ class TorrentApi {
     }
   }
 
-  static Future<void> deleteTorrent(
-      {String hash, bool deleteWithData, BuildContext context}) async {
+  static Future<void> deleteTorrent({
+    required String hash,
+    required bool deleteWithData,
+    required BuildContext context,
+  }) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.deleteTorrent;
@@ -224,8 +230,8 @@ class TorrentApi {
   }
 
   static Stream<Map<String, dynamic>> getTorrentContent({
-    BuildContext context,
-    String hash,
+    required BuildContext context,
+    required String hash,
   }) async* {
     while (true) {
       print('---GET TORRENT CONTENT---');
@@ -264,11 +270,12 @@ class TorrentApi {
     }
   }
 
-  static Future<void> setTorrentContentPriority(
-      {BuildContext context,
-      String hash,
-      int priorityType,
-      List<int> indexList}) async {
+  static Future<void> setTorrentContentPriority({
+    required BuildContext context,
+    required String hash,
+    required int priorityType,
+    required List<int> indexList,
+  }) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.setTorrentContentPriorityUrl +
@@ -303,8 +310,10 @@ class TorrentApi {
     }
   }
 
-  static Future<void> checkTorrentHash(
-      {List<String> hashes, BuildContext context}) async {
+  static Future<void> checkTorrentHash({
+    required List<String> hashes,
+    required BuildContext context,
+  }) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.checkHash;

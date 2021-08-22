@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class DeleteTorrentSheet extends StatefulWidget {
   final TorrentModel torrent;
 
-  DeleteTorrentSheet({@required this.torrent});
+  DeleteTorrentSheet({required this.torrent});
 
   @override
   _DeleteTorrentSheetState createState() => _DeleteTorrentSheetState();
@@ -47,10 +47,10 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
               Checkbox(
                 value: deleteWithData,
                 activeColor: AppColor.greenAccentColor,
-                onChanged: (value) {
+                onChanged: (bool? value) {
                   print(value);
                   setState(() {
-                    deleteWithData = value;
+                    deleteWithData = value ?? false;
                   });
                 },
               ),
