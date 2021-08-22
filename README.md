@@ -2,6 +2,8 @@
 
 ![Group 3](https://user-images.githubusercontent.com/52864956/118592164-24de8280-b7c3-11eb-95f3-f575fd75d356.png)
 
+[![Slack](https://img.shields.io/badge/chat-on_slack-purple.svg?style=for-the-badge&logo=slack)](https://slackinvite.ccextractor.org/)
+
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
@@ -13,16 +15,8 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage & Screenshots</a></li>
+    <li><a href="#usage & screenshot">Usage & Screenshots</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
   </ol>
 </details>
 
@@ -51,6 +45,12 @@ found at [Flood](https://github.com/jesec/flood).
 * [Dart](https://dart.dev/)
 * [Flutter](https://flutter.dev/)
 * [flutter_client_sse](https://github.com/pratikbaid3/flutter_client_sse)
+
+<!-- GETTING STARTED & CONTRIBUTING -->
+
+## Getting started & Contribution guide
+
+[CONTRIBUTING.md](https://github.com/CCExtractor/Flood_Mobile/blob/master/CONTRIBUTING.md)
 
 <!-- USAGE EXAMPLES -->
 
