@@ -27,6 +27,7 @@
 ## About The Project
 
 [![Flood logo](https://github.com/jesec/flood/raw/master/flood.svg)](https://flood.js.org)
+[![google-play-badge 2](https://user-images.githubusercontent.com/52864956/131207547-d6005fd4-ddff-455e-b86f-bea1460dbad9.png)](https://play.google.com/store/apps/details?id=com.hustlecreatives.flood_mobile)
 
 Flood is a monitoring service for various torrent clients. It's a Node.js service that communicates with your favorite
 torrent client and serves a decent mobile UI for administration. The web ap and other relevant documentation can be
