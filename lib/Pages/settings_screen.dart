@@ -2,6 +2,7 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Components/settings_text_field.dart';
+import 'package:flood_mobile/Components/snackbar_torrent.dart';
 import 'package:flood_mobile/Components/text_size.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
@@ -74,6 +75,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool isAdmin = false;
   bool socket = true;
   String client = 'rTorrent';
+  ScaffoldMessengerState? scaffoldMessengerState;
+  
 
   @override
   void didChangeDependencies() {
@@ -134,6 +137,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           TransferSpeedManager.valToSpeedMap[model.throttleGlobalUpSpeed] ??
               'Unlimited';
     });
+    scaffoldMessengerState = ScaffoldMessenger.of(context);
     super.didChangeDependencies();
   }
 
@@ -286,6 +290,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   // *Authentication Section
                   AuthenticationSection(
+
                       setTCP: (value) {
                         setState(() {
                           socket = !value!;
@@ -317,7 +322,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       clientUsernameController: clientUsernameController,
                       clientPasswordController: clientPasswordController,
                       urlController: urlController,
-                      hp: hp),
+                      hp: hp , 
+                      scaffoldMessengerState: scaffoldMessengerState!,),
                   SizedBox(
                     height: 200,
                   )
@@ -337,7 +343,7 @@ class SpeedLimitSection extends StatelessWidget {
       required this.hp,
       required this.downSpeed,
       required this.setDownSpeed,
-      required this.setUpSpeed,
+      required this.setUpSpeed, 
       required this.upSpeed,
       required this.model})
       : super(key: key);
@@ -345,6 +351,7 @@ class SpeedLimitSection extends StatelessWidget {
   final double hp;
   final String upSpeed;
   final String downSpeed;
+  
   final void Function(String? value) setUpSpeed;
   final void Function(String? value) setDownSpeed;
   final ClientSettingsProvider model;
@@ -498,7 +505,7 @@ class SpeedLimitSection extends StatelessWidget {
   }
 }
 
-class AuthenticationSection extends StatelessWidget {
+class  AuthenticationSection extends StatelessWidget {
   const AuthenticationSection({
     Key? key,
     required this.usernameController,
@@ -517,6 +524,7 @@ class AuthenticationSection extends StatelessWidget {
     required this.setIsAdmin,
     required this.setSocket,
     required this.setTCP,
+    required this.scaffoldMessengerState ,
   }) : super(key: key);
 
   final TextEditingController usernameController;
@@ -535,6 +543,7 @@ class AuthenticationSection extends StatelessWidget {
   final void Function(String? value) setClient;
   final void Function(bool? value) setSocket;
   final void Function(bool? value) setTCP;
+  final ScaffoldMessengerState scaffoldMessengerState ; 
 
   @override
   Widget build(BuildContext context) {
@@ -748,6 +757,15 @@ class AuthenticationSection extends StatelessWidget {
                               host: hostController.text,
                               port: int.parse(portController.text)),
                         );
+                        // Showing snackbar only if fields are not empty
+                        if (usernameController.text.isNotEmpty &&
+                            passwordController.text.isNotEmpty &&
+                            pathController.text.isNotEmpty)
+                          snackBar(
+                              text: 'Added User Successfully !',
+                              context: context,
+                              textAlign: TextAlign.left,
+                              scaffoldMessengerState: scaffoldMessengerState);
                       },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(

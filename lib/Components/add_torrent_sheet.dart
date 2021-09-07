@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:clipboard/clipboard.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flood_mobile/Api/torrent_api.dart';
+import 'package:flood_mobile/Components/snackbar_torrent.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,13 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
   late String torrentPath;
   final _formKey = GlobalKey<FormState>();
   late String base64;
+
+  ScaffoldMessengerState? scaffoldMessengerState;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    scaffoldMessengerState = ScaffoldMessenger.of(context);
+  }
 
   @override
   void initState() {
@@ -264,6 +272,12 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                           context: context);
                       Navigator.pop(context);
                     }
+                    //! snack bar
+                    snackBar(
+                        text: 'Torrent Deleted !',
+                        context: context,
+                        textAlign: TextAlign.left,
+                        scaffoldMessengerState: scaffoldMessengerState!);
                   }
                 },
                 style: ElevatedButton.styleFrom(

@@ -1,4 +1,5 @@
 import 'package:flood_mobile/Api/torrent_api.dart';
+import 'package:flood_mobile/Components/snackbar_torrent.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,13 @@ class DeleteTorrentSheet extends StatefulWidget {
 
 class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
   bool deleteWithData = false;
+
+  ScaffoldMessengerState? scaffoldMessengerState;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    scaffoldMessengerState = ScaffoldMessenger.of(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +116,11 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                           deleteWithData: deleteWithData,
                           context: context);
                       Navigator.of(context).pop();
+                      snackBar(
+                          text: 'Torrent Deleted !',
+                          context: context,
+                          textAlign: TextAlign.left,
+                          scaffoldMessengerState: scaffoldMessengerState!);
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(

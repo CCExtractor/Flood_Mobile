@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'Route/route_generator.dart';
 import 'Route/routes.dart';
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterDownloader.initialize(
