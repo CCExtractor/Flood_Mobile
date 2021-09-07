@@ -274,7 +274,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                     }
                     //! snack bar
                     snackBar(
-                        text: 'Torrent Deleted !',
+                        text: 'Added Torrent !',
                         context: context,
                         textAlign: TextAlign.left,
                         scaffoldMessengerState: scaffoldMessengerState!);
