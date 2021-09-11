@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
+import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
@@ -148,6 +149,9 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
+
+    // Log Out Alert Dialog Widget
+
     return Scaffold(
       body: Container(
         color: AppColor.secondaryColor,
@@ -200,14 +204,21 @@ class _MenuState extends State<Menu> {
             NavDrawerListTile(
                 icon: Icons.exit_to_app,
                 onTap: () async {
-                  controller.toggle();
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  prefs.setString('floodToken', '');
-                  Provider.of<UserDetailProvider>(context, listen: false)
-                      .setToken('');
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      Routes.loginScreenRoute, (Route<dynamic> route) => false);
+                  showDialog(
+                      context: context,
+                      builder: (context) =>
+                          LogOutAlert(logoutOnClick: () async {
+                            controller.toggle();
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.setString('floodToken', '');
+                            Provider.of<UserDetailProvider>(context,
+                                    listen: false)
+                                .setToken('');
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                Routes.loginScreenRoute,
+                                (Route<dynamic> route) => false);
+                          }));
                 },
                 title: 'Logout'),
             NavDrawerListTile(
