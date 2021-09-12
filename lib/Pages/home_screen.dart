@@ -199,25 +199,27 @@ class _MenuState extends State<Menu> {
                 },
                 title: 'Settings'),
             NavDrawerListTile(
-                icon: Icons.exit_to_app,
-                onTap: () async {
-                 showDialog(
-                      context: context,
-                      builder: (context) =>
-                          LogOutAlert(logoutOnClick: () async {
-                            controller.toggle();
-                            SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            prefs.setString('floodToken', '');
-                            Provider.of<UserDetailProvider>(context,
-                                    listen: false)
-                                .setToken('');
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                Routes.loginScreenRoute,
-                                (Route<dynamic> route) => false);
-                          }));
-                },
-                title: 'Logout'),
+              icon: Icons.exit_to_app,
+              onTap: () async {
+                showDialog(
+                  context: context,
+                  builder: (context) => LogOutAlert(
+                    logoutOnClick: () async {
+                      controller.toggle();
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setString('floodToken', '');
+                      Provider.of<UserDetailProvider>(context, listen: false)
+                          .setToken('');
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          Routes.loginScreenRoute,
+                          (Route<dynamic> route) => false);
+                    },
+                  ),
+                );
+              },
+              title: 'Logout',
+            ),
             NavDrawerListTile(
                 icon: Icons.info,
                 onTap: () {
