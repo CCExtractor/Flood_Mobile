@@ -27,7 +27,6 @@ class LogOutAlert extends StatelessWidget {
           fontSize: 20,
         ),
       ),
-      actionsAlignment: MainAxisAlignment.spaceEvenly,
       actionsPadding: EdgeInsets.all(5),
       actions: [
         // Yes - TextButton
