@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
+import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
@@ -198,18 +199,27 @@ class _MenuState extends State<Menu> {
                 },
                 title: 'Settings'),
             NavDrawerListTile(
-                icon: Icons.exit_to_app,
-                onTap: () async {
-                  controller.toggle();
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  prefs.setString('floodToken', '');
-                  Provider.of<UserDetailProvider>(context, listen: false)
-                      .setToken('');
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      Routes.loginScreenRoute, (Route<dynamic> route) => false);
-                },
-                title: 'Logout'),
+              icon: Icons.exit_to_app,
+              onTap: () async {
+                showDialog(
+                  context: context,
+                  builder: (context) => LogOutAlert(
+                    logoutOnClick: () async {
+                      controller.toggle();
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setString('floodToken', '');
+                      Provider.of<UserDetailProvider>(context, listen: false)
+                          .setToken('');
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          Routes.loginScreenRoute,
+                          (Route<dynamic> route) => false);
+                    },
+                  ),
+                );
+              },
+              title: 'Logout',
+            ),
             NavDrawerListTile(
                 icon: Icons.info,
                 onTap: () {

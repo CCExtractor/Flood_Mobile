@@ -2,6 +2,8 @@
 
 ![Group 3](https://user-images.githubusercontent.com/52864956/118592164-24de8280-b7c3-11eb-95f3-f575fd75d356.png)
 
+[![Slack](https://img.shields.io/badge/chat-on_slack-purple.svg?style=for-the-badge&logo=slack)](https://slackinvite.ccextractor.org/)
+
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
@@ -13,16 +15,8 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage & Screenshots</a></li>
+    <li><a href="#usage & screenshot">Usage & Screenshots</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
   </ol>
 </details>
 
@@ -33,10 +27,11 @@
 ## About The Project
 
 [![Flood logo](https://github.com/jesec/flood/raw/master/flood.svg)](https://flood.js.org)
+[![google-play-badge 2](https://user-images.githubusercontent.com/52864956/131207547-d6005fd4-ddff-455e-b86f-bea1460dbad9.png)](https://play.google.com/store/apps/details?id=com.hustlecreatives.flood_mobile)
 
 Flood is a monitoring service for various torrent clients. It's a Node.js service that communicates with your favorite
 torrent client and serves a decent mobile UI for administration. The web ap and other relevant documentation can be
-found at [Flood](https://github.com/jesec/floodI).
+found at [Flood](https://github.com/jesec/flood).
 
 #### Supported Clients
 
@@ -51,6 +46,12 @@ found at [Flood](https://github.com/jesec/floodI).
 * [Dart](https://dart.dev/)
 * [Flutter](https://flutter.dev/)
 * [flutter_client_sse](https://github.com/pratikbaid3/flutter_client_sse)
+
+<!-- GETTING STARTED & CONTRIBUTING -->
+
+## Getting started & Contribution guide
+
+[CONTRIBUTING.md](https://github.com/CCExtractor/Flood_Mobile/blob/master/CONTRIBUTING.md)
 
 <!-- USAGE EXAMPLES -->
 
