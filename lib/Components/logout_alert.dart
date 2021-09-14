@@ -9,57 +9,71 @@ class LogOutAlert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var deviceHeight = MediaQuery.of(context).size.height;
+    final hp = MediaQuery.of(context).size.height;
     return AlertDialog(
-        backgroundColor: AppColor.secondaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(14)),
+      backgroundColor: AppColor.secondaryColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(12),
         ),
-        contentPadding: EdgeInsets.all(20),
-        content: Text(
-          'Are you sure you want to\n Log out ?',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+      ),
+      contentPadding: EdgeInsets.all(20),
+      content: Text(
+        'Are you sure you want to\n Log out ?',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
         ),
-        actionsAlignment: MainAxisAlignment.spaceEvenly,
-        actionsPadding: EdgeInsets.only(bottom: 10),
-        actions: [
-          // Yes - ElevatedButton
-          ElevatedButton(
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14),
-              )),
-              minimumSize: MaterialStateProperty.all<Size>(
-                Size(deviceHeight * .160, deviceHeight * .059),
+      ),
+      actionsPadding: EdgeInsets.all(5),
+      actions: [
+        // Yes - TextButton
+        TextButton(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
               ),
-              backgroundColor:
-                  MaterialStateProperty.all(AppColor.greenAccentColor),
             ),
-            onPressed: logoutOnClick,
-            child: Text('Yes'),
+            minimumSize: MaterialStateProperty.all<Size>(
+              Size(hp * .160, hp * .059),
+            ),
+            backgroundColor:
+                MaterialStateProperty.all(AppColor.greenAccentColor),
           ),
-
-          // No - ElevatedButton
-          ElevatedButton(
-            style: ButtonStyle(
-              minimumSize: MaterialStateProperty.all<Size>(
-                Size(deviceHeight * .160, deviceHeight * .059),
-              ),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14),
-              )),
-              backgroundColor:
-                  MaterialStateProperty.all(AppColor.greyAccentColor),
+          onPressed: logoutOnClick,
+          child: Text(
+            'Yes',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        // Space in between Buttons
+        SizedBox(width: 5),
+        // No - TextButton
+        TextButton(
+          style: ButtonStyle(
+            minimumSize: MaterialStateProperty.all<Size>(
+              Size(hp * .160, hp * .059),
             ),
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true).pop();
-            },
-            child: Text('No'),
-          )
-        ]);
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            backgroundColor:
+                MaterialStateProperty.all(AppColor.greyAccentColor),
+          ),
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).pop();
+          },
+          child: Text(
+            'No',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ],
+    );
   }
 }
