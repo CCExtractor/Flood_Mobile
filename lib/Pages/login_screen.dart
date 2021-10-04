@@ -2,11 +2,14 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Components/toast_component.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/links.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -21,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController urlController =
       new TextEditingController(text: 'http://localhost:3000');
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
@@ -301,6 +305,20 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: hp * 0.06,
+                      ),
+                      IconButton(
+                        icon: FaIcon(
+                          FontAwesomeIcons.github,
+                        ),
+                        onPressed: () {
+                          launch(
+                            Links.gitHubBaseUrl + Links.gitHubUsageFragment,
+                          );
+                        },
+                        iconSize: hp * 0.07,
                       ),
                       SizedBox(
                         height: hp * 0.02,
