@@ -2,7 +2,6 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Components/toast_component.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
-import 'package:flood_mobile/Constants/links.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
@@ -315,10 +314,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         onPressed: () {
                           launch(
-                            Links.gitHubBaseUrl + Links.gitHubUsageFragment,
+                            'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
                           );
                         },
-                        iconSize: hp * 0.07,
+                        iconSize: hp * 0.05,
                       ),
                       SizedBox(
                         height: hp * 0.02,

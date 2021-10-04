@@ -5,7 +5,6 @@ import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
-import 'package:flood_mobile/Constants/links.dart';
 import 'package:flood_mobile/Pages/about_screen.dart';
 import 'package:flood_mobile/Pages/settings_screen.dart';
 import 'package:flood_mobile/Pages/torrent_screen.dart';
@@ -227,7 +226,9 @@ class _MenuState extends State<Menu> {
                 icon: FontAwesomeIcons.github,
                 onTap: () {
                   controller.toggle();
-                  launch(Links.gitHubBaseUrl + Links.gitHubUsageFragment);
+                  launch(
+                    'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
+                  );
                 },
                 title: 'GitHub'),
             NavDrawerListTile(
