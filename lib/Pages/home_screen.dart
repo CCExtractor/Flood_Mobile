@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
+import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
@@ -14,10 +15,12 @@ import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -198,18 +201,36 @@ class _MenuState extends State<Menu> {
                 },
                 title: 'Settings'),
             NavDrawerListTile(
-                icon: Icons.exit_to_app,
-                onTap: () async {
+              icon: Icons.exit_to_app,
+              onTap: () async {
+                showDialog(
+                  context: context,
+                  builder: (context) => LogOutAlert(
+                    logoutOnClick: () async {
+                      controller.toggle();
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setString('floodToken', '');
+                      Provider.of<UserDetailProvider>(context, listen: false)
+                          .setToken('');
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          Routes.loginScreenRoute,
+                          (Route<dynamic> route) => false);
+                    },
+                  ),
+                );
+              },
+              title: 'Logout',
+            ),
+            NavDrawerListTile(
+                icon: FontAwesomeIcons.github,
+                onTap: () {
                   controller.toggle();
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  prefs.setString('floodToken', '');
-                  Provider.of<UserDetailProvider>(context, listen: false)
-                      .setToken('');
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      Routes.loginScreenRoute, (Route<dynamic> route) => false);
+                  launch(
+                    'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
+                  );
                 },
-                title: 'Logout'),
+                title: 'GitHub'),
             NavDrawerListTile(
                 icon: Icons.info,
                 onTap: () {
