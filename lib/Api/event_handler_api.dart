@@ -10,30 +10,17 @@ import 'package:json_patch/json_patch.dart';
 import 'package:provider/provider.dart';
 
 class EventHandlerApi {
-  //Sets the transfer rate if the event returned is TRANSFER_SUMMARY_DIFF_CHANGE
+  //Sets the transfer rate if the event returned is TRANSFER_SUMMARY_FULL_UPDATE
   static void setTransferRate({
     required SSEModel model,
     required BuildContext context,
   }) {
-    List<dynamic> data = json.decode(model.data ?? '');
-    if (data != []) {
-      String upSpeed = '0';
-      String downSpeed = '0';
-
-      List<RateModel> rateList = [];
-      for (var i in data) {
-        rateList.add(RateModel.fromJson(i));
-      }
-      for (RateModel model in rateList) {
-        if (model.path == '/downRate') {
-          downSpeed = filesize(model.value);
-        } else if (model.path == '/upRate') {
-          upSpeed = filesize(model.value);
-        }
-      }
-      Provider.of<HomeProvider>(context, listen: false)
-          .setSpeed(upSpeed, downSpeed);
-    }
+    dynamic data = json.decode(model.data ?? '');
+    RateModel rateModel = RateModel.fromJson(data);
+    String downSpeed = filesize(rateModel.downRate.toString());
+    String upSpeed = filesize(rateModel.upRate.toString());
+    Provider.of<HomeProvider>(context, listen: false)
+        .setSpeed(upSpeed, downSpeed);
   }
 
   //Getting full list of torrents

@@ -1,7 +1,7 @@
 class Events {
   //Transfer rate
-  static const String TRANSFER_SUMMARY_DIFF_CHANGE =
-      'TRANSFER_SUMMARY_DIFF_CHANGE';
+  static const String TRANSFER_SUMMARY_FULL_UPDATE =
+      'TRANSFER_SUMMARY_FULL_UPDATE';
 
   //Full list of torrents
   static const String TORRENT_LIST_FULL_UPDATE = 'TORRENT_LIST_FULL_UPDATE';
