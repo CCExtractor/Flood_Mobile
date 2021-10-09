@@ -10,7 +10,7 @@ import 'package:json_patch/json_patch.dart';
 import 'package:provider/provider.dart';
 
 class EventHandlerApi {
-  //Sets the transfer rate if the event returned is TRANSFER_SUMMARY_DIFF_CHANGE
+  //Sets the transfer rate if the event returned is TRANSFER_SUMMARY_FULL_UPDATE
   static void setTransferRate({
     required SSEModel model,
     required BuildContext context,
