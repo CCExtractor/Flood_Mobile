@@ -15,25 +15,12 @@ class EventHandlerApi {
     required SSEModel model,
     required BuildContext context,
   }) {
-    List<dynamic> data = json.decode(model.data ?? '');
-    if (data != []) {
-      String upSpeed = '0';
-      String downSpeed = '0';
-
-      List<RateModel> rateList = [];
-      for (var i in data) {
-        rateList.add(RateModel.fromJson(i));
-      }
-      for (RateModel model in rateList) {
-        if (model.path == '/downRate') {
-          downSpeed = filesize(model.value);
-        } else if (model.path == '/upRate') {
-          upSpeed = filesize(model.value);
-        }
-      }
-      Provider.of<HomeProvider>(context, listen: false)
-          .setSpeed(upSpeed, downSpeed);
-    }
+    dynamic data = json.decode(model.data ?? '');
+    RateModel rateModel = RateModel.fromJson(data);
+    String downSpeed = filesize(rateModel.downRate.toString());
+    String upSpeed = filesize(rateModel.upRate.toString());
+    Provider.of<HomeProvider>(context, listen: false)
+        .setSpeed(upSpeed, downSpeed);
   }
 
   //Getting full list of torrents

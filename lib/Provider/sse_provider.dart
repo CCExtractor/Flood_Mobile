@@ -21,12 +21,12 @@ class SSEProvider extends ChangeNotifier {
             Provider.of<UserDetailProvider>(context).token)
         .listen((event) {
       if (event.id != '' && event.data != '' && event.event != '') {
-        // print('Id: ' + event.id);
-        // print('Event: ' + event.event);
-        // print('Data: ' + event.data);
+        // print('Id: ' + event.id!);
+        // print('Event: ' + event.event!);
+        // print('Data: ' + event.data!);
         sseModel = event;
         switch (event.event) {
-          case Events.TRANSFER_SUMMARY_DIFF_CHANGE:
+          case Events.TRANSFER_SUMMARY_FULL_UPDATE:
             EventHandlerApi.setTransferRate(model: event, context: context);
             break;
           case Events.TORRENT_LIST_FULL_UPDATE:
