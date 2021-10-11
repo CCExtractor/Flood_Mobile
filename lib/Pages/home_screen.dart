@@ -1,10 +1,15 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:badges/badges.dart';
+import 'package:duration/duration.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
+import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/notification_keys.dart';
+import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Pages/about_screen.dart';
 import 'package:flood_mobile/Pages/settings_screen.dart';
 import 'package:flood_mobile/Pages/torrent_screen.dart';
@@ -28,9 +33,43 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // Boolean that tells whether all torrents are currently paused
+  late bool isPaused;
+
   @override
   void initState() {
     super.initState();
+
+    AwesomeNotifications().actionStream.listen((receivedNotification) async {
+      final actionKey = receivedNotification.buttonKeyPressed;
+
+      // Not a desired action
+      if (actionKey != NotificationConstants.PAUSE_ACTION_KEY &&
+          actionKey != NotificationConstants.RESUME_ACTION_KEY) {
+        return;
+      }
+
+      // Grab hashes of all the torrents
+      List<String> hashes = Provider.of<HomeProvider>(context, listen: false)
+          .torrentList
+          .map((torrent) => torrent.hash)
+          .toList();
+
+      // Hashes are being printed in background as expected
+      debugPrint('Hashes: ' + hashes.toString());
+
+      // Pause downloads
+      if (actionKey == NotificationConstants.PAUSE_ACTION_KEY) {
+        await TorrentApi.stopTorrent(hashes: hashes, context: context);
+        isPaused = true;
+      }
+
+      // Resume downloads
+      else {
+        await TorrentApi.startTorrent(hashes: hashes, context: context);
+        isPaused = false;
+      }
+    });
   }
 
   @override
@@ -69,6 +108,90 @@ class _HomeScreenState extends State<HomeScreen> {
               break;
           }
           return Consumer<HomeProvider>(builder: (context, homeModel, child) {
+            debugPrint('Consumer called');
+            // Display the 'Resume All' action by default
+            isPaused = true;
+
+            List<String> torrentStrings = [];
+
+            for (TorrentModel model in homeModel.torrentList) {
+              // Skip finished torrents
+              if (model.status.contains('complete')) {
+                continue;
+              }
+
+              // Create torrent-specific string
+              String torrentString;
+
+              // Torrent not being downloaded
+              if (!model.status.contains('downloading')) {
+                torrentString = 'Paused - ' + model.name;
+
+                // Display dot-dot-dot for lengthy torrent strings
+                if (torrentString.length > 51) {
+                  torrentString = torrentString.substring(0, 48) + '...';
+                }
+
+                // Add finished torrents to the end
+                torrentStrings.add(torrentString);
+              }
+
+              // Torrent being downloaded
+              else {
+                torrentString = model.percentComplete.round().toString() +
+                    '% - ' +
+                    prettyDuration(
+                      Duration(
+                        seconds: model.eta.toInt(),
+                      ),
+                      abbreviated: true,
+                    ) +
+                    ' - ' +
+                    model.name;
+
+                // Change to the 'Pause All' action
+                isPaused = false;
+
+                // Display dot-dot-dot for lengthy torrent strings
+                if (torrentString.length > 45) {
+                  torrentString = torrentString.substring(0, 43) + '...';
+                }
+
+                // Add unfinished torrents to top
+                torrentStrings.insert(0, torrentString);
+              }
+            }
+
+            // Create notification for unfinished downloads
+            AwesomeNotifications().createNotification(
+              content: NotificationContent(
+                id: NotificationConstants.UNFINISHED_DOWNLOADS_ID,
+                channelKey: NotificationConstants.DOWNLOADS_CHANNEL_KEY,
+                title:
+                    '<b>${homeModel.downSpeed} \u{2B07} ${homeModel.upSpeed} \u{2B06}</b>',
+
+                // TODO: [BUG] Collapsed notification should have a separate body
+                body: torrentStrings.join('<br>'),
+                notificationLayout: NotificationLayout.BigText,
+                summary: isPaused ? 'Paused' : 'Downloading',
+                locked: true,
+                autoCancel: false,
+
+                // TODO: [TEST] Time elapsed should not be visible
+                showWhen: false,
+              ),
+              actionButtons: [
+                NotificationActionButton(
+                  key: isPaused
+                      ? NotificationConstants.RESUME_ACTION_KEY
+                      : NotificationConstants.PAUSE_ACTION_KEY,
+                  label: isPaused ? 'Resume All' : 'Pause All',
+                  buttonType: ActionButtonType.KeepOnTop,
+                  autoCancel: false,
+                ),
+              ],
+            );
+
             return Scaffold(
               appBar: AppBar(
                 leading: IconButton(

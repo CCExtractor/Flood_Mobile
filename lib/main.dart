@@ -1,5 +1,7 @@
-import 'package:flood_mobile/Provider/api_provider.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/notification_keys.dart';
+import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
@@ -18,6 +20,27 @@ Future<void> main() async {
   await FlutterDownloader.initialize(
       debug: true // optional: set false to disable printing logs to console
       );
+  await AwesomeNotifications().initialize(
+    null,
+    [
+      NotificationChannel(
+        channelKey: NotificationConstants.DOWNLOADS_CHANNEL_KEY,
+        channelName: 'Downloads Channel',
+        channelDescription:
+            'Notification channel for displaying torrent downloads',
+        defaultColor: Color(0xFF9D50DD),
+        ledColor: Colors.white,
+        playSound: false,
+        enableVibration: false,
+      ),
+    ],
+  );
+
+  AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+    if (!isAllowed) {
+      AwesomeNotifications().requestPermissionToSendNotifications();
+    }
+  });
   runApp(MyApp());
 }
 
