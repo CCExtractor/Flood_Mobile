@@ -16,7 +16,7 @@ using the npm distribution
 2. In the preferences, set up the Web UI. You would have to set a new username nad password and with everything done,
    the qBitTorrent Web UI should be up and running in ```http://localhost:8080/```
 
-<center><img width="400" alt="Screenshot 2021-05-25 at 1 59 24 PM" src="https://user-images.githubusercontent.com/52864956/119465947-c9cc0300-bd61-11eb-97a4-7889aec00fe9.png"></center>
+<p align="center"><img width="400" alt="Screenshot 2021-05-25 at 1 59 24 PM" src="https://user-images.githubusercontent.com/52864956/119465947-c9cc0300-bd61-11eb-97a4-7889aec00fe9.png"></p>
 
 ### Install Flood
 
@@ -24,7 +24,7 @@ using the npm distribution
 2. Run flood using ```flood``` command. After this, flood should be running on ```http://127.0.0.1:3000```
 3. Configure the torrent client in the flood web ui by entering the url for qBitTorrent web ui and the username and password.
 
-<center><img width="400" alt="Screenshot 2021-05-25 at 2 06 39 PM" src="https://raw.githubusercontent.com/KunjKanani/assets/main/Flood-Login-Img.png"></center>
+<p align="center"><img width="400" alt="Screenshot 2021-05-25 at 2 06 39 PM" src="https://raw.githubusercontent.com/KunjKanani/assets/main/Flood-Login-Img.png"></p>
 
 <br /> 
 
@@ -84,7 +84,7 @@ ___
    2. Flood Username
    3. Flood Password
 
-<center><img width="300" alt="Flood App Login Demo Image" src="https://raw.githubusercontent.com/KunjKanani/assets/main/Screenshot_2021-11-11-20-52-46-21_cee4b64e37a5d4be45a41b3aa0b225bb.jpg"></center>
+<p align="center"><img width="300" alt="Flood App Login Demo Image" src="https://raw.githubusercontent.com/KunjKanani/assets/main/Screenshot_2021-11-11-20-52-46-21_cee4b64e37a5d4be45a41b3aa0b225bb.jpg"></p>
 
 ## Prerequisites
 
