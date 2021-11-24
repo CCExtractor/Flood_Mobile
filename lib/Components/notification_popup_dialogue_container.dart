@@ -1,5 +1,4 @@
 import 'package:flood_mobile/Api/notifications_api.dart';
-import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/notification_model.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
@@ -13,7 +12,7 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
               .length ==
           0)
       ? Container(
-          color: ThemeProvider.theme.backgroundColor,
+          color: ThemeProvider.theme.primaryColorLight,
           width: 300,
           child: Text(
             'No notifications to display',

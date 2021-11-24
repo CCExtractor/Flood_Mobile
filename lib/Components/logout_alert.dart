@@ -1,4 +1,3 @@
-import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +11,7 @@ class LogOutAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     final hp = MediaQuery.of(context).size.height;
     return AlertDialog(
-      backgroundColor: ThemeProvider.theme.backgroundColor,
+      backgroundColor: ThemeProvider.theme.primaryColorLight,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(12),

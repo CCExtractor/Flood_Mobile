@@ -1,12 +1,10 @@
 import 'dart:io';
 import 'dart:math' as math;
-import 'dart:ui';
 
 import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Components/base_app_bar.dart';
 import 'package:flood_mobile/Components/toast_component.dart';
 import 'package:flood_mobile/Components/torrent_content_tile.dart';
-import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/torrent_content_provider.dart';

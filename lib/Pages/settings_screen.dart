@@ -3,7 +3,6 @@ import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Components/settings_text_field.dart';
 import 'package:flood_mobile/Components/text_size.dart';
-import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flood_mobile/Model/register_user_model.dart';
@@ -378,13 +377,13 @@ class SpeedLimitSection extends StatelessWidget {
                     width: double.infinity,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: ThemeProvider.theme.backgroundColor,
+                      color: ThemeProvider.theme.primaryColorLight,
                       border: null,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
                       child: DropdownButtonFormField<String>(
-                        dropdownColor: ThemeProvider.theme.backgroundColor,
+                        dropdownColor: ThemeProvider.theme.primaryColorLight,
                         isExpanded: true,
                         decoration: InputDecoration(
                           enabledBorder: InputBorder.none,
@@ -422,7 +421,7 @@ class SpeedLimitSection extends StatelessWidget {
                     width: double.infinity,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: ThemeProvider.theme.backgroundColor,
+                      color: ThemeProvider.theme.primaryColorLight,
                       border: null,
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -576,7 +575,7 @@ class AuthenticationSection extends StatelessWidget {
                 Expanded(
                   child: CheckboxListTile(
                     activeColor: ThemeProvider.theme.primaryColorDark,
-                    tileColor: ThemeProvider.theme.backgroundColor,
+                    tileColor: ThemeProvider.theme.primaryColorLight,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -597,7 +596,7 @@ class AuthenticationSection extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 5),
                     decoration: BoxDecoration(
-                      color: ThemeProvider.theme.backgroundColor,
+                      color: ThemeProvider.theme.primaryColorLight,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: ButtonTheme(
@@ -636,7 +635,8 @@ class AuthenticationSection extends StatelessWidget {
                         children: [
                           Expanded(
                             child: CheckboxListTile(
-                                tileColor: ThemeProvider.theme.backgroundColor,
+                                tileColor:
+                                    ThemeProvider.theme.primaryColorLight,
                                 activeColor:
                                     ThemeProvider.theme.primaryColorDark,
                                 shape: RoundedRectangleBorder(
@@ -655,7 +655,7 @@ class AuthenticationSection extends StatelessWidget {
                           Expanded(
                             child: CheckboxListTile(
                               activeColor: ThemeProvider.theme.primaryColorDark,
-                              tileColor: ThemeProvider.theme.backgroundColor,
+                              tileColor: ThemeProvider.theme.primaryColorLight,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
@@ -841,8 +841,8 @@ class ResourceSection extends StatelessWidget {
                         height: 5,
                       ),
                       CheckboxListTile(
-                        activeColor: ThemeProvider.theme.primaryColorDark,
-                        tileColor: ThemeProvider.theme.backgroundColor,
+                        activeColor: ThemeProvider.theme.backgroundColor,
+                        tileColor: ThemeProvider.theme.primaryColorLight,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -943,7 +943,7 @@ class ConnectivitySection extends StatelessWidget {
                 Expanded(
                   child: CheckboxListTile(
                     activeColor: ThemeProvider.theme.primaryColorDark,
-                    tileColor: ThemeProvider.theme.backgroundColor,
+                    tileColor: ThemeProvider.theme.primaryColorLight,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -961,7 +961,7 @@ class ConnectivitySection extends StatelessWidget {
                 Expanded(
                   child: CheckboxListTile(
                     activeColor: ThemeProvider.theme.primaryColorDark,
-                    tileColor: ThemeProvider.theme.backgroundColor,
+                    tileColor: ThemeProvider.theme.primaryColorLight,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -999,7 +999,7 @@ class ConnectivitySection extends StatelessWidget {
                 Expanded(
                   child: CheckboxListTile(
                     activeColor: ThemeProvider.theme.primaryColorDark,
-                    tileColor: ThemeProvider.theme.backgroundColor,
+                    tileColor: ThemeProvider.theme.primaryColorLight,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -1021,7 +1021,7 @@ class ConnectivitySection extends StatelessWidget {
                 Expanded(
                   child: CheckboxListTile(
                     activeColor: ThemeProvider.theme.primaryColorDark,
-                    tileColor: ThemeProvider.theme.backgroundColor,
+                    tileColor: ThemeProvider.theme.primaryColorLight,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
