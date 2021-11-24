@@ -19,6 +19,7 @@ class MyThemes {
     brightness: Brightness.dark,
     primaryColor: Color(0xff0E2537),
     primaryColorDark: Color(0xff39C481),
+    primaryColorLight: Color(0xff305067),
     accentColor: Color(0xff399CF4),
     backgroundColor: Color(0xff305067),
     textTheme: TextTheme().apply(
@@ -37,9 +38,10 @@ class MyThemes {
     brightness: Brightness.light,
     primaryColor: Colors.white,
     primaryColorDark: Color(0xff39C481),
+    backgroundColor: Color(0xff293341),
     accentColor: Color(0xff399CF4),
     canvasColor: Colors.transparent,
-    backgroundColor: Color(0xffE9EEF2),
+    primaryColorLight: Colors.grey[300],
     dialogBackgroundColor: Color(0xff399CF4),
     textTheme: TextTheme().apply(
       displayColor: Color(0xff293341),

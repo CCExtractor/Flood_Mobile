@@ -1,5 +1,4 @@
 import 'package:flood_mobile/Api/torrent_api.dart';
-import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,4 @@
 import 'package:flood_mobile/Provider/api_provider.dart';
-import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
@@ -10,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:provider/provider.dart';
-import 'package:flood_mobile/Constants/theme_provider.dart';
 
 import 'Route/route_generator.dart';
 import 'Route/routes.dart';
@@ -64,11 +62,6 @@ class MyApp extends StatelessWidget {
               themeMode: ThemeProvider.themeMode,
               theme: MyThemes.lightTheme,
               darkTheme: MyThemes.darkTheme,
-              // theme: ThemeData.dark().copyWith(
-              //   primaryColor: ThemeProvider.theme.primaryColor,
-              //   accentColor: ThemeProvider.theme.primaryColorDark,
-              //   canvasColor: Colors.transparent,
-              // ),
               initialRoute: Routes.splashScreenRoute,
               onGenerateRoute: RouteGenerator.generateRoute,
             ),

@@ -1,4 +1,3 @@
-import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +43,7 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             filled: true,
-            fillColor: ThemeProvider.theme.backgroundColor,
+            fillColor: ThemeProvider.theme.primaryColorLight,
             // labelText: widget.labelText,
             hintText: widget.hintText,
             labelStyle: TextStyle(
@@ -54,7 +53,7 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
                 color: ThemeProvider.theme.textTheme.bodyText1?.color),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: ThemeProvider.theme.backgroundColor,
+                color: ThemeProvider.theme.primaryColorLight,
                 width: 0.0,
               ),
               borderRadius: BorderRadius.circular(8),
@@ -62,7 +61,7 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
-                color: ThemeProvider.theme.backgroundColor,
+                color: ThemeProvider.theme.primaryColorLight,
                 width: 1.0,
               ),
             ),

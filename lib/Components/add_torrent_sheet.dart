@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:clipboard/clipboard.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flood_mobile/Api/torrent_api.dart';
-import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +44,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: ThemeProvider.theme.primaryColorLight,
       padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
       child: Form(
         key: _formKey,
@@ -123,7 +123,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                 : Container(),
             CheckboxListTile(
               activeColor: ThemeProvider.theme.primaryColorDark,
-              tileColor: ThemeProvider.theme.backgroundColor,
+              tileColor: ThemeProvider.theme.primaryColorLight,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -140,7 +140,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
             ),
             CheckboxListTile(
               activeColor: ThemeProvider.theme.primaryColorDark,
-              tileColor: ThemeProvider.theme.backgroundColor,
+              tileColor: ThemeProvider.theme.primaryColorLight,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -157,7 +157,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
             ),
             CheckboxListTile(
               activeColor: ThemeProvider.theme.primaryColorDark,
-              tileColor: ThemeProvider.theme.backgroundColor,
+              tileColor: ThemeProvider.theme.primaryColorLight,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),

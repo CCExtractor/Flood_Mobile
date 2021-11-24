@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class RateModel {
   int downRate;
   int downTotal;

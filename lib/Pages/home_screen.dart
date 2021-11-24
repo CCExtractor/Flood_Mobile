@@ -1,10 +1,8 @@
-import 'package:badges/badges.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
-import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Pages/about_screen.dart';
 import 'package:flood_mobile/Pages/settings_screen.dart';
@@ -92,35 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 centerTitle: true,
                 backgroundColor: Theme.of(context).primaryColor,
                 elevation: 0,
-                // actions: [
-                //   Badge(
-                //     badgeColor: ThemeProvider.theme.accentColor,
-                //     badgeContent: Center(
-                //       child: Text(
-                //         homeModel.unreadNotifications.toString(),
-                //         style: TextStyle(color:ThemeProvider.theme.textTheme.bodyText1?.color),
-                //       ),
-                //     ),
-                //     position: BadgePosition(top: 0, end: 3),
-                //     child: IconButton(
-                //       icon: Icon(
-                //         Icons.notifications,
-                //         color:ThemeProvider.theme.textTheme.bodyText1?.color,
-                //       ),
-                //       onPressed: () {
-                //         showDialog(
-                //             context: context,
-                //             builder: (BuildContext context) {
-                //               return AlertDialog(
-                //                 backgroundColor: ThemeProvider.theme.backgroundColor,
-                //                 content: notificationPopupDialogueContainer(
-                //                     context: context),
-                //               );
-                //             });
-                //       },
-                //     ),
-                //   ),
-                // ],
                 actions: [
                   ChangeThemeButtonWidget(),
                 ],
@@ -250,7 +219,7 @@ class _MenuState extends State<Menu> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        backgroundColor: ThemeProvider.theme.backgroundColor,
+                        backgroundColor: ThemeProvider.theme.primaryColorLight,
                         content: notificationPopupDialogueContainer(
                             context: context),
                       );
