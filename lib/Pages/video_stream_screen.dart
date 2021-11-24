@@ -1,6 +1,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:flood_mobile/Components/base_app_bar.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/Arguments/video_stream_screen_arguments.dart';
@@ -66,7 +67,7 @@ class _VideoStreamScreenState extends State<VideoStreamScreen> {
         appBar: AppBar(),
       ),
       body: Container(
-        color: AppColor.primaryColor,
+        color: ThemeProvider.theme.primaryColor,
         child: Center(
           child: chewieController != null &&
                   chewieController!.videoPlayerController.value.isInitialized
@@ -75,9 +76,9 @@ class _VideoStreamScreenState extends State<VideoStreamScreen> {
                 )
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     CircularProgressIndicator(
-                      color: AppColor.greenAccentColor,
+                      color: ThemeProvider.theme.primaryColorDark,
                     ),
                     SizedBox(height: 20),
                     Text('Loading'),

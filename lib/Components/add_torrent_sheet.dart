@@ -5,6 +5,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -54,17 +55,18 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
             TextField(
               controller: directoryController,
               style: TextStyle(
-                color: AppColor.textColor,
+                color: ThemeProvider.theme.textTheme.bodyText1?.color,
               ),
               decoration: InputDecoration(
                 prefixIcon: Icon(
                   Icons.folder,
-                  color: Colors.white,
+                  color: ThemeProvider.theme.textTheme.bodyText1?.color,
                 ),
                 labelText: 'Destination',
                 hintText: 'Destination',
-                labelStyle:
-                    TextStyle(fontFamily: 'Montserrat', color: Colors.white),
+                labelStyle: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: ThemeProvider.theme.textTheme.bodyText1?.color),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -77,12 +79,12 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                 ? TextFormField(
                     controller: magnetUrlController,
                     style: TextStyle(
-                      color: AppColor.textColor,
+                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
                     ),
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.link,
-                        color: Colors.white,
+                        color: ThemeProvider.theme.textTheme.bodyText1?.color,
                       ),
                       suffix: GestureDetector(
                         child: Icon(Icons.paste),
@@ -99,7 +101,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                       hintText: 'Torrent URL or Magnet Link',
                       labelStyle: TextStyle(
                         fontFamily: 'Montserrat',
-                        color: Colors.white,
+                        color: ThemeProvider.theme.textTheme.bodyText1?.color,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -120,8 +122,8 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                   )
                 : Container(),
             CheckboxListTile(
-              activeColor: AppColor.greenAccentColor,
-              tileColor: AppColor.secondaryColor,
+              activeColor: ThemeProvider.theme.primaryColorDark,
+              tileColor: ThemeProvider.theme.backgroundColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -137,8 +139,8 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
               },
             ),
             CheckboxListTile(
-              activeColor: AppColor.greenAccentColor,
-              tileColor: AppColor.secondaryColor,
+              activeColor: ThemeProvider.theme.primaryColorDark,
+              tileColor: ThemeProvider.theme.backgroundColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -154,8 +156,8 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
               },
             ),
             CheckboxListTile(
-              activeColor: AppColor.greenAccentColor,
-              tileColor: AppColor.secondaryColor,
+              activeColor: ThemeProvider.theme.primaryColorDark,
+              tileColor: ThemeProvider.theme.backgroundColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -193,7 +195,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                 Text(
                   'or',
                   style: TextStyle(
-                      color: Colors.white,
+                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
                       fontSize: 12,
                       fontWeight: FontWeight.w900),
                 ),
@@ -270,13 +272,13 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14.0),
                   ),
-                  primary: AppColor.greenAccentColor,
+                  primary: ThemeProvider.theme.primaryColorDark,
                 ),
                 child: Center(
                   child: Text(
                     "Add Torrent",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: ThemeProvider.theme.textTheme.bodyText1?.color,
                         fontSize: 16,
                         fontWeight: FontWeight.w900),
                   ),

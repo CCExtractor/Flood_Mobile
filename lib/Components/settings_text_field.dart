@@ -1,4 +1,5 @@
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class SettingsTextField extends StatefulWidget {
@@ -36,30 +37,34 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
         TextFormField(
           controller: widget.controller,
           style: TextStyle(
-            color: AppColor.textColor,
+            color: ThemeProvider.theme.textTheme.bodyText1?.color,
           ),
           keyboardType:
               (!widget.isText) ? TextInputType.text : TextInputType.number,
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             filled: true,
-            fillColor: AppColor.secondaryColor,
+            fillColor: ThemeProvider.theme.backgroundColor,
             // labelText: widget.labelText,
             hintText: widget.hintText,
             labelStyle: TextStyle(
                 fontFamily: 'Montserrat',
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: Colors.white),
+                color: ThemeProvider.theme.textTheme.bodyText1?.color),
             enabledBorder: OutlineInputBorder(
-              borderSide:
-                  const BorderSide(color: AppColor.secondaryColor, width: 0.0),
+              borderSide: BorderSide(
+                color: ThemeProvider.theme.backgroundColor,
+                width: 0.0,
+              ),
               borderRadius: BorderRadius.circular(8),
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide:
-                  const BorderSide(color: AppColor.secondaryColor, width: 1.0),
+              borderSide: BorderSide(
+                color: ThemeProvider.theme.backgroundColor,
+                width: 1.0,
+              ),
             ),
           ),
           validator: widget.validator,
