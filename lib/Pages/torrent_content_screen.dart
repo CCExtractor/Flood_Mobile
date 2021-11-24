@@ -7,6 +7,7 @@ import 'package:flood_mobile/Components/base_app_bar.dart';
 import 'package:flood_mobile/Components/toast_component.dart';
 import 'package:flood_mobile/Components/torrent_content_tile.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/torrent_content_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
@@ -55,7 +56,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                   height: 60,
                 ),
                 centerTitle: true,
-                backgroundColor: AppColor.primaryColor,
+                backgroundColor: ThemeProvider.theme.primaryColor,
                 elevation: 0,
                 leading: Row(
                   children: [
@@ -64,7 +65,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                       child: IconButton(
                         icon: Icon(
                           Icons.add,
-                          color: Colors.white,
+                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
                         ),
                         onPressed: () {
                           model.setSelectionMode(newIsSelected: false);
@@ -78,7 +79,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                   IconButton(
                     icon: Icon(
                       Icons.download_rounded,
-                      color: Colors.white,
+                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
                     ),
                     onPressed: () async {
                       try {
@@ -123,10 +124,10 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                     },
                   ),
                   PopupMenuButton<String>(
-                    color: AppColor.secondaryColor,
+                    color: ThemeProvider.theme.backgroundColor,
                     icon: Icon(
                       Icons.more_vert,
-                      color: Colors.white,
+                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
                     ),
                     onSelected: (value) {
                       if (value == 'High Priority') {
@@ -191,7 +192,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          color: AppColor.primaryColor,
+          color: ThemeProvider.theme.primaryColor,
           child: StreamBuilder(
             stream: TorrentApi.getTorrentContent(
                 context: context, hash: widget.arguments.hash),
@@ -211,7 +212,8 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                         child: Text(
                           'Files',
                           style: GoogleFonts.notoSans(
-                            color: Colors.white,
+                            color:
+                                ThemeProvider.theme.textTheme.bodyText1?.color,
                             fontWeight: FontWeight.bold,
                             fontSize: 30,
                           ),
@@ -230,7 +232,8 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                               child: Text(
                                 widget.arguments.directory,
                                 style: GoogleFonts.notoSans(
-                                  color: Colors.white,
+                                  color: ThemeProvider
+                                      .theme.textTheme.bodyText1?.color,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                 ),
@@ -241,7 +244,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                         decoration: BoxDecoration(
-                          color: AppColor.greenAccentColor,
+                          color: ThemeProvider.theme.primaryColorDark,
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
@@ -255,7 +258,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                 );
               }
               return SpinKitFadingCircle(
-                color: AppColor.greenAccentColor,
+                color: ThemeProvider.theme.primaryColorDark,
               );
             },
           ),

@@ -1,4 +1,5 @@
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -11,7 +12,7 @@ class _AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.primaryColor,
+      backgroundColor: ThemeProvider.theme.primaryColor,
       body: Padding(
         padding: EdgeInsets.all(22.0),
         child: Column(
@@ -52,7 +53,9 @@ class _AboutScreenState extends State<AboutScreen> {
               children: [
                 Text(
                   'Flood is a monitoring service for various torrent clients. It\'s a Node.js service that communicates with your favorite torrent client and serves a decent mobile UI for administration. This project is based on the original Flood project.',
-                  style: TextStyle(color: Colors.white60, fontSize: 15),
+                  style: TextStyle(
+                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                      fontSize: 15),
                 ),
                 SizedBox(
                   height: 20,
@@ -60,8 +63,8 @@ class _AboutScreenState extends State<AboutScreen> {
                 Text(
                   'Feedback',
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
+                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -69,7 +72,9 @@ class _AboutScreenState extends State<AboutScreen> {
                 ),
                 Text(
                   'If you have a specific issue or bug, please file a GitHub issue. Please join the Flood Discord server to discuss feature requests and implementation details.',
-                  style: TextStyle(color: Colors.white60, fontSize: 15),
+                  style: TextStyle(
+                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                      fontSize: 15),
                 ),
                 SizedBox(
                   height: 20,
@@ -77,8 +82,8 @@ class _AboutScreenState extends State<AboutScreen> {
                 Text(
                   'More Information',
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
+                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -86,7 +91,9 @@ class _AboutScreenState extends State<AboutScreen> {
                 ),
                 Text(
                   'Check out the Wiki for more information.',
-                  style: TextStyle(color: Colors.white60, fontSize: 15),
+                  style: TextStyle(
+                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                      fontSize: 15),
                 ),
                 SizedBox(
                   height: 20,

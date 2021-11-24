@@ -4,6 +4,7 @@ import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Components/settings_text_field.dart';
 import 'package:flood_mobile/Components/text_size.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flood_mobile/Model/register_user_model.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
@@ -145,7 +146,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       return KeyboardDismissOnTap(
         child: Scaffold(
           floatingActionButton: FloatingActionButton.extended(
-            backgroundColor: AppColor.greenAccentColor,
+            backgroundColor: ThemeProvider.theme.primaryColorDark,
             onPressed: () {
               ClientSettingsModel newClientSettingsModel = new ClientSettingsModel(
                   dht: clientSettingsModel.clientSettings.dht,
@@ -196,17 +197,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
             icon: Icon(
               Icons.save,
-              color: Colors.white,
+              color: ThemeProvider.theme.textTheme.bodyText1?.color,
             ),
             label: Text(
               "Save",
               style: TextStyle(
-                  color: Colors.white,
+                  color: ThemeProvider.theme.textTheme.bodyText1?.color,
                   fontSize: 16,
                   fontWeight: FontWeight.w600),
             ),
           ),
-          backgroundColor: AppColor.primaryColor,
+          backgroundColor: ThemeProvider.theme.primaryColor,
           body: SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 14),
@@ -354,8 +355,8 @@ class SpeedLimitSection extends StatelessWidget {
     return ExpansionTileCard(
       onExpansionChanged: (value) {},
       elevation: 0,
-      expandedColor: AppColor.primaryColor,
-      baseColor: AppColor.primaryColor,
+      expandedColor: ThemeProvider.theme.primaryColor,
+      baseColor: ThemeProvider.theme.primaryColor,
       title: MText(text: 'Speed Limit'),
       leading: Icon(Icons.speed_rounded),
       contentPadding: EdgeInsets.all(0),
@@ -377,20 +378,20 @@ class SpeedLimitSection extends StatelessWidget {
                     width: double.infinity,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: AppColor.secondaryColor,
+                      color: ThemeProvider.theme.backgroundColor,
                       border: null,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
                       child: DropdownButtonFormField<String>(
-                        dropdownColor: AppColor.secondaryColor,
+                        dropdownColor: ThemeProvider.theme.backgroundColor,
                         isExpanded: true,
                         decoration: InputDecoration(
                           enabledBorder: InputBorder.none,
                         ),
                         icon: Icon(
                           Icons.arrow_drop_down,
-                          color: Colors.white,
+                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
                           size: 25,
                         ),
                         hint: Text("Download Speed"),
@@ -421,20 +422,20 @@ class SpeedLimitSection extends StatelessWidget {
                     width: double.infinity,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: AppColor.secondaryColor,
+                      color: ThemeProvider.theme.backgroundColor,
                       border: null,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
                       child: DropdownButtonFormField<String>(
-                        dropdownColor: AppColor.secondaryColor,
+                        dropdownColor: ThemeProvider.theme.backgroundColor,
                         isExpanded: true,
                         decoration: InputDecoration(
                           enabledBorder: InputBorder.none,
                         ),
                         icon: Icon(
                           Icons.arrow_drop_down,
-                          color: Colors.white,
+                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
                           size: 25,
                         ),
                         hint: Text("Upload Speed"),
@@ -474,13 +475,14 @@ class SpeedLimitSection extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        primary: AppColor.blueAccentColor,
+                        primary: ThemeProvider.theme.accentColor,
                       ),
                       child: Center(
                         child: Text(
                           "Set",
                           style: TextStyle(
-                              color: Colors.white,
+                              color: ThemeProvider
+                                  .theme.textTheme.bodyText1?.color,
                               fontSize: 16,
                               fontWeight: FontWeight.w600),
                         ),
@@ -541,8 +543,8 @@ class AuthenticationSection extends StatelessWidget {
     return ExpansionTileCard(
       onExpansionChanged: (value) {},
       elevation: 0,
-      expandedColor: AppColor.primaryColor,
-      baseColor: AppColor.primaryColor,
+      expandedColor: ThemeProvider.theme.primaryColor,
+      baseColor: ThemeProvider.theme.primaryColor,
       title: MText(text: 'Authentication'),
       leading: Icon(Icons.security),
       contentPadding: EdgeInsets.all(0),
@@ -573,8 +575,8 @@ class AuthenticationSection extends StatelessWidget {
                 ),
                 Expanded(
                   child: CheckboxListTile(
-                    activeColor: AppColor.greenAccentColor,
-                    tileColor: AppColor.secondaryColor,
+                    activeColor: ThemeProvider.theme.primaryColorDark,
+                    tileColor: ThemeProvider.theme.backgroundColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -595,7 +597,7 @@ class AuthenticationSection extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 5),
                     decoration: BoxDecoration(
-                      color: AppColor.secondaryColor,
+                      color: ThemeProvider.theme.backgroundColor,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: ButtonTheme(
@@ -604,7 +606,7 @@ class AuthenticationSection extends StatelessWidget {
                         isExpanded: true,
                         value: client,
                         icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                        dropdownColor: AppColor.secondaryColor,
+                        dropdownColor: ThemeProvider.theme.backgroundColor,
                         elevation: 16,
                         onChanged: setClient,
                         underline: Container(),
@@ -634,8 +636,9 @@ class AuthenticationSection extends StatelessWidget {
                         children: [
                           Expanded(
                             child: CheckboxListTile(
-                                tileColor: AppColor.secondaryColor,
-                                activeColor: AppColor.greenAccentColor,
+                                tileColor: ThemeProvider.theme.backgroundColor,
+                                activeColor:
+                                    ThemeProvider.theme.primaryColorDark,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -651,8 +654,8 @@ class AuthenticationSection extends StatelessWidget {
                           ),
                           Expanded(
                             child: CheckboxListTile(
-                              activeColor: AppColor.greenAccentColor,
-                              tileColor: AppColor.secondaryColor,
+                              activeColor: ThemeProvider.theme.primaryColorDark,
+                              tileColor: ThemeProvider.theme.backgroundColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
@@ -753,13 +756,14 @@ class AuthenticationSection extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        primary: AppColor.blueAccentColor,
+                        primary: ThemeProvider.theme.accentColor,
                       ),
                       child: Center(
                         child: Text(
                           "Add",
                           style: TextStyle(
-                              color: Colors.white,
+                              color: ThemeProvider
+                                  .theme.textTheme.bodyText1?.color,
                               fontSize: 16,
                               fontWeight: FontWeight.w600),
                         ),
@@ -797,8 +801,8 @@ class ResourceSection extends StatelessWidget {
     return ExpansionTileCard(
       onExpansionChanged: (value) {},
       elevation: 0,
-      expandedColor: AppColor.primaryColor,
-      baseColor: AppColor.primaryColor,
+      expandedColor: ThemeProvider.theme.primaryColor,
+      baseColor: ThemeProvider.theme.primaryColor,
       title: MText(text: 'Resources'),
       leading: Icon(Icons.settings),
       contentPadding: EdgeInsets.all(0),
@@ -837,8 +841,8 @@ class ResourceSection extends StatelessWidget {
                         height: 5,
                       ),
                       CheckboxListTile(
-                        activeColor: AppColor.greenAccentColor,
-                        tileColor: AppColor.secondaryColor,
+                        activeColor: ThemeProvider.theme.primaryColorDark,
+                        tileColor: ThemeProvider.theme.backgroundColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -915,8 +919,8 @@ class ConnectivitySection extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionTileCard(
       elevation: 0,
-      expandedColor: AppColor.primaryColor,
-      baseColor: AppColor.primaryColor,
+      expandedColor: ThemeProvider.theme.primaryColor,
+      baseColor: ThemeProvider.theme.primaryColor,
       leading: Icon(FontAwesomeIcons.connectdevelop),
       title: MText(text: 'Connectivity'),
       contentPadding: EdgeInsets.all(0),
@@ -938,8 +942,8 @@ class ConnectivitySection extends StatelessWidget {
               children: [
                 Expanded(
                   child: CheckboxListTile(
-                    activeColor: AppColor.greenAccentColor,
-                    tileColor: AppColor.secondaryColor,
+                    activeColor: ThemeProvider.theme.primaryColorDark,
+                    tileColor: ThemeProvider.theme.backgroundColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -956,8 +960,8 @@ class ConnectivitySection extends StatelessWidget {
                 ),
                 Expanded(
                   child: CheckboxListTile(
-                    activeColor: AppColor.greenAccentColor,
-                    tileColor: AppColor.secondaryColor,
+                    activeColor: ThemeProvider.theme.primaryColorDark,
+                    tileColor: ThemeProvider.theme.backgroundColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -994,8 +998,8 @@ class ConnectivitySection extends StatelessWidget {
               children: [
                 Expanded(
                   child: CheckboxListTile(
-                    activeColor: AppColor.greenAccentColor,
-                    tileColor: AppColor.secondaryColor,
+                    activeColor: ThemeProvider.theme.primaryColorDark,
+                    tileColor: ThemeProvider.theme.backgroundColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -1016,8 +1020,8 @@ class ConnectivitySection extends StatelessWidget {
                 ),
                 Expanded(
                   child: CheckboxListTile(
-                    activeColor: AppColor.greenAccentColor,
-                    tileColor: AppColor.secondaryColor,
+                    activeColor: ThemeProvider.theme.primaryColorDark,
+                    tileColor: ThemeProvider.theme.backgroundColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -1108,8 +1112,8 @@ class BandwidthSection extends StatelessWidget {
       initiallyExpanded: true,
       onExpansionChanged: (value) {},
       elevation: 0,
-      expandedColor: AppColor.primaryColor,
-      baseColor: AppColor.primaryColor,
+      expandedColor: ThemeProvider.theme.primaryColor,
+      baseColor: ThemeProvider.theme.primaryColor,
       title: MText(text: 'Bandwidth'),
       leading: Icon(Icons.wifi_rounded),
       contentPadding: EdgeInsets.all(0),

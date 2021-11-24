@@ -1,3 +1,4 @@
+import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -16,11 +17,13 @@ class NavDrawerListTile extends StatelessWidget {
       onTap: onTap,
       leading: Icon(
         icon,
-        color: Colors.white,
+        color: ThemeProvider.theme.textTheme.bodyText1?.color,
       ),
       title: Text(
         title,
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
+        style: TextStyle(
+            color: ThemeProvider.theme.textTheme.bodyText1?.color,
+            fontWeight: FontWeight.w400),
       ),
     );
   }
