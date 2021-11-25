@@ -17,6 +17,7 @@ class ThemeProvider extends ChangeNotifier {
 class MyThemes {
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
+    shadowColor: Colors.white54,
     primaryColor: Color(0xff0E2537),
     primaryColorDark: Color(0xff39C481),
     primaryColorLight: Color(0xff305067),
@@ -35,6 +36,7 @@ class MyThemes {
     ),
   );
   static final lightTheme = ThemeData(
+    shadowColor: Colors.grey[800],
     brightness: Brightness.light,
     primaryColor: Colors.white,
     primaryColorDark: Color(0xff39C481),
