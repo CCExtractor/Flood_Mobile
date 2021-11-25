@@ -8,6 +8,11 @@ class ChangeThemeButtonWidget extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Switch.adaptive(
+      splashRadius: 2.0,
+      activeThumbImage: AssetImage(
+        'assets/images/moon.png',
+      ),
+      inactiveThumbImage: AssetImage('assets/images/sun.png'),
       value: themeProvider.isDarkMode,
       onChanged: (value) {
         final provider = Provider.of<ThemeProvider>(context, listen: false);
