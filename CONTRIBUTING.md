@@ -12,7 +12,7 @@ using the npm distribution
 ### Steps
 
 1. Install [qBitTorrent](https://www.qbittorrent.org/)
-2. In the preferences, set up the Web UI. You would have to set a new username nad password and with everything done,
+2. In the preferences, set up the Web UI. You would have to set a new username and password and with everything done,
    the qBitTorrent Web UI should be up and running in ```http://localhost:8080/```
 
 <img width="400" alt="Screenshot 2021-05-25 at 1 59 24 PM" src="https://user-images.githubusercontent.com/52864956/119465947-c9cc0300-bd61-11eb-97a4-7889aec00fe9.png">
