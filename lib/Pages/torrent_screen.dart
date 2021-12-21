@@ -3,11 +3,14 @@ import 'package:flood_mobile/Components/torrent_tile.dart';
 import 'package:flood_mobile/Constants/app_color.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_reveal/pull_to_reveal.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class TorrentScreen extends StatefulWidget {
   @override
@@ -52,49 +55,62 @@ class _TorrentScreenState extends State<TorrentScreen> {
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                      right: wp * 0.15,
                                       left: wp * 0.15,
+                                      right: wp * 0.15,
                                       top: hp * 0.01,
                                       bottom: hp * 0.02),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.arrow_upward_rounded,
-                                            color: AppColor.greenAccentColor,
-                                            size: 25,
-                                          ),
-                                          Text(
-                                            model.upSpeed,
-                                            style: TextStyle(
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.arrow_upward_rounded,
                                               color: AppColor.greenAccentColor,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
+                                              size: 25,
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.arrow_downward_rounded,
-                                            color: AppColor.blueAccentColor,
-                                            size: 25,
-                                          ),
-                                          Text(
-                                            model.downSpeed,
-                                            style: TextStyle(
+                                            SizedBox(
+                                              width: 80,
+                                              child: AutoSizeText(
+                                                model.upSpeed,
+                                                style: TextStyle(
+                                                  color:
+                                                      AppColor.greenAccentColor,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                                maxLines: 1,
+                                                textAlign: TextAlign.start,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.arrow_downward_rounded,
                                               color: AppColor.blueAccentColor,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
+                                              size: 25,
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                            SizedBox(
+                                              width: 80,
+                                              child: AutoSizeText(
+                                                model.downSpeed,
+                                                style: TextStyle(
+                                                  color:
+                                                      AppColor.blueAccentColor,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                                maxLines: 1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

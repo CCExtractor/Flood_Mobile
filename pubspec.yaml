@@ -59,6 +59,7 @@ dependencies:
   permission_handler: ^8.1.4+2
   flutter_client_sse: ^0.1.0
   url_launcher: ^6.0.12
+  auto_size_text: ^3.0.0
     #    git:
     #      url: https://github.com/pratikbaid3/flutter_client_sse
     #      path:
