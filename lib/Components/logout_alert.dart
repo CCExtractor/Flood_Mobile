@@ -49,8 +49,6 @@ class LogOutAlert extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        // Space in between Buttons
-        SizedBox(width: 5),
         // No - TextButton
         TextButton(
           style: ButtonStyle(
