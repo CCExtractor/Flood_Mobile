@@ -12,7 +12,7 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
               .length ==
           0)
       ? Container(
-          color: ThemeProvider.theme.primaryColorLight,
+          color: ThemeProvider.theme.primaryColor,
           width: 300,
           child: Text(
             'No notifications to display',
@@ -22,7 +22,7 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
           ),
         )
       : Container(
-          color: ThemeProvider.theme.backgroundColor,
+          color: ThemeProvider.theme.primaryColor,
           width: 300.0, // Change as per your requirement
           child: ListView.builder(
             shrinkWrap: true,

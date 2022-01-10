@@ -222,7 +222,10 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.storage),
+                            Icon(
+                              Icons.storage,
+                              color: Colors.white,
+                            ),
                             SizedBox(
                               width: 12,
                             ),
@@ -230,8 +233,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                               child: Text(
                                 widget.arguments.directory,
                                 style: GoogleFonts.notoSans(
-                                  color: ThemeProvider
-                                      .theme.textTheme.bodyText1?.color,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                 ),

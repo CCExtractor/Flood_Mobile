@@ -44,7 +44,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ThemeProvider.theme.primaryColorLight,
+      color: ThemeProvider.theme.primaryColor,
       padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
       child: Form(
         key: _formKey,
@@ -269,6 +269,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
+                  elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14.0),
                   ),
@@ -278,9 +279,9 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                   child: Text(
                     "Add Torrent",
                     style: TextStyle(
-                        color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                        color: Colors.white,
                         fontSize: 16,
-                        fontWeight: FontWeight.w900),
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
