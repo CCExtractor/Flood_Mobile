@@ -58,7 +58,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                       bottom: hp * 0.02),
                                   child: Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Row(
                                         children: [
