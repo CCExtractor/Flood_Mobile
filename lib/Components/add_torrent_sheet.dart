@@ -44,7 +44,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ThemeProvider.theme.primaryColor,
+      color: ThemeProvider.theme.primaryColorLight,
       padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
       child: Form(
         key: _formKey,
