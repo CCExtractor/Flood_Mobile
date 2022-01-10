@@ -127,7 +127,7 @@ class _TorrentTileState extends State<TorrentTile> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              subtitle: Padding(
+              subtitle: Container(
                 padding: EdgeInsets.symmetric(vertical: 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

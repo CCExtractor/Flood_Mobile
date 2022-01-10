@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
@@ -49,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return KeyboardDismissOnTap(
       child: SimpleHiddenDrawer(
         withShadow: true,
-        slidePercent: wp > 600 ? wp * 0.025 : wp * 0.13,
+        slidePercent: 80,
         contentCornerRadius: 40,
         menu: Menu(),
         screenSelectedBuilder: (position, controller) {
@@ -92,6 +93,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 elevation: 0,
                 actions: [
                   ChangeThemeButtonWidget(),
+                  Badge(
+                    badgeColor: Theme.of(context).accentColor,
+                    badgeContent: Center(
+                      child: Text(
+                        homeModel.unreadNotifications.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    position: BadgePosition(top: 0, end: 3),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.notifications,
+                      ),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              elevation: 0,
+                              backgroundColor: Theme.of(context).primaryColor,
+                              content: notificationPopupDialogueContainer(
+                                context: context,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
               body: screenCurrent,
@@ -212,21 +242,6 @@ class _MenuState extends State<Menu> {
                   controller.toggle();
                 },
                 title: 'About'),
-            NavDrawerListTile(
-              icon: Icons.notifications,
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        backgroundColor: ThemeProvider.theme.primaryColorLight,
-                        content: notificationPopupDialogueContainer(
-                            context: context),
-                      );
-                    });
-              },
-              title: 'Notifications',
-            ),
           ],
         ),
       ),

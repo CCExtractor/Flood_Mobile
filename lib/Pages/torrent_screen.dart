@@ -138,6 +138,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                       ),
               ),
               floatingActionButton: FloatingActionButton(
+                elevation: 0,
                 onPressed: () {
                   showModalBottomSheet(
                     shape: RoundedRectangleBorder(
@@ -156,10 +157,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                   );
                 },
                 backgroundColor: ThemeProvider.theme.primaryColorDark,
-                child: Icon(
-                  Icons.add,
-                  color: ThemeProvider.theme.textTheme.bodyText1?.color,
-                ),
+                child: Icon(Icons.add, color: Colors.white),
               ),
             ),
           );

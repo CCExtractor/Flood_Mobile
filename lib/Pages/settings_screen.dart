@@ -145,6 +145,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       return KeyboardDismissOnTap(
         child: Scaffold(
           floatingActionButton: FloatingActionButton.extended(
+            elevation: 0,
             backgroundColor: ThemeProvider.theme.primaryColorDark,
             onPressed: () {
               ClientSettingsModel newClientSettingsModel = new ClientSettingsModel(
@@ -196,12 +197,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
             icon: Icon(
               Icons.save,
-              color: ThemeProvider.theme.textTheme.bodyText1?.color,
+              color: Colors.white,
             ),
             label: Text(
               "Save",
               style: TextStyle(
-                  color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                  color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w600),
             ),
@@ -762,8 +763,7 @@ class AuthenticationSection extends StatelessWidget {
                         child: Text(
                           "Add",
                           style: TextStyle(
-                              color: ThemeProvider
-                                  .theme.textTheme.bodyText1?.color,
+                              color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.w600),
                         ),

@@ -7,17 +7,25 @@ class ChangeThemeButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
-    return Switch.adaptive(
-      splashRadius: 2.0,
-      activeThumbImage: AssetImage(
-        'assets/images/moon.png',
-      ),
-      inactiveThumbImage: AssetImage('assets/images/sun.png'),
-      value: themeProvider.isDarkMode,
-      onChanged: (value) {
-        final provider = Provider.of<ThemeProvider>(context, listen: false);
-        provider.toggleTheme(value);
+    return IconButton(
+      onPressed: () {
+        themeProvider.toggleTheme();
       },
+      icon: Icon(themeProvider.isDarkMode
+          ? Icons.wb_sunny_rounded
+          : Icons.mode_night_rounded),
     );
+    //   Switch.adaptive(
+    //   splashRadius: 2.0,
+    //   activeThumbImage: AssetImage(
+    //     'assets/images/moon.png',
+    //   ),
+    //   inactiveThumbImage: AssetImage('assets/images/sun.png'),
+    //   value: themeProvider.isDarkMode,
+    //   onChanged: (value) {
+    //     final provider = Provider.of<ThemeProvider>(context, listen: false);
+    //     provider.toggleTheme(value);
+    //   },
+    // );
   }
 }

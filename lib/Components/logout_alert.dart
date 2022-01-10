@@ -11,6 +11,7 @@ class LogOutAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     final hp = MediaQuery.of(context).size.height;
     return AlertDialog(
+      elevation: 0,
       backgroundColor: ThemeProvider.theme.primaryColorLight,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
@@ -29,12 +30,36 @@ class LogOutAlert extends StatelessWidget {
       ),
       actionsPadding: EdgeInsets.all(5),
       actions: [
+        // No - TextButton
+        TextButton(
+          style: ButtonStyle(
+            minimumSize: MaterialStateProperty.all<Size>(
+              Size(hp * .160, hp * .059),
+            ),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            backgroundColor: MaterialStateProperty.all(
+                ThemeProvider.theme.dialogBackgroundColor),
+          ),
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).pop();
+          },
+          child: Text(
+            'No',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
         // Yes - TextButton
         TextButton(
           style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(8),
               ),
             ),
             minimumSize: MaterialStateProperty.all<Size>(
@@ -47,32 +72,8 @@ class LogOutAlert extends StatelessWidget {
           child: Text(
             'Yes',
             style: TextStyle(
-                color: ThemeProvider.theme.textTheme.bodyText1?.color),
-          ),
-        ),
-        // Space in between Buttons
-        SizedBox(width: 5),
-        // No - TextButton
-        TextButton(
-          style: ButtonStyle(
-            minimumSize: MaterialStateProperty.all<Size>(
-              Size(hp * .160, hp * .059),
+              color: Colors.white,
             ),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            backgroundColor: MaterialStateProperty.all(
-                ThemeProvider.theme.dialogBackgroundColor),
-          ),
-          onPressed: () {
-            Navigator.of(context, rootNavigator: true).pop();
-          },
-          child: Text(
-            'No',
-            style: TextStyle(
-                color: ThemeProvider.theme.textTheme.bodyText1?.color),
           ),
         ),
       ],

@@ -8,8 +8,12 @@ class ThemeProvider extends ChangeNotifier {
   static ThemeData get theme =>
       themeMode == ThemeMode.dark ? MyThemes.darkTheme : MyThemes.lightTheme;
 
-  void toggleTheme(bool isOn) {
-    themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
+  void toggleTheme() {
+    if (themeMode == ThemeMode.dark) {
+      themeMode = ThemeMode.light;
+    } else {
+      themeMode = ThemeMode.dark;
+    }
     notifyListeners();
   }
 }
@@ -17,7 +21,6 @@ class ThemeProvider extends ChangeNotifier {
 class MyThemes {
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
-    shadowColor: Colors.white54,
     primaryColor: Color(0xff0E2537),
     primaryColorDark: Color(0xff39C481),
     primaryColorLight: Color(0xff305067),
@@ -36,14 +39,13 @@ class MyThemes {
     ),
   );
   static final lightTheme = ThemeData(
-    shadowColor: Colors.grey[800],
     brightness: Brightness.light,
     primaryColor: Colors.white,
     primaryColorDark: Color(0xff39C481),
     backgroundColor: Color(0xff293341),
     accentColor: Color(0xff399CF4),
     canvasColor: Colors.transparent,
-    primaryColorLight: Colors.grey[300],
+    primaryColorLight: Colors.grey[100],
     dialogBackgroundColor: Color(0xff399CF4),
     textTheme: TextTheme().apply(
       displayColor: Color(0xff293341),
