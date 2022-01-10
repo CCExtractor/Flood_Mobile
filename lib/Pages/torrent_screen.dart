@@ -1,6 +1,6 @@
 import 'package:flood_mobile/Components/add_torrent_sheet.dart';
 import 'package:flood_mobile/Components/torrent_tile.dart';
-import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
               body: Container(
                 height: double.infinity,
                 width: double.infinity,
-                color: AppColor.primaryColor,
+                color: ThemeProvider.theme.primaryColor,
                 child: (model.torrentList.length != 0)
                     ? PullToRevealTopItemList(
                         itemCount: model.torrentList.length,
@@ -64,13 +64,15 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                         children: [
                                           Icon(
                                             Icons.arrow_upward_rounded,
-                                            color: AppColor.greenAccentColor,
+                                            color: ThemeProvider
+                                                .theme.primaryColorDark,
                                             size: 25,
                                           ),
                                           Text(
                                             model.upSpeed,
                                             style: TextStyle(
-                                              color: AppColor.greenAccentColor,
+                                              color: ThemeProvider
+                                                  .theme.primaryColorDark,
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -81,13 +83,15 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                         children: [
                                           Icon(
                                             Icons.arrow_downward_rounded,
-                                            color: AppColor.blueAccentColor,
+                                            color:
+                                                ThemeProvider.theme.accentColor,
                                             size: 25,
                                           ),
                                           Text(
                                             model.downSpeed,
                                             style: TextStyle(
-                                              color: AppColor.blueAccentColor,
+                                              color: ThemeProvider
+                                                  .theme.accentColor,
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -144,17 +148,17 @@ class _TorrentScreenState extends State<TorrentScreen> {
                     ),
                     isScrollControlled: true,
                     context: context,
-                    backgroundColor: AppColor.secondaryColor,
+                    backgroundColor: ThemeProvider.theme.backgroundColor,
                     builder: (context) {
                       return AddTorrentSheet(
                           clientSettings: clientModel.clientSettings);
                     },
                   );
                 },
-                backgroundColor: AppColor.greenAccentColor,
+                backgroundColor: ThemeProvider.theme.primaryColorDark,
                 child: Icon(
                   Icons.add,
-                  color: Colors.white,
+                  color: ThemeProvider.theme.textTheme.bodyText1?.color,
                 ),
               ),
             ),

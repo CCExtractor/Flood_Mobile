@@ -1,4 +1,4 @@
-import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class LogOutAlert extends StatelessWidget {
@@ -11,7 +11,7 @@ class LogOutAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     final hp = MediaQuery.of(context).size.height;
     return AlertDialog(
-      backgroundColor: AppColor.secondaryColor,
+      backgroundColor: ThemeProvider.theme.primaryColorLight,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(12),
@@ -22,7 +22,7 @@ class LogOutAlert extends StatelessWidget {
         'Are you sure you want to\n Log out ?',
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: Colors.white,
+          color: ThemeProvider.theme.textTheme.bodyText1?.color,
           fontWeight: FontWeight.bold,
           fontSize: 20,
         ),
@@ -41,12 +41,13 @@ class LogOutAlert extends StatelessWidget {
               Size(hp * .160, hp * .059),
             ),
             backgroundColor:
-                MaterialStateProperty.all(AppColor.greenAccentColor),
+                MaterialStateProperty.all(ThemeProvider.theme.primaryColorDark),
           ),
           onPressed: logoutOnClick,
           child: Text(
             'Yes',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+                color: ThemeProvider.theme.textTheme.bodyText1?.color),
           ),
         ),
         // Space in between Buttons
@@ -62,15 +63,16 @@ class LogOutAlert extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            backgroundColor:
-                MaterialStateProperty.all(AppColor.greyAccentColor),
+            backgroundColor: MaterialStateProperty.all(
+                ThemeProvider.theme.dialogBackgroundColor),
           ),
           onPressed: () {
             Navigator.of(context, rootNavigator: true).pop();
           },
           child: Text(
             'No',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+                color: ThemeProvider.theme.textTheme.bodyText1?.color),
           ),
         ),
       ],

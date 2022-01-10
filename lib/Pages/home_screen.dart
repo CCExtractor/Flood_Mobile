@@ -1,10 +1,9 @@
-import 'package:badges/badges.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
-import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Pages/about_screen.dart';
 import 'package:flood_mobile/Pages/settings_screen.dart';
 import 'package:flood_mobile/Pages/torrent_screen.dart';
@@ -21,6 +20,7 @@ import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dar
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flood_mobile/Components/change_theme_button_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 leading: IconButton(
                   icon: Icon(
                     Icons.menu,
-                    color: Colors.white,
+                    color: ThemeProvider.theme.textTheme.bodyText1?.color,
                   ),
                   onPressed: () {
                     controller.toggle();
@@ -88,36 +88,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 60,
                 ),
                 centerTitle: true,
-                backgroundColor: AppColor.primaryColor,
+                backgroundColor: Theme.of(context).primaryColor,
                 elevation: 0,
                 actions: [
-                  Badge(
-                    badgeColor: AppColor.blueAccentColor,
-                    badgeContent: Center(
-                      child: Text(
-                        homeModel.unreadNotifications.toString(),
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    position: BadgePosition(top: 0, end: 3),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.notifications,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                backgroundColor: AppColor.secondaryColor,
-                                content: notificationPopupDialogueContainer(
-                                    context: context),
-                              );
-                            });
-                      },
-                    ),
-                  ),
+                  ChangeThemeButtonWidget(),
                 ],
               ),
               body: screenCurrent,
@@ -153,7 +127,7 @@ class _MenuState extends State<Menu> {
     double hp = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
-        color: AppColor.secondaryColor,
+        color: ThemeProvider.theme.backgroundColor,
         width: double.maxFinite,
         height: double.maxFinite,
         padding: const EdgeInsets.only(top: 30.0, left: 5),
@@ -238,6 +212,21 @@ class _MenuState extends State<Menu> {
                   controller.toggle();
                 },
                 title: 'About'),
+            NavDrawerListTile(
+              icon: Icons.notifications,
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        backgroundColor: ThemeProvider.theme.primaryColorLight,
+                        content: notificationPopupDialogueContainer(
+                            context: context),
+                      );
+                    });
+              },
+              title: 'Notifications',
+            ),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class SText extends StatelessWidget {
@@ -10,7 +11,9 @@ class SText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-          fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
+          fontSize: 18,
+          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+          fontWeight: FontWeight.w500),
     );
   }
 }
