@@ -1,5 +1,5 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
-import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/torrent_content_model.dart';
 import 'package:flood_mobile/Provider/torrent_content_provider.dart';
 import 'package:flood_mobile/Route/Arguments/video_stream_screen_arguments.dart';
@@ -60,8 +60,8 @@ class _FolderFileListViewState extends State<FolderFileListView> {
                       },
                       child: ExpansionTileCard(
                         elevation: 0,
-                        expandedColor: AppColor.primaryColor,
-                        baseColor: AppColor.primaryColor,
+                        expandedColor: ThemeProvider.theme.primaryColor,
+                        baseColor: ThemeProvider.theme.primaryColor,
                         leading: Icon(
                           Icons.folder_rounded,
                         ),
@@ -83,7 +83,7 @@ class _FolderFileListViewState extends State<FolderFileListView> {
                     ),
                   )
             : SpinKitFadingCircle(
-                color: AppColor.greenAccentColor,
+                color: ThemeProvider.theme.primaryColorDark,
               );
       },
     );
@@ -150,7 +150,9 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
               ),
               Text(
                 filesize(widget.model.sizeBytes),
-                style: TextStyle(color: AppColor.textColor, fontSize: 12),
+                style: TextStyle(
+                    color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                    fontSize: 12),
               ),
             ],
           ),
@@ -161,11 +163,12 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
                   padding: EdgeInsets.all(0),
                   lineHeight: 5.0,
                   percent: widget.model.percentComplete.roundToDouble() / 100,
-                  backgroundColor: AppColor.blueAccentColor.withAlpha(80),
+                  backgroundColor:
+                      ThemeProvider.theme.accentColor.withAlpha(80),
                   progressColor:
                       (widget.model.percentComplete.toStringAsFixed(1) ==
                               '100.0')
-                          ? AppColor.greenAccentColor
+                          ? ThemeProvider.theme.primaryColorDark
                           : Colors.blue,
                 ),
               ),
@@ -182,7 +185,7 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
                   : Icons.insert_drive_file_outlined)
               : Checkbox(
                   value: isSelected,
-                  activeColor: AppColor.greenAccentColor,
+                  activeColor: ThemeProvider.theme.primaryColorDark,
                   onChanged: (bool? value) {
                     setState(() {
                       isSelected = value ?? false;

@@ -1,5 +1,5 @@
 import 'package:flood_mobile/Api/notifications_api.dart';
-import 'package:flood_mobile/Constants/app_color.dart';
+import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/notification_model.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
@@ -12,17 +12,17 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
               .length ==
           0)
       ? Container(
-          color: AppColor.secondaryColor,
+          color: ThemeProvider.theme.primaryColor,
           width: 300,
           child: Text(
             'No notifications to display',
             style: TextStyle(
-              color: AppColor.textColor,
+              color: ThemeProvider.theme.textTheme.bodyText1?.color,
             ),
           ),
         )
       : Container(
-          color: AppColor.secondaryColor,
+          color: ThemeProvider.theme.primaryColor,
           width: 300.0, // Change as per your requirement
           child: ListView.builder(
             shrinkWrap: true,
@@ -94,7 +94,7 @@ class NotificationListTile extends StatelessWidget {
             textAlign: TextAlign.left,
             style: TextStyle(
                 fontSize: 16,
-                color: AppColor.blueAccentColor,
+                color: ThemeProvider.theme.accentColor,
                 fontWeight: FontWeight.bold),
           ),
           SizedBox(
@@ -113,7 +113,7 @@ class NotificationListTile extends StatelessWidget {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: 14,
-              color: Colors.white,
+              color: ThemeProvider.theme.textTheme.bodyText1?.color,
             ),
           ),
         ],
