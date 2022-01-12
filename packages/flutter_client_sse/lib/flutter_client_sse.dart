@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 part 'sse_event_model.dart';
 
 class SSEClient {
-  static http.Client _client;
+  static http.Client _client=http.Client();
   static Stream<SSEModel> subscribeToSSE(String url, String token) {
     //Regex to be used
     var lineRegex = RegExp(r'^([^:]*)(?::)?(?: )?(.*)?$');
@@ -57,7 +57,7 @@ class SSEClient {
                   break;
                 case 'data':
                   currentSSEModel.data =
-                      (currentSSEModel.data ?? '') + value + '\n';
+                      (currentSSEModel.data) + value + '\n';
                   break;
                 case 'id':
                   currentSSEModel.id = value;
