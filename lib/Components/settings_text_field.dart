@@ -39,7 +39,7 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
             color: ThemeProvider.theme.textTheme.bodyText1?.color,
           ),
           keyboardType:
-              (!widget.isText) ? TextInputType.text : TextInputType.number,
+              (widget.isText) ? TextInputType.text : TextInputType.number,
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             filled: true,
