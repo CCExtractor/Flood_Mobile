@@ -84,14 +84,14 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                           Icon(
                                             Icons.arrow_downward_rounded,
                                             color:
-                                                ThemeProvider.theme.accentColor,
+                                                ThemeProvider.theme.colorScheme.secondary,
                                             size: 25,
                                           ),
                                           Text(
                                             model.downSpeed,
                                             style: TextStyle(
                                               color: ThemeProvider
-                                                  .theme.accentColor,
+                                                  .theme.colorScheme.secondary,
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                             ),

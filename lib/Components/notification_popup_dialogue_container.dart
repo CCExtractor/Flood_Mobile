@@ -94,7 +94,7 @@ class NotificationListTile extends StatelessWidget {
             textAlign: TextAlign.left,
             style: TextStyle(
                 fontSize: 16,
-                color: ThemeProvider.theme.accentColor,
+                color: ThemeProvider.theme.colorScheme.secondary,
                 fontWeight: FontWeight.bold),
           ),
           SizedBox(

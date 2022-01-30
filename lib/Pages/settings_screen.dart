@@ -475,7 +475,7 @@ class SpeedLimitSection extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        primary: ThemeProvider.theme.accentColor,
+                        primary: ThemeProvider.theme.colorScheme.secondary,
                       ),
                       child: Center(
                         child: Text(
@@ -757,7 +757,7 @@ class AuthenticationSection extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        primary: ThemeProvider.theme.accentColor,
+                        primary: ThemeProvider.theme.colorScheme.secondary,
                       ),
                       child: Center(
                         child: Text(

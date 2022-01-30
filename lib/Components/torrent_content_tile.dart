@@ -164,7 +164,7 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
                   lineHeight: 5.0,
                   percent: widget.model.percentComplete.roundToDouble() / 100,
                   backgroundColor:
-                      ThemeProvider.theme.accentColor.withAlpha(80),
+                      ThemeProvider.theme.colorScheme.secondary.withAlpha(80),
                   progressColor:
                       (widget.model.percentComplete.toStringAsFixed(1) ==
                               '100.0')
