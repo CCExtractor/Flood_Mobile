@@ -152,7 +152,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   dht: clientSettingsModel.clientSettings.dht,
                   dhtPort: clientSettingsModel.clientSettings.dhtPort,
                   directoryDefault:
-                      clientSettingsModel.clientSettings.directoryDefault,
+                      defaultDownloadDirectoryController.text,
                   networkHttpMaxOpen:
                       clientSettingsModel.clientSettings.networkHttpMaxOpen,
                   networkLocalAddress:
