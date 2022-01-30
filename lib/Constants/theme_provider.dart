@@ -24,6 +24,7 @@ class MyThemes {
     primaryColor: Color(0xff0E2537),
     primaryColorDark: Color(0xff39C481),
     primaryColorLight: Color(0xff305067),
+    // ignore: deprecated_member_use
     accentColor: Color(0xff399CF4),
     backgroundColor: Color(0xff305067),
     textTheme: TextTheme().apply(
@@ -43,6 +44,7 @@ class MyThemes {
     primaryColor: Colors.white,
     primaryColorDark: Color(0xff39C481),
     backgroundColor: Color(0xff293341),
+    // ignore: deprecated_member_use
     accentColor: Color(0xff399CF4),
     canvasColor: Colors.transparent,
     primaryColorLight: Colors.grey[100],

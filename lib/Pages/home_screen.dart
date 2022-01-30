@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 actions: [
                   ChangeThemeButtonWidget(),
                   Badge(
-                    badgeColor: Theme.of(context).accentColor,
+                    badgeColor: Theme.of(context).colorScheme.secondary,
                     badgeContent: Center(
                       child: Text(
                         homeModel.unreadNotifications.toString(),
