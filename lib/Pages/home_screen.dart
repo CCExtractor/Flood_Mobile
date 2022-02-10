@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
+import 'package:flood_mobile/Components/change_theme_button_widget.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
@@ -21,7 +22,6 @@ import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dar
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flood_mobile/Components/change_theme_button_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -156,95 +156,103 @@ class _MenuState extends State<Menu> {
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Container(
-        color: ThemeProvider.theme.backgroundColor,
-        width: double.maxFinite,
-        height: double.maxFinite,
-        padding: const EdgeInsets.only(top: 30.0, left: 5),
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+      body: GestureDetector(
+          onPanUpdate: (details) {
+            // Swiping in left direction.
+            if (details.delta.dx < 0) {
+              SimpleHiddenDrawerController.of(context).close();
+            }
+          },
+          child: Container(
+            color: ThemeProvider.theme.backgroundColor,
+            width: double.maxFinite,
+            height: double.maxFinite,
+            padding: const EdgeInsets.only(top: 30.0, left: 5),
+            child: ListView(
+              shrinkWrap: true,
               children: [
-                Image(
-                  width: 80,
-                  height: 80,
-                  image: AssetImage(
-                    'assets/images/icon.png',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image(
+                      width: 80,
+                      height: 80,
+                      image: AssetImage(
+                        'assets/images/icon.png',
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 18.0, top: 20, bottom: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SvgPicture.network(
+                        'https://img.shields.io/github/v/release/CCExtractor/Flood_Mobile?include_prereleases',
+                      ),
+                    ],
                   ),
                 ),
+                SizedBox(
+                  height: hp * 0.01,
+                ),
+                NavDrawerListTile(
+                    icon: Icons.dashboard,
+                    onTap: () {
+                      controller.position = 0;
+                      controller.toggle();
+                    },
+                    title: 'Torrents'),
+                NavDrawerListTile(
+                    icon: Icons.settings,
+                    onTap: () {
+                      controller.position = 2;
+                      controller.toggle();
+                    },
+                    title: 'Settings'),
+                NavDrawerListTile(
+                  icon: Icons.exit_to_app,
+                  onTap: () async {
+                    showDialog(
+                      context: context,
+                      builder: (context) => LogOutAlert(
+                        logoutOnClick: () async {
+                          controller.toggle();
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.setString('floodToken', '');
+                          Provider.of<UserDetailProvider>(context,
+                                  listen: false)
+                              .setToken('');
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              Routes.loginScreenRoute,
+                              (Route<dynamic> route) => false);
+                        },
+                      ),
+                    );
+                  },
+                  title: 'Logout',
+                ),
+                NavDrawerListTile(
+                    icon: FontAwesomeIcons.github,
+                    onTap: () {
+                      controller.toggle();
+                      launch(
+                        'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
+                      );
+                    },
+                    title: 'GitHub'),
+                NavDrawerListTile(
+                    icon: Icons.info,
+                    onTap: () {
+                      controller.position = 5;
+                      controller.toggle();
+                    },
+                    title: 'About'),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 18.0, top: 20, bottom: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SvgPicture.network(
-                    'https://img.shields.io/github/v/release/CCExtractor/Flood_Mobile?include_prereleases',
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: hp * 0.01,
-            ),
-            NavDrawerListTile(
-                icon: Icons.dashboard,
-                onTap: () {
-                  controller.position = 0;
-                  controller.toggle();
-                },
-                title: 'Torrents'),
-            NavDrawerListTile(
-                icon: Icons.settings,
-                onTap: () {
-                  controller.position = 2;
-                  controller.toggle();
-                },
-                title: 'Settings'),
-            NavDrawerListTile(
-              icon: Icons.exit_to_app,
-              onTap: () async {
-                showDialog(
-                  context: context,
-                  builder: (context) => LogOutAlert(
-                    logoutOnClick: () async {
-                      controller.toggle();
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      prefs.setString('floodToken', '');
-                      Provider.of<UserDetailProvider>(context, listen: false)
-                          .setToken('');
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          Routes.loginScreenRoute,
-                          (Route<dynamic> route) => false);
-                    },
-                  ),
-                );
-              },
-              title: 'Logout',
-            ),
-            NavDrawerListTile(
-                icon: FontAwesomeIcons.github,
-                onTap: () {
-                  controller.toggle();
-                  launch(
-                    'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
-                  );
-                },
-                title: 'GitHub'),
-            NavDrawerListTile(
-                icon: Icons.info,
-                onTap: () {
-                  controller.position = 5;
-                  controller.toggle();
-                },
-                title: 'About'),
-          ],
-        ),
-      ),
+          )),
     );
   }
 }
