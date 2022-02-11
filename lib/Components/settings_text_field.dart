@@ -29,7 +29,7 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
         Text(
           widget.labelText,
           style: TextStyle(
-            color: ThemeProvider.theme.shadowColor,
+            color: ThemeProvider.theme.unselectedWidgetColor,
           ),
         ),
         SizedBox(height: 5),
