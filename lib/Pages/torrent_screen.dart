@@ -1,4 +1,5 @@
 import 'package:flood_mobile/Components/add_torrent_sheet.dart';
+import 'package:flood_mobile/Components/filter_by_status.dart';
 import 'package:flood_mobile/Components/torrent_tile.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
@@ -13,6 +14,8 @@ class TorrentScreen extends StatefulWidget {
   @override
   _TorrentScreenState createState() => _TorrentScreenState();
 }
+
+List<String> trackerURIsList = [];
 
 class _TorrentScreenState extends State<TorrentScreen> {
   String keyword = '';
@@ -35,10 +38,27 @@ class _TorrentScreenState extends State<TorrentScreen> {
                     ? PullToRevealTopItemList(
                         itemCount: model.torrentList.length,
                         itemBuilder: (BuildContext context, int index) {
+                          trackerURIsList =
+                              model.torrentList[index].trackerURIs;
                           if (model.torrentList[index].name
-                              .toLowerCase()
-                              .contains(keyword.toLowerCase())) {
-                            return TorrentTile(model: model.torrentList[index]);
+                                      .toLowerCase()
+                                      .contains(keyword.toLowerCase()) &&
+                                  model.torrentList[index].status.contains(
+                                      filterStatus
+                                          .toString()
+                                          .split(".")
+                                          .last) ||
+                              model.torrentList[index].trackerURIs
+                                  .toString()
+                                  .contains(trackerURISelected) ||
+                              filterStatus.toString().split(".").last ==
+                                  "all") {
+                            if (model.torrentList[index].name
+                                .toLowerCase()
+                                .contains(keyword.toLowerCase())) {
+                              return TorrentTile(
+                                  model: model.torrentList[index]);
+                            }
                           }
                           return Container();
                         },
@@ -118,6 +138,42 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                       contentPadding: EdgeInsets.symmetric(
                                           horizontal: 20, vertical: 20),
                                       hintText: 'Search Torrent',
+                                      suffixIcon: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.green,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: IconButton(
+                                            icon: Icon(
+                                              Icons.filter_list_alt,
+                                              color: Colors.white,
+                                            ),
+                                            onPressed: () {
+                                              showModalBottomSheet(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(15),
+                                                    topLeft:
+                                                        Radius.circular(15),
+                                                  ),
+                                                ),
+                                                isScrollControlled: true,
+                                                context: context,
+                                                backgroundColor: ThemeProvider
+                                                    .theme.backgroundColor,
+                                                builder: (context) {
+                                                  return FilterByStatus();
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
