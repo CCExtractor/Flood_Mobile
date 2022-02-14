@@ -122,6 +122,80 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                   ),
                                 ),
                               ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    right: wp * 0.05,
+                                    left: wp * 0.05,
+                                    top: 0,
+                                    bottom: 0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Filter type:',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: ThemeProvider.theme.accentColor,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      trackerURISelected == 'all' ||
+                                              trackerURISelected == 'null' ||
+                                              trackerURISelected == ''
+                                          ? 'Filter by status'
+                                          : 'Filter by trackers',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: ThemeProvider
+                                            .theme.primaryColorDark,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    right: wp * 0.05,
+                                    left: wp * 0.05,
+                                    top: hp * 0.005,
+                                    bottom: hp * 0.02),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Filter selected:',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: ThemeProvider.theme.accentColor,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      trackerURISelected == 'all' ||
+                                              trackerURISelected == 'null' ||
+                                              trackerURISelected == ''
+                                          ? '${filterStatus.toString().split(".").last}'
+                                          : '$trackerURISelected',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: ThemeProvider
+                                            .theme.primaryColorDark,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               Expanded(
                                 child: Container(
                                   height: 100,
@@ -136,7 +210,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                     decoration: InputDecoration(
                                       isDense: true,
                                       contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 20),
+                                          horizontal: 15, vertical: 15),
                                       hintText: 'Search Torrent',
                                       suffixIcon: Padding(
                                         padding: const EdgeInsets.all(5.0),
