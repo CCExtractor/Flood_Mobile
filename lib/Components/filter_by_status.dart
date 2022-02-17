@@ -48,6 +48,12 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     fontSize: 24,
                     fontWeight: FontWeight.bold)),
             ListTile(
+              leading: Icon(
+                Icons.star_sharp,
+                size: 20,
+              ),
+              minLeadingWidth: 2,
+              visualDensity: VisualDensity(horizontal: -4, vertical: -2),
               title: Text('All',
                   style: TextStyle(
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,
@@ -66,6 +72,12 @@ class _FilterByStatusState extends State<FilterByStatus> {
               ),
             ),
             ListTile(
+              leading: Icon(
+                Icons.download,
+                size: 20,
+              ),
+              minLeadingWidth: 2,
+              visualDensity: VisualDensity(horizontal: -4, vertical: -2),
               title: Text('Downloading',
                   style: TextStyle(
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,
@@ -84,6 +96,12 @@ class _FilterByStatusState extends State<FilterByStatus> {
               ),
             ),
             ListTile(
+              leading: Icon(
+                Icons.upload_sharp,
+                size: 20,
+              ),
+              minLeadingWidth: 2,
+              visualDensity: VisualDensity(horizontal: -4, vertical: -2),
               title: Text('Seeding',
                   style: TextStyle(
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,
@@ -102,6 +120,12 @@ class _FilterByStatusState extends State<FilterByStatus> {
               ),
             ),
             ListTile(
+              leading: Icon(
+                Icons.done,
+                size: 20,
+              ),
+              minLeadingWidth: 2,
+              visualDensity: VisualDensity(horizontal: -4, vertical: -2),
               title: Text('Complete',
                   style: TextStyle(
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,
@@ -120,6 +144,12 @@ class _FilterByStatusState extends State<FilterByStatus> {
               ),
             ),
             ListTile(
+              leading: Icon(
+                Icons.stop,
+                size: 20,
+              ),
+              minLeadingWidth: 2,
+              visualDensity: VisualDensity(horizontal: -4, vertical: -2),
               title: Text('Stopped',
                   style: TextStyle(
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,
@@ -138,6 +168,12 @@ class _FilterByStatusState extends State<FilterByStatus> {
               ),
             ),
             ListTile(
+              leading: Icon(
+                Icons.trending_up_outlined,
+                size: 20,
+              ),
+              minLeadingWidth: 2,
+              visualDensity: VisualDensity(horizontal: -4, vertical: -2),
               title: Text('Active',
                   style: TextStyle(
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,
@@ -156,6 +192,12 @@ class _FilterByStatusState extends State<FilterByStatus> {
               ),
             ),
             ListTile(
+              leading: Icon(
+                Icons.trending_down_outlined,
+                size: 20,
+              ),
+              minLeadingWidth: 2,
+              visualDensity: VisualDensity(horizontal: -4, vertical: -2),
               title: Text('Inactive',
                   style: TextStyle(
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,
@@ -182,6 +224,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     fontSize: 24,
                     fontWeight: FontWeight.bold)),
             ListTile(
+              minLeadingWidth: 2,
+              visualDensity: VisualDensity(horizontal: -4, vertical: -2),
               title: Text('All',
                   style: TextStyle(
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,
@@ -205,10 +249,12 @@ class _FilterByStatusState extends State<FilterByStatus> {
                 itemCount: trackerURIsList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
+                    minLeadingWidth: 2,
+                    visualDensity: VisualDensity(horizontal: -4, vertical: -2),
                     title: Text(trackerURIsList[index].toString(),
                         style: TextStyle(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                            ThemeProvider.theme.textTheme.bodyText1?.color,
                             fontFamily: 'Montserrat',
                             fontSize: 16,
                             fontWeight: FontWeight.normal)),
