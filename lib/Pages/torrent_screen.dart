@@ -122,80 +122,6 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    right: wp * 0.05,
-                                    left: wp * 0.05,
-                                    top: 0,
-                                    bottom: 0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Filter type:',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: ThemeProvider.theme.accentColor,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(width: 5),
-                                    Text(
-                                      trackerURISelected == 'all' ||
-                                              trackerURISelected == 'null' ||
-                                              trackerURISelected == ''
-                                          ? 'Filter by status'
-                                          : 'Filter by trackers',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: ThemeProvider
-                                            .theme.primaryColorDark,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    right: wp * 0.05,
-                                    left: wp * 0.05,
-                                    top: hp * 0.005,
-                                    bottom: hp * 0.02),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Filter selected:',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: ThemeProvider.theme.accentColor,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(width: 5),
-                                    Text(
-                                      trackerURISelected == 'all' ||
-                                              trackerURISelected == 'null' ||
-                                              trackerURISelected == ''
-                                          ? '${filterStatus.toString().split(".").last}'
-                                          : '$trackerURISelected',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: ThemeProvider
-                                            .theme.primaryColorDark,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                               Expanded(
                                 child: Container(
                                   height: 100,
@@ -210,42 +136,66 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                     decoration: InputDecoration(
                                       isDense: true,
                                       contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 15, vertical: 15),
+                                          horizontal: 20, vertical: 20),
                                       hintText: 'Search Torrent',
                                       suffixIcon: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: Colors.green,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
+                                        padding: const EdgeInsets.only(right: 5),
+                                        child: ActionChip(
+                                          padding: EdgeInsets.all(0),
+                                          avatar: ClipRRect(
+                                            borderRadius: BorderRadius.circular(4),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(0),
+                                                color: Colors.green,
+                                              ),
+                                              height: 50,
+                                              width: 50,
+                                              child: Icon(
+                                                Icons.filter_list_alt,
+                                                color: Colors.white,
+                                                size: 20,
+                                              ),
+                                            )
                                           ),
-                                          child: IconButton(
-                                            icon: Icon(
-                                              Icons.filter_list_alt,
-                                              color: Colors.white,
-                                            ),
-                                            onPressed: () {
-                                              showModalBottomSheet(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(15),
-                                                    topLeft:
-                                                        Radius.circular(15),
-                                                  ),
+                                          label: Text(trackerURISelected == 'all' ||
+                                              trackerURISelected == 'null' ||
+                                              trackerURISelected == ''
+                                              ? '${filterStatus.toString().split(".").last}'
+                                              : '$trackerURISelected',
+                                            style: TextStyle(
+                                              color: ThemeProvider
+                                                  .theme.primaryColorDark,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.normal,
+                                            ),),
+                                          onPressed: () {
+                                            showModalBottomSheet(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.only(
+                                                  topRight:
+                                                  Radius.circular(15),
+                                                  topLeft:
+                                                  Radius.circular(15),
                                                 ),
-                                                isScrollControlled: true,
-                                                context: context,
-                                                backgroundColor: ThemeProvider
-                                                    .theme.backgroundColor,
-                                                builder: (context) {
-                                                  return FilterByStatus();
-                                                },
-                                              );
-                                            },
-                                          ),
+                                              ),
+                                              isScrollControlled: true,
+                                              context: context,
+                                              backgroundColor: ThemeProvider
+                                                  .theme.backgroundColor,
+                                              builder: (context) {
+                                                return FilterByStatus();
+                                              },
+                                            );
+                                          },
+                                          backgroundColor: Colors.transparent,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(5),
+                                              side: BorderSide(
+                                                width: 1,
+                                                color: Colors.blueGrey,
+                                              )),
                                         ),
                                       ),
                                       border: OutlineInputBorder(
