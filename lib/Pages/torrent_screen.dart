@@ -3,6 +3,7 @@ import 'package:flood_mobile/Components/filter_by_status.dart';
 import 'package:flood_mobile/Components/torrent_tile.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
+import 'package:flood_mobile/Provider/filter_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -28,30 +29,35 @@ class _TorrentScreenState extends State<TorrentScreen> {
       builder: (context, model, child) {
         return Consumer<ClientSettingsProvider>(
             builder: (context, clientModel, child) {
-          return KeyboardDismissOnTap(
-            child: Scaffold(
-              body: Container(
-                height: double.infinity,
-                width: double.infinity,
-                color: ThemeProvider.theme.primaryColor,
-                child: (model.torrentList.length != 0)
-                    ? PullToRevealTopItemList(
+          return Consumer<FilterProvider>(
+              builder: (context, filterModel, child) {
+                return KeyboardDismissOnTap(
+                  child: Scaffold(
+                    body: Container(
+                      height: double.infinity,
+                      width: double.infinity,
+                      color: ThemeProvider.theme.primaryColor,
+                      child: (model.torrentList.length != 0)
+                          ? PullToRevealTopItemList(
                         itemCount: model.torrentList.length,
                         itemBuilder: (BuildContext context, int index) {
                           trackerURIsList =
                               model.torrentList[index].trackerURIs;
                           if (model.torrentList[index].name
-                                      .toLowerCase()
-                                      .contains(keyword.toLowerCase()) &&
-                                  model.torrentList[index].status.contains(
-                                      filterStatus
-                                          .toString()
-                                          .split(".")
-                                          .last) ||
+                              .toLowerCase()
+                              .contains(keyword.toLowerCase()) &&
+                              model.torrentList[index].status.contains(
+                                  filterModel.filterStatus
+                                      .toString()
+                                      .split(".")
+                                      .last) ||
                               model.torrentList[index].trackerURIs
                                   .toString()
-                                  .contains(trackerURISelected) ||
-                              filterStatus.toString().split(".").last ==
+                                  .contains(filterModel.trackerURISelected) ||
+                              filterModel.filterStatus
+                                  .toString()
+                                  .split(".")
+                                  .last ==
                                   "all") {
                             if (model.torrentList[index].name
                                 .toLowerCase()
@@ -78,7 +84,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                       bottom: hp * 0.02),
                                   child: Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
@@ -104,7 +110,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                           Icon(
                                             Icons.arrow_downward_rounded,
                                             color:
-                                                ThemeProvider.theme.accentColor,
+                                            ThemeProvider.theme.accentColor,
                                             size: 25,
                                           ),
                                           Text(
@@ -144,7 +150,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                           decoration: BoxDecoration(
                                             color: Colors.green,
                                             borderRadius:
-                                                BorderRadius.circular(5),
+                                            BorderRadius.circular(5),
                                           ),
                                           child: IconButton(
                                             icon: Icon(
@@ -155,11 +161,11 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                               showModalBottomSheet(
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.only(
+                                                  BorderRadius.only(
                                                     topRight:
-                                                        Radius.circular(15),
+                                                    Radius.circular(15),
                                                     topLeft:
-                                                        Radius.circular(15),
+                                                    Radius.circular(15),
                                                   ),
                                                 ),
                                                 isScrollControlled: true,
@@ -185,38 +191,39 @@ class _TorrentScreenState extends State<TorrentScreen> {
                           );
                         },
                       )
-                    : Center(
+                          : Center(
                         child: SvgPicture.asset(
                           'assets/images/empty_dark.svg',
                           width: 120,
                           height: 120,
                         ),
                       ),
-              ),
-              floatingActionButton: FloatingActionButton(
-                elevation: 0,
-                onPressed: () {
-                  showModalBottomSheet(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(15),
-                        topLeft: Radius.circular(15),
-                      ),
                     ),
-                    isScrollControlled: true,
-                    context: context,
-                    backgroundColor: ThemeProvider.theme.backgroundColor,
-                    builder: (context) {
-                      return AddTorrentSheet(
-                          clientSettings: clientModel.clientSettings);
-                    },
-                  );
-                },
-                backgroundColor: ThemeProvider.theme.primaryColorDark,
-                child: Icon(Icons.add, color: Colors.white),
-              ),
-            ),
-          );
+                    floatingActionButton: FloatingActionButton(
+                      elevation: 0,
+                      onPressed: () {
+                        showModalBottomSheet(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(15),
+                              topLeft: Radius.circular(15),
+                            ),
+                          ),
+                          isScrollControlled: true,
+                          context: context,
+                          backgroundColor: ThemeProvider.theme.backgroundColor,
+                          builder: (context) {
+                            return AddTorrentSheet(
+                                clientSettings: clientModel.clientSettings);
+                          },
+                        );
+                      },
+                      backgroundColor: ThemeProvider.theme.primaryColorDark,
+                      child: Icon(Icons.add, color: Colors.white),
+                    ),
+                  ),
+                );
+              });
         });
       },
     );
