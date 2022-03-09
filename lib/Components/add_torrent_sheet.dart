@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:clipboard/clipboard.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flood_mobile/Api/torrent_api.dart';
+import 'package:flood_mobile/Components/flood_snackbar.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flutter/material.dart';
@@ -267,6 +268,13 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                       Navigator.pop(context);
                     }
                   }
+                  final addTorrentSnackbar = addFloodSnackBar(
+                      SnackbarType.information,
+                      'Torrent added successfully',
+                      'Dismiss');
+
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(addTorrentSnackbar);
                 },
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
@@ -279,9 +287,10 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                   child: Text(
                     "Add Torrent",
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600),
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),

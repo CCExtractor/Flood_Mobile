@@ -1,6 +1,7 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Api/client_api.dart';
+import 'package:flood_mobile/Components/flood_snackbar.dart';
 import 'package:flood_mobile/Components/settings_text_field.dart';
 import 'package:flood_mobile/Components/text_size.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
@@ -194,6 +195,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   .then((value) {
                 setState(() {});
               });
+
+              final changeSettingsSnackBar = addFloodSnackBar(
+                  SnackbarType.success, 'Settings changed', 'Dismiss');
+
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(changeSettingsSnackBar);
             },
             icon: Icon(
               Icons.save,
@@ -735,23 +742,29 @@ class AuthenticationSection extends StatelessWidget {
                         AuthApi.registerUser(
                           context: context,
                           model: RegisterUserModel(
-                              username: usernameController.text,
-                              password: passwordController.text,
-                              client: client,
-                              type: (client == 'rTorrent')
-                                  ? (socket)
-                                      ? 'socket'
-                                      : 'tcp'
-                                  : "web",
-                              version: 1,
-                              url: urlController.text,
-                              clientUsername: clientUsernameController.text,
-                              clientPassword: clientPasswordController.text,
-                              level: isAdmin ? 10 : 5,
-                              path: pathController.text,
-                              host: hostController.text,
-                              port: int.parse(portController.text)),
+                            username: usernameController.text,
+                            password: passwordController.text,
+                            client: client,
+                            type: (client == 'rTorrent')
+                                ? (socket)
+                                    ? 'socket'
+                                    : 'tcp'
+                                : "web",
+                            version: 1,
+                            url: urlController.text,
+                            clientUsername: clientUsernameController.text,
+                            clientPassword: clientPasswordController.text,
+                            level: isAdmin ? 10 : 5,
+                            path: pathController.text,
+                            host: hostController.text,
+                            port: int.parse(portController.text),
+                          ),
                         );
+                        final addNewUserSnackBar = addFloodSnackBar(
+                            SnackbarType.success, 'New user added', 'Dismiss');
+
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(addNewUserSnackBar);
                       },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -763,9 +776,10 @@ class AuthenticationSection extends StatelessWidget {
                         child: Text(
                           "Add",
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600),
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),
