@@ -3,6 +3,8 @@ import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flutter/material.dart';
 
+import 'flood_snackbar.dart';
+
 class DeleteTorrentSheet extends StatefulWidget {
   final TorrentModel torrent;
 
@@ -85,10 +87,10 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                       child: Text(
                         "No",
                         style: TextStyle(
-                            color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w900),
+                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w900,
+                        ),
                       ),
                     ),
                   ),
@@ -100,8 +102,9 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
               Expanded(
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.06,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: ElevatedButton(
                     onPressed: () {
                       TorrentApi.deleteTorrent(
@@ -109,6 +112,13 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                           deleteWithData: deleteWithData,
                           context: context);
                       Navigator.of(context).pop();
+
+                      final deleteTorrentSnackBar = addFloodSnackBar(
+                          SnackbarType.caution,
+                          'Torrent deleted successfuly',
+                          'Dismiss');
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(deleteTorrentSnackBar);
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -120,10 +130,10 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                       child: Text(
                         "Yes",
                         style: TextStyle(
-                            color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w900),
+                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w900,
+                        ),
                       ),
                     ),
                   ),
