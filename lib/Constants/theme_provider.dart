@@ -26,6 +26,7 @@ class MyThemes {
     primaryColorLight: Color(0xff305067),
     accentColor: Color(0xff399CF4),
     backgroundColor: Color(0xff305067),
+    scaffoldBackgroundColor: Color(0xff305067),
     textTheme: TextTheme().apply(
       displayColor: Colors.white,
       bodyColor: Colors.white,
@@ -43,6 +44,7 @@ class MyThemes {
     primaryColor: Colors.white,
     primaryColorDark: Color(0xff39C481),
     backgroundColor: Color(0xff293341),
+    scaffoldBackgroundColor: Colors.grey[300],
     accentColor: Color(0xff399CF4),
     canvasColor: Colors.transparent,
     primaryColorLight: Colors.grey[100],
