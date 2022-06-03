@@ -15,7 +15,6 @@ class RSSFeedButtonWidget extends StatelessWidget {
               topLeft: Radius.circular(15),
             ),
           ),
-          isScrollControlled: true,
           context: context,
           backgroundColor: ThemeProvider.theme.backgroundColor,
           builder: (context) {
