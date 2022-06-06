@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:provider/provider.dart';
-
 import 'Route/route_generator.dart';
 import 'Route/routes.dart';
 
