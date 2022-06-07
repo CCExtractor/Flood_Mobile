@@ -162,7 +162,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                               trackerURISelected == 'null' ||
                                               trackerURISelected == ''
                                               ? '${filterStatus.toString().split(".").last}'
-                                              : '$trackerURISelected',
+                                              : trackerURISelected.length > 12 ? trackerURISelected.substring(0, 12) + '...' : trackerURISelected,
                                             style: TextStyle(
                                               color: ThemeProvider
                                                   .theme.primaryColorDark,
