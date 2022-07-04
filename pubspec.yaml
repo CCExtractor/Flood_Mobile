@@ -61,6 +61,8 @@ dependencies:
   permission_handler: ^8.1.4+2
   flutter_client_sse: ^0.1.0
   url_launcher: ^6.0.12
+  bottom_sheet: ^3.1.1
+  contained_tab_bar_view: ^0.8.0
     #    git:
     #      url: https://github.com/pratikbaid3/flutter_client_sse
     #      path:

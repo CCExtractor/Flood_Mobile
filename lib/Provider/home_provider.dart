@@ -1,12 +1,19 @@
 import 'package:flood_mobile/Model/notification_model.dart';
+import 'package:flood_mobile/Model/rss_feeds_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../Model/single_feed_and_response_model.dart';
+import '../Model/single_rule_model.dart';
 
 class HomeProvider extends ChangeNotifier {
   List<TorrentModel> torrentList = [];
   Map<String, dynamic> torrentListJson = {};
   int unreadNotifications = 0;
   late NotificationModel notificationModel;
+  Map<String, dynamic> RssFeedsListJson = {};
+  List<FeedsAndRulesModel> RssFeedsList = [];
+  List<RulesModel> RssRulesList = [];
 
   String upSpeed = '0 KB/s';
   String downSpeed = '0 KB/s';
@@ -35,8 +42,23 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setRssFeedsList(List<FeedsAndRulesModel> newRssFeedsList) {
+    RssFeedsList = newRssFeedsList;
+    notifyListeners();
+  }
+
+  void setRssRulesList(List<RulesModel> newRssRulesList) {
+    RssRulesList = newRssRulesList;
+    notifyListeners();
+  }
+
   void setTorrentListJson(Map<String, dynamic> newTorrentListJson) {
     torrentListJson = newTorrentListJson;
+    notifyListeners();
+  }
+
+  void setFeedsAndRulesListJson(Map<String, dynamic> newRssFeedsListJson) {
+    RssFeedsListJson = newRssFeedsListJson;
     notifyListeners();
   }
 
