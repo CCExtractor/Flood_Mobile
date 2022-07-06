@@ -12,7 +12,6 @@ import '../Provider/user_detail_provider.dart';
 class RulesApi {
   static Future<void> addRules({
     required String type,
-    required String id,
     required String label,
     required List<String> feedIDs,
     required String field,
@@ -44,7 +43,6 @@ class RulesApi {
               .token;
       Map<String, dynamic> mp = Map();
       mp['type'] = type;
-      mp['_id'] = id;
       mp['label'] = label;
       mp['feedIDs'] = feedIDs;
       mp['field'] = field;

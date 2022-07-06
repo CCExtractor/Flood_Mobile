@@ -1,5 +1,4 @@
 import 'package:flood_mobile/Components/RSSFeedHomePage.dart';
-import 'package:flood_mobile/Components/testingpage.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
 import '../Constants/theme_provider.dart';
@@ -30,25 +29,23 @@ class _RSSFeedButtonWidgetState extends State<RSSFeedButtonWidget> {
   }
 
   Widget _buildBottomSheet(
-      BuildContext context,
-      ScrollController scrollController,
-      double bottomSheetOffset,
-      ) {
+    BuildContext context,
+    ScrollController scrollController,
+    double bottomSheetOffset,
+  ) {
     return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(15),
-            topLeft: Radius.circular(15),
-          ),
-          color: ThemeProvider.theme.primaryColorLight,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(15),
+          topLeft: Radius.circular(15),
         ),
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          controller: scrollController,
-          children: [
-            RSSFeedHomePage()
-          ],
-        ),
+        color: ThemeProvider.theme.primaryColorLight,
+      ),
+      child: ListView(
+        scrollDirection: Axis.vertical,
+        controller: scrollController,
+        children: [RSSFeedHomePage()],
+      ),
     );
   }
 }

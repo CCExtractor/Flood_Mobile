@@ -4,19 +4,19 @@ part 'single_feed_and_response_model.g.dart';
 @JsonSerializable()
 class FeedsAndRulesModel {
   @JsonKey(name : "type")
-  late String type;
+  late String? type;
 
   @JsonKey(name : "url")
-  late String url;
+  late String? url;
 
   @JsonKey(name : "label")
-  late String label;
+  late String? label;
 
   @JsonKey(name : "interval")
-  late int interval;
+  late int? interval;
 
   @JsonKey(name : "_id")
-  late String id;
+  late String? id;
 
   FeedsAndRulesModel();
 

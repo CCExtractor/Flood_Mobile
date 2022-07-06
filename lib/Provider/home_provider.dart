@@ -1,8 +1,7 @@
+import 'package:flood_mobile/Model/feeds_content_model.dart';
 import 'package:flood_mobile/Model/notification_model.dart';
-import 'package:flood_mobile/Model/rss_feeds_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../Model/single_feed_and_response_model.dart';
 import '../Model/single_rule_model.dart';
 
@@ -14,6 +13,7 @@ class HomeProvider extends ChangeNotifier {
   Map<String, dynamic> RssFeedsListJson = {};
   List<FeedsAndRulesModel> RssFeedsList = [];
   List<RulesModel> RssRulesList = [];
+  List<FeedsContentsModel> RssFeedsContentsList = [];
 
   String upSpeed = '0 KB/s';
   String downSpeed = '0 KB/s';
@@ -42,13 +42,14 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setRssFeedsList(List<FeedsAndRulesModel> newRssFeedsList) {
+  void setRssFeedsList(List<FeedsAndRulesModel> newRssFeedsList, List<RulesModel> newRssRulesList) {
+    RssRulesList = newRssRulesList;
     RssFeedsList = newRssFeedsList;
     notifyListeners();
   }
 
-  void setRssRulesList(List<RulesModel> newRssRulesList) {
-    RssRulesList = newRssRulesList;
+  void setRssFeedsContentsList(List<FeedsContentsModel> newRssFeedsContentsList) {
+    RssFeedsContentsList = newRssFeedsContentsList;
     notifyListeners();
   }
 

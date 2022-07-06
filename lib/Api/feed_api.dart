@@ -9,8 +9,6 @@ import '../Provider/api_provider.dart';
 import '../Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 
-List<FeedsAndRulesModel> feedsandrules = [];
-List<RulesModel> rssrules = [];
 class FeedsApi{
   static Future<void> addFeeds({
     required String type,
@@ -58,6 +56,8 @@ class FeedsApi{
 
   static Future<void> listAllFeedsAndRules(
       {required BuildContext context}) async{
+    List<FeedsAndRulesModel> feedsandrules = [];
+    List<RulesModel> rssrules = [];
     RssFeedsModel rssfeedsmodel;
       try {
         Response response;
@@ -75,9 +75,7 @@ class FeedsApi{
             feedsandrules = rssfeedsmodel.feeds;
             rssrules = rssfeedsmodel.rules;
             Provider.of<HomeProvider>(context, listen: false)
-                .setRssFeedsList(feedsandrules);
-            Provider.of<HomeProvider>(context, listen: false)
-                .setRssRulesList(rssrules);
+                .setRssFeedsList(feedsandrules,rssrules);
             print("Feeds and Rules Listed");
         } else {
           print("There is some problem status code not 200");
