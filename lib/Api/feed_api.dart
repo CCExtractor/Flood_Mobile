@@ -9,7 +9,7 @@ import '../Provider/api_provider.dart';
 import '../Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 
-class FeedsApi{
+class FeedsApi {
   static Future<void> addFeeds({
     required String type,
     required String id,
@@ -53,36 +53,34 @@ class FeedsApi{
     }
   }
 
-
   static Future<void> listAllFeedsAndRules(
-      {required BuildContext context}) async{
+      {required BuildContext context}) async {
     List<FeedsAndRulesModel> feedsandrules = [];
     List<RulesModel> rssrules = [];
     RssFeedsModel rssfeedsmodel;
-      try {
-        Response response;
-        Dio dio = new Dio();
-        String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-            ApiProvider.listAllFeedsAndRules;
-        dio.options.headers['Accept'] = "application/json";
-        dio.options.headers['Content-Type'] = "application/json";
-        dio.options.headers['Connection'] = "keep-alive";
-        dio.options.headers['Cookie'] =
-            Provider.of<UserDetailProvider>(context, listen: false).token;
-        response = await dio.get(url);
-        if (response.statusCode == 200) {
-            rssfeedsmodel = RssFeedsModel.fromJson(response.data);
-            feedsandrules = rssfeedsmodel.feeds;
-            rssrules = rssfeedsmodel.rules;
-            Provider.of<HomeProvider>(context, listen: false)
-                .setRssFeedsList(feedsandrules,rssrules);
-            print("Feeds and Rules Listed");
-        } else {
-          print("There is some problem status code not 200");
-        }
-      } catch (e) {
-        print('Exception caught in Api Request ' + e.toString());
+    try {
+      Response response;
+      Dio dio = new Dio();
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+          ApiProvider.listAllFeedsAndRules;
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          Provider.of<UserDetailProvider>(context, listen: false).token;
+      response = await dio.get(url);
+      if (response.statusCode == 200) {
+        rssfeedsmodel = RssFeedsModel.fromJson(response.data);
+        feedsandrules = rssfeedsmodel.feeds;
+        rssrules = rssfeedsmodel.rules;
+        Provider.of<HomeProvider>(context, listen: false)
+            .setRssFeedsList(feedsandrules, rssrules);
+        print("Feeds and Rules Listed");
+      } else {
+        print("There is some problem status code not 200");
       }
+    } catch (e) {
+      print('Exception caught in Api Request ' + e.toString());
     }
   }
-
+}

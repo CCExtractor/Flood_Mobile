@@ -5,18 +5,16 @@ import 'package:json_annotation/json_annotation.dart';
 part 'rss_feeds_model.g.dart';
 
 @JsonSerializable()
-
-class RssFeedsModel{
-
+class RssFeedsModel {
   RssFeedsModel();
 
-  @JsonKey(name : "feeds")
+  @JsonKey(name: "feeds")
   late List<FeedsAndRulesModel> feeds;
 
-  @JsonKey(name : "rules")
+  @JsonKey(name: "rules")
   late List<RulesModel> rules;
 
-  factory RssFeedsModel.fromJson(Map<String, dynamic> json) => _$RssFeedsModelFromJson(json);
+  factory RssFeedsModel.fromJson(Map<String, dynamic> json) =>
+      _$RssFeedsModelFromJson(json);
   Map<String, dynamic> toJson() => _$RssFeedsModelToJson(this);
-
 }

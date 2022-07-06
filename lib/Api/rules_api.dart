@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -25,9 +23,7 @@ class RulesApi {
     required int count,
   }) async {
     try {
-      String url = Provider
-          .of<ApiProvider>(context, listen: false)
-          .baseUrl +
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
           ApiProvider.addRules;
       print('---ADD RSS RULES---');
       print(url);
@@ -38,9 +34,7 @@ class RulesApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider
-              .of<UserDetailProvider>(context, listen: false)
-              .token;
+          Provider.of<UserDetailProvider>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
       mp['type'] = type;
       mp['label'] = label;

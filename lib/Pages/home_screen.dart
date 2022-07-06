@@ -94,7 +94,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 backgroundColor: Theme.of(context).primaryColor,
                 elevation: 0,
                 actions: [
-
                   RSSFeedButtonWidget(),
                   Badge(
                     badgeColor: Theme.of(context).accentColor,

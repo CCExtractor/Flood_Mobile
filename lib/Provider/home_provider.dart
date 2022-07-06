@@ -42,13 +42,15 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setRssFeedsList(List<FeedsAndRulesModel> newRssFeedsList, List<RulesModel> newRssRulesList) {
+  void setRssFeedsList(List<FeedsAndRulesModel> newRssFeedsList,
+      List<RulesModel> newRssRulesList) {
     RssRulesList = newRssRulesList;
     RssFeedsList = newRssFeedsList;
     notifyListeners();
   }
 
-  void setRssFeedsContentsList(List<FeedsContentsModel> newRssFeedsContentsList) {
+  void setRssFeedsContentsList(
+      List<FeedsContentsModel> newRssFeedsContentsList) {
     RssFeedsContentsList = newRssFeedsContentsList;
     notifyListeners();
   }

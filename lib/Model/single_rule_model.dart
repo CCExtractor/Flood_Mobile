@@ -3,41 +3,42 @@ part 'single_rule_model.g.dart';
 
 @JsonSerializable()
 class RulesModel {
-  @JsonKey(name : "type")
+  @JsonKey(name: "type")
   late String? type;
 
-  @JsonKey(name : "label")
+  @JsonKey(name: "label")
   late String? label;
 
-  @JsonKey(name : "feedIDs")
+  @JsonKey(name: "feedIDs")
   late List<String?> feedIDs;
 
-  @JsonKey(name : "field")
+  @JsonKey(name: "field")
   late String? field;
 
-  @JsonKey(name : "match")
+  @JsonKey(name: "match")
   late String? match;
 
-  @JsonKey(name : "exclude")
+  @JsonKey(name: "exclude")
   late String? exclude;
 
-  @JsonKey(name : "destination")
+  @JsonKey(name: "destination")
   late String? destination;
 
-  @JsonKey(name : "tags")
+  @JsonKey(name: "tags")
   late List<String?> tags;
 
-  @JsonKey(name : "startOnLoad")
+  @JsonKey(name: "startOnLoad")
   late bool startOnLoad;
 
-  @JsonKey(name : "isBasePath")
+  @JsonKey(name: "isBasePath")
   late bool isBasePath;
 
-  @JsonKey(name : "_id")
+  @JsonKey(name: "_id")
   late String? id;
 
   RulesModel();
 
-  factory RulesModel.fromJson(Map<String, dynamic> json) => _$RulesModelFromJson(json);
+  factory RulesModel.fromJson(Map<String, dynamic> json) =>
+      _$RulesModelFromJson(json);
   Map<String, dynamic> toJson() => _$RulesModelToJson(this);
 }
