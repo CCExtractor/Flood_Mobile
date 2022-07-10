@@ -90,7 +90,7 @@ class NotificationListTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            model.status,
+            model.status.toString(),
             textAlign: TextAlign.left,
             style: TextStyle(
                 fontSize: 16,
@@ -109,7 +109,7 @@ class NotificationListTile extends StatelessWidget {
             height: 4,
           ),
           Text(
-            model.name,
+            model.name.toString(),
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: 14,
