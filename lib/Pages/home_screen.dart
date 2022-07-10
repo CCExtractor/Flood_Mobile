@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:badges/badges.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
@@ -23,7 +25,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flood_mobile/Components/change_theme_button_widget.dart';
 
+import '../Api/torrent_api.dart';
 import '../Components/RSSFeedButtonWidget.dart';
+
+import 'dart:io';
+import 'dart:math';
+
+import 'package:path_provider/path_provider.dart';
+
+import 'package:uni_links/uni_links.dart';
+import 'package:uri_to_file/uri_to_file.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -31,9 +42,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool _isLoading = false, _hasError = false;
+  File? _file;
+  late String base64;
+
   @override
   void initState() {
     super.initState();
+    _processInitialUri();
+    _listenForUri();
   }
 
   @override
@@ -43,6 +60,52 @@ class _HomeScreenState extends State<HomeScreen> {
     ClientApi.getClientSettings(context);
     NotificationApi.getNotifications(context: context);
     super.didChangeDependencies();
+  }
+
+  Future<void> _processInitialUri() async {
+    String? uriString = await getInitialLink();
+    _processUri(uriString);
+  }
+
+  void _listenForUri() {
+    linkStream.listen((uriString) => _processUri(uriString));
+  }
+
+  Future<void> _processUri(String? uriString) async {
+    try {
+      if (uriString != null) {
+        _hasError = false;
+        _isLoading = true;
+        setState(() {});
+        _file = await toFile(uriString);
+        _isLoading = false;
+        setState(() {
+          List<int> imageBytes = _file!.readAsBytesSync();
+          setState(() {
+            base64 = base64Encode(imageBytes);
+          });
+          TorrentApi.addTorrentFile(
+              base64: base64,
+              destination: "/home/akshatji/Downloads",
+              isBasePath: true,
+              isSequential: true,
+              isCompleted: true,
+              context: context);
+        });
+      }
+    } on UnsupportedError catch (e) {
+      print('Something went wrong. Please try again');
+      _hasError = true;
+      print(e.message);
+    } on IOException catch (e) {
+      print('Something went wrong. Please try again');
+      _hasError = true;
+      print(e);
+    } on Exception catch (e) {
+      print('Something went wrong. Please try again');
+      _hasError = true;
+      print(e.toString());
+    }
   }
 
   @override
