@@ -1,4 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:badges/badges.dart';
+import 'package:dio/dio.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
@@ -20,8 +23,12 @@ import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.d
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:uri_to_file/uri_to_file.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flood_mobile/Components/change_theme_button_widget.dart';
+import '../Api/torrent_api.dart';
+import '../Provider/api_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -29,9 +36,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  File? _file;
+  late String base64;
+  late String directoryDefault;
+
   @override
   void initState() {
     super.initState();
+    _processInitialUri();
+    _listenForUri();
   }
 
   @override
@@ -41,6 +54,70 @@ class _HomeScreenState extends State<HomeScreen> {
     ClientApi.getClientSettings(context);
     NotificationApi.getNotifications(context: context);
     super.didChangeDependencies();
+  }
+
+  Future<void> _processInitialUri() async {
+    String? uriString = await getInitialLink();
+    _processUriandAddTorrent(uriString);
+  }
+
+  void _listenForUri() {
+    linkStream.listen((uriString) => _processUriandAddTorrent(uriString));
+  }
+
+  Future<void> _processUriandAddTorrent(String? uriString) async {
+    try {
+      if (uriString != null) {
+        _file = await toFile(uriString);
+        List<int> imageBytes = _file!.readAsBytesSync();
+        setState(() {
+          base64 = base64Encode(imageBytes);
+        });
+        try {
+          String url =
+              Provider.of<ApiProvider>(context, listen: false).baseUrl +
+                  ApiProvider.getClientSettingsUrl;
+          print('---GET CLIENT SETTINGS---');
+          print(url);
+          Response response;
+          Dio dio = new Dio();
+          //Headers
+          dio.options.headers['Accept'] = "application/json";
+          dio.options.headers['Content-Type'] = "application/json";
+          dio.options.headers['Connection'] = "keep-alive";
+          dio.options.headers['Cookie'] =
+              Provider.of<UserDetailProvider>(context, listen: false).token;
+          response = await dio.get(
+            url,
+          );
+          if (response.statusCode == 200) {
+            print('---CLIENT SETTINGS---');
+            directoryDefault = response.data['directoryDefault'];
+            TorrentApi.addTorrentFile(
+                base64: base64,
+                destination: directoryDefault,
+                isBasePath: false,
+                isSequential: false,
+                isCompleted: false,
+                context: context);
+          } else {}
+        } catch (e) {
+          print('--ERROR--');
+          print(e.toString());
+        }
+        _file = null;
+        base64 = "";
+      }
+    } on UnsupportedError catch (e) {
+      print('Something went wrong. Please try again');
+      print(e.message);
+    } on IOException catch (e) {
+      print('Something went wrong. Please try again');
+      print(e);
+    } on Exception catch (e) {
+      print('Something went wrong. Please try again');
+      print(e.toString());
+    }
   }
 
   @override
