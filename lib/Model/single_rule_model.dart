@@ -36,7 +36,19 @@ class RulesModel {
   @JsonKey(name: "_id")
   late String? id;
 
-  RulesModel();
+  RulesModel({
+    required this.type,
+    required this.label,
+    required this.feedIDs,
+    required this.field,
+    required this.match,
+    required this.exclude,
+    required this.destination,
+    required this.tags,
+    required this.startOnLoad,
+    required this.isBasePath,
+    required this.id,
+  });
 
   factory RulesModel.fromJson(Map<String, dynamic> json) =>
       _$RulesModelFromJson(json);

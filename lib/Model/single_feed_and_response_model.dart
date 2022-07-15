@@ -18,7 +18,13 @@ class FeedsAndRulesModel {
   @JsonKey(name: "_id")
   late String? id;
 
-  FeedsAndRulesModel();
+  FeedsAndRulesModel({
+    required this.type,
+    required this.url,
+    required this.label,
+    required this.interval,
+    required this.id,
+  });
 
   factory FeedsAndRulesModel.fromJson(Map<String, dynamic> json) =>
       _$FeedsAndRulesModelFromJson(json);
