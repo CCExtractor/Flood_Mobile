@@ -4,6 +4,7 @@ import 'package:badges/badges.dart';
 import 'package:dio/dio.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
+import 'package:flood_mobile/Components/add_automatic_torrent.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
@@ -73,40 +74,20 @@ class _HomeScreenState extends State<HomeScreen> {
         setState(() {
           base64 = base64Encode(imageBytes);
         });
-        try {
-          String url =
-              Provider.of<ApiProvider>(context, listen: false).baseUrl +
-                  ApiProvider.getClientSettingsUrl;
-          print('---GET CLIENT SETTINGS---');
-          print(url);
-          Response response;
-          Dio dio = new Dio();
-          //Headers
-          dio.options.headers['Accept'] = "application/json";
-          dio.options.headers['Content-Type'] = "application/json";
-          dio.options.headers['Connection'] = "keep-alive";
-          dio.options.headers['Cookie'] =
-              Provider.of<UserDetailProvider>(context, listen: false).token;
-          response = await dio.get(
-            url,
-          );
-          if (response.statusCode == 200) {
-            print('---CLIENT SETTINGS---');
-            directoryDefault = response.data['directoryDefault'];
-            TorrentApi.addTorrentFile(
-                base64: base64,
-                destination: directoryDefault,
-                isBasePath: false,
-                isSequential: false,
-                isCompleted: false,
-                context: context);
-          } else {}
-        } catch (e) {
-          print('--ERROR--');
-          print(e.toString());
-        }
-        _file = null;
-        base64 = "";
+        showModalBottomSheet(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(15),
+              topLeft: Radius.circular(15),
+            ),
+          ),
+          isScrollControlled: true,
+          context: context,
+          backgroundColor: ThemeProvider.theme.backgroundColor,
+          builder: (context) {
+            return AddAutoTorrent(base64: base64, imageBytes: imageBytes, uriString: uriString);
+          },
+        );
       }
     } on UnsupportedError catch (e) {
       print('Something went wrong. Please try again');
