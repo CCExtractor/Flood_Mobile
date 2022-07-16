@@ -48,7 +48,7 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(right:20, left:20, bottom: 5),
+              padding: const EdgeInsets.only(right: 20, left: 20, bottom: 5),
               child: Text(
                 "Selected Torrent File",
                 style: TextStyle(
@@ -85,13 +85,14 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                             padding: const EdgeInsets.only(left: 5),
                             child: Text(
                               fileSelectedName.length > 25
-                                  ? fileSelectedName.substring(0, 25) + '.torrent'
+                                  ? fileSelectedName.substring(0, 25) +
+                                      '.torrent'
                                   : fileSelectedName + '.torrent',
                               style: TextStyle(
                                   fontSize: 16,
                                   fontFamily: 'Montserrat',
-                                  color:
-                                      ThemeProvider.theme.textTheme.bodyText1?.color),
+                                  color: ThemeProvider
+                                      .theme.textTheme.bodyText1?.color),
                             ),
                           ),
                         ],

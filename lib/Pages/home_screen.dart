@@ -85,7 +85,8 @@ class _HomeScreenState extends State<HomeScreen> {
           context: context,
           backgroundColor: ThemeProvider.theme.backgroundColor,
           builder: (context) {
-            return AddAutoTorrent(base64: base64, imageBytes: imageBytes, uriString: uriString);
+            return AddAutoTorrent(
+                base64: base64, imageBytes: imageBytes, uriString: uriString);
           },
         );
       }
