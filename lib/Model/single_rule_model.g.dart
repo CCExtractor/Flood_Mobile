@@ -18,7 +18,8 @@ RulesModel _$RulesModelFromJson(Map<String, dynamic> json) => RulesModel()
   ..tags = (json['tags'] as List<dynamic>).map((e) => e as String?).toList()
   ..startOnLoad = json['startOnLoad'] as bool
   ..isBasePath = json['isBasePath'] as bool
-  ..id = json['_id'] as String?;
+  ..id = json['_id'] as String?
+  ..count = json['count'] as int?;
 
 Map<String, dynamic> _$RulesModelToJson(RulesModel instance) =>
     <String, dynamic>{
@@ -33,4 +34,5 @@ Map<String, dynamic> _$RulesModelToJson(RulesModel instance) =>
       'startOnLoad': instance.startOnLoad,
       'isBasePath': instance.isBasePath,
       '_id': instance.id,
+      'count': instance.count,
     };

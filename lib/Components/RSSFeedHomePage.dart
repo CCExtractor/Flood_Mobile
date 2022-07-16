@@ -145,7 +145,16 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       .RssFeedsList[index].label
                                                       .toString()),
                                                   SizedBox(width: 10),
-                                                  Text("0 matches"),
+                                                  Text(model.RssFeedsList[index]
+                                                              .count !=
+                                                          null
+                                                      ? model
+                                                              .RssFeedsList[
+                                                                  index]
+                                                              .count
+                                                              .toString() +
+                                                          " matches"
+                                                      : "0 matches"),
                                                 ],
                                               ),
                                             ),
@@ -579,7 +588,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     interval: int.parse(
                                                         intervalController
                                                             .text),
-                                                    count: 10,
+                                                    count: 0,
                                                     context: context,
                                                   );
                                                 }
@@ -960,7 +969,16 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       .RssRulesList[index].label
                                                       .toString()),
                                                   SizedBox(width: 10),
-                                                  Text("1 matches"),
+                                                  Text(model.RssRulesList[index]
+                                                              .count !=
+                                                          null
+                                                      ? model
+                                                              .RssRulesList[
+                                                                  index]
+                                                              .count
+                                                              .toString() +
+                                                          " matches"
+                                                      : "0 matches"),
                                                   SizedBox(width: 10),
                                                   Container(
                                                     decoration: BoxDecoration(
@@ -1610,7 +1628,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   tags: [tagsController.text],
                                                   startOnLoad: startOnLoad,
                                                   isBasePath: useAsBasePath,
-                                                  count: 1,
+                                                  count: 0,
                                                   context: context,
                                                 );
                                                 FeedsApi.listAllFeedsAndRules(

@@ -36,6 +36,9 @@ class RulesModel {
   @JsonKey(name: "_id")
   late String? id;
 
+  @JsonKey(name: "count")
+  late int? count;
+
   RulesModel();
 
   factory RulesModel.fromJson(Map<String, dynamic> json) =>
