@@ -1,4 +1,4 @@
-import 'package:flood_mobile/Components/add_torrent_sheet.dart';
+import 'package:flood_mobile/Components/bottom_floating_menu_button.dart';
 import 'package:flood_mobile/Components/torrent_tile.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
@@ -137,28 +137,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                         ),
                       ),
               ),
-              floatingActionButton: FloatingActionButton(
-                elevation: 0,
-                onPressed: () {
-                  showModalBottomSheet(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(15),
-                        topLeft: Radius.circular(15),
-                      ),
-                    ),
-                    isScrollControlled: true,
-                    context: context,
-                    backgroundColor: ThemeProvider.theme.backgroundColor,
-                    builder: (context) {
-                      return AddTorrentSheet(
-                          clientSettings: clientModel.clientSettings);
-                    },
-                  );
-                },
-                backgroundColor: ThemeProvider.theme.primaryColorDark,
-                child: Icon(Icons.add, color: Colors.white),
-              ),
+              floatingActionButton: BottomFloatingMenuButton(),
             ),
           );
         });
