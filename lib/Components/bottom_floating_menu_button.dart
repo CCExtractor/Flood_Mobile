@@ -14,12 +14,13 @@ import '../Provider/api_provider.dart';
 import '../Provider/user_detail_provider.dart';
 
 class BottomFloatingMenuButton extends StatefulWidget {
-
   @override
-  _BottomFloatingMenuButtonState createState() => _BottomFloatingMenuButtonState();
+  _BottomFloatingMenuButtonState createState() =>
+      _BottomFloatingMenuButtonState();
 }
 
-class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton> with TickerProviderStateMixin {
+class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
+    with TickerProviderStateMixin {
   bool isFileSelected = false;
   bool isMagnetSelected = false;
   bool useAdBasePath = false;
@@ -32,7 +33,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton> wit
   late String torrentPath;
   final _formKey = GlobalKey<FormState>();
   late String base64;
-  
+
   @override
   void initState() {
     _getDefaultDirectory();
@@ -386,58 +387,58 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton> wit
                           Padding(
                             padding:
                                 const EdgeInsets.only(left: 20.0, right: 20),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      controller: magnetUrlController,
-                                      style: TextStyle(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: TextFormField(
+                                    controller: magnetUrlController,
+                                    style: TextStyle(
+                                      color: ThemeProvider
+                                          .theme.textTheme.bodyText1?.color,
+                                    ),
+                                    decoration: InputDecoration(
+                                      prefixIcon: Icon(
+                                        Icons.link,
                                         color: ThemeProvider
                                             .theme.textTheme.bodyText1?.color,
                                       ),
-                                      decoration: InputDecoration(
-                                        prefixIcon: Icon(
-                                          Icons.link,
-                                          color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
-                                        ),
-                                        suffix: GestureDetector(
-                                          child: Icon(Icons.paste),
-                                          onTap: () {
-                                            FlutterClipboard.paste()
-                                                .then((value) {
-                                              setState(() {
-                                                magnetUrlController =
-                                                    TextEditingController(
-                                                        text: value);
-                                              });
+                                      suffix: GestureDetector(
+                                        child: Icon(Icons.paste),
+                                        onTap: () {
+                                          FlutterClipboard.paste()
+                                              .then((value) {
+                                            setState(() {
+                                              magnetUrlController =
+                                                  TextEditingController(
+                                                      text: value);
                                             });
-                                          },
-                                        ),
-                                        labelText: 'Torrent',
-                                        hintText: 'Torrent URL or Magnet Link',
-                                        labelStyle: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
+                                          });
+                                        },
                                       ),
-                                      validator: (String? value) {
-                                        if (value == null ||
-                                            (value.isEmpty && isMagnetSelected)) {
-                                          return 'Field cannot be empty';
-                                        }
-                                        return null;
-                                      },
+                                      labelText: 'Torrent',
+                                      hintText: 'Torrent URL or Magnet Link',
+                                      labelStyle: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: ThemeProvider
+                                            .theme.textTheme.bodyText1?.color,
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
                                     ),
-                                  )
-                                ],
-                              ),
+                                    validator: (String? value) {
+                                      if (value == null ||
+                                          (value.isEmpty && isMagnetSelected)) {
+                                        return 'Field cannot be empty';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                )
+                              ],
                             ),
+                          ),
                           Container(
                             color: ThemeProvider.theme.primaryColorLight,
                             padding: EdgeInsets.symmetric(
