@@ -1,6 +1,7 @@
-import 'package:flood_mobile/Api/feed_api.dart';
 import 'package:flood_mobile/Components/RSSFeedHomePage.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
+import 'package:flood_mobile/Model/single_feed_and_response_model.dart';
+import 'package:flood_mobile/Model/single_rule_model.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
@@ -8,10 +9,44 @@ import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
 import 'package:provider/provider.dart';
+
+class MockHomeProvider extends Mock implements HomeProvider {}
 
 void main() {
   setUp(() {});
+  MockHomeProvider mockHomeProvider = MockHomeProvider();
+  when(() => mockHomeProvider.RssFeedsList).thenReturn([
+    FeedsAndRulesModel(
+        type: 'test feed',
+        label: 'test label',
+        interval: 0,
+        id: 'test id',
+        url: 'test url'),
+    FeedsAndRulesModel(
+        type: 'test feed',
+        label: 'test label',
+        interval: 0,
+        id: 'test id',
+        url: 'test url')
+  ]);
+  when(() => mockHomeProvider.RssRulesList).thenReturn([
+    RulesModel(
+      type: 'test rules',
+      label: 'test label',
+      feedIDs: ['test feedIDs'],
+      field: 'test field',
+      tags: ['test tags'],
+      match: 'test match',
+      exclude: 'test exclude',
+      destination: 'test destination',
+      id: 'test id',
+      isBasePath: true,
+      startOnLoad: true,
+    )
+  ]);
 
   Widget createWidgetUnderTest() {
     return MultiProvider(
@@ -20,7 +55,7 @@ void main() {
           create: (context) => UserDetailProvider(),
         ),
         ChangeNotifierProvider<HomeProvider>(
-          create: (context) => HomeProvider(),
+          create: (context) => mockHomeProvider,
         ),
         ChangeNotifierProvider<SSEProvider>(
           create: (context) => SSEProvider(),
@@ -67,7 +102,9 @@ void main() {
             find.byKey(
               Key('No existing feeds displaying container'),
             ),
-            findsOneWidget);
+            findsNothing);
+        expect(find.byKey(Key("Feeds are fetched")), findsOneWidget);
+        expect(find.byKey(Key("Feed displayed")), findsNWidgets(2));
         await tester.pumpAndSettle();
       },
     );
@@ -116,7 +153,8 @@ void main() {
         await tester.tap(find.text('Download Rules'));
         await tester.pumpAndSettle();
         expect(find.text('Existing Rules'), findsOneWidget);
-        expect(find.byKey(Key('No rules defined')), findsOneWidget);
+        expect(find.byKey(Key('No rules defined')), findsNothing);
+        expect(find.byKey(Key("Rules Displayed")), findsOneWidget);
         await tester.pumpAndSettle();
       },
     );

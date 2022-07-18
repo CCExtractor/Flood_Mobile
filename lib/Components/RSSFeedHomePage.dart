@@ -113,6 +113,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                       ),
                       (model.RssFeedsList.isNotEmpty)
                           ? Container(
+                              key: Key("Feeds are fetched"),
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.white38),
                                 borderRadius: BorderRadius.only(
@@ -131,6 +132,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   return Column(
                                     children: [
                                       ListTile(
+                                        key: Key("Feed displayed"),
                                         minLeadingWidth: 0.1,
                                         minVerticalPadding: 0.1,
                                         horizontalTitleGap: 0.1,
@@ -958,6 +960,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                       ),
                       (model.RssRulesList.isNotEmpty)
                           ? Container(
+                              key: Key("Rules Displayed"),
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.white38),
                                 borderRadius: BorderRadius.only(
