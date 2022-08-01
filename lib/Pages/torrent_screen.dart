@@ -21,10 +21,9 @@ class _TorrentScreenState extends State<TorrentScreen> {
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
     double wp = MediaQuery.of(context).size.width;
-    return Consumer<HomeProvider>(
-      builder: (context, model, child) {
-        return Consumer<ClientSettingsProvider>(
-            builder: (context, clientModel, child) {
+    return Consumer<ClientSettingsProvider>(
+      builder: (context, clientModel, child) {
+        return Consumer<HomeProvider>(builder: (context, model, child) {
           return KeyboardDismissOnTap(
             child: Scaffold(
               body: Container(
@@ -138,6 +137,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                       ),
               ),
               floatingActionButton: FloatingActionButton(
+                key: Key('Floating Action Button'),
                 elevation: 0,
                 onPressed: () {
                   showModalBottomSheet(

@@ -53,6 +53,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             TextField(
+              key: Key('Destination TextField'),
               controller: directoryController,
               style: TextStyle(
                 color: ThemeProvider.theme.textTheme.bodyText1?.color,
@@ -77,6 +78,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
             ),
             (isMagnetSelected)
                 ? TextFormField(
+                    key: Key('Torrent magnet link textfield'),
                     controller: magnetUrlController,
                     style: TextStyle(
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,
