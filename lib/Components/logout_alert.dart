@@ -11,6 +11,7 @@ class LogOutAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     final hp = MediaQuery.of(context).size.height;
     return AlertDialog(
+      key: Key('Alert Dialog'),
       elevation: 0,
       backgroundColor: ThemeProvider.theme.primaryColorLight,
       shape: RoundedRectangleBorder(

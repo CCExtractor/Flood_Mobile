@@ -82,6 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 title: Image(
+                  key: Key('Flood Icon'),
                   image: AssetImage(
                     'assets/images/icon.png',
                   ),
@@ -94,6 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 actions: [
                   ChangeThemeButtonWidget(),
                   Badge(
+                    key: Key('Badge Widget'),
                     badgeColor: Theme.of(context).accentColor,
                     badgeContent: Center(
                       child: Text(
@@ -111,6 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
+                              key: Key('Notification Alert Dialog'),
                               elevation: 0,
                               backgroundColor: Theme.of(context).primaryColor,
                               content: notificationPopupDialogueContainer(
@@ -168,6 +171,7 @@ class _MenuState extends State<Menu> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image(
+                  key: Key('Flood Icon menu'),
                   width: 80,
                   height: 80,
                   image: AssetImage(
@@ -183,6 +187,7 @@ class _MenuState extends State<Menu> {
                 children: [
                   SvgPicture.network(
                     'https://img.shields.io/github/v/release/CCExtractor/Flood_Mobile?include_prereleases',
+                    key: Key('Release Shield'),
                   ),
                 ],
               ),
