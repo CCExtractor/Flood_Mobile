@@ -48,7 +48,8 @@ void main() {
   }
 
   group("Check different widgets in about-screen", () {
-    testWidgets("Check if widgets displayed correctly", (WidgetTester tester) async {
+    testWidgets("Check if widgets displayed correctly",
+        (WidgetTester tester) async {
       await tester.pumpWidget(createWidgetUnderTest());
       expect(find.byKey(Key('App icon asset image')), findsOneWidget);
       expect(find.byKey(Key('release badge key')), findsOneWidget);
