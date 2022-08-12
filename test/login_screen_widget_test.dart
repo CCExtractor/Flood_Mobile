@@ -74,5 +74,28 @@ void main() {
       expect(find.widgetWithText(ElevatedButton, 'Login'), findsOneWidget);
       expect(find.byKey(Key('Github Icon key')), findsOneWidget);
     });
+
+    testWidgets("Check if validators working correctly",
+        (WidgetTester tester) async {
+      await tester.pumpWidget(createWidgetUnderTest());
+      await tester.enterText(find.byKey(Key('Url TextField')), '');
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Login'));
+      await tester.pumpAndSettle();
+      expect(find.text('Field cannot be empty'), findsNWidgets(3));
+      await tester.enterText(find.byKey(Key('Url TextField')), 'test url');
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Login'));
+      await tester.pumpAndSettle();
+      expect(find.text('Field cannot be empty'), findsNWidgets(2));
+      await tester.enterText(
+          find.byKey(Key('Username TextField')), 'test username');
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Login'));
+      await tester.pumpAndSettle();
+      expect(find.text('Field cannot be empty'), findsNWidgets(1));
+      await tester.enterText(
+          find.byKey(Key('Password TextField')), 'test password');
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Login'));
+      await tester.pumpAndSettle();
+      expect(find.text('Field cannot be empty'), findsNWidgets(0));
+    });
   });
 }
