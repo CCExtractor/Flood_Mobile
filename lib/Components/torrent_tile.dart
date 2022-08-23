@@ -378,7 +378,7 @@ class _TorrentTileState extends State<TorrentTile> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('Size'),
-                          Text(widget.model.directory),
+                          Text(filesize(widget.model.sizeBytes.toInt())),
                         ],
                       ),
                       SizedBox(
