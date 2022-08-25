@@ -21,7 +21,7 @@ Future<void> main() async {
       debug: true // optional: set false to disable printing logs to console
       );
   await AwesomeNotifications().initialize(
-    null,
+    'resource://drawable/ic_launcher',
     [
       NotificationChannel(
         channelKey: NotificationConstants.DOWNLOADS_CHANNEL_KEY,
@@ -29,7 +29,7 @@ Future<void> main() async {
         channelName: 'Downloads Channel',
         channelDescription:
             'Notification channel for displaying torrent downloads',
-        defaultColor: Color(0xFF9D50DD),
+        defaultColor: Color(0xff0E2537),
         ledColor: Colors.white,
         playSound: true,
         enableVibration: true,
@@ -41,7 +41,7 @@ Future<void> main() async {
         channelName: 'Push Notification Channel',
         channelDescription:
             'Notification channel for displaying push notifications',
-        defaultColor: Color(0xFF9D50DD),
+        defaultColor: Color(0xff0E2537),
         ledColor: Colors.white,
         playSound: true,
         enableVibration: true,

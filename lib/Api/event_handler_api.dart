@@ -134,7 +134,7 @@ class EventHandlerApi {
       AwesomeNotifications().createNotification(
         content: NotificationContent(
           id: id,
-          actionType: ActionType.SilentBackgroundAction,
+          actionType: ActionType.Default,
           channelKey: NotificationConstants.DOWNLOADS_CHANNEL_KEY,
           category: NotificationCategory.Progress,
           notificationLayout: NotificationLayout.ProgressBar,
@@ -151,6 +151,7 @@ class EventHandlerApi {
           progress: homeModel.torrentList[id].percentComplete.round(),
           summary: isPaused ? 'Paused' : 'Downloading',
           locked: true,
+          autoDismissible: false,
           showWhen: false,
         ),
         actionButtons: [
@@ -174,6 +175,7 @@ class EventHandlerApi {
     AwesomeNotifications().createNotification(
         content: NotificationContent(
       id: id,
+      autoDismissible: false,
       channelKey: NotificationConstants.PUSH_NOTIFICATION_CHANNEL_KEY,
       category: NotificationCategory.Event,
       notificationLayout: NotificationLayout.Default,
