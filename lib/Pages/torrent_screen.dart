@@ -139,45 +139,51 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                           horizontal: 20, vertical: 20),
                                       hintText: 'Search Torrent',
                                       suffixIcon: Padding(
-                                        padding: const EdgeInsets.only(right: 5),
+                                        padding:
+                                            const EdgeInsets.only(right: 5),
                                         child: ActionChip(
                                           padding: EdgeInsets.all(0),
                                           avatar: ClipRRect(
-                                            borderRadius: BorderRadius.circular(4),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(0),
-                                                color: Colors.green,
-                                              ),
-                                              height: 50,
-                                              width: 50,
-                                              child: Icon(
-                                                Icons.filter_list_alt,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                            )
-                                          ),
-                                          label: Text(trackerURISelected == 'all' ||
-                                              trackerURISelected == 'null' ||
-                                              trackerURISelected == ''
-                                              ? '${filterStatus.toString().split(".").last}'
-                                              : trackerURISelected.length > 12 ? trackerURISelected.substring(0, 12) + '...' : trackerURISelected,
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(0),
+                                                  color: Colors.green,
+                                                ),
+                                                height: 50,
+                                                width: 50,
+                                                child: Icon(
+                                                  Icons.filter_list_alt,
+                                                  color: Colors.white,
+                                                  size: 20,
+                                                ),
+                                              )),
+                                          label: Text(
+                                            trackerURISelected == 'all' ||
+                                                    trackerURISelected ==
+                                                        'null' ||
+                                                    trackerURISelected == ''
+                                                ? '${filterStatus.toString().split(".").last}'
+                                                : trackerURISelected.length > 12
+                                                    ? trackerURISelected
+                                                            .substring(0, 12) +
+                                                        '...'
+                                                    : trackerURISelected,
                                             style: TextStyle(
                                               color: ThemeProvider
                                                   .theme.primaryColorDark,
                                               fontSize: 15,
                                               fontWeight: FontWeight.normal,
-                                            ),),
+                                            ),
+                                          ),
                                           onPressed: () {
                                             showModalBottomSheet(
                                               shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius.only(
-                                                  topRight:
-                                                  Radius.circular(15),
-                                                  topLeft:
-                                                  Radius.circular(15),
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(15),
+                                                  topLeft: Radius.circular(15),
                                                 ),
                                               ),
                                               isScrollControlled: true,
@@ -191,7 +197,8 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                           },
                                           backgroundColor: Colors.transparent,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                               side: BorderSide(
                                                 width: 1,
                                                 color: Colors.blueGrey,

@@ -16,6 +16,7 @@ enum FilterValue {
   active,
   inactive
 }
+
 FilterValue? filterStatus = FilterValue.all;
 String trackerURISelected = '';
 
@@ -254,7 +255,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     title: Text(trackerURIsList[index].toString(),
                         style: TextStyle(
                             color:
-                            ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme.textTheme.bodyText1?.color,
                             fontFamily: 'Montserrat',
                             fontSize: 16,
                             fontWeight: FontWeight.normal)),
