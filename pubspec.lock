@@ -21,11 +21,7 @@ packages:
       name: args
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.3.1"
-=======
-    version: "2.3.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   async:
     dependency: transitive
     description:
@@ -39,11 +35,7 @@ packages:
       name: badges
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.3"
-=======
-    version: "2.0.2"
->>>>>>> 953d765 (feat: Solves Build failing)
   boolean_selector:
     dependency: transitive
     description:
@@ -57,11 +49,7 @@ packages:
       name: build
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.3.1"
-=======
-    version: "2.2.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   build_config:
     dependency: transitive
     description:
@@ -75,11 +63,7 @@ packages:
       name: build_daemon
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "3.1.0"
-=======
-    version: "3.0.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   build_resolvers:
     dependency: transitive
     description:
@@ -93,11 +77,7 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.1.11"
-=======
-    version: "2.1.8"
->>>>>>> 953d765 (feat: Solves Build failing)
   build_runner_core:
     dependency: transitive
     description:
@@ -118,11 +98,7 @@ packages:
       name: built_value
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "8.4.1"
-=======
-    version: "8.1.4"
->>>>>>> 953d765 (feat: Solves Build failing)
   characters:
     dependency: transitive
     description:
@@ -185,44 +161,28 @@ packages:
       name: convert
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "3.1.1"
-=======
-    version: "3.0.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   crypto:
     dependency: transitive
     description:
       name: crypto
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "3.0.2"
-=======
-    version: "3.0.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   csslib:
     dependency: transitive
     description:
       name: csslib
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "0.17.2"
-=======
-    version: "0.17.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   cupertino_icons:
     dependency: "direct main"
     description:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.0.5"
-=======
-    version: "1.0.4"
->>>>>>> 953d765 (feat: Solves Build failing)
   dart_style:
     dependency: transitive
     description:
@@ -236,22 +196,14 @@ packages:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "4.0.6"
-=======
-    version: "4.0.4"
->>>>>>> 953d765 (feat: Solves Build failing)
   duration:
     dependency: "direct main"
     description:
       name: duration
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "3.0.12"
-=======
-    version: "3.0.11"
->>>>>>> 953d765 (feat: Solves Build failing)
   expansion_tile_card:
     dependency: "direct main"
     description:
@@ -272,22 +224,14 @@ packages:
       name: ffi
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.1"
-=======
-    version: "1.1.2"
->>>>>>> 953d765 (feat: Solves Build failing)
   file:
     dependency: transitive
     description:
       name: file
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "6.1.4"
-=======
-    version: "6.1.2"
->>>>>>> 953d765 (feat: Solves Build failing)
   file_picker:
     dependency: "direct main"
     description:
@@ -320,18 +264,13 @@ packages:
       name: flutter_downloader
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.8.4"
-=======
-    version: "1.7.3"
->>>>>>> 953d765 (feat: Solves Build failing)
   flutter_keyboard_visibility:
     dependency: "direct main"
     description:
       name: flutter_keyboard_visibility
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "5.4.0"
   flutter_keyboard_visibility_linux:
     dependency: transitive
@@ -347,9 +286,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-=======
-    version: "5.2.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   flutter_keyboard_visibility_platform_interface:
     dependency: transitive
     description:
@@ -377,11 +313,7 @@ packages:
       name: flutter_plugin_android_lifecycle
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.7"
-=======
-    version: "2.0.5"
->>>>>>> 953d765 (feat: Solves Build failing)
   flutter_slidable:
     dependency: "direct main"
     description:
@@ -419,11 +351,7 @@ packages:
       name: fluttertoast
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "8.1.1"
-=======
-    version: "8.0.9"
->>>>>>> 953d765 (feat: Solves Build failing)
   focused_menu:
     dependency: "direct main"
     description:
@@ -444,33 +372,21 @@ packages:
       name: frontend_server_client
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.1.3"
-=======
-    version: "2.1.2"
->>>>>>> 953d765 (feat: Solves Build failing)
   glob:
     dependency: transitive
     description:
       name: glob
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.1.0"
-=======
-    version: "2.0.2"
->>>>>>> 953d765 (feat: Solves Build failing)
   google_fonts:
     dependency: "direct main"
     description:
       name: google_fonts
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.3.3"
-=======
-    version: "2.3.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   graphs:
     dependency: transitive
     description:
@@ -498,22 +414,14 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "0.13.5"
-=======
-    version: "0.13.4"
->>>>>>> 953d765 (feat: Solves Build failing)
   http_multi_server:
     dependency: transitive
     description:
       name: http_multi_server
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "3.2.1"
-=======
-    version: "3.2.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   http_parser:
     dependency: transitive
     description:
@@ -569,33 +477,21 @@ packages:
       name: logging
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.1.0"
-=======
-    version: "1.0.2"
->>>>>>> 953d765 (feat: Solves Build failing)
   matcher:
     dependency: transitive
     description:
       name: matcher
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "0.12.12"
-=======
-    version: "0.12.11"
->>>>>>> 953d765 (feat: Solves Build failing)
   material_color_utilities:
     dependency: transitive
     description:
       name: material_color_utilities
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "0.1.5"
-=======
-    version: "0.1.3"
->>>>>>> 953d765 (feat: Solves Build failing)
   meta:
     dependency: "direct overridden"
     description:
@@ -609,11 +505,7 @@ packages:
       name: mime
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.0.2"
-=======
-    version: "1.0.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   nested:
     dependency: transitive
     description:
@@ -627,11 +519,7 @@ packages:
       name: package_config
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.1.0"
-=======
-    version: "2.0.2"
->>>>>>> 953d765 (feat: Solves Build failing)
   path:
     dependency: transitive
     description:
@@ -659,77 +547,49 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.11"
-=======
-    version: "2.0.9"
->>>>>>> 953d765 (feat: Solves Build failing)
   path_provider_android:
     dependency: transitive
     description:
       name: path_provider_android
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.20"
-=======
-    version: "2.0.12"
->>>>>>> 953d765 (feat: Solves Build failing)
   path_provider_ios:
     dependency: transitive
     description:
       name: path_provider_ios
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.11"
-=======
-    version: "2.0.8"
->>>>>>> 953d765 (feat: Solves Build failing)
   path_provider_linux:
     dependency: transitive
     description:
       name: path_provider_linux
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.1.7"
-=======
-    version: "2.1.5"
->>>>>>> 953d765 (feat: Solves Build failing)
   path_provider_macos:
     dependency: transitive
     description:
       name: path_provider_macos
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.6"
-=======
-    version: "2.0.5"
->>>>>>> 953d765 (feat: Solves Build failing)
   path_provider_platform_interface:
     dependency: transitive
     description:
       name: path_provider_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.5"
-=======
-    version: "2.0.3"
->>>>>>> 953d765 (feat: Solves Build failing)
   path_provider_windows:
     dependency: transitive
     description:
       name: path_provider_windows
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.1.3"
-=======
-    version: "2.0.5"
->>>>>>> 953d765 (feat: Solves Build failing)
   percent_indicator:
     dependency: "direct main"
     description:
@@ -750,22 +610,14 @@ packages:
       name: permission_handler_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "3.9.0"
-=======
-    version: "3.7.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   petitparser:
     dependency: transitive
     description:
       name: petitparser
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "5.0.0"
-=======
-    version: "4.4.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   platform:
     dependency: transitive
     description:
@@ -779,11 +631,7 @@ packages:
       name: plugin_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.1.3"
-=======
-    version: "2.1.2"
->>>>>>> 953d765 (feat: Solves Build failing)
   pool:
     dependency: transitive
     description:
@@ -811,11 +659,7 @@ packages:
       name: pub_semver
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.1.2"
-=======
-    version: "2.1.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   pubspec_parse:
     dependency: transitive
     description:
@@ -836,55 +680,35 @@ packages:
       name: shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.15"
-=======
-    version: "2.0.13"
->>>>>>> 953d765 (feat: Solves Build failing)
   shared_preferences_android:
     dependency: transitive
     description:
       name: shared_preferences_android
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.14"
-=======
-    version: "2.0.11"
->>>>>>> 953d765 (feat: Solves Build failing)
   shared_preferences_ios:
     dependency: transitive
     description:
       name: shared_preferences_ios
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.1.1"
-=======
-    version: "2.1.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   shared_preferences_linux:
     dependency: transitive
     description:
       name: shared_preferences_linux
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.1.1"
-=======
-    version: "2.1.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   shared_preferences_macos:
     dependency: transitive
     description:
       name: shared_preferences_macos
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.4"
-=======
-    version: "2.0.3"
->>>>>>> 953d765 (feat: Solves Build failing)
   shared_preferences_platform_interface:
     dependency: transitive
     description:
@@ -898,33 +722,21 @@ packages:
       name: shared_preferences_web
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.4"
-=======
-    version: "2.0.3"
->>>>>>> 953d765 (feat: Solves Build failing)
   shared_preferences_windows:
     dependency: transitive
     description:
       name: shared_preferences_windows
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.1.1"
-=======
-    version: "2.1.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   shelf:
     dependency: transitive
     description:
       name: shelf
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.4.0"
-=======
-    version: "1.2.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   shelf_web_socket:
     dependency: transitive
     description:
@@ -943,22 +755,14 @@ packages:
       name: source_gen
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.2.2"
-=======
-    version: "1.2.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   source_helper:
     dependency: transitive
     description:
       name: source_helper
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.3.2"
-=======
-    version: "1.3.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   source_span:
     dependency: transitive
     description:
@@ -1007,11 +811,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "0.4.12"
-=======
-    version: "0.4.8"
->>>>>>> 953d765 (feat: Solves Build failing)
   timing:
     dependency: transitive
     description:
@@ -1032,88 +832,56 @@ packages:
       name: url_launcher
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "6.1.6"
-=======
-    version: "6.0.20"
->>>>>>> 953d765 (feat: Solves Build failing)
   url_launcher_android:
     dependency: transitive
     description:
       name: url_launcher_android
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "6.0.19"
-=======
-    version: "6.0.15"
->>>>>>> 953d765 (feat: Solves Build failing)
   url_launcher_ios:
     dependency: transitive
     description:
       name: url_launcher_ios
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "6.0.17"
-=======
-    version: "6.0.15"
->>>>>>> 953d765 (feat: Solves Build failing)
   url_launcher_linux:
     dependency: transitive
     description:
       name: url_launcher_linux
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "3.0.1"
-=======
-    version: "3.0.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   url_launcher_macos:
     dependency: transitive
     description:
       name: url_launcher_macos
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "3.0.1"
-=======
-    version: "3.0.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   url_launcher_platform_interface:
     dependency: transitive
     description:
       name: url_launcher_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.1.1"
-=======
-    version: "2.0.5"
->>>>>>> 953d765 (feat: Solves Build failing)
   url_launcher_web:
     dependency: transitive
     description:
       name: url_launcher_web
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.13"
-=======
-    version: "2.0.9"
->>>>>>> 953d765 (feat: Solves Build failing)
   url_launcher_windows:
     dependency: transitive
     description:
       name: url_launcher_windows
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "3.0.1"
-=======
-    version: "3.0.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   vector_math:
     dependency: transitive
     description:
@@ -1127,55 +895,35 @@ packages:
       name: video_player
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.4.7"
-=======
-    version: "2.3.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   video_player_android:
     dependency: transitive
     description:
       name: video_player_android
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.3.9"
-=======
-    version: "2.3.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   video_player_avfoundation:
     dependency: transitive
     description:
       name: video_player_avfoundation
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.3.7"
-=======
-    version: "2.3.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   video_player_platform_interface:
     dependency: transitive
     description:
       name: video_player_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "5.1.4"
-=======
-    version: "5.1.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   video_player_web:
     dependency: transitive
     description:
       name: video_player_web
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.12"
-=======
-    version: "2.0.7"
->>>>>>> 953d765 (feat: Solves Build failing)
   wakelock:
     dependency: transitive
     description:
@@ -1210,22 +958,14 @@ packages:
       name: wakelock_windows
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "0.2.1"
-=======
-    version: "0.2.0"
->>>>>>> 953d765 (feat: Solves Build failing)
   watcher:
     dependency: transitive
     description:
       name: watcher
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.0.2"
-=======
-    version: "1.0.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   web_socket_channel:
     dependency: transitive
     description:
@@ -1239,33 +979,21 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "3.0.1"
-=======
-    version: "2.4.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   xdg_directories:
     dependency: transitive
     description:
       name: xdg_directories
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "0.2.0+2"
-=======
-    version: "0.2.0+1"
->>>>>>> 953d765 (feat: Solves Build failing)
   xml:
     dependency: transitive
     description:
       name: xml
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "5.4.1"
-=======
-    version: "5.3.1"
->>>>>>> 953d765 (feat: Solves Build failing)
   yaml:
     dependency: transitive
     description:
@@ -1274,10 +1002,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-<<<<<<< HEAD
   dart: ">=2.18.0 <3.0.0"
   flutter: ">=3.0.0"
-=======
-  dart: ">=2.15.0 <3.0.0"
-  flutter: ">=2.10.0"
->>>>>>> 953d765 (feat: Solves Build failing)
