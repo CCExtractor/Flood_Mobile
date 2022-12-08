@@ -43,6 +43,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  bottom_inset_observer:
+    dependency: transitive
+    description:
+      name: bottom_inset_observer
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
+  bottom_sheet:
+    dependency: "direct main"
+    description:
+      name: bottom_sheet
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.1"
   build:
     dependency: transitive
     description:
@@ -155,6 +169,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.16.0"
+  contained_tab_bar_view:
+    dependency: "direct main"
+    description:
+      name: contained_tab_bar_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.0"
+  container_tab_indicator:
+    dependency: transitive
+    description:
+      name: container_tab_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   convert:
     dependency: transitive
     description:
@@ -197,6 +225,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.6"
+  dropdown_button2:
+    dependency: "direct main"
+    description:
+      name: dropdown_button2
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.6.2"
   duration:
     dependency: "direct main"
     description:

@@ -23,6 +23,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flood_mobile/Components/change_theme_button_widget.dart';
 
+import '../Components/RSSFeedButtonWidget.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -92,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 backgroundColor: Theme.of(context).primaryColor,
                 elevation: 0,
                 actions: [
-                  ChangeThemeButtonWidget(),
+                  RSSFeedButtonWidget(),
                   Badge(
                     badgeColor: Theme.of(context).accentColor,
                     badgeContent: Center(
@@ -173,6 +175,10 @@ class _MenuState extends State<Menu> {
                   image: AssetImage(
                     'assets/images/icon.png',
                   ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0),
+                  child: ChangeThemeButtonWidget(),
                 ),
               ],
             ),
