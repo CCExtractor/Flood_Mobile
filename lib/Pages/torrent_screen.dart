@@ -1,4 +1,5 @@
 import 'package:flood_mobile/Components/add_torrent_sheet.dart';
+import 'package:flood_mobile/Components/filter_by_status.dart';
 import 'package:flood_mobile/Components/torrent_tile.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
@@ -13,6 +14,8 @@ class TorrentScreen extends StatefulWidget {
   @override
   _TorrentScreenState createState() => _TorrentScreenState();
 }
+
+List<String> trackerURIsList = [];
 
 class _TorrentScreenState extends State<TorrentScreen> {
   String keyword = '';
@@ -35,10 +38,27 @@ class _TorrentScreenState extends State<TorrentScreen> {
                     ? PullToRevealTopItemList(
                         itemCount: model.torrentList.length,
                         itemBuilder: (BuildContext context, int index) {
+                          trackerURIsList =
+                              model.torrentList[index].trackerURIs;
                           if (model.torrentList[index].name
-                              .toLowerCase()
-                              .contains(keyword.toLowerCase())) {
-                            return TorrentTile(model: model.torrentList[index]);
+                                      .toLowerCase()
+                                      .contains(keyword.toLowerCase()) &&
+                                  model.torrentList[index].status.contains(
+                                      filterStatus
+                                          .toString()
+                                          .split(".")
+                                          .last) ||
+                              model.torrentList[index].trackerURIs
+                                  .toString()
+                                  .contains(trackerURISelected) ||
+                              filterStatus.toString().split(".").last ==
+                                  "all") {
+                            if (model.torrentList[index].name
+                                .toLowerCase()
+                                .contains(keyword.toLowerCase())) {
+                              return TorrentTile(
+                                  model: model.torrentList[index]);
+                            }
                           }
                           return Container();
                         },
@@ -118,6 +138,73 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                       contentPadding: EdgeInsets.symmetric(
                                           horizontal: 20, vertical: 20),
                                       hintText: 'Search Torrent',
+                                      suffixIcon: Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 5),
+                                        child: ActionChip(
+                                          padding: EdgeInsets.all(0),
+                                          avatar: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(0),
+                                                  color: Colors.green,
+                                                ),
+                                                height: 50,
+                                                width: 50,
+                                                child: Icon(
+                                                  Icons.filter_list_alt,
+                                                  color: Colors.white,
+                                                  size: 20,
+                                                ),
+                                              )),
+                                          label: Text(
+                                            trackerURISelected == 'all' ||
+                                                    trackerURISelected ==
+                                                        'null' ||
+                                                    trackerURISelected == ''
+                                                ? '${filterStatus.toString().split(".").last}'
+                                                : trackerURISelected.length > 12
+                                                    ? trackerURISelected
+                                                            .substring(0, 12) +
+                                                        '...'
+                                                    : trackerURISelected,
+                                            style: TextStyle(
+                                              color: ThemeProvider
+                                                  .theme.primaryColorDark,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            showModalBottomSheet(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(15),
+                                                  topLeft: Radius.circular(15),
+                                                ),
+                                              ),
+                                              isScrollControlled: true,
+                                              context: context,
+                                              backgroundColor: ThemeProvider
+                                                  .theme.backgroundColor,
+                                              builder: (context) {
+                                                return FilterByStatus();
+                                              },
+                                            );
+                                          },
+                                          backgroundColor: Colors.transparent,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              side: BorderSide(
+                                                width: 1,
+                                                color: Colors.blueGrey,
+                                              )),
+                                        ),
+                                      ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
