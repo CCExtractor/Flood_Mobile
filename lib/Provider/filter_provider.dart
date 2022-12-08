@@ -7,13 +7,18 @@ enum FilterValue {
   complete,
   stopped,
   active,
-  inactive
+  inactive,
+  error
 }
 
 class FilterProvider extends ChangeNotifier {
   String trackerURISelected = '';
   FilterValue? filterStatus = FilterValue.all;
   List<String> trackerURIsList = [];
+  List<String> trackerURIsListMain = [];
+  List<String> statusList = [];
+  var maptrackerURIs = {};
+  var mapStatus = {};
   void settrackerURISelected(String newtrackerURISelected) {
     trackerURISelected = newtrackerURISelected;
     notifyListeners();
@@ -21,11 +26,25 @@ class FilterProvider extends ChangeNotifier {
 
   void setFilterSelected(FilterValue? newfilterStatus) {
     filterStatus = newfilterStatus;
-    notifyListeners();
   }
 
   void settrackerURIsList(List<String> newtrackerURIsList) {
     trackerURIsList = newtrackerURIsList;
-    notifyListeners();
+  }
+
+  void settrackerURIsListMain(List<String> newtrackerURIsListMain) {
+    trackerURIsListMain = newtrackerURIsListMain;
+  }
+
+  void setmaptrackerURIs(var newmaptrackerURIs) {
+    maptrackerURIs = newmaptrackerURIs;
+  }
+
+  void setmapStatus(var newmapStatus) {
+    mapStatus = newmapStatus;
+  }
+
+  void setstatusList(var newstatusList) {
+    statusList = newstatusList;
   }
 }
