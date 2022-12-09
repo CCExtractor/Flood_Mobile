@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:badges/badges.dart';
@@ -29,11 +30,13 @@ import 'package:uri_to_file/uri_to_file.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flood_mobile/Components/change_theme_button_widget.dart';
 import '../Api/torrent_api.dart';
+import '../Constants/notification_keys.dart';
 import '../Provider/api_provider.dart';
-
 import '../Components/RSSFeedButtonWidget.dart';
 
 class HomeScreen extends StatefulWidget {
+  final GlobalKey<NavigatorState> navigatorKey =
+      new GlobalKey<NavigatorState>();
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -46,6 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    AwesomeNotifications().setListeners(
+      onActionReceivedMethod: NotificationController.onActionReceivedMethod,
+    );
     _processInitialUri();
     _listenForUri();
   }
@@ -194,6 +200,41 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+class NotificationController {
+  /// Use this method to detect when the user taps on a notification or action button
+  static Future<void> onActionReceivedMethod(
+      ReceivedAction receivedAction) async {
+    late bool isPaused;
+    HomeProvider homeModel = Provider.of<HomeProvider>(
+        NavigationService.navigatorKey.currentContext!,
+        listen: false);
+    isPaused = true;
+    final actionKey = receivedAction.buttonKeyPressed;
+
+    // Not a desired action
+    if (actionKey != NotificationConstants.PAUSE_ACTION_KEY &&
+        actionKey != NotificationConstants.RESUME_ACTION_KEY) {
+      return;
+    }
+
+    // Pause downloads
+    if (actionKey == NotificationConstants.PAUSE_ACTION_KEY) {
+      await TorrentApi.stopTorrent(
+          hashes: [homeModel.torrentList[receivedAction.id!].hash],
+          context: NavigationService.navigatorKey.currentContext!);
+      isPaused = true;
+    }
+
+    // Resume downloads
+    else {
+      await TorrentApi.startTorrent(
+          hashes: [homeModel.torrentList[receivedAction.id!].hash],
+          context: NavigationService.navigatorKey.currentContext!);
+      isPaused = false;
+    }
+  }
+}
+
 class Menu extends StatefulWidget {
   @override
   _MenuState createState() => _MenuState();
@@ -312,4 +353,8 @@ class _MenuState extends State<Menu> {
       ),
     );
   }
+}
+
+class NavigationService {
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 }
