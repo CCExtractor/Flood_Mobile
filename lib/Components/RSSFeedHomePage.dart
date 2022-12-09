@@ -88,9 +88,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
             color: ThemeProvider.theme.primaryColorLight,
           ),
           child: ContainedTabBarView(
+            key: Key('Tab view'),
             tabs: [
-              Tab(text: "Feeds"),
-              Tab(text: "Download Rules"),
+              Tab(key: Key('Feeds Tab'), text: "Feeds"),
+              Tab(key: Key('Download Rules Tab'), text: "Download Rules"),
             ],
             tabBarProperties: TabBarProperties(
               indicatorColor: ThemeProvider.theme.textTheme.bodyText1?.color,
@@ -119,6 +120,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                       ),
                       (model.RssFeedsList.isNotEmpty)
                           ? Container(
+                              key: Key("Feeds are fetched"),
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.white38),
                                 borderRadius: BorderRadius.only(
@@ -137,6 +139,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   return Column(
                                     children: [
                                       ListTile(
+                                        key: Key("Feed displayed"),
                                         minLeadingWidth: 0.1,
                                         minVerticalPadding: 0.1,
                                         horizontalTitleGap: 0.1,
@@ -279,6 +282,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                               ),
                             )
                           : Container(
+                              key:
+                                  Key('No existing feeds displaying container'),
                               height: 60,
                               width: double.infinity,
                               decoration: BoxDecoration(
@@ -343,6 +348,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                     padding:
                                         const EdgeInsets.only(bottom: 10.0),
                                     child: TextField(
+                                      key: Key('Label textfield'),
                                       style: TextStyle(
                                         color: ThemeProvider
                                             .theme.textTheme.bodyText1?.color,
@@ -369,6 +375,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                       Container(
                                         width: 150,
                                         child: TextField(
+                                          key: Key('Interval textfield'),
                                           controller: intervalController,
                                           style: TextStyle(
                                             color: ThemeProvider.theme.textTheme
@@ -401,6 +408,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 MainAxisAlignment.center,
                                             children: [
                                               DropdownButtonFormField2(
+                                                key: Key(
+                                                    'Interval type dropdown'),
                                                 decoration: InputDecoration(
                                                   //Add isDense true and zero Padding.
                                                   //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
@@ -507,6 +516,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10.0),
                                     child: TextField(
+                                      key: Key('Url textfield'),
                                       controller: urlController,
                                       style: TextStyle(
                                         color: ThemeProvider
@@ -527,7 +537,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           child: Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 8.0),
-                                            child: Icon(Icons.paste),
+                                            child: Icon(Icons.paste,
+                                                key: Key('Url paste icon')),
                                           ),
                                           onTap: () {
                                             FlutterClipboard.paste()
@@ -652,6 +663,15 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                               height: 10,
                             )
                           : Container(),
+                      Text(
+                        "Browse Feeds",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Montserrat',
+                            color:
+                                ThemeProvider.theme.textTheme.bodyText1?.color),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0),
                         child: Form(
@@ -660,6 +680,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               DropdownButtonFormField2(
+                                key: Key('Browse feeds dropdown'),
                                 decoration: InputDecoration(
                                   //Add isDense true and zero Padding.
                                   //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
@@ -1239,11 +1260,24 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                   color: ThemeProvider.theme.primaryColorLight,
                   padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Text(
+                          "Existing Rules",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
+                              color: ThemeProvider
+                                  .theme.textTheme.bodyText1?.color),
+                        ),
+                      ),
                       (model.RssRulesList.isNotEmpty)
                           ? Container(
+                              key: Key("Rules Displayed"),
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.white38),
                                 borderRadius: BorderRadius.only(
@@ -1461,6 +1495,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                               ),
                             )
                           : Container(
+                              key: Key('No rules defined'),
                               height: 60,
                               width: double.infinity,
                               decoration: BoxDecoration(
@@ -1525,6 +1560,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                     padding:
                                         const EdgeInsets.only(bottom: 10.0),
                                     child: TextField(
+                                      key: Key('Rules label textfield'),
                                       controller: labelRulesController,
                                       style: TextStyle(
                                         color: ThemeProvider
@@ -1569,6 +1605,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             //Add more decoration as you want here
                                             //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
                                           ),
+                                          key: Key('applicable feed dropdown'),
                                           isExpanded: true,
                                           hint: Text(
                                             'Applicable Feed',
@@ -1649,6 +1686,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         Container(
                                           width: 150,
                                           child: TextField(
+                                            key: Key('Match pattern textfield'),
                                             controller: matchpatternController,
                                             style: TextStyle(
                                               color: ThemeProvider.theme
@@ -1674,6 +1712,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         Container(
                                           width: 150,
                                           child: TextField(
+                                            key: Key(
+                                                'Exclude pattern textfield'),
                                             controller:
                                                 excludepatternController,
                                             style: TextStyle(
@@ -1703,6 +1743,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10.0),
                                     child: TextField(
+                                      key: Key('Torrent destination textfield'),
                                       controller: destinationController,
                                       style: TextStyle(
                                         color: ThemeProvider
@@ -1738,6 +1779,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10.0),
                                     child: TextField(
+                                      key: Key('Apply tags textfield'),
                                       controller: tagsController,
                                       style: TextStyle(
                                         color: ThemeProvider
@@ -1777,6 +1819,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         FilterChip(
+                                          key: Key(
+                                              'use as base path filterchip'),
                                           backgroundColor: Colors.grey,
                                           avatar: Container(
                                             height: 30,
@@ -1821,6 +1865,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           },
                                         ),
                                         FilterChip(
+                                          key: Key('starts on load filterchip'),
                                           backgroundColor: Colors.grey,
                                           avatar: Container(
                                             height: 30,

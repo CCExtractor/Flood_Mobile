@@ -21,6 +21,7 @@ jobs:
       - run: flutter pub get
       #       - run: flutter analyze
       - run: flutter format -n --set-exit-if-changed .
+      - run: flutter test
       - run: flutter build apk
 
       - uses: actions/upload-artifact@v1
