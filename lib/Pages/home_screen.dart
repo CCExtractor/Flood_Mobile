@@ -1,6 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:badges/badges.dart';
+import 'package:dio/dio.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
+import 'package:flood_mobile/Components/add_automatic_torrent.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
@@ -20,8 +24,12 @@ import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.d
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:uri_to_file/uri_to_file.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flood_mobile/Components/change_theme_button_widget.dart';
+import '../Api/torrent_api.dart';
+import '../Provider/api_provider.dart';
 
 import '../Components/RSSFeedButtonWidget.dart';
 
@@ -31,9 +39,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  File? _file;
+  late String base64;
+  late String directoryDefault;
+
   @override
   void initState() {
     super.initState();
+    _processInitialUri();
+    _listenForUri();
   }
 
   @override
@@ -43,6 +57,51 @@ class _HomeScreenState extends State<HomeScreen> {
     ClientApi.getClientSettings(context);
     NotificationApi.getNotifications(context: context);
     super.didChangeDependencies();
+  }
+
+  Future<void> _processInitialUri() async {
+    String? uriString = await getInitialLink();
+    _processUriandAddTorrent(uriString);
+  }
+
+  void _listenForUri() {
+    linkStream.listen((uriString) => _processUriandAddTorrent(uriString));
+  }
+
+  Future<void> _processUriandAddTorrent(String? uriString) async {
+    try {
+      if (uriString != null) {
+        _file = await toFile(uriString);
+        List<int> imageBytes = _file!.readAsBytesSync();
+        setState(() {
+          base64 = base64Encode(imageBytes);
+        });
+        showModalBottomSheet(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(15),
+              topLeft: Radius.circular(15),
+            ),
+          ),
+          isScrollControlled: true,
+          context: context,
+          backgroundColor: ThemeProvider.theme.backgroundColor,
+          builder: (context) {
+            return AddAutoTorrent(
+                base64: base64, imageBytes: imageBytes, uriString: uriString);
+          },
+        );
+      }
+    } on UnsupportedError catch (e) {
+      print('Something went wrong. Please try again');
+      print(e.message);
+    } on IOException catch (e) {
+      print('Something went wrong. Please try again');
+      print(e);
+    } on Exception catch (e) {
+      print('Something went wrong. Please try again');
+      print(e.toString());
+    }
   }
 
   @override
