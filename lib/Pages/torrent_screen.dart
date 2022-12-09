@@ -16,6 +16,8 @@ class TorrentScreen extends StatefulWidget {
   _TorrentScreenState createState() => _TorrentScreenState();
 }
 
+List<String> trackerURIsList = [];
+
 class _TorrentScreenState extends State<TorrentScreen> {
   String keyword = '';
 
@@ -127,67 +129,96 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                     ),
                                   ),
                                 ),
-                                Expanded(
-                                  child: Container(
-                                    height: 100,
-                                    padding: EdgeInsets.only(
-                                        left: wp * 0.05, right: wp * 0.05),
-                                    child: TextField(
-                                      onChanged: (value) {
-                                        setState(() {
-                                          keyword = value;
-                                        });
-                                      },
-                                      decoration: InputDecoration(
-                                        isDense: true,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 20),
-                                        hintText: 'Search Torrent',
-                                        suffixIcon: Padding(
-                                          padding: const EdgeInsets.all(5.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.green,
+                              Expanded(
+                                child: Container(
+                                  height: 100,
+                                  padding: EdgeInsets.only(
+                                      left: wp * 0.05, right: wp * 0.05),
+                                  child: TextField(
+                                    onChanged: (value) {
+                                      setState(() {
+                                        keyword = value;
+                                      });
+                                    },
+                                    decoration: InputDecoration(
+                                      isDense: true,
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 20),
+                                      hintText: 'Search Torrent',
+                                      suffixIcon: Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 5),
+                                        child: ActionChip(
+                                          padding: EdgeInsets.all(0),
+                                          avatar: ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: IconButton(
-                                              icon: Icon(
-                                                Icons.filter_list_alt,
-                                                color: Colors.white,
-                                              ),
-                                              onPressed: () {
-                                                showModalBottomSheet(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topRight:
-                                                          Radius.circular(15),
-                                                      topLeft:
-                                                          Radius.circular(15),
-                                                    ),
-                                                  ),
-                                                  isScrollControlled: true,
-                                                  context: context,
-                                                  backgroundColor: ThemeProvider
-                                                      .theme.backgroundColor,
-                                                  builder: (context) {
-                                                    return FilterByStatus();
-                                                  },
-                                                );
-                                              },
+                                                  BorderRadius.circular(4),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(0),
+                                                  color: Colors.green,
+                                                ),
+                                                height: 50,
+                                                width: 50,
+                                                child: Icon(
+                                                  Icons.filter_list_alt,
+                                                  color: Colors.white,
+                                                  size: 20,
+                                                ),
+                                              )),
+                                          label: Text(
+                                            filterModel.trackerURISelected == 'all' ||
+                                                    filterModel.trackerURISelected ==
+                                                        'null' ||
+                                                    filterModel.trackerURISelected == ''
+                                                ? '${filterModel.filterStatus.toString().split(".").last}'
+                                                : filterModel.trackerURISelected.length > 12
+                                                    ? filterModel.trackerURISelected
+                                                            .substring(0, 12) +
+                                                        '...'
+                                                    : filterModel.trackerURISelected,
+                                            style: TextStyle(
+                                              color: ThemeProvider
+                                                  .theme.primaryColorDark,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.normal,
                                             ),
                                           ),
+                                          onPressed: () {
+                                            showModalBottomSheet(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(15),
+                                                  topLeft: Radius.circular(15),
+                                                ),
+                                              ),
+                                              isScrollControlled: true,
+                                              context: context,
+                                              backgroundColor: ThemeProvider
+                                                  .theme.backgroundColor,
+                                              builder: (context) {
+                                                return FilterByStatus();
+                                              },
+                                            );
+                                          },
+                                          backgroundColor: Colors.transparent,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              side: BorderSide(
+                                                width: 1,
+                                                color: Colors.blueGrey,
+                                              )),
                                         ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ],
+                              )],
                             );
                           },
                         )
