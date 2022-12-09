@@ -18,12 +18,16 @@ class FeedsAndRulesModel {
   @JsonKey(name: "_id")
   late String? id;
 
+  @JsonKey(name: "count")
+  late int? count;
+
   FeedsAndRulesModel({
     required this.type,
     required this.url,
     required this.label,
     required this.interval,
     required this.id,
+    required this.count,
   });
 
   factory FeedsAndRulesModel.fromJson(Map<String, dynamic> json) =>

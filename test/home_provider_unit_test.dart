@@ -35,7 +35,8 @@ void main() {
           label: 'test label',
           interval: 0,
           id: 'test id',
-          url: 'test url')
+          url: 'test url',
+          count: 0)
     ];
     final newRssRulesList = [
       RulesModel(
@@ -50,6 +51,7 @@ void main() {
         id: 'test id',
         isBasePath: true,
         startOnLoad: true,
+        count: 0
       )
     ];
 

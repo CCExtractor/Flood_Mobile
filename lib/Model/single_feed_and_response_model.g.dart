@@ -13,6 +13,7 @@ FeedsAndRulesModel _$FeedsAndRulesModelFromJson(Map<String, dynamic> json) =>
       label: json['label'] as String?,
       interval: json['interval'] as int?,
       id: json['_id'] as String?,
+      count: json['count'] as int?,
     );
 
 Map<String, dynamic> _$FeedsAndRulesModelToJson(FeedsAndRulesModel instance) =>

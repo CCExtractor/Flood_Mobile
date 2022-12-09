@@ -24,13 +24,13 @@ void main() {
         label: 'test label',
         interval: 0,
         id: 'test id',
-        url: 'test url'),
+        url: 'test url', count: 0),
     FeedsAndRulesModel(
         type: 'test feed',
         label: 'test label',
         interval: 0,
         id: 'test id',
-        url: 'test url')
+        url: 'test url', count: 0)
   ]);
   when(() => mockHomeProvider.RssRulesList).thenReturn([
     RulesModel(
@@ -44,7 +44,7 @@ void main() {
       destination: 'test destination',
       id: 'test id',
       isBasePath: true,
-      startOnLoad: true,
+      startOnLoad: true, count: 0,
     )
   ]);
 
