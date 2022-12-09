@@ -34,4 +34,5 @@ Map<String, dynamic> _$RulesModelToJson(RulesModel instance) =>
       'startOnLoad': instance.startOnLoad,
       'isBasePath': instance.isBasePath,
       '_id': instance.id,
+      'count': instance.count,
     };

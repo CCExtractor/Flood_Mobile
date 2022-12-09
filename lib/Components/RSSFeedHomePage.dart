@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../Api/delete_feeds_and_rules.dart';
 import '../Api/feed_api.dart';
 import '../Api/rules_api.dart';
+import '../Api/torrent_api.dart';
 import '../Constants/theme_provider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
@@ -27,6 +28,12 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
     'Hours',
     'Days',
   ];
+  bool useAdBasePath = false;
+  bool completed = false;
+  bool sequentialDownload = false;
+
+  final directoryController = TextEditingController();
+  TextEditingController magnetUrlController = new TextEditingController();
 
   String updateFeedId = "";
 
@@ -148,7 +155,16 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       .RssFeedsList[index].label
                                                       .toString()),
                                                   SizedBox(width: 10),
-                                                  Text("0 matches"),
+                                                  Text(model.RssFeedsList[index]
+                                                              .count !=
+                                                          null
+                                                      ? model
+                                                              .RssFeedsList[
+                                                                  index]
+                                                              .count
+                                                              .toString() +
+                                                          " matches"
+                                                      : "0 matches"),
                                                 ],
                                               ),
                                             ),
@@ -590,7 +606,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     interval: int.parse(
                                                         intervalController
                                                             .text),
-                                                    count: 10,
+                                                    count: 0,
                                                     context: context,
                                                   );
                                                 }
@@ -783,6 +799,31 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             height: 50,
                                             child: ElevatedButton(
                                               onPressed: () {
+                                                for (int i = 0;
+                                                    i <
+                                                        model
+                                                            .RssFeedsContentsList
+                                                            .length;
+                                                    i++) {
+                                                  if (model
+                                                      .RssFeedsContentsList[i]
+                                                      .title
+                                                      .toString()
+                                                      .toLowerCase()
+                                                      .contains(
+                                                          searchTermController
+                                                              .text
+                                                              .toLowerCase())) {
+                                                    magnetUrlController.text =
+                                                        model
+                                                            .RssFeedsContentsList[
+                                                                i]
+                                                            .urls[0];
+                                                  }
+                                                }
+                                                directoryController.text =
+                                                    clientModel.clientSettings
+                                                        .directoryDefault;
                                                 showModalBottomSheet(
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
@@ -798,10 +839,287 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   backgroundColor: ThemeProvider
                                                       .theme.backgroundColor,
                                                   builder: (context) {
-                                                    return AddTorrentSheet(
-                                                        clientSettings:
-                                                            clientModel
-                                                                .clientSettings);
+                                                    return ListView(
+                                                        shrinkWrap: true,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    top: 20),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      right: 20,
+                                                                      left: 20,
+                                                                      bottom:
+                                                                          5),
+                                                                  child: Text(
+                                                                    "Selected Magnet Link",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            15,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontFamily:
+                                                                            'Montserrat',
+                                                                        color: ThemeProvider
+                                                                            .theme
+                                                                            .textTheme
+                                                                            .bodyText1
+                                                                            ?.color),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      left:
+                                                                          20.0,
+                                                                      right:
+                                                                          20),
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            TextFormField(
+                                                                          controller:
+                                                                              magnetUrlController,
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                                                          ),
+                                                                          decoration:
+                                                                              InputDecoration(
+                                                                            prefixIcon:
+                                                                                Icon(
+                                                                              Icons.link,
+                                                                              color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                                                                            ),
+                                                                            suffix:
+                                                                                GestureDetector(
+                                                                              child: Icon(Icons.paste),
+                                                                              onTap: () {
+                                                                                FlutterClipboard.paste().then((value) {
+                                                                                  setState(() {
+                                                                                    magnetUrlController = TextEditingController(text: value);
+                                                                                  });
+                                                                                });
+                                                                              },
+                                                                            ),
+                                                                            labelText:
+                                                                                'Torrent',
+                                                                            hintText:
+                                                                                'Torrent URL or Magnet Link',
+                                                                            labelStyle:
+                                                                                TextStyle(
+                                                                              fontFamily: 'Montserrat',
+                                                                              color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                                                                            ),
+                                                                            border:
+                                                                                OutlineInputBorder(
+                                                                              borderRadius: BorderRadius.circular(8),
+                                                                            ),
+                                                                          ),
+                                                                          validator:
+                                                                              (String? value) {
+                                                                            if (value == null ||
+                                                                                (value.isEmpty)) {
+                                                                              return 'Field cannot be empty';
+                                                                            }
+                                                                            return null;
+                                                                          },
+                                                                        ),
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                Container(
+                                                                  color: ThemeProvider
+                                                                      .theme
+                                                                      .primaryColorLight,
+                                                                  padding: EdgeInsets.symmetric(
+                                                                      vertical:
+                                                                          25,
+                                                                      horizontal:
+                                                                          20),
+                                                                  child: Form(
+                                                                    key:
+                                                                        _formKey,
+                                                                    child:
+                                                                        Column(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .center,
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .min,
+                                                                      children: <
+                                                                          Widget>[
+                                                                        TextField(
+                                                                          controller:
+                                                                              directoryController,
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                                                          ),
+                                                                          decoration:
+                                                                              InputDecoration(
+                                                                            prefixIcon:
+                                                                                Icon(
+                                                                              Icons.folder,
+                                                                              color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                                                                            ),
+                                                                            labelText:
+                                                                                'Destination',
+                                                                            hintText:
+                                                                                'Destination',
+                                                                            labelStyle:
+                                                                                TextStyle(fontFamily: 'Montserrat', color: ThemeProvider.theme.textTheme.bodyText1?.color),
+                                                                            border:
+                                                                                OutlineInputBorder(
+                                                                              borderRadius: BorderRadius.circular(8),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              20,
+                                                                        ),
+                                                                        CheckboxListTile(
+                                                                          activeColor: ThemeProvider
+                                                                              .theme
+                                                                              .primaryColorDark,
+                                                                          tileColor: ThemeProvider
+                                                                              .theme
+                                                                              .primaryColorLight,
+                                                                          shape:
+                                                                              RoundedRectangleBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(8),
+                                                                          ),
+                                                                          title:
+                                                                              Text(
+                                                                            'Use as Base Path',
+                                                                            style:
+                                                                                TextStyle(fontSize: 14),
+                                                                          ),
+                                                                          value:
+                                                                              useAdBasePath,
+                                                                          onChanged:
+                                                                              (bool? value) {
+                                                                            setState(() {
+                                                                              useAdBasePath = value ?? false;
+                                                                            });
+                                                                          },
+                                                                        ),
+                                                                        CheckboxListTile(
+                                                                          activeColor: ThemeProvider
+                                                                              .theme
+                                                                              .primaryColorDark,
+                                                                          tileColor: ThemeProvider
+                                                                              .theme
+                                                                              .primaryColorLight,
+                                                                          shape:
+                                                                              RoundedRectangleBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(8),
+                                                                          ),
+                                                                          title:
+                                                                              Text(
+                                                                            'Sequential Download',
+                                                                            style:
+                                                                                TextStyle(fontSize: 14),
+                                                                          ),
+                                                                          value:
+                                                                              sequentialDownload,
+                                                                          onChanged:
+                                                                              (bool? value) {
+                                                                            setState(() {
+                                                                              sequentialDownload = value ?? false;
+                                                                            });
+                                                                          },
+                                                                        ),
+                                                                        CheckboxListTile(
+                                                                          activeColor: ThemeProvider
+                                                                              .theme
+                                                                              .primaryColorDark,
+                                                                          tileColor: ThemeProvider
+                                                                              .theme
+                                                                              .primaryColorLight,
+                                                                          shape:
+                                                                              RoundedRectangleBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(8),
+                                                                          ),
+                                                                          title:
+                                                                              Text(
+                                                                            'Completed',
+                                                                            style:
+                                                                                TextStyle(fontSize: 14),
+                                                                          ),
+                                                                          value:
+                                                                              completed,
+                                                                          onChanged:
+                                                                              (bool? value) {
+                                                                            setState(() {
+                                                                              completed = value ?? false;
+                                                                            });
+                                                                          },
+                                                                        ),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              15,
+                                                                        ),
+                                                                        Container(
+                                                                          height:
+                                                                              MediaQuery.of(context).size.height * 0.06,
+                                                                          decoration:
+                                                                              BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                                                                          child:
+                                                                              ElevatedButton(
+                                                                            onPressed:
+                                                                                () async {
+                                                                              //The file has been chosen
+                                                                              TorrentApi.addTorrentMagnet(magnetUrl: magnetUrlController.text, destination: directoryController.text, isBasePath: useAdBasePath, isSequential: sequentialDownload, isCompleted: completed, context: context);
+                                                                              Navigator.pop(context);
+                                                                              Navigator.pop(context);
+                                                                            },
+                                                                            style:
+                                                                                ElevatedButton.styleFrom(
+                                                                              elevation: 0,
+                                                                              shape: RoundedRectangleBorder(
+                                                                                borderRadius: BorderRadius.circular(14.0),
+                                                                              ),
+                                                                              primary: ThemeProvider.theme.primaryColorDark,
+                                                                            ),
+                                                                            child:
+                                                                                Center(
+                                                                              child: Text(
+                                                                                "Add Torrent",
+                                                                                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ]);
                                                   },
                                                 );
                                               },
@@ -878,15 +1196,14 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                 children: [
                                                                   Text(
                                                                       model.RssFeedsContentsList[index].title.toString().length <
-                                                                              40
+                                                                              38
                                                                           ? model
                                                                               .RssFeedsContentsList[
                                                                                   index]
                                                                               .title
                                                                               .toString()
-                                                                          : model.RssFeedsContentsList[index].title.toString().substring(
-                                                                              0,
-                                                                              40),
+                                                                          : model.RssFeedsContentsList[index].title.toString().substring(0, 38) +
+                                                                              "..",
                                                                       style: TextStyle(
                                                                           fontSize:
                                                                               14)),
@@ -994,7 +1311,16 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       .RssRulesList[index].label
                                                       .toString()),
                                                   SizedBox(width: 10),
-                                                  Text("1 matches"),
+                                                  Text(model.RssRulesList[index]
+                                                              .count !=
+                                                          null
+                                                      ? model
+                                                              .RssRulesList[
+                                                                  index]
+                                                              .count
+                                                              .toString() +
+                                                          " matches"
+                                                      : "0 matches"),
                                                   SizedBox(width: 10),
                                                   Container(
                                                     decoration: BoxDecoration(
@@ -1655,7 +1981,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   tags: [tagsController.text],
                                                   startOnLoad: startOnLoad,
                                                   isBasePath: useAsBasePath,
-                                                  count: 1,
+                                                  count: 0,
                                                   context: context,
                                                 );
                                                 FeedsApi.listAllFeedsAndRules(

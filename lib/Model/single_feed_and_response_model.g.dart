@@ -22,4 +22,5 @@ Map<String, dynamic> _$FeedsAndRulesModelToJson(FeedsAndRulesModel instance) =>
       'label': instance.label,
       'interval': instance.interval,
       '_id': instance.id,
+      'count': instance.count,
     };
