@@ -12,6 +12,7 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:provider/provider.dart';
 import 'Constants/notification_keys.dart';
 import 'Pages/home_screen.dart';
+import 'Provider/filter_provider.dart';
 import 'Route/route_generator.dart';
 import 'Route/routes.dart';
 
@@ -93,6 +94,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ThemeProvider>(
           create: (context) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider<FilterProvider>(
+          create: (context) => FilterProvider(),
         ),
       ],
       child: Consumer<ThemeProvider>(

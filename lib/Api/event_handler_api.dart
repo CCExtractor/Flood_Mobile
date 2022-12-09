@@ -10,6 +10,9 @@ import 'package:flutter_client_sse/flutter_client_sse.dart';
 import 'package:json_patch/json_patch.dart';
 import 'package:provider/provider.dart';
 import '../Constants/notification_keys.dart';
+import '../Provider/filter_provider.dart';
+
+String torrentLength = '';
 
 class EventHandlerApi {
   //Sets the transfer rate if the event returned is TRANSFER_SUMMARY_FULL_UPDATE
@@ -48,6 +51,7 @@ class EventHandlerApi {
       //Setting the full list of torrent
       Provider.of<HomeProvider>(context, listen: false)
           .setTorrentList(torrentList);
+      filterDataRephrasor(torrentList, context);
     }
   }
 
@@ -100,6 +104,12 @@ class EventHandlerApi {
         print(e.toString());
       }
     }
+
+    if (torrentList.length > int.parse(torrentLength) ||
+        torrentList.length < int.parse(torrentLength)) {
+      filterDataRephrasor(torrentList, context);
+    }
+
     //Setting the full list of torrent
     Provider.of<HomeProvider>(context, listen: false)
         .setTorrentList(torrentList);
@@ -182,5 +192,67 @@ class EventHandlerApi {
       title: homeModel.torrentList[id].name,
       body: "Download Finished",
     ));
+  }
+  static Future<void> filterDataRephrasor(
+      List<TorrentModel> torrentList, context) async {
+    var maptrackerURIs = {};
+    var mapStatus = {};
+    List<String> statusList = [];
+    torrentLength = torrentList.length.toString();
+    try {
+      for (int i = 0; i < torrentList.length; i++) {
+        for (int j = 0; j < torrentList[i].trackerURIs.length; j++) {
+          Provider.of<FilterProvider>(context, listen: false)
+              .trackerURIsListMain
+              .add(torrentList[i].trackerURIs[j].toString());
+          Provider.of<FilterProvider>(context, listen: false)
+              .settrackerURIsListMain(
+              Provider.of<FilterProvider>(context, listen: false)
+                  .trackerURIsListMain);
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+    try {
+      Provider.of<FilterProvider>(context, listen: false)
+          .trackerURIsListMain
+          .forEach((element) {
+        if (!maptrackerURIs.containsKey(element)) {
+          maptrackerURIs[element] = 1;
+        } else {
+          maptrackerURIs[element] += 1;
+        }
+      });
+      Provider.of<FilterProvider>(context, listen: false)
+          .setmaptrackerURIs(maptrackerURIs);
+    } catch (e) {
+      print(e);
+    }
+    try {
+      for (int i = 0; i < torrentList.length; i++) {
+        for (int j = 0; j < torrentList[i].status.length; j++) {
+          statusList.add(torrentList[i].status[j].toString());
+        }
+      }
+      Provider.of<FilterProvider>(context, listen: false)
+          .setstatusList(statusList);
+    } catch (e) {
+      print(e);
+    }
+
+    try {
+      statusList.forEach((element) {
+        if (!mapStatus.containsKey(element)) {
+          mapStatus[element] = 1;
+        } else {
+          mapStatus[element] += 1;
+        }
+      });
+      Provider.of<FilterProvider>(context, listen: false)
+          .setmapStatus(mapStatus);
+    } catch (error) {
+      print(error);
+    }
   }
 }
