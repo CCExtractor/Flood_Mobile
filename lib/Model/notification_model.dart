@@ -29,11 +29,11 @@ class NotificationModel {
 
 class NotificationContentModel {
   int ts;
-  String name;
-  String id;
+  String? name;
+  String? id;
   bool read;
-  String identification;
-  String status;
+  String? identification;
+  String? status;
 
   NotificationContentModel({
     required this.identification,
@@ -55,7 +55,7 @@ class NotificationContentModel {
     return NotificationContentModel(
       identification: json['_id'],
       id: json['id'],
-      name: json['data']['name'],
+      name: json['data']['title'],
       read: json['read'],
       ts: json['ts'],
       status: status,

@@ -30,11 +30,16 @@ android {
     defaultConfig {
         multiDexEnabled true
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        multiDexEnabled true
         applicationId "com.hustlecreatives.flood_mobile"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+    }
+
+    dependencies {
+        implementation 'com.android.support:multidex:1.0.3'
     }
 
     buildTypes {
