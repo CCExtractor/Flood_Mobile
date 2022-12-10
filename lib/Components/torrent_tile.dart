@@ -55,6 +55,7 @@ class _TorrentTileState extends State<TorrentTile> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: FocusedMenuHolder(
+          key: Key('Long Press Torrent Tile Menu'),
           menuBoxDecoration: BoxDecoration(
               color: ThemeProvider.theme.textTheme.bodyText1?.color,
               borderRadius: BorderRadius.circular(50)),
@@ -136,6 +137,7 @@ class _TorrentTileState extends State<TorrentTile> {
                       children: [
                         Expanded(
                           child: LinearPercentIndicator(
+                            key: Key('Linear Progress Indicator'),
                             padding: EdgeInsets.all(0),
                             lineHeight: 5.0,
                             percent:
@@ -166,6 +168,7 @@ class _TorrentTileState extends State<TorrentTile> {
                           (widget.model.status.contains('downloading'))
                               ? 'Downloading  '
                               : 'Stopped  ',
+                          key: Key('status widget'),
                           style: TextStyle(
                             color:
                                 ThemeProvider.theme.textTheme.bodyText1?.color,
@@ -180,6 +183,7 @@ class _TorrentTileState extends State<TorrentTile> {
                                       ),
                                       abbreviated: true)
                               : 'ETA : ∞',
+                          key: Key('eta widget'),
                           style: TextStyle(
                               color: ThemeProvider
                                   .theme.textTheme.bodyText1?.color),
@@ -190,6 +194,7 @@ class _TorrentTileState extends State<TorrentTile> {
                       height: hp * 0.002,
                     ),
                     Row(
+                      key: Key('download done data widget'),
                       children: [
                         Text(
                           filesize(widget.model.bytesDone.toInt()),
@@ -378,7 +383,7 @@ class _TorrentTileState extends State<TorrentTile> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('Size'),
-                          Text(widget.model.directory),
+                          Text(filesize(widget.model.sizeBytes.toInt())),
                         ],
                       ),
                       SizedBox(
@@ -400,6 +405,7 @@ class _TorrentTileState extends State<TorrentTile> {
                         width: double.infinity,
                         height: 60,
                         child: OutlinedButton(
+                          key: Key('Files button'),
                           onPressed: () {
                             Navigator.of(context).pushNamed(
                                 Routes.torrentContentScreenRoute,

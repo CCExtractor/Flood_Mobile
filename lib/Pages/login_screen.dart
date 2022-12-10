@@ -8,7 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../Components/custom_dialog_animation.dart';
+import '../Provider/login_status_data_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -46,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: <Widget>[
                       Image(
+                        key: Key('Flood Icon'),
                         image: AssetImage(
                           'assets/images/icon.png',
                         ),
@@ -75,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Stack(
                           children: [
                             TextFormField(
+                              key: Key('Url TextField'),
                               controller: urlController,
                               style: TextStyle(
                                 color: ThemeProvider
@@ -149,6 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       Container(
                         child: TextFormField(
+                          key: Key('Username TextField'),
                           controller: usernameController,
                           style: TextStyle(
                             color:
@@ -205,6 +211,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Stack(
                           children: <Widget>[
                             TextFormField(
+                              key: Key('Password TextField'),
                               controller: passwordController,
                               style: TextStyle(
                                 color: ThemeProvider
@@ -302,6 +309,45 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Navigator.of(context).pushNamedAndRemoveUntil(
                                     Routes.homeScreenRoute,
                                     (Route<dynamic> route) => false);
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                bool batteryOptimizationInfoSeen =
+                                    prefs.getBool(
+                                            'batteryOptimizationInfoSeen') ??
+                                        false;
+                                if (batteryOptimizationInfoSeen == false) {
+                                  Provider.of<LoginStatusDataProvider>(context,
+                                          listen: false)
+                                      .setBatteryOptimizationInfoStatus(true);
+                                  Future.delayed(
+                                    Duration.zero,
+                                    () => showGeneralDialog(
+                                      barrierDismissible: false,
+                                      context: context,
+                                      barrierColor: Colors.black54,
+                                      // space around dialog
+                                      transitionDuration:
+                                          Duration(milliseconds: 1000),
+                                      transitionBuilder:
+                                          (context, a1, a2, child) {
+                                        return ScaleTransition(
+                                          scale: CurvedAnimation(
+                                              parent: a1,
+                                              curve: Curves.elasticOut,
+                                              reverseCurve:
+                                                  Curves.easeOutCubic),
+                                          child: CustomDialogAnimation(),
+                                        );
+                                      },
+                                      pageBuilder: (BuildContext context,
+                                          Animation<double> animation,
+                                          Animation<double>
+                                              secondaryAnimation) {
+                                        return Container();
+                                      },
+                                    ),
+                                  );
+                                }
                               } else {
                                 Toasts.showFailToast(msg: 'Login Error');
                               }
@@ -331,6 +377,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: hp * 0.06,
                       ),
                       IconButton(
+                        key: Key('Github Icon key'),
                         icon: FaIcon(
                           FontAwesomeIcons.github,
                         ),
