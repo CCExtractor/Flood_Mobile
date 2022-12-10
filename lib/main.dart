@@ -3,6 +3,7 @@ import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
+import 'package:flood_mobile/Provider/login_status_data_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:provider/provider.dart';
+import 'Provider/color_provider.dart';
 import 'Constants/notification_keys.dart';
 import 'Pages/home_screen.dart';
 import 'Provider/filter_provider.dart';
@@ -79,6 +81,12 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<UserDetailProvider>(
           create: (context) => UserDetailProvider(),
+        ),
+        ChangeNotifierProvider<LoginStatusDataProvider>(
+          create: (context) => LoginStatusDataProvider(),
+        ),
+        ChangeNotifierProvider<ColorProvider>(
+          create: (context) => ColorProvider(),
         ),
         ChangeNotifierProvider<HomeProvider>(
           create: (context) => HomeProvider(),

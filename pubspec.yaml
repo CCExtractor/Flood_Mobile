@@ -61,6 +61,8 @@ dependencies:
   permission_handler: ^8.1.4+2
   flutter_client_sse: ^0.1.0
   url_launcher: ^6.0.12
+  optimize_battery: ^0.0.4
+  smooth_page_indicator: ^1.0.0+2
   awesome_notifications: ^0.7.0-beta.1
   uri_to_file: ^0.2.0
   bottom_sheet: ^3.1.1
