@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
@@ -9,7 +10,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:provider/provider.dart';
-
+import 'Constants/notification_keys.dart';
+import 'Pages/home_screen.dart';
+import 'Provider/filter_provider.dart';
 import 'Route/route_generator.dart';
 import 'Route/routes.dart';
 
@@ -18,6 +21,47 @@ Future<void> main() async {
   await FlutterDownloader.initialize(
       debug: true // optional: set false to disable printing logs to console
       );
+  await AwesomeNotifications().initialize(
+    'resource://drawable/ic_launcher',
+    [
+      NotificationChannel(
+        channelKey: NotificationConstants.DOWNLOADS_CHANNEL_KEY,
+        channelGroupKey: NotificationConstants.CHANNEL_GROUP_KEY1,
+        channelName: 'Downloads Channel',
+        channelDescription:
+            'Notification channel for displaying torrent downloads',
+        defaultColor: Color(0xff0E2537),
+        ledColor: Colors.white,
+        playSound: true,
+        enableVibration: true,
+        locked: true,
+      ),
+      NotificationChannel(
+        channelKey: NotificationConstants.PUSH_NOTIFICATION_CHANNEL_KEY,
+        channelGroupKey: NotificationConstants.CHANNEL_GROUP_KEY2,
+        channelName: 'Push Notification Channel',
+        channelDescription:
+            'Notification channel for displaying push notifications',
+        defaultColor: Color(0xff0E2537),
+        ledColor: Colors.white,
+        playSound: true,
+        enableVibration: true,
+      ),
+    ],
+    channelGroups: [
+      NotificationChannelGroup(
+          channelGroupName: 'Download Channel',
+          channelGroupKey: NotificationConstants.CHANNEL_GROUP_KEY1),
+      NotificationChannelGroup(
+          channelGroupName: 'Push Notification Channel',
+          channelGroupKey: NotificationConstants.CHANNEL_GROUP_KEY2),
+    ],
+  );
+  AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+    if (!isAllowed) {
+      AwesomeNotifications().requestPermissionToSendNotifications();
+    }
+  });
   runApp(
     MyApp(),
   );
@@ -51,12 +95,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<ThemeProvider>(
           create: (context) => ThemeProvider(),
         ),
+        ChangeNotifierProvider<FilterProvider>(
+          create: (context) => FilterProvider(),
+        ),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, _) {
           print(ThemeProvider.themeMode);
           return KeyboardDismissOnTap(
             child: MaterialApp(
+              navigatorKey: NavigationService.navigatorKey,
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               themeMode: ThemeProvider.themeMode,

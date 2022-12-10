@@ -46,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: <Widget>[
                       Image(
+                        key: Key('Flood Icon'),
                         image: AssetImage(
                           'assets/images/icon.png',
                         ),
@@ -75,6 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Stack(
                           children: [
                             TextFormField(
+                              key: Key('Url TextField'),
                               controller: urlController,
                               style: TextStyle(
                                 color: ThemeProvider
@@ -149,6 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       Container(
                         child: TextFormField(
+                          key: Key('Username TextField'),
                           controller: usernameController,
                           style: TextStyle(
                             color:
@@ -205,6 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Stack(
                           children: <Widget>[
                             TextFormField(
+                              key: Key('Password TextField'),
                               controller: passwordController,
                               style: TextStyle(
                                 color: ThemeProvider
@@ -331,6 +335,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: hp * 0.06,
                       ),
                       IconButton(
+                        key: Key('Github Icon key'),
                         icon: FaIcon(
                           FontAwesomeIcons.github,
                         ),

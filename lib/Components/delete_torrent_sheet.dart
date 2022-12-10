@@ -45,6 +45,7 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Checkbox(
+                key: Key('Checkbox delete with data'),
                 value: deleteWithData,
                 activeColor: ThemeProvider.theme.primaryColorDark,
                 onChanged: (bool? value) {
