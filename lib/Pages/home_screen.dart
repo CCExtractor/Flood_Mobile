@@ -262,7 +262,7 @@ class _MenuState extends State<Menu> {
     double hp = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
-        color: ThemeProvider.theme.backgroundColor,
+        color: ThemeProvider.theme.scaffoldBackgroundColor,
         width: double.maxFinite,
         height: double.maxFinite,
         padding: const EdgeInsets.only(top: 30.0, left: 5),

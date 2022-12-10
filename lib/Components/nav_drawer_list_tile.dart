@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Constants/theme_provider.dart';
+
 // ignore: must_be_immutable
 class NavDrawerListTile extends StatelessWidget {
   VoidCallback onTap;
@@ -16,11 +18,13 @@ class NavDrawerListTile extends StatelessWidget {
       onTap: onTap,
       leading: Icon(
         icon,
-        color: Colors.white,
+        color: ThemeProvider.theme.textTheme.bodyText1?.color,
       ),
       title: Text(
         title,
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
+        style: TextStyle(
+            color: ThemeProvider.theme.textTheme.bodyText1?.color,
+            fontWeight: FontWeight.w400),
       ),
     );
   }
