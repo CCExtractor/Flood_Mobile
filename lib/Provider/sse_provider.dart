@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_client_sse/flutter_client_sse.dart';
 import 'package:provider/provider.dart';
 
+import 'home_provider.dart';
+
 class SSEProvider extends ChangeNotifier {
   SSEModel sseModel = SSEModel(data: '', id: '', event: '');
 
@@ -31,14 +33,43 @@ class SSEProvider extends ChangeNotifier {
             break;
           case Events.TORRENT_LIST_FULL_UPDATE:
             EventHandlerApi.setFullTorrentList(model: event, context: context);
+            for (int i = 0;
+                i <
+                    Provider.of<HomeProvider>(context, listen: false)
+                        .torrentList
+                        .length;
+                i++) {
+              EventHandlerApi.showNotification(i, context);
+            }
             break;
           case Events.TORRENT_LIST_DIFF_CHANGE:
             EventHandlerApi.updateFullTorrentList(
                 model: event, context: context);
+            for (int i = 0;
+                i <
+                    Provider.of<HomeProvider>(context, listen: false)
+                        .torrentList
+                        .length;
+                i++) {
+              EventHandlerApi.showNotification(i, context);
+            }
             break;
           case Events.NOTIFICATION_COUNT_CHANGE:
             EventHandlerApi.setNotificationCount(
                 model: event, context: context);
+            for (int j = 0;
+                j <
+                    Provider.of<HomeProvider>(context, listen: false)
+                        .torrentList
+                        .length;
+                j++) {
+              if (Provider.of<HomeProvider>(context, listen: false)
+                  .torrentList[j]
+                  .status
+                  .contains('complete')) {
+                EventHandlerApi.showEventNotification(j, context);
+              }
+            }
             break;
         }
         notifyListeners();
