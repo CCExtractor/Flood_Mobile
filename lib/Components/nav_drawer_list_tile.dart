@@ -22,7 +22,9 @@ class NavDrawerListTile extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: TextStyle(color: ThemeProvider.theme.textTheme.bodyText1?.color, fontWeight: FontWeight.w400),
+        style: TextStyle(
+            color: ThemeProvider.theme.textTheme.bodyText1?.color,
+            fontWeight: FontWeight.w400),
       ),
     );
   }
