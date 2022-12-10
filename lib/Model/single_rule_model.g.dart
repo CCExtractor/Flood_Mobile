@@ -19,6 +19,7 @@ RulesModel _$RulesModelFromJson(Map<String, dynamic> json) => RulesModel(
       startOnLoad: json['startOnLoad'] as bool,
       isBasePath: json['isBasePath'] as bool,
       id: json['_id'] as String?,
+      count: json['count'] as int?,
     );
 
 Map<String, dynamic> _$RulesModelToJson(RulesModel instance) =>

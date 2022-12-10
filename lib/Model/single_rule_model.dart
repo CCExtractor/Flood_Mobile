@@ -36,6 +36,9 @@ class RulesModel {
   @JsonKey(name: "_id")
   late String? id;
 
+  @JsonKey(name: "count")
+  late int? count;
+
   RulesModel({
     required this.type,
     required this.label,
@@ -48,6 +51,7 @@ class RulesModel {
     required this.startOnLoad,
     required this.isBasePath,
     required this.id,
+    required this.count,
   });
 
   factory RulesModel.fromJson(Map<String, dynamic> json) =>
