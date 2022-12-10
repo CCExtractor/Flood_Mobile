@@ -44,7 +44,11 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ThemeProvider.theme.primaryColorLight,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+        color: ThemeProvider.theme.primaryColorLight,
+      ),
       padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
       child: Form(
         key: _formKey,
@@ -53,6 +57,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             TextField(
+              key: Key('Destination TextField'),
               controller: directoryController,
               style: TextStyle(
                 color: ThemeProvider.theme.textTheme.bodyText1?.color,
@@ -77,6 +82,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
             ),
             (isMagnetSelected)
                 ? TextFormField(
+                    key: Key('Torrent magnet link textfield'),
                     controller: magnetUrlController,
                     style: TextStyle(
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,

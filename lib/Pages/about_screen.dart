@@ -21,6 +21,7 @@ class _AboutScreenState extends State<AboutScreen> {
               width: double.infinity,
             ),
             Image(
+              key: Key('App icon asset image'),
               image: AssetImage(
                 'assets/images/icon.png',
               ),
@@ -33,15 +34,24 @@ class _AboutScreenState extends State<AboutScreen> {
               children: [
                 SvgPicture.network(
                   'https://img.shields.io/github/v/release/CCExtractor/Flood_Mobile?include_prereleases',
+                  key: Key('release badge key'),
                 ),
                 SvgPicture.network(
-                    'https://img.shields.io/github/last-commit/CCExtractor/Flood_Mobile?label=commit'),
+                  'https://img.shields.io/github/last-commit/CCExtractor/Flood_Mobile?label=commit',
+                  key: Key('commit badge key'),
+                ),
                 SvgPicture.network(
-                    'https://img.shields.io/github/workflow/status/CCExtractor/Flood_Mobile/Flutter%20CI'),
+                  'https://img.shields.io/github/workflow/status/CCExtractor/Flood_Mobile/Flutter%20CI',
+                  key: Key('build badge key'),
+                ),
                 SvgPicture.network(
-                    'https://img.shields.io/github/issues/CCExtractor/Flood_Mobile'),
+                  'https://img.shields.io/github/issues/CCExtractor/Flood_Mobile',
+                  key: Key('issues badge key'),
+                ),
                 SvgPicture.network(
-                    'https://img.shields.io/github/issues-pr/CCExtractor/Flood_Mobile?label=PR')
+                  'https://img.shields.io/github/issues-pr/CCExtractor/Flood_Mobile?label=PR',
+                  key: Key('PR badge key'),
+                )
               ],
             ),
             SizedBox(
@@ -52,6 +62,7 @@ class _AboutScreenState extends State<AboutScreen> {
               children: [
                 Text(
                   'Flood is a monitoring service for various torrent clients. It\'s a Node.js service that communicates with your favorite torrent client and serves a decent mobile UI for administration. This project is based on the original Flood project.',
+                  key: Key('App info text key'),
                   style: TextStyle(
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,
                       fontSize: 15),
@@ -71,6 +82,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 ),
                 Text(
                   'If you have a specific issue or bug, please file a GitHub issue. Please join the Flood Discord server to discuss feature requests and implementation details.',
+                  key: Key('Feedback text key'),
                   style: TextStyle(
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,
                       fontSize: 15),
@@ -90,6 +102,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 ),
                 Text(
                   'Check out the Wiki for more information.',
+                  key: Key('More info text key'),
                   style: TextStyle(
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,
                       fontSize: 15),
