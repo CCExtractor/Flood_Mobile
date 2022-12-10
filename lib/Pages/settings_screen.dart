@@ -352,6 +352,7 @@ class SpeedLimitSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTileCard(
+      key: Key('Speed Limit Expansion Card'),
       onExpansionChanged: (value) {},
       elevation: 0,
       expandedColor: ThemeProvider.theme.primaryColor,
@@ -361,6 +362,7 @@ class SpeedLimitSection extends StatelessWidget {
       contentPadding: EdgeInsets.all(0),
       children: [
         Column(
+          key: Key('Speed Limit options column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -383,6 +385,7 @@ class SpeedLimitSection extends StatelessWidget {
                     ),
                     child: Center(
                       child: DropdownButtonFormField<String>(
+                        key: Key('Download Speed Dropdown'),
                         dropdownColor: ThemeProvider.theme.primaryColorLight,
                         isExpanded: true,
                         decoration: InputDecoration(
@@ -427,6 +430,7 @@ class SpeedLimitSection extends StatelessWidget {
                     ),
                     child: Center(
                       child: DropdownButtonFormField<String>(
+                        key: Key('Upload Speed Dropdown'),
                         dropdownColor: ThemeProvider.theme.backgroundColor,
                         isExpanded: true,
                         decoration: InputDecoration(
@@ -540,6 +544,7 @@ class AuthenticationSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTileCard(
+      key: Key('Authentication Expansion Card'),
       onExpansionChanged: (value) {},
       elevation: 0,
       expandedColor: ThemeProvider.theme.primaryColor,
@@ -549,6 +554,7 @@ class AuthenticationSection extends StatelessWidget {
       contentPadding: EdgeInsets.all(0),
       children: [
         Column(
+          key: Key('Authentication option display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SText(text: 'Add User'),
@@ -602,6 +608,7 @@ class AuthenticationSection extends StatelessWidget {
                     child: ButtonTheme(
                       alignedDropdown: true,
                       child: DropdownButton<String>(
+                        key: Key('Authentication dropdown'),
                         isExpanded: true,
                         value: client,
                         icon: const Icon(Icons.keyboard_arrow_down_rounded),
@@ -798,6 +805,7 @@ class ResourceSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTileCard(
+      key: Key('Resources Expansion Card'),
       onExpansionChanged: (value) {},
       elevation: 0,
       expandedColor: ThemeProvider.theme.primaryColor,
@@ -807,6 +815,7 @@ class ResourceSection extends StatelessWidget {
       contentPadding: EdgeInsets.all(0),
       children: [
         Column(
+          key: Key('Resources options display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SText(text: 'Disk'),
@@ -840,6 +849,7 @@ class ResourceSection extends StatelessWidget {
                         height: 5,
                       ),
                       CheckboxListTile(
+                        key: Key('Verify Hash checkbox'),
                         activeColor: ThemeProvider.theme.backgroundColor,
                         tileColor: ThemeProvider.theme.primaryColorLight,
                         shape: RoundedRectangleBorder(
@@ -917,6 +927,7 @@ class ConnectivitySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTileCard(
+      key: Key('Connectivity Expansion Card'),
       elevation: 0,
       expandedColor: ThemeProvider.theme.primaryColor,
       baseColor: ThemeProvider.theme.primaryColor,
@@ -925,6 +936,7 @@ class ConnectivitySection extends StatelessWidget {
       contentPadding: EdgeInsets.all(0),
       children: [
         Column(
+          key: Key('Connectivity option display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SText(text: 'Incoming Connections'),
@@ -941,6 +953,7 @@ class ConnectivitySection extends StatelessWidget {
               children: [
                 Expanded(
                   child: CheckboxListTile(
+                    key: Key('Checkbox Randomize Port'),
                     activeColor: ThemeProvider.theme.primaryColorDark,
                     tileColor: ThemeProvider.theme.primaryColorLight,
                     shape: RoundedRectangleBorder(
@@ -959,6 +972,7 @@ class ConnectivitySection extends StatelessWidget {
                 ),
                 Expanded(
                   child: CheckboxListTile(
+                    key: Key('Checkbox Open Port'),
                     activeColor: ThemeProvider.theme.primaryColorDark,
                     tileColor: ThemeProvider.theme.primaryColorLight,
                     shape: RoundedRectangleBorder(
@@ -997,6 +1011,7 @@ class ConnectivitySection extends StatelessWidget {
               children: [
                 Expanded(
                   child: CheckboxListTile(
+                    key: Key('Checkbox Enable DHT'),
                     activeColor: ThemeProvider.theme.primaryColorDark,
                     tileColor: ThemeProvider.theme.primaryColorLight,
                     shape: RoundedRectangleBorder(
@@ -1019,6 +1034,7 @@ class ConnectivitySection extends StatelessWidget {
                 ),
                 Expanded(
                   child: CheckboxListTile(
+                    key: Key('Checkbox Enable Peer Exchange'),
                     activeColor: ThemeProvider.theme.primaryColorDark,
                     tileColor: ThemeProvider.theme.primaryColorLight,
                     shape: RoundedRectangleBorder(
@@ -1108,6 +1124,7 @@ class BandwidthSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTileCard(
+      key: Key('Bandwidth Expansion Card'),
       initiallyExpanded: true,
       onExpansionChanged: (value) {},
       elevation: 0,
@@ -1118,6 +1135,7 @@ class BandwidthSection extends StatelessWidget {
       contentPadding: EdgeInsets.all(0),
       children: [
         Column(
+          key: Key('Bandwidth option display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SText(text: 'Transfer Rate Throttles'),
