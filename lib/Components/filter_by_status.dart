@@ -45,10 +45,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     Icons.star_sharp,
                     size: 20,
                     color:
-                    filterModel.filterStatus.toString().split(".").last ==
-                        "all"
-                        ? Colors.blue
-                        : ThemeProvider.theme.textTheme.bodyText1?.color,
+                        filterModel.filterStatus.toString().split(".").last ==
+                                "all"
+                            ? Colors.blue
+                            : ThemeProvider.theme.textTheme.bodyText1?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -57,13 +57,13 @@ class _FilterByStatusState extends State<FilterByStatus> {
                       Text('All',
                           style: TextStyle(
                               color: filterModel.filterStatus
-                                  .toString()
-                                  .split(".")
-                                  .last ==
-                                  "all"
+                                          .toString()
+                                          .split(".")
+                                          .last ==
+                                      "all"
                                   ? Colors.blue
                                   : ThemeProvider
-                                  .theme.textTheme.bodyText1?.color,
+                                      .theme.textTheme.bodyText1?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -82,10 +82,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: filterModel.filterStatus
-                              .toString()
-                              .split(".")
-                              .last ==
-                              "all"
+                                      .toString()
+                                      .split(".")
+                                      .last ==
+                                  "all"
                               ? Colors.blue
                               : Colors.blueGrey,
                         ),
@@ -109,10 +109,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     Icons.download_sharp,
                     size: 20,
                     color:
-                    filterModel.filterStatus.toString().split(".").last ==
-                        "downloading"
-                        ? Colors.blue
-                        : ThemeProvider.theme.textTheme.bodyText1?.color,
+                        filterModel.filterStatus.toString().split(".").last ==
+                                "downloading"
+                            ? Colors.blue
+                            : ThemeProvider.theme.textTheme.bodyText1?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -121,13 +121,13 @@ class _FilterByStatusState extends State<FilterByStatus> {
                       Text('Downloading',
                           style: TextStyle(
                               color: filterModel.filterStatus
-                                  .toString()
-                                  .split(".")
-                                  .last ==
-                                  "downloading"
+                                          .toString()
+                                          .split(".")
+                                          .last ==
+                                      "downloading"
                                   ? Colors.blue
                                   : ThemeProvider
-                                  .theme.textTheme.bodyText1?.color,
+                                      .theme.textTheme.bodyText1?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -138,10 +138,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         child: Center(
                           child: Text(
                               filterModel.mapStatus.keys
-                                  .toList()
-                                  .contains('downloading')
+                                      .toList()
+                                      .contains('downloading')
                                   ? filterModel.mapStatus['downloading']
-                                  .toString()
+                                      .toString()
                                   : '0',
                               style: TextStyle(
                                   color: Colors.black45,
@@ -152,10 +152,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: filterModel.filterStatus
-                              .toString()
-                              .split(".")
-                              .last ==
-                              "downloading"
+                                      .toString()
+                                      .split(".")
+                                      .last ==
+                                  "downloading"
                               ? Colors.blue
                               : Colors.blueGrey,
                         ),
@@ -179,10 +179,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     Icons.upload_sharp,
                     size: 20,
                     color:
-                    filterModel.filterStatus.toString().split(".").last ==
-                        "seeding"
-                        ? Colors.blue
-                        : ThemeProvider.theme.textTheme.bodyText1?.color,
+                        filterModel.filterStatus.toString().split(".").last ==
+                                "seeding"
+                            ? Colors.blue
+                            : ThemeProvider.theme.textTheme.bodyText1?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -191,13 +191,13 @@ class _FilterByStatusState extends State<FilterByStatus> {
                       Text('Seeding',
                           style: TextStyle(
                               color: filterModel.filterStatus
-                                  .toString()
-                                  .split(".")
-                                  .last ==
-                                  "seeding"
+                                          .toString()
+                                          .split(".")
+                                          .last ==
+                                      "seeding"
                                   ? Colors.blue
                                   : ThemeProvider
-                                  .theme.textTheme.bodyText1?.color,
+                                      .theme.textTheme.bodyText1?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -208,8 +208,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         child: Center(
                           child: Text(
                               filterModel.mapStatus.keys
-                                  .toList()
-                                  .contains('seeding')
+                                      .toList()
+                                      .contains('seeding')
                                   ? filterModel.mapStatus['seeding'].toString()
                                   : '0',
                               style: TextStyle(
@@ -221,10 +221,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: filterModel.filterStatus
-                              .toString()
-                              .split(".")
-                              .last ==
-                              "seeding"
+                                      .toString()
+                                      .split(".")
+                                      .last ==
+                                  "seeding"
                               ? Colors.blue
                               : Colors.blueGrey,
                         ),
@@ -248,10 +248,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     Icons.done,
                     size: 20,
                     color:
-                    filterModel.filterStatus.toString().split(".").last ==
-                        "complete"
-                        ? Colors.blue
-                        : ThemeProvider.theme.textTheme.bodyText1?.color,
+                        filterModel.filterStatus.toString().split(".").last ==
+                                "complete"
+                            ? Colors.blue
+                            : ThemeProvider.theme.textTheme.bodyText1?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -260,13 +260,13 @@ class _FilterByStatusState extends State<FilterByStatus> {
                       Text('Complete',
                           style: TextStyle(
                               color: filterModel.filterStatus
-                                  .toString()
-                                  .split(".")
-                                  .last ==
-                                  "complete"
+                                          .toString()
+                                          .split(".")
+                                          .last ==
+                                      "complete"
                                   ? Colors.blue
                                   : ThemeProvider
-                                  .theme.textTheme.bodyText1?.color,
+                                      .theme.textTheme.bodyText1?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -277,8 +277,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         child: Center(
                           child: Text(
                               filterModel.mapStatus.keys
-                                  .toList()
-                                  .contains('complete')
+                                      .toList()
+                                      .contains('complete')
                                   ? filterModel.mapStatus['complete'].toString()
                                   : '0',
                               style: TextStyle(
@@ -290,10 +290,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: filterModel.filterStatus
-                              .toString()
-                              .split(".")
-                              .last ==
-                              "complete"
+                                      .toString()
+                                      .split(".")
+                                      .last ==
+                                  "complete"
                               ? Colors.blue
                               : Colors.blueGrey,
                         ),
@@ -317,10 +317,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     Icons.stop,
                     size: 20,
                     color:
-                    filterModel.filterStatus.toString().split(".").last ==
-                        "stopped"
-                        ? Colors.blue
-                        : ThemeProvider.theme.textTheme.bodyText1?.color,
+                        filterModel.filterStatus.toString().split(".").last ==
+                                "stopped"
+                            ? Colors.blue
+                            : ThemeProvider.theme.textTheme.bodyText1?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -329,13 +329,13 @@ class _FilterByStatusState extends State<FilterByStatus> {
                       Text('Stopped',
                           style: TextStyle(
                               color: filterModel.filterStatus
-                                  .toString()
-                                  .split(".")
-                                  .last ==
-                                  "stopped"
+                                          .toString()
+                                          .split(".")
+                                          .last ==
+                                      "stopped"
                                   ? Colors.blue
                                   : ThemeProvider
-                                  .theme.textTheme.bodyText1?.color,
+                                      .theme.textTheme.bodyText1?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -346,8 +346,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         child: Center(
                           child: Text(
                               filterModel.mapStatus.keys
-                                  .toList()
-                                  .contains('stopped')
+                                      .toList()
+                                      .contains('stopped')
                                   ? filterModel.mapStatus['stopped'].toString()
                                   : '0',
                               style: TextStyle(
@@ -359,10 +359,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: filterModel.filterStatus
-                              .toString()
-                              .split(".")
-                              .last ==
-                              "stopped"
+                                      .toString()
+                                      .split(".")
+                                      .last ==
+                                  "stopped"
                               ? Colors.blue
                               : Colors.blueGrey,
                         ),
@@ -386,10 +386,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     Icons.trending_up_outlined,
                     size: 20,
                     color:
-                    filterModel.filterStatus.toString().split(".").last ==
-                        "active"
-                        ? Colors.blue
-                        : ThemeProvider.theme.textTheme.bodyText1?.color,
+                        filterModel.filterStatus.toString().split(".").last ==
+                                "active"
+                            ? Colors.blue
+                            : ThemeProvider.theme.textTheme.bodyText1?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -398,13 +398,13 @@ class _FilterByStatusState extends State<FilterByStatus> {
                       Text('Active',
                           style: TextStyle(
                               color: filterModel.filterStatus
-                                  .toString()
-                                  .split(".")
-                                  .last ==
-                                  "active"
+                                          .toString()
+                                          .split(".")
+                                          .last ==
+                                      "active"
                                   ? Colors.blue
                                   : ThemeProvider
-                                  .theme.textTheme.bodyText1?.color,
+                                      .theme.textTheme.bodyText1?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -415,8 +415,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         child: Center(
                           child: Text(
                               filterModel.mapStatus.keys
-                                  .toList()
-                                  .contains('active')
+                                      .toList()
+                                      .contains('active')
                                   ? filterModel.mapStatus['active'].toString()
                                   : '0',
                               style: TextStyle(
@@ -428,10 +428,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: filterModel.filterStatus
-                              .toString()
-                              .split(".")
-                              .last ==
-                              "active"
+                                      .toString()
+                                      .split(".")
+                                      .last ==
+                                  "active"
                               ? Colors.blue
                               : Colors.blueGrey,
                         ),
@@ -455,10 +455,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     Icons.trending_down_outlined,
                     size: 20,
                     color:
-                    filterModel.filterStatus.toString().split(".").last ==
-                        "inactive"
-                        ? Colors.blue
-                        : ThemeProvider.theme.textTheme.bodyText1?.color,
+                        filterModel.filterStatus.toString().split(".").last ==
+                                "inactive"
+                            ? Colors.blue
+                            : ThemeProvider.theme.textTheme.bodyText1?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -467,13 +467,13 @@ class _FilterByStatusState extends State<FilterByStatus> {
                       Text('Inactive',
                           style: TextStyle(
                               color: filterModel.filterStatus
-                                  .toString()
-                                  .split(".")
-                                  .last ==
-                                  "inactive"
+                                          .toString()
+                                          .split(".")
+                                          .last ==
+                                      "inactive"
                                   ? Colors.blue
                                   : ThemeProvider
-                                  .theme.textTheme.bodyText1?.color,
+                                      .theme.textTheme.bodyText1?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -484,8 +484,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         child: Center(
                           child: Text(
                               filterModel.mapStatus.keys
-                                  .toList()
-                                  .contains('inactive')
+                                      .toList()
+                                      .contains('inactive')
                                   ? filterModel.mapStatus['inactive'].toString()
                                   : '0',
                               style: TextStyle(
@@ -497,10 +497,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: filterModel.filterStatus
-                              .toString()
-                              .split(".")
-                              .last ==
-                              "inactive"
+                                      .toString()
+                                      .split(".")
+                                      .last ==
+                                  "inactive"
                               ? Colors.blue
                               : Colors.blueGrey,
                         ),
@@ -524,10 +524,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     Icons.error,
                     size: 20,
                     color:
-                    filterModel.filterStatus.toString().split(".").last ==
-                        "error"
-                        ? Colors.blue
-                        : ThemeProvider.theme.textTheme.bodyText1?.color,
+                        filterModel.filterStatus.toString().split(".").last ==
+                                "error"
+                            ? Colors.blue
+                            : ThemeProvider.theme.textTheme.bodyText1?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -536,13 +536,13 @@ class _FilterByStatusState extends State<FilterByStatus> {
                       Text('Error',
                           style: TextStyle(
                               color: filterModel.filterStatus
-                                  .toString()
-                                  .split(".")
-                                  .last ==
-                                  "error"
+                                          .toString()
+                                          .split(".")
+                                          .last ==
+                                      "error"
                                   ? Colors.blue
                                   : ThemeProvider
-                                  .theme.textTheme.bodyText1?.color,
+                                      .theme.textTheme.bodyText1?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -553,8 +553,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         child: Center(
                           child: Text(
                               filterModel.mapStatus.keys
-                                  .toList()
-                                  .contains('error')
+                                      .toList()
+                                      .contains('error')
                                   ? filterModel.mapStatus['error'].toString()
                                   : '0',
                               style: TextStyle(
@@ -566,10 +566,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: filterModel.filterStatus
-                              .toString()
-                              .split(".")
-                              .last ==
-                              "error"
+                                      .toString()
+                                      .split(".")
+                                      .last ==
+                                  "error"
                               ? Colors.blue
                               : Colors.blueGrey,
                         ),
@@ -604,13 +604,13 @@ class _FilterByStatusState extends State<FilterByStatus> {
                       Text('All',
                           style: TextStyle(
                               color: filterModel.filterStatus
-                                  .toString()
-                                  .split(".")
-                                  .last ==
-                                  "all"
+                                          .toString()
+                                          .split(".")
+                                          .last ==
+                                      "all"
                                   ? Colors.blue
                                   : ThemeProvider
-                                  .theme.textTheme.bodyText1?.color,
+                                      .theme.textTheme.bodyText1?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -629,10 +629,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: filterModel.filterStatus
-                              .toString()
-                              .split(".")
-                              .last ==
-                              "all"
+                                      .toString()
+                                      .split(".")
+                                      .last ==
+                                  "all"
                               ? Colors.blue
                               : Colors.blueGrey,
                         ),
@@ -659,19 +659,19 @@ class _FilterByStatusState extends State<FilterByStatus> {
                       return ListTile(
                         minLeadingWidth: 2,
                         visualDensity:
-                        VisualDensity(horizontal: -4, vertical: -2),
+                            VisualDensity(horizontal: -4, vertical: -2),
                         title: Row(
                           children: [
                             Text(
                                 filterModel.maptrackerURIs.keys.toList()[index],
                                 style: TextStyle(
                                     color: filterModel.maptrackerURIs.keys
-                                        .toList()[index] ==
-                                        filterModel.trackerURISelected
-                                            .toString()
+                                                .toList()[index] ==
+                                            filterModel.trackerURISelected
+                                                .toString()
                                         ? Colors.blue
                                         : ThemeProvider
-                                        .theme.textTheme.bodyText1?.color,
+                                            .theme.textTheme.bodyText1?.color,
                                     fontFamily: 'Montserrat',
                                     fontSize: 16,
                                     fontWeight: FontWeight.normal)),
@@ -682,8 +682,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                               child: Center(
                                 child: Text(
                                     filterModel.maptrackerURIs[filterModel
-                                        .maptrackerURIs.keys
-                                        .toList()[index]]
+                                            .maptrackerURIs.keys
+                                            .toList()[index]]
                                         .toString(),
                                     style: TextStyle(
                                         color: Colors.black45,
@@ -694,9 +694,9 @@ class _FilterByStatusState extends State<FilterByStatus> {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: filterModel.maptrackerURIs.keys
-                                    .toList()[index] ==
-                                    filterModel.trackerURISelected
-                                        .toString()
+                                            .toList()[index] ==
+                                        filterModel.trackerURISelected
+                                            .toString()
                                     ? Colors.blue
                                     : Colors.blueGrey,
                               ),

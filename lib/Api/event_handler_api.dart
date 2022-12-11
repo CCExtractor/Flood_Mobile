@@ -193,6 +193,7 @@ class EventHandlerApi {
       body: "Download Finished",
     ));
   }
+
   static Future<void> filterDataRephrasor(
       List<TorrentModel> torrentList, context) async {
     var maptrackerURIs = {};
@@ -207,8 +208,8 @@ class EventHandlerApi {
               .add(torrentList[i].trackerURIs[j].toString());
           Provider.of<FilterProvider>(context, listen: false)
               .settrackerURIsListMain(
-              Provider.of<FilterProvider>(context, listen: false)
-                  .trackerURIsListMain);
+                  Provider.of<FilterProvider>(context, listen: false)
+                      .trackerURIsListMain);
         }
       }
     } catch (e) {

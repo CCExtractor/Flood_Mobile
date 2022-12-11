@@ -5,6 +5,7 @@ import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Pages/home_screen.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
+import 'package:flood_mobile/Provider/filter_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
@@ -88,6 +89,9 @@ void main() {
         ),
         ChangeNotifierProvider<ThemeProvider>(
           create: (context) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider<FilterProvider>(
+          create: (context) => FilterProvider(),
         ),
       ],
       child: Consumer<ThemeProvider>(

@@ -40,19 +40,18 @@ void main() {
     ];
     final newRssRulesList = [
       RulesModel(
-        type: 'test rules',
-        label: 'test label',
-        feedIDs: ['test feedIDs'],
-        field: 'test field',
-        tags: ['test tags'],
-        match: 'test match',
-        exclude: 'test exclude',
-        destination: 'test destination',
-        id: 'test id',
-        isBasePath: true,
-        startOnLoad: true,
-        count: 0
-      )
+          type: 'test rules',
+          label: 'test label',
+          feedIDs: ['test feedIDs'],
+          field: 'test field',
+          tags: ['test tags'],
+          match: 'test match',
+          exclude: 'test exclude',
+          destination: 'test destination',
+          id: 'test id',
+          isBasePath: true,
+          startOnLoad: true,
+          count: 0)
     ];
 
     test(
