@@ -38,7 +38,7 @@ git clone https://github.com/CCExtractor/Flood_Mobile.git
 2. Navigate to project's root directory:
 
 ```bash
-cd flood_mobile
+cd Flood_Mobile
 ```
 
 3. Check for Flutter setup and connected devices:
