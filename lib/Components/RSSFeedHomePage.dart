@@ -611,13 +611,16 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     context: context,
                                                   );
                                                 }
-                                                final addFeedSnackbar = addFloodSnackBar(
-                                                    SnackbarType.information,
-                                                    'New Feed added successfully',
-                                                    'Dismiss');
+                                                final addFeedSnackbar =
+                                                    addFloodSnackBar(
+                                                        SnackbarType
+                                                            .information,
+                                                        'New Feed added successfully',
+                                                        'Dismiss');
 
                                                 ScaffoldMessenger.of(context)
-                                                    .showSnackBar(addFeedSnackbar);
+                                                    .showSnackBar(
+                                                        addFeedSnackbar);
                                                 FeedsApi.listAllFeedsAndRules(
                                                     context: context);
                                                 if (isUpdateFeedSelected) {
@@ -1992,13 +1995,16 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   count: 0,
                                                   context: context,
                                                 );
-                                                final addRuleSnackbar = addFloodSnackBar(
-                                                    SnackbarType.information,
-                                                    'New Rule added successfully',
-                                                    'Dismiss');
+                                                final addRuleSnackbar =
+                                                    addFloodSnackBar(
+                                                        SnackbarType
+                                                            .information,
+                                                        'New Rule added successfully',
+                                                        'Dismiss');
 
                                                 ScaffoldMessenger.of(context)
-                                                    .showSnackBar(addRuleSnackbar);
+                                                    .showSnackBar(
+                                                        addRuleSnackbar);
                                                 FeedsApi.listAllFeedsAndRules(
                                                     context: context);
                                               });
