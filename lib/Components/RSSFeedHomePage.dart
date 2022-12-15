@@ -5,6 +5,7 @@ import 'package:flood_mobile/Api/update_feed_api.dart';
 import 'package:flood_mobile/Model/single_feed_and_response_model.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flood_mobile/Components/flood_snackbar.dart';
 import 'package:provider/provider.dart';
 import '../Api/delete_feeds_and_rules.dart';
 import '../Api/feed_api.dart';
@@ -610,6 +611,13 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     context: context,
                                                   );
                                                 }
+                                                final addFeedSnackbar = addFloodSnackBar(
+                                                    SnackbarType.information,
+                                                    'New Feed added successfully',
+                                                    'Dismiss');
+
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(addFeedSnackbar);
                                                 FeedsApi.listAllFeedsAndRules(
                                                     context: context);
                                                 if (isUpdateFeedSelected) {
@@ -1984,6 +1992,13 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   count: 0,
                                                   context: context,
                                                 );
+                                                final addRuleSnackbar = addFloodSnackBar(
+                                                    SnackbarType.information,
+                                                    'New Rule added successfully',
+                                                    'Dismiss');
+
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(addRuleSnackbar);
                                                 FeedsApi.listAllFeedsAndRules(
                                                     context: context);
                                               });
