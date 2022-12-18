@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 import '../Constants/notification_keys.dart';
 import '../Provider/filter_provider.dart';
 
-String torrentLength = '';
+String torrentLength = '0';
 
 class EventHandlerApi {
   //Sets the transfer rate if the event returned is TRANSFER_SUMMARY_FULL_UPDATE
