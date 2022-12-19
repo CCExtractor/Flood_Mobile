@@ -17,6 +17,7 @@ import 'Pages/home_screen.dart';
 import 'Provider/filter_provider.dart';
 import 'Route/route_generator.dart';
 import 'Route/routes.dart';
+import 'package:animated_theme_switcher/animated_theme_switcher.dart' as ThemePackage;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -111,15 +112,18 @@ class MyApp extends StatelessWidget {
         builder: (context, themeProvider, _) {
           print(ThemeProvider.themeMode);
           return KeyboardDismissOnTap(
-            child: MaterialApp(
-              navigatorKey: NavigationService.navigatorKey,
-              debugShowCheckedModeBanner: false,
-              title: 'Flutter Demo',
-              themeMode: ThemeProvider.themeMode,
-              theme: MyThemes.lightTheme,
-              darkTheme: MyThemes.darkTheme,
-              initialRoute: Routes.splashScreenRoute,
-              onGenerateRoute: RouteGenerator.generateRoute,
+            child: ThemePackage.ThemeProvider(
+              initTheme: ThemeProvider.theme,
+              child: MaterialApp(
+                navigatorKey: NavigationService.navigatorKey,
+                debugShowCheckedModeBanner: false,
+                title: 'Flutter Demo',
+                themeMode: ThemeProvider.themeMode,
+                theme: MyThemes.lightTheme,
+                darkTheme: MyThemes.darkTheme,
+                initialRoute: Routes.splashScreenRoute,
+                onGenerateRoute: RouteGenerator.generateRoute,
+              ),
             ),
           );
         },

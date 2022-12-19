@@ -14,7 +14,7 @@ class ThemeProvider extends ChangeNotifier {
     } else {
       themeMode = ThemeMode.dark;
     }
-    notifyListeners();
+    // notifyListeners();
   }
 }
 

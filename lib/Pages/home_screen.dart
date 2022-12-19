@@ -1,3 +1,4 @@
+import 'package:animated_theme_switcher/animated_theme_switcher.dart' as ThemePackage;
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'dart:convert';
 import 'dart:io';
@@ -116,89 +117,91 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return KeyboardDismissOnTap(
       child: SimpleHiddenDrawer(
-        withShadow: true,
-        slidePercent: 80,
-        contentCornerRadius: 40,
-        menu: Menu(),
-        screenSelectedBuilder: (position, controller) {
-          Widget screenCurrent = Container();
-          switch (position) {
-            case 0:
-              screenCurrent = TorrentScreen();
-              break;
-            case 1:
-              screenCurrent = TorrentScreen();
-              break;
-            case 2:
-              screenCurrent = SettingsScreen();
-              break;
-            case 5:
-              screenCurrent = AboutScreen();
-              break;
-          }
-          return Consumer<HomeProvider>(builder: (context, homeModel, child) {
-            return Scaffold(
-              appBar: AppBar(
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.menu,
-                    color: ThemeProvider.theme.textTheme.bodyText1?.color,
-                  ),
-                  onPressed: () {
-                    controller.toggle();
-                  },
-                ),
-                title: Image(
-                  key: Key('Flood Icon'),
-                  image: AssetImage(
-                    'assets/images/icon.png',
-                  ),
-                  width: 60,
-                  height: 60,
-                ),
-                centerTitle: true,
-                backgroundColor: Theme.of(context).primaryColor,
-                elevation: 0,
-                actions: [
-                  RSSFeedButtonWidget(),
-                  Badge(
-                    key: Key('Badge Widget'),
-                    badgeColor: Theme.of(context).accentColor,
-                    badgeContent: Center(
-                      child: Text(
-                        homeModel.unreadNotifications.toString(),
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    position: BadgePosition(top: 0, end: 3),
-                    child: IconButton(
+          withShadow: true,
+          slidePercent: 80,
+          contentCornerRadius: 40,
+          menu: Menu(),
+          screenSelectedBuilder: (position, controller) {
+            Widget screenCurrent = Container();
+            switch (position) {
+              case 0:
+                screenCurrent = TorrentScreen();
+                break;
+              case 1:
+                screenCurrent = TorrentScreen();
+                break;
+              case 2:
+                screenCurrent = SettingsScreen();
+                break;
+              case 5:
+                screenCurrent = AboutScreen();
+                break;
+            }
+            return Consumer<HomeProvider>(builder: (context, homeModel, child) {
+              return ThemePackage.ThemeSwitchingArea(
+                child: Scaffold(
+                  appBar: AppBar(
+                    leading: IconButton(
                       icon: Icon(
-                        Icons.notifications,
+                        Icons.menu,
+                        color: ThemeProvider.theme.textTheme.bodyText1?.color,
                       ),
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              key: Key('Notification Alert Dialog'),
-                              elevation: 0,
-                              backgroundColor: Theme.of(context).primaryColor,
-                              content: notificationPopupDialogueContainer(
-                                context: context,
-                              ),
-                            );
-                          },
-                        );
+                        controller.toggle();
                       },
                     ),
+                    title: Image(
+                      key: Key('Flood Icon'),
+                      image: AssetImage(
+                        'assets/images/icon.png',
+                      ),
+                      width: 60,
+                      height: 60,
+                    ),
+                    centerTitle: true,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    elevation: 0,
+                    actions: [
+                      RSSFeedButtonWidget(),
+                      Badge(
+                        key: Key('Badge Widget'),
+                        badgeColor: Theme.of(context).accentColor,
+                        badgeContent: Center(
+                          child: Text(
+                            homeModel.unreadNotifications.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        position: BadgePosition(top: 0, end: 3),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.notifications,
+                          ),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  key: Key('Notification Alert Dialog'),
+                                  elevation: 0,
+                                  backgroundColor: Theme.of(context).primaryColor,
+                                  content: notificationPopupDialogueContainer(
+                                    context: context,
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              body: screenCurrent,
-            );
-          });
-        },
-      ),
+                  body: screenCurrent,
+                ),
+              );
+            });
+          },
+        ),
     );
   }
 }
@@ -260,100 +263,102 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: Container(
-        color: ThemeProvider.theme.scaffoldBackgroundColor,
-        width: double.maxFinite,
-        height: double.maxFinite,
-        padding: const EdgeInsets.only(top: 30.0, left: 5),
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image(
-                  key: Key('Flood Icon menu'),
-                  width: 80,
-                  height: 80,
-                  image: AssetImage(
-                    'assets/images/icon.png',
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 30.0),
-                  child: ChangeThemeButtonWidget(),
-                ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 18.0, top: 20, bottom: 20),
-              child: Row(
+    return ThemePackage.ThemeSwitchingArea(
+      child: Scaffold(
+        body: Container(
+          color: ThemeProvider.theme.scaffoldBackgroundColor,
+          width: double.maxFinite,
+          height: double.maxFinite,
+          padding: const EdgeInsets.only(top: 30.0, left: 5),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SvgPicture.network(
-                    'https://img.shields.io/github/v/release/CCExtractor/Flood_Mobile?include_prereleases',
-                    key: Key('Release Shield'),
+                  Image(
+                    key: Key('Flood Icon menu'),
+                    width: 80,
+                    height: 80,
+                    image: AssetImage(
+                      'assets/images/icon.png',
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30.0),
+                    child: ChangeThemeButtonWidget(),
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: hp * 0.01,
-            ),
-            NavDrawerListTile(
-                icon: Icons.dashboard,
-                onTap: () {
-                  controller.position = 0;
-                  controller.toggle();
-                },
-                title: 'Torrents'),
-            NavDrawerListTile(
-                icon: Icons.settings,
-                onTap: () {
-                  controller.position = 2;
-                  controller.toggle();
-                },
-                title: 'Settings'),
-            NavDrawerListTile(
-              icon: Icons.exit_to_app,
-              onTap: () async {
-                showDialog(
-                  context: context,
-                  builder: (context) => LogOutAlert(
-                    logoutOnClick: () async {
-                      controller.toggle();
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      prefs.setString('floodToken', '');
-                      Provider.of<UserDetailProvider>(context, listen: false)
-                          .setToken('');
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          Routes.loginScreenRoute,
-                          (Route<dynamic> route) => false);
-                    },
-                  ),
-                );
-              },
-              title: 'Logout',
-            ),
-            NavDrawerListTile(
-                icon: FontAwesomeIcons.github,
-                onTap: () {
-                  controller.toggle();
-                  launch(
-                    'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
+              Padding(
+                padding: EdgeInsets.only(left: 18.0, top: 20, bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SvgPicture.network(
+                      'https://img.shields.io/github/v/release/CCExtractor/Flood_Mobile?include_prereleases',
+                      key: Key('Release Shield'),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: hp * 0.01,
+              ),
+              NavDrawerListTile(
+                  icon: Icons.dashboard,
+                  onTap: () {
+                    controller.position = 0;
+                    controller.toggle();
+                  },
+                  title: 'Torrents'),
+              NavDrawerListTile(
+                  icon: Icons.settings,
+                  onTap: () {
+                    controller.position = 2;
+                    controller.toggle();
+                  },
+                  title: 'Settings'),
+              NavDrawerListTile(
+                icon: Icons.exit_to_app,
+                onTap: () async {
+                  showDialog(
+                    context: context,
+                    builder: (context) => LogOutAlert(
+                      logoutOnClick: () async {
+                        controller.toggle();
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.setString('floodToken', '');
+                        Provider.of<UserDetailProvider>(context, listen: false)
+                            .setToken('');
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            Routes.loginScreenRoute,
+                            (Route<dynamic> route) => false);
+                      },
+                    ),
                   );
                 },
-                title: 'GitHub'),
-            NavDrawerListTile(
-                icon: Icons.info,
-                onTap: () {
-                  controller.position = 5;
-                  controller.toggle();
-                },
-                title: 'About'),
-          ],
+                title: 'Logout',
+              ),
+              NavDrawerListTile(
+                  icon: FontAwesomeIcons.github,
+                  onTap: () {
+                    controller.toggle();
+                    launch(
+                      'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
+                    );
+                  },
+                  title: 'GitHub'),
+              NavDrawerListTile(
+                  icon: Icons.info,
+                  onTap: () {
+                    controller.position = 5;
+                    controller.toggle();
+                  },
+                  title: 'About'),
+            ],
+          ),
         ),
       ),
     );
