@@ -1,5 +1,3 @@
-import 'package:animated_theme_switcher/animated_theme_switcher.dart'
-    as ThemePackage;
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Api/client_api.dart';

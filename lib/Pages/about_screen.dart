@@ -1,5 +1,3 @@
-import 'package:animated_theme_switcher/animated_theme_switcher.dart'
-    as ThemePackage;
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

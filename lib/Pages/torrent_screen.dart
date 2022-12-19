@@ -1,5 +1,3 @@
-import 'package:animated_theme_switcher/animated_theme_switcher.dart'
-    as ThemePackage;
 import 'package:flood_mobile/Components/add_torrent_sheet.dart';
 import 'package:flood_mobile/Components/filter_by_status.dart';
 import 'package:flood_mobile/Components/bottom_floating_menu_button.dart';
