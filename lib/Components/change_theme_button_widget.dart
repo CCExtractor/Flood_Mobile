@@ -12,13 +12,13 @@ class ChangeThemeButtonWidget extends StatelessWidget {
     return ThemePackage.ThemeSwitcher.withTheme(builder: (context, switcher, theme) {
       return IconButton(
         onPressed: () {
+          themeProvider.toggleTheme();
           switcher.changeTheme(
             theme: theme == MyThemes.darkTheme
                 ? MyThemes.lightTheme
                 : MyThemes.darkTheme,
             isReversed: false,
           );
-          themeProvider.toggleTheme();
         },
         icon: Icon(themeProvider.isDarkMode
             ? Icons.wb_sunny_rounded

@@ -138,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 break;
             }
             return Consumer<HomeProvider>(builder: (context, homeModel, child) {
-              return ThemePackage.ThemeSwitchingArea(
+              return Container(
                 child: Scaffold(
                   appBar: AppBar(
                     leading: IconButton(

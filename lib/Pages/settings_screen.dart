@@ -1,4 +1,5 @@
-import 'package:animated_theme_switcher/animated_theme_switcher.dart' as ThemePackage;
+import 'package:animated_theme_switcher/animated_theme_switcher.dart'
+    as ThemePackage;
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Api/client_api.dart';
@@ -145,193 +146,191 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Consumer<ClientSettingsProvider>(
         builder: (context, clientSettingsModel, child) {
       return KeyboardDismissOnTap(
-        child: ThemePackage.ThemeSwitchingArea(
-          child: Scaffold(
-            floatingActionButton: FloatingActionButton.extended(
-              elevation: 0,
-              backgroundColor: ThemeProvider.theme.primaryColorDark,
-              onPressed: () {
-                ClientSettingsModel newClientSettingsModel = new ClientSettingsModel(
-                    dht: clientSettingsModel.clientSettings.dht,
-                    dhtPort: clientSettingsModel.clientSettings.dhtPort,
-                    directoryDefault: defaultDownloadDirectoryController.text,
-                    networkHttpMaxOpen:
-                        clientSettingsModel.clientSettings.networkHttpMaxOpen,
-                    networkLocalAddress:
-                        clientSettingsModel.clientSettings.networkLocalAddress,
-                    networkMaxOpenFiles:
-                        clientSettingsModel.clientSettings.networkMaxOpenFiles,
-                    networkPortOpen: openPort,
-                    networkPortRandom: randomizePort,
-                    networkPortRange: portController.text,
-                    piecesHashOnCompletion:
-                        clientSettingsModel.clientSettings.piecesHashOnCompletion,
-                    piecesMemoryMax:
-                        clientSettingsModel.clientSettings.piecesMemoryMax,
-                    protocolPex: clientSettingsModel.clientSettings.protocolPex,
-                    throttleGlobalDownSpeed:
-                        int.parse(globalDownloadRateController.text),
-                    throttleGlobalUpSpeed:
-                        int.parse(globalUploadRateController.text),
-                    throttleMaxDownloads:
-                        int.parse(downloadSlotPerTorrentController.text),
-                    throttleMaxDownloadsGlobal:
-                        int.parse(downloadSlotGlobalController.text),
-                    throttleMaxPeersNormal:
-                        clientSettingsModel.clientSettings.throttleMaxPeersNormal,
-                    throttleMaxPeersSeed:
-                        clientSettingsModel.clientSettings.throttleMaxPeersSeed,
-                    throttleMaxUploads:
-                        int.parse(uploadSlotPerTorrentController.text),
-                    throttleMaxUploadsGlobal:
-                        int.parse(uploadSlotGlobalController.text),
-                    throttleMinPeersNormal:
-                        clientSettingsModel.clientSettings.throttleMinPeersNormal,
-                    throttleMinPeersSeed:
-                        clientSettingsModel.clientSettings.throttleMinPeersSeed,
-                    trackersNumWant:
-                        clientSettingsModel.clientSettings.trackersNumWant);
-                ClientApi.setClientSettings(
-                        context: context, model: newClientSettingsModel)
-                    .then((value) {
-                  setState(() {});
-                });
+        child: Scaffold(
+          floatingActionButton: FloatingActionButton.extended(
+            elevation: 0,
+            backgroundColor: ThemeProvider.theme.primaryColorDark,
+            onPressed: () {
+              ClientSettingsModel newClientSettingsModel = new ClientSettingsModel(
+                  dht: clientSettingsModel.clientSettings.dht,
+                  dhtPort: clientSettingsModel.clientSettings.dhtPort,
+                  directoryDefault: defaultDownloadDirectoryController.text,
+                  networkHttpMaxOpen:
+                      clientSettingsModel.clientSettings.networkHttpMaxOpen,
+                  networkLocalAddress:
+                      clientSettingsModel.clientSettings.networkLocalAddress,
+                  networkMaxOpenFiles:
+                      clientSettingsModel.clientSettings.networkMaxOpenFiles,
+                  networkPortOpen: openPort,
+                  networkPortRandom: randomizePort,
+                  networkPortRange: portController.text,
+                  piecesHashOnCompletion:
+                      clientSettingsModel.clientSettings.piecesHashOnCompletion,
+                  piecesMemoryMax:
+                      clientSettingsModel.clientSettings.piecesMemoryMax,
+                  protocolPex: clientSettingsModel.clientSettings.protocolPex,
+                  throttleGlobalDownSpeed:
+                      int.parse(globalDownloadRateController.text),
+                  throttleGlobalUpSpeed:
+                      int.parse(globalUploadRateController.text),
+                  throttleMaxDownloads:
+                      int.parse(downloadSlotPerTorrentController.text),
+                  throttleMaxDownloadsGlobal:
+                      int.parse(downloadSlotGlobalController.text),
+                  throttleMaxPeersNormal:
+                      clientSettingsModel.clientSettings.throttleMaxPeersNormal,
+                  throttleMaxPeersSeed:
+                      clientSettingsModel.clientSettings.throttleMaxPeersSeed,
+                  throttleMaxUploads:
+                      int.parse(uploadSlotPerTorrentController.text),
+                  throttleMaxUploadsGlobal:
+                      int.parse(uploadSlotGlobalController.text),
+                  throttleMinPeersNormal:
+                      clientSettingsModel.clientSettings.throttleMinPeersNormal,
+                  throttleMinPeersSeed:
+                      clientSettingsModel.clientSettings.throttleMinPeersSeed,
+                  trackersNumWant:
+                      clientSettingsModel.clientSettings.trackersNumWant);
+              ClientApi.setClientSettings(
+                      context: context, model: newClientSettingsModel)
+                  .then((value) {
+                setState(() {});
+              });
 
-                final changeSettingsSnackBar = addFloodSnackBar(
-                    SnackbarType.success, 'Settings changed', 'Dismiss');
+              final changeSettingsSnackBar = addFloodSnackBar(
+                  SnackbarType.success, 'Settings changed', 'Dismiss');
 
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(changeSettingsSnackBar);
-              },
-              icon: Icon(
-                Icons.save,
-                color: Colors.white,
-              ),
-              label: Text(
-                "Save",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
-              ),
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(changeSettingsSnackBar);
+            },
+            icon: Icon(
+              Icons.save,
+              color: Colors.white,
             ),
-            backgroundColor: ThemeProvider.theme.primaryColor,
-            body: SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 14),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    LText(text: 'Settings'),
-                    SizedBox(height: 30),
-                    // *Bandwidth Section
-                    BandwidthSection(
-                        globalDownloadRateController:
-                            globalDownloadRateController,
-                        globalUploadRateController: globalUploadRateController,
-                        uploadSlotPerTorrentController:
-                            uploadSlotPerTorrentController,
-                        uploadSlotGlobalController: uploadSlotGlobalController,
-                        downloadSlotPerTorrentController:
-                            downloadSlotPerTorrentController,
-                        downloadSlotGlobalController:
-                            downloadSlotGlobalController),
-                    // *Connectivity Section
-                    ConnectivitySection(
-                      clientSettingsModel: clientSettingsModel,
-                      portRangeController: portRangeController,
-                      openPort: openPort,
-                      maxHttpConnectionsController: maxHttpConnectionsController,
-                      dhtPortController: dhtPortController,
-                      enableDht: enableDht,
-                      enablePeerExchange: enablePeerExchange,
-                      minimumPeerController: minimumPeerController,
-                      maximumPeerController: maximumPeerController,
-                      minimumPeerSeedingController: minimumPeerSeedingController,
-                      maximumPeerSeedingController: maximumPeerSeedingController,
-                      peerDesiredController: peerDesiredController,
-                      randomizePort: randomizePort,
-                      setRandomizePort: (value) {
+            label: Text(
+              "Save",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600),
+            ),
+          ),
+          backgroundColor: ThemeProvider.theme.primaryColor,
+          body: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  LText(text: 'Settings'),
+                  SizedBox(height: 30),
+                  // *Bandwidth Section
+                  BandwidthSection(
+                      globalDownloadRateController:
+                          globalDownloadRateController,
+                      globalUploadRateController: globalUploadRateController,
+                      uploadSlotPerTorrentController:
+                          uploadSlotPerTorrentController,
+                      uploadSlotGlobalController: uploadSlotGlobalController,
+                      downloadSlotPerTorrentController:
+                          downloadSlotPerTorrentController,
+                      downloadSlotGlobalController:
+                          downloadSlotGlobalController),
+                  // *Connectivity Section
+                  ConnectivitySection(
+                    clientSettingsModel: clientSettingsModel,
+                    portRangeController: portRangeController,
+                    openPort: openPort,
+                    maxHttpConnectionsController: maxHttpConnectionsController,
+                    dhtPortController: dhtPortController,
+                    enableDht: enableDht,
+                    enablePeerExchange: enablePeerExchange,
+                    minimumPeerController: minimumPeerController,
+                    maximumPeerController: maximumPeerController,
+                    minimumPeerSeedingController: minimumPeerSeedingController,
+                    maximumPeerSeedingController: maximumPeerSeedingController,
+                    peerDesiredController: peerDesiredController,
+                    randomizePort: randomizePort,
+                    setRandomizePort: (value) {
+                      setState(() {
+                        randomizePort = value!;
+                      });
+                    },
+                    setEnableDht: null,
+                    setEnablePeerExchange: null,
+                    setOpenPort: (value) {
+                      setState(() {
+                        openPort = value!;
+                      });
+                    },
+                  ),
+                  // *Resources Section
+                  ResourceSection(
+                      setVerifyHash: (value) {
                         setState(() {
-                          randomizePort = value!;
+                          verifyHash = value!;
                         });
                       },
-                      setEnableDht: null,
-                      setEnablePeerExchange: null,
-                      setOpenPort: (value) {
+                      defaultDownloadDirectoryController:
+                          defaultDownloadDirectoryController,
+                      maximumOpenFilesController: maximumOpenFilesController,
+                      verifyHash: verifyHash,
+                      maxMemoryUsageController: maxMemoryUsageController),
+                  // *Speed Limit Section
+                  SpeedLimitSection(
+                    model: clientSettingsModel,
+                    hp: hp,
+                    downSpeed: downSpeed,
+                    upSpeed: upSpeed,
+                    setDownSpeed: (value) {
+                      setState(() {
+                        downSpeed = value!;
+                      });
+                    },
+                    setUpSpeed: (value) {
+                      setState(() {
+                        upSpeed = value!;
+                      });
+                    },
+                  ),
+                  // *Authentication Section
+                  AuthenticationSection(
+                      setTCP: (value) {
                         setState(() {
-                          openPort = value!;
+                          socket = !value!;
                         });
                       },
-                    ),
-                    // *Resources Section
-                    ResourceSection(
-                        setVerifyHash: (value) {
-                          setState(() {
-                            verifyHash = value!;
-                          });
-                        },
-                        defaultDownloadDirectoryController:
-                            defaultDownloadDirectoryController,
-                        maximumOpenFilesController: maximumOpenFilesController,
-                        verifyHash: verifyHash,
-                        maxMemoryUsageController: maxMemoryUsageController),
-                    // *Speed Limit Section
-                    SpeedLimitSection(
-                      model: clientSettingsModel,
-                      hp: hp,
-                      downSpeed: downSpeed,
-                      upSpeed: upSpeed,
-                      setDownSpeed: (value) {
+                      setSocket: (bool? value) {
                         setState(() {
-                          downSpeed = value!;
+                          socket = value!;
                         });
                       },
-                      setUpSpeed: (value) {
+                      setClient: (String? newValue) {
                         setState(() {
-                          upSpeed = value!;
+                          client = newValue!;
                         });
                       },
-                    ),
-                    // *Authentication Section
-                    AuthenticationSection(
-                        setTCP: (value) {
-                          setState(() {
-                            socket = !value!;
-                          });
-                        },
-                        setSocket: (bool? value) {
-                          setState(() {
-                            socket = value!;
-                          });
-                        },
-                        setClient: (String? newValue) {
-                          setState(() {
-                            client = newValue!;
-                          });
-                        },
-                        setIsAdmin: (bool? value) {
-                          setState(() {
-                            isAdmin = value!;
-                          });
-                        },
-                        usernameController: usernameController,
-                        passwordController: passwordController,
-                        isAdmin: isAdmin,
-                        client: client,
-                        socket: socket,
-                        pathController: pathController,
-                        hostController: hostController,
-                        portController: portController,
-                        clientUsernameController: clientUsernameController,
-                        clientPasswordController: clientPasswordController,
-                        urlController: urlController,
-                        hp: hp),
-                    SizedBox(
-                      height: 200,
-                    )
-                  ],
-                ),
+                      setIsAdmin: (bool? value) {
+                        setState(() {
+                          isAdmin = value!;
+                        });
+                      },
+                      usernameController: usernameController,
+                      passwordController: passwordController,
+                      isAdmin: isAdmin,
+                      client: client,
+                      socket: socket,
+                      pathController: pathController,
+                      hostController: hostController,
+                      portController: portController,
+                      clientUsernameController: clientUsernameController,
+                      clientPasswordController: clientPasswordController,
+                      urlController: urlController,
+                      hp: hp),
+                  SizedBox(
+                    height: 200,
+                  )
+                ],
               ),
             ),
           ),
