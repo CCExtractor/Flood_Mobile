@@ -13,10 +13,12 @@ using the npm distribution
 
 ### Install qBitTorrent 
 1. Install [qBitTorrent](https://www.qbittorrent.org/)
-2. In the preferences, set up the Web UI. You would have to set a new username and password and with everything done,
+2. Start the application, click the settings button and setup the Web UI. You would have to set a new username and password and with everything done,
    the qBitTorrent Web UI should be up and running in ```http://localhost:8080/```
+   
+<p align="center"><img width="400" alt="Screenshot 2022-12-20 at 11 04 PM" src="https://user-images.githubusercontent.com/64683098/208731323-019c3738-6303-4588-ab6d-006cbbee9013.PNG"></p>
 
-<p align="center"><img width="400" alt="Screenshot 2021-05-25 at 1 59 24 PM" src="https://user-images.githubusercontent.com/52864956/119465947-c9cc0300-bd61-11eb-97a4-7889aec00fe9.png"></p>
+<p align="center"><img width="400" alt="Screenshot 2021-05-25 at 1 59 24 PM" src="https://user-images.githubusercontent.com/64683098/208732411-2c7c74b9-0d9c-4804-bf9f-11170ea4696d.PNG"></p>
 
 ### Install Flood
 
