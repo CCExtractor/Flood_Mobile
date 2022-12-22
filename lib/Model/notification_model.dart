@@ -55,7 +55,7 @@ class NotificationContentModel {
     return NotificationContentModel(
       identification: json['_id'],
       id: json['id'],
-      name: json['data']['title'],
+      name: json['data']['name'],
       read: json['read'],
       ts: json['ts'],
       status: status,
