@@ -2,7 +2,8 @@ import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class LogOutAlert extends StatelessWidget {
-  const LogOutAlert({Key? key, @required this.logoutOnClick})
+  final int index;
+  const LogOutAlert({Key? key, @required this.logoutOnClick, required this.index})
       : assert(logoutOnClick != null),
         super(key: key);
   final VoidCallback? logoutOnClick;
@@ -13,7 +14,7 @@ class LogOutAlert extends StatelessWidget {
     return AlertDialog(
       key: Key('Logout AlertDialog'),
       elevation: 0,
-      backgroundColor: ThemeProvider.theme.primaryColorLight,
+      backgroundColor: ThemeProvider.theme(index).primaryColorLight,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(12),
@@ -24,7 +25,7 @@ class LogOutAlert extends StatelessWidget {
         'Are you sure you want to\n Log out ?',
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+          color: ThemeProvider.theme(index).textTheme.bodyText1?.color,
           fontWeight: FontWeight.bold,
           fontSize: 20,
         ),
@@ -43,7 +44,7 @@ class LogOutAlert extends StatelessWidget {
               ),
             ),
             backgroundColor: MaterialStateProperty.all(
-                ThemeProvider.theme.dialogBackgroundColor),
+                ThemeProvider.theme(index).dialogBackgroundColor),
           ),
           onPressed: () {
             Navigator.of(context, rootNavigator: true).pop();
@@ -67,7 +68,7 @@ class LogOutAlert extends StatelessWidget {
               Size(hp * .160, hp * .059),
             ),
             backgroundColor:
-                MaterialStateProperty.all(ThemeProvider.theme.primaryColorDark),
+                MaterialStateProperty.all(ThemeProvider.theme(index).primaryColorDark),
           ),
           onPressed: logoutOnClick,
           child: Text(

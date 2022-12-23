@@ -7,8 +7,9 @@ import 'flood_snackbar.dart';
 
 class DeleteTorrentSheet extends StatefulWidget {
   final TorrentModel torrent;
+  final int index;
 
-  DeleteTorrentSheet({required this.torrent});
+  DeleteTorrentSheet({required this.torrent, required this.index});
 
   @override
   _DeleteTorrentSheetState createState() => _DeleteTorrentSheetState();
@@ -49,7 +50,7 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
               Checkbox(
                 key: Key('Checkbox delete with data'),
                 value: deleteWithData,
-                activeColor: ThemeProvider.theme.primaryColorDark,
+                activeColor: ThemeProvider.theme((widget.index)).primaryColorDark,
                 onChanged: (bool? value) {
                   print(value);
                   setState(() {
@@ -88,7 +89,7 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                       child: Text(
                         "No",
                         style: TextStyle(
-                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
                           fontSize: 16,
                           fontWeight: FontWeight.w900,
                         ),
@@ -125,13 +126,13 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14.0),
                       ),
-                      primary: ThemeProvider.theme.primaryColorDark,
+                      primary: ThemeProvider.theme((widget.index)).primaryColorDark,
                     ),
                     child: Center(
                       child: Text(
                         "Yes",
                         style: TextStyle(
-                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
                           fontSize: 16,
                           fontWeight: FontWeight.w900,
                         ),

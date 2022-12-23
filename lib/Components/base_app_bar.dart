@@ -7,10 +7,12 @@ import 'change_theme_button_widget.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBar appBar;
+  final int index;
 
   const BaseAppBar({
     Key? key,
     required this.appBar,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -27,11 +29,8 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
           height: 60,
         ),
         centerTitle: true,
-        backgroundColor: ThemeProvider.theme.primaryColor,
+        backgroundColor: ThemeProvider.theme(index).primaryColor,
         elevation: 0,
-        actions: [
-          ChangeThemeButtonWidget(),
-        ],
       );
     });
   }

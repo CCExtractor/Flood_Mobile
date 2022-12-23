@@ -5,24 +5,24 @@ import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-Widget notificationPopupDialogueContainer({required BuildContext context}) {
+Widget notificationPopupDialogueContainer({required BuildContext context, required int index}) {
   return (Provider.of<HomeProvider>(context)
               .notificationModel
               .notifications
               .length ==
           0)
       ? Container(
-          color: ThemeProvider.theme.primaryColor,
+          color: ThemeProvider.theme(index).primaryColor,
           width: 300,
           child: Text(
             'No notifications to display',
             style: TextStyle(
-              color: ThemeProvider.theme.textTheme.bodyText1?.color,
+              color: ThemeProvider.theme(index).textTheme.bodyText1?.color,
             ),
           ),
         )
       : Container(
-          color: ThemeProvider.theme.primaryColor,
+          color: ThemeProvider.theme(index).primaryColor,
           width: 300.0, // Change as per your requirement
           child: ListView.builder(
             shrinkWrap: true,
@@ -42,7 +42,7 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
                     NotificationListTile(
                         model: Provider.of<HomeProvider>(context, listen: false)
                             .notificationModel
-                            .notifications[index]),
+                            .notifications[index], index: index,),
                     SizedBox(
                       height: 10,
                     ),
@@ -67,7 +67,7 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
                   NotificationListTile(
                       model: Provider.of<HomeProvider>(context)
                           .notificationModel
-                          .notifications[index]),
+                          .notifications[index], index: index,),
                   SizedBox(
                     height: 10,
                   )
@@ -80,8 +80,9 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
 
 class NotificationListTile extends StatelessWidget {
   NotificationContentModel model;
+  final int index;
 
-  NotificationListTile({required this.model});
+  NotificationListTile({required this.model, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,7 @@ class NotificationListTile extends StatelessWidget {
             textAlign: TextAlign.left,
             style: TextStyle(
                 fontSize: 16,
-                color: ThemeProvider.theme.accentColor,
+                color: ThemeProvider.theme(index).accentColor,
                 fontWeight: FontWeight.bold),
           ),
           SizedBox(
@@ -113,7 +114,7 @@ class NotificationListTile extends StatelessWidget {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: 14,
-              color: ThemeProvider.theme.textTheme.bodyText1?.color,
+              color: ThemeProvider.theme(index).textTheme.bodyText1?.color,
             ),
           ),
         ],

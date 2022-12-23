@@ -44,6 +44,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
         appBar: (!model.isSelectionMode)
             ? BaseAppBar(
                 appBar: AppBar(),
+          index: widget.arguments.index,
               )
             : AppBar(
                 title: Image(
@@ -54,7 +55,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                   height: 60,
                 ),
                 centerTitle: true,
-                backgroundColor: ThemeProvider.theme.primaryColor,
+                backgroundColor: ThemeProvider.theme(widget.arguments.index).primaryColor,
                 elevation: 0,
                 leading: Row(
                   children: [
@@ -63,7 +64,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                       child: IconButton(
                         icon: Icon(
                           Icons.add,
-                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme(widget.arguments.index).textTheme.bodyText1?.color,
                         ),
                         onPressed: () {
                           model.setSelectionMode(newIsSelected: false);
@@ -77,7 +78,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                   IconButton(
                     icon: Icon(
                       Icons.download_rounded,
-                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                      color: ThemeProvider.theme(widget.arguments.index).textTheme.bodyText1?.color,
                     ),
                     onPressed: () async {
                       try {
@@ -122,10 +123,10 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                     },
                   ),
                   PopupMenuButton<String>(
-                    color: ThemeProvider.theme.backgroundColor,
+                    color: ThemeProvider.theme(widget.arguments.index).backgroundColor,
                     icon: Icon(
                       Icons.more_vert,
-                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                      color: ThemeProvider.theme(widget.arguments.index).textTheme.bodyText1?.color,
                     ),
                     onSelected: (value) {
                       if (value == 'High Priority') {
@@ -190,7 +191,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          color: ThemeProvider.theme.primaryColor,
+          color: ThemeProvider.theme(widget.arguments.index).primaryColor,
           child: StreamBuilder(
             stream: TorrentApi.getTorrentContent(
                 context: context, hash: widget.arguments.hash),
@@ -211,7 +212,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                           'Files',
                           style: GoogleFonts.notoSans(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme(widget.arguments.index).textTheme.bodyText1?.color,
                             fontWeight: FontWeight.bold,
                             fontSize: 30,
                           ),
@@ -244,7 +245,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                         decoration: BoxDecoration(
-                          color: ThemeProvider.theme.primaryColorDark,
+                          color: ThemeProvider.theme(widget.arguments.index).primaryColorDark,
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
@@ -252,13 +253,14 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                         data: snapshot.data,
                         depth: 0,
                         hash: widget.arguments.hash,
+                        index: widget.arguments.index,
                       ),
                     ],
                   ),
                 );
               }
               return SpinKitFadingCircle(
-                color: ThemeProvider.theme.primaryColorDark,
+                color: ThemeProvider.theme(widget.arguments.index).primaryColorDark,
               );
             },
           ),

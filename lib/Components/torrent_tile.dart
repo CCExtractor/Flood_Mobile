@@ -17,8 +17,9 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class TorrentTile extends StatefulWidget {
   final TorrentModel model;
+  final int index;
 
-  TorrentTile({required this.model});
+  TorrentTile({required this.model, required this.index});
 
   @override
   _TorrentTileState createState() => _TorrentTileState();
@@ -37,10 +38,11 @@ class _TorrentTileState extends State<TorrentTile> {
       ),
       isScrollControlled: true,
       context: context,
-      backgroundColor: ThemeProvider.theme.backgroundColor,
+      backgroundColor: ThemeProvider.theme(widget.index).backgroundColor,
       builder: (context) {
         return DeleteTorrentSheet(
           torrent: widget.model,
+          index: widget.index,
         );
       },
     );
@@ -57,7 +59,7 @@ class _TorrentTileState extends State<TorrentTile> {
         child: FocusedMenuHolder(
           key: Key('Long Press Torrent Tile Menu'),
           menuBoxDecoration: BoxDecoration(
-              color: ThemeProvider.theme.textTheme.bodyText1?.color,
+              color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
               borderRadius: BorderRadius.circular(50)),
           menuWidth: MediaQuery.of(context).size.width * 0.5,
           menuItemExtent: 60,
@@ -100,7 +102,7 @@ class _TorrentTileState extends State<TorrentTile> {
               ),
               trailingIcon: Icon(
                 Icons.delete,
-                color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
               ),
               onPressed: () {
                 deleteTorrent();
@@ -115,8 +117,8 @@ class _TorrentTileState extends State<TorrentTile> {
               });
             },
             elevation: 0,
-            expandedColor: ThemeProvider.theme.primaryColor,
-            baseColor: ThemeProvider.theme.primaryColor,
+            expandedColor: ThemeProvider.theme(widget.index).primaryColor,
+            baseColor: ThemeProvider.theme(widget.index).primaryColor,
             title: ListTile(
               key: Key(widget.model.hash),
               contentPadding: EdgeInsets.all(0),
@@ -124,7 +126,7 @@ class _TorrentTileState extends State<TorrentTile> {
                 widget.model.name,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                  color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -144,11 +146,11 @@ class _TorrentTileState extends State<TorrentTile> {
                                 widget.model.percentComplete.roundToDouble() /
                                     100,
                             backgroundColor:
-                                ThemeProvider.theme.accentColor.withAlpha(80),
+                                ThemeProvider.theme(widget.index).accentColor.withAlpha(80),
                             progressColor: (widget.model.percentComplete
                                         .toStringAsFixed(1) ==
                                     '100.0')
-                                ? ThemeProvider.theme.primaryColorDark
+                                ? ThemeProvider.theme(widget.index).primaryColorDark
                                 : Colors.blue,
                           ),
                         ),
@@ -171,7 +173,7 @@ class _TorrentTileState extends State<TorrentTile> {
                           key: Key('status widget'),
                           style: TextStyle(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
                           ),
                         ),
                         Text(
@@ -186,7 +188,7 @@ class _TorrentTileState extends State<TorrentTile> {
                           key: Key('eta widget'),
                           style: TextStyle(
                               color: ThemeProvider
-                                  .theme.textTheme.bodyText1?.color),
+                                  .theme(widget.index).textTheme.bodyText1?.color),
                         ),
                       ],
                     ),
@@ -200,7 +202,7 @@ class _TorrentTileState extends State<TorrentTile> {
                           filesize(widget.model.bytesDone.toInt()),
                           style: TextStyle(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
                           ),
                         ),
                         Text(' / '),
@@ -208,7 +210,7 @@ class _TorrentTileState extends State<TorrentTile> {
                           filesize(widget.model.sizeBytes.toInt()),
                           style: TextStyle(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
                           ),
                         ),
                       ],
@@ -227,12 +229,12 @@ class _TorrentTileState extends State<TorrentTile> {
                           height: 30,
                           decoration: BoxDecoration(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
                             borderRadius: BorderRadius.circular(50),
                           ),
                           child: Icon(
                             Icons.stop,
-                            color: ThemeProvider.theme.primaryColor,
+                            color: ThemeProvider.theme(widget.index).primaryColor,
                           ),
                         ),
                         onTap: () {
@@ -246,12 +248,12 @@ class _TorrentTileState extends State<TorrentTile> {
                           height: 30,
                           decoration: BoxDecoration(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
                             borderRadius: BorderRadius.circular(50),
                           ),
                           child: Icon(
                             Icons.play_arrow,
-                            color: ThemeProvider.theme.primaryColor,
+                            color: ThemeProvider.theme(widget.index).primaryColor,
                           ),
                         ),
                         onTap: () {
@@ -270,7 +272,7 @@ class _TorrentTileState extends State<TorrentTile> {
             ),
             children: [
               Card(
-                color: ThemeProvider.theme.primaryColorLight,
+                color: ThemeProvider.theme(widget.index).primaryColorLight,
                 child: Padding(
                   padding: EdgeInsets.all(15),
                   child: Column(
@@ -283,7 +285,7 @@ class _TorrentTileState extends State<TorrentTile> {
                         'General',
                         style: TextStyle(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
@@ -339,7 +341,7 @@ class _TorrentTileState extends State<TorrentTile> {
                         'Transfer',
                         style: TextStyle(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
@@ -373,7 +375,7 @@ class _TorrentTileState extends State<TorrentTile> {
                         'Torrent',
                         style: TextStyle(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
@@ -411,7 +413,8 @@ class _TorrentTileState extends State<TorrentTile> {
                                 Routes.torrentContentScreenRoute,
                                 arguments: TorrentContentPageArguments(
                                     hash: widget.model.hash,
-                                    directory: widget.model.directory));
+                                    directory: widget.model.directory,
+                                    index: widget.index));
                           },
                           style: OutlinedButton.styleFrom(
                             shape: RoundedRectangleBorder(
@@ -419,7 +422,7 @@ class _TorrentTileState extends State<TorrentTile> {
                             side: BorderSide(
                               width: 1.0,
                               color: ThemeProvider
-                                  .theme.textTheme.bodyText1!.color!,
+                                  .theme(widget.index).textTheme.bodyText1!.color!,
                               style: BorderStyle.solid,
                             ),
                           ),
@@ -429,7 +432,7 @@ class _TorrentTileState extends State<TorrentTile> {
                               Icon(
                                 Icons.file_copy_rounded,
                                 color: ThemeProvider
-                                    .theme.textTheme.bodyText1?.color,
+                                    .theme(widget.index).textTheme.bodyText1?.color,
                               ),
                               SizedBox(
                                 width: 5,
@@ -438,7 +441,7 @@ class _TorrentTileState extends State<TorrentTile> {
                                 "Files",
                                 style: TextStyle(
                                   color: ThemeProvider
-                                      .theme.textTheme.bodyText1?.color,
+                                      .theme(widget.index).textTheme.bodyText1?.color,
                                 ),
                               ),
                             ],

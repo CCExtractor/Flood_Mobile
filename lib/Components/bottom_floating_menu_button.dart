@@ -11,6 +11,9 @@ import '../Constants/theme_provider.dart';
 import '../Provider/client_provider.dart';
 
 class BottomFloatingMenuButton extends StatefulWidget {
+  final int index;
+
+  const BottomFloatingMenuButton({Key? key, required this.index}) : super(key: key);
   @override
   _BottomFloatingMenuButtonState createState() =>
       _BottomFloatingMenuButtonState();
@@ -42,7 +45,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
         builder: (context, clientModel, child) {
       return SpeedDial(
         buttonSize: Size(60, 60),
-        backgroundColor: ThemeProvider.theme.primaryColorDark,
+        backgroundColor: ThemeProvider.theme(widget.index).primaryColorDark,
         icon: Icons.add,
         activeIcon: Icons.close,
         spacing: 3,
@@ -55,8 +58,8 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
         children: [
           SpeedDialChild(
             child: Icon(FontAwesomeIcons.solidFile),
-            backgroundColor: ThemeProvider.theme.textTheme.bodyText1?.color,
-            foregroundColor: ThemeProvider.theme.primaryColorDark,
+            backgroundColor: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+            foregroundColor: ThemeProvider.theme(widget.index).primaryColorDark,
             label: 'Torrent File',
             labelBackgroundColor: Colors.transparent,
             labelShadow: [
@@ -65,7 +68,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
               )
             ],
             labelStyle: TextStyle(
-                color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
                 fontSize: 14,
                 fontWeight: FontWeight.w800),
             onTap: () async {
@@ -99,7 +102,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                     ),
                     isScrollControlled: true,
                     context: context,
-                    backgroundColor: ThemeProvider.theme.backgroundColor,
+                    backgroundColor: ThemeProvider.theme(widget.index).backgroundColor,
                     builder: (context) {
                       return ListView(shrinkWrap: true, children: [
                         Padding(
@@ -117,7 +120,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Montserrat',
                                       color: ThemeProvider
-                                          .theme.textTheme.bodyText1?.color),
+                                          .theme(widget.index).textTheme.bodyText1?.color),
                                 ),
                               ),
                               Padding(
@@ -135,7 +138,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                       bottomRight: Radius.circular(8),
                                     ),
                                     color:
-                                        ThemeProvider.theme.primaryColorLight,
+                                        ThemeProvider.theme(widget.index).primaryColorLight,
                                   ),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -168,7 +171,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                     fontSize: 16,
                                                     fontFamily: 'Montserrat',
                                                     color: ThemeProvider
-                                                        .theme
+                                                        .theme(widget.index)
                                                         .textTheme
                                                         .bodyText1
                                                         ?.color),
@@ -182,7 +185,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                 ),
                               ),
                               Container(
-                                color: ThemeProvider.theme.primaryColorLight,
+                                color: ThemeProvider.theme(widget.index).primaryColorLight,
                                 padding: EdgeInsets.symmetric(
                                     vertical: 25, horizontal: 20),
                                 child: Form(
@@ -196,19 +199,19 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                         controller: directoryController,
                                         style: TextStyle(
                                           color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
+                                              .theme(widget.index).textTheme.bodyText1?.color,
                                         ),
                                         decoration: InputDecoration(
                                           prefixIcon: Icon(
                                             Icons.folder,
-                                            color: ThemeProvider.theme.textTheme
+                                            color: ThemeProvider.theme(widget.index).textTheme
                                                 .bodyText1?.color,
                                           ),
                                           labelText: 'Destination',
                                           hintText: 'Destination',
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              color: ThemeProvider.theme
+                                              color: ThemeProvider.theme(widget.index)
                                                   .textTheme.bodyText1?.color),
                                           border: OutlineInputBorder(
                                             borderRadius:
@@ -221,9 +224,9 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                       ),
                                       CheckboxListTile(
                                         activeColor: ThemeProvider
-                                            .theme.primaryColorDark,
+                                            .theme(widget.index).primaryColorDark,
                                         tileColor: ThemeProvider
-                                            .theme.primaryColorLight,
+                                            .theme(widget.index).primaryColorLight,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(8),
@@ -241,9 +244,9 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                       ),
                                       CheckboxListTile(
                                         activeColor: ThemeProvider
-                                            .theme.primaryColorDark,
+                                            .theme(widget.index).primaryColorDark,
                                         tileColor: ThemeProvider
-                                            .theme.primaryColorLight,
+                                            .theme(widget.index).primaryColorLight,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(8),
@@ -261,9 +264,9 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                       ),
                                       CheckboxListTile(
                                         activeColor: ThemeProvider
-                                            .theme.primaryColorDark,
+                                            .theme(widget.index).primaryColorDark,
                                         tileColor: ThemeProvider
-                                            .theme.primaryColorLight,
+                                            .theme(widget.index).primaryColorLight,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(8),
@@ -310,7 +313,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                   BorderRadius.circular(14.0),
                                             ),
                                             primary: ThemeProvider
-                                                .theme.primaryColorDark,
+                                                .theme(widget.index).primaryColorDark,
                                           ),
                                           child: Center(
                                             child: Text(
@@ -341,8 +344,8 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
           ),
           SpeedDialChild(
             child: const Icon(FontAwesomeIcons.magnet),
-            backgroundColor: ThemeProvider.theme.textTheme.bodyText1?.color,
-            foregroundColor: ThemeProvider.theme.primaryColorDark,
+            backgroundColor: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+            foregroundColor: ThemeProvider.theme(widget.index).primaryColorDark,
             label: 'Magnet Link',
             labelBackgroundColor: Colors.transparent,
             labelShadow: [
@@ -351,7 +354,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
               )
             ],
             labelStyle: TextStyle(
-                color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
                 fontSize: 14,
                 fontWeight: FontWeight.w800),
             onTap: () {
@@ -371,7 +374,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                   ),
                   isScrollControlled: true,
                   context: context,
-                  backgroundColor: ThemeProvider.theme.backgroundColor,
+                  backgroundColor: ThemeProvider.theme(widget.index).backgroundColor,
                   builder: (context) {
                     return ListView(shrinkWrap: true, children: [
                       Padding(
@@ -389,7 +392,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Montserrat',
                                     color: ThemeProvider
-                                        .theme.textTheme.bodyText1?.color),
+                                        .theme(widget.index).textTheme.bodyText1?.color),
                               ),
                             ),
                             Padding(
@@ -403,13 +406,13 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                       controller: magnetUrlController,
                                       style: TextStyle(
                                         color: ThemeProvider
-                                            .theme.textTheme.bodyText1?.color,
+                                            .theme(widget.index).textTheme.bodyText1?.color,
                                       ),
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(
                                           Icons.link,
                                           color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
+                                              .theme(widget.index).textTheme.bodyText1?.color,
                                         ),
                                         suffix: GestureDetector(
                                           child: Icon(Icons.paste),
@@ -429,7 +432,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                         labelStyle: TextStyle(
                                           fontFamily: 'Montserrat',
                                           color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
+                                              .theme(widget.index).textTheme.bodyText1?.color,
                                         ),
                                         border: OutlineInputBorder(
                                           borderRadius:
@@ -450,7 +453,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                               ),
                             ),
                             Container(
-                              color: ThemeProvider.theme.primaryColorLight,
+                              color: ThemeProvider.theme(widget.index).primaryColorLight,
                               padding: EdgeInsets.symmetric(
                                   vertical: 25, horizontal: 20),
                               child: Form(
@@ -463,19 +466,19 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                       controller: directoryController,
                                       style: TextStyle(
                                         color: ThemeProvider
-                                            .theme.textTheme.bodyText1?.color,
+                                            .theme(widget.index).textTheme.bodyText1?.color,
                                       ),
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(
                                           Icons.folder,
                                           color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
+                                              .theme(widget.index).textTheme.bodyText1?.color,
                                         ),
                                         labelText: 'Destination',
                                         hintText: 'Destination',
                                         labelStyle: TextStyle(
                                             fontFamily: 'Montserrat',
-                                            color: ThemeProvider.theme.textTheme
+                                            color: ThemeProvider.theme(widget.index).textTheme
                                                 .bodyText1?.color),
                                         border: OutlineInputBorder(
                                           borderRadius:
@@ -488,9 +491,9 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                     ),
                                     CheckboxListTile(
                                       activeColor:
-                                          ThemeProvider.theme.primaryColorDark,
+                                          ThemeProvider.theme(widget.index).primaryColorDark,
                                       tileColor:
-                                          ThemeProvider.theme.primaryColorLight,
+                                          ThemeProvider.theme(widget.index).primaryColorLight,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
@@ -507,9 +510,9 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                     ),
                                     CheckboxListTile(
                                       activeColor:
-                                          ThemeProvider.theme.primaryColorDark,
+                                          ThemeProvider.theme(widget.index).primaryColorDark,
                                       tileColor:
-                                          ThemeProvider.theme.primaryColorLight,
+                                          ThemeProvider.theme(widget.index).primaryColorLight,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
@@ -526,9 +529,9 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                     ),
                                     CheckboxListTile(
                                       activeColor:
-                                          ThemeProvider.theme.primaryColorDark,
+                                          ThemeProvider.theme(widget.index).primaryColorDark,
                                       tileColor:
-                                          ThemeProvider.theme.primaryColorLight,
+                                          ThemeProvider.theme(widget.index).primaryColorLight,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
@@ -574,7 +577,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                 BorderRadius.circular(14.0),
                                           ),
                                           primary: ThemeProvider
-                                              .theme.primaryColorDark,
+                                              .theme(widget.index).primaryColorDark,
                                         ),
                                         child: Center(
                                           child: Text(

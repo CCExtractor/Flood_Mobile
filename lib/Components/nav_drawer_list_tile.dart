@@ -7,10 +7,12 @@ class NavDrawerListTile extends StatelessWidget {
   VoidCallback onTap;
   IconData icon;
   String title;
+  final int index;
   NavDrawerListTile({
     required this.icon,
     required this.onTap,
     required this.title,
+    required this.index,
   });
   @override
   Widget build(BuildContext context) {
@@ -18,12 +20,12 @@ class NavDrawerListTile extends StatelessWidget {
       onTap: onTap,
       leading: Icon(
         icon,
-        color: ThemeProvider.theme.textTheme.bodyText1?.color,
+        color: ThemeProvider.theme(index).textTheme.bodyText1?.color,
       ),
       title: Text(
         title,
         style: TextStyle(
-            color: ThemeProvider.theme.textTheme.bodyText1?.color,
+            color: ThemeProvider.theme(index).textTheme.bodyText1?.color,
             fontWeight: FontWeight.w400),
       ),
     );

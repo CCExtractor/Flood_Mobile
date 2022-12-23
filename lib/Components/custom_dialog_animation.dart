@@ -4,6 +4,9 @@ import 'package:optimize_battery/optimize_battery.dart';
 import '../Constants/theme_provider.dart';
 
 class CustomDialogAnimation extends StatelessWidget {
+  final int index;
+
+  const CustomDialogAnimation({Key? key, required this.index}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -22,7 +25,7 @@ class CustomDialogAnimation extends StatelessWidget {
           margin:
               EdgeInsets.only(top: 40), // to push the box half way below circle
           decoration: BoxDecoration(
-            color: ThemeProvider.theme.primaryColorLight,
+            color: ThemeProvider.theme(index).primaryColorLight,
             borderRadius: BorderRadius.circular(12),
           ),
           padding: EdgeInsets.only(
@@ -39,7 +42,7 @@ class CustomDialogAnimation extends StatelessWidget {
                     backgroundColor: Colors.white,
                     child: Icon(
                       Icons.cancel,
-                      color: ThemeProvider.theme.primaryColorDark,
+                      color: ThemeProvider.theme(index).primaryColorDark,
                       size: 30,
                     ),
                   ),
@@ -58,7 +61,7 @@ class CustomDialogAnimation extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 20.0,
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme(index).textTheme.bodyText1?.color,
                             fontWeight: FontWeight.bold)),
                     SizedBox(height: 10),
                     Text("To make sure progress notification works smoothly.",
@@ -66,7 +69,7 @@ class CustomDialogAnimation extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 14.0,
                             color: ThemeProvider
-                                .theme.textTheme.bodyText1?.color)),
+                                .theme(index).textTheme.bodyText1?.color)),
                     SizedBox(height: 10),
                     Text(
                         "This might not be required for certain devices like MI/Redmi, etc as they don't have a rigorous battery optimization.",
@@ -169,7 +172,7 @@ class CustomDialogAnimation extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
-                                primary: ThemeProvider.theme.primaryColorDark,
+                                primary: ThemeProvider.theme(index).primaryColorDark,
                               ),
                               child: Container(
                                 height: 45,
@@ -201,7 +204,7 @@ class CustomDialogAnimation extends StatelessWidget {
           backgroundColor: Colors.white,
           child: Icon(
             Icons.settings,
-            color: ThemeProvider.theme.primaryColorDark,
+            color: ThemeProvider.theme(index).primaryColorDark,
             size: 50,
           ),
         ),

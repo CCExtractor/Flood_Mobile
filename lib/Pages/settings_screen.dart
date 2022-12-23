@@ -15,6 +15,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
+  final int index;
+
+  const SettingsScreen({Key? key, required this.index}) : super(key: key);
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
@@ -147,7 +150,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Scaffold(
           floatingActionButton: FloatingActionButton.extended(
             elevation: 0,
-            backgroundColor: ThemeProvider.theme.primaryColorDark,
+            backgroundColor: ThemeProvider.theme(widget.index).primaryColorDark,
             onPressed: () {
               ClientSettingsModel newClientSettingsModel = new ClientSettingsModel(
                   dht: clientSettingsModel.clientSettings.dht,
@@ -213,7 +216,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   fontWeight: FontWeight.w600),
             ),
           ),
-          backgroundColor: ThemeProvider.theme.primaryColor,
+          backgroundColor: ThemeProvider.theme(widget.index).primaryColor,
           body: SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 14),
@@ -233,7 +236,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       downloadSlotPerTorrentController:
                           downloadSlotPerTorrentController,
                       downloadSlotGlobalController:
-                          downloadSlotGlobalController),
+                          downloadSlotGlobalController,
+                      index: widget.index),
                   // *Connectivity Section
                   ConnectivitySection(
                     clientSettingsModel: clientSettingsModel,
@@ -261,6 +265,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         openPort = value!;
                       });
                     },
+                    index: widget.index,
                   ),
                   // *Resources Section
                   ResourceSection(
@@ -273,7 +278,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           defaultDownloadDirectoryController,
                       maximumOpenFilesController: maximumOpenFilesController,
                       verifyHash: verifyHash,
-                      maxMemoryUsageController: maxMemoryUsageController),
+                      maxMemoryUsageController: maxMemoryUsageController,
+                      index: widget.index),
                   // *Speed Limit Section
                   SpeedLimitSection(
                     model: clientSettingsModel,
@@ -290,41 +296,44 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         upSpeed = value!;
                       });
                     },
+                    index: widget.index,
                   ),
                   // *Authentication Section
                   AuthenticationSection(
-                      setTCP: (value) {
-                        setState(() {
-                          socket = !value!;
-                        });
-                      },
-                      setSocket: (bool? value) {
-                        setState(() {
-                          socket = value!;
-                        });
-                      },
-                      setClient: (String? newValue) {
-                        setState(() {
-                          client = newValue!;
-                        });
-                      },
-                      setIsAdmin: (bool? value) {
-                        setState(() {
-                          isAdmin = value!;
-                        });
-                      },
-                      usernameController: usernameController,
-                      passwordController: passwordController,
-                      isAdmin: isAdmin,
-                      client: client,
-                      socket: socket,
-                      pathController: pathController,
-                      hostController: hostController,
-                      portController: portController,
-                      clientUsernameController: clientUsernameController,
-                      clientPasswordController: clientPasswordController,
-                      urlController: urlController,
-                      hp: hp),
+                    setTCP: (value) {
+                      setState(() {
+                        socket = !value!;
+                      });
+                    },
+                    setSocket: (bool? value) {
+                      setState(() {
+                        socket = value!;
+                      });
+                    },
+                    setClient: (String? newValue) {
+                      setState(() {
+                        client = newValue!;
+                      });
+                    },
+                    setIsAdmin: (bool? value) {
+                      setState(() {
+                        isAdmin = value!;
+                      });
+                    },
+                    usernameController: usernameController,
+                    passwordController: passwordController,
+                    isAdmin: isAdmin,
+                    client: client,
+                    socket: socket,
+                    pathController: pathController,
+                    hostController: hostController,
+                    portController: portController,
+                    clientUsernameController: clientUsernameController,
+                    clientPasswordController: clientPasswordController,
+                    urlController: urlController,
+                    hp: hp,
+                    index: widget.index,
+                  ),
                   SizedBox(
                     height: 200,
                   )
@@ -339,15 +348,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
 }
 
 class SpeedLimitSection extends StatelessWidget {
-  SpeedLimitSection(
-      {Key? key,
-      required this.hp,
-      required this.downSpeed,
-      required this.setDownSpeed,
-      required this.setUpSpeed,
-      required this.upSpeed,
-      required this.model})
-      : super(key: key);
+  SpeedLimitSection({
+    Key? key,
+    required this.hp,
+    required this.downSpeed,
+    required this.setDownSpeed,
+    required this.setUpSpeed,
+    required this.upSpeed,
+    required this.model,
+    required this.index,
+  }) : super(key: key);
 
   final double hp;
   final String upSpeed;
@@ -355,6 +365,7 @@ class SpeedLimitSection extends StatelessWidget {
   final void Function(String? value) setUpSpeed;
   final void Function(String? value) setDownSpeed;
   final ClientSettingsProvider model;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -362,8 +373,8 @@ class SpeedLimitSection extends StatelessWidget {
       key: Key('Speed Limit Expansion Card'),
       onExpansionChanged: (value) {},
       elevation: 0,
-      expandedColor: ThemeProvider.theme.primaryColor,
-      baseColor: ThemeProvider.theme.primaryColor,
+      expandedColor: ThemeProvider.theme(index).primaryColor,
+      baseColor: ThemeProvider.theme(index).primaryColor,
       title: MText(text: 'Speed Limit'),
       leading: Icon(Icons.speed_rounded),
       contentPadding: EdgeInsets.all(0),
@@ -376,7 +387,7 @@ class SpeedLimitSection extends StatelessWidget {
             Container(
               width: double.infinity,
             ),
-            SText(text: 'Download'),
+            SText(text: 'Download', index: index,),
             SizedBox(height: 15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -386,21 +397,25 @@ class SpeedLimitSection extends StatelessWidget {
                     width: double.infinity,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: ThemeProvider.theme.primaryColorLight,
+                      color: ThemeProvider.theme(index).primaryColorLight,
                       border: null,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
                       child: DropdownButtonFormField<String>(
                         key: Key('Download Speed Dropdown'),
-                        dropdownColor: ThemeProvider.theme.primaryColorLight,
+                        dropdownColor:
+                            ThemeProvider.theme(index).primaryColorLight,
                         isExpanded: true,
                         decoration: InputDecoration(
                           enabledBorder: InputBorder.none,
                         ),
                         icon: Icon(
                           Icons.arrow_drop_down,
-                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme(index)
+                              .textTheme
+                              .bodyText1
+                              ?.color,
                           size: 25,
                         ),
                         hint: Text("Download Speed"),
@@ -421,7 +436,7 @@ class SpeedLimitSection extends StatelessWidget {
               ],
             ),
             SizedBox(height: 25),
-            SText(text: 'Upload'),
+            SText(text: 'Upload', index: index,),
             SizedBox(height: 15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -431,21 +446,25 @@ class SpeedLimitSection extends StatelessWidget {
                     width: double.infinity,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: ThemeProvider.theme.primaryColorLight,
+                      color: ThemeProvider.theme(index).primaryColorLight,
                       border: null,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
                       child: DropdownButtonFormField<String>(
                         key: Key('Upload Speed Dropdown'),
-                        dropdownColor: ThemeProvider.theme.backgroundColor,
+                        dropdownColor:
+                            ThemeProvider.theme(index).backgroundColor,
                         isExpanded: true,
                         decoration: InputDecoration(
                           enabledBorder: InputBorder.none,
                         ),
                         icon: Icon(
                           Icons.arrow_drop_down,
-                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme(index)
+                              .textTheme
+                              .bodyText1
+                              ?.color,
                           size: 25,
                         ),
                         hint: Text("Upload Speed"),
@@ -485,14 +504,16 @@ class SpeedLimitSection extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        primary: ThemeProvider.theme.accentColor,
+                        primary: ThemeProvider.theme(index).accentColor,
                       ),
                       child: Center(
                         child: Text(
                           "Set",
                           style: TextStyle(
-                              color: ThemeProvider
-                                  .theme.textTheme.bodyText1?.color,
+                              color: ThemeProvider.theme(index)
+                                  .textTheme
+                                  .bodyText1
+                                  ?.color,
                               fontSize: 16,
                               fontWeight: FontWeight.w600),
                         ),
@@ -529,6 +550,7 @@ class AuthenticationSection extends StatelessWidget {
     required this.setIsAdmin,
     required this.setSocket,
     required this.setTCP,
+    required this.index,
   }) : super(key: key);
 
   final TextEditingController usernameController;
@@ -547,6 +569,7 @@ class AuthenticationSection extends StatelessWidget {
   final void Function(String? value) setClient;
   final void Function(bool? value) setSocket;
   final void Function(bool? value) setTCP;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -554,8 +577,8 @@ class AuthenticationSection extends StatelessWidget {
       key: Key('Authentication Expansion Card'),
       onExpansionChanged: (value) {},
       elevation: 0,
-      expandedColor: ThemeProvider.theme.primaryColor,
-      baseColor: ThemeProvider.theme.primaryColor,
+      expandedColor: ThemeProvider.theme(index).primaryColor,
+      baseColor: ThemeProvider.theme(index).primaryColor,
       title: MText(text: 'Authentication'),
       leading: Icon(Icons.security),
       contentPadding: EdgeInsets.all(0),
@@ -564,13 +587,14 @@ class AuthenticationSection extends StatelessWidget {
           key: Key('Authentication option display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SText(text: 'Add User'),
+            SText(text: 'Add User',index: index,),
             SizedBox(height: 25),
             SettingsTextField(
               validator: (value) {},
               hintText: 'Username',
               labelText: 'Username',
               controller: usernameController,
+              index: index,
             ),
             SizedBox(height: 20),
             SettingsTextField(
@@ -578,6 +602,7 @@ class AuthenticationSection extends StatelessWidget {
               hintText: 'Password',
               labelText: 'Password',
               controller: passwordController,
+              index: index,
             ),
             SizedBox(height: 20),
             Row(
@@ -587,8 +612,8 @@ class AuthenticationSection extends StatelessWidget {
                 ),
                 Expanded(
                   child: CheckboxListTile(
-                    activeColor: ThemeProvider.theme.primaryColorDark,
-                    tileColor: ThemeProvider.theme.primaryColorLight,
+                    activeColor: ThemeProvider.theme(index).primaryColorDark,
+                    tileColor: ThemeProvider.theme(index).primaryColorLight,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -609,7 +634,7 @@ class AuthenticationSection extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 5),
                     decoration: BoxDecoration(
-                      color: ThemeProvider.theme.primaryColorLight,
+                      color: ThemeProvider.theme(index).primaryColorLight,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: ButtonTheme(
@@ -619,7 +644,8 @@ class AuthenticationSection extends StatelessWidget {
                         isExpanded: true,
                         value: client,
                         icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                        dropdownColor: ThemeProvider.theme.backgroundColor,
+                        dropdownColor:
+                            ThemeProvider.theme(index).backgroundColor,
                         elevation: 16,
                         onChanged: setClient,
                         underline: Container(),
@@ -649,10 +675,10 @@ class AuthenticationSection extends StatelessWidget {
                         children: [
                           Expanded(
                             child: CheckboxListTile(
-                                tileColor:
-                                    ThemeProvider.theme.primaryColorLight,
+                                tileColor: ThemeProvider.theme(index)
+                                    .primaryColorLight,
                                 activeColor:
-                                    ThemeProvider.theme.primaryColorDark,
+                                    ThemeProvider.theme(index).primaryColorDark,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -668,8 +694,10 @@ class AuthenticationSection extends StatelessWidget {
                           ),
                           Expanded(
                             child: CheckboxListTile(
-                              activeColor: ThemeProvider.theme.primaryColorDark,
-                              tileColor: ThemeProvider.theme.primaryColorLight,
+                              activeColor:
+                                  ThemeProvider.theme(index).primaryColorDark,
+                              tileColor:
+                                  ThemeProvider.theme(index).primaryColorLight,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
@@ -690,6 +718,7 @@ class AuthenticationSection extends StatelessWidget {
                               hintText: 'eg. ~/.local/share/rtorrent',
                               labelText: 'Path',
                               controller: pathController,
+                        index: index,
                             )
                           : Column(
                               children: [
@@ -698,6 +727,7 @@ class AuthenticationSection extends StatelessWidget {
                                   hintText: 'Host or IP',
                                   labelText: 'Host',
                                   controller: hostController,
+                                  index: index,
                                 ),
                                 SizedBox(height: 20),
                                 SettingsTextField(
@@ -705,6 +735,7 @@ class AuthenticationSection extends StatelessWidget {
                                   hintText: 'Port',
                                   labelText: 'Port',
                                   controller: portController,
+                                  index: index,
                                 )
                               ],
                             ),
@@ -717,6 +748,7 @@ class AuthenticationSection extends StatelessWidget {
                         hintText: 'Client Username',
                         labelText: 'Username',
                         controller: clientUsernameController,
+                        index: index,
                       ),
                       SizedBox(height: 20),
                       SettingsTextField(
@@ -724,6 +756,7 @@ class AuthenticationSection extends StatelessWidget {
                         hintText: 'Client Password',
                         labelText: 'Password',
                         controller: clientPasswordController,
+                        index: index,
                       ),
                       SizedBox(height: 20),
                       SettingsTextField(
@@ -731,6 +764,7 @@ class AuthenticationSection extends StatelessWidget {
                         hintText: 'eg. http://localhost:8080/',
                         labelText: 'URL',
                         controller: urlController,
+                        index: index,
                       ),
                     ],
                   ),
@@ -776,7 +810,7 @@ class AuthenticationSection extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        primary: ThemeProvider.theme.accentColor,
+                        primary: ThemeProvider.theme(index).accentColor,
                       ),
                       child: Center(
                         child: Text(
@@ -808,6 +842,7 @@ class ResourceSection extends StatelessWidget {
     required this.verifyHash,
     required this.maxMemoryUsageController,
     required this.setVerifyHash,
+    required this.index,
   }) : super(key: key);
 
   final TextEditingController defaultDownloadDirectoryController;
@@ -815,6 +850,7 @@ class ResourceSection extends StatelessWidget {
   final bool verifyHash;
   final TextEditingController maxMemoryUsageController;
   final void Function(bool? value) setVerifyHash;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -822,8 +858,8 @@ class ResourceSection extends StatelessWidget {
       key: Key('Resources Expansion Card'),
       onExpansionChanged: (value) {},
       elevation: 0,
-      expandedColor: ThemeProvider.theme.primaryColor,
-      baseColor: ThemeProvider.theme.primaryColor,
+      expandedColor: ThemeProvider.theme(index).primaryColor,
+      baseColor: ThemeProvider.theme(index).primaryColor,
       title: MText(text: 'Resources'),
       leading: Icon(Icons.settings),
       contentPadding: EdgeInsets.all(0),
@@ -832,13 +868,14 @@ class ResourceSection extends StatelessWidget {
           key: Key('Resources options display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SText(text: 'Disk'),
+            SText(text: 'Disk', index: index,),
             SizedBox(height: 25),
             SettingsTextField(
               validator: (value) {},
               hintText: 'Default Download Directory',
               labelText: 'Default Download Directory',
               controller: defaultDownloadDirectoryController,
+              index: index,
             ),
             SizedBox(height: 22),
             Row(
@@ -850,6 +887,7 @@ class ResourceSection extends StatelessWidget {
                     labelText: 'Maximum Open Files',
                     controller: maximumOpenFilesController,
                     isText: false,
+                    index: index,
                   ),
                 ),
                 SizedBox(
@@ -864,8 +902,8 @@ class ResourceSection extends StatelessWidget {
                       ),
                       CheckboxListTile(
                         key: Key('Verify Hash checkbox'),
-                        activeColor: ThemeProvider.theme.backgroundColor,
-                        tileColor: ThemeProvider.theme.primaryColorLight,
+                        activeColor: ThemeProvider.theme(index).backgroundColor,
+                        tileColor: ThemeProvider.theme(index).primaryColorLight,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -882,7 +920,7 @@ class ResourceSection extends StatelessWidget {
               ],
             ),
             SizedBox(height: 25),
-            SText(text: 'Memory'),
+            SText(text: 'Memory', index: index,),
             SizedBox(height: 25),
             SettingsTextField(
               validator: (value) {},
@@ -890,6 +928,7 @@ class ResourceSection extends StatelessWidget {
               labelText: 'Max Memory Usage (MB)',
               controller: maxMemoryUsageController,
               isText: false,
+              index: index,
             ),
           ],
         )
@@ -917,7 +956,8 @@ class ConnectivitySection extends StatelessWidget {
       required this.setEnablePeerExchange,
       required this.setOpenPort,
       required this.setRandomizePort,
-      required this.randomizePort})
+      required this.randomizePort,
+      required this.index})
       : super(key: key);
 
   final TextEditingController portRangeController;
@@ -937,14 +977,15 @@ class ConnectivitySection extends StatelessWidget {
   final void Function(bool? value) setOpenPort;
   final Function? setEnableDht;
   final Function? setEnablePeerExchange;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTileCard(
       key: Key('Connectivity Expansion Card'),
       elevation: 0,
-      expandedColor: ThemeProvider.theme.primaryColor,
-      baseColor: ThemeProvider.theme.primaryColor,
+      expandedColor: ThemeProvider.theme(index).primaryColor,
+      baseColor: ThemeProvider.theme(index).primaryColor,
       leading: Icon(FontAwesomeIcons.connectdevelop),
       title: MText(text: 'Connectivity'),
       contentPadding: EdgeInsets.all(0),
@@ -953,7 +994,7 @@ class ConnectivitySection extends StatelessWidget {
           key: Key('Connectivity option display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SText(text: 'Incoming Connections'),
+            SText(text: 'Incoming Connections', index: index,),
             SizedBox(height: 15),
             SettingsTextField(
               validator: (value) {},
@@ -961,6 +1002,7 @@ class ConnectivitySection extends StatelessWidget {
               labelText: 'Port Range',
               isText: false,
               controller: portRangeController,
+              index: index,
             ),
             SizedBox(height: 22),
             Row(
@@ -968,8 +1010,8 @@ class ConnectivitySection extends StatelessWidget {
                 Expanded(
                   child: CheckboxListTile(
                     key: Key('Checkbox Randomize Port'),
-                    activeColor: ThemeProvider.theme.primaryColorDark,
-                    tileColor: ThemeProvider.theme.primaryColorLight,
+                    activeColor: ThemeProvider.theme(index).primaryColorDark,
+                    tileColor: ThemeProvider.theme(index).primaryColorLight,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -987,8 +1029,8 @@ class ConnectivitySection extends StatelessWidget {
                 Expanded(
                   child: CheckboxListTile(
                     key: Key('Checkbox Open Port'),
-                    activeColor: ThemeProvider.theme.primaryColorDark,
-                    tileColor: ThemeProvider.theme.primaryColorLight,
+                    activeColor: ThemeProvider.theme(index).primaryColorDark,
+                    tileColor: ThemeProvider.theme(index).primaryColorLight,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -1009,9 +1051,10 @@ class ConnectivitySection extends StatelessWidget {
               labelText: 'Maximum HTTP Connections',
               isText: false,
               controller: maxHttpConnectionsController,
+              index: index,
             ),
             SizedBox(height: 25),
-            SText(text: 'Decentralized Peer Discovery'),
+            SText(text: 'Decentralized Peer Discovery', index: index,),
             SizedBox(height: 15),
             SettingsTextField(
               validator: (value) {},
@@ -1019,6 +1062,7 @@ class ConnectivitySection extends StatelessWidget {
               labelText: 'DHT Port',
               controller: dhtPortController,
               isText: false,
+              index: index,
             ),
             SizedBox(height: 22),
             Row(
@@ -1026,8 +1070,8 @@ class ConnectivitySection extends StatelessWidget {
                 Expanded(
                   child: CheckboxListTile(
                     key: Key('Checkbox Enable DHT'),
-                    activeColor: ThemeProvider.theme.primaryColorDark,
-                    tileColor: ThemeProvider.theme.primaryColorLight,
+                    activeColor: ThemeProvider.theme(index).primaryColorDark,
+                    tileColor: ThemeProvider.theme(index).primaryColorLight,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -1049,8 +1093,8 @@ class ConnectivitySection extends StatelessWidget {
                 Expanded(
                   child: CheckboxListTile(
                     key: Key('Checkbox Enable Peer Exchange'),
-                    activeColor: ThemeProvider.theme.primaryColorDark,
-                    tileColor: ThemeProvider.theme.primaryColorLight,
+                    activeColor: ThemeProvider.theme(index).primaryColorDark,
+                    tileColor: ThemeProvider.theme(index).primaryColorLight,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -1069,7 +1113,7 @@ class ConnectivitySection extends StatelessWidget {
               ],
             ),
             SizedBox(height: 25),
-            SText(text: 'Peers'),
+            SText(text: 'Peers', index: index,),
             SizedBox(height: 15),
             SettingsTextField(
               validator: (value) {},
@@ -1077,6 +1121,7 @@ class ConnectivitySection extends StatelessWidget {
               labelText: 'Minimum Peers',
               controller: minimumPeerController,
               isText: false,
+              index: index,
             ),
             SizedBox(height: 22),
             SettingsTextField(
@@ -1084,6 +1129,7 @@ class ConnectivitySection extends StatelessWidget {
               hintText: 'Maximum Peers',
               labelText: 'Maximum Peers',
               controller: maximumPeerController,
+              index: index,
               isText: false,
             ),
             SizedBox(height: 22),
@@ -1093,6 +1139,7 @@ class ConnectivitySection extends StatelessWidget {
               labelText: 'Minimum Peers Seeding',
               controller: minimumPeerSeedingController,
               isText: false,
+              index: index,
             ),
             SizedBox(height: 22),
             SettingsTextField(
@@ -1101,6 +1148,7 @@ class ConnectivitySection extends StatelessWidget {
               labelText: 'Maximum Peers Seeding',
               controller: maximumPeerSeedingController,
               isText: false,
+              index: index,
             ),
             SizedBox(height: 22),
             SettingsTextField(
@@ -1109,6 +1157,7 @@ class ConnectivitySection extends StatelessWidget {
               labelText: 'Peers Desired',
               controller: peerDesiredController,
               isText: false,
+              index: index,
             ),
           ],
         )
@@ -1126,6 +1175,7 @@ class BandwidthSection extends StatelessWidget {
     required this.uploadSlotGlobalController,
     required this.downloadSlotPerTorrentController,
     required this.downloadSlotGlobalController,
+    required this.index,
   }) : super(key: key);
 
   final TextEditingController globalDownloadRateController;
@@ -1134,6 +1184,7 @@ class BandwidthSection extends StatelessWidget {
   final TextEditingController uploadSlotGlobalController;
   final TextEditingController downloadSlotPerTorrentController;
   final TextEditingController downloadSlotGlobalController;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -1142,8 +1193,8 @@ class BandwidthSection extends StatelessWidget {
       initiallyExpanded: true,
       onExpansionChanged: (value) {},
       elevation: 0,
-      expandedColor: ThemeProvider.theme.primaryColor,
-      baseColor: ThemeProvider.theme.primaryColor,
+      expandedColor: ThemeProvider.theme(index).primaryColor,
+      baseColor: ThemeProvider.theme(index).primaryColor,
       title: MText(text: 'Bandwidth'),
       leading: Icon(Icons.wifi_rounded),
       contentPadding: EdgeInsets.all(0),
@@ -1152,7 +1203,7 @@ class BandwidthSection extends StatelessWidget {
           key: Key('Bandwidth option display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SText(text: 'Transfer Rate Throttles'),
+            SText(text: 'Transfer Rate Throttles', index: index,),
             SizedBox(height: 15),
             SettingsTextField(
               validator: (value) {},
@@ -1160,6 +1211,7 @@ class BandwidthSection extends StatelessWidget {
               labelText: 'Global Download Rate Throttle',
               isText: false,
               controller: globalDownloadRateController,
+              index: index,
             ),
             SizedBox(height: 22),
             SettingsTextField(
@@ -1168,9 +1220,10 @@ class BandwidthSection extends StatelessWidget {
               labelText: 'Global Upload Rate Throttle',
               isText: false,
               controller: globalUploadRateController,
+              index: index,
             ),
             SizedBox(height: 25),
-            SText(text: 'Slot Availability'),
+            SText(text: 'Slot Availability', index: index,),
             SizedBox(height: 15),
             SettingsTextField(
               validator: (value) {},
@@ -1178,6 +1231,7 @@ class BandwidthSection extends StatelessWidget {
               labelText: 'Upload Slots Per Torrent',
               isText: false,
               controller: uploadSlotPerTorrentController,
+              index: index,
             ),
             SizedBox(height: 22),
             SettingsTextField(
@@ -1185,6 +1239,7 @@ class BandwidthSection extends StatelessWidget {
               hintText: 'Upload Slots Global',
               labelText: 'Upload Slots Global',
               controller: uploadSlotGlobalController,
+              index: index,
               isText: false,
             ),
             SizedBox(height: 22),
@@ -1193,6 +1248,7 @@ class BandwidthSection extends StatelessWidget {
               hintText: 'Download Slots Per Torrent',
               labelText: 'Download Slots Per Torrent',
               controller: downloadSlotPerTorrentController,
+              index: index,
               isText: false,
             ),
             SizedBox(height: 22),
@@ -1201,6 +1257,7 @@ class BandwidthSection extends StatelessWidget {
               hintText: 'Download Slots Global',
               labelText: 'Download Slots Global',
               controller: downloadSlotGlobalController,
+              index: index,
               isText: false,
             ),
           ],

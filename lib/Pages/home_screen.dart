@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Components/add_automatic_torrent.dart';
+import 'package:flood_mobile/Components/dark_transition.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
@@ -45,6 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
   File? _file;
   late String base64;
   late String directoryDefault;
+
+  bool isDark = true;
 
   @override
   void initState() {
@@ -91,10 +94,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           isScrollControlled: true,
           context: context,
-          backgroundColor: ThemeProvider.theme.backgroundColor,
+          backgroundColor: ThemeProvider.theme(2).backgroundColor,
           builder: (context) {
             return AddAutoTorrent(
-                base64: base64, imageBytes: imageBytes, uriString: uriString);
+                base64: base64, imageBytes: imageBytes, uriString: uriString, index: 2,);
           },
         );
       }
@@ -110,96 +113,116 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void toggleTheme() {
+    setState(() {
+      isDark = !isDark;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double wp = MediaQuery.of(context).size.width;
+    final mediaQuery = MediaQuery.of(context);
 
-    return KeyboardDismissOnTap(
-      child: SimpleHiddenDrawer(
-        withShadow: true,
-        slidePercent: 80,
-        contentCornerRadius: 40,
-        menu: Menu(),
-        screenSelectedBuilder: (position, controller) {
-          Widget screenCurrent = Container();
-          switch (position) {
-            case 0:
-              screenCurrent = TorrentScreen();
-              break;
-            case 1:
-              screenCurrent = TorrentScreen();
-              break;
-            case 2:
-              screenCurrent = SettingsScreen();
-              break;
-            case 5:
-              screenCurrent = AboutScreen();
-              break;
-          }
-          return Consumer<HomeProvider>(builder: (context, homeModel, child) {
-            return Scaffold(
-              appBar: AppBar(
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.menu,
-                    color: ThemeProvider.theme.textTheme.bodyText1?.color,
-                  ),
-                  onPressed: () {
-                    controller.toggle();
-                  },
-                ),
-                title: Image(
-                  key: Key('Flood Icon'),
-                  image: AssetImage(
-                    'assets/images/icon.png',
-                  ),
-                  width: 60,
-                  height: 60,
-                ),
-                centerTitle: true,
-                backgroundColor: Theme.of(context).primaryColor,
-                elevation: 0,
-                actions: [
-                  RSSFeedButtonWidget(),
-                  Badge(
-                    key: Key('Badge Widget'),
-                    badgeColor: Theme.of(context).accentColor,
-                    badgeContent: Center(
-                      child: Text(
-                        homeModel.unreadNotifications.toString(),
-                        style: TextStyle(color: Colors.white),
+    return DarkTransition(
+        isDark: isDark,
+        offset: Offset(mediaQuery.viewPadding.left + 115 + 20, mediaQuery.viewPadding.top + 30 + 20),
+        duration: const Duration(seconds: 1),
+        childBuilder: (context, int index, bool needsSetup, int position, Function(int) updatePosition) {
+          return KeyboardDismissOnTap(
+            child: SimpleHiddenDrawer(
+              withShadow: true,
+              initPositionSelected: position,
+              slidePercent: 80,
+              contentCornerRadius: 40,
+              menu: Menu(toggleTheme: toggleTheme, index: index, updatePosition: updatePosition),
+              screenSelectedBuilder: (position, controller) {
+                Widget screenCurrent = Container();
+                switch (position) {
+                  case 0:
+                    screenCurrent = TorrentScreen(index: index,);
+                    break;
+                  case 1:
+                    screenCurrent = TorrentScreen(index: index,);
+                    break;
+                  case 2:
+                    screenCurrent = SettingsScreen(index: index,);
+                    break;
+                  case 5:
+                    screenCurrent = AboutScreen(index: index,);
+                    break;
+                }
+                if (needsSetup) {
+                  if (index == 1) {
+                    controller.open();
+                  }
+                }
+                return Consumer<HomeProvider>(builder: (context, homeModel, child) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      leading: IconButton(
+                        icon: Icon(
+                          Icons.menu,
+                          color: ThemeProvider.theme(index).textTheme.bodyText1?.color,
+                        ),
+                        onPressed: () {
+                          controller.toggle();
+                        },
                       ),
-                    ),
-                    position: BadgePosition(top: 0, end: 3),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.notifications,
+                      title: Image(
+                        key: Key('Flood Icon'),
+                        image: AssetImage(
+                          'assets/images/icon.png',
+                        ),
+                        width: 60,
+                        height: 60,
                       ),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              key: Key('Notification Alert Dialog'),
-                              elevation: 0,
-                              backgroundColor: Theme.of(context).primaryColor,
-                              content: notificationPopupDialogueContainer(
+                      centerTitle: true,
+                      backgroundColor: ThemeProvider.theme(index).primaryColor,
+                      elevation: 0,
+                      actions: [
+                        RSSFeedButtonWidget(index: index,),
+                        Badge(
+                          key: Key('Badge Widget'),
+                          badgeColor: ThemeProvider.theme(index).accentColor,
+                          badgeContent: Center(
+                            child: Text(
+                              homeModel.unreadNotifications.toString(),
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          position: BadgePosition(top: 0, end: 3),
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.notifications,
+                            ),
+                            onPressed: () {
+                              showDialog(
                                 context: context,
-                              ),
-                            );
-                          },
-                        );
-                      },
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    key: Key('Notification Alert Dialog'),
+                                    elevation: 0,
+                                    backgroundColor: ThemeProvider.theme(index).primaryColor,
+                                    content: notificationPopupDialogueContainer(
+                                      context: context,
+                                      index: index,
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              body: screenCurrent,
-            );
-          });
-        },
-      ),
-    );
+                    body: screenCurrent,
+                  );
+                });
+              },
+            ),
+          );
+        });
   }
 }
 
@@ -239,6 +262,10 @@ class NotificationController {
 }
 
 class Menu extends StatefulWidget {
+  final Function toggleTheme;
+  final int index;
+  final Function(int) updatePosition;
+  const Menu({Key? key, required this.toggleTheme, required this.index, required this.updatePosition}) : super(key: key);
   @override
   _MenuState createState() => _MenuState();
 }
@@ -262,7 +289,7 @@ class _MenuState extends State<Menu> {
     double hp = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
-        color: ThemeProvider.theme.scaffoldBackgroundColor,
+        color: ThemeProvider.theme(widget.index).scaffoldBackgroundColor,
         width: double.maxFinite,
         height: double.maxFinite,
         padding: const EdgeInsets.only(top: 30.0, left: 5),
@@ -282,7 +309,7 @@ class _MenuState extends State<Menu> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 30.0),
-                  child: ChangeThemeButtonWidget(),
+                  child: ChangeThemeButtonWidget(toggleTheme: widget.toggleTheme,),
                 ),
               ],
             ),
@@ -305,16 +332,20 @@ class _MenuState extends State<Menu> {
                 icon: Icons.dashboard,
                 onTap: () {
                   controller.position = 0;
+                  widget.updatePosition(0);
                   controller.toggle();
                 },
-                title: 'Torrents'),
+                title: 'Torrents',
+                index: widget.index,),
             NavDrawerListTile(
                 icon: Icons.settings,
                 onTap: () {
                   controller.position = 2;
+                  widget.updatePosition(2);
                   controller.toggle();
                 },
-                title: 'Settings'),
+                title: 'Settings',
+                index: widget.index,),
             NavDrawerListTile(
               icon: Icons.exit_to_app,
               onTap: () async {
@@ -332,10 +363,12 @@ class _MenuState extends State<Menu> {
                           Routes.loginScreenRoute,
                           (Route<dynamic> route) => false);
                     },
+                    index: widget.index,
                   ),
                 );
               },
               title: 'Logout',
+              index: widget.index,
             ),
             NavDrawerListTile(
                 icon: FontAwesomeIcons.github,
@@ -345,14 +378,18 @@ class _MenuState extends State<Menu> {
                     'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
                   );
                 },
-                title: 'GitHub'),
+                title: 'GitHub',
+                index: widget.index,
+            ),
             NavDrawerListTile(
                 icon: Icons.info,
                 onTap: () {
                   controller.position = 5;
+                  widget.updatePosition(5);
                   controller.toggle();
                 },
-                title: 'About'),
+                title: 'About',
+                index: widget.index,),
           ],
         ),
       ),
