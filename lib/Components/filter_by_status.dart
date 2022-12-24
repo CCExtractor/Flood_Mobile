@@ -40,7 +40,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
               children: <Widget>[
                 Text("Filter by status",
                     style: TextStyle(
-                        color: ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
+                        color: ThemeProvider.theme((widget.index))
+                            .textTheme
+                            .bodyText1
+                            ?.color,
                         fontSize: 24,
                         fontWeight: FontWeight.bold)),
                 ListTile(
@@ -51,7 +54,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         filterModel.filterStatus.toString().split(".").last ==
                                 "all"
                             ? Colors.blue
-                            : ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
+                            : ThemeProvider.theme((widget.index))
+                                .textTheme
+                                .bodyText1
+                                ?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -65,8 +71,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                           .last ==
                                       "all"
                                   ? Colors.blue
-                                  : ThemeProvider
-                                      .theme((widget.index)).textTheme.bodyText1?.color,
+                                  : ThemeProvider.theme((widget.index))
+                                      .textTheme
+                                      .bodyText1
+                                      ?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -115,7 +123,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         filterModel.filterStatus.toString().split(".").last ==
                                 "downloading"
                             ? Colors.blue
-                            : ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
+                            : ThemeProvider.theme((widget.index))
+                                .textTheme
+                                .bodyText1
+                                ?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -129,8 +140,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                           .last ==
                                       "downloading"
                                   ? Colors.blue
-                                  : ThemeProvider
-                                      .theme((widget.index)).textTheme.bodyText1?.color,
+                                  : ThemeProvider.theme((widget.index))
+                                      .textTheme
+                                      .bodyText1
+                                      ?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -185,7 +198,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         filterModel.filterStatus.toString().split(".").last ==
                                 "seeding"
                             ? Colors.blue
-                            : ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
+                            : ThemeProvider.theme((widget.index))
+                                .textTheme
+                                .bodyText1
+                                ?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -199,8 +215,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                           .last ==
                                       "seeding"
                                   ? Colors.blue
-                                  : ThemeProvider
-                                      .theme((widget.index)).textTheme.bodyText1?.color,
+                                  : ThemeProvider.theme((widget.index))
+                                      .textTheme
+                                      .bodyText1
+                                      ?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -254,7 +272,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         filterModel.filterStatus.toString().split(".").last ==
                                 "complete"
                             ? Colors.blue
-                            : ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
+                            : ThemeProvider.theme((widget.index))
+                                .textTheme
+                                .bodyText1
+                                ?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -268,8 +289,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                           .last ==
                                       "complete"
                                   ? Colors.blue
-                                  : ThemeProvider
-                                      .theme((widget.index)).textTheme.bodyText1?.color,
+                                  : ThemeProvider.theme((widget.index))
+                                      .textTheme
+                                      .bodyText1
+                                      ?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -323,7 +346,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         filterModel.filterStatus.toString().split(".").last ==
                                 "stopped"
                             ? Colors.blue
-                            : ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
+                            : ThemeProvider.theme((widget.index))
+                                .textTheme
+                                .bodyText1
+                                ?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -337,8 +363,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                           .last ==
                                       "stopped"
                                   ? Colors.blue
-                                  : ThemeProvider
-                                      .theme((widget.index)).textTheme.bodyText1?.color,
+                                  : ThemeProvider.theme((widget.index))
+                                      .textTheme
+                                      .bodyText1
+                                      ?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -392,7 +420,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         filterModel.filterStatus.toString().split(".").last ==
                                 "active"
                             ? Colors.blue
-                            : ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
+                            : ThemeProvider.theme((widget.index))
+                                .textTheme
+                                .bodyText1
+                                ?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -406,8 +437,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                           .last ==
                                       "active"
                                   ? Colors.blue
-                                  : ThemeProvider
-                                      .theme((widget.index)).textTheme.bodyText1?.color,
+                                  : ThemeProvider.theme((widget.index))
+                                      .textTheme
+                                      .bodyText1
+                                      ?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -461,7 +494,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         filterModel.filterStatus.toString().split(".").last ==
                                 "inactive"
                             ? Colors.blue
-                            : ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
+                            : ThemeProvider.theme((widget.index))
+                                .textTheme
+                                .bodyText1
+                                ?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -475,8 +511,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                           .last ==
                                       "inactive"
                                   ? Colors.blue
-                                  : ThemeProvider
-                                      .theme((widget.index)).textTheme.bodyText1?.color,
+                                  : ThemeProvider.theme((widget.index))
+                                      .textTheme
+                                      .bodyText1
+                                      ?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -530,7 +568,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         filterModel.filterStatus.toString().split(".").last ==
                                 "error"
                             ? Colors.blue
-                            : ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
+                            : ThemeProvider.theme((widget.index))
+                                .textTheme
+                                .bodyText1
+                                ?.color,
                   ),
                   minLeadingWidth: 2,
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -544,8 +585,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                           .last ==
                                       "error"
                                   ? Colors.blue
-                                  : ThemeProvider
-                                      .theme((widget.index)).textTheme.bodyText1?.color,
+                                  : ThemeProvider.theme((widget.index))
+                                      .textTheme
+                                      .bodyText1
+                                      ?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -596,7 +639,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                 ),
                 Text("Filter by trackers",
                     style: TextStyle(
-                        color: ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
+                        color: ThemeProvider.theme((widget.index))
+                            .textTheme
+                            .bodyText1
+                            ?.color,
                         fontSize: 24,
                         fontWeight: FontWeight.bold)),
                 ListTile(
@@ -612,8 +658,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                           .last ==
                                       "all"
                                   ? Colors.blue
-                                  : ThemeProvider
-                                      .theme((widget.index)).textTheme.bodyText1?.color,
+                                  : ThemeProvider.theme((widget.index))
+                                      .textTheme
+                                      .bodyText1
+                                      ?.color,
                               fontFamily: 'Montserrat',
                               fontSize: 16,
                               fontWeight: FontWeight.normal)),
@@ -673,8 +721,10 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                             filterModel.trackerURISelected
                                                 .toString()
                                         ? Colors.blue
-                                        : ThemeProvider
-                                            .theme((widget.index)).textTheme.bodyText1?.color,
+                                        : ThemeProvider.theme((widget.index))
+                                            .textTheme
+                                            .bodyText1
+                                            ?.color,
                                     fontFamily: 'Montserrat',
                                     fontSize: 16,
                                     fontWeight: FontWeight.normal)),

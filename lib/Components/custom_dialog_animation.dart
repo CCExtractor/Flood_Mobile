@@ -6,7 +6,8 @@ import '../Constants/theme_provider.dart';
 class CustomDialogAnimation extends StatelessWidget {
   final int index;
 
-  const CustomDialogAnimation({Key? key, required this.index}) : super(key: key);
+  const CustomDialogAnimation({Key? key, required this.index})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -60,16 +61,20 @@ class CustomDialogAnimation extends StatelessWidget {
                     new Text("Action Required",
                         style: TextStyle(
                             fontSize: 20.0,
-                            color:
-                                ThemeProvider.theme(index).textTheme.bodyText1?.color,
+                            color: ThemeProvider.theme(index)
+                                .textTheme
+                                .bodyText1
+                                ?.color,
                             fontWeight: FontWeight.bold)),
                     SizedBox(height: 10),
                     Text("To make sure progress notification works smoothly.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 14.0,
-                            color: ThemeProvider
-                                .theme(index).textTheme.bodyText1?.color)),
+                            color: ThemeProvider.theme(index)
+                                .textTheme
+                                .bodyText1
+                                ?.color)),
                     SizedBox(height: 10),
                     Text(
                         "This might not be required for certain devices like MI/Redmi, etc as they don't have a rigorous battery optimization.",
@@ -172,7 +177,8 @@ class CustomDialogAnimation extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
-                                primary: ThemeProvider.theme(index).primaryColorDark,
+                                primary:
+                                    ThemeProvider.theme(index).primaryColorDark,
                               ),
                               child: Container(
                                 height: 45,

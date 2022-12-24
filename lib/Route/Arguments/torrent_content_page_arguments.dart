@@ -3,5 +3,6 @@ class TorrentContentPageArguments {
   String directory;
   int index;
 
-  TorrentContentPageArguments({required this.hash, required this.directory, required this.index});
+  TorrentContentPageArguments(
+      {required this.hash, required this.directory, required this.index});
 }

@@ -67,7 +67,10 @@ class _AboutScreenState extends State<AboutScreen> {
                   'Flood is a monitoring service for various torrent clients. It\'s a Node.js service that communicates with your favorite torrent client and serves a decent mobile UI for administration. This project is based on the original Flood project.',
                   key: Key('App info text key'),
                   style: TextStyle(
-                      color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                      color: ThemeProvider.theme(widget.index)
+                          .textTheme
+                          .bodyText1
+                          ?.color,
                       fontSize: 15),
                 ),
                 SizedBox(
@@ -76,7 +79,10 @@ class _AboutScreenState extends State<AboutScreen> {
                 Text(
                   'Feedback',
                   style: TextStyle(
-                      color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                      color: ThemeProvider.theme(widget.index)
+                          .textTheme
+                          .bodyText1
+                          ?.color,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
@@ -87,7 +93,10 @@ class _AboutScreenState extends State<AboutScreen> {
                   'If you have a specific issue or bug, please file a GitHub issue. Please join the Flood Discord server to discuss feature requests and implementation details.',
                   key: Key('Feedback text key'),
                   style: TextStyle(
-                      color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                      color: ThemeProvider.theme(widget.index)
+                          .textTheme
+                          .bodyText1
+                          ?.color,
                       fontSize: 15),
                 ),
                 SizedBox(
@@ -96,7 +105,10 @@ class _AboutScreenState extends State<AboutScreen> {
                 Text(
                   'More Information',
                   style: TextStyle(
-                      color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                      color: ThemeProvider.theme(widget.index)
+                          .textTheme
+                          .bodyText1
+                          ?.color,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
@@ -107,7 +119,10 @@ class _AboutScreenState extends State<AboutScreen> {
                   'Check out the Wiki for more information.',
                   key: Key('More info text key'),
                   style: TextStyle(
-                      color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                      color: ThemeProvider.theme(widget.index)
+                          .textTheme
+                          .bodyText1
+                          ?.color,
                       fontSize: 15),
                 ),
                 SizedBox(

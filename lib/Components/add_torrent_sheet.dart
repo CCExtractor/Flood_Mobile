@@ -63,18 +63,27 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
               key: Key('Destination TextField'),
               controller: directoryController,
               style: TextStyle(
-                color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                color: ThemeProvider.theme(widget.index)
+                    .textTheme
+                    .bodyText1
+                    ?.color,
               ),
               decoration: InputDecoration(
                 prefixIcon: Icon(
                   Icons.folder,
-                  color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                  color: ThemeProvider.theme(widget.index)
+                      .textTheme
+                      .bodyText1
+                      ?.color,
                 ),
                 labelText: 'Destination',
                 hintText: 'Destination',
                 labelStyle: TextStyle(
                     fontFamily: 'Montserrat',
-                    color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color),
+                    color: ThemeProvider.theme(widget.index)
+                        .textTheme
+                        .bodyText1
+                        ?.color),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -88,12 +97,18 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                     key: Key('Torrent magnet link textfield'),
                     controller: magnetUrlController,
                     style: TextStyle(
-                      color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                      color: ThemeProvider.theme(widget.index)
+                          .textTheme
+                          .bodyText1
+                          ?.color,
                     ),
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.link,
-                        color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                        color: ThemeProvider.theme(widget.index)
+                            .textTheme
+                            .bodyText1
+                            ?.color,
                       ),
                       suffix: GestureDetector(
                         child: Icon(Icons.paste),
@@ -110,7 +125,10 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                       hintText: 'Torrent URL or Magnet Link',
                       labelStyle: TextStyle(
                         fontFamily: 'Montserrat',
-                        color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                        color: ThemeProvider.theme(widget.index)
+                            .textTheme
+                            .bodyText1
+                            ?.color,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -204,7 +222,10 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                 Text(
                   'or',
                   style: TextStyle(
-                      color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                      color: ThemeProvider.theme(widget.index)
+                          .textTheme
+                          .bodyText1
+                          ?.color,
                       fontSize: 12,
                       fontWeight: FontWeight.w900),
                 ),

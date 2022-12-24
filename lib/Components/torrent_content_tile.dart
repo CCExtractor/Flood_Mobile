@@ -17,7 +17,10 @@ class FolderFileListView extends StatefulWidget {
   final int index;
 
   FolderFileListView(
-      {required this.data, required this.depth, required this.hash, required this.index});
+      {required this.data,
+      required this.depth,
+      required this.hash,
+      required this.index});
 
   @override
   _FolderFileListViewState createState() => _FolderFileListViewState();
@@ -49,7 +52,8 @@ class _FolderFileListViewState extends State<FolderFileListView> {
                     model: widget.data[folderList[index]],
                     wp: wp,
                     hash: widget.hash,
-                    index: widget.index,)
+                    index: widget.index,
+                  )
                 : Padding(
                     padding: EdgeInsets.only(left: widget.depth * 10),
                     child: GestureDetector(
@@ -62,8 +66,10 @@ class _FolderFileListViewState extends State<FolderFileListView> {
                       },
                       child: ExpansionTileCard(
                         elevation: 0,
-                        expandedColor: ThemeProvider.theme(widget.index).primaryColor,
-                        baseColor: ThemeProvider.theme(widget.index).primaryColor,
+                        expandedColor:
+                            ThemeProvider.theme(widget.index).primaryColor,
+                        baseColor:
+                            ThemeProvider.theme(widget.index).primaryColor,
                         leading: Icon(
                           Icons.folder_rounded,
                         ),
@@ -99,7 +105,11 @@ class TorrentFileTile extends StatefulWidget {
   final String hash;
   final int index;
 
-  TorrentFileTile({required this.model, required this.wp, required this.hash, required this.index});
+  TorrentFileTile(
+      {required this.model,
+      required this.wp,
+      required this.hash,
+      required this.index});
 
   @override
   _TorrentFileTileState createState() => _TorrentFileTileState();
@@ -156,7 +166,10 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
               Text(
                 filesize(widget.model.sizeBytes),
                 style: TextStyle(
-                    color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                    color: ThemeProvider.theme(widget.index)
+                        .textTheme
+                        .bodyText1
+                        ?.color,
                     fontSize: 12),
               ),
             ],
@@ -168,8 +181,9 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
                   padding: EdgeInsets.all(0),
                   lineHeight: 5.0,
                   percent: widget.model.percentComplete.roundToDouble() / 100,
-                  backgroundColor:
-                      ThemeProvider.theme(widget.index).accentColor.withAlpha(80),
+                  backgroundColor: ThemeProvider.theme(widget.index)
+                      .accentColor
+                      .withAlpha(80),
                   progressColor:
                       (widget.model.percentComplete.toStringAsFixed(1) ==
                               '100.0')
@@ -190,7 +204,8 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
                   : Icons.insert_drive_file_outlined)
               : Checkbox(
                   value: isSelected,
-                  activeColor: ThemeProvider.theme(widget.index).primaryColorDark,
+                  activeColor:
+                      ThemeProvider.theme(widget.index).primaryColorDark,
                   onChanged: (bool? value) {
                     setState(() {
                       isSelected = value ?? false;

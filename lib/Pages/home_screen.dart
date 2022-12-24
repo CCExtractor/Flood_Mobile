@@ -97,7 +97,11 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: ThemeProvider.theme(2).backgroundColor,
           builder: (context) {
             return AddAutoTorrent(
-                base64: base64, imageBytes: imageBytes, uriString: uriString, index: 2,);
+              base64: base64,
+              imageBytes: imageBytes,
+              uriString: uriString,
+              index: 2,
+            );
           },
         );
       }
@@ -126,30 +130,43 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return DarkTransition(
         isDark: isDark,
-        offset: Offset(mediaQuery.viewPadding.left + 115 + 20, mediaQuery.viewPadding.top + 30 + 20),
+        offset: Offset(mediaQuery.viewPadding.left + 115 + 20,
+            mediaQuery.viewPadding.top + 30 + 20),
         duration: const Duration(seconds: 1),
-        childBuilder: (context, int index, bool needsSetup, int position, Function(int) updatePosition) {
+        childBuilder: (context, int index, bool needsSetup, int position,
+            Function(int) updatePosition) {
           return KeyboardDismissOnTap(
             child: SimpleHiddenDrawer(
               withShadow: true,
               initPositionSelected: position,
               slidePercent: 80,
               contentCornerRadius: 40,
-              menu: Menu(toggleTheme: toggleTheme, index: index, updatePosition: updatePosition),
+              menu: Menu(
+                  toggleTheme: toggleTheme,
+                  index: index,
+                  updatePosition: updatePosition),
               screenSelectedBuilder: (position, controller) {
                 Widget screenCurrent = Container();
                 switch (position) {
                   case 0:
-                    screenCurrent = TorrentScreen(index: index,);
+                    screenCurrent = TorrentScreen(
+                      index: index,
+                    );
                     break;
                   case 1:
-                    screenCurrent = TorrentScreen(index: index,);
+                    screenCurrent = TorrentScreen(
+                      index: index,
+                    );
                     break;
                   case 2:
-                    screenCurrent = SettingsScreen(index: index,);
+                    screenCurrent = SettingsScreen(
+                      index: index,
+                    );
                     break;
                   case 5:
-                    screenCurrent = AboutScreen(index: index,);
+                    screenCurrent = AboutScreen(
+                      index: index,
+                    );
                     break;
                 }
                 if (needsSetup) {
@@ -157,13 +174,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     controller.open();
                   }
                 }
-                return Consumer<HomeProvider>(builder: (context, homeModel, child) {
+                return Consumer<HomeProvider>(
+                    builder: (context, homeModel, child) {
                   return Scaffold(
                     appBar: AppBar(
                       leading: IconButton(
                         icon: Icon(
                           Icons.menu,
-                          color: ThemeProvider.theme(index).textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme(index)
+                              .textTheme
+                              .bodyText1
+                              ?.color,
                         ),
                         onPressed: () {
                           controller.toggle();
@@ -181,7 +202,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       backgroundColor: ThemeProvider.theme(index).primaryColor,
                       elevation: 0,
                       actions: [
-                        RSSFeedButtonWidget(index: index,),
+                        RSSFeedButtonWidget(
+                          index: index,
+                        ),
                         Badge(
                           key: Key('Badge Widget'),
                           badgeColor: ThemeProvider.theme(index).accentColor,
@@ -203,7 +226,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return AlertDialog(
                                     key: Key('Notification Alert Dialog'),
                                     elevation: 0,
-                                    backgroundColor: ThemeProvider.theme(index).primaryColor,
+                                    backgroundColor:
+                                        ThemeProvider.theme(index).primaryColor,
                                     content: notificationPopupDialogueContainer(
                                       context: context,
                                       index: index,
@@ -265,7 +289,12 @@ class Menu extends StatefulWidget {
   final Function toggleTheme;
   final int index;
   final Function(int) updatePosition;
-  const Menu({Key? key, required this.toggleTheme, required this.index, required this.updatePosition}) : super(key: key);
+  const Menu(
+      {Key? key,
+      required this.toggleTheme,
+      required this.index,
+      required this.updatePosition})
+      : super(key: key);
   @override
   _MenuState createState() => _MenuState();
 }
@@ -309,7 +338,9 @@ class _MenuState extends State<Menu> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 30.0),
-                  child: ChangeThemeButtonWidget(toggleTheme: widget.toggleTheme,),
+                  child: ChangeThemeButtonWidget(
+                    toggleTheme: widget.toggleTheme,
+                  ),
                 ),
               ],
             ),
@@ -329,23 +360,25 @@ class _MenuState extends State<Menu> {
               height: hp * 0.01,
             ),
             NavDrawerListTile(
-                icon: Icons.dashboard,
-                onTap: () {
-                  controller.position = 0;
-                  widget.updatePosition(0);
-                  controller.toggle();
-                },
-                title: 'Torrents',
-                index: widget.index,),
+              icon: Icons.dashboard,
+              onTap: () {
+                controller.position = 0;
+                widget.updatePosition(0);
+                controller.toggle();
+              },
+              title: 'Torrents',
+              index: widget.index,
+            ),
             NavDrawerListTile(
-                icon: Icons.settings,
-                onTap: () {
-                  controller.position = 2;
-                  widget.updatePosition(2);
-                  controller.toggle();
-                },
-                title: 'Settings',
-                index: widget.index,),
+              icon: Icons.settings,
+              onTap: () {
+                controller.position = 2;
+                widget.updatePosition(2);
+                controller.toggle();
+              },
+              title: 'Settings',
+              index: widget.index,
+            ),
             NavDrawerListTile(
               icon: Icons.exit_to_app,
               onTap: () async {
@@ -371,25 +404,26 @@ class _MenuState extends State<Menu> {
               index: widget.index,
             ),
             NavDrawerListTile(
-                icon: FontAwesomeIcons.github,
-                onTap: () {
-                  controller.toggle();
-                  launch(
-                    'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
-                  );
-                },
-                title: 'GitHub',
-                index: widget.index,
+              icon: FontAwesomeIcons.github,
+              onTap: () {
+                controller.toggle();
+                launch(
+                  'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
+                );
+              },
+              title: 'GitHub',
+              index: widget.index,
             ),
             NavDrawerListTile(
-                icon: Icons.info,
-                onTap: () {
-                  controller.position = 5;
-                  widget.updatePosition(5);
-                  controller.toggle();
-                },
-                title: 'About',
-                index: widget.index,),
+              icon: Icons.info,
+              onTap: () {
+                controller.position = 5;
+                widget.updatePosition(5);
+                controller.toggle();
+              },
+              title: 'About',
+              index: widget.index,
+            ),
           ],
         ),
       ),

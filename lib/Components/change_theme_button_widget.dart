@@ -5,7 +5,8 @@ import 'package:provider/provider.dart';
 class ChangeThemeButtonWidget extends StatelessWidget {
   final Function toggleTheme;
 
-  const ChangeThemeButtonWidget({Key? key, required this.toggleTheme}) : super(key: key);
+  const ChangeThemeButtonWidget({Key? key, required this.toggleTheme})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);

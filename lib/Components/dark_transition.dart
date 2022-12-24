@@ -6,15 +6,16 @@ import 'package:flutter/material.dart';
 class DarkTransition extends StatefulWidget {
   const DarkTransition(
       {required this.childBuilder,
-        Key? key,
-        this.offset = Offset.zero,
-        this.themeController,
-        this.radius,
-        this.duration = const Duration(milliseconds: 400),
-        this.isDark = false})
+      Key? key,
+      this.offset = Offset.zero,
+      this.themeController,
+      this.radius,
+      this.duration = const Duration(milliseconds: 400),
+      this.isDark = false})
       : super(key: key);
 
-  final Widget Function(BuildContext, int, bool, int, Function(int)) childBuilder;
+  final Widget Function(BuildContext, int, bool, int, Function(int))
+      childBuilder;
   final bool isDark;
   final AnimationController? themeController;
   final Offset offset;
@@ -25,7 +26,8 @@ class DarkTransition extends StatefulWidget {
   _DarkTransitionState createState() => _DarkTransitionState();
 }
 
-class _DarkTransitionState extends State<DarkTransition> with SingleTickerProviderStateMixin {
+class _DarkTransitionState extends State<DarkTransition>
+    with SingleTickerProviderStateMixin {
   @override
   void dispose() {
     _darkNotifier.dispose();
@@ -128,7 +130,8 @@ class _DarkTransitionState extends State<DarkTransition> with SingleTickerProvid
                 data: index == 2
                     ? getTheme(!isDarkVisible)
                     : getTheme(isDarkVisible),
-                child: widget.childBuilder(context, index, needsSetup, currentPosition, _updatePosition));
+                child: widget.childBuilder(context, index, needsSetup,
+                    currentPosition, _updatePosition));
           });
     }
 

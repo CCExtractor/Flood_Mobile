@@ -50,7 +50,8 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
               Checkbox(
                 key: Key('Checkbox delete with data'),
                 value: deleteWithData,
-                activeColor: ThemeProvider.theme((widget.index)).primaryColorDark,
+                activeColor:
+                    ThemeProvider.theme((widget.index)).primaryColorDark,
                 onChanged: (bool? value) {
                   print(value);
                   setState(() {
@@ -89,7 +90,10 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                       child: Text(
                         "No",
                         style: TextStyle(
-                          color: ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme((widget.index))
+                              .textTheme
+                              .bodyText1
+                              ?.color,
                           fontSize: 16,
                           fontWeight: FontWeight.w900,
                         ),
@@ -126,13 +130,17 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14.0),
                       ),
-                      primary: ThemeProvider.theme((widget.index)).primaryColorDark,
+                      primary:
+                          ThemeProvider.theme((widget.index)).primaryColorDark,
                     ),
                     child: Center(
                       child: Text(
                         "Yes",
                         style: TextStyle(
-                          color: ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme((widget.index))
+                              .textTheme
+                              .bodyText1
+                              ?.color,
                           fontSize: 16,
                           fontWeight: FontWeight.w900,
                         ),

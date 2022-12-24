@@ -5,7 +5,8 @@ import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-Widget notificationPopupDialogueContainer({required BuildContext context, required int index}) {
+Widget notificationPopupDialogueContainer(
+    {required BuildContext context, required int index}) {
   return (Provider.of<HomeProvider>(context)
               .notificationModel
               .notifications
@@ -40,9 +41,11 @@ Widget notificationPopupDialogueContainer({required BuildContext context, requir
                 return Column(
                   children: [
                     NotificationListTile(
-                        model: Provider.of<HomeProvider>(context, listen: false)
-                            .notificationModel
-                            .notifications[index], index: index,),
+                      model: Provider.of<HomeProvider>(context, listen: false)
+                          .notificationModel
+                          .notifications[index],
+                      index: index,
+                    ),
                     SizedBox(
                       height: 10,
                     ),
@@ -65,9 +68,11 @@ Widget notificationPopupDialogueContainer({required BuildContext context, requir
               return Column(
                 children: [
                   NotificationListTile(
-                      model: Provider.of<HomeProvider>(context)
-                          .notificationModel
-                          .notifications[index], index: index,),
+                    model: Provider.of<HomeProvider>(context)
+                        .notificationModel
+                        .notifications[index],
+                    index: index,
+                  ),
                   SizedBox(
                     height: 10,
                   )

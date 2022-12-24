@@ -3,5 +3,6 @@ class VideoStreamScreenArguments {
   String index;
   int myIndex;
 
-  VideoStreamScreenArguments({required this.hash, required this.index, required this.myIndex});
+  VideoStreamScreenArguments(
+      {required this.hash, required this.index, required this.myIndex});
 }

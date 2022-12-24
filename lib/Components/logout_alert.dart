@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class LogOutAlert extends StatelessWidget {
   final int index;
-  const LogOutAlert({Key? key, @required this.logoutOnClick, required this.index})
+  const LogOutAlert(
+      {Key? key, @required this.logoutOnClick, required this.index})
       : assert(logoutOnClick != null),
         super(key: key);
   final VoidCallback? logoutOnClick;
@@ -67,8 +68,8 @@ class LogOutAlert extends StatelessWidget {
             minimumSize: MaterialStateProperty.all<Size>(
               Size(hp * .160, hp * .059),
             ),
-            backgroundColor:
-                MaterialStateProperty.all(ThemeProvider.theme(index).primaryColorDark),
+            backgroundColor: MaterialStateProperty.all(
+                ThemeProvider.theme(index).primaryColorDark),
           ),
           onPressed: logoutOnClick,
           child: Text(

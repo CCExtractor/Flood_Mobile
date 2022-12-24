@@ -387,7 +387,10 @@ class SpeedLimitSection extends StatelessWidget {
             Container(
               width: double.infinity,
             ),
-            SText(text: 'Download', index: index,),
+            SText(
+              text: 'Download',
+              index: index,
+            ),
             SizedBox(height: 15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -436,7 +439,10 @@ class SpeedLimitSection extends StatelessWidget {
               ],
             ),
             SizedBox(height: 25),
-            SText(text: 'Upload', index: index,),
+            SText(
+              text: 'Upload',
+              index: index,
+            ),
             SizedBox(height: 15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -587,7 +593,10 @@ class AuthenticationSection extends StatelessWidget {
           key: Key('Authentication option display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SText(text: 'Add User',index: index,),
+            SText(
+              text: 'Add User',
+              index: index,
+            ),
             SizedBox(height: 25),
             SettingsTextField(
               validator: (value) {},
@@ -718,7 +727,7 @@ class AuthenticationSection extends StatelessWidget {
                               hintText: 'eg. ~/.local/share/rtorrent',
                               labelText: 'Path',
                               controller: pathController,
-                        index: index,
+                              index: index,
                             )
                           : Column(
                               children: [
@@ -868,7 +877,10 @@ class ResourceSection extends StatelessWidget {
           key: Key('Resources options display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SText(text: 'Disk', index: index,),
+            SText(
+              text: 'Disk',
+              index: index,
+            ),
             SizedBox(height: 25),
             SettingsTextField(
               validator: (value) {},
@@ -920,7 +932,10 @@ class ResourceSection extends StatelessWidget {
               ],
             ),
             SizedBox(height: 25),
-            SText(text: 'Memory', index: index,),
+            SText(
+              text: 'Memory',
+              index: index,
+            ),
             SizedBox(height: 25),
             SettingsTextField(
               validator: (value) {},
@@ -994,7 +1009,10 @@ class ConnectivitySection extends StatelessWidget {
           key: Key('Connectivity option display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SText(text: 'Incoming Connections', index: index,),
+            SText(
+              text: 'Incoming Connections',
+              index: index,
+            ),
             SizedBox(height: 15),
             SettingsTextField(
               validator: (value) {},
@@ -1054,7 +1072,10 @@ class ConnectivitySection extends StatelessWidget {
               index: index,
             ),
             SizedBox(height: 25),
-            SText(text: 'Decentralized Peer Discovery', index: index,),
+            SText(
+              text: 'Decentralized Peer Discovery',
+              index: index,
+            ),
             SizedBox(height: 15),
             SettingsTextField(
               validator: (value) {},
@@ -1113,7 +1134,10 @@ class ConnectivitySection extends StatelessWidget {
               ],
             ),
             SizedBox(height: 25),
-            SText(text: 'Peers', index: index,),
+            SText(
+              text: 'Peers',
+              index: index,
+            ),
             SizedBox(height: 15),
             SettingsTextField(
               validator: (value) {},
@@ -1203,7 +1227,10 @@ class BandwidthSection extends StatelessWidget {
           key: Key('Bandwidth option display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SText(text: 'Transfer Rate Throttles', index: index,),
+            SText(
+              text: 'Transfer Rate Throttles',
+              index: index,
+            ),
             SizedBox(height: 15),
             SettingsTextField(
               validator: (value) {},
@@ -1223,7 +1250,10 @@ class BandwidthSection extends StatelessWidget {
               index: index,
             ),
             SizedBox(height: 25),
-            SText(text: 'Slot Availability', index: index,),
+            SText(
+              text: 'Slot Availability',
+              index: index,
+            ),
             SizedBox(height: 15),
             SettingsTextField(
               validator: (value) {},

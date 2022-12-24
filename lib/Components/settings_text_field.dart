@@ -38,7 +38,8 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
         TextFormField(
           controller: widget.controller,
           style: TextStyle(
-            color: ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
+            color:
+                ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color,
           ),
           keyboardType:
               (widget.isText) ? TextInputType.text : TextInputType.number,
@@ -52,7 +53,10 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
                 fontFamily: 'Montserrat',
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: ThemeProvider.theme((widget.index)).textTheme.bodyText1?.color),
+                color: ThemeProvider.theme((widget.index))
+                    .textTheme
+                    .bodyText1
+                    ?.color),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: ThemeProvider.theme((widget.index)).primaryColorLight,

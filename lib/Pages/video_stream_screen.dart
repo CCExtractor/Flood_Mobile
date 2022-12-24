@@ -78,7 +78,8 @@ class _VideoStreamScreenState extends State<VideoStreamScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircularProgressIndicator(
-                      color: ThemeProvider.theme(widget.args.myIndex).primaryColorDark,
+                      color: ThemeProvider.theme(widget.args.myIndex)
+                          .primaryColorDark,
                     ),
                     SizedBox(height: 20),
                     Text('Loading'),

@@ -47,7 +47,11 @@ class _RSSFeedButtonWidgetState extends State<RSSFeedButtonWidget> {
       child: ListView(
         scrollDirection: Axis.vertical,
         controller: scrollController,
-        children: [RSSFeedHomePage(index: widget.index,)],
+        children: [
+          RSSFeedHomePage(
+            index: widget.index,
+          )
+        ],
       ),
     );
   }

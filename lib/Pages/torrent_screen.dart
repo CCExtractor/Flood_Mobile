@@ -66,8 +66,9 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                 .toLowerCase()
                                 .contains(keyword.toLowerCase())) {
                               return TorrentTile(
-                                  model: model.torrentList[index],
-                                index: widget.index,);
+                                model: model.torrentList[index],
+                                index: widget.index,
+                              );
                             }
                           }
                           return Container();
@@ -94,15 +95,17 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                         children: [
                                           Icon(
                                             Icons.arrow_upward_rounded,
-                                            color: ThemeProvider
-                                                .theme(widget.index).primaryColorDark,
+                                            color: ThemeProvider.theme(
+                                                    widget.index)
+                                                .primaryColorDark,
                                             size: 25,
                                           ),
                                           Text(
                                             model.upSpeed,
                                             style: TextStyle(
-                                              color: ThemeProvider
-                                                  .theme(widget.index).primaryColorDark,
+                                              color: ThemeProvider.theme(
+                                                      widget.index)
+                                                  .primaryColorDark,
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -113,15 +116,17 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                         children: [
                                           Icon(
                                             Icons.arrow_downward_rounded,
-                                            color:
-                                                ThemeProvider.theme(widget.index).accentColor,
+                                            color: ThemeProvider.theme(
+                                                    widget.index)
+                                                .accentColor,
                                             size: 25,
                                           ),
                                           Text(
                                             model.downSpeed,
                                             style: TextStyle(
-                                              color: ThemeProvider
-                                                  .theme(widget.index).accentColor,
+                                              color: ThemeProvider.theme(
+                                                      widget.index)
+                                                  .accentColor,
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -190,8 +195,9 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                                     : filterModel
                                                         .trackerURISelected,
                                             style: TextStyle(
-                                              color: ThemeProvider
-                                                  .theme(widget.index).primaryColorDark,
+                                              color: ThemeProvider.theme(
+                                                      widget.index)
+                                                  .primaryColorDark,
                                               fontSize: 15,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -206,10 +212,14 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                               ),
                                               isScrollControlled: true,
                                               context: context,
-                                              backgroundColor: ThemeProvider
-                                                  .theme(widget.index).backgroundColor,
+                                              backgroundColor:
+                                                  ThemeProvider.theme(
+                                                          widget.index)
+                                                      .backgroundColor,
                                               builder: (context) {
-                                                return FilterByStatus(index: widget.index,);
+                                                return FilterByStatus(
+                                                  index: widget.index,
+                                                );
                                               },
                                             );
                                           },
@@ -242,7 +252,9 @@ class _TorrentScreenState extends State<TorrentScreen> {
                         ),
                       ),
               ),
-              floatingActionButton: BottomFloatingMenuButton(index: widget.index,),
+              floatingActionButton: BottomFloatingMenuButton(
+                index: widget.index,
+              ),
             ),
           );
         });

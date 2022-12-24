@@ -57,7 +57,10 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',
-                    color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color),
+                    color: ThemeProvider.theme(widget.index)
+                        .textTheme
+                        .bodyText1
+                        ?.color),
               ),
             ),
             Padding(
@@ -93,8 +96,10 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                               style: TextStyle(
                                   fontSize: 16,
                                   fontFamily: 'Montserrat',
-                                  color: ThemeProvider
-                                      .theme(widget.index).textTheme.bodyText1?.color),
+                                  color: ThemeProvider.theme(widget.index)
+                                      .textTheme
+                                      .bodyText1
+                                      ?.color),
                             ),
                           ),
                         ],
@@ -116,19 +121,27 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                     TextField(
                       controller: directoryController,
                       style: TextStyle(
-                        color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                        color: ThemeProvider.theme(widget.index)
+                            .textTheme
+                            .bodyText1
+                            ?.color,
                       ),
                       decoration: InputDecoration(
                         prefixIcon: Icon(
                           Icons.folder,
-                          color: ThemeProvider.theme(widget.index).textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme(widget.index)
+                              .textTheme
+                              .bodyText1
+                              ?.color,
                         ),
                         labelText: 'Destination',
                         hintText: 'Destination',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
-                            color:
-                                ThemeProvider.theme(widget.index).textTheme.bodyText1?.color),
+                            color: ThemeProvider.theme(widget.index)
+                                .textTheme
+                                .bodyText1
+                                ?.color),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -138,8 +151,10 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                       height: 20,
                     ),
                     CheckboxListTile(
-                      activeColor: ThemeProvider.theme(widget.index).primaryColorDark,
-                      tileColor: ThemeProvider.theme(widget.index).primaryColorLight,
+                      activeColor:
+                          ThemeProvider.theme(widget.index).primaryColorDark,
+                      tileColor:
+                          ThemeProvider.theme(widget.index).primaryColorLight,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -155,8 +170,10 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                       },
                     ),
                     CheckboxListTile(
-                      activeColor: ThemeProvider.theme(widget.index).primaryColorDark,
-                      tileColor: ThemeProvider.theme(widget.index).primaryColorLight,
+                      activeColor:
+                          ThemeProvider.theme(widget.index).primaryColorDark,
+                      tileColor:
+                          ThemeProvider.theme(widget.index).primaryColorLight,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -172,8 +189,10 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                       },
                     ),
                     CheckboxListTile(
-                      activeColor: ThemeProvider.theme(widget.index).primaryColorDark,
-                      tileColor: ThemeProvider.theme(widget.index).primaryColorLight,
+                      activeColor:
+                          ThemeProvider.theme(widget.index).primaryColorDark,
+                      tileColor:
+                          ThemeProvider.theme(widget.index).primaryColorLight,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -213,7 +232,8 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(14.0),
                           ),
-                          primary: ThemeProvider.theme(widget.index).primaryColorDark,
+                          primary: ThemeProvider.theme(widget.index)
+                              .primaryColorDark,
                         ),
                         child: Center(
                           child: Text(
