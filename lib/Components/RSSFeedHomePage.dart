@@ -287,31 +287,35 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   Key('No existing feeds displaying container'),
                               height: 60,
                               width: double.infinity,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white38),
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(8),
-                                  topLeft: Radius.circular(8),
-                                  bottomLeft: Radius.circular(8),
-                                  bottomRight: Radius.circular(8),
-                                ),
-                                color: ThemeProvider.theme.primaryColorLight,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Text(
-                                      "No feeds defined.",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontFamily: 'Montserrat',
-                                          color: ThemeProvider.theme.textTheme
-                                              .bodyText1?.color),
+                              color: ThemeProvider.theme.primaryColorLight,
+                              child: InputDecorator(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(8),
+                                      topLeft: Radius.circular(8),
+                                      bottomLeft: Radius.circular(8),
+                                      bottomRight: Radius.circular(8),
                                     ),
                                   ),
-                                ],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Text(
+                                        "No feeds defined.",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: 'Montserrat',
+                                            color: ThemeProvider.theme.textTheme
+                                                .bodyText1?.color),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                       Padding(
