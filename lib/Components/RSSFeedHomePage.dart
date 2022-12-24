@@ -287,31 +287,29 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   Key('No existing feeds displaying container'),
                               height: 60,
                               width: double.infinity,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white38),
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(8),
-                                  topLeft: Radius.circular(8),
-                                  bottomLeft: Radius.circular(8),
-                                  bottomRight: Radius.circular(8),
-                                ),
-                                color: ThemeProvider.theme.primaryColorLight,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Text(
-                                      "No feeds defined.",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontFamily: 'Montserrat',
-                                          color: ThemeProvider.theme.textTheme
-                                              .bodyText1?.color),
+                              color: ThemeProvider.theme.primaryColorLight,
+                              child: InputDecorator(
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8))),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Text(
+                                        "No feeds defined.",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: 'Montserrat',
+                                            color: ThemeProvider.theme.textTheme
+                                                .bodyText1?.color),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                       Padding(
@@ -324,10 +322,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
+                            backgroundColor: ThemeProvider.theme.accentColor,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
-                            primary: ThemeProvider.theme.accentColor,
                           ),
                           child: Center(
                             child: Text(
@@ -483,6 +481,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   if (value == null) {
                                                     return 'Please select a unit';
                                                   }
+                                                  return null;
                                                 },
                                                 onChanged: (value) {
                                                   if (value.toString() ==
@@ -569,11 +568,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             },
                                             style: ElevatedButton.styleFrom(
                                               elevation: 0,
+                                              backgroundColor: Colors.red,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(5.0),
                                               ),
-                                              primary: Colors.red,
                                             ),
                                             child: Center(
                                               child: Text(
@@ -643,12 +642,12 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             },
                                             style: ElevatedButton.styleFrom(
                                               elevation: 0,
+                                              backgroundColor: ThemeProvider
+                                                  .theme.primaryColorDark,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(5.0),
                                               ),
-                                              primary: ThemeProvider
-                                                  .theme.primaryColorDark,
                                             ),
                                             child: Center(
                                               child: Text(
@@ -752,6 +751,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   if (value == null) {
                                     return 'Please select a feed';
                                   }
+                                  return null;
                                 },
                                 onChanged: (value) {
                                   isbrowseFeedsContentSelected = true;
@@ -1109,10 +1109,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                             style:
                                                                                 ElevatedButton.styleFrom(
                                                                               elevation: 0,
+                                                                              backgroundColor: ThemeProvider.theme.primaryColorDark,
                                                                               shape: RoundedRectangleBorder(
                                                                                 borderRadius: BorderRadius.circular(14.0),
                                                                               ),
-                                                                              primary: ThemeProvider.theme.primaryColorDark,
                                                                             ),
                                                                             child:
                                                                                 Center(
@@ -1136,13 +1136,13 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,
+                                                backgroundColor: ThemeProvider
+                                                    .theme.primaryColorDark,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           5.0),
                                                 ),
-                                                primary: ThemeProvider
-                                                    .theme.primaryColorDark,
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -1546,10 +1546,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
+                            backgroundColor: ThemeProvider.theme.accentColor,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
-                            primary: ThemeProvider.theme.accentColor,
                           ),
                           child: Center(
                             child: Text(
@@ -1668,6 +1668,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             if (value == null) {
                                               return 'Please select a feed';
                                             }
+                                            return null;
                                           },
                                           onChanged: (value) {
                                             applicableFeedSelected =
@@ -1838,7 +1839,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             width: 30,
                                             child: CircleAvatar(
                                               backgroundColor: ThemeProvider
-                                                  .theme.accentColor,
+                                                  .theme.colorScheme.secondary,
                                               child: Icon(
                                                 Icons.home_rounded,
                                                 color: ThemeProvider.theme
@@ -1883,7 +1884,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             width: 30,
                                             child: CircleAvatar(
                                               backgroundColor: ThemeProvider
-                                                  .theme.accentColor,
+                                                  .theme.colorScheme.secondary,
                                               child: Icon(
                                                 Icons.download_rounded,
                                                 color: ThemeProvider.theme
@@ -1939,11 +1940,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             },
                                             style: ElevatedButton.styleFrom(
                                               elevation: 0,
+                                              backgroundColor: Colors.red,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(5.0),
                                               ),
-                                              primary: Colors.red,
                                             ),
                                             child: Center(
                                               child: Text(
@@ -2011,12 +2012,12 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             },
                                             style: ElevatedButton.styleFrom(
                                               elevation: 0,
+                                              backgroundColor: ThemeProvider
+                                                  .theme.primaryColorDark,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(5.0),
                                               ),
-                                              primary: ThemeProvider
-                                                  .theme.primaryColorDark,
                                             ),
                                             child: Center(
                                               child: Text(
@@ -2055,13 +2056,13 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
   }
 
   String feedidgetter(String newlabel, List<FeedsAndRulesModel> newmodel) {
-    String feed_id = "test";
+    String feedId = "test";
     for (int i = 0; i < newmodel.length; i++) {
       if (newmodel[i].label.toString() == newlabel) {
-        feed_id = newmodel[i].id.toString();
+        feedId = newmodel[i].id.toString();
       }
     }
-    return feed_id;
+    return feedId;
   }
 
   List feedlabelgetter(List<FeedsAndRulesModel> newmodel) {
