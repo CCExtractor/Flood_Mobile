@@ -141,7 +141,9 @@ void main() {
           print(ThemeProvider.themeMode);
           return MaterialApp(
               home: Material(
-            child: TorrentScreen(),
+            child: TorrentScreen(
+              index: 2,
+            ),
           ));
         },
       ),

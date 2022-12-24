@@ -40,7 +40,9 @@ void main() {
           print(ThemeProvider.themeMode);
           return MaterialApp(
               home: Material(
-            child: AboutScreen(),
+            child: AboutScreen(
+              index: 2,
+            ),
           ));
         },
       ),
