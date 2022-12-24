@@ -15,7 +15,6 @@ import '../Constants/theme_provider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 import '../Provider/client_provider.dart';
-import 'add_torrent_sheet.dart';
 
 class RSSFeedHomePage extends StatefulWidget {
   @override
@@ -322,7 +321,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
-                            backgroundColor: ThemeProvider.theme.accentColor,
+                            backgroundColor:
+                                ThemeProvider.theme.colorScheme.secondary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
@@ -1519,21 +1519,28 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                 ),
                                 color: ThemeProvider.theme.primaryColorLight,
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Text(
-                                      "No rules defined.",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontFamily: 'Montserrat',
-                                          color: ThemeProvider.theme.textTheme
-                                              .bodyText1?.color),
+                              child: InputDecorator(
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8))),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Text(
+                                        "No rules defined.",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: 'Montserrat',
+                                            color: ThemeProvider.theme.textTheme
+                                                .bodyText1?.color),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                       Padding(
@@ -1546,7 +1553,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
-                            backgroundColor: ThemeProvider.theme.accentColor,
+                            backgroundColor:
+                                ThemeProvider.theme.colorScheme.secondary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
