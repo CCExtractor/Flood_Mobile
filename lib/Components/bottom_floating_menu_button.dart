@@ -575,6 +575,14 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                               isSequential: sequentialDownload,
                                               isCompleted: completed,
                                               context: context);
+                                          final addTorrentSnackbar =
+                                              addFloodSnackBar(
+                                                  SnackbarType.information,
+                                                  'Torrent added successfully',
+                                                  'Dismiss');
+
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(addTorrentSnackbar);
                                           Navigator.pop(context);
                                         },
                                         style: ElevatedButton.styleFrom(
