@@ -37,7 +37,7 @@ class _TorrentTileState extends State<TorrentTile> {
       ),
       isScrollControlled: true,
       context: context,
-      backgroundColor: ThemeProvider.theme.backgroundColor,
+      backgroundColor: ThemeProvider.theme.primaryColorLight,
       builder: (context) {
         return DeleteTorrentSheet(
           torrent: widget.model,
