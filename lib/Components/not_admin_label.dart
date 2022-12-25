@@ -20,5 +20,4 @@ class NotAdminLabel extends StatelessWidget {
       ),
     );
   }
-
 }

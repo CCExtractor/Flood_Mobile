@@ -41,13 +41,19 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.of(context).pushNamedAndRemoveUntil(
           Routes.homeScreenRoute, (Route<dynamic> route) => false);
     }
-    if (token == '' && baseUrl == '' && username == '' && loggedInBefore == false) {
+    if (token == '' &&
+        baseUrl == '' &&
+        username == '' &&
+        loggedInBefore == false) {
       Provider.of<LoginStatusDataProvider>(context, listen: false)
           .setLoggedInStatus(true);
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => OnboardingMainPage()));
     }
-    if (token == '' && baseUrl == '' && username == '' && loggedInBefore == true) {
+    if (token == '' &&
+        baseUrl == '' &&
+        username == '' &&
+        loggedInBefore == true) {
       Navigator.of(context).pushNamedAndRemoveUntil(
           Routes.loginScreenRoute, (Route<dynamic> route) => false);
     }

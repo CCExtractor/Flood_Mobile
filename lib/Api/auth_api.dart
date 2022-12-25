@@ -129,7 +129,9 @@ class AuthApi {
   static deleteUser(BuildContext context, String username) async {
     try {
       String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.deleteUser + "/" + username;
+          ApiProvider.deleteUser +
+          "/" +
+          username;
       print('---DELETE USER---');
       print(url);
       Response response;
