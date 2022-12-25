@@ -2,12 +2,16 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Components/flood_snackbar.dart';
+import 'package:flood_mobile/Components/not_admin_label.dart';
 import 'package:flood_mobile/Components/settings_text_field.dart';
 import 'package:flood_mobile/Components/text_size.dart';
+import 'package:flood_mobile/Components/users_list.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
+import 'package:flood_mobile/Model/current_user_detail_model.dart';
 import 'package:flood_mobile/Model/register_user_model.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
+import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Services/transfer_speed_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -64,6 +68,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String downSpeed = '1 kB/s';
 
   // *Authentication
+  List<CurrentUserDetailModel> usersList = [];
+  String currentUsername = '';
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   TextEditingController pathController = new TextEditingController();
@@ -134,6 +140,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
       upSpeed =
           TransferSpeedManager.valToSpeedMap[model.throttleGlobalUpSpeed] ??
               'Unlimited';
+
+      // Authentication Initialization
+      usersList = Provider.of<UserDetailProvider>(context).usersList;
+      currentUsername =
+          Provider.of<UserDetailProvider>(context, listen: false).username;
     });
     super.didChangeDependencies();
   }
@@ -293,6 +304,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   // *Authentication Section
                   AuthenticationSection(
+                      usersList: usersList,
+                      currentUsername: currentUsername,
                       setTCP: (value) {
                         setState(() {
                           socket = !value!;
@@ -513,6 +526,8 @@ class SpeedLimitSection extends StatelessWidget {
 class AuthenticationSection extends StatelessWidget {
   const AuthenticationSection({
     Key? key,
+    required this.usersList,
+    required this.currentUsername,
     required this.usernameController,
     required this.passwordController,
     required this.isAdmin,
@@ -531,6 +546,8 @@ class AuthenticationSection extends StatelessWidget {
     required this.setTCP,
   }) : super(key: key);
 
+  final List<CurrentUserDetailModel> usersList;
+  final String currentUsername;
   final TextEditingController usernameController;
   final TextEditingController passwordController;
   final bool isAdmin;
@@ -550,6 +567,23 @@ class AuthenticationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (usersList.length == 0) {
+      // User is not Admin
+      return ExpansionTileCard(
+        key: Key('Authentication Expansion Card'),
+        onExpansionChanged: (value) {},
+        elevation: 0,
+        expandedColor: ThemeProvider.theme.primaryColor,
+        baseColor: ThemeProvider.theme.primaryColor,
+        title: MText(text: 'Authentication'),
+        leading: Icon(Icons.security),
+        contentPadding: EdgeInsets.all(0),
+        children: [
+          NotAdminLabel(),
+        ],
+      );
+    }
+
     return ExpansionTileCard(
       key: Key('Authentication Expansion Card'),
       onExpansionChanged: (value) {},
@@ -564,6 +598,13 @@ class AuthenticationSection extends StatelessWidget {
           key: Key('Authentication option display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SText(text: 'User Accounts'),
+            SizedBox(height: 25),
+            UsersListView(
+              usersList: usersList,
+              currentUsername: currentUsername,
+            ),
+            SizedBox(height: 25),
             SText(text: 'Add User'),
             SizedBox(height: 25),
             SettingsTextField(
@@ -766,6 +807,7 @@ class AuthenticationSection extends StatelessWidget {
                             port: int.parse(portController.text),
                           ),
                         );
+                        AuthApi.getUsersList(context);
                         final addNewUserSnackBar = addFloodSnackBar(
                             SnackbarType.success, 'New user added', 'Dismiss');
 

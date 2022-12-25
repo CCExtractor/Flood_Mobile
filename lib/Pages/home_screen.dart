@@ -29,8 +29,10 @@ import 'package:uni_links/uni_links.dart';
 import 'package:uri_to_file/uri_to_file.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flood_mobile/Components/change_theme_button_widget.dart';
+import '../Api/auth_api.dart';
 import '../Api/torrent_api.dart';
 import '../Constants/notification_keys.dart';
+import '../Model/current_user_detail_model.dart';
 import '../Provider/api_provider.dart';
 import '../Components/RSSFeedButtonWidget.dart';
 
@@ -61,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //Initialize the ap
     Provider.of<SSEProvider>(context, listen: false).listenToSSE(context);
     ClientApi.getClientSettings(context);
+    AuthApi.getUsersList(context);
     NotificationApi.getNotifications(context: context);
     super.didChangeDependencies();
   }
@@ -326,8 +329,11 @@ class _MenuState extends State<Menu> {
                       SharedPreferences prefs =
                           await SharedPreferences.getInstance();
                       prefs.setString('floodToken', '');
+                      prefs.setString('floodUsername', '');
                       Provider.of<UserDetailProvider>(context, listen: false)
-                          .setToken('');
+                          .setUserDetails('', '');
+                      Provider.of<UserDetailProvider>(context, listen: false)
+                          .setUsersList(<CurrentUserDetailModel>[]);
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           Routes.loginScreenRoute,
                           (Route<dynamic> route) => false);

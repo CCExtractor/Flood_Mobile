@@ -28,19 +28,26 @@ class _SplashScreenState extends State<SplashScreen> {
     String token = prefs.getString('floodToken') ?? '';
     print('Token: ' + token);
     String baseUrl = prefs.getString('baseUrl') ?? '';
-    if (token != '' && baseUrl != '' && loggedInBefore == true) {
-      Provider.of<UserDetailProvider>(context, listen: false).setToken(token);
+    String username = prefs.getString('floodUsername') ?? '';
+    if (token != '' &&
+        baseUrl != '' &&
+        username != '' &&
+        loggedInBefore == true) {
+      Provider.of<UserDetailProvider>(context, listen: false).setUserDetails(
+        token,
+        username,
+      );
       Provider.of<ApiProvider>(context, listen: false).setBaseUrl(baseUrl);
       Navigator.of(context).pushNamedAndRemoveUntil(
           Routes.homeScreenRoute, (Route<dynamic> route) => false);
     }
-    if (token == '' && baseUrl == '' && loggedInBefore == false) {
+    if (token == '' && baseUrl == '' && username == '' && loggedInBefore == false) {
       Provider.of<LoginStatusDataProvider>(context, listen: false)
           .setLoggedInStatus(true);
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => OnboardingMainPage()));
     }
-    if (token == '' && baseUrl == '' && loggedInBefore == true) {
+    if (token == '' && baseUrl == '' && username == '' && loggedInBefore == true) {
       Navigator.of(context).pushNamedAndRemoveUntil(
           Routes.loginScreenRoute, (Route<dynamic> route) => false);
     }

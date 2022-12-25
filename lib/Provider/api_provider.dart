@@ -4,8 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ApiProvider extends ChangeNotifier {
   String baseUrl = 'http://localhost:3000';
   static String authenticateUrl = '/api/auth/authenticate';
-  static String getCurrentUserDetails = '/api/auth/users';
+  static String getUsersList = '/api/auth/users';
   static String registerUser = '/api/auth/register';
+  static String deleteUser = '/api/auth/users';
   static String startTorrentUrl = '/api/torrents/start';
   static String getTorrentListUrl = '/api/torrents';
   static String stopTorrentUrl = '/api/torrents/stop';
