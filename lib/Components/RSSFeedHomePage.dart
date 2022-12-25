@@ -218,6 +218,17 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     FeedsApi
                                                         .listAllFeedsAndRules(
                                                             context: context);
+                                                    final deleteFeedSnackbar =
+                                                        addFloodSnackBar(
+                                                            SnackbarType
+                                                                .information,
+                                                            'Feed deleted successfully',
+                                                            'Dismiss');
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      deleteFeedSnackbar,
+                                                    );
                                                   },
                                                 ),
                                               ],
