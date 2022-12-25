@@ -24,7 +24,7 @@ You can either use qBitTorrent,Transmission or rTorrent as the torrent client
 
 ### Install Transmission 
 1. Install [Transmission](https://transmissionbt.com/download)
-2. Start the application, click the edit button, select preferences and setup the Remote Control. You would have to set a new port, username and password and with everything done, the traansmission app should be up and running in ```http://localhost:portnumber/```
+2. Start the application, click the edit button, select preferences and setup the Remote Control. You would have to set a new port, username and password and with everything done, the transmission app should be up and running in ```http://localhost:portnumber/```
 3. Click Open web client button and access the app
    
 <p align="center"><img width="400" alt="trans" src="https://user-images.githubusercontent.com/64683098/209478308-7c58c7a6-7a05-4363-91cd-50bed49b5e52.PNG"></p>
