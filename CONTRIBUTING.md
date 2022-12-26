@@ -11,7 +11,7 @@ using the npm distribution
 
 ## Steps
 
-You can either use qBitTorrent,Transmission or rTorrent as the torrent client
+You can use qBitTorrent,Transmission or rTorrent(anyone) as the torrent client
 
 ### Install qBitTorrent 
 1. Install [qBitTorrent](https://www.qbittorrent.org/)
