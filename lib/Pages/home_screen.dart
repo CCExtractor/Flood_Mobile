@@ -162,6 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 actions: [
                   RSSFeedButtonWidget(),
                   Badge(
+                    showBadge: homeModel.unreadNotifications ==0 ? false:true ,
                     key: Key('Badge Widget'),
                     badgeColor: Theme.of(context).accentColor,
                     badgeContent: Center(

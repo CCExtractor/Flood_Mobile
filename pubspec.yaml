@@ -58,7 +58,7 @@ dependencies:
   badges: ^2.0.1
   flutter_downloader: ^1.6.1
   path_provider: ^2.0.2
-  permission_handler: ^8.1.4+2
+  permission_handler: ^10.2.0
   flutter_client_sse: ^0.1.0
   url_launcher: ^6.0.12
   optimize_battery: ^0.0.4
@@ -75,8 +75,10 @@ dependencies:
     #path: packages/flutter_client_sse
 
 dependency_overrides:
-  meta: ^1.7.0
-  analyzer: ^3.0.0
+  meta: 
+  analyzer: 
+
+#^1.8.0 ^3.4.1
 
 dev_dependencies:
   build_runner: ^2.1.1
