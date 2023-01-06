@@ -74,7 +74,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         child: Center(
                           child: Text(torrentLength,
                               style: TextStyle(
-                                  color: Colors.black45,
+                                  color: ThemeProvider.theme.primaryColorLight,
                                   fontFamily: 'Montserrat',
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold)),
@@ -144,7 +144,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                       .toString()
                                   : '0',
                               style: TextStyle(
-                                  color: Colors.black45,
+                                  color: ThemeProvider.theme.primaryColorLight,
                                   fontFamily: 'Montserrat',
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold)),
@@ -213,7 +213,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                   ? filterModel.mapStatus['seeding'].toString()
                                   : '0',
                               style: TextStyle(
-                                  color: Colors.black45,
+                                  color: ThemeProvider.theme.primaryColorLight,
                                   fontFamily: 'Montserrat',
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold)),
@@ -282,7 +282,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                   ? filterModel.mapStatus['complete'].toString()
                                   : '0',
                               style: TextStyle(
-                                  color: Colors.black45,
+                                  color: ThemeProvider.theme.primaryColorLight,
                                   fontFamily: 'Montserrat',
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold)),
@@ -351,7 +351,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                   ? filterModel.mapStatus['stopped'].toString()
                                   : '0',
                               style: TextStyle(
-                                  color: Colors.black45,
+                                  color: ThemeProvider.theme.primaryColorLight,
                                   fontFamily: 'Montserrat',
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold)),
@@ -420,7 +420,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                   ? filterModel.mapStatus['active'].toString()
                                   : '0',
                               style: TextStyle(
-                                  color: Colors.black45,
+                                  color: ThemeProvider.theme.primaryColorLight,
                                   fontFamily: 'Montserrat',
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold)),
@@ -489,7 +489,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                   ? filterModel.mapStatus['inactive'].toString()
                                   : '0',
                               style: TextStyle(
-                                  color: Colors.black45,
+                                  color: ThemeProvider.theme.primaryColorLight,
                                   fontFamily: 'Montserrat',
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold)),
@@ -558,7 +558,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                   ? filterModel.mapStatus['error'].toString()
                                   : '0',
                               style: TextStyle(
-                                  color: Colors.black45,
+                                  color: ThemeProvider.theme.primaryColorLight,
                                   fontFamily: 'Montserrat',
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold)),
@@ -621,7 +621,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         child: Center(
                           child: Text(torrentLength,
                               style: TextStyle(
-                                  color: Colors.black45,
+                                  color: ThemeProvider.theme.primaryColorLight,
                                   fontFamily: 'Montserrat',
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold)),
@@ -686,7 +686,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                             .toList()[index]]
                                         .toString(),
                                     style: TextStyle(
-                                        color: Colors.black45,
+                                        color: ThemeProvider.theme.primaryColorLight,
                                         fontFamily: 'Montserrat',
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold)),
