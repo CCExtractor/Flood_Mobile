@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../Api/torrent_api.dart';
 import '../Constants/theme_provider.dart';
 import '../Provider/client_provider.dart';
+import 'flood_snackbar.dart';
 
 class BottomFloatingMenuButton extends StatefulWidget {
   @override
@@ -301,6 +302,15 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                     sequentialDownload,
                                                 isCompleted: completed,
                                                 context: context);
+                                            final addTorrentSnackbar =
+                                                addFloodSnackBar(
+                                                    SnackbarType.information,
+                                                    'Torrent added successfully',
+                                                    'Dismiss');
+
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                                    addTorrentSnackbar);
                                             Navigator.pop(context);
                                           },
                                           style: ElevatedButton.styleFrom(
@@ -565,6 +575,14 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                               isSequential: sequentialDownload,
                                               isCompleted: completed,
                                               context: context);
+                                          final addTorrentSnackbar =
+                                              addFloodSnackBar(
+                                                  SnackbarType.information,
+                                                  'Torrent added successfully',
+                                                  'Dismiss');
+
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(addTorrentSnackbar);
                                           Navigator.pop(context);
                                         },
                                         style: ElevatedButton.styleFrom(

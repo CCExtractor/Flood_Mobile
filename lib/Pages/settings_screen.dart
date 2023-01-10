@@ -763,7 +763,11 @@ class AuthenticationSection extends StatelessWidget {
                             level: isAdmin ? 10 : 5,
                             path: pathController.text,
                             host: hostController.text,
-                            port: int.parse(portController.text),
+                            port: int.parse(
+                              portController.text.isEmpty
+                                  ? "0"
+                                  : portController.text,
+                            ),
                           ),
                         );
                         final addNewUserSnackBar = addFloodSnackBar(
