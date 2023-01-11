@@ -686,7 +686,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                             .toList()[index]]
                                         .toString(),
                                     style: TextStyle(
-                                        color: ThemeProvider.theme.primaryColorLight,
+                                        color: ThemeProvider
+                                            .theme.primaryColorLight,
                                         fontFamily: 'Montserrat',
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold)),
