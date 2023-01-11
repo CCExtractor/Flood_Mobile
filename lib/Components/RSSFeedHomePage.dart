@@ -154,7 +154,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 children: [
                                                   Flexible(
                                                     child: Text(model
-                                                        .RssFeedsList[index].label
+                                                        .RssFeedsList[index]
+                                                        .label
                                                         .toString()),
                                                   ),
                                                   SizedBox(width: 10),
@@ -1322,7 +1323,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 children: [
                                                   Flexible(
                                                     child: Text(model
-                                                        .RssRulesList[index].label
+                                                        .RssRulesList[index]
+                                                        .label
                                                         .toString()),
                                                   ),
                                                   SizedBox(width: 10),
