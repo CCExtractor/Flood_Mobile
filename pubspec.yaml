@@ -78,8 +78,6 @@ dependency_overrides:
   meta: ^1.7.0
   analyzer: ^3.0.0
 
-#^1.8.0 ^3.4.1
-
 dev_dependencies:
   build_runner: ^2.1.1
   json_serializable: ^5.0.0
