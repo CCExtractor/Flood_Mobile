@@ -636,7 +636,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         'New Feed added successfully',
                                                         'Dismiss');
 
-                                                ScaffoldMessenger.of(context).clearSnackBars();
+                                                ScaffoldMessenger.of(context)
+                                                    .clearSnackBars();
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                         addFeedSnackbar);
@@ -2038,7 +2039,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                             .information,
                                                         'New Rule added successfully',
                                                         'Dismiss');
-                                                ScaffoldMessenger.of(context).clearSnackBars();
+                                                ScaffoldMessenger.of(context)
+                                                    .clearSnackBars();
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                         addRuleSnackbar);
