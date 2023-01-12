@@ -2,6 +2,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
+import 'package:flood_mobile/Provider/graph_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flood_mobile/Provider/login_status_data_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
@@ -105,6 +106,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<FilterProvider>(
           create: (context) => FilterProvider(),
+        ),
+        ChangeNotifierProvider<GraphProvider>(
+          create: (context) => GraphProvider(),
         ),
       ],
       child: Consumer<ThemeProvider>(
