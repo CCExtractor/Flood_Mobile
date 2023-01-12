@@ -73,7 +73,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                             return Container();
                           },
                           revealableHeight:
-                          // 270 165
+                              // 270 165
                               graph.showChart ? hp * 0.34 : hp * 0.21,
                           revealableBuilder: (BuildContext context,
                               RevealableToggler opener,
