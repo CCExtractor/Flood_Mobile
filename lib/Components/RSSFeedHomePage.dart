@@ -152,9 +152,12 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             Expanded(
                                               child: Row(
                                                 children: [
-                                                  Text(model
-                                                      .RssFeedsList[index].label
-                                                      .toString()),
+                                                  Flexible(
+                                                    child: Text(model
+                                                        .RssFeedsList[index]
+                                                        .label
+                                                        .toString()),
+                                                  ),
                                                   SizedBox(width: 10),
                                                   Text(model.RssFeedsList[index]
                                                               .count !=
@@ -1333,9 +1336,12 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             Expanded(
                                               child: Row(
                                                 children: [
-                                                  Text(model
-                                                      .RssRulesList[index].label
-                                                      .toString()),
+                                                  Flexible(
+                                                    child: Text(model
+                                                        .RssRulesList[index]
+                                                        .label
+                                                        .toString()),
+                                                  ),
                                                   SizedBox(width: 10),
                                                   Text(model.RssRulesList[index]
                                                               .count !=

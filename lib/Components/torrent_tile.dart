@@ -49,6 +49,7 @@ class _TorrentTileState extends State<TorrentTile> {
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
+    double wp = MediaQuery.of(context).size.width;
     return Slidable(
       actionPane: SlidableBehindActionPane(),
       actionExtentRatio: 0.25,
@@ -315,7 +316,12 @@ class _TorrentTileState extends State<TorrentTile> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('Location'),
-                          Text(widget.model.directory),
+                          Flexible(
+                            child: Container(
+                              padding: EdgeInsets.only(left: wp * 0.1),
+                              child: Text(widget.model.directory),
+                            ),
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -327,9 +333,14 @@ class _TorrentTileState extends State<TorrentTile> {
                           Text(
                             'Tags',
                           ),
-                          Text((widget.model.tags.length != 0)
-                              ? widget.model.tags.toString()
-                              : 'None'),
+                          Flexible(
+                            child: Container(
+                              padding: EdgeInsets.only(left: wp * 0.17),
+                              child: Text((widget.model.tags.length != 0)
+                                  ? widget.model.tags.toString()
+                                  : 'None'),
+                            ),
+                          ),
                         ],
                       ),
                       SizedBox(
