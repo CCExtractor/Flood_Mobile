@@ -218,6 +218,17 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     FeedsApi
                                                         .listAllFeedsAndRules(
                                                             context: context);
+                                                    final deleteFeedSnackbar =
+                                                        addFloodSnackBar(
+                                                            SnackbarType
+                                                                .information,
+                                                            'Feed deleted successfully',
+                                                            'Dismiss');
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      deleteFeedSnackbar,
+                                                    );
                                                   },
                                                 ),
                                               ],
@@ -1451,6 +1462,17 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     FeedsApi
                                                         .listAllFeedsAndRules(
                                                             context: context);
+                                                    final deleteRuleSnackbar =
+                                                        addFloodSnackBar(
+                                                            SnackbarType
+                                                                .information,
+                                                            'Rule deleted successfully',
+                                                            'Dismiss');
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      deleteRuleSnackbar,
+                                                    );
                                                   },
                                                 ),
                                               ],
