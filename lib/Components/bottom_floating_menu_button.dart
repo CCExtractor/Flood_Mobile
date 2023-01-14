@@ -309,6 +309,8 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                     'Dismiss');
 
                                             ScaffoldMessenger.of(context)
+                                                .clearSnackBars();
+                                            ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                                     addTorrentSnackbar);
                                             Navigator.pop(context);
@@ -581,6 +583,8 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                   'Torrent added successfully',
                                                   'Dismiss');
 
+                                          ScaffoldMessenger.of(context)
+                                              .clearSnackBars();
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(addTorrentSnackbar);
                                           Navigator.pop(context);

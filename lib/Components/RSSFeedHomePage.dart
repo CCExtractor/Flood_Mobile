@@ -227,6 +227,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                 .information,
                                                             'Feed deleted successfully',
                                                             'Dismiss');
+
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .clearSnackBars();
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(
@@ -1476,6 +1480,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                 .information,
                                                             'Rule deleted successfully',
                                                             'Dismiss');
+
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .clearSnackBars();
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(
@@ -2039,6 +2047,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                             .information,
                                                         'New Rule added successfully',
                                                         'Dismiss');
+
                                                 ScaffoldMessenger.of(context)
                                                     .clearSnackBars();
                                                 ScaffoldMessenger.of(context)
