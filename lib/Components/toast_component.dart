@@ -21,4 +21,14 @@ class Toasts {
         textColor: Colors.white,
         fontSize: 16.0);
   }
+
+  static void showExitWarningToast({required String msg}) {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.green.withAlpha(130),
+        textColor: Colors.white,
+        fontSize: 16);
+  }
 }
