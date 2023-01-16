@@ -123,7 +123,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                           ? Container(
                               key: Key("Feeds are fetched"),
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white38),
+                                border: Border.all(
+                                    color: ThemeProvider.themeMode ==
+                                            ThemeMode.dark
+                                        ? Colors.white38
+                                        : Colors.black38),
                                 borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(8),
                                   topLeft: Radius.circular(8),
@@ -1180,7 +1184,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.white38),
+                                      border: Border.all(
+                                          color: ThemeProvider.themeMode ==
+                                                  ThemeMode.dark
+                                              ? Colors.white38
+                                              : Colors.black38),
                                       borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(8),
                                         topLeft: Radius.circular(8),
@@ -1308,7 +1316,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                           ? Container(
                               key: Key("Rules Displayed"),
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white38),
+                                border: Border.all(
+                                    color: ThemeProvider.themeMode ==
+                                            ThemeMode.dark
+                                        ? Colors.white38
+                                        : Colors.black38),
                                 borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(8),
                                   topLeft: Radius.circular(8),
