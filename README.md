@@ -55,7 +55,7 @@ found at [Flood](https://github.com/jesec/flood).
 
 ## Installation guide
 
-[CONTRIBUTING.md](https://github.com/CCExtractor/Flood_Mobile/blob/master/INSTALLATION.md)
+[INSTALLATION.md](https://github.com/CCExtractor/Flood_Mobile/blob/master/INSTALLATION.md)
 
 <!-- USAGE EXAMPLES -->
 
