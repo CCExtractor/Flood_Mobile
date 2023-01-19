@@ -96,22 +96,16 @@ class _TorrentTileState extends State<TorrentTile> {
                 var result = await TorrentApi.checkTorrentHash(
                     hashes: [widget.model.hash], context: context);
                 if (result) {
-                  if(kDebugMode)
-                  print("check hash performed successfully");
+                  if (kDebugMode) print("check hash performed successfully");
                   final addTorrentSnackbar = addFloodSnackBar(
-                      SnackbarType.success,
-                      'Hash check successful',
-                      'Dismiss');
+                      SnackbarType.success, 'Hash check successful', 'Dismiss');
 
                   ScaffoldMessenger.of(context)
                       .showSnackBar(addTorrentSnackbar);
                 } else {
-                  if(kDebugMode)
-                  print("Error check hash failed");
+                  if (kDebugMode) print("Error check hash failed");
                   final addTorrentSnackbar = addFloodSnackBar(
-                      SnackbarType.caution,
-                      'Torrent hash failed',
-                      'Dismiss');
+                      SnackbarType.caution, 'Torrent hash failed', 'Dismiss');
 
                   ScaffoldMessenger.of(context)
                       .showSnackBar(addTorrentSnackbar);

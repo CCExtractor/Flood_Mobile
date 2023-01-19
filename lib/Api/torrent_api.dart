@@ -336,7 +336,7 @@ class TorrentApi {
       );
       //if hashcheck is successful then return true else return false
       if (response.statusCode == 200) {
-        return true;  
+        return true;
       } else {
         return false;
       }
