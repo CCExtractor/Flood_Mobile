@@ -310,7 +310,7 @@ class TorrentApi {
     }
   }
 
-  static Future<void> checkTorrentHash({
+  static Future<bool> checkTorrentHash({
     required List<String> hashes,
     required BuildContext context,
   }) async {
@@ -334,11 +334,17 @@ class TorrentApi {
         url,
         data: rawBody,
       );
+      //if hashcheck is successful then return true else return false
       if (response.statusCode == 200) {
-      } else {}
+        return true;
+      } else {
+        return false;
+      }
     } catch (e) {
       print('--ERROR--');
       print(e.toString());
+      //if error arises then return false
+      return false;
     }
   }
 }
