@@ -53,6 +53,10 @@ found at [Flood](https://github.com/jesec/flood).
 
 [CONTRIBUTING.md](https://github.com/CCExtractor/Flood_Mobile/blob/master/CONTRIBUTING.md)
 
+## Installation guide
+
+[CONTRIBUTING.md](https://github.com/CCExtractor/Flood_Mobile/blob/master/INSTALLATION.md)
+
 <!-- USAGE EXAMPLES -->
 
 ## Usage & Screenshots
