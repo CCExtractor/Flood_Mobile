@@ -31,10 +31,14 @@ SnackBar addFloodSnackBar(
         SizedBox(
           width: 8,
         ),
-        Text(
-          title,
-          style: TextStyle(
-            color: Colors.white,
+        Expanded(
+          child: Text(
+            title,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            style: TextStyle(
+              color: Colors.white,
+            ),
           ),
         ),
       ],
