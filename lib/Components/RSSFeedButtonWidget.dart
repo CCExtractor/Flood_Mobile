@@ -12,6 +12,7 @@ class _RSSFeedButtonWidgetState extends State<RSSFeedButtonWidget> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      key: Key("Rss feed button"),
       onPressed: () {
         showFlexibleBottomSheet(
           minHeight: 0,

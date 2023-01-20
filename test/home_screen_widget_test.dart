@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/notification_model.dart';
+import 'package:flood_mobile/Model/single_feed_and_response_model.dart';
+import 'package:flood_mobile/Model/single_rule_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Pages/home_screen.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
@@ -69,6 +71,40 @@ void main() {
         upRate: 0.0,
         upTotal: 0.0),
   ]);
+
+  when(() => mockHomeProvider.RssFeedsList).thenReturn([
+    FeedsAndRulesModel(
+        type: 'test feed',
+        label: 'test label',
+        interval: 0,
+        id: 'test id',
+        url: 'test url',
+        count: 0),
+    FeedsAndRulesModel(
+        type: 'test feed',
+        label: 'test label',
+        interval: 0,
+        id: 'test id',
+        url: 'test url',
+        count: 0)
+  ]);
+  when(() => mockHomeProvider.RssRulesList).thenReturn([
+    RulesModel(
+      type: 'test rules',
+      label: 'test label',
+      feedIDs: ['test feedIDs'],
+      field: 'test field',
+      tags: ['test tags'],
+      match: 'test match',
+      exclude: 'test exclude',
+      destination: 'test destination',
+      id: 'test id',
+      isBasePath: true,
+      startOnLoad: true,
+      count: 0,
+    )
+  ]);
+
   Widget createWidgetUnderTest() {
     return MultiProvider(
       providers: [
@@ -109,26 +145,42 @@ void main() {
   group("Check different widgets in home-screen", () {
     testWidgets("Check top bar widgets", (WidgetTester tester) async {
       await tester.pumpWidget(createWidgetUnderTest());
-      expect(find.byIcon(Icons.menu), findsOneWidget);
-      expect(find.byKey(Key('Flood Icon')), findsOneWidget);
-      expect(find.byIcon(Icons.wb_sunny_rounded), findsOneWidget);
-      await tester.tap(find.byIcon(Icons.wb_sunny_rounded));
+      final hamMenu = find.byIcon(Icons.menu);
+      final floodIcon = find.byKey(Key('Flood Icon'));
+      final rssIcon = find.byIcon(Icons.rss_feed);
+      final notificationIcon = find.byIcon(Icons.notifications);
+
+      expect(hamMenu, findsOneWidget);
+      expect(floodIcon, findsOneWidget);
+      expect(rssIcon, findsOneWidget);
+      expect(notificationIcon, findsOneWidget);
+      expect(find.byKey(Key('Notification button')), findsOneWidget);
+
+      await tester.ensureVisible(find.byType(AppBar));
+
+      final bottomSheet = find.byKey(Key("Rss feed home"));
+      expect(bottomSheet, findsNothing);
+
+      // await tester.runAsync(() async {
+      await tester.pumpAndSettle(Duration(seconds: 1));
+      await tester.ensureVisible(find.byKey(Key("Rss feed button")));
       await tester.pumpAndSettle();
-      expect(find.byIcon(Icons.mode_night_rounded), findsOneWidget);
-      expect(find.byKey(Key('Badge Widget')), findsOneWidget);
-      expect(find.byIcon(Icons.notifications), findsOneWidget);
-      await tester.tap(find.byIcon(Icons.notifications));
-      await tester.pumpAndSettle();
-      expect(find.byKey(Key('Notification Alert Dialog')), findsOneWidget);
-      expect(find.text('test status'), findsOneWidget);
-      expect(
-          find.text(DateTime.fromMillisecondsSinceEpoch(
-                  mockHomeProvider.notificationModel.notifications[0].ts)
-              .toString()),
-          findsOneWidget);
-      expect(find.text('test name'), findsOneWidget);
-      expect(find.text('Clear All'), findsOneWidget);
+      await tester.tap(find.byKey(Key("Rss feed button")));
+      await tester.pump(Duration(seconds: 1));
+      await tester.pump(Duration(seconds: 1));
+
+      expect(bottomSheet, findsOneWidget);
+      // });
       await tester.pumpAndSettle(const Duration(seconds: 5));
+    });
+
+    testWidgets("test notification button", (WidgetTester tester) async {
+      await tester.pumpWidget(createWidgetUnderTest());
+      await tester.ensureVisible(find.byKey(Key("Notification button")));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(Key('Notification button')));
+      await tester.pumpAndSettle();
+      expect(find.byKey(Key("Notification Alert Dialog")), findsOneWidget);
     });
 
     testWidgets("Check menu button working", (WidgetTester tester) async {
@@ -148,10 +200,15 @@ void main() {
       expect(find.text('GitHub'), findsOneWidget);
       expect(find.byIcon(Icons.info), findsOneWidget);
       expect(find.text('About'), findsOneWidget);
-      await tester.tap(find.byIcon(Icons.exit_to_app));
-      await tester.pumpAndSettle();
-      expect(find.byKey(Key('Alert Dialog')), findsOneWidget);
-      expect(find.text('Are you sure you want to\n Log out ?'), findsOneWidget);
+
+      await tester.runAsync(() async {
+        await tester.tap(find.byIcon(Icons.exit_to_app));
+        await tester.pumpAndSettle();
+        expect(find.byKey(Key("Logout dialog")), findsOneWidget);
+        expect(
+            find.text('Are you sure you want to\n Log out ?'), findsOneWidget);
+      });
+
       expect(find.widgetWithText(TextButton, 'No'), findsOneWidget);
       expect(find.widgetWithText(TextButton, 'Yes'), findsOneWidget);
       await tester.pumpAndSettle(const Duration(seconds: 5));

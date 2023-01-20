@@ -154,69 +154,67 @@ class _HomeScreenState extends State<HomeScreen> {
               break;
           }
           return Consumer<HomeProvider>(builder: (context, homeModel, child) {
-            return WillPopScope(
-              onWillPop: onBackPressed,
-              child: Scaffold(
-                appBar: AppBar(
-                  leading: IconButton(
-                    icon: Icon(
-                      Icons.menu,
-                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
-                    ),
-                    onPressed: () {
-                      controller.toggle();
-                    },
+            return Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: ThemeProvider.theme.textTheme.bodyText1?.color,
                   ),
-                  title: Image(
-                    key: Key('Flood Icon'),
-                    image: AssetImage(
-                      'assets/images/icon.png',
-                    ),
-                    width: 60,
-                    height: 60,
-                  ),
-                  centerTitle: true,
-                  backgroundColor: Theme.of(context).primaryColor,
-                  elevation: 0,
-                  actions: [
-                    RSSFeedButtonWidget(),
-                    Badge(
-                      showBadge:
-                          homeModel.unreadNotifications == 0 ? false : true,
-                      key: Key('Badge Widget'),
-                      badgeColor: Theme.of(context).colorScheme.secondary,
-                      badgeContent: Center(
-                        child: Text(
-                          homeModel.unreadNotifications.toString(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      position: BadgePosition(top: 0, end: 3),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.notifications,
-                        ),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                key: Key('Notification Alert Dialog'),
-                                elevation: 0,
-                                backgroundColor: Theme.of(context).primaryColor,
-                                content: notificationPopupDialogueContainer(
-                                  context: context,
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+                  onPressed: () {
+                    controller.toggle();
+                  },
                 ),
-                body: screenCurrent,
+                title: Image(
+                  key: Key('Flood Icon'),
+                  image: AssetImage(
+                    'assets/images/icon.png',
+                  ),
+                  width: 60,
+                  height: 60,
+                ),
+                centerTitle: true,
+                backgroundColor: Theme.of(context).primaryColor,
+                elevation: 0,
+                actions: [
+                  RSSFeedButtonWidget(),
+                  Badge(
+                    showBadge:
+                        homeModel.unreadNotifications == 0 ? false : true,
+                    key: Key('Badge Widget'),
+                    badgeColor: Theme.of(context).accentColor,
+                    badgeContent: Center(
+                      child: Text(
+                        homeModel.unreadNotifications.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    position: BadgePosition(top: 0, end: 3),
+                    child: IconButton(
+                      key: Key("Notification button"),
+                      icon: Icon(
+                        Icons.notifications,
+                      ),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              key: Key('Notification Alert Dialog'),
+                              elevation: 0,
+                              backgroundColor: Theme.of(context).primaryColor,
+                              content: notificationPopupDialogueContainer(
+                                context: context,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
+              body: screenCurrent,
             );
           });
         },
@@ -343,6 +341,7 @@ class _MenuState extends State<Menu> {
                 showDialog(
                   context: context,
                   builder: (context) => LogOutAlert(
+                    key: Key("Logout dialog"),
                     logoutOnClick: () async {
                       controller.toggle();
                       SharedPreferences prefs =
