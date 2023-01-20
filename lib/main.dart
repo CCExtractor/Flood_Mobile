@@ -16,6 +16,7 @@ import 'Provider/color_provider.dart';
 import 'Constants/notification_keys.dart';
 import 'Pages/home_screen.dart';
 import 'Provider/filter_provider.dart';
+import 'Provider/graph_provider.dart';
 import 'Route/route_generator.dart';
 import 'Route/routes.dart';
 
@@ -110,6 +111,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<MultipleSelectTorrentProvider>(
           create: (context) => MultipleSelectTorrentProvider(),
         ),
+        ChangeNotifierProvider<GraphProvider>(
+          create: (context) => GraphProvider(),
+        )
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, _) {
