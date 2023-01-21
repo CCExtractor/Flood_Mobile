@@ -396,251 +396,260 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                   context: context,
                   backgroundColor: ThemeProvider.theme.backgroundColor,
                   builder: (context) {
-                    return ListView(shrinkWrap: true, children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 20, left: 20, bottom: 10),
-                              child: Text(
-                                "Selected Magnet Link",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Montserrat',
-                                    color: ThemeProvider
-                                        .theme.textTheme.bodyText1?.color),
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: ListView(shrinkWrap: true, children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 20, left: 20, bottom: 10),
+                                child: Text(
+                                  "Selected Magnet Link",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Montserrat',
+                                      color: ThemeProvider
+                                          .theme.textTheme.bodyText1?.color),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 20.0, right: 20),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      controller: magnetUrlController,
-                                      style: TextStyle(
-                                        color: ThemeProvider
-                                            .theme.textTheme.bodyText1?.color,
-                                      ),
-                                      decoration: InputDecoration(
-                                        prefixIcon: Icon(
-                                          Icons.link,
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20.0, right: 20),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: TextFormField(
+                                        controller: magnetUrlController,
+                                        style: TextStyle(
                                           color: ThemeProvider
                                               .theme.textTheme.bodyText1?.color,
                                         ),
-                                        suffix: GestureDetector(
-                                          child: Icon(Icons.paste),
-                                          onTap: () {
-                                            FlutterClipboard.paste()
-                                                .then((value) {
-                                              setState(() {
-                                                magnetUrlController =
-                                                    TextEditingController(
-                                                        text: value);
+                                        decoration: InputDecoration(
+                                          prefixIcon: Icon(
+                                            Icons.link,
+                                            color: ThemeProvider.theme.textTheme
+                                                .bodyText1?.color,
+                                          ),
+                                          suffix: GestureDetector(
+                                            child: Icon(Icons.paste),
+                                            onTap: () {
+                                              FlutterClipboard.paste()
+                                                  .then((value) {
+                                                setState(() {
+                                                  magnetUrlController =
+                                                      TextEditingController(
+                                                          text: value);
+                                                });
                                               });
-                                            });
-                                          },
-                                        ),
-                                        labelText: 'Torrent',
-                                        hintText: 'Torrent URL or Magnet Link',
-                                        labelStyle: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                      ),
-                                      validator: (String? value) {
-                                        if (value == null ||
-                                            (value.isEmpty &&
-                                                isMagnetSelected)) {
-                                          return 'Field cannot be empty';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              color: ThemeProvider.theme.primaryColorLight,
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 25, horizontal: 20),
-                              child: Form(
-                                key: _formKey,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    TextField(
-                                      controller: directoryController,
-                                      style: TextStyle(
-                                        color: ThemeProvider
-                                            .theme.textTheme.bodyText1?.color,
-                                      ),
-                                      decoration: InputDecoration(
-                                        prefixIcon: Icon(
-                                          Icons.folder,
-                                          color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
-                                        ),
-                                        labelText: 'Destination',
-                                        hintText: 'Destination',
-                                        labelStyle: TextStyle(
+                                            },
+                                          ),
+                                          labelText: 'Torrent',
+                                          hintText:
+                                              'Torrent URL or Magnet Link',
+                                          labelStyle: TextStyle(
                                             fontFamily: 'Montserrat',
                                             color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    StatefulBuilder(
-                                      builder: (BuildContext context,
-                                              StateSetter _setState) =>
-                                          CheckboxListTile(
-                                        activeColor: ThemeProvider
-                                            .theme.primaryColorDark,
-                                        tileColor: ThemeProvider
-                                            .theme.primaryColorLight,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        title: Text(
-                                          'Use as Base Path',
-                                          style: TextStyle(fontSize: 14),
-                                        ),
-                                        value: useAdBasePath,
-                                        onChanged: (bool? value) {
-                                          _setState(() {
-                                            useAdBasePath = value ?? false;
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                    StatefulBuilder(
-                                      builder: (BuildContext context,
-                                              StateSetter _setState) =>
-                                          CheckboxListTile(
-                                        activeColor: ThemeProvider
-                                            .theme.primaryColorDark,
-                                        tileColor: ThemeProvider
-                                            .theme.primaryColorLight,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        title: Text(
-                                          'Sequential Download',
-                                          style: TextStyle(fontSize: 14),
-                                        ),
-                                        value: sequentialDownload,
-                                        onChanged: (bool? value) {
-                                          _setState(() {
-                                            sequentialDownload = value ?? false;
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                    StatefulBuilder(
-                                      builder: (BuildContext context,
-                                              StateSetter _setState) =>
-                                          CheckboxListTile(
-                                        activeColor: ThemeProvider
-                                            .theme.primaryColorDark,
-                                        tileColor: ThemeProvider
-                                            .theme.primaryColorLight,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        title: Text(
-                                          'Completed',
-                                          style: TextStyle(fontSize: 14),
-                                        ),
-                                        value: completed,
-                                        onChanged: (bool? value) {
-                                          _setState(() {
-                                            completed = value ?? false;
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.06,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      child: ElevatedButton(
-                                        onPressed: () async {
-                                          //The file has been chosen
-                                          TorrentApi.addTorrentMagnet(
-                                              magnetUrl:
-                                                  magnetUrlController.text,
-                                              destination:
-                                                  directoryController.text,
-                                              isBasePath: useAdBasePath,
-                                              isSequential: sequentialDownload,
-                                              isCompleted: completed,
-                                              context: context);
-                                          final addTorrentSnackbar =
-                                              addFloodSnackBar(
-                                                  SnackbarType.information,
-                                                  'Torrent added successfully',
-                                                  'Dismiss');
-
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(addTorrentSnackbar);
-                                          Navigator.pop(context);
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          elevation: 0,
-                                          shape: RoundedRectangleBorder(
+                                                .bodyText1?.color,
+                                          ),
+                                          border: OutlineInputBorder(
                                             borderRadius:
-                                                BorderRadius.circular(14.0),
-                                          ),
-                                          primary: ThemeProvider
-                                              .theme.primaryColorDark,
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            "Add Torrent",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600),
+                                                BorderRadius.circular(8),
                                           ),
                                         ),
+                                        validator: (String? value) {
+                                          if (value == null ||
+                                              (value.isEmpty &&
+                                                  isMagnetSelected)) {
+                                            return 'Field cannot be empty';
+                                          }
+                                          return null;
+                                        },
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
                               ),
-                            ),
-                          ],
+                              Container(
+                                color: ThemeProvider.theme.primaryColorLight,
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 25, horizontal: 20),
+                                child: Form(
+                                  key: _formKey,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      TextField(
+                                        controller: directoryController,
+                                        style: TextStyle(
+                                          color: ThemeProvider
+                                              .theme.textTheme.bodyText1?.color,
+                                        ),
+                                        decoration: InputDecoration(
+                                          prefixIcon: Icon(
+                                            Icons.folder,
+                                            color: ThemeProvider.theme.textTheme
+                                                .bodyText1?.color,
+                                          ),
+                                          labelText: 'Destination',
+                                          hintText: 'Destination',
+                                          labelStyle: TextStyle(
+                                              fontFamily: 'Montserrat',
+                                              color: ThemeProvider.theme
+                                                  .textTheme.bodyText1?.color),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      StatefulBuilder(
+                                        builder: (BuildContext context,
+                                                StateSetter _setState) =>
+                                            CheckboxListTile(
+                                          activeColor: ThemeProvider
+                                              .theme.primaryColorDark,
+                                          tileColor: ThemeProvider
+                                              .theme.primaryColorLight,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          title: Text(
+                                            'Use as Base Path',
+                                            style: TextStyle(fontSize: 14),
+                                          ),
+                                          value: useAdBasePath,
+                                          onChanged: (bool? value) {
+                                            _setState(() {
+                                              useAdBasePath = value ?? false;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      StatefulBuilder(
+                                        builder: (BuildContext context,
+                                                StateSetter _setState) =>
+                                            CheckboxListTile(
+                                          activeColor: ThemeProvider
+                                              .theme.primaryColorDark,
+                                          tileColor: ThemeProvider
+                                              .theme.primaryColorLight,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          title: Text(
+                                            'Sequential Download',
+                                            style: TextStyle(fontSize: 14),
+                                          ),
+                                          value: sequentialDownload,
+                                          onChanged: (bool? value) {
+                                            _setState(() {
+                                              sequentialDownload =
+                                                  value ?? false;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      StatefulBuilder(
+                                        builder: (BuildContext context,
+                                                StateSetter _setState) =>
+                                            CheckboxListTile(
+                                          activeColor: ThemeProvider
+                                              .theme.primaryColorDark,
+                                          tileColor: ThemeProvider
+                                              .theme.primaryColorLight,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          title: Text(
+                                            'Completed',
+                                            style: TextStyle(fontSize: 14),
+                                          ),
+                                          value: completed,
+                                          onChanged: (bool? value) {
+                                            _setState(() {
+                                              completed = value ?? false;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.06,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: ElevatedButton(
+                                          onPressed: () async {
+                                            //The file has been chosen
+                                            TorrentApi.addTorrentMagnet(
+                                                magnetUrl:
+                                                    magnetUrlController.text,
+                                                destination:
+                                                    directoryController.text,
+                                                isBasePath: useAdBasePath,
+                                                isSequential:
+                                                    sequentialDownload,
+                                                isCompleted: completed,
+                                                context: context);
+                                            final addTorrentSnackbar =
+                                                addFloodSnackBar(
+                                                    SnackbarType.information,
+                                                    'Torrent added successfully',
+                                                    'Dismiss');
+
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                                    addTorrentSnackbar);
+                                            Navigator.pop(context);
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            elevation: 0,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(14.0),
+                                            ),
+                                            primary: ThemeProvider
+                                                .theme.primaryColorDark,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              "Add Torrent",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ]);
+                      ]),
+                    );
                   },
                 );
               });
