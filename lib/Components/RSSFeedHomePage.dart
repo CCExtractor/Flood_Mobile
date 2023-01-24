@@ -123,7 +123,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                           ? Container(
                               key: Key("Feeds are fetched"),
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white38),
+                                border: Border.all(color: Colors.black38),
                                 borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(8),
                                   topLeft: Radius.circular(8),
