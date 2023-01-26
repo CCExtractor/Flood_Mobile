@@ -42,6 +42,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
     return Consumer<ClientSettingsProvider>(
         builder: (context, clientModel, child) {
       return SpeedDial(
+        key: Key("Floating Action Button"),
         buttonSize: Size(60, 60),
         backgroundColor: ThemeProvider.theme.primaryColorDark,
         icon: Icons.add,

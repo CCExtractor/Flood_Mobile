@@ -150,7 +150,9 @@ void main() {
 
   group("Check different widgets in torrent screen", () {
     testWidgets("Check torrent tile", (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
+      await tester.runAsync(() async {
+        await tester.pumpWidget(createWidgetUnderTest());
+      });
       expect(find.text('test1 name'), findsOneWidget);
       expect(find.text('test2 name'), findsOneWidget);
       expect(find.byKey(Key('Linear Progress Indicator')), findsNWidgets(2));
@@ -235,31 +237,43 @@ void main() {
       "Check add torrent widgets",
       (WidgetTester tester) async {
         await tester.pumpWidget(createWidgetUnderTest());
-        expect(find.byKey(Key('Floating Action Button')), findsOneWidget);
-        await tester.tap(find.byKey(Key('Floating Action Button')));
+        final floatingActionBtn = find.byKey(Key('Floating Action Button'));
+        expect(floatingActionBtn, findsOneWidget);
+        await tester.tap(floatingActionBtn);
         await tester.pumpAndSettle();
-        expect(find.byKey(Key('Destination TextField')), findsOneWidget);
+        expect(find.byIcon(Icons.close), findsOneWidget);
+        final magnetIcon = find.byIcon(FontAwesomeIcons.magnet);
+        final solidFileIcon = find.byIcon(FontAwesomeIcons.solidFile);
+        expect(magnetIcon, findsOneWidget);
+        expect(solidFileIcon, findsOneWidget);
+        expect(
+            find.text(
+                mockClientSettingsProvider.clientSettings.directoryDefault),
+            findsNothing);
+        await tester.tap(magnetIcon);
+        await tester.pumpAndSettle();
         expect(
             find.text(
                 mockClientSettingsProvider.clientSettings.directoryDefault),
             findsOneWidget);
+        expect(find.byType(TextField), findsNWidgets(2));
+        final magnetLinkTextField = find.widgetWithIcon(TextField, Icons.link);
+        expect(magnetLinkTextField, findsOneWidget);
+        await tester.tap(magnetLinkTextField);
+        await tester.pumpAndSettle();
+        expect(find.byIcon(Icons.paste), findsOneWidget);
+        expect(find.byIcon(Icons.link), findsOneWidget);
+        expect(find.byIcon(Icons.folder), findsOneWidget);
+        expect(find.byType(CheckboxListTile), findsNWidgets(3));
         expect(find.text('Use as Base Path'), findsOneWidget);
         expect(find.text('Sequential Download'), findsOneWidget);
         expect(find.text('Completed'), findsOneWidget);
-        expect(find.byType(CheckboxListTile), findsNWidgets(3));
-        expect(find.byIcon(FontAwesomeIcons.magnet), findsOneWidget);
-        expect(find.byIcon(FontAwesomeIcons.solidFile), findsOneWidget);
-        expect(
-            find.widgetWithText(ElevatedButton, 'Add Torrent'), findsOneWidget);
-        expect(find.byIcon(Icons.link), findsNothing);
-        expect(find.byKey(Key('Torrent magnet link textfield')), findsNothing);
-        await tester.tap(find.byIcon(FontAwesomeIcons.magnet));
-        expect(find.byIcon(Icons.paste), findsNothing);
+        final addTorrentBtn =
+            find.widgetWithText(ElevatedButton, 'Add Torrent');
+        expect(addTorrentBtn, findsOneWidget);
+        await tester.tap(addTorrentBtn);
         await tester.pumpAndSettle();
-        expect(find.byIcon(Icons.link), findsOneWidget);
-        expect(
-            find.byKey(Key('Torrent magnet link textfield')), findsOneWidget);
-        expect(find.byIcon(Icons.paste), findsOneWidget);
+        expect(find.byType(SnackBar), findsOneWidget);
       },
     );
   });
