@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 Widget notificationPopupDialogueContainer({required BuildContext context}) {
+  NotificationApi.getNotifications(context: context);
   return (Provider.of<HomeProvider>(context)
               .notificationModel
               .notifications
