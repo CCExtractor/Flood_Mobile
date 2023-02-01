@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Components/add_automatic_torrent.dart';
+import 'package:flood_mobile/Components/delete_torrent_sheet.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
@@ -14,6 +15,7 @@ import 'package:flood_mobile/Pages/about_screen.dart';
 import 'package:flood_mobile/Pages/settings_screen.dart';
 import 'package:flood_mobile/Pages/torrent_screen.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
+import 'package:flood_mobile/Provider/multiple_select_torrent_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
@@ -137,67 +139,153 @@ class _HomeScreenState extends State<HomeScreen> {
               break;
           }
           return Consumer<HomeProvider>(builder: (context, homeModel, child) {
-            return Scaffold(
-              appBar: AppBar(
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.menu,
-                    color: ThemeProvider.theme.textTheme.bodyText1?.color,
-                  ),
-                  onPressed: () {
-                    controller.toggle();
-                  },
-                ),
-                title: Image(
-                  key: Key('Flood Icon'),
-                  image: AssetImage(
-                    'assets/images/icon.png',
-                  ),
-                  width: 60,
-                  height: 60,
-                ),
-                centerTitle: true,
-                backgroundColor: Theme.of(context).primaryColor,
-                elevation: 0,
-                actions: [
-                  RSSFeedButtonWidget(),
-                  Badge(
-                    showBadge:
-                        homeModel.unreadNotifications == 0 ? false : true,
-                    key: Key('Badge Widget'),
-                    badgeColor: Theme.of(context).accentColor,
-                    badgeContent: Center(
-                      child: Text(
-                        homeModel.unreadNotifications.toString(),
-                        style: TextStyle(color: Colors.white),
-                      ),
+            return Consumer<MultipleSelectTorrentProvider>(
+                builder: (context, selectTorrent, child) {
+              return Scaffold(
+                appBar: AppBar(
+                  leading: !selectTorrent.isSelectionMode
+                      ? IconButton(
+                          icon: Icon(
+                            Icons.menu,
+                            color:
+                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                          ),
+                          onPressed: () {
+                            controller.toggle();
+                          },
+                        )
+                      : IconButton(
+                          onPressed: () {
+                            setState(() {
+                              selectTorrent.changeSelectionMode();
+                              selectTorrent.removeAllItemsFromList();
+                            });
+                          },
+                          icon: Icon(Icons.close)),
+                  title: Image(
+                    key: Key('Flood Icon'),
+                    image: AssetImage(
+                      'assets/images/icon.png',
                     ),
-                    position: BadgePosition(top: 0, end: 3),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.notifications,
-                      ),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              key: Key('Notification Alert Dialog'),
-                              elevation: 0,
-                              backgroundColor: Theme.of(context).primaryColor,
-                              content: notificationPopupDialogueContainer(
-                                context: context,
-                              ),
+                    width: 60,
+                    height: 60,
+                  ),
+                  centerTitle: true,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  elevation: 0,
+                  actions: [
+                    if (!selectTorrent.isSelectionMode) RSSFeedButtonWidget(),
+                    if (!selectTorrent.isSelectionMode)
+                      Badge(
+                        showBadge:
+                            homeModel.unreadNotifications == 0 ? false : true,
+                        key: Key('Badge Widget'),
+                        badgeColor: Theme.of(context).accentColor,
+                        badgeContent: Center(
+                          child: Text(
+                            homeModel.unreadNotifications.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        position: BadgePosition(top: 0, end: 3),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.notifications,
+                          ),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  key: Key('Notification Alert Dialog'),
+                                  elevation: 0,
+                                  backgroundColor:
+                                      Theme.of(context).primaryColor,
+                                  content: notificationPopupDialogueContainer(
+                                    context: context,
+                                  ),
+                                );
+                              },
                             );
                           },
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              body: screenCurrent,
-            );
+                        ),
+                      ),
+                    if (selectTorrent.isSelectionMode)
+                      PopupMenuButton<String>(
+                        color: ThemeProvider.theme.primaryColorLight,
+                        icon: Icon(
+                          Icons.more_vert,
+                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                        ),
+                        onSelected: (value) {
+                          List<String> hash = [];
+                          selectTorrent.selectedTorrentList
+                              .toList()
+                              .forEach((element) {
+                            hash.add(element.hash);
+                          });
+                          if (value == 'Select All') {
+                            selectTorrent.removeAllItemsFromList();
+                            selectTorrent
+                                .addAllItemsToList(homeModel.torrentList);
+                          }
+                          if (value == 'Start') {
+                            TorrentApi.startTorrent(
+                                hashes: hash, context: context);
+                            selectTorrent.changeSelectionMode();
+                          }
+                          if (value == 'Pause') {
+                            TorrentApi.stopTorrent(
+                                hashes: hash, context: context);
+                            selectTorrent.changeSelectionMode();
+                          }
+                          if (value == 'Delete') {
+                            showModalBottomSheet(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(15),
+                                  topLeft: Radius.circular(15),
+                                ),
+                              ),
+                              isScrollControlled: true,
+                              context: context,
+                              backgroundColor:
+                                  ThemeProvider.theme.scaffoldBackgroundColor,
+                              builder: (context) {
+                                return DeleteTorrentSheet(
+                                  torrents: selectTorrent.selectedTorrentList
+                                      .toList(),
+                                );
+                              },
+                            );
+                            selectTorrent.changeSelectionMode();
+                          }
+                        },
+                        itemBuilder: (BuildContext context) {
+                          return {
+                            'Select All',
+                            'Start',
+                            'Pause',
+                            'Delete',
+                            'Set Tags',
+                          }.map((String choice) {
+                            return PopupMenuItem<String>(
+                              value: choice,
+                              child: Text(choice),
+                            );
+                          }).toList();
+                        },
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12.0),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+                body: screenCurrent,
+              );
+            });
           });
         },
       ),

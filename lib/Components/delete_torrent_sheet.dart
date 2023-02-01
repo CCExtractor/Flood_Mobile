@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'flood_snackbar.dart';
 
 class DeleteTorrentSheet extends StatefulWidget {
-  final TorrentModel torrent;
+  final List<TorrentModel> torrents;
 
-  DeleteTorrentSheet({required this.torrent});
+  DeleteTorrentSheet({required this.torrents});
 
   @override
   _DeleteTorrentSheetState createState() => _DeleteTorrentSheetState();
@@ -36,7 +36,9 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
             height: 5,
           ),
           Text(
-            'Are you sure you want to delete the torrent?',
+            widget.torrents.length > 1
+                ? 'Are you sure you want to delete ${widget.torrents.length} torrents?'
+                : 'Are you sure you want to delete the torrent?',
             style: TextStyle(fontSize: 16),
           ),
           SizedBox(
@@ -108,8 +110,12 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                   ),
                   child: ElevatedButton(
                     onPressed: () {
+                      List<String> hashes = [];
+                      widget.torrents.forEach((element) {
+                        hashes.add(element.hash);
+                      });
                       TorrentApi.deleteTorrent(
-                          hash: widget.torrent.hash,
+                          hashes: hashes,
                           deleteWithData: deleteWithData,
                           context: context);
                       Navigator.of(context).pop();
