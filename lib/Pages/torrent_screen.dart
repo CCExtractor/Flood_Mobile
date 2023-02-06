@@ -1,6 +1,7 @@
 import 'package:flood_mobile/Components/add_torrent_sheet.dart';
 import 'package:flood_mobile/Components/filter_by_status.dart';
 import 'package:flood_mobile/Components/bottom_floating_menu_button.dart';
+import 'package:flood_mobile/Components/text_size.dart';
 import 'package:flood_mobile/Components/torrent_tile.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
@@ -22,6 +23,26 @@ List<String> trackerURIsList = [];
 class _TorrentScreenState extends State<TorrentScreen> {
   String keyword = '';
 
+  int countDisplayTorrent(HomeProvider model, String keyword,
+      FilterProvider filterModel, int showTorrentCount) {
+    model.torrentList.forEach(
+      (torrent) {
+        if (torrent.name.toLowerCase().contains(keyword.toLowerCase()) &&
+                torrent.status.contains(
+                    filterModel.filterStatus.toString().split(".").last) ||
+            torrent.trackerURIs
+                .toString()
+                .contains(filterModel.trackerURISelected) ||
+            filterModel.filterStatus.toString().split(".").last == "all") {
+          if (torrent.name.toLowerCase().contains(keyword.toLowerCase())) {
+            showTorrentCount++;
+          }
+        }
+      },
+    );
+    return showTorrentCount;
+  }
+
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
@@ -30,6 +51,8 @@ class _TorrentScreenState extends State<TorrentScreen> {
       return Consumer<ClientSettingsProvider>(
           builder: (context, clientModel, child) {
         return Consumer<FilterProvider>(builder: (context, filterModel, child) {
+          int showTorrentCount =
+              countDisplayTorrent(model, keyword, filterModel, 0);
           return KeyboardDismissOnTap(
             child: Scaffold(
               body: Container(
@@ -38,7 +61,9 @@ class _TorrentScreenState extends State<TorrentScreen> {
                 color: ThemeProvider.theme.primaryColor,
                 child: (model.torrentList.length != 0)
                     ? PullToRevealTopItemList(
-                        itemCount: model.torrentList.length,
+                        itemCount: showTorrentCount == 0
+                            ? 1
+                            : model.torrentList.length,
                         itemBuilder: (BuildContext context, int index) {
                           Provider.of<FilterProvider>(context, listen: false)
                               .settrackerURIsList(
@@ -66,7 +91,41 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                   model: model.torrentList[index]);
                             }
                           }
-                          return Container();
+                          return Container(
+                            child: showTorrentCount == 0
+                                ? Container(
+                                    height: 300,
+                                    width: double.infinity,
+                                    alignment: Alignment.center,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SText(text: "No torrents to display."),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: ThemeProvider
+                                                    .theme.primaryColorLight,
+                                                foregroundColor: ThemeProvider
+                                                    .theme
+                                                    .textTheme
+                                                    .bodyText1
+                                                    ?.color),
+                                            onPressed: () {
+                                              setState(() {
+                                                filterModel.setFilterSelected(
+                                                    FilterValue.all);
+                                              });
+                                            },
+                                            child: Text("Clear Filter"))
+                                      ],
+                                    ),
+                                  )
+                                : Container(),
+                          );
                         },
                         revealableHeight: 165,
                         revealableBuilder: (BuildContext context,
