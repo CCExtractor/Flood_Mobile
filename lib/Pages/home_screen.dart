@@ -21,6 +21,7 @@ import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
@@ -121,6 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Toasts.showExitWarningToast(msg: 'Press back button again to exit');
       return false;
     } else {
+      Fluttertoast.cancel();
       return true;
     }
   }
