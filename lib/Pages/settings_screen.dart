@@ -81,7 +81,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     ClientSettingsModel model =
-        Provider.of<ClientSettingsProvider>(context).clientSettings;
+        Provider.of<ClientSettingsProvider>(context, listen: false)
+            .clientSettings;
     setState(() {
       // *Bandwidth Initialization
       globalDownloadRateController = new TextEditingController(
