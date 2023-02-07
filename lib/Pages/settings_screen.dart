@@ -75,6 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool isAdmin = false;
   bool socket = true;
   String client = 'rTorrent';
+  GlobalKey<FormState> _authenticationformKey = GlobalKey<FormState>();
 
   @override
   void didChangeDependencies() {
@@ -325,7 +326,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       clientUsernameController: clientUsernameController,
                       clientPasswordController: clientPasswordController,
                       urlController: urlController,
-                      hp: hp),
+                      hp: hp,
+                      authenticationformKey: _authenticationformKey),
                   SizedBox(
                     height: 200,
                   )
@@ -530,6 +532,7 @@ class AuthenticationSection extends StatelessWidget {
     required this.setIsAdmin,
     required this.setSocket,
     required this.setTCP,
+    required this.authenticationformKey,
   }) : super(key: key);
 
   final TextEditingController usernameController;
@@ -548,6 +551,7 @@ class AuthenticationSection extends StatelessWidget {
   final void Function(String? value) setClient;
   final void Function(bool? value) setSocket;
   final void Function(bool? value) setTCP;
+  final GlobalKey<FormState> authenticationformKey;
 
   @override
   Widget build(BuildContext context) {
@@ -561,245 +565,297 @@ class AuthenticationSection extends StatelessWidget {
       leading: Icon(Icons.security),
       contentPadding: EdgeInsets.all(0),
       children: [
-        Column(
-          key: Key('Authentication option display column'),
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SText(text: 'Add User'),
-            SizedBox(height: 25),
-            SettingsTextField(
-              validator: (value) {},
-              hintText: 'Username',
-              labelText: 'Username',
-              controller: usernameController,
-            ),
-            SizedBox(height: 20),
-            SettingsTextField(
-              validator: (value) {},
-              hintText: 'Password',
-              labelText: 'Password',
-              controller: passwordController,
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(),
-                ),
-                Expanded(
-                  child: CheckboxListTile(
-                    activeColor: ThemeProvider.theme.primaryColorDark,
-                    tileColor: ThemeProvider.theme.primaryColorLight,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    title: Text(
-                      'Is Admin',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    value: isAdmin,
-                    onChanged: setIsAdmin,
+        Form(
+          key: authenticationformKey,
+          child: Column(
+            key: Key('Authentication option display column'),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SText(text: 'Add User'),
+              SizedBox(height: 25),
+              SettingsTextField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Username cannot be empty.";
+                  }
+                  return null;
+                },
+                hintText: 'Username',
+                labelText: 'Username',
+                controller: usernameController,
+              ),
+              SizedBox(height: 20),
+              SettingsTextField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Password cannot be empty.";
+                  }
+                  return null;
+                },
+                hintText: 'Password',
+                labelText: 'Password',
+                controller: passwordController,
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(),
                   ),
-                )
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    decoration: BoxDecoration(
-                      color: ThemeProvider.theme.primaryColorLight,
-                      borderRadius: BorderRadius.circular(8),
+                  Expanded(
+                    child: CheckboxListTile(
+                      activeColor: ThemeProvider.theme.primaryColorDark,
+                      tileColor: ThemeProvider.theme.primaryColorLight,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      title: Text(
+                        'Is Admin',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      value: isAdmin,
+                      onChanged: setIsAdmin,
                     ),
-                    child: ButtonTheme(
-                      alignedDropdown: true,
-                      child: DropdownButton<String>(
-                        key: Key('Authentication dropdown'),
-                        isExpanded: true,
-                        value: client,
-                        icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                        dropdownColor: ThemeProvider.theme.backgroundColor,
-                        elevation: 16,
-                        onChanged: setClient,
-                        underline: Container(),
-                        items: <String>[
-                          'rTorrent',
-                          'qBittorrent',
-                          'Transmission',
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
+                  )
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 5),
+                      decoration: BoxDecoration(
+                        color: ThemeProvider.theme.primaryColorLight,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: ButtonTheme(
+                        alignedDropdown: true,
+                        child: DropdownButton<String>(
+                          key: Key('Authentication dropdown'),
+                          isExpanded: true,
+                          value: client,
+                          icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                          dropdownColor: ThemeProvider.theme.backgroundColor,
+                          elevation: 16,
+                          onChanged: setClient,
+                          underline: Container(),
+                          items: <String>[
+                            'rTorrent',
+                            'qBittorrent',
+                            'Transmission',
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            //Check if the client is rTorrent, qBittorrent or Transmission
+                ],
+              ),
+              SizedBox(height: 20),
+              //Check if the client is rTorrent, qBittorrent or Transmission
 
-            (client == 'rTorrent')
-                ? Column(
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CheckboxListTile(
-                                tileColor:
-                                    ThemeProvider.theme.primaryColorLight,
+              (client == 'rTorrent')
+                  ? Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CheckboxListTile(
+                                  tileColor:
+                                      ThemeProvider.theme.primaryColorLight,
+                                  activeColor:
+                                      ThemeProvider.theme.primaryColorDark,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  title: Text(
+                                    'Socket',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                  value: socket,
+                                  onChanged: setSocket),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: CheckboxListTile(
                                 activeColor:
                                     ThemeProvider.theme.primaryColorDark,
+                                tileColor:
+                                    ThemeProvider.theme.primaryColorLight,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 title: Text(
-                                  'Socket',
+                                  'TCP',
                                   style: TextStyle(fontSize: 12),
                                 ),
-                                value: socket,
-                                onChanged: setSocket),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Expanded(
-                            child: CheckboxListTile(
-                              activeColor: ThemeProvider.theme.primaryColorDark,
-                              tileColor: ThemeProvider.theme.primaryColorLight,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                                value: !socket,
+                                onChanged: setTCP,
                               ),
-                              title: Text(
-                                'TCP',
-                                style: TextStyle(fontSize: 12),
-                              ),
-                              value: !socket,
-                              onChanged: setTCP,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      (socket)
-                          ? SettingsTextField(
-                              validator: (value) {},
-                              hintText: 'eg. ~/.local/share/rtorrent',
-                              labelText: 'Path',
-                              controller: pathController,
                             )
-                          : Column(
-                              children: [
-                                SettingsTextField(
-                                  validator: (value) {},
-                                  hintText: 'Host or IP',
-                                  labelText: 'Host',
-                                  controller: hostController,
-                                ),
-                                SizedBox(height: 20),
-                                SettingsTextField(
-                                  validator: (value) {},
-                                  hintText: 'Port',
-                                  labelText: 'Port',
-                                  controller: portController,
-                                )
-                              ],
-                            ),
-                    ],
-                  )
-                : Column(
-                    children: [
-                      SettingsTextField(
-                        validator: (value) {},
-                        hintText: 'Client Username',
-                        labelText: 'Username',
-                        controller: clientUsernameController,
-                      ),
-                      SizedBox(height: 20),
-                      SettingsTextField(
-                        validator: (value) {},
-                        hintText: 'Client Password',
-                        labelText: 'Password',
-                        controller: clientPasswordController,
-                      ),
-                      SizedBox(height: 20),
-                      SettingsTextField(
-                        validator: (value) {},
-                        hintText: 'eg. http://localhost:8080/',
-                        labelText: 'URL',
-                        controller: urlController,
-                      ),
-                    ],
-                  ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(child: Container()),
-                Expanded(
-                  child: Container(
-                    height: hp * 0.06,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        AuthApi.registerUser(
-                          context: context,
-                          model: RegisterUserModel(
-                            username: usernameController.text,
-                            password: passwordController.text,
-                            client: client,
-                            type: (client == 'rTorrent')
-                                ? (socket)
-                                    ? 'socket'
-                                    : 'tcp'
-                                : "web",
-                            version: 1,
-                            url: urlController.text,
-                            clientUsername: clientUsernameController.text,
-                            clientPassword: clientPasswordController.text,
-                            level: isAdmin ? 10 : 5,
-                            path: pathController.text,
-                            host: hostController.text,
-                            port: int.parse(
-                              portController.text.isEmpty
-                                  ? "0"
-                                  : portController.text,
-                            ),
-                          ),
-                        );
-                        final addNewUserSnackBar = addFloodSnackBar(
-                            SnackbarType.success, 'New user added', 'Dismiss');
-
-                        ScaffoldMessenger.of(context).clearSnackBars();
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(addNewUserSnackBar);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          ],
                         ),
-                        primary: ThemeProvider.theme.accentColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Add",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                        SizedBox(height: 20),
+                        (socket)
+                            ? SettingsTextField(
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Path cannot be empty";
+                                  }
+                                  return null;
+                                },
+                                hintText: 'eg. ~/.local/share/rtorrent',
+                                labelText: 'Path',
+                                controller: pathController,
+                              )
+                            : Column(
+                                children: [
+                                  SettingsTextField(
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return "Host or IP cannot be empty";
+                                      }
+                                      return null;
+                                    },
+                                    hintText: 'Host or IP',
+                                    labelText: 'Host',
+                                    controller: hostController,
+                                  ),
+                                  SizedBox(height: 20),
+                                  SettingsTextField(
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return "Port cannot be empty";
+                                      }
+                                      return null;
+                                    },
+                                    hintText: 'Port',
+                                    labelText: 'Port',
+                                    controller: portController,
+                                  )
+                                ],
+                              ),
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        SettingsTextField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Client Username cannot be empty.";
+                            }
+                            return null;
+                          },
+                          hintText: 'Client Username',
+                          labelText: 'Username',
+                          controller: clientUsernameController,
+                        ),
+                        SizedBox(height: 20),
+                        SettingsTextField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Client Password cannot be empty.";
+                            }
+                            return null;
+                          },
+                          hintText: 'Client Password',
+                          labelText: 'Password',
+                          controller: clientPasswordController,
+                        ),
+                        SizedBox(height: 20),
+                        SettingsTextField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "URL cannot be empty";
+                            } else if (!value.startsWith("http://")) {
+                              return "Enter valid URL";
+                            }
+                            return null;
+                          },
+                          hintText: client == "qBittorrent"
+                              ? 'eg. http://localhost:8080'
+                              : 'eg. http://localhost:9091/transmission/rpc',
+                          labelText: 'URL',
+                          controller: urlController,
+                        ),
+                      ],
+                    ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(child: Container()),
+                  Expanded(
+                    child: Container(
+                      height: hp * 0.06,
+                      decoration:
+                          BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (authenticationformKey.currentState!.validate()) {
+                            AuthApi.registerUser(
+                              context: context,
+                              model: RegisterUserModel(
+                                username: usernameController.text,
+                                password: passwordController.text,
+                                client: client,
+                                type: (client == 'rTorrent')
+                                    ? (socket)
+                                        ? 'socket'
+                                        : 'tcp'
+                                    : "web",
+                                version: 1,
+                                url: urlController.text,
+                                clientUsername: clientUsernameController.text,
+                                clientPassword: clientPasswordController.text,
+                                level: isAdmin ? 10 : 5,
+                                path: pathController.text,
+                                host: hostController.text,
+                                port: int.parse(
+                                  portController.text.isEmpty
+                                      ? "0"
+                                      : portController.text,
+                                ),
+                              ),
+                            );
+                            final addNewUserSnackBar = addFloodSnackBar(
+                                SnackbarType.success,
+                                'New user added',
+                                'Dismiss');
+
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(addNewUserSnackBar);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          primary: ThemeProvider.theme.accentColor,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Add",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         )
       ],
     );
