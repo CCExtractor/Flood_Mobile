@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -700,7 +702,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                     ? Colors.blue
                                     : Colors.blueGrey,
                               ),
-                            )
+                            ),
                           ],
                         ),
                         trailing: Radio<String>(
@@ -716,6 +718,19 @@ class _FilterByStatusState extends State<FilterByStatus> {
                           },
                           activeColor: Colors.blue,
                         ),
+                        subtitle: Text(
+                          humanReadableByteCountSI(filterModel.sizeList[index]),
+                          style: TextStyle(
+                              color: filterModel.maptrackerURIs.keys
+                                          .toList()[index] ==
+                                      filterModel.trackerURISelected.toString()
+                                  ? Colors.blue
+                                  : ThemeProvider
+                                      .theme.textTheme.bodyText1?.color,
+                              fontFamily: 'Montserrat',
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal),
+                        ),
                       );
                     }),
               ],
@@ -724,5 +739,15 @@ class _FilterByStatusState extends State<FilterByStatus> {
         );
       });
     });
+  }
+
+  String humanReadableByteCountSI(String bytesStr) {
+    // convert bytes to readable format from string
+    double bytes = double.parse(bytesStr);
+    int unit = 1024;
+    if (bytes < unit) return bytes.toString() + " B";
+    int exp = (log(bytes) / log(unit)).floor();
+    String pre = "kMGTPE"[exp - 1];
+    return (bytes / pow(unit, exp)).toStringAsFixed(1) + " " + pre + "B";
   }
 }
