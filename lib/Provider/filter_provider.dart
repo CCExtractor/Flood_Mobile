@@ -17,6 +17,8 @@ class FilterProvider extends ChangeNotifier {
   List<String> trackerURIsList = [];
   List<String> trackerURIsListMain = [];
   List<String> statusList = [];
+  // size of the torrents
+  List<String> sizeList = [];
   var maptrackerURIs = {};
   var mapStatus = {};
   void settrackerURISelected(String newtrackerURISelected) {
@@ -46,5 +48,9 @@ class FilterProvider extends ChangeNotifier {
 
   void setstatusList(var newstatusList) {
     statusList = newstatusList;
+  }
+
+  void setsizeList(var newsizeList) {
+    sizeList = newsizeList;
   }
 }
