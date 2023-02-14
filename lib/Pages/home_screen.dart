@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           isScrollControlled: true,
           context: context,
-          backgroundColor: ThemeProvider.theme.primaryColorLight,
+          backgroundColor: ThemeProvider.theme.backgroundColor,
           builder: (context) {
             return AddAutoTorrent(
                 base64: base64, imageBytes: imageBytes, uriString: uriString);

@@ -837,7 +837,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   isScrollControlled: true,
                                                   context: context,
                                                   backgroundColor: ThemeProvider
-                                                      .theme.primaryColorLight,
+                                                      .theme.backgroundColor,
                                                   builder: (context) {
                                                     return ListView(
                                                         shrinkWrap: true,

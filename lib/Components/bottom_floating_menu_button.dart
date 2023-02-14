@@ -100,7 +100,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                     ),
                     isScrollControlled: true,
                     context: context,
-                    backgroundColor: ThemeProvider.theme.primaryColorLight,
+                    backgroundColor: ThemeProvider.theme.backgroundColor,
                     builder: (context) {
                       return ListView(shrinkWrap: true, children: [
                         Padding(
@@ -381,7 +381,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                   ),
                   isScrollControlled: true,
                   context: context,
-                  backgroundColor: ThemeProvider.theme.primaryColorLight,
+                  backgroundColor: ThemeProvider.theme.backgroundColor,
                   builder: (context) {
                     return ListView(shrinkWrap: true, children: [
                       Padding(
