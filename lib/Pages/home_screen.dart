@@ -1,7 +1,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'dart:convert';
 import 'dart:io';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:dio/dio.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
@@ -161,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 elevation: 0,
                 actions: [
                   RSSFeedButtonWidget(),
-                  Badge(
+                  badges.Badge(
                     showBadge:
                         homeModel.unreadNotifications == 0 ? false : true,
                     key: Key('Badge Widget'),
@@ -172,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    position: BadgePosition(top: 0, end: 3),
+                    position: badges.BadgePosition(top: 0, end: 3),
                     child: IconButton(
                       icon: Icon(
                         Icons.notifications,
