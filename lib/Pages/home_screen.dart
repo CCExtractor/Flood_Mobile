@@ -1,11 +1,26 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'dart:convert';
 import 'dart:io';
-import 'package:badges/badges.dart';
+
+import 'package:flutter/material.dart';
+
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:badges/badges.dart' as badge;
 import 'package:dio/dio.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:uri_to_file/uri_to_file.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Components/add_automatic_torrent.dart';
+import 'package:flood_mobile/Components/change_theme_button_widget.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
@@ -17,22 +32,11 @@ import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
-import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uni_links/uni_links.dart';
-import 'package:uri_to_file/uri_to_file.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:flood_mobile/Components/change_theme_button_widget.dart';
+
 import '../Api/torrent_api.dart';
+import '../Components/RSSFeedButtonWidget.dart';
 import '../Constants/notification_keys.dart';
 import '../Provider/api_provider.dart';
-import '../Components/RSSFeedButtonWidget.dart';
 
 class HomeScreen extends StatefulWidget {
   final GlobalKey<NavigatorState> navigatorKey =
@@ -161,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 elevation: 0,
                 actions: [
                   RSSFeedButtonWidget(),
-                  Badge(
+                  badge.Badge(
                     showBadge:
                         homeModel.unreadNotifications == 0 ? false : true,
                     key: Key('Badge Widget'),
@@ -172,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    position: BadgePosition(top: 0, end: 3),
+                    position: badge.BadgePosition(top: 0, end: 3),
                     child: IconButton(
                       icon: Icon(
                         Icons.notifications,

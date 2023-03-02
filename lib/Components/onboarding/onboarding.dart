@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 import '../../Provider/color_provider.dart';
 import '../../Route/routes.dart';
+
 import 'components/onboard_page.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'data/onboard_page_data.dart';
 import 'models/onboard_page_model.dart';
 
@@ -63,7 +66,7 @@ class _OnboardingState extends State<Onboarding> {
                 textBaseline: TextBaseline.alphabetic,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
+                    padding: const EdgeInsets.only(left: 20.0, bottom: 10),
                     child: Text(
                       'Explore Flood-Mobile',
                       style: TextStyle(
@@ -74,7 +77,7 @@ class _OnboardingState extends State<Onboarding> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 32.0),
+                    padding: const EdgeInsets.only(right: 32.0, bottom: 10),
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pushNamedAndRemoveUntil(
