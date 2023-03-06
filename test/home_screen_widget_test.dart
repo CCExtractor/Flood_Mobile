@@ -161,7 +161,6 @@ void main() {
       final bottomSheet = find.byKey(Key("Rss feed home"));
       expect(bottomSheet, findsNothing);
 
-      // await tester.runAsync(() async {
       await tester.pumpAndSettle(Duration(seconds: 1));
       await tester.ensureVisible(find.byKey(Key("Rss feed button")));
       await tester.pumpAndSettle();
@@ -170,7 +169,7 @@ void main() {
       await tester.pump(Duration(seconds: 1));
 
       expect(bottomSheet, findsOneWidget);
-      // });
+
       await tester.pumpAndSettle(const Duration(seconds: 5));
     });
 

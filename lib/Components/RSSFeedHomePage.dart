@@ -15,7 +15,6 @@ import '../Constants/theme_provider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 import '../Provider/client_provider.dart';
-import 'add_torrent_sheet.dart';
 
 class RSSFeedHomePage extends StatefulWidget {
   @override
@@ -82,7 +81,6 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
           key: Key("Rss feed home"),
           builder: (context, model, child) {
             return Container(
-              // key: Key("Rss feed home"),
               height: 750,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
