@@ -20,8 +20,9 @@ import 'flood_snackbar.dart';
 
 class TorrentTile extends StatefulWidget {
   final TorrentModel model;
+  final int index;
 
-  TorrentTile({required this.model});
+  TorrentTile({required this.model, required this.index});
 
   @override
   _TorrentTileState createState() => _TorrentTileState();
@@ -43,6 +44,7 @@ class _TorrentTileState extends State<TorrentTile> {
       backgroundColor: ThemeProvider.theme.scaffoldBackgroundColor,
       builder: (context) {
         return DeleteTorrentSheet(
+          index: widget.index,
           torrent: widget.model,
         );
       },

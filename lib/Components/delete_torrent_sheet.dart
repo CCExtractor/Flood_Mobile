@@ -7,8 +7,9 @@ import 'flood_snackbar.dart';
 
 class DeleteTorrentSheet extends StatefulWidget {
   final TorrentModel torrent;
+  final int index;
 
-  DeleteTorrentSheet({required this.torrent});
+  DeleteTorrentSheet({required this.index, required this.torrent});
 
   @override
   _DeleteTorrentSheetState createState() => _DeleteTorrentSheetState();
@@ -109,6 +110,7 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                   child: ElevatedButton(
                     onPressed: () {
                       TorrentApi.deleteTorrent(
+                          id: widget.index,
                           hash: widget.torrent.hash,
                           deleteWithData: deleteWithData,
                           context: context);

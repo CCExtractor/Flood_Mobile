@@ -65,6 +65,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                 .toLowerCase()
                                 .contains(keyword.toLowerCase())) {
                               return TorrentTile(
+                                  index: index,
                                   model: model.torrentList[index]);
                             }
                           }
