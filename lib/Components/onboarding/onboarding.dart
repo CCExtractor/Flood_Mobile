@@ -63,7 +63,10 @@ class _OnboardingState extends State<Onboarding> {
                 textBaseline: TextBaseline.alphabetic,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
+                    padding: const EdgeInsets.only(
+                      left: 20.0,
+                      bottom: 30.0,
+                    ),
                     child: Text(
                       'Explore Flood-Mobile',
                       style: TextStyle(
@@ -84,8 +87,11 @@ class _OnboardingState extends State<Onboarding> {
                       style: ElevatedButton.styleFrom(
                         elevation: 0,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14.0),
-                        ),
+                            borderRadius: BorderRadius.circular(14.0),
+                            side: BorderSide(
+                              width: 1.00,
+                              color: Colors.white,
+                            )),
                         primary: Color(0xff305067),
                       ),
                       child: Text(
