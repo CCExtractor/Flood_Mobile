@@ -227,6 +227,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                 .information,
                                                             'Feed deleted successfully',
                                                             'Dismiss');
+
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .clearSnackBars();
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(
@@ -637,6 +641,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         'Dismiss');
 
                                                 ScaffoldMessenger.of(context)
+                                                    .clearSnackBars();
+                                                ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                         addFeedSnackbar);
                                                 FeedsApi.listAllFeedsAndRules(
@@ -866,7 +872,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   isScrollControlled: true,
                                                   context: context,
                                                   backgroundColor: ThemeProvider
-                                                      .theme.backgroundColor,
+                                                      .theme.primaryColorLight,
                                                   builder: (context) {
                                                     return ListView(
                                                         shrinkWrap: true,
@@ -1474,6 +1480,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                 .information,
                                                             'Rule deleted successfully',
                                                             'Dismiss');
+
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .clearSnackBars();
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(
@@ -2038,6 +2048,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         'New Rule added successfully',
                                                         'Dismiss');
 
+                                                ScaffoldMessenger.of(context)
+                                                    .clearSnackBars();
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                         addRuleSnackbar);

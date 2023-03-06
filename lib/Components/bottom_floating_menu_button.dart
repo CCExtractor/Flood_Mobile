@@ -100,7 +100,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                     ),
                     isScrollControlled: true,
                     context: context,
-                    backgroundColor: ThemeProvider.theme.backgroundColor,
+                    backgroundColor: ThemeProvider.theme.primaryColorLight,
                     builder: (context) {
                       return ListView(shrinkWrap: true, children: [
                         Padding(
@@ -128,13 +128,12 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                   height: 60,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.white38),
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(8),
-                                      topLeft: Radius.circular(8),
-                                      bottomLeft: Radius.circular(8),
-                                      bottomRight: Radius.circular(8),
-                                    ),
+                                    border: Border.all(
+                                        color: ThemeProvider.themeMode ==
+                                                ThemeMode.light
+                                            ? Colors.black38
+                                            : Colors.white38),
+                                    borderRadius: BorderRadius.circular(8),
                                     color:
                                         ThemeProvider.theme.primaryColorLight,
                                   ),
@@ -322,6 +321,8 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                     'Dismiss');
 
                                             ScaffoldMessenger.of(context)
+                                                .clearSnackBars();
+                                            ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                                     addTorrentSnackbar);
                                             Navigator.pop(context);
@@ -394,7 +395,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                   ),
                   isScrollControlled: true,
                   context: context,
-                  backgroundColor: ThemeProvider.theme.backgroundColor,
+                  backgroundColor: ThemeProvider.theme.primaryColorLight,
                   builder: (context) {
                     return ListView(shrinkWrap: true, children: [
                       Padding(
@@ -609,6 +610,8 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                   'Torrent added successfully',
                                                   'Dismiss');
 
+                                          ScaffoldMessenger.of(context)
+                                              .clearSnackBars();
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(addTorrentSnackbar);
                                           Navigator.pop(context);
