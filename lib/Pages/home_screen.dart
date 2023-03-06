@@ -154,67 +154,70 @@ class _HomeScreenState extends State<HomeScreen> {
               break;
           }
           return Consumer<HomeProvider>(builder: (context, homeModel, child) {
-            return Scaffold(
-              appBar: AppBar(
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.menu,
-                    color: ThemeProvider.theme.textTheme.bodyText1?.color,
+            return WillPopScope(
+              onWillPop: onBackPressed,
+              child: Scaffold(
+                appBar: AppBar(
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.menu,
+                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                    ),
+                    onPressed: () {
+                      controller.toggle();
+                    },
                   ),
-                  onPressed: () {
-                    controller.toggle();
-                  },
-                ),
-                title: Image(
-                  key: Key('Flood Icon'),
-                  image: AssetImage(
-                    'assets/images/icon.png',
+                  title: Image(
+                    key: Key('Flood Icon'),
+                    image: AssetImage(
+                      'assets/images/icon.png',
+                    ),
+                    width: 60,
+                    height: 60,
                   ),
-                  width: 60,
-                  height: 60,
-                ),
-                centerTitle: true,
-                backgroundColor: Theme.of(context).primaryColor,
-                elevation: 0,
-                actions: [
-                  RSSFeedButtonWidget(),
-                  Badge(
-                    showBadge:
-                        homeModel.unreadNotifications == 0 ? false : true,
-                    key: Key('Badge Widget'),
-                    badgeColor: Theme.of(context).accentColor,
-                    badgeContent: Center(
-                      child: Text(
-                        homeModel.unreadNotifications.toString(),
-                        style: TextStyle(color: Colors.white),
+                  centerTitle: true,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  elevation: 0,
+                  actions: [
+                    RSSFeedButtonWidget(),
+                    Badge(
+                      showBadge:
+                          homeModel.unreadNotifications == 0 ? false : true,
+                      key: Key('Badge Widget'),
+                      badgeColor: Theme.of(context).colorScheme.secondary,
+                      badgeContent: Center(
+                        child: Text(
+                          homeModel.unreadNotifications.toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      position: BadgePosition(top: 0, end: 3),
+                      child: IconButton(
+                        key: Key('Notification button'),
+                        icon: Icon(
+                          Icons.notifications,
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                key: Key('Notification Alert Dialog'),
+                                elevation: 0,
+                                backgroundColor: Theme.of(context).primaryColor,
+                                content: notificationPopupDialogueContainer(
+                                  context: context,
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                     ),
-                    position: BadgePosition(top: 0, end: 3),
-                    child: IconButton(
-                      key: Key("Notification button"),
-                      icon: Icon(
-                        Icons.notifications,
-                      ),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              key: Key('Notification Alert Dialog'),
-                              elevation: 0,
-                              backgroundColor: Theme.of(context).primaryColor,
-                              content: notificationPopupDialogueContainer(
-                                context: context,
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ],
+                  ],
+                ),
+                body: screenCurrent,
               ),
-              body: screenCurrent,
             );
           });
         },
