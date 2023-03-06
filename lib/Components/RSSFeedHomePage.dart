@@ -80,7 +80,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
     FeedsApi.listAllFeedsAndRules(context: context);
     super.initState();
   }
-  
+
   // clearing the fields in Feeds tabs after tappping save button
   void clearFeedsFields() {
     labelController.clear();
