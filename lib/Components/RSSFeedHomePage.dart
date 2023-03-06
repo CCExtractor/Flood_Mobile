@@ -15,6 +15,7 @@ import '../Constants/theme_provider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 import '../Provider/client_provider.dart';
+import 'add_torrent_sheet.dart';
 
 class RSSFeedHomePage extends StatefulWidget {
   @override
@@ -76,10 +77,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
   @override
   Widget build(BuildContext context) {
     return Consumer<ClientSettingsProvider>(
+        key: Key("Rss feed home"),
         builder: (context, clientModel, child) {
-      return Consumer<HomeProvider>(
-          key: Key("Rss feed home"),
-          builder: (context, model, child) {
+          return Consumer<HomeProvider>(builder: (context, model, child) {
             return Container(
               height: 750,
               decoration: BoxDecoration(
@@ -239,6 +239,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                     .information,
                                                                 'Feed deleted successfully',
                                                                 'Dismiss');
+
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .clearSnackBars();
                                                         ScaffoldMessenger.of(
                                                                 context)
                                                             .showSnackBar(
@@ -671,6 +675,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
 
                                                     ScaffoldMessenger.of(
                                                             context)
+                                                        .clearSnackBars();
+                                                    ScaffoldMessenger.of(
+                                                            context)
                                                         .showSnackBar(
                                                             addFeedSnackbar);
                                                     FeedsApi
@@ -917,7 +924,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       context: context,
                                                       backgroundColor:
                                                           ThemeProvider.theme
-                                                              .backgroundColor,
+                                                              .primaryColorLight,
                                                       builder: (context) {
                                                         return ListView(
                                                             shrinkWrap: true,
@@ -1485,6 +1492,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                     .information,
                                                                 'Rule deleted successfully',
                                                                 'Dismiss');
+
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .clearSnackBars();
                                                         ScaffoldMessenger.of(
                                                                 context)
                                                             .showSnackBar(
@@ -2101,6 +2112,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
 
                                                     ScaffoldMessenger.of(
                                                             context)
+                                                        .clearSnackBars();
+                                                    ScaffoldMessenger.of(
+                                                            context)
                                                         .showSnackBar(
                                                             addRuleSnackbar);
                                                     FeedsApi
@@ -2151,7 +2165,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
               ),
             );
           });
-    });
+        });
   }
 
   String feedidgetter(String newlabel, List<FeedsAndRulesModel> newmodel) {
