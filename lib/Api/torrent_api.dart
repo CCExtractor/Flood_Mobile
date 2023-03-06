@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:dio/dio.dart';
 import 'package:flood_mobile/Model/torrent_content_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
@@ -194,6 +195,7 @@ class TorrentApi {
   }
 
   static Future<void> deleteTorrent({
+    required int id,
     required String hash,
     required bool deleteWithData,
     required BuildContext context,
@@ -222,6 +224,7 @@ class TorrentApi {
       );
       if (response.statusCode == 200) {
         print('--TORRENT DELETED--');
+        AwesomeNotifications().dismiss(id);
       } else {}
     } catch (e) {
       print('--ERROR--');
