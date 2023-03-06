@@ -57,11 +57,18 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
   bool isNewApplicableFeedSelected = false;
   bool isNewDownloadRules = false;
 
+  // editing the search term
   final searchTermController = TextEditingController();
+
+  // adding new feed
   final labelController = TextEditingController();
   final urlController = TextEditingController();
   final intervalController = TextEditingController();
+
+  // editing existing rule name c
   final existingFeedsController = TextEditingController();
+
+  // adding new rules
   final labelRulesController = TextEditingController();
   final matchpatternController = TextEditingController();
   final excludepatternController = TextEditingController();
@@ -72,6 +79,21 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
   void initState() {
     FeedsApi.listAllFeedsAndRules(context: context);
     super.initState();
+  }
+  
+  // clearing the fields in Feeds tabs after tappping save button
+  void clearFeedsFields() {
+    labelController.clear();
+    urlController.clear();
+    intervalController.clear();
+  }
+
+  void clearDownloadRulesFields() {
+    labelRulesController.clear();
+    matchpatternController.clear();
+    excludepatternController.clear();
+    destinationController.clear();
+    tagsController.clear();
   }
 
   @override
@@ -664,6 +686,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       context: context);
                                                 }
                                               });
+                                              clearFeedsFields();
                                             },
                                             style: ElevatedButton.styleFrom(
                                               elevation: 0,
@@ -2056,6 +2079,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 FeedsApi.listAllFeedsAndRules(
                                                     context: context);
                                               });
+                                              clearDownloadRulesFields();
                                             },
                                             style: ElevatedButton.styleFrom(
                                               elevation: 0,
