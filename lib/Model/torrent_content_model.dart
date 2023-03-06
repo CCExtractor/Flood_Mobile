@@ -32,7 +32,11 @@ class TorrentContentModel {
       depth: json['path'].split('/').length,
       parentPath: json['path'].split('/'),
       isMediaFile: (json['filename'].split('.').last == 'mp3' ||
-          json['filename'].split('.').last == 'mp4'),
+          json['filename'].split('.').last == 'wav' ||
+          json['filename'].split('.').last == 'mp4' ||
+          json['filename'].split('.').last == 'mkv' ||
+          json['filename'].split('.').last == 'mov' ||
+          json['filename'].split('.').last == 'webm'),
     );
   }
 }

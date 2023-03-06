@@ -130,7 +130,12 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
           },
           onTap: () {
             String fileType = widget.model.filename.split('.').last;
-            if (fileType == 'mp4') {
+            if (fileType == 'mp4' ||
+                fileType == 'mkv' ||
+                fileType == 'webm' ||
+                fileType == 'mov' ||
+                fileType == 'mp3' ||
+                fileType == 'wav') {
               Navigator.of(context).pushNamed(
                 Routes.streamVideoScreenRoute,
                 arguments: VideoStreamScreenArguments(

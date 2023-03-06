@@ -8,12 +8,15 @@ import 'package:flood_mobile/Route/Arguments/torrent_content_page_arguments.dart
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flood_mobile/Services/date_converter.dart';
 import 'package:flood_mobile/Services/file_size_helper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+
+import 'flood_snackbar.dart';
 
 class TorrentTile extends StatefulWidget {
   final TorrentModel model;
@@ -49,6 +52,7 @@ class _TorrentTileState extends State<TorrentTile> {
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
+    double wp = MediaQuery.of(context).size.width;
     return Slidable(
       actionPane: SlidableBehindActionPane(),
       actionExtentRatio: 0.25,
@@ -88,9 +92,24 @@ class _TorrentTileState extends State<TorrentTile> {
                 Icons.tag,
                 color: Colors.black,
               ),
-              onPressed: () {
-                TorrentApi.checkTorrentHash(
+              onPressed: () async {
+                var result = await TorrentApi.checkTorrentHash(
                     hashes: [widget.model.hash], context: context);
+                if (result) {
+                  if (kDebugMode) print("check hash performed successfully");
+                  final addTorrentSnackbar = addFloodSnackBar(
+                      SnackbarType.success, 'Hash check successful', 'Dismiss');
+
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(addTorrentSnackbar);
+                } else {
+                  if (kDebugMode) print("Error check hash failed");
+                  final addTorrentSnackbar = addFloodSnackBar(
+                      SnackbarType.caution, 'Torrent hash failed', 'Dismiss');
+
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(addTorrentSnackbar);
+                }
               },
             ),
             FocusedMenuItem(
@@ -315,7 +334,12 @@ class _TorrentTileState extends State<TorrentTile> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('Location'),
-                          Text(widget.model.directory),
+                          Flexible(
+                            child: Container(
+                              padding: EdgeInsets.only(left: wp * 0.1),
+                              child: Text(widget.model.directory),
+                            ),
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -327,9 +351,14 @@ class _TorrentTileState extends State<TorrentTile> {
                           Text(
                             'Tags',
                           ),
-                          Text((widget.model.tags.length != 0)
-                              ? widget.model.tags.toString()
-                              : 'None'),
+                          Flexible(
+                            child: Container(
+                              padding: EdgeInsets.only(left: wp * 0.17),
+                              child: Text((widget.model.tags.length != 0)
+                                  ? widget.model.tags.toString()
+                                  : 'None'),
+                            ),
+                          ),
                         ],
                       ),
                       SizedBox(

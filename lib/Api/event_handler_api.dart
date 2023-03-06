@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 import '../Constants/notification_keys.dart';
 import '../Provider/filter_provider.dart';
 
-String torrentLength = '';
+String torrentLength = '0';
 
 class EventHandlerApi {
   //Sets the transfer rate if the event returned is TRANSFER_SUMMARY_FULL_UPDATE
@@ -196,37 +196,34 @@ class EventHandlerApi {
 
   static Future<void> filterDataRephrasor(
       List<TorrentModel> torrentList, context) async {
+    FilterProvider filterProvider =
+        Provider.of<FilterProvider>(context, listen: false);
     var maptrackerURIs = {};
     var mapStatus = {};
     List<String> statusList = [];
     torrentLength = torrentList.length.toString();
+    filterProvider.trackerURIsListMain = [];
     try {
       for (int i = 0; i < torrentList.length; i++) {
         for (int j = 0; j < torrentList[i].trackerURIs.length; j++) {
-          Provider.of<FilterProvider>(context, listen: false)
-              .trackerURIsListMain
+          filterProvider.trackerURIsListMain
               .add(torrentList[i].trackerURIs[j].toString());
-          Provider.of<FilterProvider>(context, listen: false)
-              .settrackerURIsListMain(
-                  Provider.of<FilterProvider>(context, listen: false)
-                      .trackerURIsListMain);
+          filterProvider
+              .settrackerURIsListMain(filterProvider.trackerURIsListMain);
         }
       }
     } catch (e) {
       print(e);
     }
     try {
-      Provider.of<FilterProvider>(context, listen: false)
-          .trackerURIsListMain
-          .forEach((element) {
+      filterProvider.trackerURIsListMain.forEach((element) {
         if (!maptrackerURIs.containsKey(element)) {
           maptrackerURIs[element] = 1;
         } else {
           maptrackerURIs[element] += 1;
         }
       });
-      Provider.of<FilterProvider>(context, listen: false)
-          .setmaptrackerURIs(maptrackerURIs);
+      filterProvider.setmaptrackerURIs(maptrackerURIs);
     } catch (e) {
       print(e);
     }
@@ -236,8 +233,7 @@ class EventHandlerApi {
           statusList.add(torrentList[i].status[j].toString());
         }
       }
-      Provider.of<FilterProvider>(context, listen: false)
-          .setstatusList(statusList);
+      filterProvider.setstatusList(statusList);
     } catch (e) {
       print(e);
     }
@@ -250,8 +246,7 @@ class EventHandlerApi {
           mapStatus[element] += 1;
         }
       });
-      Provider.of<FilterProvider>(context, listen: false)
-          .setmapStatus(mapStatus);
+      filterProvider.setmapStatus(mapStatus);
     } catch (error) {
       print(error);
     }
