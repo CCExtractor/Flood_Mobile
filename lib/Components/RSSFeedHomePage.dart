@@ -120,186 +120,201 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                         ),
                       ),
                       (model.RssFeedsList.isNotEmpty)
-                          ? Container(
-                              key: Key("Feeds are fetched"),
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white38),
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(8),
-                                  topLeft: Radius.circular(8),
-                                  bottomLeft: Radius.circular(8),
-                                  bottomRight: Radius.circular(8),
+                          ? InputDecorator(
+                            decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(1),
+                                fillColor:
+                                    ThemeProvider.theme.primaryColorLight,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(8),
+                                    topLeft: Radius.circular(8),
+                                    bottomLeft: Radius.circular(8),
+                                    bottomRight: Radius.circular(8),
+                                  ),
                                 ),
-                                color: ThemeProvider.theme.primaryColorLight,
                               ),
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: ClampingScrollPhysics(),
-                                itemCount: model.RssFeedsList.length,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      ListTile(
-                                        key: Key("Feed displayed"),
-                                        minLeadingWidth: 0.1,
-                                        minVerticalPadding: 0.1,
-                                        horizontalTitleGap: 0.1,
-                                        visualDensity: VisualDensity(
-                                            horizontal: -3, vertical: -3),
-                                        title: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Expanded(
-                                              child: Row(
-                                                children: [
-                                                  Flexible(
-                                                    child: Text(model
-                                                        .RssFeedsList[index]
-                                                        .label
-                                                        .toString()),
-                                                  ),
-                                                  SizedBox(width: 10),
-                                                  Text(model.RssFeedsList[index]
-                                                              .count !=
-                                                          null
-                                                      ? model
-                                                              .RssFeedsList[
-                                                                  index]
-                                                              .count
-                                                              .toString() +
-                                                          " matches"
-                                                      : "0 matches"),
-                                                ],
-                                              ),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  width: 30,
-                                                  child: IconButton(
-                                                    icon: Icon(Icons.edit,
-                                                        size: 18),
-                                                    onPressed: () {
-                                                      isNewSelected = true;
-                                                      isUpdateFeedSelected =
-                                                          true;
-                                                      updateFeedId = model
+                            child: Container(
+                                key: Key("Feeds are fetched"),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white38),
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(8),
+                                    topLeft: Radius.circular(8),
+                                    bottomLeft: Radius.circular(8),
+                                    bottomRight: Radius.circular(8),
+                                  ),
+                                  color: ThemeProvider.theme.primaryColorLight,
+                                ),
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: ClampingScrollPhysics(),
+                                  itemCount: model.RssFeedsList.length,
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      children: [
+                                        ListTile(
+                                          key: Key("Feed displayed"),
+                                          minLeadingWidth: 0.1,
+                                          minVerticalPadding: 0.1,
+                                          horizontalTitleGap: 0.1,
+                                          visualDensity: VisualDensity(
+                                              horizontal: -3, vertical: -3),
+                                          title: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Expanded(
+                                                child: Row(
+                                                  children: [
+                                                    Flexible(
+                                                      child: Text(model
                                                           .RssFeedsList[index]
-                                                          .id
-                                                          .toString();
-                                                      urlController.text = model
-                                                          .RssFeedsList[index]
-                                                          .url
-                                                          .toString();
-                                                      labelController.text =
-                                                          model
-                                                              .RssFeedsList[
-                                                                  index]
-                                                              .label
-                                                              .toString();
-                                                      intervalController.text =
-                                                          model
-                                                              .RssFeedsList[
-                                                                  index]
-                                                              .interval
-                                                              .toString();
-                                                    },
-                                                  ),
-                                                ),
-                                                IconButton(
-                                                  icon: Icon(Icons.delete,
-                                                      size: 18),
-                                                  onPressed: () {
-                                                    DeleteFeedOrRulesApi
-                                                        .deleteFeedsOrRules(
-                                                            context: context,
-                                                            id: model
+                                                          .label
+                                                          .toString()),
+                                                    ),
+                                                    SizedBox(width: 10),
+                                                    Text(model.RssFeedsList[index]
+                                                                .count !=
+                                                            null
+                                                        ? model
                                                                 .RssFeedsList[
                                                                     index]
-                                                                .id
-                                                                .toString());
-                                                    FeedsApi
-                                                        .listAllFeedsAndRules(
-                                                            context: context);
-                                                    final deleteFeedSnackbar =
-                                                        addFloodSnackBar(
-                                                            SnackbarType
-                                                                .information,
-                                                            'Feed deleted successfully',
-                                                            'Dismiss');
-
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .clearSnackBars();
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      deleteFeedSnackbar,
-                                                    );
-                                                  },
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        subtitle: Row(children: [
-                                          Text(model.RssFeedsList[index].interval! / 60 > 24 &&
-                                                  (model.RssFeedsList[index].interval! / 60)
-                                                          .toString()
-                                                          .split('.')[1] ==
-                                                      "0"
-                                              ? (((model.RssFeedsList[index].interval! / 60) / 24)
-                                                      .toString()
-                                                      .split('.')[0] +
-                                                  ' Days')
-                                              : model.RssFeedsList[index].interval! / 60 < 24 &&
-                                                      model.RssFeedsList[index].interval! / 60 >
-                                                          1 &&
-                                                      (model.RssFeedsList[index].interval! / 60)
-                                                              .toString()
-                                                              .split('.')[1] ==
-                                                          "0"
-                                                  ? ((model.RssFeedsList[index].interval! / 60))
-                                                          .toString()
-                                                          .split('.')[0] +
-                                                      ' Hours'
-                                                  : model.RssFeedsList[index]
-                                                          .interval
-                                                          .toString() +
-                                                      ' Minutes'),
-                                          SizedBox(width: 10),
-                                          Text(model.RssFeedsList[index].url
-                                                      .toString()
-                                                      .length >
-                                                  25
-                                              ? model.RssFeedsList[index].url
-                                                      .toString()
-                                                      .substring(0, 25) +
-                                                  '...'
-                                              : model.RssFeedsList[index].url
-                                                  .toString()),
-                                        ]),
-                                      ),
-                                      (index < model.RssFeedsList.length - 1)
-                                          ? Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 8.0),
-                                              child: Container(
-                                                height: 1,
-                                                width: double.infinity,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white12,
+                                                                .count
+                                                                .toString() +
+                                                            " matches"
+                                                        : "0 matches"),
+                                                  ],
                                                 ),
                                               ),
-                                            )
-                                          : Container(
-                                              height: 8,
-                                            ),
-                                    ],
-                                  );
-                                },
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    width: 30,
+                                                    child: IconButton(
+                                                      icon: Icon(Icons.edit,
+                                                          size: 18),
+                                                      onPressed: () {
+                                                        isNewSelected = true;
+                                                        isUpdateFeedSelected =
+                                                            true;
+                                                        updateFeedId = model
+                                                            .RssFeedsList[index]
+                                                            .id
+                                                            .toString();
+                                                        urlController.text = model
+                                                            .RssFeedsList[index]
+                                                            .url
+                                                            .toString();
+                                                        labelController.text =
+                                                            model
+                                                                .RssFeedsList[
+                                                                    index]
+                                                                .label
+                                                                .toString();
+                                                        intervalController.text =
+                                                            model
+                                                                .RssFeedsList[
+                                                                    index]
+                                                                .interval
+                                                                .toString();
+                                                      },
+                                                    ),
+                                                  ),
+                                                  IconButton(
+                                                    icon: Icon(Icons.delete,
+                                                        size: 18),
+                                                    onPressed: () {
+                                                      DeleteFeedOrRulesApi
+                                                          .deleteFeedsOrRules(
+                                                              context: context,
+                                                              id: model
+                                                                  .RssFeedsList[
+                                                                      index]
+                                                                  .id
+                                                                  .toString());
+                                                      FeedsApi
+                                                          .listAllFeedsAndRules(
+                                                              context: context);
+                                                      final deleteFeedSnackbar =
+                                                          addFloodSnackBar(
+                                                              SnackbarType
+                                                                  .information,
+                                                              'Feed deleted successfully',
+                                                              'Dismiss');
+                          
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .clearSnackBars();
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        deleteFeedSnackbar,
+                                                      );
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          subtitle: Row(children: [
+                                            Text(model.RssFeedsList[index].interval! / 60 > 24 &&
+                                                    (model.RssFeedsList[index].interval! / 60)
+                                                            .toString()
+                                                            .split('.')[1] ==
+                                                        "0"
+                                                ? (((model.RssFeedsList[index].interval! / 60) / 24)
+                                                        .toString()
+                                                        .split('.')[0] +
+                                                    ' Days')
+                                                : model.RssFeedsList[index].interval! / 60 < 24 &&
+                                                        model.RssFeedsList[index].interval! / 60 >
+                                                            1 &&
+                                                        (model.RssFeedsList[index].interval! / 60)
+                                                                .toString()
+                                                                .split('.')[1] ==
+                                                            "0"
+                                                    ? ((model.RssFeedsList[index].interval! / 60))
+                                                            .toString()
+                                                            .split('.')[0] +
+                                                        ' Hours'
+                                                    : model.RssFeedsList[index]
+                                                            .interval
+                                                            .toString() +
+                                                        ' Minutes'),
+                                            SizedBox(width: 10),
+                                            Text(model.RssFeedsList[index].url
+                                                        .toString()
+                                                        .length >
+                                                    25
+                                                ? model.RssFeedsList[index].url
+                                                        .toString()
+                                                        .substring(0, 25) +
+                                                    '...'
+                                                : model.RssFeedsList[index].url
+                                                    .toString()),
+                                          ]),
+                                        ),
+                                        (index < model.RssFeedsList.length - 1)
+                                            ? Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 8.0),
+                                                child: Container(
+                                                  height: 1,
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white12,
+                                                  ),
+                                                ),
+                                              )
+                                            : Container(
+                                                height: 8,
+                                              ),
+                                      ],
+                                    );
+                                  },
+                                ),
                               ),
-                            )
+                          )
                           : Container(
                               key:
                                   Key('No existing feeds displaying container'),
@@ -1311,143 +1326,162 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                         ),
                       ),
                       (model.RssRulesList.isNotEmpty)
-                          ? Container(
-                              key: Key("Rules Displayed"),
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white38),
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(8),
-                                  topLeft: Radius.circular(8),
-                                  bottomLeft: Radius.circular(8),
-                                  bottomRight: Radius.circular(8),
+                          ? InputDecorator(
+                            decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(1),
+                                fillColor:
+                                    ThemeProvider.theme.primaryColorLight,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(8),
+                                    topLeft: Radius.circular(8),
+                                    bottomLeft: Radius.circular(8),
+                                    bottomRight: Radius.circular(8),
+                                  ),
                                 ),
-                                color: ThemeProvider.theme.primaryColorLight,
                               ),
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: ClampingScrollPhysics(),
-                                itemCount: model.RssRulesList.length,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      ListTile(
-                                        minLeadingWidth: 0.1,
-                                        minVerticalPadding: 0.1,
-                                        horizontalTitleGap: 0.1,
-                                        visualDensity: VisualDensity(
-                                            horizontal: -0.1, vertical: -0.1),
-                                        title: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Expanded(
-                                              child: Row(
-                                                children: [
-                                                  Flexible(
-                                                    child: Text(model
-                                                        .RssRulesList[index]
-                                                        .label
-                                                        .toString()),
-                                                  ),
-                                                  SizedBox(width: 10),
-                                                  Text(model.RssRulesList[index]
-                                                              .count !=
-                                                          null
-                                                      ? model
-                                                              .RssRulesList[
-                                                                  index]
-                                                              .count
-                                                              .toString() +
-                                                          " matches"
-                                                      : "0 matches"),
-                                                  SizedBox(width: 10),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                        topRight:
-                                                            Radius.circular(12),
-                                                        topLeft:
-                                                            Radius.circular(12),
-                                                        bottomLeft:
-                                                            Radius.circular(12),
-                                                        bottomRight:
-                                                            Radius.circular(12),
-                                                      ),
-                                                      color: ThemeProvider
-                                                          .theme.primaryColor,
+                            child: Container(
+                                key: Key("Rules Displayed"),
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: ClampingScrollPhysics(),
+                                  itemCount: model.RssRulesList.length,
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      children: [
+                                        ListTile(
+                                          minLeadingWidth: 0.1,
+                                          minVerticalPadding: 0.1,
+                                          horizontalTitleGap: 0.1,
+                                          visualDensity: VisualDensity(
+                                              horizontal: -0.1, vertical: -0.1),
+                                          title: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Expanded(
+                                                child: Row(
+                                                  children: [
+                                                    Flexible(
+                                                      child: Text(model
+                                                          .RssRulesList[index]
+                                                          .label
+                                                          .toString()),
                                                     ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              5.0),
-                                                      child: Text(
-                                                        "Tags: " +
+                                                    SizedBox(width: 10),
+                                                    Text(model.RssRulesList[index]
+                                                                .count !=
+                                                            null
+                                                        ? model
+                                                                .RssRulesList[
+                                                                    index]
+                                                                .count
+                                                                .toString() +
+                                                            " matches"
+                                                        : "0 matches"),
+                                                    SizedBox(width: 10),
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(12),
+                                                          topLeft:
+                                                              Radius.circular(12),
+                                                          bottomLeft:
+                                                              Radius.circular(12),
+                                                          bottomRight:
+                                                              Radius.circular(12),
+                                                        ),
+                                                        color: ThemeProvider
+                                                            .theme.primaryColor,
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets.all(
+                                                                5.0),
+                                                        child: Text(
+                                                          "Tags: " +
+                                                              model
+                                                                  .RssRulesList[
+                                                                      index]
+                                                                  .tags[0]
+                                                                  .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 12),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Container(
+                                                    width: 30,
+                                                    child: IconButton(
+                                                      icon: Icon(Icons.edit,
+                                                          size: 18),
+                                                      onPressed: () {
+                                                        isNewDownloadRules = true;
+                                                        isUpdatedRuleSelected =
+                                                            true;
+                                                        labelRulesController
+                                                                .text =
+                                                            model
+                                                                .RssRulesList[
+                                                                    index]
+                                                                .label
+                                                                .toString();
+                                                        matchpatternController
+                                                                .text =
+                                                            model
+                                                                .RssRulesList[
+                                                                    index]
+                                                                .match
+                                                                .toString();
+                                                        excludepatternController
+                                                                .text =
+                                                            model
+                                                                .RssRulesList[
+                                                                    index]
+                                                                .exclude
+                                                                .toString();
+                                                        destinationController
+                                                                .text =
+                                                            model
+                                                                .RssRulesList[
+                                                                    index]
+                                                                .destination
+                                                                .toString();
+                                                        tagsController.text =
                                                             model
                                                                 .RssRulesList[
                                                                     index]
                                                                 .tags[0]
-                                                                .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 12),
-                                                      ),
+                                                                .toString();
+                                                        useAsBasePath = model
+                                                            .RssRulesList[index]
+                                                            .isBasePath;
+                                                        startOnLoad = model
+                                                            .RssRulesList[index]
+                                                            .startOnLoad;
+                                                        DeleteFeedOrRulesApi
+                                                            .deleteFeedsOrRules(
+                                                                context: context,
+                                                                id: model
+                                                                    .RssRulesList[
+                                                                        index]
+                                                                    .id
+                                                                    .toString());
+                                                      },
                                                     ),
                                                   ),
-                                                ],
-                                              ),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Container(
-                                                  width: 30,
-                                                  child: IconButton(
-                                                    icon: Icon(Icons.edit,
+                                                  IconButton(
+                                                    icon: Icon(Icons.delete,
                                                         size: 18),
                                                     onPressed: () {
-                                                      isNewDownloadRules = true;
-                                                      isUpdatedRuleSelected =
-                                                          true;
-                                                      labelRulesController
-                                                              .text =
-                                                          model
-                                                              .RssRulesList[
-                                                                  index]
-                                                              .label
-                                                              .toString();
-                                                      matchpatternController
-                                                              .text =
-                                                          model
-                                                              .RssRulesList[
-                                                                  index]
-                                                              .match
-                                                              .toString();
-                                                      excludepatternController
-                                                              .text =
-                                                          model
-                                                              .RssRulesList[
-                                                                  index]
-                                                              .exclude
-                                                              .toString();
-                                                      destinationController
-                                                              .text =
-                                                          model
-                                                              .RssRulesList[
-                                                                  index]
-                                                              .destination
-                                                              .toString();
-                                                      tagsController.text =
-                                                          model
-                                                              .RssRulesList[
-                                                                  index]
-                                                              .tags[0]
-                                                              .toString();
-                                                      useAsBasePath = model
-                                                          .RssRulesList[index]
-                                                          .isBasePath;
-                                                      startOnLoad = model
-                                                          .RssRulesList[index]
-                                                          .startOnLoad;
                                                       DeleteFeedOrRulesApi
                                                           .deleteFeedsOrRules(
                                                               context: context,
@@ -1456,97 +1490,83 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                       index]
                                                                   .id
                                                                   .toString());
+                                                      FeedsApi
+                                                          .listAllFeedsAndRules(
+                                                              context: context);
+                                                      final deleteRuleSnackbar =
+                                                          addFloodSnackBar(
+                                                              SnackbarType
+                                                                  .information,
+                                                              'Rule deleted successfully',
+                                                              'Dismiss');
+                          
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .clearSnackBars();
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        deleteRuleSnackbar,
+                                                      );
                                                     },
                                                   ),
-                                                ),
-                                                IconButton(
-                                                  icon: Icon(Icons.delete,
-                                                      size: 18),
-                                                  onPressed: () {
-                                                    DeleteFeedOrRulesApi
-                                                        .deleteFeedsOrRules(
-                                                            context: context,
-                                                            id: model
-                                                                .RssRulesList[
-                                                                    index]
-                                                                .id
-                                                                .toString());
-                                                    FeedsApi
-                                                        .listAllFeedsAndRules(
-                                                            context: context);
-                                                    final deleteRuleSnackbar =
-                                                        addFloodSnackBar(
-                                                            SnackbarType
-                                                                .information,
-                                                            'Rule deleted successfully',
-                                                            'Dismiss');
-
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .clearSnackBars();
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      deleteRuleSnackbar,
-                                                    );
-                                                  },
-                                                ),
-                                              ],
-                                            )
-                                          ],
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                          subtitle: Row(children: [
+                                            Text(model.RssRulesList[index].match
+                                                        .toString()
+                                                        .length >
+                                                    10
+                                                ? "Match: " +
+                                                    model
+                                                        .RssRulesList[index].match
+                                                        .toString()
+                                                        .substring(0, 10) +
+                                                    "..."
+                                                : "Match: " +
+                                                    model
+                                                        .RssRulesList[index].match
+                                                        .toString()),
+                                            SizedBox(width: 10),
+                                            Text(model.RssRulesList[index].exclude
+                                                        .toString()
+                                                        .length >
+                                                    10
+                                                ? "Exclude: " +
+                                                    model.RssRulesList[index]
+                                                        .exclude
+                                                        .toString()
+                                                        .substring(0, 10) +
+                                                    '...'
+                                                : "Exclude: " +
+                                                    model.RssRulesList[index]
+                                                        .exclude
+                                                        .toString()),
+                                          ]),
                                         ),
-                                        subtitle: Row(children: [
-                                          Text(model.RssRulesList[index].match
-                                                      .toString()
-                                                      .length >
-                                                  10
-                                              ? "Match: " +
-                                                  model
-                                                      .RssRulesList[index].match
-                                                      .toString()
-                                                      .substring(0, 10) +
-                                                  "..."
-                                              : "Match: " +
-                                                  model
-                                                      .RssRulesList[index].match
-                                                      .toString()),
-                                          SizedBox(width: 10),
-                                          Text(model.RssRulesList[index].exclude
-                                                      .toString()
-                                                      .length >
-                                                  10
-                                              ? "Exclude: " +
-                                                  model.RssRulesList[index]
-                                                      .exclude
-                                                      .toString()
-                                                      .substring(0, 10) +
-                                                  '...'
-                                              : "Exclude: " +
-                                                  model.RssRulesList[index]
-                                                      .exclude
-                                                      .toString()),
-                                        ]),
-                                      ),
-                                      (index < model.RssRulesList.length - 1)
-                                          ? Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 8.0),
-                                              child: Container(
-                                                height: 1,
-                                                width: double.infinity,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white12,
+                                        (index < model.RssRulesList.length - 1)
+                                            ? Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 8.0),
+                                                child: Container(
+                                                  height: 1,
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white12,
+                                                  ),
                                                 ),
+                                              )
+                                            : Container(
+                                                height: 8,
                                               ),
-                                            )
-                                          : Container(
-                                              height: 8,
-                                            ),
-                                    ],
-                                  );
-                                },
+                                      ],
+                                    );
+                                  },
+                                ),
                               ),
-                            )
+                          )
                           : Container(
                               key: Key('No rules defined'),
                               height: 60,
