@@ -1,3 +1,4 @@
+import 'package:flood_mobile/Api/event_handler_api.dart';
 import 'package:flood_mobile/Components/add_torrent_sheet.dart';
 import 'package:flood_mobile/Components/filter_by_status.dart';
 import 'package:flood_mobile/Components/bottom_floating_menu_button.dart';
@@ -27,6 +28,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
     double hp = MediaQuery.of(context).size.height;
     double wp = MediaQuery.of(context).size.width;
     return Consumer<HomeProvider>(builder: (context, model, child) {
+      EventHandlerApi.filterDataRephrasor(model.torrentList, context);
       return Consumer<ClientSettingsProvider>(
           builder: (context, clientModel, child) {
         return Consumer<FilterProvider>(builder: (context, filterModel, child) {
@@ -109,15 +111,15 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                         children: [
                                           Icon(
                                             Icons.arrow_downward_rounded,
-                                            color:
-                                                ThemeProvider.theme.accentColor,
+                                            color: ThemeProvider
+                                                .theme.colorScheme.secondary,
                                             size: 25,
                                           ),
                                           Text(
                                             model.downSpeed,
                                             style: TextStyle(
                                               color: ThemeProvider
-                                                  .theme.accentColor,
+                                                  .theme.colorScheme.secondary,
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -203,7 +205,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                               isScrollControlled: true,
                                               context: context,
                                               backgroundColor: ThemeProvider
-                                                  .theme.backgroundColor,
+                                                  .theme.colorScheme.background,
                                               builder: (context) {
                                                 return FilterByStatus();
                                               },

@@ -9,6 +9,7 @@ import 'package:flood_mobile/Components/add_automatic_torrent.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
+import 'package:flood_mobile/Components/toast_component.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Pages/about_screen.dart';
 import 'package:flood_mobile/Pages/settings_screen.dart';
@@ -20,6 +21,7 @@ import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
@@ -45,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   File? _file;
   late String base64;
   late String directoryDefault;
+  DateTime timeBackPressed = DateTime.now();
 
   @override
   void initState() {
@@ -91,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           isScrollControlled: true,
           context: context,
-          backgroundColor: ThemeProvider.theme.backgroundColor,
+          backgroundColor: ThemeProvider.theme.primaryColorLight,
           builder: (context) {
             return AddAutoTorrent(
                 base64: base64, imageBytes: imageBytes, uriString: uriString);
@@ -107,6 +110,20 @@ class _HomeScreenState extends State<HomeScreen> {
     } on Exception catch (e) {
       print('Something went wrong. Please try again');
       print(e.toString());
+    }
+  }
+
+  Future<bool> onBackPressed() async {
+    final differnce = DateTime.now().difference(timeBackPressed);
+    final isExitWarning = differnce >= Duration(seconds: 2);
+    timeBackPressed = DateTime.now();
+
+    if (isExitWarning) {
+      Toasts.showExitWarningToast(msg: 'Press back button again to exit');
+      return false;
+    } else {
+      Fluttertoast.cancel();
+      return true;
     }
   }
 
@@ -137,22 +154,28 @@ class _HomeScreenState extends State<HomeScreen> {
               break;
           }
           return Consumer<HomeProvider>(builder: (context, homeModel, child) {
-            return Scaffold(
-              appBar: AppBar(
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.menu,
-                    color: ThemeProvider.theme.textTheme.bodyText1?.color,
+            return WillPopScope(
+              onWillPop: onBackPressed,
+              child: Scaffold(
+                appBar: AppBar(
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.menu,
+                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                    ),
+                    onPressed: () {
+                      controller.toggle();
+                    },
                   ),
-                  onPressed: () {
-                    controller.toggle();
-                  },
-                ),
-                title: Image(
-                  key: Key('Flood Icon'),
-                  image: AssetImage(
-                    'assets/images/icon.png',
+                  title: Image(
+                    key: Key('Flood Icon'),
+                    image: AssetImage(
+                      'assets/images/icon.png',
+                    ),
+                    width: 60,
+                    height: 60,
                   ),
+
                   width: 60,
                   height: 60,
                 ),
@@ -177,26 +200,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       icon: Icon(
                         Icons.notifications,
                       ),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              key: Key('Notification Alert Dialog'),
-                              elevation: 0,
-                              backgroundColor: Theme.of(context).primaryColor,
-                              content: notificationPopupDialogueContainer(
-                                context: context,
-                              ),
-                            );
-                          },
-                        );
-                      },
                     ),
-                  ),
-                ],
+                  ],
+                ),
+                body: screenCurrent,
               ),
-              body: screenCurrent,
             );
           });
         },
