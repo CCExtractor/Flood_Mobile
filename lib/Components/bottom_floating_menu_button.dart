@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../Api/torrent_api.dart';
 import '../Constants/theme_provider.dart';
 import '../Provider/client_provider.dart';
+import 'flood_snackbar.dart';
 
 class BottomFloatingMenuButton extends StatefulWidget {
   @override
@@ -219,65 +220,78 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      CheckboxListTile(
-                                        activeColor: ThemeProvider
-                                            .theme.primaryColorDark,
-                                        tileColor: ThemeProvider
-                                            .theme.primaryColorLight,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                      StatefulBuilder(
+                                        builder: (BuildContext context,
+                                                StateSetter _setState) =>
+                                            CheckboxListTile(
+                                          activeColor: ThemeProvider
+                                              .theme.primaryColorDark,
+                                          tileColor: ThemeProvider
+                                              .theme.primaryColorLight,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          title: Text(
+                                            'Use as Base Path',
+                                            style: TextStyle(fontSize: 14),
+                                          ),
+                                          value: useAdBasePath,
+                                          onChanged: (bool? value) {
+                                            _setState(() {
+                                              useAdBasePath = value ?? false;
+                                            });
+                                          },
                                         ),
-                                        title: Text(
-                                          'Use as Base Path',
-                                          style: TextStyle(fontSize: 14),
-                                        ),
-                                        value: useAdBasePath,
-                                        onChanged: (bool? value) {
-                                          setState(() {
-                                            useAdBasePath = value ?? false;
-                                          });
-                                        },
                                       ),
-                                      CheckboxListTile(
-                                        activeColor: ThemeProvider
-                                            .theme.primaryColorDark,
-                                        tileColor: ThemeProvider
-                                            .theme.primaryColorLight,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                      StatefulBuilder(
+                                        builder: (BuildContext context,
+                                                StateSetter _setState) =>
+                                            CheckboxListTile(
+                                          activeColor: ThemeProvider
+                                              .theme.primaryColorDark,
+                                          tileColor: ThemeProvider
+                                              .theme.primaryColorLight,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          title: Text(
+                                            'Sequential Download',
+                                            style: TextStyle(fontSize: 14),
+                                          ),
+                                          value: sequentialDownload,
+                                          onChanged: (bool? value) {
+                                            _setState(() {
+                                              sequentialDownload =
+                                                  value ?? false;
+                                            });
+                                          },
                                         ),
-                                        title: Text(
-                                          'Sequential Download',
-                                          style: TextStyle(fontSize: 14),
-                                        ),
-                                        value: sequentialDownload,
-                                        onChanged: (bool? value) {
-                                          setState(() {
-                                            sequentialDownload = value ?? false;
-                                          });
-                                        },
                                       ),
-                                      CheckboxListTile(
-                                        activeColor: ThemeProvider
-                                            .theme.primaryColorDark,
-                                        tileColor: ThemeProvider
-                                            .theme.primaryColorLight,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                      StatefulBuilder(
+                                        builder: (BuildContext context,
+                                                StateSetter _setState) =>
+                                            CheckboxListTile(
+                                          activeColor: ThemeProvider
+                                              .theme.primaryColorDark,
+                                          tileColor: ThemeProvider
+                                              .theme.primaryColorLight,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          title: Text(
+                                            'Completed',
+                                            style: TextStyle(fontSize: 14),
+                                          ),
+                                          value: completed,
+                                          onChanged: (bool? value) {
+                                            _setState(() {
+                                              completed = value ?? false;
+                                            });
+                                          },
                                         ),
-                                        title: Text(
-                                          'Completed',
-                                          style: TextStyle(fontSize: 14),
-                                        ),
-                                        value: completed,
-                                        onChanged: (bool? value) {
-                                          setState(() {
-                                            completed = value ?? false;
-                                          });
-                                        },
                                       ),
                                       SizedBox(
                                         height: 15,
@@ -301,6 +315,17 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                     sequentialDownload,
                                                 isCompleted: completed,
                                                 context: context);
+                                            final addTorrentSnackbar =
+                                                addFloodSnackBar(
+                                                    SnackbarType.information,
+                                                    'Torrent added successfully',
+                                                    'Dismiss');
+
+                                            ScaffoldMessenger.of(context)
+                                                .clearSnackBars();
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                                    addTorrentSnackbar);
                                             Navigator.pop(context);
                                           },
                                           style: ElevatedButton.styleFrom(
@@ -486,62 +511,77 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                     SizedBox(
                                       height: 20,
                                     ),
-                                    CheckboxListTile(
-                                      activeColor:
-                                          ThemeProvider.theme.primaryColorDark,
-                                      tileColor:
-                                          ThemeProvider.theme.primaryColorLight,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
+                                    StatefulBuilder(
+                                      builder: (BuildContext context,
+                                              StateSetter _setState) =>
+                                          CheckboxListTile(
+                                        activeColor: ThemeProvider
+                                            .theme.primaryColorDark,
+                                        tileColor: ThemeProvider
+                                            .theme.primaryColorLight,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        title: Text(
+                                          'Use as Base Path',
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                        value: useAdBasePath,
+                                        onChanged: (bool? value) {
+                                          _setState(() {
+                                            useAdBasePath = value ?? false;
+                                          });
+                                        },
                                       ),
-                                      title: Text(
-                                        'Use as Base Path',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                      value: useAdBasePath,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          useAdBasePath = value ?? false;
-                                        });
-                                      },
                                     ),
-                                    CheckboxListTile(
-                                      activeColor:
-                                          ThemeProvider.theme.primaryColorDark,
-                                      tileColor:
-                                          ThemeProvider.theme.primaryColorLight,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
+                                    StatefulBuilder(
+                                      builder: (BuildContext context,
+                                              StateSetter _setState) =>
+                                          CheckboxListTile(
+                                        activeColor: ThemeProvider
+                                            .theme.primaryColorDark,
+                                        tileColor: ThemeProvider
+                                            .theme.primaryColorLight,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        title: Text(
+                                          'Sequential Download',
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                        value: sequentialDownload,
+                                        onChanged: (bool? value) {
+                                          _setState(() {
+                                            sequentialDownload = value ?? false;
+                                          });
+                                        },
                                       ),
-                                      title: Text(
-                                        'Sequential Download',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                      value: sequentialDownload,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          sequentialDownload = value ?? false;
-                                        });
-                                      },
                                     ),
-                                    CheckboxListTile(
-                                      activeColor:
-                                          ThemeProvider.theme.primaryColorDark,
-                                      tileColor:
-                                          ThemeProvider.theme.primaryColorLight,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
+                                    StatefulBuilder(
+                                      builder: (BuildContext context,
+                                              StateSetter _setState) =>
+                                          CheckboxListTile(
+                                        activeColor: ThemeProvider
+                                            .theme.primaryColorDark,
+                                        tileColor: ThemeProvider
+                                            .theme.primaryColorLight,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        title: Text(
+                                          'Completed',
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                        value: completed,
+                                        onChanged: (bool? value) {
+                                          _setState(() {
+                                            completed = value ?? false;
+                                          });
+                                        },
                                       ),
-                                      title: Text(
-                                        'Completed',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                      value: completed,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          completed = value ?? false;
-                                        });
-                                      },
                                     ),
                                     SizedBox(
                                       height: 15,
@@ -565,6 +605,16 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                               isSequential: sequentialDownload,
                                               isCompleted: completed,
                                               context: context);
+                                          final addTorrentSnackbar =
+                                              addFloodSnackBar(
+                                                  SnackbarType.information,
+                                                  'Torrent added successfully',
+                                                  'Dismiss');
+
+                                          ScaffoldMessenger.of(context)
+                                              .clearSnackBars();
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(addTorrentSnackbar);
                                           Navigator.pop(context);
                                         },
                                         style: ElevatedButton.styleFrom(

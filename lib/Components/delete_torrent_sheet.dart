@@ -118,6 +118,8 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                           SnackbarType.caution,
                           'Torrent deleted successfuly',
                           'Dismiss');
+
+                      ScaffoldMessenger.of(context).clearSnackBars();
                       ScaffoldMessenger.of(context)
                           .showSnackBar(deleteTorrentSnackBar);
                     },

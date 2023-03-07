@@ -122,7 +122,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                     },
                   ),
                   PopupMenuButton<String>(
-                    color: ThemeProvider.theme.backgroundColor,
+                    color: ThemeProvider.theme.primaryColorLight,
                     icon: Icon(
                       Icons.more_vert,
                       color: ThemeProvider.theme.textTheme.bodyText1?.color,

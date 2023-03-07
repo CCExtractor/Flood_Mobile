@@ -198,6 +198,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               final changeSettingsSnackBar = addFloodSnackBar(
                   SnackbarType.success, 'Settings changed', 'Dismiss');
 
+              ScaffoldMessenger.of(context).clearSnackBars();
               ScaffoldMessenger.of(context)
                   .showSnackBar(changeSettingsSnackBar);
             },
@@ -763,12 +764,17 @@ class AuthenticationSection extends StatelessWidget {
                             level: isAdmin ? 10 : 5,
                             path: pathController.text,
                             host: hostController.text,
-                            port: int.parse(portController.text),
+                            port: int.parse(
+                              portController.text.isEmpty
+                                  ? "0"
+                                  : portController.text,
+                            ),
                           ),
                         );
                         final addNewUserSnackBar = addFloodSnackBar(
                             SnackbarType.success, 'New user added', 'Dismiss');
 
+                        ScaffoldMessenger.of(context).clearSnackBars();
                         ScaffoldMessenger.of(context)
                             .showSnackBar(addNewUserSnackBar);
                       },

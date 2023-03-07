@@ -279,6 +279,7 @@ class _AddTorrentSheetState extends State<AddTorrentSheet> {
                       'Torrent added successfully',
                       'Dismiss');
 
+                  ScaffoldMessenger.of(context).clearSnackBars();
                   ScaffoldMessenger.of(context)
                       .showSnackBar(addTorrentSnackbar);
                 },

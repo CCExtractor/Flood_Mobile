@@ -55,7 +55,7 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
                       child: Text(
                         'Clear All',
                         style: TextStyle(
-                          color: Colors.white60,
+                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
                         ),
                       ),
                     )
@@ -103,7 +103,7 @@ class NotificationListTile extends StatelessWidget {
           Text(
             DateTime.fromMillisecondsSinceEpoch(model.ts).toString(),
             textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 12, color: Colors.white38),
+            style: TextStyle(fontSize: 12, color: Colors.grey[500]),
           ),
           SizedBox(
             height: 4,

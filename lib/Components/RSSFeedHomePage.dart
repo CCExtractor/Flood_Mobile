@@ -152,9 +152,12 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             Expanded(
                                               child: Row(
                                                 children: [
-                                                  Text(model
-                                                      .RssFeedsList[index].label
-                                                      .toString()),
+                                                  Flexible(
+                                                    child: Text(model
+                                                        .RssFeedsList[index]
+                                                        .label
+                                                        .toString()),
+                                                  ),
                                                   SizedBox(width: 10),
                                                   Text(model.RssFeedsList[index]
                                                               .count !=
@@ -218,6 +221,21 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     FeedsApi
                                                         .listAllFeedsAndRules(
                                                             context: context);
+                                                    final deleteFeedSnackbar =
+                                                        addFloodSnackBar(
+                                                            SnackbarType
+                                                                .information,
+                                                            'Feed deleted successfully',
+                                                            'Dismiss');
+
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .clearSnackBars();
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      deleteFeedSnackbar,
+                                                    );
                                                   },
                                                 ),
                                               ],
@@ -287,31 +305,35 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   Key('No existing feeds displaying container'),
                               height: 60,
                               width: double.infinity,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white38),
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(8),
-                                  topLeft: Radius.circular(8),
-                                  bottomLeft: Radius.circular(8),
-                                  bottomRight: Radius.circular(8),
-                                ),
-                                color: ThemeProvider.theme.primaryColorLight,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Text(
-                                      "No feeds defined.",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontFamily: 'Montserrat',
-                                          color: ThemeProvider.theme.textTheme
-                                              .bodyText1?.color),
+                              color: ThemeProvider.theme.primaryColorLight,
+                              child: InputDecorator(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(8),
+                                      topLeft: Radius.circular(8),
+                                      bottomLeft: Radius.circular(8),
+                                      bottomRight: Radius.circular(8),
                                     ),
                                   ),
-                                ],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Text(
+                                        "No feeds defined.",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: 'Montserrat',
+                                            color: ThemeProvider.theme.textTheme
+                                                .bodyText1?.color),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                       Padding(
@@ -618,6 +640,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         'New Feed added successfully',
                                                         'Dismiss');
 
+                                                ScaffoldMessenger.of(context)
+                                                    .clearSnackBars();
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                         addFeedSnackbar);
@@ -1318,9 +1342,12 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             Expanded(
                                               child: Row(
                                                 children: [
-                                                  Text(model
-                                                      .RssRulesList[index].label
-                                                      .toString()),
+                                                  Flexible(
+                                                    child: Text(model
+                                                        .RssRulesList[index]
+                                                        .label
+                                                        .toString()),
+                                                  ),
                                                   SizedBox(width: 10),
                                                   Text(model.RssRulesList[index]
                                                               .count !=
@@ -1447,6 +1474,21 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     FeedsApi
                                                         .listAllFeedsAndRules(
                                                             context: context);
+                                                    final deleteRuleSnackbar =
+                                                        addFloodSnackBar(
+                                                            SnackbarType
+                                                                .information,
+                                                            'Rule deleted successfully',
+                                                            'Dismiss');
+
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .clearSnackBars();
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      deleteRuleSnackbar,
+                                                    );
                                                   },
                                                 ),
                                               ],
@@ -1509,31 +1551,35 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                               key: Key('No rules defined'),
                               height: 60,
                               width: double.infinity,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white38),
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(8),
-                                  topLeft: Radius.circular(8),
-                                  bottomLeft: Radius.circular(8),
-                                  bottomRight: Radius.circular(8),
-                                ),
-                                color: ThemeProvider.theme.primaryColorLight,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Text(
-                                      "No rules defined.",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontFamily: 'Montserrat',
-                                          color: ThemeProvider.theme.textTheme
-                                              .bodyText1?.color),
+                              color: ThemeProvider.theme.primaryColorLight,
+                              child: InputDecorator(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(8),
+                                      topLeft: Radius.circular(8),
+                                      bottomLeft: Radius.circular(8),
+                                      bottomRight: Radius.circular(8),
                                     ),
                                   ),
-                                ],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Text(
+                                        "No rules defined.",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: 'Montserrat',
+                                            color: ThemeProvider.theme.textTheme
+                                                .bodyText1?.color),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                       Padding(
@@ -2002,6 +2048,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         'New Rule added successfully',
                                                         'Dismiss');
 
+                                                ScaffoldMessenger.of(context)
+                                                    .clearSnackBars();
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
                                                         addRuleSnackbar);
