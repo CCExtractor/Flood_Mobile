@@ -27,6 +27,7 @@ class MyThemes {
     accentColor: Color(0xff399CF4),
     backgroundColor: Color(0xff305067),
     scaffoldBackgroundColor: Color(0xff305067),
+    cardColor: Colors.white,
     textTheme: TextTheme().apply(
       displayColor: Colors.white,
       bodyColor: Colors.white,
@@ -48,6 +49,7 @@ class MyThemes {
     accentColor: Color(0xff399CF4),
     canvasColor: Colors.transparent,
     primaryColorLight: Colors.grey[100],
+    cardColor: Colors.black,
     dialogBackgroundColor: Color(0xff399CF4),
     textTheme: TextTheme().apply(
       displayColor: Color(0xff293341),

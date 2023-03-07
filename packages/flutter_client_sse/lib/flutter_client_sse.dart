@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 part 'sse_event_model.dart';
 
 class SSEClient {
-  static http.Client _client;
+  static http.Client? _client;
   static Stream<SSEModel> subscribeToSSE(String url, String token) {
     //Regex to be used
     var lineRegex = RegExp(r'^([^:]*)(?::)?(?: )?(.*)?$');
@@ -24,7 +24,7 @@ class SSEClient {
         request.headers["Cache-Control"] = "no-cache";
         request.headers["Accept"] = "text/event-stream";
         request.headers["Cookie"] = token;
-        Future<http.StreamedResponse> response = _client.send(request);
+        Future<http.StreamedResponse> response = _client!.send(request);
 
         //Listening to the response as a stream
         response.asStream().listen((data) {
@@ -38,9 +38,9 @@ class SSEClient {
                 currentSSEModel = SSEModel(data: '', id: '', event: '');
                 return;
               }
-              Match match = lineRegex.firstMatch(dataLine);
+              Match match = lineRegex.firstMatch(dataLine) as Match;
               var field = match.group(1);
-              if (field.isEmpty) {
+              if (field!.isEmpty) {
                 return;
               }
               var value = '';
@@ -79,6 +79,6 @@ class SSEClient {
   }
 
   static void unsubscribeFromSSE() {
-    _client.close();
+    _client?.close();
   }
 }
