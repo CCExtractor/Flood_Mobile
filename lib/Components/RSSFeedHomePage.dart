@@ -121,7 +121,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                       ),
                       (model.RssFeedsList.isNotEmpty)
                           ? InputDecorator(
-                            decoration: InputDecoration(
+                              decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(1),
                                 fillColor:
                                     ThemeProvider.theme.primaryColorLight,
@@ -134,7 +134,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   ),
                                 ),
                               ),
-                            child: Container(
+                              child: Container(
                                 key: Key("Feeds are fetched"),
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Colors.white38),
@@ -173,7 +173,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                           .toString()),
                                                     ),
                                                     SizedBox(width: 10),
-                                                    Text(model.RssFeedsList[index]
+                                                    Text(model
+                                                                .RssFeedsList[
+                                                                    index]
                                                                 .count !=
                                                             null
                                                         ? model
@@ -201,17 +203,20 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                             .RssFeedsList[index]
                                                             .id
                                                             .toString();
-                                                        urlController.text = model
-                                                            .RssFeedsList[index]
-                                                            .url
-                                                            .toString();
+                                                        urlController.text =
+                                                            model
+                                                                .RssFeedsList[
+                                                                    index]
+                                                                .url
+                                                                .toString();
                                                         labelController.text =
                                                             model
                                                                 .RssFeedsList[
                                                                     index]
                                                                 .label
                                                                 .toString();
-                                                        intervalController.text =
+                                                        intervalController
+                                                                .text =
                                                             model
                                                                 .RssFeedsList[
                                                                     index]
@@ -241,7 +246,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                   .information,
                                                               'Feed deleted successfully',
                                                               'Dismiss');
-                          
+
                                                       ScaffoldMessenger.of(
                                                               context)
                                                           .clearSnackBars();
@@ -271,15 +276,14 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                             1 &&
                                                         (model.RssFeedsList[index].interval! / 60)
                                                                 .toString()
-                                                                .split('.')[1] ==
+                                                                .split(
+                                                                    '.')[1] ==
                                                             "0"
                                                     ? ((model.RssFeedsList[index].interval! / 60))
                                                             .toString()
                                                             .split('.')[0] +
                                                         ' Hours'
-                                                    : model.RssFeedsList[index]
-                                                            .interval
-                                                            .toString() +
+                                                    : model.RssFeedsList[index].interval.toString() +
                                                         ' Minutes'),
                                             SizedBox(width: 10),
                                             Text(model.RssFeedsList[index].url
@@ -314,7 +318,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   },
                                 ),
                               ),
-                          )
+                            )
                           : Container(
                               key:
                                   Key('No existing feeds displaying container'),
@@ -1327,7 +1331,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                       ),
                       (model.RssRulesList.isNotEmpty)
                           ? InputDecorator(
-                            decoration: InputDecoration(
+                              decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(1),
                                 fillColor:
                                     ThemeProvider.theme.primaryColorLight,
@@ -1340,7 +1344,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   ),
                                 ),
                               ),
-                            child: Container(
+                              child: Container(
                                 key: Key("Rules Displayed"),
                                 child: ListView.builder(
                                   shrinkWrap: true,
@@ -1368,7 +1372,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                           .toString()),
                                                     ),
                                                     SizedBox(width: 10),
-                                                    Text(model.RssRulesList[index]
+                                                    Text(model
+                                                                .RssRulesList[
+                                                                    index]
                                                                 .count !=
                                                             null
                                                         ? model
@@ -1384,21 +1390,25 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         borderRadius:
                                                             BorderRadius.only(
                                                           topRight:
-                                                              Radius.circular(12),
+                                                              Radius.circular(
+                                                                  12),
                                                           topLeft:
-                                                              Radius.circular(12),
+                                                              Radius.circular(
+                                                                  12),
                                                           bottomLeft:
-                                                              Radius.circular(12),
+                                                              Radius.circular(
+                                                                  12),
                                                           bottomRight:
-                                                              Radius.circular(12),
+                                                              Radius.circular(
+                                                                  12),
                                                         ),
                                                         color: ThemeProvider
                                                             .theme.primaryColor,
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets.all(
-                                                                5.0),
+                                                            const EdgeInsets
+                                                                .all(5.0),
                                                         child: Text(
                                                           "Tags: " +
                                                               model
@@ -1424,7 +1434,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       icon: Icon(Icons.edit,
                                                           size: 18),
                                                       onPressed: () {
-                                                        isNewDownloadRules = true;
+                                                        isNewDownloadRules =
+                                                            true;
                                                         isUpdatedRuleSelected =
                                                             true;
                                                         labelRulesController
@@ -1469,7 +1480,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                             .startOnLoad;
                                                         DeleteFeedOrRulesApi
                                                             .deleteFeedsOrRules(
-                                                                context: context,
+                                                                context:
+                                                                    context,
                                                                 id: model
                                                                     .RssRulesList[
                                                                         index]
@@ -1499,7 +1511,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                   .information,
                                                               'Rule deleted successfully',
                                                               'Dismiss');
-                          
+
                                                       ScaffoldMessenger.of(
                                                               context)
                                                           .clearSnackBars();
@@ -1520,17 +1532,18 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         .length >
                                                     10
                                                 ? "Match: " +
-                                                    model
-                                                        .RssRulesList[index].match
+                                                    model.RssRulesList[index]
+                                                        .match
                                                         .toString()
                                                         .substring(0, 10) +
                                                     "..."
                                                 : "Match: " +
-                                                    model
-                                                        .RssRulesList[index].match
+                                                    model.RssRulesList[index]
+                                                        .match
                                                         .toString()),
                                             SizedBox(width: 10),
-                                            Text(model.RssRulesList[index].exclude
+                                            Text(model.RssRulesList[index]
+                                                        .exclude
                                                         .toString()
                                                         .length >
                                                     10
@@ -1566,7 +1579,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   },
                                 ),
                               ),
-                          )
+                            )
                           : Container(
                               key: Key('No rules defined'),
                               height: 60,
