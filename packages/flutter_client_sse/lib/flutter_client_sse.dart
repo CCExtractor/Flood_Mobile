@@ -2,12 +2,11 @@ library flutter_client_sse;
 
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 part 'sse_event_model.dart';
 
 class SSEClient {
-  static http.Client _client;
+  static late http.Client _client;
   static Stream<SSEModel> subscribeToSSE(String url, String token) {
     //Regex to be used
     var lineRegex = RegExp(r'^([^:]*)(?::)?(?: )?(.*)?$');
@@ -38,9 +37,9 @@ class SSEClient {
                 currentSSEModel = SSEModel(data: '', id: '', event: '');
                 return;
               }
-              Match match = lineRegex.firstMatch(dataLine);
+              Match match = lineRegex.firstMatch(dataLine) as Match;
               var field = match.group(1);
-              if (field.isEmpty) {
+              if (field!.isEmpty) {
                 return;
               }
               var value = '';

@@ -1,8 +1,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'dart:convert';
 import 'dart:io';
-import 'package:badges/badges.dart';
-import 'package:dio/dio.dart';
+import 'package:badges/badges.dart' as badge;
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Components/add_automatic_torrent.dart';
@@ -33,7 +32,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flood_mobile/Components/change_theme_button_widget.dart';
 import '../Api/torrent_api.dart';
 import '../Constants/notification_keys.dart';
-import '../Provider/api_provider.dart';
 import '../Components/RSSFeedButtonWidget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -180,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   elevation: 0,
                   actions: [
                     RSSFeedButtonWidget(),
-                    Badge(
+                    badge.Badge(
                       showBadge:
                           homeModel.unreadNotifications == 0 ? false : true,
                       key: Key('Badge Widget'),
@@ -191,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
-                      position: BadgePosition(top: 0, end: 3),
+                      position: badge.BadgePosition(top: 0, end: 3),
                       child: IconButton(
                         icon: Icon(
                           Icons.notifications,
