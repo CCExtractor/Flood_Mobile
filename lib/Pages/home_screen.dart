@@ -18,7 +18,7 @@ import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
-import 'package:flutter/material.dart' hide Badge ;
+import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';

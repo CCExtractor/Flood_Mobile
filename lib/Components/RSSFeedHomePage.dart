@@ -619,44 +619,75 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           height: 50,
                                           child: ElevatedButton(
                                             onPressed: () {
-                                              ClientApi.checkClientOnline(context).then((status) {
+                                              ClientApi.checkClientOnline(
+                                                      context)
+                                                  .then((status) {
                                                 if (status) {
                                                   setState(() {
-                                                    if (isUpdateFeedSelected == false) {
+                                                    if (isUpdateFeedSelected ==
+                                                        false) {
                                                       FeedsApi.addFeeds(
                                                         type: "feed",
                                                         id: "43",
-                                                        label: labelController.text,
-                                                        feedurl: urlController.text,
-                                                        interval: int.parse(intervalController.text),
+                                                        label: labelController
+                                                            .text,
+                                                        feedurl:
+                                                            urlController.text,
+                                                        interval: int.parse(
+                                                            intervalController
+                                                                .text),
                                                         count: 0,
                                                         context: context,
                                                       );
                                                     }
-                                                    final addFeedSnackbar = addFloodSnackBar(SnackbarType.information,
-                                                        'New Feed added successfully', 'Dismiss');
+                                                    final addFeedSnackbar =
+                                                        addFloodSnackBar(
+                                                            SnackbarType
+                                                                .information,
+                                                            'New Feed added successfully',
+                                                            'Dismiss');
 
-                                                    ScaffoldMessenger.of(context).clearSnackBars();
-                                                    ScaffoldMessenger.of(context).showSnackBar(addFeedSnackbar);
-                                                    FeedsApi.listAllFeedsAndRules(context: context);
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .clearSnackBars();
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                            addFeedSnackbar);
+                                                    FeedsApi
+                                                        .listAllFeedsAndRules(
+                                                            context: context);
                                                     if (isUpdateFeedSelected) {
                                                       UpdateFeedApi.updateFeed(
                                                           type: "feed",
                                                           id: updateFeedId,
-                                                          label: labelController.text,
-                                                          feedurl: urlController.text,
+                                                          label: labelController
+                                                              .text,
+                                                          feedurl: urlController
+                                                              .text,
                                                           context: context,
-                                                          interval: int.parse(intervalController.text),
+                                                          interval: int.parse(
+                                                              intervalController
+                                                                  .text),
                                                           count: 1);
-                                                      FeedsApi.listAllFeedsAndRules(context: context);
+                                                      FeedsApi
+                                                          .listAllFeedsAndRules(
+                                                              context: context);
                                                     }
                                                   });
                                                 } else {
-                                                  final addFeedSnackbar = addFloodSnackBar(SnackbarType.information,
-                                                      'Please check your backend connection', 'Dismiss');
+                                                  final addFeedSnackbar =
+                                                      addFloodSnackBar(
+                                                          SnackbarType
+                                                              .information,
+                                                          'Please check your backend connection',
+                                                          'Dismiss');
 
-                                                  ScaffoldMessenger.of(context).clearSnackBars();
-                                                  ScaffoldMessenger.of(context).showSnackBar(addFeedSnackbar);
+                                                  ScaffoldMessenger.of(context)
+                                                      .clearSnackBars();
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                          addFeedSnackbar);
                                                 }
                                               });
                                             },
