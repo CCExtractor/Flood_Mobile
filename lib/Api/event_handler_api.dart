@@ -200,8 +200,13 @@ class EventHandlerApi {
         Provider.of<FilterProvider>(context, listen: false);
     var maptrackerURIs = {};
     var mapStatus = {};
+    Map<String, dynamic> mapTags = {};
     List<String> statusList = [];
+    filterProvider.tagListMain = [];
+    filterProvider.mapTags = {'Untagged': 0};
     torrentLength = torrentList.length.toString();
+
+    //For torrent TrackerURIs
     filterProvider.trackerURIsListMain = [];
     try {
       for (int i = 0; i < torrentList.length; i++) {
@@ -227,6 +232,35 @@ class EventHandlerApi {
     } catch (e) {
       print(e);
     }
+
+    //For torrent tags
+    try {
+      for (int i = 0; i < torrentList.length; i++) {
+        if (torrentList[i].tags.isEmpty) {
+          filterProvider.mapTags.update('Untagged', (value) => ++value);
+        }
+        for (int j = 0; j < torrentList[i].tags.length; j++) {
+          filterProvider.tagListMain.add(torrentList[i].tags[j].toString());
+          filterProvider.setTagsListMain(filterProvider.tagListMain);
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+    try {
+      filterProvider.tagListMain.forEach((element) {
+        if (!mapTags.containsKey(element)) {
+          mapTags[element] = 1;
+        } else {
+          mapTags[element] += 1;
+        }
+      });
+      filterProvider.setmapTags(mapTags);
+    } catch (e) {
+      print(e);
+    }
+
+    //For torrent status
     try {
       for (int i = 0; i < torrentList.length; i++) {
         for (int j = 0; j < torrentList[i].status.length; j++) {
@@ -237,7 +271,6 @@ class EventHandlerApi {
     } catch (e) {
       print(e);
     }
-
     try {
       statusList.forEach((element) {
         if (!mapStatus.containsKey(element)) {

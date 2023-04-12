@@ -1,6 +1,7 @@
 import 'package:duration/duration.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Api/torrent_api.dart';
+import 'package:flood_mobile/Components/add_tag_dialogue.dart';
 import 'package:flood_mobile/Components/delete_torrent_sheet.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
@@ -137,7 +138,13 @@ class _TorrentTileState extends State<TorrentTile> {
                         color: Colors.black,
                         size: 18,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) =>
+                              AddTagDialogue(torrents: [widget.model]),
+                        );
+                      },
                     ),
                     FocusedMenuItem(
                       title: Text(
@@ -433,7 +440,10 @@ class _TorrentTileState extends State<TorrentTile> {
                                       padding: EdgeInsets.only(left: wp * 0.17),
                                       child: Text(
                                           (widget.model.tags.length != 0)
-                                              ? widget.model.tags.toString()
+                                              ? widget.model.tags
+                                                  .toSet()
+                                                  .toList()
+                                                  .toString()
                                               : 'None'),
                                     ),
                                   ),

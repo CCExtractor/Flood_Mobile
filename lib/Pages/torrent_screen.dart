@@ -85,7 +85,11 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                       .toString()
                                       .split(".")
                                       .last ==
-                                  "all") {
+                                  "all" ||
+                              model.torrentList[index].tags
+                                  .toString()
+                                  .contains(filterModel.tagSelected) ||
+                              model.torrentList[index].tags.isEmpty) {
                             if (model.torrentList[index].name
                                 .toLowerCase()
                                 .contains(keyword.toLowerCase())) {
@@ -228,24 +232,37 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                                 ),
                                               )),
                                           label: Text(
-                                            filterModel.trackerURISelected ==
-                                                        'all' ||
-                                                    filterModel
-                                                            .trackerURISelected ==
+                                            filterModel.tagSelected == 'all' ||
+                                                    filterModel.tagSelected ==
                                                         'null' ||
-                                                    filterModel
-                                                            .trackerURISelected ==
+                                                    filterModel.tagSelected ==
                                                         ''
-                                                ? '${filterModel.filterStatus.toString().split(".").last}'
-                                                : filterModel.trackerURISelected
-                                                            .length >
-                                                        12
-                                                    ? filterModel
+                                                ? filterModel.trackerURISelected ==
+                                                            'all' ||
+                                                        filterModel
+                                                                .trackerURISelected ==
+                                                            'null' ||
+                                                        filterModel
+                                                                .trackerURISelected ==
+                                                            ''
+                                                    ? '${filterModel.filterStatus.toString().split(".").last}'
+                                                    : filterModel
+                                                                .trackerURISelected
+                                                                .length >
+                                                            12
+                                                        ? filterModel
+                                                                .trackerURISelected
+                                                                .substring(
+                                                                    0, 12) +
+                                                            '...'
+                                                        : filterModel
                                                             .trackerURISelected
+                                                : filterModel.tagSelected.length >
+                                                        12
+                                                    ? filterModel.tagSelected
                                                             .substring(0, 12) +
                                                         '...'
-                                                    : filterModel
-                                                        .trackerURISelected,
+                                                    : filterModel.tagSelected,
                                             style: TextStyle(
                                               color: ThemeProvider
                                                   .theme.primaryColorDark,

@@ -12,20 +12,51 @@ enum FilterValue {
 }
 
 class FilterProvider extends ChangeNotifier {
-  String trackerURISelected = '';
   FilterValue? filterStatus = FilterValue.all;
+  List<String> statusList = [];
+  var mapStatus = {};
+  String tagSelected = '';
+  List<String> tagList = [];
+  List<String> tagListMain = [];
+  Map<String, dynamic> mapTags = {'Untagged': 0};
+  String trackerURISelected = '';
   List<String> trackerURIsList = [];
   List<String> trackerURIsListMain = [];
-  List<String> statusList = [];
   var maptrackerURIs = {};
-  var mapStatus = {};
-  void settrackerURISelected(String newtrackerURISelected) {
-    trackerURISelected = newtrackerURISelected;
-    notifyListeners();
-  }
 
   void setFilterSelected(FilterValue? newfilterStatus) {
     filterStatus = newfilterStatus;
+  }
+
+  void setmapStatus(var newmapStatus) {
+    mapStatus = newmapStatus;
+  }
+
+  void setstatusList(var newstatusList) {
+    statusList = newstatusList;
+  }
+
+  void setTagSelected(String newtagSelected) {
+    tagSelected = newtagSelected;
+    notifyListeners();
+  }
+
+  void setTagsListMain(List<String> newTagListMain) {
+    tagListMain = newTagListMain;
+  }
+
+  void setmapTags(Map<String, dynamic> newTagStatus) {
+    mapTags.addAll(newTagStatus);
+    // notifyListeners();
+  }
+
+  void setTagList(var newTagList) {
+    tagList = newTagList;
+  }
+
+  void settrackerURISelected(String newtrackerURISelected) {
+    trackerURISelected = newtrackerURISelected;
+    notifyListeners();
   }
 
   void settrackerURIsList(List<String> newtrackerURIsList) {
@@ -38,13 +69,5 @@ class FilterProvider extends ChangeNotifier {
 
   void setmaptrackerURIs(var newmaptrackerURIs) {
     maptrackerURIs = newmaptrackerURIs;
-  }
-
-  void setmapStatus(var newmapStatus) {
-    mapStatus = newmapStatus;
-  }
-
-  void setstatusList(var newstatusList) {
-    statusList = newstatusList;
   }
 }
