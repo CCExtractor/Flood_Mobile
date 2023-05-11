@@ -4,6 +4,7 @@ import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flood_mobile/Provider/login_status_data_provider.dart';
+import 'package:flood_mobile/Provider/multiple_select_torrent_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flutter/material.dart';
@@ -105,6 +106,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<FilterProvider>(
           create: (context) => FilterProvider(),
+        ),
+        ChangeNotifierProvider<MultipleSelectTorrentProvider>(
+          create: (context) => MultipleSelectTorrentProvider(),
         ),
       ],
       child: Consumer<ThemeProvider>(

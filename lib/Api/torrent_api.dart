@@ -194,7 +194,7 @@ class TorrentApi {
   }
 
   static Future<void> deleteTorrent({
-    required String hash,
+    required List<String> hashes,
     required bool deleteWithData,
     required BuildContext context,
   }) async {
@@ -212,7 +212,7 @@ class TorrentApi {
       dio.options.headers['Cookie'] =
           Provider.of<UserDetailProvider>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
-      mp['hashes'] = [hash];
+      mp['hashes'] = hashes;
       mp['deleteData'] = deleteWithData;
       String rawBody = json.encode(mp);
       print(rawBody);
