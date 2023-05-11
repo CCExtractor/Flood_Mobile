@@ -481,6 +481,13 @@ class SpeedLimitSection extends StatelessWidget {
                             context: context,
                             downSpeed: downSpeed,
                             upSpeed: upSpeed);
+                        final setSpeedSnackbar = addFloodSnackBar(
+                            SnackbarType.information,
+                            'Speed set successfully',
+                            'Dismiss');
+                        ScaffoldMessenger.of(context).clearSnackBars();
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(setSpeedSnackbar);
                       },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
