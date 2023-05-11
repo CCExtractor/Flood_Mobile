@@ -42,9 +42,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
   String? browsefeedSelected;
   String? applicableFeedSelected;
 
-  final _formKey = GlobalKey<FormState>();
+  final _feedformKey = GlobalKey<FormState>();
   final _browseformKey = GlobalKey<FormState>();
-  final _applicablefeedformKey = GlobalKey<FormState>();
+  final _rulesformKey = GlobalKey<FormState>();
 
   bool isNewBrowseSelected = false;
   bool isUpdateFeedSelected = false;
@@ -363,69 +363,84 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                         ),
                       ),
                       (isNewSelected)
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 10.0),
-                                    child: TextField(
-                                      key: Key('Label textfield'),
-                                      style: TextStyle(
-                                        color: ThemeProvider
-                                            .theme.textTheme.bodyText1?.color,
-                                      ),
-                                      controller: labelController,
-                                      decoration: InputDecoration(
-                                        labelText: 'Label',
-                                        hintText: 'Label',
-                                        labelStyle: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                          ? Form(
+                              key: _feedformKey,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10.0),
+                                      child: TextFormField(
+                                        key: Key('Label textformfield'),
+                                        style: TextStyle(
+                                          color: ThemeProvider
+                                              .theme.textTheme.bodyText1?.color,
                                         ),
+                                        controller: labelController,
+                                        decoration: InputDecoration(
+                                          labelText: 'Label',
+                                          hintText: 'Label',
+                                          labelStyle: TextStyle(
+                                              fontFamily: 'Montserrat',
+                                              color: ThemeProvider.theme
+                                                  .textTheme.bodyText1?.color),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "You must specify a label.";
+                                          }
+                                          return null;
+                                        },
                                       ),
                                     ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        width: 150,
-                                        child: TextField(
-                                          key: Key('Interval textfield'),
-                                          controller: intervalController,
-                                          style: TextStyle(
-                                            color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color,
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
-                                            labelText: 'Interval',
-                                            hintText: 'Interval',
-                                            labelStyle: TextStyle(
-                                                fontFamily: 'Montserrat',
-                                                color: ThemeProvider
-                                                    .theme
-                                                    .textTheme
-                                                    .bodyText1
-                                                    ?.color),
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: 150,
+                                          child: TextFormField(
+                                            key: Key('Interval textformfield'),
+                                            controller: intervalController,
+                                            style: TextStyle(
+                                              color: ThemeProvider.theme
+                                                  .textTheme.bodyText1?.color,
                                             ),
+                                            keyboardType: TextInputType.number,
+                                            decoration: InputDecoration(
+                                                labelText: 'Interval',
+                                                hintText: 'Interval',
+                                                labelStyle: TextStyle(
+                                                    fontFamily: 'Montserrat',
+                                                    color: ThemeProvider
+                                                        .theme
+                                                        .textTheme
+                                                        .bodyText1
+                                                        ?.color),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                                errorMaxLines: 2),
+                                            validator: (value) {
+                                              if (!RegExp(r'^[0-9]+$')
+                                                  .hasMatch(value!)) {
+                                                return "The interval must be a positive number.";
+                                              }
+                                              return null;
+                                            },
                                           ),
                                         ),
-                                      ),
-                                      Container(
-                                        width: 150,
-                                        child: Form(
-                                          key: _formKey,
+                                        Container(
+                                          width: 150,
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
@@ -435,7 +450,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     'Interval type dropdown'),
                                                 decoration: InputDecoration(
                                                   //Add isDense true and zero Padding.
-                                                  //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
+                                                  //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextFormField Button become clickable, and also the dropdown menu open under The whole TextFormField Button.
                                                   isDense: true,
                                                   contentPadding:
                                                       EdgeInsets.zero,
@@ -505,6 +520,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   if (value == null) {
                                                     return 'Please select a unit';
                                                   }
+                                                  return null;
                                                 },
                                                 onChanged: (value) {
                                                   if (value.toString() ==
@@ -533,163 +549,181 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             ],
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10.0),
-                                    child: TextField(
-                                      key: Key('Url textfield'),
-                                      controller: urlController,
-                                      style: TextStyle(
-                                        color: ThemeProvider
-                                            .theme.textTheme.bodyText1?.color,
-                                      ),
-                                      decoration: InputDecoration(
-                                        labelText: 'URL',
-                                        hintText: 'URL',
-                                        labelStyle: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: TextFormField(
+                                        key: Key('Url textformfield'),
+                                        controller: urlController,
+                                        style: TextStyle(
+                                          color: ThemeProvider
+                                              .theme.textTheme.bodyText1?.color,
                                         ),
-                                        suffix: GestureDetector(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0),
-                                            child: Icon(Icons.paste,
-                                                key: Key('Url paste icon')),
+                                        decoration: InputDecoration(
+                                          labelText: 'URL',
+                                          hintText: 'URL',
+                                          labelStyle: TextStyle(
+                                              fontFamily: 'Montserrat',
+                                              color: ThemeProvider.theme
+                                                  .textTheme.bodyText1?.color),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                           ),
-                                          onTap: () {
-                                            FlutterClipboard.paste()
-                                                .then((value) {
-                                              setState(() {
-                                                urlController.text = value;
+                                          suffix: GestureDetector(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
+                                              child: Icon(Icons.paste,
+                                                  key: Key('Url paste icon')),
+                                            ),
+                                            onTap: () {
+                                              FlutterClipboard.paste()
+                                                  .then((value) {
+                                                setState(() {
+                                                  urlController.text = value;
+                                                });
                                               });
-                                            });
-                                          },
+                                            },
+                                          ),
                                         ),
+                                        validator: (value) {
+                                          if (!RegExp(
+                                                r"^(http|https):\/\/[^\s/$.?#]+.[^\s]*$",
+                                              ).hasMatch(value!) ||
+                                              value.isEmpty) {
+                                            return "You must specify a valid feed URL.";
+                                          }
+                                          return null;
+                                        },
                                       ),
                                     ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 10.0),
-                                        child: Container(
-                                          width: 150,
-                                          height: 50,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                isNewSelected = false;
-                                              });
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              elevation: 0,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 10.0),
+                                          child: Container(
+                                            width: 150,
+                                            height: 50,
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  isNewSelected = false;
+                                                });
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                elevation: 0,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                ),
+                                                primary: Colors.red,
                                               ),
-                                              primary: Colors.red,
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                "Cancel",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w600),
+                                              child: Center(
+                                                child: Text(
+                                                  "Cancel",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 10.0, left: 20),
-                                        child: Container(
-                                          width: 150,
-                                          height: 50,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                if (isUpdateFeedSelected ==
-                                                    false) {
-                                                  FeedsApi.addFeeds(
-                                                    type: "feed",
-                                                    id: "43",
-                                                    label: labelController.text,
-                                                    feedurl: urlController.text,
-                                                    interval: int.parse(
-                                                        intervalController
-                                                            .text),
-                                                    count: 0,
-                                                    context: context,
-                                                  );
-                                                }
-                                                final addFeedSnackbar =
-                                                    addFloodSnackBar(
-                                                        SnackbarType
-                                                            .information,
-                                                        'New Feed added successfully',
-                                                        'Dismiss');
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 10.0, left: 20),
+                                          child: Container(
+                                            width: 150,
+                                            height: 50,
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                if (_feedformKey.currentState!
+                                                        .validate() ==
+                                                    true) {
+                                                  setState(() {
+                                                    if (isUpdateFeedSelected ==
+                                                        false) {
+                                                      FeedsApi.addFeeds(
+                                                        type: "feed",
+                                                        id: "43",
+                                                        label: labelController
+                                                            .text,
+                                                        feedurl:
+                                                            urlController.text,
+                                                        interval: int.parse(
+                                                            intervalController
+                                                                .text),
+                                                        count: 0,
+                                                        context: context,
+                                                      );
+                                                    }
+                                                    final addFeedSnackbar =
+                                                        addFloodSnackBar(
+                                                            SnackbarType
+                                                                .information,
+                                                            'New Feed added successfully',
+                                                            'Dismiss');
 
-                                                ScaffoldMessenger.of(context)
-                                                    .clearSnackBars();
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                        addFeedSnackbar);
-                                                FeedsApi.listAllFeedsAndRules(
-                                                    context: context);
-                                                if (isUpdateFeedSelected) {
-                                                  UpdateFeedApi.updateFeed(
-                                                      type: "feed",
-                                                      id: updateFeedId,
-                                                      label:
-                                                          labelController.text,
-                                                      feedurl:
-                                                          urlController.text,
-                                                      context: context,
-                                                      interval: int.parse(
-                                                          intervalController
-                                                              .text),
-                                                      count: 1);
-                                                  FeedsApi.listAllFeedsAndRules(
-                                                      context: context);
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                            addFeedSnackbar);
+                                                    FeedsApi
+                                                        .listAllFeedsAndRules(
+                                                            context: context);
+                                                    if (isUpdateFeedSelected) {
+                                                      UpdateFeedApi.updateFeed(
+                                                          type: "feed",
+                                                          id: updateFeedId,
+                                                          label: labelController
+                                                              .text,
+                                                          feedurl: urlController
+                                                              .text,
+                                                          context: context,
+                                                          interval: int.parse(
+                                                              intervalController
+                                                                  .text),
+                                                          count: 1);
+                                                      FeedsApi
+                                                          .listAllFeedsAndRules(
+                                                              context: context);
+                                                    }
+                                                  });
                                                 }
-                                              });
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              elevation: 0,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                elevation: 0,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                ),
+                                                primary: ThemeProvider
+                                                    .theme.primaryColorDark,
                                               ),
-                                              primary: ThemeProvider
-                                                  .theme.primaryColorDark,
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                "Save",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w600),
+                                              child: Center(
+                                                child: Text(
+                                                  "Save",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             )
                           : Container(),
@@ -718,7 +752,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                 key: Key('Browse feeds dropdown'),
                                 decoration: InputDecoration(
                                   //Add isDense true and zero Padding.
-                                  //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
+                                  //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextFormField Button become clickable, and also the dropdown menu open under The whole TextFormField Button.
                                   isDense: true,
                                   contentPadding: EdgeInsets.zero,
                                   border: OutlineInputBorder(
@@ -776,6 +810,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   if (value == null) {
                                     return 'Please select a feed';
                                   }
+                                  return null;
                                 },
                                 onChanged: (value) {
                                   isbrowseFeedsContentSelected = true;
@@ -803,7 +838,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                     child: Row(
                                       children: [
                                         Expanded(
-                                          child: TextField(
+                                          child: TextFormField(
                                             style: TextStyle(
                                               color: ThemeProvider.theme
                                                   .textTheme.bodyText1?.color,
@@ -989,7 +1024,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                           20),
                                                                   child: Form(
                                                                     key:
-                                                                        _formKey,
+                                                                        _feedformKey,
                                                                     child:
                                                                         Column(
                                                                       crossAxisAlignment:
@@ -1000,7 +1035,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                               .min,
                                                                       children: <
                                                                           Widget>[
-                                                                        TextField(
+                                                                        TextFormField(
                                                                           controller:
                                                                               directoryController,
                                                                           style:
@@ -1611,42 +1646,48 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                       (isNewDownloadRules)
                           ? Padding(
                               padding: const EdgeInsets.only(top: 10.0),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 10.0),
-                                    child: TextField(
-                                      key: Key('Rules label textfield'),
-                                      controller: labelRulesController,
-                                      style: TextStyle(
-                                        color: ThemeProvider
-                                            .theme.textTheme.bodyText1?.color,
-                                      ),
-                                      decoration: InputDecoration(
-                                        labelText: 'Label',
-                                        hintText: 'Label',
-                                        labelStyle: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                              child: Form(
+                                key: _rulesformKey,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10.0),
+                                      child: TextFormField(
+                                        key: Key('Rules label textformfield'),
+                                        controller: labelRulesController,
+                                        style: TextStyle(
+                                          color: ThemeProvider
+                                              .theme.textTheme.bodyText1?.color,
                                         ),
+                                        decoration: InputDecoration(
+                                          labelText: 'Label',
+                                          hintText: 'Label',
+                                          labelStyle: TextStyle(
+                                              fontFamily: 'Montserrat',
+                                              color: ThemeProvider.theme
+                                                  .textTheme.bodyText1?.color),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "You must specify a label.";
+                                          }
+                                          return null;
+                                        },
                                       ),
                                     ),
-                                  ),
-                                  Form(
-                                    key: _applicablefeedformKey,
-                                    child: Column(
+                                    Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
                                         DropdownButtonFormField2(
                                           decoration: InputDecoration(
                                             //Add isDense true and zero Padding.
-                                            //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
+                                            //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextFormField Button become clickable, and also the dropdown menu open under The whole TextFormField Button.
                                             isDense: true,
                                             contentPadding: EdgeInsets.zero,
                                             border: OutlineInputBorder(
@@ -1714,6 +1755,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             if (value == null) {
                                               return 'Please select a feed';
                                             }
+                                            return null;
                                           },
                                           onChanged: (value) {
                                             applicableFeedSelected =
@@ -1733,355 +1775,384 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          width: 150,
-                                          child: TextField(
-                                            key: Key('Match pattern textfield'),
-                                            controller: matchpatternController,
-                                            style: TextStyle(
-                                              color: ThemeProvider.theme
-                                                  .textTheme.bodyText1?.color,
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: 150,
+                                            child: TextFormField(
+                                              key: Key(
+                                                  'Match pattern textformfield'),
+                                              controller:
+                                                  matchpatternController,
+                                              style: TextStyle(
+                                                color: ThemeProvider.theme
+                                                    .textTheme.bodyText1?.color,
+                                              ),
+                                              decoration: InputDecoration(
+                                                  labelText: 'Match Pattern',
+                                                  hintText: 'RegEx',
+                                                  labelStyle: TextStyle(
+                                                      fontFamily: 'Montserrat',
+                                                      color: ThemeProvider
+                                                          .theme
+                                                          .textTheme
+                                                          .bodyText1
+                                                          ?.color),
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  errorMaxLines: 2),
+                                              validator: (value) {
+                                                if (value!.isEmpty) {
+                                                  return "Invalid regular expression.";
+                                                }
+                                                return null;
+                                              },
                                             ),
-                                            decoration: InputDecoration(
-                                              labelText: 'Match Pattern',
-                                              hintText: 'RegEx',
-                                              labelStyle: TextStyle(
-                                                  fontFamily: 'Montserrat',
-                                                  color: ThemeProvider
-                                                      .theme
-                                                      .textTheme
-                                                      .bodyText1
-                                                      ?.color),
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
+                                          ),
+                                          Container(
+                                            width: 150,
+                                            child: TextFormField(
+                                              key: Key(
+                                                  'Exclude pattern textformfield'),
+                                              controller:
+                                                  excludepatternController,
+                                              style: TextStyle(
+                                                color: ThemeProvider.theme
+                                                    .textTheme.bodyText1?.color,
+                                              ),
+                                              decoration: InputDecoration(
+                                                labelText: 'Exclude Pattern',
+                                                hintText: 'RegEx',
+                                                labelStyle: TextStyle(
+                                                    fontFamily: 'Montserrat',
+                                                    color: ThemeProvider
+                                                        .theme
+                                                        .textTheme
+                                                        .bodyText1
+                                                        ?.color),
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
                                               ),
                                             ),
                                           ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: TextFormField(
+                                        key: Key(
+                                            'Torrent destination textformfield'),
+                                        controller: destinationController,
+                                        style: TextStyle(
+                                          color: ThemeProvider
+                                              .theme.textTheme.bodyText1?.color,
                                         ),
-                                        Container(
-                                          width: 150,
-                                          child: TextField(
+                                        decoration: InputDecoration(
+                                          prefixIcon: Icon(
+                                            Icons.folder,
+                                            color: ThemeProvider.theme.textTheme
+                                                .bodyText1?.color,
+                                          ),
+                                          suffixIcon: IconButton(
+                                            icon: Icon(
+                                              Icons.search,
+                                              color: ThemeProvider.theme
+                                                  .textTheme.bodyText1?.color,
+                                            ),
+                                            onPressed: () {},
+                                          ),
+                                          labelText: 'Torrent Destination',
+                                          hintText: 'Destination',
+                                          labelStyle: TextStyle(
+                                              fontFamily: 'Montserrat',
+                                              color: ThemeProvider.theme
+                                                  .textTheme.bodyText1?.color),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: TextFormField(
+                                        key: Key('Apply tags textformfield'),
+                                        controller: tagsController,
+                                        style: TextStyle(
+                                          color: ThemeProvider
+                                              .theme.textTheme.bodyText1?.color,
+                                        ),
+                                        decoration: InputDecoration(
+                                          prefixIcon: Icon(
+                                            Icons.tag,
+                                            color: ThemeProvider.theme.textTheme
+                                                .bodyText1?.color,
+                                          ),
+                                          suffixIcon: IconButton(
+                                            icon: Icon(
+                                              Icons.keyboard_arrow_down,
+                                              color: ThemeProvider.theme
+                                                  .textTheme.bodyText1?.color,
+                                            ),
+                                            onPressed: () {},
+                                          ),
+                                          labelText: 'Apply Tags',
+                                          hintText: 'Tags',
+                                          labelStyle: TextStyle(
+                                              fontFamily: 'Montserrat',
+                                              color: ThemeProvider.theme
+                                                  .textTheme.bodyText1?.color),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          FilterChip(
                                             key: Key(
-                                                'Exclude pattern textfield'),
-                                            controller:
-                                                excludepatternController,
-                                            style: TextStyle(
-                                              color: ThemeProvider.theme
-                                                  .textTheme.bodyText1?.color,
+                                                'use as base path filterchip'),
+                                            backgroundColor: Colors.grey,
+                                            avatar: Container(
+                                              height: 30,
+                                              width: 30,
+                                              child: CircleAvatar(
+                                                backgroundColor: ThemeProvider
+                                                    .theme.accentColor,
+                                                child: Icon(
+                                                  Icons.home_rounded,
+                                                  color: ThemeProvider
+                                                      .theme
+                                                      .textTheme
+                                                      .bodyText1
+                                                      ?.color,
+                                                ),
+                                              ),
                                             ),
-                                            decoration: InputDecoration(
-                                              labelText: 'Exclude Pattern',
-                                              hintText: 'RegEx',
-                                              labelStyle: TextStyle(
+                                            label: Text(
+                                              'Use as Base Path',
+                                              style: TextStyle(
                                                   fontFamily: 'Montserrat',
+                                                  fontSize: 13,
                                                   color: ThemeProvider
                                                       .theme
                                                       .textTheme
                                                       .bodyText1
                                                       ?.color),
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
+                                            ),
+                                            labelPadding: EdgeInsets.only(
+                                                top: 4,
+                                                bottom: 4,
+                                                left: 2,
+                                                right: 10),
+                                            selected: useAsBasePath,
+                                            selectedColor: ThemeProvider
+                                                .theme.primaryColorDark,
+                                            onSelected: (bool selected) {
+                                              setState(() {
+                                                if (selected) {
+                                                  useAsBasePath = true;
+                                                } else {
+                                                  useAsBasePath = false;
+                                                }
+                                              });
+                                            },
+                                          ),
+                                          FilterChip(
+                                            key: Key(
+                                                'starts on load filterchip'),
+                                            backgroundColor: Colors.grey,
+                                            avatar: Container(
+                                              height: 30,
+                                              width: 30,
+                                              child: CircleAvatar(
+                                                backgroundColor: ThemeProvider
+                                                    .theme.accentColor,
+                                                child: Icon(
+                                                  Icons.download_rounded,
+                                                  color: ThemeProvider
+                                                      .theme
+                                                      .textTheme
+                                                      .bodyText1
+                                                      ?.color,
+                                                ),
                                               ),
                                             ),
+                                            labelPadding: EdgeInsets.only(
+                                                top: 4,
+                                                bottom: 4,
+                                                left: 2,
+                                                right: 35),
+                                            label: Text(
+                                              'Start on load',
+                                              style: TextStyle(
+                                                  fontFamily: 'Montserrat',
+                                                  fontSize: 13,
+                                                  color: ThemeProvider
+                                                      .theme
+                                                      .textTheme
+                                                      .bodyText1
+                                                      ?.color),
+                                            ),
+                                            selected: startOnLoad,
+                                            selectedColor: ThemeProvider
+                                                .theme.primaryColorDark,
+                                            onSelected: (bool selected) {
+                                              setState(() {
+                                                if (selected) {
+                                                  startOnLoad = true;
+                                                } else {
+                                                  startOnLoad = false;
+                                                }
+                                              });
+                                            },
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10.0),
-                                    child: TextField(
-                                      key: Key('Torrent destination textfield'),
-                                      controller: destinationController,
-                                      style: TextStyle(
-                                        color: ThemeProvider
-                                            .theme.textTheme.bodyText1?.color,
-                                      ),
-                                      decoration: InputDecoration(
-                                        prefixIcon: Icon(
-                                          Icons.folder,
-                                          color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
-                                        ),
-                                        suffixIcon: IconButton(
-                                          icon: Icon(
-                                            Icons.search,
-                                            color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color,
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                        labelText: 'Torrent Destination',
-                                        hintText: 'Destination',
-                                        labelStyle: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
+                                        ],
                                       ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10.0),
-                                    child: TextField(
-                                      key: Key('Apply tags textfield'),
-                                      controller: tagsController,
-                                      style: TextStyle(
-                                        color: ThemeProvider
-                                            .theme.textTheme.bodyText1?.color,
-                                      ),
-                                      decoration: InputDecoration(
-                                        prefixIcon: Icon(
-                                          Icons.tag,
-                                          color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
-                                        ),
-                                        suffixIcon: IconButton(
-                                          icon: Icon(
-                                            Icons.keyboard_arrow_down,
-                                            color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color,
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                        labelText: 'Apply Tags',
-                                        hintText: 'Tags',
-                                        labelStyle: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 5),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                    Row(
                                       children: [
-                                        FilterChip(
-                                          key: Key(
-                                              'use as base path filterchip'),
-                                          backgroundColor: Colors.grey,
-                                          avatar: Container(
-                                            height: 30,
-                                            width: 30,
-                                            child: CircleAvatar(
-                                              backgroundColor: ThemeProvider
-                                                  .theme.accentColor,
-                                              child: Icon(
-                                                Icons.home_rounded,
-                                                color: ThemeProvider.theme
-                                                    .textTheme.bodyText1?.color,
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 10.0),
+                                          child: Container(
+                                            width: 150,
+                                            height: 50,
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  isNewDownloadRules = false;
+                                                });
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                elevation: 0,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                ),
+                                                primary: Colors.red,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "Cancel",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
                                               ),
                                             ),
                                           ),
-                                          label: Text(
-                                            'Use as Base Path',
-                                            style: TextStyle(
-                                                fontFamily: 'Montserrat',
-                                                fontSize: 13,
-                                                color: ThemeProvider
-                                                    .theme
-                                                    .textTheme
-                                                    .bodyText1
-                                                    ?.color),
-                                          ),
-                                          labelPadding: EdgeInsets.only(
-                                              top: 4,
-                                              bottom: 4,
-                                              left: 2,
-                                              right: 10),
-                                          selected: useAsBasePath,
-                                          selectedColor: ThemeProvider
-                                              .theme.primaryColorDark,
-                                          onSelected: (bool selected) {
-                                            setState(() {
-                                              if (selected) {
-                                                useAsBasePath = true;
-                                              } else {
-                                                useAsBasePath = false;
-                                              }
-                                            });
-                                          },
                                         ),
-                                        FilterChip(
-                                          key: Key('starts on load filterchip'),
-                                          backgroundColor: Colors.grey,
-                                          avatar: Container(
-                                            height: 30,
-                                            width: 30,
-                                            child: CircleAvatar(
-                                              backgroundColor: ThemeProvider
-                                                  .theme.accentColor,
-                                              child: Icon(
-                                                Icons.download_rounded,
-                                                color: ThemeProvider.theme
-                                                    .textTheme.bodyText1?.color,
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 10.0, left: 20),
+                                          child: Container(
+                                            width: 150,
+                                            height: 50,
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                if (_rulesformKey.currentState!
+                                                        .validate() ==
+                                                    true) {
+                                                  setState(() {
+                                                    isNewDownloadRules = true;
+                                                    RulesApi.addRules(
+                                                      type: "rule",
+                                                      label:
+                                                          labelRulesController
+                                                              .text,
+                                                      feedIDs: [
+                                                        feedidgetter(
+                                                                applicableFeedSelected
+                                                                    .toString(),
+                                                                model
+                                                                    .RssFeedsList)
+                                                            .toString()
+                                                      ],
+                                                      field: "test",
+                                                      matchpattern:
+                                                          matchpatternController
+                                                              .text,
+                                                      excludepattern:
+                                                          excludepatternController
+                                                              .text,
+                                                      destination:
+                                                          destinationController
+                                                              .text,
+                                                      tags: [
+                                                        tagsController.text
+                                                      ],
+                                                      startOnLoad: startOnLoad,
+                                                      isBasePath: useAsBasePath,
+                                                      count: 0,
+                                                      context: context,
+                                                    );
+                                                    final addRuleSnackbar =
+                                                        addFloodSnackBar(
+                                                            SnackbarType
+                                                                .information,
+                                                            'New Rule added successfully',
+                                                            'Dismiss');
+
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                            addRuleSnackbar);
+                                                    FeedsApi
+                                                        .listAllFeedsAndRules(
+                                                            context: context);
+                                                  });
+                                                }
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                elevation: 0,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                ),
+                                                primary: ThemeProvider
+                                                    .theme.primaryColorDark,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "Save",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
                                               ),
                                             ),
                                           ),
-                                          labelPadding: EdgeInsets.only(
-                                              top: 4,
-                                              bottom: 4,
-                                              left: 2,
-                                              right: 35),
-                                          label: Text(
-                                            'Start on load',
-                                            style: TextStyle(
-                                                fontFamily: 'Montserrat',
-                                                fontSize: 13,
-                                                color: ThemeProvider
-                                                    .theme
-                                                    .textTheme
-                                                    .bodyText1
-                                                    ?.color),
-                                          ),
-                                          selected: startOnLoad,
-                                          selectedColor: ThemeProvider
-                                              .theme.primaryColorDark,
-                                          onSelected: (bool selected) {
-                                            setState(() {
-                                              if (selected) {
-                                                startOnLoad = true;
-                                              } else {
-                                                startOnLoad = false;
-                                              }
-                                            });
-                                          },
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 10.0),
-                                        child: Container(
-                                          width: 150,
-                                          height: 50,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                isNewDownloadRules = false;
-                                              });
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              elevation: 0,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                              ),
-                                              primary: Colors.red,
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                "Cancel",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 10.0, left: 20),
-                                        child: Container(
-                                          width: 150,
-                                          height: 50,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                isNewDownloadRules = true;
-                                                RulesApi.addRules(
-                                                  type: "rule",
-                                                  label:
-                                                      labelRulesController.text,
-                                                  feedIDs: [
-                                                    feedidgetter(
-                                                            applicableFeedSelected
-                                                                .toString(),
-                                                            model.RssFeedsList)
-                                                        .toString()
-                                                  ],
-                                                  field: "test",
-                                                  matchpattern:
-                                                      matchpatternController
-                                                          .text,
-                                                  excludepattern:
-                                                      excludepatternController
-                                                          .text,
-                                                  destination:
-                                                      destinationController
-                                                          .text,
-                                                  tags: [tagsController.text],
-                                                  startOnLoad: startOnLoad,
-                                                  isBasePath: useAsBasePath,
-                                                  count: 0,
-                                                  context: context,
-                                                );
-                                                final addRuleSnackbar =
-                                                    addFloodSnackBar(
-                                                        SnackbarType
-                                                            .information,
-                                                        'New Rule added successfully',
-                                                        'Dismiss');
-
-                                                ScaffoldMessenger.of(context)
-                                                    .clearSnackBars();
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                        addRuleSnackbar);
-                                                FeedsApi.listAllFeedsAndRules(
-                                                    context: context);
-                                              });
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              elevation: 0,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                              ),
-                                              primary: ThemeProvider
-                                                  .theme.primaryColorDark,
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                "Save",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             )
                           : Container(),

@@ -111,32 +111,30 @@ void main() {
         await tester.pumpAndSettle();
       },
     );
-
     testWidgets(
       "Check adding new feed widgets",
       (WidgetTester tester) async {
         await tester.pumpWidget(createWidgetUnderTest());
         expect(find.text('New'), findsOneWidget);
-        expect(find.byKey(Key('Label textfield')), findsNothing);
-        expect(find.byKey(Key('Interval textfield')), findsNothing);
+        expect(find.byKey(Key('Label textformfield')), findsNothing);
+        expect(find.byKey(Key('Interval textformfield')), findsNothing);
         expect(find.byKey(Key('Interval type dropdown')), findsNothing);
-        expect(find.byKey(Key('Url textfield')), findsNothing);
+        expect(find.byKey(Key('Url textformfield')), findsNothing);
         expect(find.byKey(Key('Url paste icon')), findsNothing);
         expect(find.text('Cancel'), findsNothing);
         expect(find.text('Save'), findsNothing);
         await tester.tap(find.text('New'));
         await tester.pumpAndSettle();
-        expect(find.byKey(Key('Label textfield')), findsOneWidget);
-        expect(find.byKey(Key('Interval textfield')), findsOneWidget);
+        expect(find.byKey(Key('Label textformfield')), findsOneWidget);
+        expect(find.byKey(Key('Interval textformfield')), findsOneWidget);
         expect(find.byKey(Key('Interval type dropdown')), findsOneWidget);
-        expect(find.byKey(Key('Url textfield')), findsOneWidget);
+        expect(find.byKey(Key('Url textformfield')), findsOneWidget);
         expect(find.byKey(Key('Url paste icon')), findsOneWidget);
         expect(find.text('Cancel'), findsOneWidget);
         expect(find.text('Save'), findsOneWidget);
         await tester.pumpAndSettle();
       },
     );
-
     testWidgets(
       "Check browse feeds widgets",
       (WidgetTester tester) async {
@@ -147,7 +145,6 @@ void main() {
       },
     );
   });
-
   group("Check Download Rules Tab", () {
     testWidgets(
       "Check existing rules are displayed",
@@ -161,7 +158,6 @@ void main() {
         await tester.pumpAndSettle();
       },
     );
-
     testWidgets(
       "Check adding new rules widgets",
       (WidgetTester tester) async {
@@ -169,25 +165,25 @@ void main() {
         await tester.tap(find.text('Download Rules'));
         await tester.pumpAndSettle();
         expect(find.text('New'), findsOneWidget);
-        expect(find.byKey(Key('Rules label textfield')), findsNothing);
+        expect(find.byKey(Key('Rules label textformfield')), findsNothing);
         expect(find.byKey(Key('applicable feed dropdown')), findsNothing);
-        expect(find.byKey(Key('Match pattern textfield')), findsNothing);
-        expect(find.byKey(Key('Exclude pattern textfield')), findsNothing);
-        expect(find.byKey(Key('Torrent destination textfield')), findsNothing);
-        expect(find.byKey(Key('Apply tags textfield')), findsNothing);
+        expect(find.byKey(Key('Match pattern textformfield')), findsNothing);
+        expect(find.byKey(Key('Exclude pattern textformfield')), findsNothing);
+        expect(
+            find.byKey(Key('Torrent destination textformfield')), findsNothing);
+        expect(find.byKey(Key('Apply tags textformfield')), findsNothing);
         expect(find.byKey(Key('use as base path filterchip')), findsNothing);
         expect(find.byKey(Key('starts on load filterchip')), findsNothing);
         expect(find.text('Cancel'), findsNothing);
         expect(find.text('Save'), findsNothing);
         await tester.tap(find.text('New'));
         await tester.pumpAndSettle();
-        expect(find.byKey(Key('Rules label textfield')), findsOneWidget);
+        expect(find.byKey(Key('Rules label textformfield')), findsOneWidget);
         expect(find.byKey(Key('applicable feed dropdown')), findsOneWidget);
-        expect(find.byKey(Key('Match pattern textfield')), findsOneWidget);
-        expect(find.byKey(Key('Exclude pattern textfield')), findsOneWidget);
-        expect(
-            find.byKey(Key('Torrent destination textfield')), findsOneWidget);
-        expect(find.byKey(Key('Apply tags textfield')), findsOneWidget);
+        expect(find.byKey(Key('Match pattern textformfield')), findsOneWidget);
+        expect(find.byKey(Key('Torrent destination textformfield')),
+            findsOneWidget);
+        expect(find.byKey(Key('Apply tags textformfield')), findsOneWidget);
         expect(find.byKey(Key('use as base path filterchip')), findsOneWidget);
         expect(find.byKey(Key('starts on load filterchip')), findsOneWidget);
         expect(find.text('Cancel'), findsOneWidget);
