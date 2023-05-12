@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Components/add_automatic_torrent.dart';
+import 'package:flood_mobile/Components/add_tag_dialogue.dart';
 import 'package:flood_mobile/Components/delete_torrent_sheet.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
@@ -278,6 +279,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                               );
                               selectTorrent.changeSelectionMode();
+                            }
+                            if (value == "Set Tags") {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AddTagDialogue(
+                                      torrents: selectTorrent
+                                          .selectedTorrentList
+                                          .toList())).then((value) {
+                                setState(() {
+                                  selectTorrent.changeSelectionMode();
+                                  selectTorrent.removeAllItemsFromList();
+                                });
+                              });
                             }
                           },
                           itemBuilder: (BuildContext context) {

@@ -347,4 +347,38 @@ class TorrentApi {
       return false;
     }
   }
+
+  static Future<void> setTags(
+      {required List<String> tagLits,
+      required String hashes,
+      required BuildContext context}) async {
+    try {
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+          ApiProvider.setTags;
+      print('---SET TAGS---');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          Provider.of<UserDetailProvider>(context, listen: false).token;
+      Map<String, dynamic> mp = Map();
+      mp['hashes'] = [hashes];
+      mp['tags'] = tagLits;
+      String rawBody = json.encode(mp);
+      response = await dio.patch(
+        url,
+        data: rawBody,
+      );
+      if (response.statusCode == 200) {
+      } else {
+        print('--TAG ADDED--');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }

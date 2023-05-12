@@ -36,6 +36,8 @@ class ApiProvider extends ChangeNotifier {
   // /api/feed-monitor/feeds/{id}
   static String listAllFeedsAndRules = '/api/feed-monitor';
 
+  static String setTags = '/api/torrents/tags';
+
   Future<void> setBaseUrl(String url) async {
     baseUrl = url;
     SharedPreferences prefs = await SharedPreferences.getInstance();

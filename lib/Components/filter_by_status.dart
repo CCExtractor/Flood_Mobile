@@ -97,6 +97,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     groupValue: filterModel.filterStatus,
                     onChanged: (FilterValue? value) {
                       Provider.of<FilterProvider>(context, listen: false)
+                          .setTagSelected('null');
+                      Provider.of<FilterProvider>(context, listen: false)
                           .settrackerURISelected('null');
                       Provider.of<FilterProvider>(context, listen: false)
                           .setFilterSelected(value!);
@@ -167,6 +169,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     groupValue: filterModel.filterStatus,
                     onChanged: (FilterValue? value) {
                       Provider.of<FilterProvider>(context, listen: false)
+                          .setTagSelected('null');
+                      Provider.of<FilterProvider>(context, listen: false)
                           .settrackerURISelected('null');
                       Provider.of<FilterProvider>(context, listen: false)
                           .setFilterSelected(value!);
@@ -235,6 +239,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     value: FilterValue.seeding,
                     groupValue: filterModel.filterStatus,
                     onChanged: (FilterValue? value) {
+                      Provider.of<FilterProvider>(context, listen: false)
+                          .setTagSelected('null');
                       Provider.of<FilterProvider>(context, listen: false)
                           .settrackerURISelected('null');
                       Provider.of<FilterProvider>(context, listen: false)
@@ -305,6 +311,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     groupValue: filterModel.filterStatus,
                     onChanged: (FilterValue? value) {
                       Provider.of<FilterProvider>(context, listen: false)
+                          .setTagSelected('null');
+                      Provider.of<FilterProvider>(context, listen: false)
                           .settrackerURISelected('null');
                       Provider.of<FilterProvider>(context, listen: false)
                           .setFilterSelected(value!);
@@ -373,6 +381,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     value: FilterValue.stopped,
                     groupValue: filterModel.filterStatus,
                     onChanged: (FilterValue? value) {
+                      Provider.of<FilterProvider>(context, listen: false)
+                          .setTagSelected('null');
                       Provider.of<FilterProvider>(context, listen: false)
                           .settrackerURISelected('null');
                       Provider.of<FilterProvider>(context, listen: false)
@@ -443,6 +453,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     groupValue: filterModel.filterStatus,
                     onChanged: (FilterValue? value) {
                       Provider.of<FilterProvider>(context, listen: false)
+                          .setTagSelected('null');
+                      Provider.of<FilterProvider>(context, listen: false)
                           .settrackerURISelected('null');
                       Provider.of<FilterProvider>(context, listen: false)
                           .setFilterSelected(value!);
@@ -511,6 +523,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     value: FilterValue.inactive,
                     groupValue: filterModel.filterStatus,
                     onChanged: (FilterValue? value) {
+                      Provider.of<FilterProvider>(context, listen: false)
+                          .setTagSelected('null');
                       Provider.of<FilterProvider>(context, listen: false)
                           .settrackerURISelected('null');
                       Provider.of<FilterProvider>(context, listen: false)
@@ -581,6 +595,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     groupValue: filterModel.filterStatus,
                     onChanged: (FilterValue? value) {
                       Provider.of<FilterProvider>(context, listen: false)
+                          .setTagSelected('null');
+                      Provider.of<FilterProvider>(context, listen: false)
                           .settrackerURISelected('null');
                       Provider.of<FilterProvider>(context, listen: false)
                           .setFilterSelected(value!);
@@ -588,6 +604,215 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     activeColor: Colors.blue,
                   ),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text("Filter by tags",
+                    style: TextStyle(
+                        color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold)),
+                ListTile(
+                  minLeadingWidth: 2,
+                  visualDensity: VisualDensity(horizontal: -4, vertical: -2),
+                  title: Row(
+                    children: [
+                      Text('All',
+                          style: TextStyle(
+                              color: filterModel.filterStatus
+                                          .toString()
+                                          .split(".")
+                                          .last ==
+                                      "all"
+                                  ? Colors.blue
+                                  : ThemeProvider
+                                      .theme.textTheme.bodyText1?.color,
+                              fontFamily: 'Montserrat',
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal)),
+                      SizedBox(width: 5),
+                      Container(
+                        width: 18,
+                        height: 18,
+                        child: Center(
+                          child: Text(torrentLength,
+                              style: TextStyle(
+                                  color: Colors.black45,
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: filterModel.filterStatus
+                                      .toString()
+                                      .split(".")
+                                      .last ==
+                                  "all"
+                              ? Colors.blue
+                              : Colors.blueGrey,
+                        ),
+                      )
+                    ],
+                  ),
+                  trailing: Radio<FilterValue>(
+                    value: FilterValue.all,
+                    groupValue: filterModel.filterStatus,
+                    onChanged: (FilterValue? value) {
+                      Provider.of<FilterProvider>(context, listen: false)
+                          .settrackerURISelected('null');
+                      Provider.of<FilterProvider>(context, listen: false)
+                          .setFilterSelected(value!);
+                      Provider.of<FilterProvider>(context, listen: false)
+                          .setTagSelected('null');
+                    },
+                    activeColor: Colors.blue,
+                  ),
+                ),
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: filterModel.mapTags.keys.toList().length,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (filterModel.mapTags.keys.toList()[index] !=
+                          'Untagged') {
+                        return ListTile(
+                          minLeadingWidth: 2,
+                          visualDensity:
+                              VisualDensity(horizontal: -4, vertical: -2),
+                          title: Row(
+                            children: [
+                              Flexible(
+                                child: Text(
+                                    filterModel.mapTags.keys.toList()[index],
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        color: filterModel.mapTags.keys
+                                                    .toList()[index] ==
+                                                filterModel.tagSelected
+                                                    .toString()
+                                            ? Colors.blue
+                                            : ThemeProvider.theme.textTheme
+                                                .bodyText1?.color,
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.normal)),
+                              ),
+                              SizedBox(width: 5),
+                              Container(
+                                width: 18,
+                                height: 18,
+                                child: Center(
+                                  child: Text(
+                                      filterModel.mapTags[filterModel
+                                              .mapTags.keys
+                                              .toList()[index]]
+                                          .toString(),
+                                      style: TextStyle(
+                                          color: Colors.black45,
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: filterModel.mapTags.keys
+                                              .toList()[index] ==
+                                          filterModel.tagSelected.toString()
+                                      ? Colors.blue
+                                      : Colors.blueGrey,
+                                ),
+                              )
+                            ],
+                          ),
+                          trailing: Radio<String>(
+                            value: filterModel.mapTags.keys
+                                .toList()[index]
+                                .toString(),
+                            groupValue: filterModel.tagSelected,
+                            onChanged: (value) {
+                              Provider.of<FilterProvider>(context,
+                                      listen: false)
+                                  .setFilterSelected(null);
+                              Provider.of<FilterProvider>(context,
+                                      listen: false)
+                                  .setTagSelected(value.toString());
+                              Provider.of<FilterProvider>(context,
+                                      listen: false)
+                                  .settrackerURISelected('null');
+                            },
+                            activeColor: Colors.blue,
+                          ),
+                        );
+                      } else {
+                        return ListTile(
+                          minLeadingWidth: 2,
+                          visualDensity:
+                              VisualDensity(horizontal: -4, vertical: -2),
+                          title: Row(
+                            children: [
+                              Text('Untagged',
+                                  style: TextStyle(
+                                      color: filterModel.tagSelected
+                                                  .toString()
+                                                  .split(".")
+                                                  .last ==
+                                              "Untagged"
+                                          ? Colors.blue
+                                          : ThemeProvider
+                                              .theme.textTheme.bodyText1?.color,
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.normal)),
+                              SizedBox(width: 5),
+                              Container(
+                                width: 18,
+                                height: 18,
+                                child: Center(
+                                  child: Text(
+                                      Provider.of<FilterProvider>(context)
+                                          .mapTags['Untagged']
+                                          .toString(),
+                                      style: TextStyle(
+                                          color: Colors.black45,
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: filterModel.tagSelected
+                                              .toString()
+                                              .split(".")
+                                              .last ==
+                                          "Untagged"
+                                      ? Colors.blue
+                                      : Colors.blueGrey,
+                                ),
+                              )
+                            ],
+                          ),
+                          trailing: Radio<String>(
+                            value: filterModel.mapTags.keys
+                                .toList()[index]
+                                .toString(),
+                            groupValue: filterModel.tagSelected,
+                            onChanged: (_) {
+                              Provider.of<FilterProvider>(context,
+                                      listen: false)
+                                  .settrackerURISelected('null');
+                              Provider.of<FilterProvider>(context,
+                                      listen: false)
+                                  .setTagSelected('Untagged');
+                              Provider.of<FilterProvider>(context,
+                                      listen: false)
+                                  .setFilterSelected(null);
+                            },
+                            activeColor: Colors.blue,
+                          ),
+                        );
+                      }
+                    }),
                 SizedBox(
                   height: 20,
                 ),
@@ -643,6 +868,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                     value: FilterValue.all,
                     groupValue: filterModel.filterStatus,
                     onChanged: (FilterValue? value) {
+                      Provider.of<FilterProvider>(context, listen: false)
+                          .setTagSelected('null');
                       Provider.of<FilterProvider>(context, listen: false)
                           .settrackerURISelected('null');
                       Provider.of<FilterProvider>(context, listen: false)
@@ -710,6 +937,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                               .toString(),
                           groupValue: filterModel.trackerURISelected,
                           onChanged: (value) {
+                            Provider.of<FilterProvider>(context, listen: false)
+                                .setTagSelected('null');
                             Provider.of<FilterProvider>(context, listen: false)
                                 .setFilterSelected(null);
                             Provider.of<FilterProvider>(context, listen: false)
