@@ -3,6 +3,7 @@ import 'package:flood_mobile/Api/event_handler_api.dart';
 import 'package:flood_mobile/Constants/event_names.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_client_sse/constants/sse_request_type_enum.dart';
 import 'package:flutter_client_sse/flutter_client_sse.dart';
 import 'package:provider/provider.dart';
 
@@ -18,10 +19,14 @@ class SSEProvider extends ChangeNotifier {
 
   void listenToSSE(BuildContext context) {
     SSEClient.subscribeToSSE(
-            Provider.of<ApiProvider>(context).baseUrl +
-                ApiProvider.eventsStreamUrl,
-            Provider.of<UserDetailProvider>(context).token)
-        .listen((event) {
+        url: Provider.of<ApiProvider>(context).baseUrl +
+            ApiProvider.eventsStreamUrl,
+        method: SSERequestType.GET,
+        header: {
+          "Cookie": Provider.of<UserDetailProvider>(context).token,
+          "Accept": "text/event-stream",
+          "Cache-Control": "no-cache",
+        }).listen((event) {
       if (event.id != '' && event.data != '' && event.event != '') {
         // print('Id: ' + event.id!);
         // print('Event: ' + event.event!);
