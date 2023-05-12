@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:duration/duration.dart';
@@ -200,61 +201,83 @@ class EventHandlerApi {
         Provider.of<FilterProvider>(context, listen: false);
     var maptrackerURIs = {};
     var mapStatus = {};
-    Map<String, dynamic> mapTags = {};
     List<String> statusList = [];
-    filterProvider.tagListMain = [];
-    filterProvider.mapTags = {'Untagged': 0};
-    torrentLength = torrentList.length.toString();
+    Map<String, dynamic> mapTags = {};
+    List<Map<String, dynamic>> trackersSizeList = [];
+    List<Map<String, dynamic>> tagsSizeList = [];
 
-    //For torrent TrackerURIs
-    filterProvider.trackerURIsListMain = [];
+    //For torrent trackerURI
+    //make a List of Map for trackerURIs and their corresponding size
     try {
       for (int i = 0; i < torrentList.length; i++) {
         for (int j = 0; j < torrentList[i].trackerURIs.length; j++) {
-          filterProvider.trackerURIsListMain
-              .add(torrentList[i].trackerURIs[j].toString());
-          filterProvider
-              .settrackerURIsListMain(filterProvider.trackerURIsListMain);
+          trackersSizeList.add({
+            torrentList[i].trackerURIs[j].toString():
+                torrentList[i].sizeBytes.toString()
+          });
         }
       }
+      filterProvider.setTrackersSizeList(trackersSizeList);
     } catch (e) {
       print(e);
     }
+    //make a map of trackerURIs and their corresponding status
     try {
-      filterProvider.trackerURIsListMain.forEach((element) {
-        if (!maptrackerURIs.containsKey(element)) {
-          maptrackerURIs[element] = 1;
+      filterProvider.trackersSizeList.forEach((element) {
+        if (!maptrackerURIs.containsKey(element.keys.first)) {
+          maptrackerURIs[element.keys.first] = [
+            1,
+            double.parse(element.values.first)
+          ];
         } else {
-          maptrackerURIs[element] += 1;
+          maptrackerURIs.update(
+              element.keys.first,
+              (value) => [
+                    value[0] + 1,
+                    value[1] + double.parse(element.values.first)
+                  ]);
         }
       });
+      maptrackerURIs = SplayTreeMap<String, dynamic>.from(maptrackerURIs);
       filterProvider.setmaptrackerURIs(maptrackerURIs);
     } catch (e) {
       print(e);
     }
 
     //For torrent tags
+    //make a List of Map for tags and their corresponding size
     try {
       for (int i = 0; i < torrentList.length; i++) {
         if (torrentList[i].tags.isEmpty) {
-          filterProvider.mapTags.update('Untagged', (value) => ++value);
-        }
-        for (int j = 0; j < torrentList[i].tags.length; j++) {
-          filterProvider.tagListMain.add(torrentList[i].tags[j].toString());
-          filterProvider.setTagsListMain(filterProvider.tagListMain);
+          tagsSizeList.add({'Untagged': '0'});
+        } else {
+          for (int j = 0; j < torrentList[i].tags.length; j++) {
+            tagsSizeList.add({
+              torrentList[i].tags[j].toString():
+                  torrentList[i].sizeBytes.toString()
+            });
+          }
         }
       }
+      filterProvider.setTagsSizeList(tagsSizeList);
     } catch (e) {
       print(e);
     }
+    //make a map of tags and their corresponding status
     try {
-      filterProvider.tagListMain.forEach((element) {
-        if (!mapTags.containsKey(element)) {
-          mapTags[element] = 1;
+      filterProvider.tagsSizeList.forEach((element) {
+        if (!mapTags.containsKey(element.keys.first)) {
+          mapTags[element.keys.first] = [1, double.parse(element.values.first)];
         } else {
-          mapTags[element] += 1;
+          mapTags.update(
+              element.keys.first,
+              (value) => [
+                    value[0] + 1,
+                    value[1] + double.parse(element.values.first)
+                  ]);
         }
       });
+      mapTags = SplayTreeMap<String, dynamic>.from(mapTags);
       filterProvider.setmapTags(mapTags);
     } catch (e) {
       print(e);
@@ -271,6 +294,7 @@ class EventHandlerApi {
     } catch (e) {
       print(e);
     }
+
     try {
       statusList.forEach((element) {
         if (!mapStatus.containsKey(element)) {

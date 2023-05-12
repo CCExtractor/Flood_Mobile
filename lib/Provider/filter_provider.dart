@@ -17,11 +17,11 @@ class FilterProvider extends ChangeNotifier {
   var mapStatus = {};
   String tagSelected = '';
   List<String> tagList = [];
-  List<String> tagListMain = [];
   Map<String, dynamic> mapTags = {'Untagged': 0};
   String trackerURISelected = '';
   List<String> trackerURIsList = [];
-  List<String> trackerURIsListMain = [];
+  var trackersSizeList = [];
+  var tagsSizeList = [];
   var maptrackerURIs = {};
 
   void setFilterSelected(FilterValue? newfilterStatus) {
@@ -41,16 +41,12 @@ class FilterProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setTagsListMain(List<String> newTagListMain) {
-    tagListMain = newTagListMain;
-  }
-
   void setmapTags(Map<String, dynamic> newTagStatus) {
-    mapTags.addAll(newTagStatus);
+    mapTags = newTagStatus;
   }
 
-  void setTagList(var newTagList) {
-    tagList = newTagList;
+  void setTagsSizeList(var newTagsSizeList) {
+    tagsSizeList = newTagsSizeList;
   }
 
   void settrackerURISelected(String newtrackerURISelected) {
@@ -58,15 +54,11 @@ class FilterProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void settrackerURIsList(List<String> newtrackerURIsList) {
-    trackerURIsList = newtrackerURIsList;
-  }
-
-  void settrackerURIsListMain(List<String> newtrackerURIsListMain) {
-    trackerURIsListMain = newtrackerURIsListMain;
-  }
-
   void setmaptrackerURIs(var newmaptrackerURIs) {
     maptrackerURIs = newmaptrackerURIs;
+  }
+
+  void setTrackersSizeList(var newTrackersSizeList) {
+    trackersSizeList = newTrackersSizeList;
   }
 }
