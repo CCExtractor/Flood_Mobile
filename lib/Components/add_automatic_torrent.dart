@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../Provider/api_provider.dart';
 import '../Provider/user_detail_provider.dart';
 
+// ignore: must_be_immutable
 class AddAutoTorrent extends StatefulWidget {
   String base64;
   List<int> imageBytes;
@@ -33,7 +34,6 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getDefaultDirectory();
     _addAndGetTorrent();
@@ -55,7 +55,7 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Montserrat',
-                    color: ThemeProvider.theme.textTheme.bodyText1?.color),
+                    color: ThemeProvider.theme.textTheme.bodyLarge?.color),
               ),
             ),
             Padding(
@@ -90,7 +90,7 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                                   fontSize: 16,
                                   fontFamily: 'Montserrat',
                                   color: ThemeProvider
-                                      .theme.textTheme.bodyText1?.color),
+                                      .theme.textTheme.bodyLarge?.color),
                             ),
                           ),
                         ],
@@ -112,19 +112,19 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                     TextField(
                       controller: directoryController,
                       style: TextStyle(
-                        color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                        color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                       ),
                       decoration: InputDecoration(
                         prefixIcon: Icon(
                           Icons.folder,
-                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                         ),
                         labelText: 'Destination',
                         hintText: 'Destination',
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color),
+                                ThemeProvider.theme.textTheme.bodyLarge?.color),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -206,10 +206,10 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
+                          backgroundColor: ThemeProvider.theme.primaryColorDark,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(14.0),
                           ),
-                          primary: ThemeProvider.theme.primaryColorDark,
                         ),
                         child: Center(
                           child: Text(

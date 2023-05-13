@@ -38,7 +38,6 @@ class AuthApi {
       if (response.statusCode == 200) {
         //Successfully Logged in
         print(response.data);
-        // TODO(owner): check logic
         String? token =
             response.headers['Set-Cookie']?[0].toString().split(';')[0];
         print('Token $token');

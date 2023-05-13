@@ -15,7 +15,6 @@ import '../Constants/theme_provider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 import '../Provider/client_provider.dart';
-import 'add_torrent_sheet.dart';
 
 class RSSFeedHomePage extends StatefulWidget {
   @override
@@ -95,7 +94,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
               Tab(key: Key('Download Rules Tab'), text: "Download Rules"),
             ],
             tabBarProperties: TabBarProperties(
-              indicatorColor: ThemeProvider.theme.textTheme.bodyText1?.color,
+              indicatorColor: ThemeProvider.theme.textTheme.bodyLarge?.color,
               indicatorWeight: 3.0,
               indicatorPadding: EdgeInsets.only(left: 12.0, right: 12.0),
             ),
@@ -116,10 +115,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat',
                               color: ThemeProvider
-                                  .theme.textTheme.bodyText1?.color),
+                                  .theme.textTheme.bodyLarge?.color),
                         ),
                       ),
-                      (model.RssFeedsList.isNotEmpty)
+                      (model.rssFeedsList.isNotEmpty)
                           ? Container(
                               key: Key("Feeds are fetched"),
                               decoration: BoxDecoration(
@@ -135,7 +134,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 physics: ClampingScrollPhysics(),
-                                itemCount: model.RssFeedsList.length,
+                                itemCount: model.rssFeedsList.length,
                                 itemBuilder: (context, index) {
                                   return Column(
                                     children: [
@@ -154,16 +153,16 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 children: [
                                                   Flexible(
                                                     child: Text(model
-                                                        .RssFeedsList[index]
+                                                        .rssFeedsList[index]
                                                         .label
                                                         .toString()),
                                                   ),
                                                   SizedBox(width: 10),
-                                                  Text(model.RssFeedsList[index]
+                                                  Text(model.rssFeedsList[index]
                                                               .count !=
                                                           null
                                                       ? model
-                                                              .RssFeedsList[
+                                                              .rssFeedsList[
                                                                   index]
                                                               .count
                                                               .toString() +
@@ -184,22 +183,22 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       isUpdateFeedSelected =
                                                           true;
                                                       updateFeedId = model
-                                                          .RssFeedsList[index]
+                                                          .rssFeedsList[index]
                                                           .id
                                                           .toString();
                                                       urlController.text = model
-                                                          .RssFeedsList[index]
+                                                          .rssFeedsList[index]
                                                           .url
                                                           .toString();
                                                       labelController.text =
                                                           model
-                                                              .RssFeedsList[
+                                                              .rssFeedsList[
                                                                   index]
                                                               .label
                                                               .toString();
                                                       intervalController.text =
                                                           model
-                                                              .RssFeedsList[
+                                                              .rssFeedsList[
                                                                   index]
                                                               .interval
                                                               .toString();
@@ -214,7 +213,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         .deleteFeedsOrRules(
                                                             context: context,
                                                             id: model
-                                                                .RssFeedsList[
+                                                                .rssFeedsList[
                                                                     index]
                                                                 .id
                                                                 .toString());
@@ -243,44 +242,44 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           ],
                                         ),
                                         subtitle: Row(children: [
-                                          Text(model.RssFeedsList[index].interval! / 60 > 24 &&
-                                                  (model.RssFeedsList[index].interval! / 60)
+                                          Text(model.rssFeedsList[index].interval! / 60 > 24 &&
+                                                  (model.rssFeedsList[index].interval! / 60)
                                                           .toString()
                                                           .split('.')[1] ==
                                                       "0"
-                                              ? (((model.RssFeedsList[index].interval! / 60) / 24)
+                                              ? (((model.rssFeedsList[index].interval! / 60) / 24)
                                                       .toString()
                                                       .split('.')[0] +
                                                   ' Days')
-                                              : model.RssFeedsList[index].interval! / 60 < 24 &&
-                                                      model.RssFeedsList[index].interval! / 60 >
+                                              : model.rssFeedsList[index].interval! / 60 < 24 &&
+                                                      model.rssFeedsList[index].interval! / 60 >
                                                           1 &&
-                                                      (model.RssFeedsList[index].interval! / 60)
+                                                      (model.rssFeedsList[index].interval! / 60)
                                                               .toString()
                                                               .split('.')[1] ==
                                                           "0"
-                                                  ? ((model.RssFeedsList[index].interval! / 60))
+                                                  ? ((model.rssFeedsList[index].interval! / 60))
                                                           .toString()
                                                           .split('.')[0] +
                                                       ' Hours'
-                                                  : model.RssFeedsList[index]
+                                                  : model.rssFeedsList[index]
                                                           .interval
                                                           .toString() +
                                                       ' Minutes'),
                                           SizedBox(width: 10),
-                                          Text(model.RssFeedsList[index].url
+                                          Text(model.rssFeedsList[index].url
                                                       .toString()
                                                       .length >
                                                   25
-                                              ? model.RssFeedsList[index].url
+                                              ? model.rssFeedsList[index].url
                                                       .toString()
                                                       .substring(0, 25) +
                                                   '...'
-                                              : model.RssFeedsList[index].url
+                                              : model.rssFeedsList[index].url
                                                   .toString()),
                                         ]),
                                       ),
-                                      (index < model.RssFeedsList.length - 1)
+                                      (index < model.rssFeedsList.length - 1)
                                           ? Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 8.0),
@@ -329,7 +328,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             fontSize: 16,
                                             fontFamily: 'Montserrat',
                                             color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color),
+                                                .bodyLarge?.color),
                                       ),
                                     ),
                                   ],
@@ -346,10 +345,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
+                            backgroundColor:
+                                ThemeProvider.theme.colorScheme.secondary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
-                            primary: ThemeProvider.theme.accentColor,
                           ),
                           child: Center(
                             child: Text(
@@ -376,7 +376,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         key: Key('Label textformfield'),
                                         style: TextStyle(
                                           color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
+                                              .theme.textTheme.bodyLarge?.color,
                                         ),
                                         controller: labelController,
                                         decoration: InputDecoration(
@@ -385,7 +385,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
                                               color: ThemeProvider.theme
-                                                  .textTheme.bodyText1?.color),
+                                                  .textTheme.bodyLarge?.color),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -412,7 +412,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             controller: intervalController,
                                             style: TextStyle(
                                               color: ThemeProvider.theme
-                                                  .textTheme.bodyText1?.color,
+                                                  .textTheme.bodyLarge?.color,
                                             ),
                                             keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
@@ -423,7 +423,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     color: ThemeProvider
                                                         .theme
                                                         .textTheme
-                                                        .bodyText1
+                                                        .bodyLarge
                                                         ?.color),
                                                 border: OutlineInputBorder(
                                                   borderRadius:
@@ -469,7 +469,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       color: ThemeProvider
                                                           .theme
                                                           .textTheme
-                                                          .bodyText1
+                                                          .bodyLarge
                                                           ?.color),
                                                 ),
                                                 value: "Minutes",
@@ -478,7 +478,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   color: ThemeProvider
                                                       .theme
                                                       .textTheme
-                                                      .bodyText1
+                                                      .bodyLarge
                                                       ?.color,
                                                 ),
                                                 buttonHeight: 58,
@@ -558,7 +558,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         controller: urlController,
                                         style: TextStyle(
                                           color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
+                                              .theme.textTheme.bodyLarge?.color,
                                         ),
                                         decoration: InputDecoration(
                                           labelText: 'URL',
@@ -566,7 +566,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
                                               color: ThemeProvider.theme
-                                                  .textTheme.bodyText1?.color),
+                                                  .textTheme.bodyLarge?.color),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -615,12 +615,12 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,
+                                                backgroundColor: Colors.red,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           5.0),
                                                 ),
-                                                primary: Colors.red,
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -699,13 +699,13 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,
+                                                backgroundColor: ThemeProvider
+                                                    .theme.primaryColorDark,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           5.0),
                                                 ),
-                                                primary: ThemeProvider
-                                                    .theme.primaryColorDark,
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -739,7 +739,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Montserrat',
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color),
+                                ThemeProvider.theme.textTheme.bodyLarge?.color),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0),
@@ -761,7 +761,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   prefixIcon: Icon(
                                     Icons.search,
                                     color: ThemeProvider
-                                        .theme.textTheme.bodyText1?.color,
+                                        .theme.textTheme.bodyLarge?.color,
                                     size: 25,
                                   ),
                                   //Add more decoration as you want here
@@ -772,12 +772,12 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   'Select Feed',
                                   style: TextStyle(
                                       color: ThemeProvider
-                                          .theme.textTheme.bodyText1?.color),
+                                          .theme.textTheme.bodyLarge?.color),
                                 ),
                                 icon: Icon(
                                   Icons.keyboard_arrow_down,
                                   color: ThemeProvider
-                                      .theme.textTheme.bodyText1?.color,
+                                      .theme.textTheme.bodyLarge?.color,
                                 ),
                                 buttonHeight: 58,
                                 buttonPadding:
@@ -795,7 +795,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   borderRadius: BorderRadius.circular(5),
                                   color: ThemeProvider.theme.primaryColorLight,
                                 ),
-                                items: feedlabelgetter(model.RssFeedsList)
+                                items: feedlabelgetter(model.rssFeedsList)
                                     .map((item) => DropdownMenuItem<String>(
                                           value: item,
                                           child: Text(
@@ -819,7 +819,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                       context: context,
                                       id: feedidgetter(
                                           browsefeedSelected.toString(),
-                                          model.RssFeedsList));
+                                          model.rssFeedsList));
                                 },
                               ),
                             ],
@@ -841,7 +841,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           child: TextFormField(
                                             style: TextStyle(
                                               color: ThemeProvider.theme
-                                                  .textTheme.bodyText1?.color,
+                                                  .textTheme.bodyLarge?.color,
                                             ),
                                             controller: searchTermController,
                                             decoration: InputDecoration(
@@ -852,7 +852,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   color: ThemeProvider
                                                       .theme
                                                       .textTheme
-                                                      .bodyText1
+                                                      .bodyLarge
                                                       ?.color),
                                               border: OutlineInputBorder(
                                                 borderRadius:
@@ -872,11 +872,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 for (int i = 0;
                                                     i <
                                                         model
-                                                            .RssFeedsContentsList
+                                                            .rssFeedsContentsList
                                                             .length;
                                                     i++) {
                                                   if (model
-                                                      .RssFeedsContentsList[i]
+                                                      .rssFeedsContentsList[i]
                                                       .title
                                                       .toString()
                                                       .toLowerCase()
@@ -886,7 +886,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                               .toLowerCase())) {
                                                     magnetUrlController.text =
                                                         model
-                                                            .RssFeedsContentsList[
+                                                            .rssFeedsContentsList[
                                                                 i]
                                                             .urls[0];
                                                   }
@@ -942,7 +942,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                         color: ThemeProvider
                                                                             .theme
                                                                             .textTheme
-                                                                            .bodyText1
+                                                                            .bodyLarge
                                                                             ?.color),
                                                                   ),
                                                                 ),
@@ -966,14 +966,14 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                           style:
                                                                               TextStyle(
                                                                             color:
-                                                                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                                                                ThemeProvider.theme.textTheme.bodyLarge?.color,
                                                                           ),
                                                                           decoration:
                                                                               InputDecoration(
                                                                             prefixIcon:
                                                                                 Icon(
                                                                               Icons.link,
-                                                                              color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                                                                              color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                                                                             ),
                                                                             suffix:
                                                                                 GestureDetector(
@@ -993,7 +993,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                             labelStyle:
                                                                                 TextStyle(
                                                                               fontFamily: 'Montserrat',
-                                                                              color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                                                                              color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                                                                             ),
                                                                             border:
                                                                                 OutlineInputBorder(
@@ -1041,21 +1041,21 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                           style:
                                                                               TextStyle(
                                                                             color:
-                                                                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                                                                ThemeProvider.theme.textTheme.bodyLarge?.color,
                                                                           ),
                                                                           decoration:
                                                                               InputDecoration(
                                                                             prefixIcon:
                                                                                 Icon(
                                                                               Icons.folder,
-                                                                              color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                                                                              color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                                                                             ),
                                                                             labelText:
                                                                                 'Destination',
                                                                             hintText:
                                                                                 'Destination',
                                                                             labelStyle:
-                                                                                TextStyle(fontFamily: 'Montserrat', color: ThemeProvider.theme.textTheme.bodyText1?.color),
+                                                                                TextStyle(fontFamily: 'Montserrat', color: ThemeProvider.theme.textTheme.bodyLarge?.color),
                                                                             border:
                                                                                 OutlineInputBorder(
                                                                               borderRadius: BorderRadius.circular(8),
@@ -1168,10 +1168,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                             style:
                                                                                 ElevatedButton.styleFrom(
                                                                               elevation: 0,
+                                                                              backgroundColor: ThemeProvider.theme.primaryColorDark,
                                                                               shape: RoundedRectangleBorder(
                                                                                 borderRadius: BorderRadius.circular(14.0),
                                                                               ),
-                                                                              primary: ThemeProvider.theme.primaryColorDark,
                                                                             ),
                                                                             child:
                                                                                 Center(
@@ -1195,13 +1195,13 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,
+                                                backgroundColor: ThemeProvider
+                                                    .theme.primaryColorDark,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           5.0),
                                                 ),
-                                                primary: ThemeProvider
-                                                    .theme.primaryColorDark,
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -1235,11 +1235,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                       shrinkWrap: true,
                                       physics: ClampingScrollPhysics(),
                                       itemCount:
-                                          model.RssFeedsContentsList.length,
+                                          model.rssFeedsContentsList.length,
                                       itemBuilder: (context, index) {
                                         return Column(
                                           children: [
-                                            (model.RssFeedsContentsList[index]
+                                            (model.rssFeedsContentsList[index]
                                                     .title
                                                     .toString()
                                                     .toLowerCase()
@@ -1265,14 +1265,14 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                               child: Row(
                                                                 children: [
                                                                   Text(
-                                                                      model.RssFeedsContentsList[index].title.toString().length <
+                                                                      model.rssFeedsContentsList[index].title.toString().length <
                                                                               38
                                                                           ? model
-                                                                              .RssFeedsContentsList[
+                                                                              .rssFeedsContentsList[
                                                                                   index]
                                                                               .title
                                                                               .toString()
-                                                                          : model.RssFeedsContentsList[index].title.toString().substring(0, 38) +
+                                                                          : model.rssFeedsContentsList[index].title.toString().substring(0, 38) +
                                                                               "..",
                                                                       style: TextStyle(
                                                                           fontSize:
@@ -1284,7 +1284,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         ),
                                                       ),
                                                       (index <
-                                                              model.RssFeedsContentsList
+                                                              model.rssFeedsContentsList
                                                                       .length -
                                                                   1)
                                                           ? Padding(
@@ -1342,10 +1342,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat',
                               color: ThemeProvider
-                                  .theme.textTheme.bodyText1?.color),
+                                  .theme.textTheme.bodyLarge?.color),
                         ),
                       ),
-                      (model.RssRulesList.isNotEmpty)
+                      (model.rssRulesList.isNotEmpty)
                           ? Container(
                               key: Key("Rules Displayed"),
                               decoration: BoxDecoration(
@@ -1361,7 +1361,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 physics: ClampingScrollPhysics(),
-                                itemCount: model.RssRulesList.length,
+                                itemCount: model.rssRulesList.length,
                                 itemBuilder: (context, index) {
                                   return Column(
                                     children: [
@@ -1379,16 +1379,16 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 children: [
                                                   Flexible(
                                                     child: Text(model
-                                                        .RssRulesList[index]
+                                                        .rssRulesList[index]
                                                         .label
                                                         .toString()),
                                                   ),
                                                   SizedBox(width: 10),
-                                                  Text(model.RssRulesList[index]
+                                                  Text(model.rssRulesList[index]
                                                               .count !=
                                                           null
                                                       ? model
-                                                              .RssRulesList[
+                                                              .rssRulesList[
                                                                   index]
                                                               .count
                                                               .toString() +
@@ -1418,7 +1418,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       child: Text(
                                                         "Tags: " +
                                                             model
-                                                                .RssRulesList[
+                                                                .rssRulesList[
                                                                     index]
                                                                 .tags[0]
                                                                 .toString(),
@@ -1446,48 +1446,48 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       labelRulesController
                                                               .text =
                                                           model
-                                                              .RssRulesList[
+                                                              .rssRulesList[
                                                                   index]
                                                               .label
                                                               .toString();
                                                       matchpatternController
                                                               .text =
                                                           model
-                                                              .RssRulesList[
+                                                              .rssRulesList[
                                                                   index]
                                                               .match
                                                               .toString();
                                                       excludepatternController
                                                               .text =
                                                           model
-                                                              .RssRulesList[
+                                                              .rssRulesList[
                                                                   index]
                                                               .exclude
                                                               .toString();
                                                       destinationController
                                                               .text =
                                                           model
-                                                              .RssRulesList[
+                                                              .rssRulesList[
                                                                   index]
                                                               .destination
                                                               .toString();
                                                       tagsController.text =
                                                           model
-                                                              .RssRulesList[
+                                                              .rssRulesList[
                                                                   index]
                                                               .tags[0]
                                                               .toString();
                                                       useAsBasePath = model
-                                                          .RssRulesList[index]
+                                                          .rssRulesList[index]
                                                           .isBasePath;
                                                       startOnLoad = model
-                                                          .RssRulesList[index]
+                                                          .rssRulesList[index]
                                                           .startOnLoad;
                                                       DeleteFeedOrRulesApi
                                                           .deleteFeedsOrRules(
                                                               context: context,
                                                               id: model
-                                                                  .RssRulesList[
+                                                                  .rssRulesList[
                                                                       index]
                                                                   .id
                                                                   .toString());
@@ -1502,7 +1502,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         .deleteFeedsOrRules(
                                                             context: context,
                                                             id: model
-                                                                .RssRulesList[
+                                                                .rssRulesList[
                                                                     index]
                                                                 .id
                                                                 .toString());
@@ -1531,38 +1531,38 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           ],
                                         ),
                                         subtitle: Row(children: [
-                                          Text(model.RssRulesList[index].match
+                                          Text(model.rssRulesList[index].match
                                                       .toString()
                                                       .length >
                                                   10
                                               ? "Match: " +
                                                   model
-                                                      .RssRulesList[index].match
+                                                      .rssRulesList[index].match
                                                       .toString()
                                                       .substring(0, 10) +
                                                   "..."
                                               : "Match: " +
                                                   model
-                                                      .RssRulesList[index].match
+                                                      .rssRulesList[index].match
                                                       .toString()),
                                           SizedBox(width: 10),
-                                          Text(model.RssRulesList[index].exclude
+                                          Text(model.rssRulesList[index].exclude
                                                       .toString()
                                                       .length >
                                                   10
                                               ? "Exclude: " +
-                                                  model.RssRulesList[index]
+                                                  model.rssRulesList[index]
                                                       .exclude
                                                       .toString()
                                                       .substring(0, 10) +
                                                   '...'
                                               : "Exclude: " +
-                                                  model.RssRulesList[index]
+                                                  model.rssRulesList[index]
                                                       .exclude
                                                       .toString()),
                                         ]),
                                       ),
-                                      (index < model.RssRulesList.length - 1)
+                                      (index < model.rssRulesList.length - 1)
                                           ? Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 8.0),
@@ -1610,7 +1610,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             fontSize: 16,
                                             fontFamily: 'Montserrat',
                                             color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color),
+                                                .bodyLarge?.color),
                                       ),
                                     ),
                                   ],
@@ -1627,10 +1627,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
+                            backgroundColor:
+                                ThemeProvider.theme.colorScheme.secondary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
-                            primary: ThemeProvider.theme.accentColor,
                           ),
                           child: Center(
                             child: Text(
@@ -1658,7 +1659,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         controller: labelRulesController,
                                         style: TextStyle(
                                           color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
+                                              .theme.textTheme.bodyLarge?.color,
                                         ),
                                         decoration: InputDecoration(
                                           labelText: 'Label',
@@ -1666,7 +1667,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
                                               color: ThemeProvider.theme
-                                                  .textTheme.bodyText1?.color),
+                                                  .textTheme.bodyLarge?.color),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -1697,7 +1698,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             prefixIcon: Icon(
                                               Icons.search,
                                               color: ThemeProvider.theme
-                                                  .textTheme.bodyText1?.color,
+                                                  .textTheme.bodyLarge?.color,
                                               size: 25,
                                             ),
                                             //Add more decoration as you want here
@@ -1711,13 +1712,13 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 color: ThemeProvider
                                                     .theme
                                                     .textTheme
-                                                    .bodyText1
+                                                    .bodyLarge
                                                     ?.color),
                                           ),
                                           icon: Icon(
                                             Icons.keyboard_arrow_down,
                                             color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color,
+                                                .bodyLarge?.color,
                                           ),
                                           buttonHeight: 58,
                                           buttonPadding: const EdgeInsets.only(
@@ -1739,7 +1740,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 .theme.primaryColorLight,
                                           ),
                                           items: feedlabelgetter(
-                                                  model.RssFeedsList)
+                                                  model.rssFeedsList)
                                               .map((item) =>
                                                   DropdownMenuItem<String>(
                                                     value: item,
@@ -1766,7 +1767,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     id: feedidgetter(
                                                         applicableFeedSelected
                                                             .toString(),
-                                                        model.RssFeedsList));
+                                                        model.rssFeedsList));
                                           },
                                           onSaved: (value) {
                                             applicableFeedSelected =
@@ -1792,7 +1793,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   matchpatternController,
                                               style: TextStyle(
                                                 color: ThemeProvider.theme
-                                                    .textTheme.bodyText1?.color,
+                                                    .textTheme.bodyLarge?.color,
                                               ),
                                               decoration: InputDecoration(
                                                   labelText: 'Match Pattern',
@@ -1802,7 +1803,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       color: ThemeProvider
                                                           .theme
                                                           .textTheme
-                                                          .bodyText1
+                                                          .bodyLarge
                                                           ?.color),
                                                   border: OutlineInputBorder(
                                                     borderRadius:
@@ -1827,7 +1828,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   excludepatternController,
                                               style: TextStyle(
                                                 color: ThemeProvider.theme
-                                                    .textTheme.bodyText1?.color,
+                                                    .textTheme.bodyLarge?.color,
                                               ),
                                               decoration: InputDecoration(
                                                 labelText: 'Exclude Pattern',
@@ -1837,7 +1838,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     color: ThemeProvider
                                                         .theme
                                                         .textTheme
-                                                        .bodyText1
+                                                        .bodyLarge
                                                         ?.color),
                                                 border: OutlineInputBorder(
                                                   borderRadius:
@@ -1857,19 +1858,19 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         controller: destinationController,
                                         style: TextStyle(
                                           color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
+                                              .theme.textTheme.bodyLarge?.color,
                                         ),
                                         decoration: InputDecoration(
                                           prefixIcon: Icon(
                                             Icons.folder,
                                             color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color,
+                                                .bodyLarge?.color,
                                           ),
                                           suffixIcon: IconButton(
                                             icon: Icon(
                                               Icons.search,
                                               color: ThemeProvider.theme
-                                                  .textTheme.bodyText1?.color,
+                                                  .textTheme.bodyLarge?.color,
                                             ),
                                             onPressed: () {},
                                           ),
@@ -1878,7 +1879,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
                                               color: ThemeProvider.theme
-                                                  .textTheme.bodyText1?.color),
+                                                  .textTheme.bodyLarge?.color),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -1893,19 +1894,19 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         controller: tagsController,
                                         style: TextStyle(
                                           color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
+                                              .theme.textTheme.bodyLarge?.color,
                                         ),
                                         decoration: InputDecoration(
                                           prefixIcon: Icon(
                                             Icons.tag,
                                             color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color,
+                                                .bodyLarge?.color,
                                           ),
                                           suffixIcon: IconButton(
                                             icon: Icon(
                                               Icons.keyboard_arrow_down,
                                               color: ThemeProvider.theme
-                                                  .textTheme.bodyText1?.color,
+                                                  .textTheme.bodyLarge?.color,
                                             ),
                                             onPressed: () {},
                                           ),
@@ -1914,7 +1915,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
                                               color: ThemeProvider.theme
-                                                  .textTheme.bodyText1?.color),
+                                                  .textTheme.bodyLarge?.color),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -1937,13 +1938,15 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               width: 30,
                                               child: CircleAvatar(
                                                 backgroundColor: ThemeProvider
-                                                    .theme.accentColor,
+                                                    .theme
+                                                    .colorScheme
+                                                    .secondary,
                                                 child: Icon(
                                                   Icons.home_rounded,
                                                   color: ThemeProvider
                                                       .theme
                                                       .textTheme
-                                                      .bodyText1
+                                                      .bodyLarge
                                                       ?.color,
                                                 ),
                                               ),
@@ -1956,7 +1959,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   color: ThemeProvider
                                                       .theme
                                                       .textTheme
-                                                      .bodyText1
+                                                      .bodyLarge
                                                       ?.color),
                                             ),
                                             labelPadding: EdgeInsets.only(
@@ -1986,13 +1989,15 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               width: 30,
                                               child: CircleAvatar(
                                                 backgroundColor: ThemeProvider
-                                                    .theme.accentColor,
+                                                    .theme
+                                                    .colorScheme
+                                                    .secondary,
                                                 child: Icon(
                                                   Icons.download_rounded,
                                                   color: ThemeProvider
                                                       .theme
                                                       .textTheme
-                                                      .bodyText1
+                                                      .bodyLarge
                                                       ?.color,
                                                 ),
                                               ),
@@ -2010,7 +2015,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   color: ThemeProvider
                                                       .theme
                                                       .textTheme
-                                                      .bodyText1
+                                                      .bodyLarge
                                                       ?.color),
                                             ),
                                             selected: startOnLoad,
@@ -2045,12 +2050,12 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,
+                                                backgroundColor: Colors.red,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           5.0),
                                                 ),
-                                                primary: Colors.red,
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -2088,7 +2093,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                 applicableFeedSelected
                                                                     .toString(),
                                                                 model
-                                                                    .RssFeedsList)
+                                                                    .rssFeedsList)
                                                             .toString()
                                                       ],
                                                       field: "test",
@@ -2128,13 +2133,13 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,
+                                                backgroundColor: ThemeProvider
+                                                    .theme.primaryColorDark,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           5.0),
                                                 ),
-                                                primary: ThemeProvider
-                                                    .theme.primaryColorDark,
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -2174,13 +2179,13 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
   }
 
   String feedidgetter(String newlabel, List<FeedsAndRulesModel> newmodel) {
-    String feed_id = "test";
+    String feedId = "test";
     for (int i = 0; i < newmodel.length; i++) {
       if (newmodel[i].label.toString() == newlabel) {
-        feed_id = newmodel[i].id.toString();
+        feedId = newmodel[i].id.toString();
       }
     }
-    return feed_id;
+    return feedId;
   }
 
   List feedlabelgetter(List<FeedsAndRulesModel> newmodel) {

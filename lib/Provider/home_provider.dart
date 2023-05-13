@@ -10,10 +10,10 @@ class HomeProvider extends ChangeNotifier {
   Map<String, dynamic> torrentListJson = {};
   int unreadNotifications = 0;
   late NotificationModel notificationModel;
-  Map<String, dynamic> RssFeedsListJson = {};
-  List<FeedsAndRulesModel> RssFeedsList = [];
-  List<RulesModel> RssRulesList = [];
-  List<FeedsContentsModel> RssFeedsContentsList = [];
+  Map<String, dynamic> rssFeedsListJson = {};
+  List<FeedsAndRulesModel> rssFeedsList = [];
+  List<RulesModel> rssRulesList = [];
+  List<FeedsContentsModel> rssFeedsContentsList = [];
 
   String upSpeed = '0 KB/s';
   String downSpeed = '0 KB/s';
@@ -44,14 +44,14 @@ class HomeProvider extends ChangeNotifier {
 
   void setRssFeedsList(List<FeedsAndRulesModel> newRssFeedsList,
       List<RulesModel> newRssRulesList) {
-    RssRulesList = newRssRulesList;
-    RssFeedsList = newRssFeedsList;
+    rssRulesList = newRssRulesList;
+    rssFeedsList = newRssFeedsList;
     notifyListeners();
   }
 
   void setRssFeedsContentsList(
       List<FeedsContentsModel> newRssFeedsContentsList) {
-    RssFeedsContentsList = newRssFeedsContentsList;
+    rssFeedsContentsList = newRssFeedsContentsList;
     notifyListeners();
   }
 
@@ -61,7 +61,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void setFeedsAndRulesListJson(Map<String, dynamic> newRssFeedsListJson) {
-    RssFeedsListJson = newRssFeedsListJson;
+    rssFeedsListJson = newRssFeedsListJson;
     notifyListeners();
   }
 

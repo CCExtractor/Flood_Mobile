@@ -47,7 +47,6 @@ class FilterProvider extends ChangeNotifier {
 
   void setmapTags(Map<String, dynamic> newTagStatus) {
     mapTags.addAll(newTagStatus);
-    // notifyListeners();
   }
 
   void setTagList(var newTagList) {

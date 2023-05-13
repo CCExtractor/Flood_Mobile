@@ -1,7 +1,6 @@
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/current_user_detail_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class UsersListView extends StatelessWidget {
@@ -38,7 +37,7 @@ class UsersListView extends StatelessWidget {
                 Text(
                   usersList[index].username,
                   style: TextStyle(
-                    color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                    color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                   ),
                 ),
                 Spacer(),

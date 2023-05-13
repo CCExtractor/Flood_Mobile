@@ -28,7 +28,7 @@ class GraphProvider extends ChangeNotifier {
         ? double.parse(model.downSpeed.replaceAll(' KB/s', ''))
         : model.downSpeed.contains('MB')
             ? (double.parse(model.downSpeed.replaceAll(' MB/s', '')) * 1024)
-            : (double.parse(model.upSpeed.replaceAll(' B/s', '')) / 1024);
+            : (double.parse(model.downSpeed.replaceAll(' B/s', '')) / 1024);
 
     if ((uploadGraphData.last.speed == 0 &&
             downloadGraphData.last.speed == 0) ||

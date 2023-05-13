@@ -32,7 +32,6 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     FlutterDownloader.registerCallback(downloadingCallback);
   }
@@ -63,7 +62,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                       child: IconButton(
                         icon: Icon(
                           Icons.add,
-                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                         ),
                         onPressed: () {
                           model.setSelectionMode(newIsSelected: false);
@@ -77,7 +76,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                   IconButton(
                     icon: Icon(
                       Icons.download_rounded,
-                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                      color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                     ),
                     onPressed: () async {
                       try {
@@ -97,12 +96,11 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                           final Directory? externalDir =
                               await getExternalStorageDirectory();
                           if (externalDir == null) {
-                            //TODO(pratik): check message
                             Toasts.showFailToast(msg: 'File not present');
                           } else {
                             FlutterDownloader.enqueue(
                                 url:
-                                    "${Provider.of<ApiProvider>(context, listen: false).baseUrl}/api/torrents/${widget.arguments.hash}/contents/${downloadFileIndexList}/data",
+                                    "${Provider.of<ApiProvider>(context, listen: false).baseUrl}/api/torrents/${widget.arguments.hash}/contents/$downloadFileIndexList/data",
                                 savedDir: externalDir.path,
                                 showNotification: true,
                                 openFileFromNotification: true,
@@ -125,7 +123,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                     color: ThemeProvider.theme.primaryColorLight,
                     icon: Icon(
                       Icons.more_vert,
-                      color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                      color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                     ),
                     onSelected: (value) {
                       if (value == 'High Priority') {
@@ -151,7 +149,6 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                                 .selectedIndexList);
                         model.removeAllItemsFromList();
                         model.setSelectionMode(newIsSelected: false);
-                        print(1);
                       }
                       if (value == 'Don\'t Download') {
                         TorrentApi.setTorrentContentPriority(
@@ -164,7 +161,6 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                                 .selectedIndexList);
                         model.removeAllItemsFromList();
                         model.setSelectionMode(newIsSelected: false);
-                        print(0);
                       }
                     },
                     itemBuilder: (BuildContext context) {
@@ -211,7 +207,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                           'Files',
                           style: GoogleFonts.notoSans(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme.textTheme.bodyLarge?.color,
                             fontWeight: FontWeight.bold,
                             fontSize: 30,
                           ),

@@ -12,7 +12,7 @@ class SText extends StatelessWidget {
       text,
       style: TextStyle(
           fontSize: 18,
-          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+          color: ThemeProvider.theme.textTheme.bodyLarge?.color,
           fontWeight: FontWeight.w500),
     );
   }

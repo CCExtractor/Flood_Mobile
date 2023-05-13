@@ -86,7 +86,7 @@ class _OnboardingState extends State<Onboarding> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14.0),
                         ),
-                        primary: Color(0xff305067),
+                        backgroundColor: Color(0xff305067),
                       ),
                       child: Text(
                         'Skip',
@@ -114,7 +114,6 @@ class _OnboardingState extends State<Onboarding> {
                   dotHeight: 16,
                   dotWidth: 16,
                   type: WormType.normal,
-                  // strokeWidth: 5,
                 ),
               ),
             ),

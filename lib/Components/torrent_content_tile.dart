@@ -27,7 +27,6 @@ class _FolderFileListViewState extends State<FolderFileListView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     widget.data.forEach((key, value) {
       folderList.add(key);
     });
@@ -105,8 +104,8 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
   bool isSelected = false;
 
   @override
-  // ignore: must_call_super
   void didChangeDependencies() {
+    super.didChangeDependencies();
     if (!Provider.of<TorrentContentProvider>(context)
         .selectedIndexList
         .contains(widget.model.index)) {
@@ -156,7 +155,7 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
               Text(
                 filesize(widget.model.sizeBytes),
                 style: TextStyle(
-                    color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                    color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                     fontSize: 12),
               ),
             ],
@@ -169,7 +168,7 @@ class _TorrentFileTileState extends State<TorrentFileTile> {
                   lineHeight: 5.0,
                   percent: widget.model.percentComplete.roundToDouble() / 100,
                   backgroundColor:
-                      ThemeProvider.theme.accentColor.withAlpha(80),
+                      ThemeProvider.theme.colorScheme.secondary.withAlpha(80),
                   progressColor:
                       (widget.model.percentComplete.toStringAsFixed(1) ==
                               '100.0')

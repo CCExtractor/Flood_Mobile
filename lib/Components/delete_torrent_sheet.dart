@@ -53,7 +53,6 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                 value: deleteWithData,
                 activeColor: ThemeProvider.theme.primaryColorDark,
                 onChanged: (bool? value) {
-                  print(value);
                   setState(() {
                     deleteWithData = value ?? false;
                   });
@@ -84,13 +83,13 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14.0),
                       ),
-                      primary: Colors.grey,
+                      backgroundColor: Colors.grey,
                     ),
                     child: Center(
                       child: Text(
                         "No",
                         style: TextStyle(
-                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                           fontSize: 16,
                           fontWeight: FontWeight.w900,
                         ),
@@ -133,13 +132,13 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14.0),
                       ),
-                      primary: ThemeProvider.theme.primaryColorDark,
+                      backgroundColor: ThemeProvider.theme.primaryColorDark,
                     ),
                     child: Center(
                       child: Text(
                         "Yes",
                         style: TextStyle(
-                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                           fontSize: 16,
                           fontWeight: FontWeight.w900,
                         ),

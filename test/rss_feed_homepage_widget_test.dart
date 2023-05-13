@@ -18,7 +18,7 @@ class MockHomeProvider extends Mock implements HomeProvider {}
 void main() {
   setUp(() {});
   MockHomeProvider mockHomeProvider = MockHomeProvider();
-  when(() => mockHomeProvider.RssFeedsList).thenReturn([
+  when(() => mockHomeProvider.rssFeedsList).thenReturn([
     FeedsAndRulesModel(
         type: 'test feed',
         label: 'test label',
@@ -34,7 +34,7 @@ void main() {
         url: 'test url',
         count: 0)
   ]);
-  when(() => mockHomeProvider.RssRulesList).thenReturn([
+  when(() => mockHomeProvider.rssRulesList).thenReturn([
     RulesModel(
       type: 'test rules',
       label: 'test label',

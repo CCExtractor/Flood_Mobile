@@ -19,10 +19,10 @@ void main() {
       expect(sut.torrentList, []);
       expect(sut.torrentListJson, {});
       expect(sut.unreadNotifications, 0);
-      expect(sut.RssFeedsListJson, {});
-      expect(sut.RssFeedsList, []);
-      expect(sut.RssRulesList, []);
-      expect(sut.RssFeedsContentsList, []);
+      expect(sut.rssFeedsListJson, {});
+      expect(sut.rssFeedsList, []);
+      expect(sut.rssRulesList, []);
+      expect(sut.rssFeedsContentsList, []);
       expect(sut.upSpeed, '0 KB/s');
       expect(sut.downSpeed, '0 KB/s');
     },
@@ -57,11 +57,11 @@ void main() {
     test(
       "tests setRssFeedsList working",
       () async {
-        expect(sut.RssFeedsList.isEmpty, true);
-        expect(sut.RssRulesList.isEmpty, true);
+        expect(sut.rssFeedsList.isEmpty, true);
+        expect(sut.rssRulesList.isEmpty, true);
         sut.setRssFeedsList(newRssFeedsList, newRssRulesList);
-        expect(sut.RssFeedsList.isNotEmpty, true);
-        expect(sut.RssRulesList.isNotEmpty, true);
+        expect(sut.rssFeedsList.isNotEmpty, true);
+        expect(sut.rssRulesList.isNotEmpty, true);
       },
     );
   });
@@ -165,9 +165,9 @@ void main() {
     test(
       "tests setRssFeedsContentsList working",
       () async {
-        expect(sut.RssFeedsContentsList.isEmpty, true);
+        expect(sut.rssFeedsContentsList.isEmpty, true);
         sut.setRssFeedsContentsList(newRssFeedsContentsList);
-        expect(sut.RssFeedsContentsList, newRssFeedsContentsList);
+        expect(sut.rssFeedsContentsList, newRssFeedsContentsList);
       },
     );
   });
@@ -191,9 +191,9 @@ void main() {
     test(
       "tests setFeedsAndRulesListJson working",
       () async {
-        expect(sut.RssFeedsListJson.isEmpty, true);
+        expect(sut.rssFeedsListJson.isEmpty, true);
         sut.setFeedsAndRulesListJson(newFeedsAndRulesListJson);
-        expect(sut.RssFeedsListJson, newFeedsAndRulesListJson);
+        expect(sut.rssFeedsListJson, newFeedsAndRulesListJson);
       },
     );
   });
