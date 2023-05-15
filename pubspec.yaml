@@ -58,7 +58,7 @@ dependencies:
   flutter_downloader: ^1.6.1
   path_provider: ^2.0.2
   permission_handler: ^8.1.4+2
-  flutter_client_sse: ^0.1.0
+  flutter_client_sse: ^2.0.0-beta.1
   url_launcher: ^6.0.12
   optimize_battery: ^0.0.4
   smooth_page_indicator: ^1.0.0+2
