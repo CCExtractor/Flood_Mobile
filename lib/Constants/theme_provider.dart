@@ -38,6 +38,8 @@ class MyThemes {
         color: Colors.white,
       ),
     ),
+    highlightColor: Color(0xff415062),
+    errorColor: Color(0xffF34570),
   );
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
@@ -62,5 +64,7 @@ class MyThemes {
         color: Colors.black,
       ),
     ),
+    highlightColor: Color(0xff415062),
+    errorColor: Color(0xffF34570),
   );
 }

@@ -12,19 +12,24 @@ void main() {
     "initial values are correct",
     () {
       expect(sut.token, '');
+      expect(sut.username, '');
     },
   );
 
   group('setToken', () {
     final newToken = 'test token';
+    final newUsername = 'testUsername';
 
     test(
-      "tests setToken working",
+      "tests setUsersDetails working",
       () async {
         expect(sut.token.isEmpty, true);
-        sut.setToken(newToken);
+        expect(sut.username.isEmpty, true);
+        sut.setUserDetails(newToken, newUsername);
         expect(sut.token.isEmpty, false);
+        expect(sut.username.isEmpty, false);
         expect(sut.token, 'test token');
+        expect(sut.username, 'testUsername');
       },
     );
   });

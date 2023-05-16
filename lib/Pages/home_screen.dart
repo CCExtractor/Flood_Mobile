@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:badges/badges.dart';
 import 'package:dio/dio.dart';
+import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Components/add_automatic_torrent.dart';
@@ -13,6 +14,7 @@ import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Components/notification_popup_dialogue_container.dart';
 import 'package:flood_mobile/Components/toast_component.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
+import 'package:flood_mobile/Model/current_user_detail_model.dart';
 import 'package:flood_mobile/Pages/about_screen.dart';
 import 'package:flood_mobile/Pages/settings_screen.dart';
 import 'package:flood_mobile/Pages/torrent_screen.dart';
@@ -60,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     _processInitialUri();
     _listenForUri();
+    AuthApi.getUsersList(context);
   }
 
   @override
@@ -450,8 +453,11 @@ class _MenuState extends State<Menu> {
                       SharedPreferences prefs =
                           await SharedPreferences.getInstance();
                       prefs.setString('floodToken', '');
+                      prefs.setString('floodUsername', '');
                       Provider.of<UserDetailProvider>(context, listen: false)
-                          .setToken('');
+                          .setUserDetails('', '');
+                      Provider.of<UserDetailProvider>(context, listen: false)
+                          .setUsersList(<CurrentUserDetailModel>[]);
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           Routes.loginScreenRoute,
                           (Route<dynamic> route) => false);
