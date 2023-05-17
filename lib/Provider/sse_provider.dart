@@ -28,9 +28,6 @@ class SSEProvider extends ChangeNotifier {
           "Cache-Control": "no-cache",
         }).listen((event) {
       if (event.id != '' && event.data != '' && event.event != '') {
-        // print('Id: ' + event.id!);
-        // print('Event: ' + event.event!);
-        // print('Data: ' + event.data!);
         sseModel = event;
         switch (event.event) {
           case Events.TRANSFER_SUMMARY_FULL_UPDATE:

@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 class AlwaysBouncableScrollPhysics extends BouncingScrollPhysics {
   const AlwaysBouncableScrollPhysics({ScrollPhysics? parent})
@@ -105,7 +104,6 @@ class _PullToRevealTopItemListState extends State<PullToRevealTopItemList>
     with TickerProviderStateMixin {
   RevealableState _revealableState = RevealableState.closed;
   ScrollDirection _scrollDirection = ScrollDirection.idle;
-  bool _isKeyboardVisible = false;
 
   AnimationController? _closeController;
   Animation<double>? _closeAnimation;
@@ -131,10 +129,6 @@ class _PullToRevealTopItemListState extends State<PullToRevealTopItemList>
     _revealableState = RevealableState.closed;
     _revealableCompleter = RevealableCompleter.animate;
     _lastEndScrollPosition = 0;
-    KeyboardVisibilityController()
-      ..onChange.listen((isVisible) {
-        _isKeyboardVisible = isVisible;
-      });
     super.initState();
   }
 

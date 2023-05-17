@@ -24,7 +24,7 @@ class LogOutAlert extends StatelessWidget {
         'Are you sure you want to\n Log out ?',
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+          color: ThemeProvider.theme.textTheme.bodyLarge?.color,
           fontWeight: FontWeight.bold,
           fontSize: 20,
         ),

@@ -24,13 +24,16 @@ class MyThemes {
     primaryColor: Color(0xff0E2537),
     primaryColorDark: Color(0xff39C481),
     primaryColorLight: Color(0xff305067),
-    accentColor: Color(0xff399CF4),
-    backgroundColor: Color(0xff305067),
     scaffoldBackgroundColor: Color(0xff305067),
     textTheme: TextTheme().apply(
       displayColor: Colors.white,
       bodyColor: Colors.white,
     ),
+    colorScheme: ThemeData(brightness: Brightness.dark).colorScheme.copyWith(
+          secondary: Color(0xff399CF4),
+          background: Color(0xff305067),
+          error: Color(0xffF34570),
+        ),
     canvasColor: Colors.transparent,
     dialogBackgroundColor: Color(0xff2A3342),
     appBarTheme: AppBarTheme(
@@ -39,15 +42,17 @@ class MyThemes {
       ),
     ),
     highlightColor: Color(0xff415062),
-    errorColor: Color(0xffF34570),
   );
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: Colors.white,
     primaryColorDark: Color(0xff39C481),
-    backgroundColor: Color(0xff293341),
     scaffoldBackgroundColor: Colors.grey[300],
-    accentColor: Color(0xff399CF4),
+    colorScheme: ThemeData(brightness: Brightness.light).colorScheme.copyWith(
+          secondary: Color(0xff399CF4),
+          background: Color(0xff293341),
+          error: Color(0xffF34570),
+        ),
     canvasColor: Colors.transparent,
     primaryColorLight: Colors.grey[100],
     dialogBackgroundColor: Color(0xff399CF4),
@@ -65,6 +70,5 @@ class MyThemes {
       ),
     ),
     highlightColor: Color(0xff415062),
-    errorColor: Color(0xffF34570),
   );
 }

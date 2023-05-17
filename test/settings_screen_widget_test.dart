@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flood_mobile/Components/settings_text_field.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';

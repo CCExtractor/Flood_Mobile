@@ -78,7 +78,6 @@ class SpeedGraphState extends State<SpeedGraph> {
                     : [
                         ThemeProvider.theme.colorScheme.secondary
                             .withAlpha(120),
-                        // Color(0xff191d2d).withAlpha(0),
                         Color.fromARGB(37, 255, 255, 255)
                       ],
                 begin: Alignment.topCenter,

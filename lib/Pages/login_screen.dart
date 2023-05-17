@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Welcome to Flood',
                         style: TextStyle(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1!.color!,
+                                ThemeProvider.theme.textTheme.bodyLarge!.color!,
                             fontWeight: FontWeight.bold,
                             fontSize: 28),
                       ),
@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Sign in to your account',
                         style: TextStyle(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1!.color!,
+                                ThemeProvider.theme.textTheme.bodyLarge!.color!,
                             fontWeight: FontWeight.normal,
                             fontSize: 16),
                       ),
@@ -83,20 +83,20 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller: urlController,
                               style: TextStyle(
                                 color: ThemeProvider
-                                    .theme.textTheme.bodyText1?.color,
+                                    .theme.textTheme.bodyLarge?.color,
                               ),
                               decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.link,
                                   color: ThemeProvider
-                                      .theme.textTheme.bodyText1!.color!,
+                                      .theme.textTheme.bodyLarge!.color!,
                                 ),
                                 labelText: 'URL',
                                 labelStyle: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.bold,
                                     color: ThemeProvider
-                                        .theme.textTheme.bodyText1!.color!),
+                                        .theme.textTheme.bodyLarge!.color!),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: ThemeProvider.theme.primaryColorDark,
@@ -105,19 +105,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                 border: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: ThemeProvider
-                                        .theme.textTheme.bodyText1!.color!,
+                                        .theme.textTheme.bodyLarge!.color!,
                                   ),
                                 ),
                                 disabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: ThemeProvider
-                                        .theme.textTheme.bodyText1!.color!,
+                                        .theme.textTheme.bodyLarge!.color!,
                                   ),
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: ThemeProvider
-                                        .theme.textTheme.bodyText1!.color!,
+                                        .theme.textTheme.bodyLarge!.color!,
                                   ),
                                 ),
                               ),
@@ -141,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 icon: Icon(
                                   Icons.paste,
                                   color: ThemeProvider
-                                      .theme.textTheme.bodyText1!.color!,
+                                      .theme.textTheme.bodyLarge!.color!,
                                   size: 20,
                                 ),
                               ),
@@ -158,20 +158,20 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: usernameController,
                           style: TextStyle(
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1!.color!,
+                                ThemeProvider.theme.textTheme.bodyLarge!.color!,
                           ),
                           decoration: InputDecoration(
                             prefixIcon: Icon(
                               Icons.person,
                               color: ThemeProvider
-                                  .theme.textTheme.bodyText1!.color!,
+                                  .theme.textTheme.bodyLarge!.color!,
                             ),
                             labelText: 'Username',
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
                                 color: ThemeProvider
-                                    .theme.textTheme.bodyText1!.color!),
+                                    .theme.textTheme.bodyLarge!.color!),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: ThemeProvider.theme.primaryColorDark,
@@ -180,19 +180,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             border: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: ThemeProvider
-                                    .theme.textTheme.bodyText1!.color!,
+                                    .theme.textTheme.bodyLarge!.color!,
                               ),
                             ),
                             disabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: ThemeProvider
-                                    .theme.textTheme.bodyText1!.color!,
+                                    .theme.textTheme.bodyLarge!.color!,
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: ThemeProvider
-                                    .theme.textTheme.bodyText1!.color!,
+                                    .theme.textTheme.bodyLarge!.color!,
                               ),
                             ),
                           ),
@@ -215,20 +215,20 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller: passwordController,
                               style: TextStyle(
                                 color: ThemeProvider
-                                    .theme.textTheme.bodyText1?.color,
+                                    .theme.textTheme.bodyLarge?.color,
                               ),
                               obscureText: showPass,
                               decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.lock_outline,
                                   color: ThemeProvider
-                                      .theme.textTheme.bodyText1!.color!,
+                                      .theme.textTheme.bodyLarge!.color!,
                                 ),
                                 labelText: 'Password',
                                 labelStyle: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: ThemeProvider
-                                        .theme.textTheme.bodyText1!.color!),
+                                        .theme.textTheme.bodyLarge!.color!),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: ThemeProvider.theme.primaryColorDark,
@@ -237,19 +237,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                 border: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: ThemeProvider
-                                        .theme.textTheme.bodyText1!.color!,
+                                        .theme.textTheme.bodyLarge!.color!,
                                   ),
                                 ),
                                 disabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: ThemeProvider
-                                        .theme.textTheme.bodyText1!.color!,
+                                        .theme.textTheme.bodyLarge!.color!,
                                   ),
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: ThemeProvider
-                                        .theme.textTheme.bodyText1!.color!,
+                                        .theme.textTheme.bodyLarge!.color!,
                                   ),
                                 ),
                               ),
@@ -267,14 +267,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   setState(() {
                                     showPass = !showPass;
                                   });
-                                  print(showPass);
                                 },
                                 icon: Icon(
                                   (showPass)
                                       ? Icons.visibility
                                       : Icons.visibility_off,
                                   color: ThemeProvider
-                                      .theme.textTheme.bodyText1!.color!,
+                                      .theme.textTheme.bodyLarge!.color!,
                                   size: 20,
                                 ),
                               ),
@@ -360,7 +359,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14.0),
                             ),
-                            primary: ThemeProvider.theme.primaryColorDark,
+                            backgroundColor:
+                                ThemeProvider.theme.primaryColorDark,
                           ),
                           child: Center(
                             child: Text(
@@ -382,9 +382,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           FontAwesomeIcons.github,
                         ),
                         onPressed: () {
-                          launch(
+                          launchUrl(Uri.parse(
                             'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
-                          );
+                          ));
                         },
                         iconSize: hp * 0.05,
                       ),

@@ -54,7 +54,6 @@ class _VideoStreamScreenState extends State<VideoStreamScreen> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     _initVideoPlayer();
     super.didChangeDependencies();
   }

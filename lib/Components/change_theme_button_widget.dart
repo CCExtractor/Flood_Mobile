@@ -15,17 +15,5 @@ class ChangeThemeButtonWidget extends StatelessWidget {
           ? Icons.wb_sunny_rounded
           : Icons.mode_night_rounded),
     );
-    //   Switch.adaptive(
-    //   splashRadius: 2.0,
-    //   activeThumbImage: AssetImage(
-    //     'assets/images/moon.png',
-    //   ),
-    //   inactiveThumbImage: AssetImage('assets/images/sun.png'),
-    //   value: themeProvider.isDarkMode,
-    //   onChanged: (value) {
-    //     final provider = Provider.of<ThemeProvider>(context, listen: false);
-    //     provider.toggleTheme(value);
-    //   },
-    // );
   }
 }

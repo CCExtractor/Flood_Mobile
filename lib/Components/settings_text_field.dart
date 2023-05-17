@@ -36,7 +36,7 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
         TextFormField(
           controller: widget.controller,
           style: TextStyle(
-            color: ThemeProvider.theme.textTheme.bodyText1?.color,
+            color: ThemeProvider.theme.textTheme.bodyLarge?.color,
           ),
           keyboardType:
               (widget.isText) ? TextInputType.text : TextInputType.number,
@@ -44,13 +44,12 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
             floatingLabelBehavior: FloatingLabelBehavior.always,
             filled: true,
             fillColor: ThemeProvider.theme.primaryColorLight,
-            // labelText: widget.labelText,
             hintText: widget.hintText,
             labelStyle: TextStyle(
                 fontFamily: 'Montserrat',
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: ThemeProvider.theme.textTheme.bodyText1?.color),
+                color: ThemeProvider.theme.textTheme.bodyLarge?.color),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: ThemeProvider.theme.primaryColorLight,

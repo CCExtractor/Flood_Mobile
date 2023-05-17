@@ -2,7 +2,6 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:badges/badges.dart';
-import 'package:dio/dio.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
@@ -23,7 +22,7 @@ import 'package:flood_mobile/Provider/multiple_select_torrent_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -38,7 +37,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flood_mobile/Components/change_theme_button_widget.dart';
 import '../Api/torrent_api.dart';
 import '../Constants/notification_keys.dart';
-import '../Provider/api_provider.dart';
 import '../Components/RSSFeedButtonWidget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -100,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           isScrollControlled: true,
           context: context,
-          backgroundColor: ThemeProvider.theme.backgroundColor,
+          backgroundColor: ThemeProvider.theme.colorScheme.background,
           builder: (context) {
             return AddAutoTorrent(
                 base64: base64, imageBytes: imageBytes, uriString: uriString);
@@ -135,7 +133,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double wp = MediaQuery.of(context).size.width;
     return KeyboardDismissOnTap(
       child: SimpleHiddenDrawer(
         withShadow: true,
@@ -170,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             icon: Icon(
                               Icons.menu,
                               color: ThemeProvider
-                                  .theme.textTheme.bodyText1?.color,
+                                  .theme.textTheme.bodyLarge?.color,
                             ),
                             onPressed: () {
                               controller.toggle();
@@ -202,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           showBadge:
                               homeModel.unreadNotifications == 0 ? false : true,
                           key: Key('Badge Widget'),
-                          badgeColor: Theme.of(context).accentColor,
+                          badgeColor: Theme.of(context).colorScheme.secondary,
                           badgeContent: Center(
                             child: Text(
                               homeModel.unreadNotifications.toString(),
@@ -238,7 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: Icon(
                             Icons.more_vert,
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme.textTheme.bodyLarge?.color,
                           ),
                           onSelected: (value) {
                             List<String> hash = [];
@@ -334,11 +331,9 @@ class NotificationController {
   /// Use this method to detect when the user taps on a notification or action button
   static Future<void> onActionReceivedMethod(
       ReceivedAction receivedAction) async {
-    late bool isPaused;
     HomeProvider homeModel = Provider.of<HomeProvider>(
         NavigationService.navigatorKey.currentContext!,
         listen: false);
-    isPaused = true;
     final actionKey = receivedAction.buttonKeyPressed;
 
     // Not a desired action
@@ -352,7 +347,6 @@ class NotificationController {
       await TorrentApi.stopTorrent(
           hashes: [homeModel.torrentList[receivedAction.id!].hash],
           context: NavigationService.navigatorKey.currentContext!);
-      isPaused = true;
     }
 
     // Resume downloads
@@ -360,7 +354,6 @@ class NotificationController {
       await TorrentApi.startTorrent(
           hashes: [homeModel.torrentList[receivedAction.id!].hash],
           context: NavigationService.navigatorKey.currentContext!);
-      isPaused = false;
     }
   }
 }
@@ -471,9 +464,9 @@ class _MenuState extends State<Menu> {
                 icon: FontAwesomeIcons.github,
                 onTap: () {
                   controller.toggle();
-                  launch(
+                  launchUrl(Uri.parse(
                     'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
-                  );
+                  ));
                 },
                 title: 'GitHub'),
             NavDrawerListTile(

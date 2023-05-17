@@ -44,6 +44,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
       return SpeedDial(
         buttonSize: Size(60, 60),
         backgroundColor: ThemeProvider.theme.primaryColorDark,
+        foregroundColor: Colors.white,
         icon: Icons.add,
         activeIcon: Icons.close,
         spacing: 3,
@@ -56,7 +57,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
         children: [
           SpeedDialChild(
             child: Icon(FontAwesomeIcons.solidFile),
-            backgroundColor: ThemeProvider.theme.textTheme.bodyText1?.color,
+            backgroundColor: ThemeProvider.theme.textTheme.bodyLarge?.color,
             foregroundColor: ThemeProvider.theme.primaryColorDark,
             label: 'Torrent File',
             labelBackgroundColor: Colors.transparent,
@@ -66,7 +67,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
               )
             ],
             labelStyle: TextStyle(
-                color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                 fontSize: 14,
                 fontWeight: FontWeight.w800),
             onTap: () async {
@@ -118,7 +119,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Montserrat',
                                       color: ThemeProvider
-                                          .theme.textTheme.bodyText1?.color),
+                                          .theme.textTheme.bodyLarge?.color),
                                 ),
                               ),
                               Padding(
@@ -170,7 +171,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                     color: ThemeProvider
                                                         .theme
                                                         .textTheme
-                                                        .bodyText1
+                                                        .bodyLarge
                                                         ?.color),
                                               ),
                                             ),
@@ -196,20 +197,20 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                         controller: directoryController,
                                         style: TextStyle(
                                           color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
+                                              .theme.textTheme.bodyLarge?.color,
                                         ),
                                         decoration: InputDecoration(
                                           prefixIcon: Icon(
                                             Icons.folder,
                                             color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color,
+                                                .bodyLarge?.color,
                                           ),
                                           labelText: 'Destination',
                                           hintText: 'Destination',
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
                                               color: ThemeProvider.theme
-                                                  .textTheme.bodyText1?.color),
+                                                  .textTheme.bodyLarge?.color),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -329,12 +330,12 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                           },
                                           style: ElevatedButton.styleFrom(
                                             elevation: 0,
+                                            backgroundColor: ThemeProvider
+                                                .theme.primaryColorDark,
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(14.0),
                                             ),
-                                            primary: ThemeProvider
-                                                .theme.primaryColorDark,
                                           ),
                                           child: Center(
                                             child: Text(
@@ -365,7 +366,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
           ),
           SpeedDialChild(
             child: const Icon(FontAwesomeIcons.magnet),
-            backgroundColor: ThemeProvider.theme.textTheme.bodyText1?.color,
+            backgroundColor: ThemeProvider.theme.textTheme.bodyLarge?.color,
             foregroundColor: ThemeProvider.theme.primaryColorDark,
             label: 'Magnet Link',
             labelBackgroundColor: Colors.transparent,
@@ -375,7 +376,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
               )
             ],
             labelStyle: TextStyle(
-                color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                 fontSize: 14,
                 fontWeight: FontWeight.w800),
             onTap: () {
@@ -413,7 +414,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Montserrat',
                                     color: ThemeProvider
-                                        .theme.textTheme.bodyText1?.color),
+                                        .theme.textTheme.bodyLarge?.color),
                               ),
                             ),
                             Padding(
@@ -427,13 +428,13 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                       controller: magnetUrlController,
                                       style: TextStyle(
                                         color: ThemeProvider
-                                            .theme.textTheme.bodyText1?.color,
+                                            .theme.textTheme.bodyLarge?.color,
                                       ),
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(
                                           Icons.link,
                                           color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
+                                              .theme.textTheme.bodyLarge?.color,
                                         ),
                                         suffix: GestureDetector(
                                           child: Icon(Icons.paste),
@@ -453,7 +454,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                         labelStyle: TextStyle(
                                           fontFamily: 'Montserrat',
                                           color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
+                                              .theme.textTheme.bodyLarge?.color,
                                         ),
                                         border: OutlineInputBorder(
                                           borderRadius:
@@ -487,20 +488,20 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                       controller: directoryController,
                                       style: TextStyle(
                                         color: ThemeProvider
-                                            .theme.textTheme.bodyText1?.color,
+                                            .theme.textTheme.bodyLarge?.color,
                                       ),
                                       decoration: InputDecoration(
                                         prefixIcon: Icon(
                                           Icons.folder,
                                           color: ThemeProvider
-                                              .theme.textTheme.bodyText1?.color,
+                                              .theme.textTheme.bodyLarge?.color,
                                         ),
                                         labelText: 'Destination',
                                         hintText: 'Destination',
                                         labelStyle: TextStyle(
                                             fontFamily: 'Montserrat',
                                             color: ThemeProvider.theme.textTheme
-                                                .bodyText1?.color),
+                                                .bodyLarge?.color),
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(8),
@@ -618,12 +619,12 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                         },
                                         style: ElevatedButton.styleFrom(
                                           elevation: 0,
+                                          backgroundColor: ThemeProvider
+                                              .theme.primaryColorDark,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(14.0),
                                           ),
-                                          primary: ThemeProvider
-                                              .theme.primaryColorDark,
                                         ),
                                         child: Center(
                                           child: Text(

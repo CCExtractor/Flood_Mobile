@@ -18,7 +18,7 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
           child: Text(
             'No notifications to display',
             style: TextStyle(
-              color: ThemeProvider.theme.textTheme.bodyText1?.color,
+              color: ThemeProvider.theme.textTheme.bodyLarge?.color,
             ),
           ),
         )
@@ -56,7 +56,7 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
                       child: Text(
                         'Clear All',
                         style: TextStyle(
-                          color: ThemeProvider.theme.textTheme.bodyText1?.color,
+                          color: ThemeProvider.theme.textTheme.bodyLarge?.color,
                         ),
                       ),
                     )
@@ -80,7 +80,7 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
 }
 
 class NotificationListTile extends StatelessWidget {
-  NotificationContentModel model;
+  final NotificationContentModel model;
 
   NotificationListTile({required this.model});
 
@@ -95,7 +95,7 @@ class NotificationListTile extends StatelessWidget {
             textAlign: TextAlign.left,
             style: TextStyle(
                 fontSize: 16,
-                color: ThemeProvider.theme.accentColor,
+                color: ThemeProvider.theme.colorScheme.secondary,
                 fontWeight: FontWeight.bold),
           ),
           SizedBox(
@@ -114,7 +114,7 @@ class NotificationListTile extends StatelessWidget {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: 14,
-              color: ThemeProvider.theme.textTheme.bodyText1?.color,
+              color: ThemeProvider.theme.textTheme.bodyLarge?.color,
             ),
           ),
         ],

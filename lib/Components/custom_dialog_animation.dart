@@ -58,7 +58,7 @@ class CustomDialogAnimation extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 20.0,
                             color:
-                                ThemeProvider.theme.textTheme.bodyText1?.color,
+                                ThemeProvider.theme.textTheme.bodyLarge?.color,
                             fontWeight: FontWeight.bold)),
                     SizedBox(height: 10),
                     Text("To make sure progress notification works smoothly.",
@@ -66,7 +66,7 @@ class CustomDialogAnimation extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 14.0,
                             color: ThemeProvider
-                                .theme.textTheme.bodyText1?.color)),
+                                .theme.textTheme.bodyLarge?.color)),
                     SizedBox(height: 10),
                     Text(
                         "This might not be required for certain devices like MI/Redmi, etc as they don't have a rigorous battery optimization.",
@@ -165,11 +165,12 @@ class CustomDialogAnimation extends StatelessWidget {
                               style: ElevatedButton.styleFrom(
                                 side:
                                     BorderSide(width: 0.2, color: Colors.black),
+                                backgroundColor:
+                                    ThemeProvider.theme.primaryColorDark,
                                 elevation: 0.5,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
-                                primary: ThemeProvider.theme.primaryColorDark,
                               ),
                               child: Container(
                                 height: 45,
