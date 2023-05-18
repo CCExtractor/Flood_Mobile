@@ -17,6 +17,9 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import '../Provider/client_provider.dart';
 
 class RSSFeedHomePage extends StatefulWidget {
+  final int index;
+
+  const RSSFeedHomePage({Key? key, required this.index}) : super(key: key);
   @override
   State<RSSFeedHomePage> createState() => _RSSFeedHomePageState();
 }
@@ -85,7 +88,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
               topRight: Radius.circular(15),
               topLeft: Radius.circular(15),
             ),
-            color: ThemeProvider.theme.primaryColorLight,
+            color: ThemeProvider.theme(widget.index).primaryColorLight,
           ),
           child: ContainedTabBarView(
             key: Key('Tab view'),
@@ -94,14 +97,15 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
               Tab(key: Key('Download Rules Tab'), text: "Download Rules"),
             ],
             tabBarProperties: TabBarProperties(
-              indicatorColor: ThemeProvider.theme.textTheme.bodyLarge?.color,
+              indicatorColor:
+                  ThemeProvider.theme(widget.index).textTheme.bodyLarge?.color,
               indicatorWeight: 3.0,
               indicatorPadding: EdgeInsets.only(left: 12.0, right: 12.0),
             ),
             views: [
               SingleChildScrollView(
                 child: Container(
-                  color: ThemeProvider.theme.primaryColorLight,
+                  color: ThemeProvider.theme(widget.index).primaryColorLight,
                   padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,8 +118,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat',
-                              color: ThemeProvider
-                                  .theme.textTheme.bodyLarge?.color),
+                              color: ThemeProvider.theme(widget.index)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.color),
                         ),
                       ),
                       (model.rssFeedsList.isNotEmpty)
@@ -129,7 +135,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   bottomLeft: Radius.circular(8),
                                   bottomRight: Radius.circular(8),
                                 ),
-                                color: ThemeProvider.theme.primaryColorLight,
+                                color: ThemeProvider.theme(widget.index)
+                                    .primaryColorLight,
                               ),
                               child: ListView.builder(
                                 shrinkWrap: true,
@@ -304,7 +311,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   Key('No existing feeds displaying container'),
                               height: 60,
                               width: double.infinity,
-                              color: ThemeProvider.theme.primaryColorLight,
+                              color: ThemeProvider.theme(widget.index)
+                                  .primaryColorLight,
                               child: InputDecorator(
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -327,8 +335,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontFamily: 'Montserrat',
-                                            color: ThemeProvider.theme.textTheme
-                                                .bodyLarge?.color),
+                                            color: ThemeProvider.theme(
+                                                    widget.index)
+                                                .textTheme
+                                                .bodyLarge
+                                                ?.color),
                                       ),
                                     ),
                                   ],
@@ -345,8 +356,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
-                            backgroundColor:
-                                ThemeProvider.theme.colorScheme.secondary,
+                            backgroundColor: ThemeProvider.theme(widget.index)
+                                .colorScheme
+                                .secondary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
@@ -375,8 +387,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                       child: TextFormField(
                                         key: Key('Label textformfield'),
                                         style: TextStyle(
-                                          color: ThemeProvider
-                                              .theme.textTheme.bodyLarge?.color,
+                                          color:
+                                              ThemeProvider.theme(widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color,
                                         ),
                                         controller: labelController,
                                         decoration: InputDecoration(
@@ -384,8 +399,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           hintText: 'Label',
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              color: ThemeProvider.theme
-                                                  .textTheme.bodyLarge?.color),
+                                              color: ThemeProvider.theme(
+                                                      widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -411,8 +429,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             key: Key('Interval textformfield'),
                                             controller: intervalController,
                                             style: TextStyle(
-                                              color: ThemeProvider.theme
-                                                  .textTheme.bodyLarge?.color,
+                                              color: ThemeProvider.theme(
+                                                      widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color,
                                             ),
                                             keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
@@ -420,8 +441,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 hintText: 'Interval',
                                                 labelStyle: TextStyle(
                                                     fontFamily: 'Montserrat',
-                                                    color: ThemeProvider
-                                                        .theme
+                                                    color: ThemeProvider.theme(
+                                                            widget.index)
                                                         .textTheme
                                                         .bodyLarge
                                                         ?.color),
@@ -466,17 +487,18 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 hint: Text(
                                                   'Interval Unit',
                                                   style: TextStyle(
-                                                      color: ThemeProvider
-                                                          .theme
-                                                          .textTheme
-                                                          .bodyLarge
-                                                          ?.color),
+                                                      color:
+                                                          ThemeProvider.theme(
+                                                                  widget.index)
+                                                              .textTheme
+                                                              .bodyLarge
+                                                              ?.color),
                                                 ),
                                                 value: "Minutes",
                                                 icon: Icon(
                                                   Icons.keyboard_arrow_down,
-                                                  color: ThemeProvider
-                                                      .theme
+                                                  color: ThemeProvider.theme(
+                                                          widget.index)
                                                       .textTheme
                                                       .bodyLarge
                                                       ?.color,
@@ -499,8 +521,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   ],
                                                   borderRadius:
                                                       BorderRadius.circular(5),
-                                                  color: ThemeProvider
-                                                      .theme.primaryColorLight,
+                                                  color: ThemeProvider.theme(
+                                                          widget.index)
+                                                      .primaryColorLight,
                                                 ),
                                                 items: intervalunits
                                                     .map((item) =>
@@ -557,16 +580,22 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         key: Key('Url textformfield'),
                                         controller: urlController,
                                         style: TextStyle(
-                                          color: ThemeProvider
-                                              .theme.textTheme.bodyLarge?.color,
+                                          color:
+                                              ThemeProvider.theme(widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color,
                                         ),
                                         decoration: InputDecoration(
                                           labelText: 'URL',
                                           hintText: 'URL',
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              color: ThemeProvider.theme
-                                                  .textTheme.bodyLarge?.color),
+                                              color: ThemeProvider.theme(
+                                                      widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -699,8 +728,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,
-                                                backgroundColor: ThemeProvider
-                                                    .theme.primaryColorDark,
+                                                backgroundColor:
+                                                    ThemeProvider.theme(
+                                                            widget.index)
+                                                        .primaryColorDark,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -738,8 +769,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Montserrat',
-                            color:
-                                ThemeProvider.theme.textTheme.bodyLarge?.color),
+                            color: ThemeProvider.theme(widget.index)
+                                .textTheme
+                                .bodyLarge
+                                ?.color),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0),
@@ -760,8 +793,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   ),
                                   prefixIcon: Icon(
                                     Icons.search,
-                                    color: ThemeProvider
-                                        .theme.textTheme.bodyLarge?.color,
+                                    color: ThemeProvider.theme(widget.index)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.color,
                                     size: 25,
                                   ),
                                   //Add more decoration as you want here
@@ -771,13 +806,17 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                 hint: Text(
                                   'Select Feed',
                                   style: TextStyle(
-                                      color: ThemeProvider
-                                          .theme.textTheme.bodyLarge?.color),
+                                      color: ThemeProvider.theme(widget.index)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.color),
                                 ),
                                 icon: Icon(
                                   Icons.keyboard_arrow_down,
-                                  color: ThemeProvider
-                                      .theme.textTheme.bodyLarge?.color,
+                                  color: ThemeProvider.theme(widget.index)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.color,
                                 ),
                                 buttonHeight: 58,
                                 buttonPadding:
@@ -793,7 +832,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(5),
-                                  color: ThemeProvider.theme.primaryColorLight,
+                                  color: ThemeProvider.theme(widget.index)
+                                      .primaryColorLight,
                                 ),
                                 items: feedlabelgetter(model.rssFeedsList)
                                     .map((item) => DropdownMenuItem<String>(
@@ -840,8 +880,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         Expanded(
                                           child: TextFormField(
                                             style: TextStyle(
-                                              color: ThemeProvider.theme
-                                                  .textTheme.bodyLarge?.color,
+                                              color: ThemeProvider.theme(
+                                                      widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color,
                                             ),
                                             controller: searchTermController,
                                             decoration: InputDecoration(
@@ -849,8 +892,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               hintText: 'Search Term',
                                               labelStyle: TextStyle(
                                                   fontFamily: 'Montserrat',
-                                                  color: ThemeProvider
-                                                      .theme
+                                                  color: ThemeProvider.theme(
+                                                          widget.index)
                                                       .textTheme
                                                       .bodyLarge
                                                       ?.color),
@@ -906,8 +949,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   ),
                                                   isScrollControlled: true,
                                                   context: context,
-                                                  backgroundColor: ThemeProvider
-                                                      .theme.primaryColorLight,
+                                                  backgroundColor:
+                                                      ThemeProvider.theme(
+                                                              widget.index)
+                                                          .primaryColorLight,
                                                   builder: (context) {
                                                     return ListView(
                                                         shrinkWrap: true,
@@ -939,8 +984,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                                 .bold,
                                                                         fontFamily:
                                                                             'Montserrat',
-                                                                        color: ThemeProvider
-                                                                            .theme
+                                                                        color: ThemeProvider.theme(widget.index)
                                                                             .textTheme
                                                                             .bodyLarge
                                                                             ?.color),
@@ -966,14 +1010,14 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                           style:
                                                                               TextStyle(
                                                                             color:
-                                                                                ThemeProvider.theme.textTheme.bodyLarge?.color,
+                                                                                ThemeProvider.theme(widget.index).textTheme.bodyLarge?.color,
                                                                           ),
                                                                           decoration:
                                                                               InputDecoration(
                                                                             prefixIcon:
                                                                                 Icon(
                                                                               Icons.link,
-                                                                              color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+                                                                              color: ThemeProvider.theme(widget.index).textTheme.bodyLarge?.color,
                                                                             ),
                                                                             suffix:
                                                                                 GestureDetector(
@@ -993,7 +1037,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                             labelStyle:
                                                                                 TextStyle(
                                                                               fontFamily: 'Montserrat',
-                                                                              color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+                                                                              color: ThemeProvider.theme(widget.index).textTheme.bodyLarge?.color,
                                                                             ),
                                                                             border:
                                                                                 OutlineInputBorder(
@@ -1014,8 +1058,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                   ),
                                                                 ),
                                                                 Container(
-                                                                  color: ThemeProvider
-                                                                      .theme
+                                                                  color: ThemeProvider.theme(
+                                                                          widget
+                                                                              .index)
                                                                       .primaryColorLight,
                                                                   padding: EdgeInsets.symmetric(
                                                                       vertical:
@@ -1041,21 +1086,21 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                           style:
                                                                               TextStyle(
                                                                             color:
-                                                                                ThemeProvider.theme.textTheme.bodyLarge?.color,
+                                                                                ThemeProvider.theme(widget.index).textTheme.bodyLarge?.color,
                                                                           ),
                                                                           decoration:
                                                                               InputDecoration(
                                                                             prefixIcon:
                                                                                 Icon(
                                                                               Icons.folder,
-                                                                              color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+                                                                              color: ThemeProvider.theme(widget.index).textTheme.bodyLarge?.color,
                                                                             ),
                                                                             labelText:
                                                                                 'Destination',
                                                                             hintText:
                                                                                 'Destination',
                                                                             labelStyle:
-                                                                                TextStyle(fontFamily: 'Montserrat', color: ThemeProvider.theme.textTheme.bodyLarge?.color),
+                                                                                TextStyle(fontFamily: 'Montserrat', color: ThemeProvider.theme(widget.index).textTheme.bodyLarge?.color),
                                                                             border:
                                                                                 OutlineInputBorder(
                                                                               borderRadius: BorderRadius.circular(8),
@@ -1067,12 +1112,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                               20,
                                                                         ),
                                                                         CheckboxListTile(
-                                                                          activeColor: ThemeProvider
-                                                                              .theme
-                                                                              .primaryColorDark,
-                                                                          tileColor: ThemeProvider
-                                                                              .theme
-                                                                              .primaryColorLight,
+                                                                          activeColor:
+                                                                              ThemeProvider.theme(widget.index).primaryColorDark,
+                                                                          tileColor:
+                                                                              ThemeProvider.theme(widget.index).primaryColorLight,
                                                                           shape:
                                                                               RoundedRectangleBorder(
                                                                             borderRadius:
@@ -1094,12 +1137,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                           },
                                                                         ),
                                                                         CheckboxListTile(
-                                                                          activeColor: ThemeProvider
-                                                                              .theme
-                                                                              .primaryColorDark,
-                                                                          tileColor: ThemeProvider
-                                                                              .theme
-                                                                              .primaryColorLight,
+                                                                          activeColor:
+                                                                              ThemeProvider.theme(widget.index).primaryColorDark,
+                                                                          tileColor:
+                                                                              ThemeProvider.theme(widget.index).primaryColorLight,
                                                                           shape:
                                                                               RoundedRectangleBorder(
                                                                             borderRadius:
@@ -1121,12 +1162,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                           },
                                                                         ),
                                                                         CheckboxListTile(
-                                                                          activeColor: ThemeProvider
-                                                                              .theme
-                                                                              .primaryColorDark,
-                                                                          tileColor: ThemeProvider
-                                                                              .theme
-                                                                              .primaryColorLight,
+                                                                          activeColor:
+                                                                              ThemeProvider.theme(widget.index).primaryColorDark,
+                                                                          tileColor:
+                                                                              ThemeProvider.theme(widget.index).primaryColorLight,
                                                                           shape:
                                                                               RoundedRectangleBorder(
                                                                             borderRadius:
@@ -1168,7 +1207,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                             style:
                                                                                 ElevatedButton.styleFrom(
                                                                               elevation: 0,
-                                                                              backgroundColor: ThemeProvider.theme.primaryColorDark,
+                                                                              backgroundColor: ThemeProvider.theme(widget.index).primaryColorDark,
                                                                               shape: RoundedRectangleBorder(
                                                                                 borderRadius: BorderRadius.circular(14.0),
                                                                               ),
@@ -1195,8 +1234,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,
-                                                backgroundColor: ThemeProvider
-                                                    .theme.primaryColorDark,
+                                                backgroundColor:
+                                                    ThemeProvider.theme(
+                                                            widget.index)
+                                                        .primaryColorDark,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -1228,8 +1269,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         bottomLeft: Radius.circular(8),
                                         bottomRight: Radius.circular(8),
                                       ),
-                                      color:
-                                          ThemeProvider.theme.primaryColorLight,
+                                      color: ThemeProvider.theme(widget.index)
+                                          .primaryColorLight,
                                     ),
                                     child: ListView.builder(
                                       shrinkWrap: true,
@@ -1327,7 +1368,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
               ),
               SingleChildScrollView(
                 child: Container(
-                  color: ThemeProvider.theme.primaryColorLight,
+                  color: ThemeProvider.theme(widget.index).primaryColorLight,
                   padding: EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -1341,8 +1382,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Montserrat',
-                              color: ThemeProvider
-                                  .theme.textTheme.bodyLarge?.color),
+                              color: ThemeProvider.theme(widget.index)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.color),
                         ),
                       ),
                       (model.rssRulesList.isNotEmpty)
@@ -1356,7 +1399,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   bottomLeft: Radius.circular(8),
                                   bottomRight: Radius.circular(8),
                                 ),
-                                color: ThemeProvider.theme.primaryColorLight,
+                                color: ThemeProvider.theme(widget.index)
+                                    .primaryColorLight,
                               ),
                               child: ListView.builder(
                                 shrinkWrap: true,
@@ -1408,8 +1452,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         bottomRight:
                                                             Radius.circular(12),
                                                       ),
-                                                      color: ThemeProvider
-                                                          .theme.primaryColor,
+                                                      color:
+                                                          ThemeProvider.theme(
+                                                                  widget.index)
+                                                              .primaryColor,
                                                     ),
                                                     child: Padding(
                                                       padding:
@@ -1586,7 +1632,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                               key: Key('No rules defined'),
                               height: 60,
                               width: double.infinity,
-                              color: ThemeProvider.theme.primaryColorLight,
+                              color: ThemeProvider.theme(widget.index)
+                                  .primaryColorLight,
                               child: InputDecorator(
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -1609,8 +1656,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontFamily: 'Montserrat',
-                                            color: ThemeProvider.theme.textTheme
-                                                .bodyLarge?.color),
+                                            color: ThemeProvider.theme(
+                                                    widget.index)
+                                                .textTheme
+                                                .bodyLarge
+                                                ?.color),
                                       ),
                                     ),
                                   ],
@@ -1627,8 +1677,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
-                            backgroundColor:
-                                ThemeProvider.theme.colorScheme.secondary,
+                            backgroundColor: ThemeProvider.theme(widget.index)
+                                .colorScheme
+                                .secondary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
@@ -1658,16 +1709,22 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         key: Key('Rules label textformfield'),
                                         controller: labelRulesController,
                                         style: TextStyle(
-                                          color: ThemeProvider
-                                              .theme.textTheme.bodyLarge?.color,
+                                          color:
+                                              ThemeProvider.theme(widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color,
                                         ),
                                         decoration: InputDecoration(
                                           labelText: 'Label',
                                           hintText: 'Label',
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              color: ThemeProvider.theme
-                                                  .textTheme.bodyLarge?.color),
+                                              color: ThemeProvider.theme(
+                                                      widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -1697,8 +1754,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             ),
                                             prefixIcon: Icon(
                                               Icons.search,
-                                              color: ThemeProvider.theme
-                                                  .textTheme.bodyLarge?.color,
+                                              color: ThemeProvider.theme(
+                                                      widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color,
                                               size: 25,
                                             ),
                                             //Add more decoration as you want here
@@ -1709,16 +1769,19 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           hint: Text(
                                             'Applicable Feed',
                                             style: TextStyle(
-                                                color: ThemeProvider
-                                                    .theme
+                                                color: ThemeProvider.theme(
+                                                        widget.index)
                                                     .textTheme
                                                     .bodyLarge
                                                     ?.color),
                                           ),
                                           icon: Icon(
                                             Icons.keyboard_arrow_down,
-                                            color: ThemeProvider.theme.textTheme
-                                                .bodyLarge?.color,
+                                            color: ThemeProvider.theme(
+                                                    widget.index)
+                                                .textTheme
+                                                .bodyLarge
+                                                ?.color,
                                           ),
                                           buttonHeight: 58,
                                           buttonPadding: const EdgeInsets.only(
@@ -1736,8 +1799,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             ],
                                             borderRadius:
                                                 BorderRadius.circular(5),
-                                            color: ThemeProvider
-                                                .theme.primaryColorLight,
+                                            color: ThemeProvider.theme(
+                                                    widget.index)
+                                                .primaryColorLight,
                                           ),
                                           items: feedlabelgetter(
                                                   model.rssFeedsList)
@@ -1792,19 +1856,23 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               controller:
                                                   matchpatternController,
                                               style: TextStyle(
-                                                color: ThemeProvider.theme
-                                                    .textTheme.bodyLarge?.color,
+                                                color: ThemeProvider.theme(
+                                                        widget.index)
+                                                    .textTheme
+                                                    .bodyLarge
+                                                    ?.color,
                                               ),
                                               decoration: InputDecoration(
                                                   labelText: 'Match Pattern',
                                                   hintText: 'RegEx',
                                                   labelStyle: TextStyle(
                                                       fontFamily: 'Montserrat',
-                                                      color: ThemeProvider
-                                                          .theme
-                                                          .textTheme
-                                                          .bodyLarge
-                                                          ?.color),
+                                                      color:
+                                                          ThemeProvider.theme(
+                                                                  widget.index)
+                                                              .textTheme
+                                                              .bodyLarge
+                                                              ?.color),
                                                   border: OutlineInputBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -1827,16 +1895,19 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               controller:
                                                   excludepatternController,
                                               style: TextStyle(
-                                                color: ThemeProvider.theme
-                                                    .textTheme.bodyLarge?.color,
+                                                color: ThemeProvider.theme(
+                                                        widget.index)
+                                                    .textTheme
+                                                    .bodyLarge
+                                                    ?.color,
                                               ),
                                               decoration: InputDecoration(
                                                 labelText: 'Exclude Pattern',
                                                 hintText: 'RegEx',
                                                 labelStyle: TextStyle(
                                                     fontFamily: 'Montserrat',
-                                                    color: ThemeProvider
-                                                        .theme
+                                                    color: ThemeProvider.theme(
+                                                            widget.index)
                                                         .textTheme
                                                         .bodyLarge
                                                         ?.color),
@@ -1857,20 +1928,29 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             'Torrent destination textformfield'),
                                         controller: destinationController,
                                         style: TextStyle(
-                                          color: ThemeProvider
-                                              .theme.textTheme.bodyLarge?.color,
+                                          color:
+                                              ThemeProvider.theme(widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color,
                                         ),
                                         decoration: InputDecoration(
                                           prefixIcon: Icon(
                                             Icons.folder,
-                                            color: ThemeProvider.theme.textTheme
-                                                .bodyLarge?.color,
+                                            color: ThemeProvider.theme(
+                                                    widget.index)
+                                                .textTheme
+                                                .bodyLarge
+                                                ?.color,
                                           ),
                                           suffixIcon: IconButton(
                                             icon: Icon(
                                               Icons.search,
-                                              color: ThemeProvider.theme
-                                                  .textTheme.bodyLarge?.color,
+                                              color: ThemeProvider.theme(
+                                                      widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color,
                                             ),
                                             onPressed: () {},
                                           ),
@@ -1878,8 +1958,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           hintText: 'Destination',
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              color: ThemeProvider.theme
-                                                  .textTheme.bodyLarge?.color),
+                                              color: ThemeProvider.theme(
+                                                      widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -1893,20 +1976,29 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         key: Key('Apply tags textformfield'),
                                         controller: tagsController,
                                         style: TextStyle(
-                                          color: ThemeProvider
-                                              .theme.textTheme.bodyLarge?.color,
+                                          color:
+                                              ThemeProvider.theme(widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color,
                                         ),
                                         decoration: InputDecoration(
                                           prefixIcon: Icon(
                                             Icons.tag,
-                                            color: ThemeProvider.theme.textTheme
-                                                .bodyLarge?.color,
+                                            color: ThemeProvider.theme(
+                                                    widget.index)
+                                                .textTheme
+                                                .bodyLarge
+                                                ?.color,
                                           ),
                                           suffixIcon: IconButton(
                                             icon: Icon(
                                               Icons.keyboard_arrow_down,
-                                              color: ThemeProvider.theme
-                                                  .textTheme.bodyLarge?.color,
+                                              color: ThemeProvider.theme(
+                                                      widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color,
                                             ),
                                             onPressed: () {},
                                           ),
@@ -1914,8 +2006,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           hintText: 'Tags',
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              color: ThemeProvider.theme
-                                                  .textTheme.bodyLarge?.color),
+                                              color: ThemeProvider.theme(
+                                                      widget.index)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color),
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -1937,14 +2032,15 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               height: 30,
                                               width: 30,
                                               child: CircleAvatar(
-                                                backgroundColor: ThemeProvider
-                                                    .theme
-                                                    .colorScheme
-                                                    .secondary,
+                                                backgroundColor:
+                                                    ThemeProvider.theme(
+                                                            widget.index)
+                                                        .colorScheme
+                                                        .secondary,
                                                 child: Icon(
                                                   Icons.home_rounded,
-                                                  color: ThemeProvider
-                                                      .theme
+                                                  color: ThemeProvider.theme(
+                                                          widget.index)
                                                       .textTheme
                                                       .bodyLarge
                                                       ?.color,
@@ -1956,8 +2052,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               style: TextStyle(
                                                   fontFamily: 'Montserrat',
                                                   fontSize: 13,
-                                                  color: ThemeProvider
-                                                      .theme
+                                                  color: ThemeProvider.theme(
+                                                          widget.index)
                                                       .textTheme
                                                       .bodyLarge
                                                       ?.color),
@@ -1968,8 +2064,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 left: 2,
                                                 right: 10),
                                             selected: useAsBasePath,
-                                            selectedColor: ThemeProvider
-                                                .theme.primaryColorDark,
+                                            selectedColor: ThemeProvider.theme(
+                                                    widget.index)
+                                                .primaryColorDark,
                                             onSelected: (bool selected) {
                                               setState(() {
                                                 if (selected) {
@@ -1988,14 +2085,15 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               height: 30,
                                               width: 30,
                                               child: CircleAvatar(
-                                                backgroundColor: ThemeProvider
-                                                    .theme
-                                                    .colorScheme
-                                                    .secondary,
+                                                backgroundColor:
+                                                    ThemeProvider.theme(
+                                                            widget.index)
+                                                        .colorScheme
+                                                        .secondary,
                                                 child: Icon(
                                                   Icons.download_rounded,
-                                                  color: ThemeProvider
-                                                      .theme
+                                                  color: ThemeProvider.theme(
+                                                          widget.index)
                                                       .textTheme
                                                       .bodyLarge
                                                       ?.color,
@@ -2012,15 +2110,16 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               style: TextStyle(
                                                   fontFamily: 'Montserrat',
                                                   fontSize: 13,
-                                                  color: ThemeProvider
-                                                      .theme
+                                                  color: ThemeProvider.theme(
+                                                          widget.index)
                                                       .textTheme
                                                       .bodyLarge
                                                       ?.color),
                                             ),
                                             selected: startOnLoad,
-                                            selectedColor: ThemeProvider
-                                                .theme.primaryColorDark,
+                                            selectedColor: ThemeProvider.theme(
+                                                    widget.index)
+                                                .primaryColorDark,
                                             onSelected: (bool selected) {
                                               setState(() {
                                                 if (selected) {
@@ -2133,8 +2232,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,
-                                                backgroundColor: ThemeProvider
-                                                    .theme.primaryColorDark,
+                                                backgroundColor:
+                                                    ThemeProvider.theme(
+                                                            widget.index)
+                                                        .primaryColorDark,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(

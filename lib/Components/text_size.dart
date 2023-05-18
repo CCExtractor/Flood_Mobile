@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class SText extends StatelessWidget {
   final String text;
-
-  SText({required this.text});
+  final int index;
+  SText({required this.text, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class SText extends StatelessWidget {
       text,
       style: TextStyle(
           fontSize: 18,
-          color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+          color: ThemeProvider.theme(index).textTheme.bodyLarge?.color,
           fontWeight: FontWeight.w500),
     );
   }

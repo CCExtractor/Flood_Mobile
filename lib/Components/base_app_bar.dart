@@ -2,14 +2,14 @@ import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'change_theme_button_widget.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBar appBar;
-
+  final int index;
   const BaseAppBar({
     Key? key,
     required this.appBar,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -26,11 +26,8 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
           height: 60,
         ),
         centerTitle: true,
-        backgroundColor: ThemeProvider.theme.primaryColor,
+        backgroundColor: ThemeProvider.theme(index).primaryColor,
         elevation: 0,
-        actions: [
-          ChangeThemeButtonWidget(),
-        ],
       );
     });
   }

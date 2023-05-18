@@ -63,9 +63,10 @@ class _VideoStreamScreenState extends State<VideoStreamScreen> {
     return Scaffold(
       appBar: BaseAppBar(
         appBar: AppBar(),
+        index: widget.args.myIndex,
       ),
       body: Container(
-        color: ThemeProvider.theme.primaryColor,
+        color: ThemeProvider.theme(widget.args.myIndex).primaryColor,
         child: Center(
           child: chewieController != null &&
                   chewieController!.videoPlayerController.value.isInitialized
@@ -76,7 +77,8 @@ class _VideoStreamScreenState extends State<VideoStreamScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircularProgressIndicator(
-                      color: ThemeProvider.theme.primaryColorDark,
+                      color: ThemeProvider.theme(widget.args.myIndex)
+                          .primaryColorDark,
                     ),
                     SizedBox(height: 20),
                     Text('Loading'),

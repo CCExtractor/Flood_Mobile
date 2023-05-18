@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AboutScreen extends StatefulWidget {
+  final int index;
+
+  const AboutScreen({Key? key, required this.index}) : super(key: key);
   @override
   _AboutScreenState createState() => _AboutScreenState();
 }
@@ -11,7 +14,7 @@ class _AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeProvider.theme.primaryColor,
+      backgroundColor: ThemeProvider.theme(widget.index).primaryColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(22.0),
@@ -65,7 +68,10 @@ class _AboutScreenState extends State<AboutScreen> {
                     'Flood is a monitoring service for various torrent clients. It\'s a Node.js service that communicates with your favorite torrent client and serves a decent mobile UI for administration. This project is based on the original Flood project.',
                     key: Key('App info text key'),
                     style: TextStyle(
-                        color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+                        color: ThemeProvider.theme(widget.index)
+                            .textTheme
+                            .bodyLarge
+                            ?.color,
                         fontSize: 15),
                   ),
                   SizedBox(
@@ -74,7 +80,10 @@ class _AboutScreenState extends State<AboutScreen> {
                   Text(
                     'Feedback',
                     style: TextStyle(
-                        color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+                        color: ThemeProvider.theme(widget.index)
+                            .textTheme
+                            .bodyLarge
+                            ?.color,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
@@ -85,7 +94,10 @@ class _AboutScreenState extends State<AboutScreen> {
                     'If you have a specific issue or bug, please file a GitHub issue. Please join the Flood Discord server to discuss feature requests and implementation details.',
                     key: Key('Feedback text key'),
                     style: TextStyle(
-                        color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+                        color: ThemeProvider.theme(widget.index)
+                            .textTheme
+                            .bodyLarge
+                            ?.color,
                         fontSize: 15),
                   ),
                   SizedBox(
@@ -94,7 +106,10 @@ class _AboutScreenState extends State<AboutScreen> {
                   Text(
                     'More Information',
                     style: TextStyle(
-                        color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+                        color: ThemeProvider.theme(widget.index)
+                            .textTheme
+                            .bodyLarge
+                            ?.color,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
@@ -105,7 +120,10 @@ class _AboutScreenState extends State<AboutScreen> {
                     'Check out the Wiki for more information.',
                     key: Key('More info text key'),
                     style: TextStyle(
-                        color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+                        color: ThemeProvider.theme(widget.index)
+                            .textTheme
+                            .bodyLarge
+                            ?.color,
                         fontSize: 15),
                   ),
                   SizedBox(

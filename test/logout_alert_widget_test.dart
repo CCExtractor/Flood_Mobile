@@ -40,6 +40,7 @@ void main() {
               home: Material(
             child: LogOutAlert(
               logoutOnClick: () {},
+              index: 2,
             ),
           ));
         },

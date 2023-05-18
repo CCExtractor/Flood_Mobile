@@ -29,13 +29,15 @@ class RouteGenerator {
               ),
             ],
             child: TorrentContentScreen(
-                arguments: args as TorrentContentPageArguments),
+              arguments: args as TorrentContentPageArguments,
+            ),
           ),
         );
       case Routes.streamVideoScreenRoute:
         return MaterialPageRoute(
-            builder: (context) =>
-                VideoStreamScreen(args: args as VideoStreamScreenArguments));
+            builder: (context) => VideoStreamScreen(
+                  args: args as VideoStreamScreenArguments,
+                ));
       default:
         return MaterialPageRoute(builder: (context) => LoginScreen());
     }

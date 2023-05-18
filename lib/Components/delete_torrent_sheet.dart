@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'flood_snackbar.dart';
 
 class DeleteTorrentSheet extends StatefulWidget {
+  final int index;
   final List<TorrentModel> torrents;
 
-  DeleteTorrentSheet({required this.torrents});
+  DeleteTorrentSheet({required this.torrents, required this.index});
 
   @override
   _DeleteTorrentSheetState createState() => _DeleteTorrentSheetState();
@@ -51,7 +52,7 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
               Checkbox(
                 key: Key('Checkbox delete with data'),
                 value: deleteWithData,
-                activeColor: ThemeProvider.theme.primaryColorDark,
+                activeColor: ThemeProvider.theme(widget.index).primaryColorDark,
                 onChanged: (bool? value) {
                   setState(() {
                     deleteWithData = value ?? false;
@@ -89,7 +90,10 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                       child: Text(
                         "No",
                         style: TextStyle(
-                          color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+                          color: ThemeProvider.theme(widget.index)
+                              .textTheme
+                              .bodyLarge
+                              ?.color,
                           fontSize: 16,
                           fontWeight: FontWeight.w900,
                         ),
@@ -132,13 +136,17 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14.0),
                       ),
-                      backgroundColor: ThemeProvider.theme.primaryColorDark,
+                      backgroundColor:
+                          ThemeProvider.theme(widget.index).primaryColorDark,
                     ),
                     child: Center(
                       child: Text(
                         "Yes",
                         style: TextStyle(
-                          color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+                          color: ThemeProvider.theme(widget.index)
+                              .textTheme
+                              .bodyLarge
+                              ?.color,
                           fontSize: 16,
                           fontWeight: FontWeight.w900,
                         ),

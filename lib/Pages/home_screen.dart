@@ -7,6 +7,7 @@ import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Components/add_automatic_torrent.dart';
 import 'package:flood_mobile/Components/add_tag_dialogue.dart';
+import 'package:flood_mobile/Components/dark_transition.dart';
 import 'package:flood_mobile/Components/delete_torrent_sheet.dart';
 import 'package:flood_mobile/Components/logout_alert.dart';
 import 'package:flood_mobile/Components/nav_drawer_list_tile.dart';
@@ -51,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late String base64;
   late String directoryDefault;
   DateTime timeBackPressed = DateTime.now();
-
+  bool isDark = false;
   @override
   void initState() {
     super.initState();
@@ -98,10 +99,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           isScrollControlled: true,
           context: context,
-          backgroundColor: ThemeProvider.theme.colorScheme.background,
+          backgroundColor: ThemeProvider.theme(2).colorScheme.background,
           builder: (context) {
             return AddAutoTorrent(
-                base64: base64, imageBytes: imageBytes, uriString: uriString);
+              base64: base64,
+              imageBytes: imageBytes,
+              uriString: uriString,
+              index: 2,
+            );
           },
         );
       }
@@ -131,199 +136,242 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void toggleTheme() {
+    setState(() {
+      isDark = !isDark;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return KeyboardDismissOnTap(
-      child: SimpleHiddenDrawer(
-        withShadow: true,
-        slidePercent: 80,
-        contentCornerRadius: 40,
-        menu: Menu(),
-        screenSelectedBuilder: (position, controller) {
-          Widget screenCurrent = Container();
-          switch (position) {
-            case 0:
-              screenCurrent = TorrentScreen();
-              break;
-            case 1:
-              screenCurrent = TorrentScreen();
-              break;
-            case 2:
-              screenCurrent = SettingsScreen();
-              break;
-            case 5:
-              screenCurrent = AboutScreen();
-              break;
-          }
-          return Consumer<HomeProvider>(builder: (context, homeModel, child) {
-            return Consumer<MultipleSelectTorrentProvider>(
-                builder: (context, selectTorrent, child) {
-              return WillPopScope(
-                onWillPop: onBackPressed,
-                child: Scaffold(
-                  appBar: AppBar(
-                    leading: !selectTorrent.isSelectionMode
-                        ? IconButton(
-                            icon: Icon(
-                              Icons.menu,
-                              color: ThemeProvider
-                                  .theme.textTheme.bodyLarge?.color,
+    final mediaQuery = MediaQuery.of(context);
+    return DarkTransition(
+        isDark: isDark,
+        offset: Offset(mediaQuery.viewPadding.left + 115 + 23,
+            mediaQuery.viewPadding.top + 35 + 25),
+        duration: const Duration(milliseconds: 800),
+        childBuilder: (context, int index, bool needsSetup, int position,
+            Function(int) updatePosition) {
+          return KeyboardDismissOnTap(
+            child: SimpleHiddenDrawer(
+              withShadow: true,
+              slidePercent: 80,
+              initPositionSelected: position,
+              contentCornerRadius: 40,
+              menu: Menu(
+                  toggleTheme: toggleTheme,
+                  index: index,
+                  updatePosition: updatePosition),
+              screenSelectedBuilder: (_, controller) {
+                Widget screenCurrent = Container();
+                switch (position) {
+                  case 0:
+                    screenCurrent = TorrentScreen(index: index);
+                    break;
+                  case 1:
+                    screenCurrent = TorrentScreen(index: index);
+                    break;
+                  case 2:
+                    screenCurrent = SettingsScreen(index: index);
+                    break;
+                  case 5:
+                    screenCurrent = AboutScreen(index: index);
+                    break;
+                }
+                if (needsSetup) {
+                  if (index == 1) {
+                    controller.open();
+                  }
+                }
+                return Consumer<HomeProvider>(
+                    builder: (context, homeModel, child) {
+                  return Consumer<MultipleSelectTorrentProvider>(
+                      builder: (context, selectTorrent, child) {
+                    return WillPopScope(
+                      onWillPop: onBackPressed,
+                      child: Scaffold(
+                        appBar: AppBar(
+                          leading: !selectTorrent.isSelectionMode
+                              ? IconButton(
+                                  icon: Icon(
+                                    Icons.menu,
+                                    color: ThemeProvider.theme(index)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.color,
+                                  ),
+                                  onPressed: () {
+                                    controller.toggle();
+                                  },
+                                )
+                              : IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      selectTorrent.changeSelectionMode();
+                                      selectTorrent.removeAllItemsFromList();
+                                    });
+                                  },
+                                  icon: Icon(Icons.close)),
+                          title: Image(
+                            key: Key('Flood Icon'),
+                            image: AssetImage(
+                              'assets/images/icon.png',
                             ),
-                            onPressed: () {
-                              controller.toggle();
-                            },
-                          )
-                        : IconButton(
-                            onPressed: () {
-                              setState(() {
-                                selectTorrent.changeSelectionMode();
-                                selectTorrent.removeAllItemsFromList();
-                              });
-                            },
-                            icon: Icon(Icons.close)),
-                    title: Image(
-                      key: Key('Flood Icon'),
-                      image: AssetImage(
-                        'assets/images/icon.png',
-                      ),
-                      width: 60,
-                      height: 60,
-                    ),
-                    centerTitle: true,
-                    backgroundColor: Theme.of(context).primaryColor,
-                    elevation: 0,
-                    actions: [
-                      if (!selectTorrent.isSelectionMode) RSSFeedButtonWidget(),
-                      if (!selectTorrent.isSelectionMode)
-                        Badge(
-                          showBadge:
-                              homeModel.unreadNotifications == 0 ? false : true,
-                          key: Key('Badge Widget'),
-                          badgeColor: Theme.of(context).colorScheme.secondary,
-                          badgeContent: Center(
-                            child: Text(
-                              homeModel.unreadNotifications.toString(),
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            width: 60,
+                            height: 60,
                           ),
-                          position: BadgePosition(top: 0, end: 3),
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.notifications,
-                            ),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    key: Key('Notification Alert Dialog'),
-                                    elevation: 0,
-                                    backgroundColor:
-                                        Theme.of(context).primaryColor,
-                                    content: notificationPopupDialogueContainer(
-                                      context: context,
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                      if (selectTorrent.isSelectionMode)
-                        PopupMenuButton<String>(
-                          color: ThemeProvider.theme.primaryColorLight,
-                          icon: Icon(
-                            Icons.more_vert,
-                            color:
-                                ThemeProvider.theme.textTheme.bodyLarge?.color,
-                          ),
-                          onSelected: (value) {
-                            List<String> hash = [];
-                            selectTorrent.selectedTorrentList
-                                .toList()
-                                .forEach((element) {
-                              hash.add(element.hash);
-                            });
-                            if (value == 'Select All') {
-                              selectTorrent.removeAllItemsFromList();
-                              selectTorrent
-                                  .addAllItemsToList(homeModel.torrentList);
-                            }
-                            if (value == 'Start') {
-                              TorrentApi.startTorrent(
-                                  hashes: hash, context: context);
-                              selectTorrent.changeSelectionMode();
-                            }
-                            if (value == 'Pause') {
-                              TorrentApi.stopTorrent(
-                                  hashes: hash, context: context);
-                              selectTorrent.changeSelectionMode();
-                            }
-                            if (value == 'Delete') {
-                              showModalBottomSheet(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(15),
-                                    topLeft: Radius.circular(15),
+                          centerTitle: true,
+                          backgroundColor:
+                              ThemeProvider.theme(index).primaryColor,
+                          elevation: 0,
+                          actions: [
+                            if (!selectTorrent.isSelectionMode)
+                              RSSFeedButtonWidget(index: index),
+                            if (!selectTorrent.isSelectionMode)
+                              Badge(
+                                showBadge: homeModel.unreadNotifications == 0
+                                    ? false
+                                    : true,
+                                key: Key('Badge Widget'),
+                                badgeColor: ThemeProvider.theme(index)
+                                    .colorScheme
+                                    .secondary,
+                                badgeContent: Center(
+                                  child: Text(
+                                    homeModel.unreadNotifications.toString(),
+                                    style: TextStyle(color: Colors.white),
                                   ),
                                 ),
-                                isScrollControlled: true,
-                                context: context,
-                                backgroundColor:
-                                    ThemeProvider.theme.scaffoldBackgroundColor,
-                                builder: (context) {
-                                  return DeleteTorrentSheet(
-                                    torrents: selectTorrent.selectedTorrentList
-                                        .toList(),
-                                  );
+                                position: BadgePosition(top: 0, end: 3),
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.notifications,
+                                  ),
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          key: Key('Notification Alert Dialog'),
+                                          elevation: 0,
+                                          backgroundColor:
+                                              ThemeProvider.theme(index)
+                                                  .primaryColor,
+                                          content:
+                                              notificationPopupDialogueContainer(
+                                            context: context,
+                                            index: index,
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            if (selectTorrent.isSelectionMode)
+                              PopupMenuButton<String>(
+                                color: ThemeProvider.theme(index)
+                                    .primaryColorLight,
+                                icon: Icon(
+                                  Icons.more_vert,
+                                  color: ThemeProvider.theme(index)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.color,
+                                ),
+                                onSelected: (value) {
+                                  List<String> hash = [];
+                                  selectTorrent.selectedTorrentList
+                                      .toList()
+                                      .forEach((element) {
+                                    hash.add(element.hash);
+                                  });
+                                  if (value == 'Select All') {
+                                    selectTorrent.removeAllItemsFromList();
+                                    selectTorrent.addAllItemsToList(
+                                        homeModel.torrentList);
+                                  }
+                                  if (value == 'Start') {
+                                    TorrentApi.startTorrent(
+                                        hashes: hash, context: context);
+                                    selectTorrent.changeSelectionMode();
+                                  }
+                                  if (value == 'Pause') {
+                                    TorrentApi.stopTorrent(
+                                        hashes: hash, context: context);
+                                    selectTorrent.changeSelectionMode();
+                                  }
+                                  if (value == 'Delete') {
+                                    showModalBottomSheet(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(15),
+                                          topLeft: Radius.circular(15),
+                                        ),
+                                      ),
+                                      isScrollControlled: true,
+                                      context: context,
+                                      backgroundColor:
+                                          ThemeProvider.theme(index)
+                                              .scaffoldBackgroundColor,
+                                      builder: (context) {
+                                        return DeleteTorrentSheet(
+                                          torrents: selectTorrent
+                                              .selectedTorrentList
+                                              .toList(),
+                                          index: index,
+                                        );
+                                      },
+                                    );
+                                    selectTorrent.changeSelectionMode();
+                                  }
+                                  if (value == "Set Tags") {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => AddTagDialogue(
+                                              torrents: selectTorrent
+                                                  .selectedTorrentList
+                                                  .toList(),
+                                              index: index,
+                                            )).then((value) {
+                                      setState(() {
+                                        selectTorrent.changeSelectionMode();
+                                        selectTorrent.removeAllItemsFromList();
+                                      });
+                                    });
+                                  }
                                 },
-                              );
-                              selectTorrent.changeSelectionMode();
-                            }
-                            if (value == "Set Tags") {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AddTagDialogue(
-                                      torrents: selectTorrent
-                                          .selectedTorrentList
-                                          .toList())).then((value) {
-                                setState(() {
-                                  selectTorrent.changeSelectionMode();
-                                  selectTorrent.removeAllItemsFromList();
-                                });
-                              });
-                            }
-                          },
-                          itemBuilder: (BuildContext context) {
-                            return {
-                              'Select All',
-                              'Start',
-                              'Pause',
-                              'Delete',
-                              'Set Tags',
-                            }.map((String choice) {
-                              return PopupMenuItem<String>(
-                                value: choice,
-                                child: Text(choice),
-                              );
-                            }).toList();
-                          },
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(12.0),
-                            ),
-                          ),
+                                itemBuilder: (BuildContext context) {
+                                  return {
+                                    'Select All',
+                                    'Start',
+                                    'Pause',
+                                    'Delete',
+                                    'Set Tags',
+                                  }.map((String choice) {
+                                    return PopupMenuItem<String>(
+                                      value: choice,
+                                      child: Text(choice),
+                                    );
+                                  }).toList();
+                                },
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12.0),
+                                  ),
+                                ),
+                              ),
+                          ],
                         ),
-                    ],
-                  ),
-                  body: screenCurrent,
-                ),
-              );
-            });
-          });
-        },
-      ),
-    );
+                        body: screenCurrent,
+                      ),
+                    );
+                  });
+                });
+              },
+            ),
+          );
+        });
   }
 }
 
@@ -359,17 +407,21 @@ class NotificationController {
 }
 
 class Menu extends StatefulWidget {
+  final Function toggleTheme;
+  final int index;
+  final Function(int) updatePosition;
+  const Menu(
+      {Key? key,
+      required this.toggleTheme,
+      required this.index,
+      required this.updatePosition})
+      : super(key: key);
   @override
   _MenuState createState() => _MenuState();
 }
 
 class _MenuState extends State<Menu> {
   late SimpleHiddenDrawerController controller;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void didChangeDependencies() {
@@ -382,7 +434,7 @@ class _MenuState extends State<Menu> {
     double hp = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
-        color: ThemeProvider.theme.scaffoldBackgroundColor,
+        color: ThemeProvider.theme(widget.index).scaffoldBackgroundColor,
         width: double.maxFinite,
         height: double.maxFinite,
         padding: const EdgeInsets.only(top: 30.0, left: 5),
@@ -402,7 +454,9 @@ class _MenuState extends State<Menu> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 30.0),
-                  child: ChangeThemeButtonWidget(),
+                  child: ChangeThemeButtonWidget(
+                    toggleTheme: widget.toggleTheme,
+                  ),
                 ),
               ],
             ),
@@ -422,19 +476,25 @@ class _MenuState extends State<Menu> {
               height: hp * 0.01,
             ),
             NavDrawerListTile(
-                icon: Icons.dashboard,
-                onTap: () {
-                  controller.position = 0;
-                  controller.toggle();
-                },
-                title: 'Torrents'),
+              icon: Icons.dashboard,
+              onTap: () {
+                controller.position = 0;
+                widget.updatePosition(0);
+                controller.toggle();
+              },
+              title: 'Torrents',
+              index: widget.index,
+            ),
             NavDrawerListTile(
-                icon: Icons.settings,
-                onTap: () {
-                  controller.position = 2;
-                  controller.toggle();
-                },
-                title: 'Settings'),
+              icon: Icons.settings,
+              onTap: () {
+                controller.position = 2;
+                widget.updatePosition(2);
+                controller.toggle();
+              },
+              title: 'Settings',
+              index: widget.index,
+            ),
             NavDrawerListTile(
               icon: Icons.exit_to_app,
               onTap: () async {
@@ -455,27 +515,33 @@ class _MenuState extends State<Menu> {
                           Routes.loginScreenRoute,
                           (Route<dynamic> route) => false);
                     },
+                    index: widget.index,
                   ),
                 );
               },
               title: 'Logout',
+              index: widget.index,
             ),
             NavDrawerListTile(
-                icon: FontAwesomeIcons.github,
-                onTap: () {
-                  controller.toggle();
-                  launchUrl(Uri.parse(
-                    'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
-                  ));
-                },
-                title: 'GitHub'),
+              icon: FontAwesomeIcons.github,
+              onTap: () {
+                controller.toggle();
+                launchUrl(Uri.parse(
+                  'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
+                ));
+              },
+              title: 'GitHub',
+              index: widget.index,
+            ),
             NavDrawerListTile(
-                icon: Icons.info,
-                onTap: () {
-                  controller.position = 5;
-                  controller.toggle();
-                },
-                title: 'About'),
+              icon: Icons.info,
+              onTap: () {
+                controller.position = 5;
+                controller.toggle();
+              },
+              title: 'About',
+              index: widget.index,
+            ),
           ],
         ),
       ),
