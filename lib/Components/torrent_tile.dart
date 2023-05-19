@@ -205,6 +205,8 @@ class _TorrentTileState extends State<TorrentTile> {
                     elevation: 0,
                     expandedColor: ThemeProvider.theme.primaryColor,
                     baseColor: ThemeProvider.theme.primaryColor,
+                    expandedTextColor:
+                        ThemeProvider.theme.colorScheme.secondary,
                     title: ListTile(
                       key: Key(widget.model.hash),
                       contentPadding: EdgeInsets.all(0),
@@ -440,7 +442,6 @@ class _TorrentTileState extends State<TorrentTile> {
                                       child: Text(
                                           (widget.model.tags.length != 0)
                                               ? widget.model.tags
-                                                  .toSet()
                                                   .toList()
                                                   .toString()
                                               : 'None'),

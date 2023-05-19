@@ -100,6 +100,7 @@ class EventHandlerApi {
     for (var hash in newTorrentList.keys) {
       try {
         TorrentModel torrentModel = TorrentModel.fromJson(newTorrentList[hash]);
+        torrentModel.tags = torrentModel.tags.toSet().toList();
         torrentList.add(torrentModel);
       } catch (e) {
         print(e.toString());

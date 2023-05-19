@@ -34,7 +34,8 @@ class _TorrentScreenState extends State<TorrentScreen> {
                     filterModel.filterStatus.toString().split(".").last) ||
             torrent.trackerURIs.contains(filterModel.trackerURISelected) ||
             torrent.tags.contains(filterModel.tagSelected) ||
-            filterModel.filterStatus.toString().split(".").last == "all") {
+            filterModel.filterStatus.toString().split(".").last == "all" ||
+            torrent.tags.isEmpty && filterModel.tagSelected == "Untagged") {
           if (torrent.name.toLowerCase().contains(keyword.toLowerCase())) {
             showTorrentCount++;
           }
