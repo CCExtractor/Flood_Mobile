@@ -41,6 +41,8 @@ class MyThemes {
       ),
     ),
     highlightColor: Color(0xff415062),
+    disabledColor: Colors.white38,
+    dividerColor: Colors.white12,
   );
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
@@ -69,5 +71,7 @@ class MyThemes {
       ),
     ),
     highlightColor: Color(0xff415062),
+    disabledColor: Colors.black38,
+    dividerColor: Colors.black12,
   );
 }
