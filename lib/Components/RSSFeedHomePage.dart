@@ -1,5 +1,6 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
+import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/feeds_contents_api.dart';
 import 'package:flood_mobile/Api/update_feed_api.dart';
 import 'package:flood_mobile/Model/single_feed_and_response_model.dart';
@@ -693,60 +694,79 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             width: 150,
                                             height: 50,
                                             child: ElevatedButton(
-                                              onPressed: () {
-                                                if (_feedformKey.currentState!
-                                                        .validate() ==
-                                                    true) {
-                                                  setState(() {
-                                                    if (isUpdateFeedSelected ==
-                                                        false) {
-                                                      FeedsApi.addFeeds(
-                                                        type: "feed",
-                                                        id: "43",
-                                                        label: labelController
-                                                            .text,
-                                                        feedurl:
-                                                            urlController.text,
-                                                        interval: int.parse(
-                                                            intervalController
-                                                                .text),
-                                                        count: 0,
-                                                        context: context,
-                                                      );
-                                                    }
-                                                    final addFeedSnackbar =
-                                                        addFloodSnackBar(
-                                                            SnackbarType
-                                                                .information,
-                                                            'New Feed added successfully',
-                                                            'Dismiss');
-
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                            addFeedSnackbar);
-                                                    FeedsApi
-                                                        .listAllFeedsAndRules(
-                                                            context: context);
-                                                    clearFeedsFields();
-                                                    if (isUpdateFeedSelected) {
-                                                      UpdateFeedApi.updateFeed(
+                                              onPressed: () async {
+                                                if (await ClientApi
+                                                    .checkClientOnline(
+                                                        context)) {
+                                                  if (_feedformKey.currentState!
+                                                          .validate() ==
+                                                      true) {
+                                                    setState(() {
+                                                      if (isUpdateFeedSelected ==
+                                                          false) {
+                                                        FeedsApi.addFeeds(
                                                           type: "feed",
                                                           id: updateFeedId,
                                                           label: labelController
                                                               .text,
                                                           feedurl: urlController
                                                               .text,
-                                                          context: context,
                                                           interval: int.parse(
                                                               intervalController
                                                                   .text),
-                                                          count: 1);
+                                                          count: 0,
+                                                          context: context,
+                                                        );
+                                                      }
+                                                      final addFeedSnackbar =
+                                                          addFloodSnackBar(
+                                                              SnackbarType
+                                                                  .information,
+                                                              'New Feed added successfully',
+                                                              'Dismiss');
+
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              addFeedSnackbar);
                                                       FeedsApi
                                                           .listAllFeedsAndRules(
                                                               context: context);
-                                                    }
-                                                  });
+                                                      clearFeedsFields();
+                                                      if (isUpdateFeedSelected) {
+                                                        UpdateFeedApi.updateFeed(
+                                                            type: "feed",
+                                                            id: updateFeedId,
+                                                            label:
+                                                                labelController
+                                                                    .text,
+                                                            feedurl:
+                                                                urlController
+                                                                    .text,
+                                                            context: context,
+                                                            interval: int.parse(
+                                                                intervalController
+                                                                    .text),
+                                                            count: 1);
+                                                        FeedsApi
+                                                            .listAllFeedsAndRules(
+                                                                context:
+                                                                    context);
+                                                      }
+                                                    });
+                                                  }
+                                                } else {
+                                                  final connectionCheckSnackbar =
+                                                      addFloodSnackBar(
+                                                          SnackbarType.caution,
+                                                          'Please check your backend connection',
+                                                          'Dismiss');
+
+                                                  ScaffoldMessenger.of(context)
+                                                      .clearSnackBars();
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                          connectionCheckSnackbar);
                                                 }
                                               },
                                               style: ElevatedButton.styleFrom(
@@ -2209,59 +2229,78 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             width: 150,
                                             height: 50,
                                             child: ElevatedButton(
-                                              onPressed: () {
-                                                if (_rulesformKey.currentState!
-                                                        .validate() ==
-                                                    true) {
-                                                  setState(() {
-                                                    isNewDownloadRules = true;
-                                                    RulesApi.addRules(
-                                                      type: "rule",
-                                                      label:
-                                                          labelRulesController
-                                                              .text,
-                                                      feedIDs: [
-                                                        feedidgetter(
-                                                                applicableFeedSelected
-                                                                    .toString(),
-                                                                model
-                                                                    .rssFeedsList)
-                                                            .toString()
-                                                      ],
-                                                      field: "test",
-                                                      matchpattern:
-                                                          matchpatternController
-                                                              .text,
-                                                      excludepattern:
-                                                          excludepatternController
-                                                              .text,
-                                                      destination:
-                                                          destinationController
-                                                              .text,
-                                                      tags: [
-                                                        tagsController.text
-                                                      ],
-                                                      startOnLoad: startOnLoad,
-                                                      isBasePath: useAsBasePath,
-                                                      count: 0,
-                                                      context: context,
-                                                    );
-                                                    final addRuleSnackbar =
-                                                        addFloodSnackBar(
-                                                            SnackbarType
-                                                                .information,
-                                                            'New Rule added successfully',
-                                                            'Dismiss');
+                                              onPressed: () async {
+                                                if (await ClientApi
+                                                    .checkClientOnline(
+                                                        context)) {
+                                                  if (_rulesformKey
+                                                          .currentState!
+                                                          .validate() ==
+                                                      true) {
+                                                    setState(() {
+                                                      isNewDownloadRules = true;
+                                                      RulesApi.addRules(
+                                                        type: "rule",
+                                                        label:
+                                                            labelRulesController
+                                                                .text,
+                                                        feedIDs: [
+                                                          feedidgetter(
+                                                                  applicableFeedSelected
+                                                                      .toString(),
+                                                                  model
+                                                                      .rssFeedsList)
+                                                              .toString()
+                                                        ],
+                                                        field: "test",
+                                                        matchpattern:
+                                                            matchpatternController
+                                                                .text,
+                                                        excludepattern:
+                                                            excludepatternController
+                                                                .text,
+                                                        destination:
+                                                            destinationController
+                                                                .text,
+                                                        tags: [
+                                                          tagsController.text
+                                                        ],
+                                                        startOnLoad:
+                                                            startOnLoad,
+                                                        isBasePath:
+                                                            useAsBasePath,
+                                                        count: 0,
+                                                        context: context,
+                                                      );
+                                                      final addRuleSnackbar =
+                                                          addFloodSnackBar(
+                                                              SnackbarType
+                                                                  .information,
+                                                              'New Rule added successfully',
+                                                              'Dismiss');
 
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                            addRuleSnackbar);
-                                                    FeedsApi
-                                                        .listAllFeedsAndRules(
-                                                            context: context);
-                                                    clearDownloadRulesFields();
-                                                  });
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              addRuleSnackbar);
+                                                      FeedsApi
+                                                          .listAllFeedsAndRules(
+                                                              context: context);
+                                                      clearDownloadRulesFields();
+                                                    });
+                                                  }
+                                                } else {
+                                                  final connectionCheckSnackbar =
+                                                      addFloodSnackBar(
+                                                          SnackbarType.caution,
+                                                          'Please check your backend connection',
+                                                          'Dismiss');
+
+                                                  ScaffoldMessenger.of(context)
+                                                      .clearSnackBars();
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                          connectionCheckSnackbar);
                                                 }
                                               },
                                               style: ElevatedButton.styleFrom(
