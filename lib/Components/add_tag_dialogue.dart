@@ -23,7 +23,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
   bool _showdropdown = false;
   late TextEditingController _textController;
   int _itemsVisibleInDropdown = 1;
-  Set<String> _inputTagList = {};
+  List<String> _inputTagList = [];
   Map<String, bool> _existingTags = {};
   Map<String, bool> _newEnterdTags = {};
   late Animation _animation;
@@ -35,9 +35,9 @@ class _AddTagDialogueState extends State<AddTagDialogue>
   void initState() {
     super.initState();
     _textController =
-        TextEditingController(text: widget.torrents[0].tags.toSet().join(","));
+        TextEditingController(text: widget.torrents[0].tags.join(","));
     _textController.addListener(_handleControllerChanged);
-    _inputTagList = _textController.text.split(',').toSet();
+    _inputTagList = _textController.text.split(',');
   }
 
   @override
@@ -342,7 +342,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
     setState(() {
       _textController.text = '';
       _existingTags.updateAll((key, value) => value = false);
-      _inputTagList = {};
+      _inputTagList = [];
       _newEnterdTags = {};
     });
   }
@@ -356,7 +356,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
         _textController.selection = TextSelection.fromPosition(
             TextPosition(offset: _textController.text.length));
       }
-      _inputTagList = _textController.text.split(',').toSet();
+      _inputTagList = _textController.text.split(',');
       _inputTagList.remove("");
 
       //if user press Untagged

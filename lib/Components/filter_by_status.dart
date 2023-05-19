@@ -1,7 +1,8 @@
+import 'dart:math';
+
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../Api/event_handler_api.dart';
 import '../Provider/filter_provider.dart';
 import '../Provider/home_provider.dart';
 
@@ -71,7 +72,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         width: 18,
                         height: 18,
                         child: Center(
-                          child: Text(torrentLength,
+                          child: Text(model.torrentList.length.toString(),
                               style: TextStyle(
                                   color: ThemeProvider.theme.primaryColorLight,
                                   fontFamily: 'Montserrat',
@@ -634,9 +635,9 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         width: 18,
                         height: 18,
                         child: Center(
-                          child: Text(torrentLength,
+                          child: Text(model.torrentList.length.toString(),
                               style: TextStyle(
-                                  color: Colors.black45,
+                                  color: ThemeProvider.theme.primaryColorLight,
                                   fontFamily: 'Montserrat',
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold)),
@@ -703,12 +704,12 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                 height: 18,
                                 child: Center(
                                   child: Text(
-                                      filterModel.mapTags[filterModel
-                                              .mapTags.keys
-                                              .toList()[index]]
+                                      filterModel.mapTags.values
+                                          .toList()[index][0]
                                           .toString(),
                                       style: TextStyle(
-                                          color: Colors.black45,
+                                          color: ThemeProvider
+                                              .theme.primaryColorLight,
                                           fontFamily: 'Montserrat',
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold)),
@@ -724,23 +725,50 @@ class _FilterByStatusState extends State<FilterByStatus> {
                               )
                             ],
                           ),
-                          trailing: Radio<String>(
-                            value: filterModel.mapTags.keys
-                                .toList()[index]
-                                .toString(),
-                            groupValue: filterModel.tagSelected,
-                            onChanged: (value) {
-                              Provider.of<FilterProvider>(context,
-                                      listen: false)
-                                  .setFilterSelected(null);
-                              Provider.of<FilterProvider>(context,
-                                      listen: false)
-                                  .setTagSelected(value.toString());
-                              Provider.of<FilterProvider>(context,
-                                      listen: false)
-                                  .settrackerURISelected('null');
-                            },
-                            activeColor: Colors.blue,
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              filterModel.mapTags.values
+                                      .toList()[index][1]
+                                      .toString()
+                                      .contains('0.0')
+                                  ? Container()
+                                  : Text(
+                                      humanReadableByteCountSI(filterModel
+                                          .mapTags.values
+                                          .toList()[index][1]
+                                          .toString()),
+                                      style: TextStyle(
+                                        color: filterModel.mapTags.keys
+                                                    .toList()[index] ==
+                                                filterModel.tagSelected
+                                                    .toString()
+                                            ? Colors.blue
+                                            : Colors.blueGrey,
+                                        fontFamily: 'Montserrat',
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                              Radio<String>(
+                                value: filterModel.mapTags.keys
+                                    .toList()[index]
+                                    .toString(),
+                                groupValue: filterModel.tagSelected,
+                                onChanged: (value) {
+                                  Provider.of<FilterProvider>(context,
+                                          listen: false)
+                                      .setFilterSelected(null);
+                                  Provider.of<FilterProvider>(context,
+                                          listen: false)
+                                      .setTagSelected(value.toString());
+                                  Provider.of<FilterProvider>(context,
+                                          listen: false)
+                                      .settrackerURISelected('null');
+                                },
+                                activeColor: Colors.blue,
+                              ),
+                            ],
                           ),
                         );
                       } else {
@@ -769,11 +797,11 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                 height: 18,
                                 child: Center(
                                   child: Text(
-                                      Provider.of<FilterProvider>(context)
-                                          .mapTags['Untagged']
+                                      filterModel.mapTags['Untagged'][0]
                                           .toString(),
                                       style: TextStyle(
-                                          color: Colors.black45,
+                                          color: ThemeProvider
+                                              .theme.primaryColorLight,
                                           fontFamily: 'Montserrat',
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold)),
@@ -843,7 +871,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         width: 18,
                         height: 18,
                         child: Center(
-                          child: Text(torrentLength,
+                          child: Text(model.torrentList.length.toString(),
                               style: TextStyle(
                                   color: ThemeProvider.theme.primaryColorLight,
                                   fontFamily: 'Montserrat',
@@ -907,9 +935,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                               height: 18,
                               child: Center(
                                 child: Text(
-                                    filterModel.maptrackerURIs[filterModel
-                                            .maptrackerURIs.keys
-                                            .toList()[index]]
+                                    filterModel.maptrackerURIs.values
+                                        .toList()[index][0]
                                         .toString(),
                                     style: TextStyle(
                                         color: ThemeProvider
@@ -927,23 +954,53 @@ class _FilterByStatusState extends State<FilterByStatus> {
                                     ? Colors.blue
                                     : Colors.blueGrey,
                               ),
-                            )
+                            ),
                           ],
                         ),
-                        trailing: Radio<String>(
-                          value: filterModel.maptrackerURIs.keys
-                              .toList()[index]
-                              .toString(),
-                          groupValue: filterModel.trackerURISelected,
-                          onChanged: (value) {
-                            Provider.of<FilterProvider>(context, listen: false)
-                                .setTagSelected('null');
-                            Provider.of<FilterProvider>(context, listen: false)
-                                .setFilterSelected(null);
-                            Provider.of<FilterProvider>(context, listen: false)
-                                .settrackerURISelected(value.toString());
-                          },
-                          activeColor: Colors.blue,
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            filterModel.maptrackerURIs.values
+                                    .toList()[index][1]
+                                    .toString()
+                                    .contains('0.0')
+                                ? Container()
+                                : Text(
+                                    humanReadableByteCountSI(filterModel
+                                        .maptrackerURIs.values
+                                        .toList()[index][1]
+                                        .toString()),
+                                    style: TextStyle(
+                                      color: filterModel.maptrackerURIs.keys
+                                                  .toList()[index] ==
+                                              filterModel.trackerURISelected
+                                                  .toString()
+                                          ? Colors.blue
+                                          : Colors.blueGrey,
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                            Radio<String>(
+                              value: filterModel.maptrackerURIs.keys
+                                  .toList()[index]
+                                  .toString(),
+                              groupValue: filterModel.trackerURISelected,
+                              onChanged: (value) {
+                                Provider.of<FilterProvider>(context,
+                                        listen: false)
+                                    .setTagSelected('null');
+                                Provider.of<FilterProvider>(context,
+                                        listen: false)
+                                    .setFilterSelected(null);
+                                Provider.of<FilterProvider>(context,
+                                        listen: false)
+                                    .settrackerURISelected(value.toString());
+                              },
+                              activeColor: Colors.blue,
+                            ),
+                          ],
                         ),
                       );
                     }),
@@ -953,5 +1010,15 @@ class _FilterByStatusState extends State<FilterByStatus> {
         );
       });
     });
+  }
+
+  String humanReadableByteCountSI(String bytesStr) {
+    // convert bytes to readable format from string
+    double bytes = double.parse(bytesStr);
+    int unit = 1024;
+    if (bytes < unit) return bytes.toString() + " B";
+    int exp = (log(bytes) / log(unit)).floor();
+    String pre = "kMGTPE"[exp - 1];
+    return (bytes / pow(unit, exp)).toStringAsFixed(1) + " " + pre + "B";
   }
 }
