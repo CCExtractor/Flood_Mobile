@@ -6,10 +6,14 @@ import 'package:flutter/material.dart';
 import 'flood_snackbar.dart';
 
 class DeleteTorrentSheet extends StatefulWidget {
-  final int index;
+  final int themeIndex;
   final List<TorrentModel> torrents;
+  final List<int> indexes;
 
-  DeleteTorrentSheet({required this.torrents, required this.index});
+  DeleteTorrentSheet(
+      {required this.torrents,
+      required this.indexes,
+      required this.themeIndex});
 
   @override
   _DeleteTorrentSheetState createState() => _DeleteTorrentSheetState();
@@ -52,7 +56,8 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
               Checkbox(
                 key: Key('Checkbox delete with data'),
                 value: deleteWithData,
-                activeColor: ThemeProvider.theme(widget.index).primaryColorDark,
+                activeColor:
+                    ThemeProvider.theme(widget.themeIndex).primaryColorDark,
                 onChanged: (bool? value) {
                   setState(() {
                     deleteWithData = value ?? false;
@@ -90,7 +95,7 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                       child: Text(
                         "No",
                         style: TextStyle(
-                          color: ThemeProvider.theme(widget.index)
+                          color: ThemeProvider.theme(widget.themeIndex)
                               .textTheme
                               .bodyLarge
                               ?.color,
@@ -118,6 +123,7 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                         hashes.add(element.hash);
                       });
                       TorrentApi.deleteTorrent(
+                          id: widget.indexes,
                           hashes: hashes,
                           deleteWithData: deleteWithData,
                           context: context);
@@ -136,14 +142,14 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14.0),
                       ),
-                      backgroundColor:
-                          ThemeProvider.theme(widget.index).primaryColorDark,
+                      backgroundColor: ThemeProvider.theme(widget.themeIndex)
+                          .primaryColorDark,
                     ),
                     child: Center(
                       child: Text(
                         "Yes",
                         style: TextStyle(
-                          color: ThemeProvider.theme(widget.index)
+                          color: ThemeProvider.theme(widget.themeIndex)
                               .textTheme
                               .bodyLarge
                               ?.color,

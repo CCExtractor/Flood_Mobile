@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
         offset: Offset(mediaQuery.viewPadding.left + 115 + 23,
             mediaQuery.viewPadding.top + 35 + 25),
         duration: const Duration(milliseconds: 800),
-        childBuilder: (context, int index, bool needsSetup, int position,
+        childBuilder: (context, int themeIndex, bool needsSetup, int position,
             Function(int) updatePosition) {
           return KeyboardDismissOnTap(
             child: SimpleHiddenDrawer(
@@ -160,26 +160,26 @@ class _HomeScreenState extends State<HomeScreen> {
               contentCornerRadius: 40,
               menu: Menu(
                   toggleTheme: toggleTheme,
-                  index: index,
+                  index: themeIndex,
                   updatePosition: updatePosition),
               screenSelectedBuilder: (_, controller) {
                 Widget screenCurrent = Container();
                 switch (position) {
                   case 0:
-                    screenCurrent = TorrentScreen(index: index);
+                    screenCurrent = TorrentScreen(index: themeIndex);
                     break;
                   case 1:
-                    screenCurrent = TorrentScreen(index: index);
+                    screenCurrent = TorrentScreen(index: themeIndex);
                     break;
                   case 2:
-                    screenCurrent = SettingsScreen(index: index);
+                    screenCurrent = SettingsScreen(index: themeIndex);
                     break;
                   case 5:
-                    screenCurrent = AboutScreen(index: index);
+                    screenCurrent = AboutScreen(index: themeIndex);
                     break;
                 }
                 if (needsSetup) {
-                  if (index == 1) {
+                  if (themeIndex == 1) {
                     controller.open();
                   }
                 }
@@ -195,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ? IconButton(
                                   icon: Icon(
                                     Icons.menu,
-                                    color: ThemeProvider.theme(index)
+                                    color: ThemeProvider.theme(themeIndex)
                                         .textTheme
                                         .bodyLarge
                                         ?.color,
@@ -209,6 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     setState(() {
                                       selectTorrent.changeSelectionMode();
                                       selectTorrent.removeAllItemsFromList();
+                                      selectTorrent.removeAllIndexFromList();
                                     });
                                   },
                                   icon: Icon(Icons.close)),
@@ -222,18 +223,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           centerTitle: true,
                           backgroundColor:
-                              ThemeProvider.theme(index).primaryColor,
+                              ThemeProvider.theme(themeIndex).primaryColor,
                           elevation: 0,
                           actions: [
                             if (!selectTorrent.isSelectionMode)
-                              RSSFeedButtonWidget(index: index),
+                              RSSFeedButtonWidget(index: themeIndex),
                             if (!selectTorrent.isSelectionMode)
                               Badge(
                                 showBadge: homeModel.unreadNotifications == 0
                                     ? false
                                     : true,
                                 key: Key('Badge Widget'),
-                                badgeColor: ThemeProvider.theme(index)
+                                badgeColor: ThemeProvider.theme(themeIndex)
                                     .colorScheme
                                     .secondary,
                                 badgeContent: Center(
@@ -255,12 +256,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                           key: Key('Notification Alert Dialog'),
                                           elevation: 0,
                                           backgroundColor:
-                                              ThemeProvider.theme(index)
+                                              ThemeProvider.theme(themeIndex)
                                                   .primaryColor,
                                           content:
                                               notificationPopupDialogueContainer(
                                             context: context,
-                                            index: index,
+                                            index: themeIndex,
                                           ),
                                         );
                                       },
@@ -270,17 +271,18 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             if (selectTorrent.isSelectionMode)
                               PopupMenuButton<String>(
-                                color: ThemeProvider.theme(index)
+                                color: ThemeProvider.theme(themeIndex)
                                     .primaryColorLight,
                                 icon: Icon(
                                   Icons.more_vert,
-                                  color: ThemeProvider.theme(index)
+                                  color: ThemeProvider.theme(themeIndex)
                                       .textTheme
                                       .bodyLarge
                                       ?.color,
                                 ),
                                 onSelected: (value) {
                                   List<String> hash = [];
+                                  List<int> index = [];
                                   selectTorrent.selectedTorrentList
                                       .toList()
                                       .forEach((element) {
@@ -288,8 +290,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   });
                                   if (value == 'Select All') {
                                     selectTorrent.removeAllItemsFromList();
+                                    selectTorrent.removeAllIndexFromList();
                                     selectTorrent.addAllItemsToList(
                                         homeModel.torrentList);
+                                    for (int i = 0;
+                                        i < homeModel.torrentList.length;
+                                        i++) {
+                                      index.add(i);
+                                    }
+                                    selectTorrent.addAllIndexToList(index);
                                   }
                                   if (value == 'Start') {
                                     TorrentApi.startTorrent(
@@ -312,14 +321,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                       isScrollControlled: true,
                                       context: context,
                                       backgroundColor:
-                                          ThemeProvider.theme(index)
+                                          ThemeProvider.theme(themeIndex)
                                               .scaffoldBackgroundColor,
                                       builder: (context) {
                                         return DeleteTorrentSheet(
                                           torrents: selectTorrent
                                               .selectedTorrentList
                                               .toList(),
-                                          index: index,
+                                          themeIndex: themeIndex,
+                                          indexes: selectTorrent
+                                              .selectedTorrentIndex,
                                         );
                                       },
                                     );
@@ -332,11 +343,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                               torrents: selectTorrent
                                                   .selectedTorrentList
                                                   .toList(),
-                                              index: index,
+                                              index: themeIndex,
                                             )).then((value) {
                                       setState(() {
                                         selectTorrent.changeSelectionMode();
                                         selectTorrent.removeAllItemsFromList();
+                                        selectTorrent.removeAllIndexFromList();
                                       });
                                     });
                                   }
