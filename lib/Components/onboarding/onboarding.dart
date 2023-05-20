@@ -63,7 +63,7 @@ class _OnboardingState extends State<Onboarding> {
                 textBaseline: TextBaseline.alphabetic,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
+                    padding: const EdgeInsets.only(left: 20.0, bottom: 10.0),
                     child: Text(
                       'Explore Flood-Mobile',
                       style: TextStyle(
@@ -74,7 +74,7 @@ class _OnboardingState extends State<Onboarding> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 32.0),
+                    padding: const EdgeInsets.only(right: 32.0, bottom: 10.0),
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pushNamedAndRemoveUntil(
