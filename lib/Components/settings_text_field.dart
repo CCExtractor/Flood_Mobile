@@ -7,13 +7,14 @@ class SettingsTextField extends StatefulWidget {
   final String? Function(String? value) validator;
   final bool isText;
   final TextEditingController controller;
-
+  final int index;
   SettingsTextField({
     required this.hintText,
     required this.labelText,
     required this.validator,
     required this.controller,
     this.isText = true,
+    required this.index,
   });
 
   @override
@@ -29,30 +30,33 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
         Text(
           widget.labelText,
           style: TextStyle(
-            color: ThemeProvider.theme.unselectedWidgetColor,
+            color: ThemeProvider.theme(widget.index).unselectedWidgetColor,
           ),
         ),
         SizedBox(height: 5),
         TextFormField(
           controller: widget.controller,
           style: TextStyle(
-            color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+            color: ThemeProvider.theme(widget.index).textTheme.bodyLarge?.color,
           ),
           keyboardType:
               (widget.isText) ? TextInputType.text : TextInputType.number,
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             filled: true,
-            fillColor: ThemeProvider.theme.primaryColorLight,
+            fillColor: ThemeProvider.theme(widget.index).primaryColorLight,
             hintText: widget.hintText,
             labelStyle: TextStyle(
                 fontFamily: 'Montserrat',
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
-                color: ThemeProvider.theme.textTheme.bodyLarge?.color),
+                color: ThemeProvider.theme(widget.index)
+                    .textTheme
+                    .bodyLarge
+                    ?.color),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: ThemeProvider.theme.primaryColorLight,
+                color: ThemeProvider.theme(widget.index).primaryColorLight,
                 width: 0.0,
               ),
               borderRadius: BorderRadius.circular(8),
@@ -60,7 +64,7 @@ class _SettingsTextFieldState extends State<SettingsTextField> {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
-                color: ThemeProvider.theme.primaryColorLight,
+                color: ThemeProvider.theme(widget.index).primaryColorLight,
                 width: 1.0,
               ),
             ),

@@ -63,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: ThemeProvider.theme.primaryColor,
+      color: ThemeProvider.theme(2).primaryColor,
       child: Center(
         child: Image(
           image: AssetImage(

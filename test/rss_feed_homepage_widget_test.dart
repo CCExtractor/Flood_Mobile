@@ -78,7 +78,7 @@ void main() {
           print(ThemeProvider.themeMode);
           return MaterialApp(
               home: Material(
-            child: RSSFeedHomePage(),
+            child: RSSFeedHomePage(index: 2),
           ));
         },
       ),

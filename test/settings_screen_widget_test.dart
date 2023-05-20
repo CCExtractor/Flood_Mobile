@@ -75,7 +75,7 @@ void main() {
           print(ThemeProvider.themeMode);
           return MaterialApp(
               home: Material(
-            child: SettingsScreen(),
+            child: SettingsScreen(index: 2),
           ));
         },
       ),

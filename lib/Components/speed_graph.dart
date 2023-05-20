@@ -8,8 +8,9 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class SpeedGraph extends StatefulWidget {
   final HomeProvider model;
-
-  const SpeedGraph({Key? key, required this.model}) : super(key: key);
+  final int index;
+  const SpeedGraph({Key? key, required this.model, required this.index})
+      : super(key: key);
   @override
   State<SpeedGraph> createState() => SpeedGraphState();
 }
@@ -49,7 +50,9 @@ class SpeedGraphState extends State<SpeedGraph> {
                         Color(0xff191d2d).withAlpha(20)
                       ]
                     : [
-                        ThemeProvider.theme.primaryColorDark.withAlpha(130),
+                        ThemeProvider.theme(widget.index)
+                            .primaryColorDark
+                            .withAlpha(130),
                         Color.fromARGB(67, 255, 255, 255)
                       ],
                 begin: Alignment.topCenter,
@@ -61,7 +64,7 @@ class SpeedGraphState extends State<SpeedGraph> {
               width: 1.8,
               xValueMapper: (GraphModel data, index) => data.second,
               yValueMapper: (GraphModel data, index) => data.speed,
-              color: ThemeProvider.theme.primaryColorDark,
+              color: ThemeProvider.theme(widget.index).primaryColorDark,
             ),
             SplineAreaSeries(
               dataSource: graph.downloadGraphData,
@@ -71,12 +74,16 @@ class SpeedGraphState extends State<SpeedGraph> {
               gradient: LinearGradient(
                 colors: themeProvider.isDarkMode
                     ? [
-                        ThemeProvider.theme.colorScheme.secondary
+                        ThemeProvider.theme(widget.index)
+                            .colorScheme
+                            .secondary
                             .withAlpha(150),
                         Color(0xff191d2d).withAlpha(20)
                       ]
                     : [
-                        ThemeProvider.theme.colorScheme.secondary
+                        ThemeProvider.theme(widget.index)
+                            .colorScheme
+                            .secondary
                             .withAlpha(120),
                         Color.fromARGB(37, 255, 255, 255)
                       ],
@@ -89,7 +96,7 @@ class SpeedGraphState extends State<SpeedGraph> {
               xValueMapper: (GraphModel data2, index) => data2.second,
               yValueMapper: (GraphModel data2, index) => data2.speed,
               width: 1.8,
-              color: ThemeProvider.theme.colorScheme.secondary,
+              color: ThemeProvider.theme(widget.index).colorScheme.secondary,
             ),
           ],
         );

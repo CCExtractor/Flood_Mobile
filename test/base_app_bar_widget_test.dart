@@ -39,7 +39,7 @@ void main() {
           print(ThemeProvider.themeMode);
           return MaterialApp(
               home: Material(
-            child: BaseAppBar(appBar: AppBar()),
+            child: BaseAppBar(appBar: AppBar(), index: 2),
           ));
         },
       ),
