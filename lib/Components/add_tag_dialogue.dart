@@ -11,8 +11,9 @@ import 'package:provider/provider.dart';
 
 class AddTagDialogue extends StatefulWidget {
   final List<TorrentModel> torrents;
-
-  const AddTagDialogue({Key? key, required this.torrents}) : super(key: key);
+  final int index;
+  const AddTagDialogue({Key? key, required this.torrents, required this.index})
+      : super(key: key);
   @override
   State<AddTagDialogue> createState() => _AddTagDialogueState();
 }
@@ -85,7 +86,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
       key: Key('Add Tag AlertDialog'),
       elevation: 0,
       backgroundColor: themeProvider.isDarkMode
-          ? ThemeProvider.theme.primaryColorLight
+          ? ThemeProvider.theme(widget.index).primaryColorLight
           : Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
@@ -106,7 +107,10 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                 'Set Tags',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+                  color: ThemeProvider.theme(widget.index)
+                      .textTheme
+                      .bodyLarge
+                      ?.color,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),
@@ -127,7 +131,8 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                               controller: _textController,
                               decoration: InputDecoration(
                                 fillColor: themeProvider.isDarkMode
-                                    ? ThemeProvider.theme.primaryColor
+                                    ? ThemeProvider.theme(widget.index)
+                                        .primaryColor
                                     : Colors.black45,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
@@ -163,8 +168,10 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                                 hintText: "Enter Tags",
                               ),
                               style: TextStyle(
-                                  color: ThemeProvider
-                                      .theme.textTheme.bodyLarge?.color,
+                                  color: ThemeProvider.theme(widget.index)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.color,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w400),
                               autocorrect: false,
@@ -248,7 +255,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
               ),
             ),
             backgroundColor: MaterialStateProperty.all(
-                ThemeProvider.theme.dialogBackgroundColor),
+                ThemeProvider.theme(widget.index).dialogBackgroundColor),
           ),
           onPressed: () {
             reset();
@@ -272,8 +279,8 @@ class _AddTagDialogueState extends State<AddTagDialogue>
             minimumSize: MaterialStateProperty.all<Size>(
               Size(hp * .160, hp * .059),
             ),
-            backgroundColor:
-                MaterialStateProperty.all(ThemeProvider.theme.primaryColorDark),
+            backgroundColor: MaterialStateProperty.all(
+                ThemeProvider.theme(widget.index).primaryColorDark),
           ),
           onPressed: (() {
             setState(() {

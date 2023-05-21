@@ -4,6 +4,9 @@ import 'package:bottom_sheet/bottom_sheet.dart';
 import '../Constants/theme_provider.dart';
 
 class RSSFeedButtonWidget extends StatefulWidget {
+  final int index;
+
+  const RSSFeedButtonWidget({Key? key, required this.index}) : super(key: key);
   @override
   State<RSSFeedButtonWidget> createState() => _RSSFeedButtonWidgetState();
 }
@@ -39,12 +42,12 @@ class _RSSFeedButtonWidgetState extends State<RSSFeedButtonWidget> {
           topRight: Radius.circular(15),
           topLeft: Radius.circular(15),
         ),
-        color: ThemeProvider.theme.primaryColorLight,
+        color: ThemeProvider.theme(widget.index).primaryColorLight,
       ),
       child: ListView(
         scrollDirection: Axis.vertical,
         controller: scrollController,
-        children: [RSSFeedHomePage()],
+        children: [RSSFeedHomePage(index: widget.index)],
       ),
     );
   }

@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 class UsersListView extends StatelessWidget {
   final List<CurrentUserDetailModel> usersList;
   final String currentUsername;
-
+  final int index;
   const UsersListView({
     Key? key,
     required this.usersList,
     required this.currentUsername,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -23,10 +24,10 @@ class UsersListView extends StatelessWidget {
           height: 50.0,
           padding: EdgeInsets.symmetric(vertical: 5),
           decoration: BoxDecoration(
-            color: ThemeProvider.theme.primaryColorLight,
+            color: ThemeProvider.theme(index).primaryColorLight,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: ThemeProvider.theme.primaryColor,
+              color: ThemeProvider.theme(index).primaryColor,
               width: 1.0,
             ),
           ),
@@ -37,14 +38,15 @@ class UsersListView extends StatelessWidget {
                 Text(
                   usersList[index].username,
                   style: TextStyle(
-                    color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+                    color:
+                        ThemeProvider.theme(index).textTheme.bodyLarge?.color,
                   ),
                 ),
                 Spacer(),
                 (usersList[index].username == currentUsername)
                     ? Container(
                         decoration: BoxDecoration(
-                          color: ThemeProvider.theme.highlightColor,
+                          color: ThemeProvider.theme(index).highlightColor,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Padding(
@@ -55,7 +57,7 @@ class UsersListView extends StatelessWidget {
                           child: Text(
                             'Current User',
                             style: TextStyle(
-                                color: ThemeProvider.theme.primaryColor),
+                                color: ThemeProvider.theme(index).primaryColor),
                           ),
                         ),
                       )

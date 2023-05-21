@@ -5,8 +5,8 @@ class ThemeProvider extends ChangeNotifier {
 
   bool get isDarkMode => themeMode == ThemeMode.dark;
 
-  static ThemeData get theme =>
-      themeMode == ThemeMode.dark ? MyThemes.darkTheme : MyThemes.lightTheme;
+  static ThemeData theme(int index) =>
+      index == 2 ? MyThemes.darkTheme : MyThemes.lightTheme;
 
   void toggleTheme() {
     if (themeMode == ThemeMode.dark) {
@@ -14,7 +14,6 @@ class ThemeProvider extends ChangeNotifier {
     } else {
       themeMode = ThemeMode.dark;
     }
-    notifyListeners();
   }
 }
 
@@ -42,6 +41,8 @@ class MyThemes {
       ),
     ),
     highlightColor: Color(0xff415062),
+    disabledColor: Colors.white38,
+    dividerColor: Colors.white12,
   );
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
@@ -70,5 +71,7 @@ class MyThemes {
       ),
     ),
     highlightColor: Color(0xff415062),
+    disabledColor: Colors.black38,
+    dividerColor: Colors.black12,
   );
 }

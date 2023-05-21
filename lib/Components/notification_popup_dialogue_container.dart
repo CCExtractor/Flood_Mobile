@@ -5,7 +5,8 @@ import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-Widget notificationPopupDialogueContainer({required BuildContext context}) {
+Widget notificationPopupDialogueContainer(
+    {required BuildContext context, required int index}) {
   NotificationApi.getNotifications(context: context);
   return (Provider.of<HomeProvider>(context)
               .notificationModel
@@ -13,17 +14,17 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
               .length ==
           0)
       ? Container(
-          color: ThemeProvider.theme.primaryColor,
+          color: ThemeProvider.theme(index).primaryColor,
           width: 300,
           child: Text(
             'No notifications to display',
             style: TextStyle(
-              color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+              color: ThemeProvider.theme(index).textTheme.bodyLarge?.color,
             ),
           ),
         )
       : Container(
-          color: ThemeProvider.theme.primaryColor,
+          color: ThemeProvider.theme(index).primaryColor,
           width: 300.0, // Change as per your requirement
           child: ListView.builder(
             shrinkWrap: true,
@@ -41,9 +42,11 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
                 return Column(
                   children: [
                     NotificationListTile(
-                        model: Provider.of<HomeProvider>(context, listen: false)
-                            .notificationModel
-                            .notifications[index]),
+                      model: Provider.of<HomeProvider>(context, listen: false)
+                          .notificationModel
+                          .notifications[index],
+                      index: index,
+                    ),
                     SizedBox(
                       height: 10,
                     ),
@@ -56,7 +59,10 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
                       child: Text(
                         'Clear All',
                         style: TextStyle(
-                          color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+                          color: ThemeProvider.theme(index)
+                              .textTheme
+                              .bodyLarge
+                              ?.color,
                         ),
                       ),
                     )
@@ -66,9 +72,11 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
               return Column(
                 children: [
                   NotificationListTile(
-                      model: Provider.of<HomeProvider>(context)
-                          .notificationModel
-                          .notifications[index]),
+                    model: Provider.of<HomeProvider>(context)
+                        .notificationModel
+                        .notifications[index],
+                    index: index,
+                  ),
                   SizedBox(
                     height: 10,
                   )
@@ -81,8 +89,8 @@ Widget notificationPopupDialogueContainer({required BuildContext context}) {
 
 class NotificationListTile extends StatelessWidget {
   final NotificationContentModel model;
-
-  NotificationListTile({required this.model});
+  final int index;
+  NotificationListTile({required this.model, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +103,7 @@ class NotificationListTile extends StatelessWidget {
             textAlign: TextAlign.left,
             style: TextStyle(
                 fontSize: 16,
-                color: ThemeProvider.theme.colorScheme.secondary,
+                color: ThemeProvider.theme(index).colorScheme.secondary,
                 fontWeight: FontWeight.bold),
           ),
           SizedBox(
@@ -114,7 +122,7 @@ class NotificationListTile extends StatelessWidget {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: 14,
-              color: ThemeProvider.theme.textTheme.bodyLarge?.color,
+              color: ThemeProvider.theme(index).textTheme.bodyLarge?.color,
             ),
           ),
         ],
