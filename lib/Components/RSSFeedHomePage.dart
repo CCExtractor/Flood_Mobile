@@ -1266,7 +1266,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.white38),
+                                      border: Border.all(
+                                          color:
+                                              ThemeProvider.theme(widget.index)
+                                                  .disabledColor),
                                       borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(8),
                                         topLeft: Radius.circular(8),
@@ -1343,8 +1346,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                     .infinity,
                                                                 decoration:
                                                                     BoxDecoration(
-                                                                  color: Colors
-                                                                      .white12,
+                                                                  color: ThemeProvider.theme(
+                                                                          widget
+                                                                              .index)
+                                                                      .dividerColor,
                                                                 ),
                                                               ),
                                                             )
