@@ -2,6 +2,7 @@ import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   late ApiProvider sut;
 
   setUp(() {

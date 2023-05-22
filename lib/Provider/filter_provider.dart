@@ -16,10 +16,8 @@ class FilterProvider extends ChangeNotifier {
   List<String> statusList = [];
   var mapStatus = {};
   String tagSelected = '';
-  List<String> tagList = [];
   Map<String, dynamic> mapTags = {'Untagged': 0};
   String trackerURISelected = '';
-  List<String> trackerURIsList = [];
   var trackersSizeList = [];
   var tagsSizeList = [];
   var maptrackerURIs = {};

@@ -23,8 +23,6 @@ class TorrentScreen extends StatefulWidget {
   _TorrentScreenState createState() => _TorrentScreenState();
 }
 
-List<String> trackerURIsList = [];
-
 class _TorrentScreenState extends State<TorrentScreen> {
   String keyword = '';
 
