@@ -422,8 +422,8 @@ class _TorrentScreenState extends State<TorrentScreen> {
                           ),
                         ),
                 ),
-                floatingActionButton:
-                    BottomFloatingMenuButton(index: widget.index),
+                floatingActionButton: BottomFloatingMenuButton(
+                    key: Key('Floating Action Button'), index: widget.index),
               ),
             );
           }));

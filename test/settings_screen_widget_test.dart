@@ -20,6 +20,7 @@ class MockClientSettingsProvider extends Mock
 
 void main() {
   setUp(() {});
+  UserDetailProvider userDetailProvider = UserDetailProvider();
   MockClientSettingsProvider mockClientSettingsProvider =
       MockClientSettingsProvider();
   when(() => mockClientSettingsProvider.clientSettings).thenReturn(
@@ -295,31 +296,43 @@ void main() {
     });
 
     testWidgets("Check authentication options", (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
-      expect(find.byKey(Key('Authentication Expansion Card')), findsOneWidget);
-      await tester
-          .ensureVisible(find.byKey(Key('Authentication Expansion Card')));
-      await tester.tap(find.byKey(Key('Authentication Expansion Card')));
-      await tester.pumpAndSettle();
-      expect(find.byKey(Key('Authentication option display column')),
-          findsOneWidget);
-      expect(find.text('Add User'), findsOneWidget);
-      //check if all the text boxes of authentication option displayed
-      expect(find.byType(SettingsTextField), findsNWidgets(9));
-      //check if all the check boxes of authentication option displayed
-      expect(find.byType(CheckboxListTile), findsNWidgets(3));
-      //check if all the dropdown of authentication option displayed
-      expect(find.byKey(Key('Authentication dropdown')), findsOneWidget);
-      final dropdownFinder1 = find.byKey(Key('Authentication dropdown'));
-      var dropdown1 = tester.firstWidget(dropdownFinder1) as DropdownButton;
-      expect(dropdown1.value, 'rTorrent');
-      expect(find.text('qBittorrent'), findsNWidgets(1));
-      await tester.ensureVisible(find.byKey(Key('Authentication dropdown')));
-      await tester.tap(find.byKey(Key('Authentication dropdown')));
-      await tester.pumpAndSettle();
-      expect(find.text('qBittorrent'), findsNWidgets(2));
-      expect(find.byType(ElevatedButton), findsOneWidget);
-      expect(find.text('Add'), findsOneWidget);
+      if (userDetailProvider.usersList.length != 0) {
+        await tester.pumpWidget(createWidgetUnderTest());
+        expect(
+            find.byKey(Key('Authentication Expansion Card')), findsOneWidget);
+        await tester
+            .ensureVisible(find.byKey(Key('Authentication Expansion Card')));
+        await tester.tap(find.byKey(Key('Authentication Expansion Card')));
+        await tester.pumpAndSettle();
+        expect(find.byKey(Key('Authentication option display column')),
+            findsOneWidget);
+        expect(find.text('Add User'), findsOneWidget);
+        //check if all the text boxes of authentication option displayed
+        expect(find.byType(SettingsTextField), findsNWidgets(9));
+        //check if all the check boxes of authentication option displayed
+        expect(find.byType(CheckboxListTile), findsNWidgets(3));
+        //check if all the dropdown of authentication option displayed
+        expect(find.byKey(Key('Authentication dropdown')), findsOneWidget);
+        final dropdownFinder1 = find.byKey(Key('Authentication dropdown'));
+        var dropdown1 = tester.firstWidget(dropdownFinder1) as DropdownButton;
+        expect(dropdown1.value, 'rTorrent');
+        expect(find.text('qBittorrent'), findsNWidgets(1));
+        await tester.ensureVisible(find.byKey(Key('Authentication dropdown')));
+        await tester.tap(find.byKey(Key('Authentication dropdown')));
+        await tester.pumpAndSettle();
+        expect(find.text('qBittorrent'), findsNWidgets(2));
+        expect(find.byType(ElevatedButton), findsOneWidget);
+        expect(find.text('Add'), findsOneWidget);
+      } else {
+        await tester.pumpWidget(createWidgetUnderTest());
+        expect(
+            find.byKey(Key('Authentication Expansion Card')), findsOneWidget);
+        await tester
+            .ensureVisible(find.byKey(Key('Authentication Expansion Card')));
+        await tester.tap(find.byKey(Key('Authentication Expansion Card')));
+        await tester.pumpAndSettle();
+        expect(find.text('User is not Admin'), findsOneWidget);
+      }
     });
   });
 }

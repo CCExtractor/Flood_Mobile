@@ -462,6 +462,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                     children: [
                                       Expanded(
                                         child: TextFormField(
+                                          key: Key('MagnetUrl TextFormField'),
                                           controller: magnetUrlController,
                                           style: TextStyle(
                                             color: ThemeProvider.theme(
@@ -534,6 +535,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
                                         TextField(
+                                          key: Key('Destination TextFormField'),
                                           controller: directoryController,
                                           style: TextStyle(
                                             color: ThemeProvider.theme(

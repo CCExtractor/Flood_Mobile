@@ -5,7 +5,9 @@ import 'package:flood_mobile/Pages/torrent_screen.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Provider/filter_provider.dart';
+import 'package:flood_mobile/Provider/graph_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
+import 'package:flood_mobile/Provider/multiple_select_torrent_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Services/date_converter.dart';
@@ -135,6 +137,11 @@ void main() {
         ChangeNotifierProvider<FilterProvider>(
           create: (context) => FilterProvider(),
         ),
+        ChangeNotifierProvider<MultipleSelectTorrentProvider>(
+          create: ((context) => MultipleSelectTorrentProvider()),
+        ),
+        ChangeNotifierProvider<GraphProvider>(
+            create: (context) => GraphProvider())
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, _) {
@@ -161,6 +168,7 @@ void main() {
       expect(find.byKey(Key('download done data widget')), findsNWidgets(2));
       expect(find.byIcon(Icons.stop), findsNWidgets(2));
       expect(find.byIcon(Icons.keyboard_arrow_down_rounded), findsNWidgets(2));
+      await tester.pumpAndSettle(const Duration(seconds: 5));
     });
 
     testWidgets("Check torrent more info widgets", (WidgetTester tester) async {
@@ -238,28 +246,26 @@ void main() {
         expect(find.byKey(Key('Floating Action Button')), findsOneWidget);
         await tester.tap(find.byKey(Key('Floating Action Button')));
         await tester.pumpAndSettle();
-        expect(find.byKey(Key('Destination TextField')), findsOneWidget);
+        expect(find.byIcon(FontAwesomeIcons.solidFile), findsOneWidget);
+        expect(find.byIcon(FontAwesomeIcons.magnet), findsOneWidget);
+        await tester.tap(find.byIcon(FontAwesomeIcons.magnet));
+        await tester.pumpAndSettle();
+        expect(find.text('Selected Magnet Link'), findsOneWidget);
+        expect(find.byKey(Key('MagnetUrl TextFormField')), findsOneWidget);
+        expect(find.byIcon(Icons.link), findsOneWidget);
+        expect(find.byIcon(Icons.paste), findsOneWidget);
+        expect(find.byKey(Key('Destination TextFormField')), findsOneWidget);
         expect(
             find.text(
                 mockClientSettingsProvider.clientSettings.directoryDefault),
             findsOneWidget);
+        expect(find.byIcon(Icons.folder), findsOneWidget);
+        expect(find.byType(CheckboxListTile), findsNWidgets(3));
         expect(find.text('Use as Base Path'), findsOneWidget);
         expect(find.text('Sequential Download'), findsOneWidget);
         expect(find.text('Completed'), findsOneWidget);
-        expect(find.byType(CheckboxListTile), findsNWidgets(3));
-        expect(find.byIcon(FontAwesomeIcons.magnet), findsOneWidget);
-        expect(find.byIcon(FontAwesomeIcons.solidFile), findsOneWidget);
         expect(
             find.widgetWithText(ElevatedButton, 'Add Torrent'), findsOneWidget);
-        expect(find.byIcon(Icons.link), findsNothing);
-        expect(find.byKey(Key('Torrent magnet link textfield')), findsNothing);
-        await tester.tap(find.byIcon(FontAwesomeIcons.magnet));
-        expect(find.byIcon(Icons.paste), findsNothing);
-        await tester.pumpAndSettle();
-        expect(find.byIcon(Icons.link), findsOneWidget);
-        expect(
-            find.byKey(Key('Torrent magnet link textfield')), findsOneWidget);
-        expect(find.byIcon(Icons.paste), findsOneWidget);
       },
     );
   });
