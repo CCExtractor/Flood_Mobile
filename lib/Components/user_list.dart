@@ -21,6 +21,7 @@ class UsersListView extends StatelessWidget {
       itemCount: usersList.length,
       itemBuilder: (context, index) {
         return Container(
+          key: Key('User list item container'),
           height: 50.0,
           padding: EdgeInsets.symmetric(vertical: 5),
           decoration: BoxDecoration(

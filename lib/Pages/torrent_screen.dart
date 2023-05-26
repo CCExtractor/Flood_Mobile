@@ -183,6 +183,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                         Flexible(
                                           flex: 1,
                                           child: ElevatedButton(
+                                            key: Key("Show Chart Button"),
                                             style: ElevatedButton.styleFrom(
                                               alignment: Alignment.center,
                                               backgroundColor: graph.showChart
@@ -289,6 +290,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                     padding: EdgeInsets.only(
                                         left: wp * 0.05, right: wp * 0.05),
                                     child: TextField(
+                                      key: Key("Search Torrent TextField"),
                                       onChanged: (value) {
                                         setState(() {
                                           keyword = value;
@@ -300,6 +302,7 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                             horizontal: 20, vertical: 20),
                                         hintText: 'Search Torrent',
                                         suffixIcon: Padding(
+                                          key: Key("Filter Torrent ActionChip"),
                                           padding:
                                               const EdgeInsets.only(right: 5),
                                           child: ActionChip(
@@ -388,6 +391,8 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                                         .background,
                                                 builder: (context) {
                                                   return FilterByStatus(
+                                                      key: Key(
+                                                          "Filter By Status Bottom Sheet"),
                                                       index: widget.index);
                                                 },
                                               );

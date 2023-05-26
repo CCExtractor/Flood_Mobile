@@ -97,6 +97,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
       content: Builder(builder: (context) {
         return AnimatedContainer(
           duration: Duration(milliseconds: 200),
+          constraints: BoxConstraints(),
           height: _showdropdown
               ? hp - (600 - (50 * _itemsVisibleInDropdown - 1))
               : hp - 650,
@@ -105,6 +106,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
             children: [
               Text(
                 'Set Tags',
+                key: Key('Set Tags Text'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: ThemeProvider.theme(widget.index)
@@ -128,6 +130,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                         children: <Widget>[
                           Expanded(
                             child: TextFormField(
+                              key: Key('Tags Text Form Field'),
                               controller: _textController,
                               decoration: InputDecoration(
                                 fillColor: themeProvider.isDarkMode
@@ -145,9 +148,11 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                                     icon: _showdropdown
                                         ? Icon(
                                             Icons.keyboard_arrow_up_rounded,
+                                            key: Key('Show Arrow Up Icon'),
                                           )
                                         : Icon(
                                             Icons.keyboard_arrow_down_rounded,
+                                            key: Key('Show Arrow Down Icon'),
                                           ),
                                     onPressed: () {
                                       SystemChannels.textInput
@@ -192,6 +197,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                       ),
                     ),
                     Container(
+                      key: Key('Tags List Container'),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: themeProvider.isDarkMode

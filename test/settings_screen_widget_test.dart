@@ -1,6 +1,8 @@
 import 'package:flood_mobile/Components/settings_text_field.dart';
+import 'package:flood_mobile/Components/user_list.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
+import 'package:flood_mobile/Model/current_user_detail_model.dart';
 import 'package:flood_mobile/Pages/settings_screen.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
@@ -18,42 +20,51 @@ class MockHomeProvider extends Mock implements HomeProvider {}
 class MockClientSettingsProvider extends Mock
     implements ClientSettingsProvider {}
 
+class MockUserDetailProvider extends Mock implements UserDetailProvider {}
+
 void main() {
   setUp(() {});
-  UserDetailProvider userDetailProvider = UserDetailProvider();
+  MockUserDetailProvider mockUserDetailProvider = MockUserDetailProvider();
   MockClientSettingsProvider mockClientSettingsProvider =
       MockClientSettingsProvider();
+  when(() => mockUserDetailProvider.usersList).thenReturn([
+    CurrentUserDetailModel(username: 'test username 1', level: 1),
+    CurrentUserDetailModel(username: 'test username 2', level: 2),
+  ]);
+  when(() => mockUserDetailProvider.token).thenReturn('token');
+  when(() => mockUserDetailProvider.username).thenReturn('test username 1');
   when(() => mockClientSettingsProvider.clientSettings).thenReturn(
-      ClientSettingsModel(
-          dht: false,
-          dhtPort: 1,
-          directoryDefault: 'test directory',
-          networkHttpMaxOpen: 2,
-          networkLocalAddress: ['test networkLocalAddress'],
-          networkMaxOpenFiles: 3,
-          networkPortOpen: true,
-          networkPortRandom: false,
-          networkPortRange: 'test networkPortRange',
-          piecesHashOnCompletion: true,
-          piecesMemoryMax: 4,
-          protocolPex: false,
-          throttleGlobalDownSpeed: 5,
-          throttleGlobalUpSpeed: 6,
-          throttleMaxDownloads: 7,
-          throttleMaxDownloadsGlobal: 8,
-          throttleMaxPeersNormal: 9,
-          throttleMaxPeersSeed: 10,
-          throttleMaxUploads: 11,
-          throttleMaxUploadsGlobal: 12,
-          throttleMinPeersNormal: 13,
-          throttleMinPeersSeed: 14,
-          trackersNumWant: 15));
+    ClientSettingsModel(
+        dht: false,
+        dhtPort: 1,
+        directoryDefault: 'test directory',
+        networkHttpMaxOpen: 2,
+        networkLocalAddress: ['test networkLocalAddress'],
+        networkMaxOpenFiles: 3,
+        networkPortOpen: true,
+        networkPortRandom: false,
+        networkPortRange: 'test networkPortRange',
+        piecesHashOnCompletion: true,
+        piecesMemoryMax: 4,
+        protocolPex: false,
+        throttleGlobalDownSpeed: 5,
+        throttleGlobalUpSpeed: 6,
+        throttleMaxDownloads: 7,
+        throttleMaxDownloadsGlobal: 8,
+        throttleMaxPeersNormal: 9,
+        throttleMaxPeersSeed: 10,
+        throttleMaxUploads: 11,
+        throttleMaxUploadsGlobal: 12,
+        throttleMinPeersNormal: 13,
+        throttleMinPeersSeed: 14,
+        trackersNumWant: 15),
+  );
 
   Widget createWidgetUnderTest() {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UserDetailProvider>(
-          create: (context) => UserDetailProvider(),
+          create: (context) => mockUserDetailProvider,
         ),
         ChangeNotifierProvider<HomeProvider>(
           create: (context) => HomeProvider(),
@@ -296,43 +307,38 @@ void main() {
     });
 
     testWidgets("Check authentication options", (WidgetTester tester) async {
-      if (userDetailProvider.usersList.length != 0) {
-        await tester.pumpWidget(createWidgetUnderTest());
-        expect(
-            find.byKey(Key('Authentication Expansion Card')), findsOneWidget);
-        await tester
-            .ensureVisible(find.byKey(Key('Authentication Expansion Card')));
-        await tester.tap(find.byKey(Key('Authentication Expansion Card')));
-        await tester.pumpAndSettle();
-        expect(find.byKey(Key('Authentication option display column')),
-            findsOneWidget);
-        expect(find.text('Add User'), findsOneWidget);
-        //check if all the text boxes of authentication option displayed
-        expect(find.byType(SettingsTextField), findsNWidgets(9));
-        //check if all the check boxes of authentication option displayed
-        expect(find.byType(CheckboxListTile), findsNWidgets(3));
-        //check if all the dropdown of authentication option displayed
-        expect(find.byKey(Key('Authentication dropdown')), findsOneWidget);
-        final dropdownFinder1 = find.byKey(Key('Authentication dropdown'));
-        var dropdown1 = tester.firstWidget(dropdownFinder1) as DropdownButton;
-        expect(dropdown1.value, 'rTorrent');
-        expect(find.text('qBittorrent'), findsNWidgets(1));
-        await tester.ensureVisible(find.byKey(Key('Authentication dropdown')));
-        await tester.tap(find.byKey(Key('Authentication dropdown')));
-        await tester.pumpAndSettle();
-        expect(find.text('qBittorrent'), findsNWidgets(2));
-        expect(find.byType(ElevatedButton), findsOneWidget);
-        expect(find.text('Add'), findsOneWidget);
-      } else {
-        await tester.pumpWidget(createWidgetUnderTest());
-        expect(
-            find.byKey(Key('Authentication Expansion Card')), findsOneWidget);
-        await tester
-            .ensureVisible(find.byKey(Key('Authentication Expansion Card')));
-        await tester.tap(find.byKey(Key('Authentication Expansion Card')));
-        await tester.pumpAndSettle();
-        expect(find.text('User is not Admin'), findsOneWidget);
-      }
+      await tester.pumpWidget(createWidgetUnderTest());
+      expect(find.byKey(Key('Authentication Expansion Card')), findsOneWidget);
+      await tester
+          .ensureVisible(find.byKey(Key('Authentication Expansion Card')));
+      await tester.tap(find.byKey(Key('Authentication Expansion Card')));
+      await tester.pumpAndSettle();
+      expect(find.byKey(Key('Authentication option display column')),
+          findsOneWidget);
+      expect(find.text('User Accounts'), findsOneWidget);
+      //check if all the text boxes of user list displayed
+      expect(find.byType(UsersListView), findsOneWidget);
+      expect(find.byKey(Key('User list item container')), findsNWidgets(2));
+      expect(find.text('test username 1'), findsOneWidget);
+      expect(find.text('Current User'), findsOneWidget);
+      expect(find.text('test username 2'), findsOneWidget);
+      expect(find.text('Add User'), findsOneWidget);
+      //check if all the text boxes of authentication option displayed
+      expect(find.byType(SettingsTextField), findsNWidgets(9));
+      //check if all the check boxes of authentication option displayed
+      expect(find.byType(CheckboxListTile), findsNWidgets(3));
+      //check if all the dropdown of authentication option displayed
+      expect(find.byKey(Key('Authentication dropdown')), findsOneWidget);
+      final dropdownFinder1 = find.byKey(Key('Authentication dropdown'));
+      var dropdown1 = tester.firstWidget(dropdownFinder1) as DropdownButton;
+      expect(dropdown1.value, 'rTorrent');
+      expect(find.text('qBittorrent'), findsNWidgets(1));
+      await tester.ensureVisible(find.byKey(Key('Authentication dropdown')));
+      await tester.tap(find.byKey(Key('Authentication dropdown')));
+      await tester.pumpAndSettle();
+      expect(find.text('qBittorrent'), findsNWidgets(2));
+      expect(find.byType(ElevatedButton), findsOneWidget);
+      expect(find.text('Add'), findsOneWidget);
     });
   });
 }
