@@ -76,6 +76,24 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
     super.initState();
   }
 
+  // clearing the fields in Feeds tabs after tappping save button
+  void clearFeedsFields() {
+    labelController.clear();
+    urlController.clear();
+    intervalController.clear();
+  }
+
+  void clearDownloadRulesFields() {
+    labelRulesController.clear();
+    matchpatternController.clear();
+    excludepatternController.clear();
+    destinationController.clear();
+    tagsController.clear();
+    startOnLoad = false;
+    useAsBasePath = false;
+    applicableFeedSelected = null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ClientSettingsProvider>(
@@ -710,6 +728,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     FeedsApi
                                                         .listAllFeedsAndRules(
                                                             context: context);
+                                                    clearFeedsFields();
                                                     if (isUpdateFeedSelected) {
                                                       UpdateFeedApi.updateFeed(
                                                           type: "feed",
@@ -1756,6 +1775,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           MainAxisAlignment.center,
                                       children: [
                                         DropdownButtonFormField2(
+                                          value: applicableFeedSelected,
                                           decoration: InputDecoration(
                                             //Add isDense true and zero Padding.
                                             //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextFormField Button become clickable, and also the dropdown menu open under The whole TextFormField Button.
@@ -2240,6 +2260,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     FeedsApi
                                                         .listAllFeedsAndRules(
                                                             context: context);
+                                                    clearDownloadRulesFields();
                                                   });
                                                 }
                                               },
