@@ -12,6 +12,7 @@ class ChangeThemeButtonWidget extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return IconButton(
+      key: Key("Change Theme Button"),
       onPressed: () {
         toggleTheme();
         themeProvider.toggleTheme();
