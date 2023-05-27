@@ -175,7 +175,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   case 2:
                     screenCurrent = SettingsScreen(index: themeIndex);
                     break;
-                  case 5:
+                  case 4:
+                    print(position);
                     screenCurrent = AboutScreen(index: themeIndex);
                     break;
                 }
@@ -553,7 +554,8 @@ class _MenuState extends State<Menu> {
             NavDrawerListTile(
               icon: Icons.info,
               onTap: () {
-                controller.position = 5;
+                controller.position = 4;
+                widget.updatePosition(4);
                 controller.toggle();
               },
               title: 'About',
