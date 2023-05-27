@@ -15,6 +15,7 @@ class _RSSFeedButtonWidgetState extends State<RSSFeedButtonWidget> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      key: Key('Rss Feed Button ${widget.index}'),
       onPressed: () {
         showFlexibleBottomSheet(
           minHeight: 0,
@@ -37,6 +38,7 @@ class _RSSFeedButtonWidgetState extends State<RSSFeedButtonWidget> {
     double bottomSheetOffset,
   ) {
     return Container(
+      key: Key('Rss feed home bottom sheet ${widget.index}'),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(15),

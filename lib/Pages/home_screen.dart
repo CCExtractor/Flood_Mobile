@@ -24,6 +24,7 @@ import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flutter/material.dart' hide Badge;
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -178,10 +179,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     screenCurrent = AboutScreen(index: themeIndex);
                     break;
                 }
-                if (needsSetup) {
-                  if (themeIndex == 1) {
+                if (needsSetup && themeIndex == 1) {
+                  SchedulerBinding.instance.addPostFrameCallback((_) {
                     controller.open();
-                  }
+                  });
                 }
                 return Consumer<HomeProvider>(
                     builder: (context, homeModel, child) {
@@ -191,10 +192,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       onWillPop: onBackPressed,
                       child: Scaffold(
                         appBar: AppBar(
+                          key: Key('AppBar $themeIndex'),
                           leading: !selectTorrent.isSelectionMode
                               ? IconButton(
                                   icon: Icon(
                                     Icons.menu,
+                                    key: Key('Menu Icon $themeIndex'),
                                     color: ThemeProvider.theme(themeIndex)
                                         .textTheme
                                         .bodyLarge
@@ -214,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   icon: Icon(Icons.close)),
                           title: Image(
-                            key: Key('Flood Icon'),
+                            key: Key('Flood Icon $themeIndex'),
                             image: AssetImage(
                               'assets/images/icon.png',
                             ),
@@ -233,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 showBadge: homeModel.unreadNotifications == 0
                                     ? false
                                     : true,
-                                key: Key('Badge Widget'),
+                                key: Key('Badge Widget $themeIndex'),
                                 badgeColor: ThemeProvider.theme(themeIndex)
                                     .colorScheme
                                     .secondary,
@@ -245,6 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 position: BadgePosition(top: 0, end: 3),
                                 child: IconButton(
+                                  key: Key('Notification Button $themeIndex'),
                                   icon: Icon(
                                     Icons.notifications,
                                   ),
@@ -253,7 +257,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
-                                          key: Key('Notification Alert Dialog'),
+                                          key: Key(
+                                              'Notification Alert Dialog $themeIndex'),
                                           elevation: 0,
                                           backgroundColor:
                                               ThemeProvider.theme(themeIndex)
@@ -457,7 +462,7 @@ class _MenuState extends State<Menu> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image(
-                  key: Key('Flood Icon menu'),
+                  key: Key('Flood Icon menu ${widget.index}'),
                   width: 80,
                   height: 80,
                   image: AssetImage(
@@ -479,7 +484,7 @@ class _MenuState extends State<Menu> {
                 children: [
                   SvgPicture.network(
                     'https://img.shields.io/github/v/release/CCExtractor/Flood_Mobile?include_prereleases',
-                    key: Key('Release Shield'),
+                    key: Key('Release Shield ${widget.index}'),
                   ),
                 ],
               ),

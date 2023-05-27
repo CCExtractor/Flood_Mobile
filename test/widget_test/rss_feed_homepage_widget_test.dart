@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flood_mobile/Components/RSSFeedHomePage.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/single_feed_and_response_model.dart';
@@ -17,6 +19,7 @@ class MockHomeProvider extends Mock implements HomeProvider {}
 
 void main() {
   setUp(() {});
+  setUpAll(() => HttpOverrides.global = null);
   MockHomeProvider mockHomeProvider = MockHomeProvider();
   when(() => mockHomeProvider.rssFeedsList).thenReturn([
     FeedsAndRulesModel(
@@ -77,8 +80,8 @@ void main() {
         builder: (context, themeProvider, _) {
           print(ThemeProvider.themeMode);
           return MaterialApp(
-              home: Material(
-            child: RSSFeedHomePage(index: 2),
+              home: Scaffold(
+            body: RSSFeedHomePage(index: 2),
           ));
         },
       ),
@@ -108,6 +111,16 @@ void main() {
             findsNothing);
         expect(find.byKey(Key("Feeds are fetched")), findsOneWidget);
         expect(find.byKey(Key("Feed displayed")), findsNWidgets(2));
+        expect(find.text("test label"), findsNWidgets(4));
+        expect(find.text("0 matches"), findsNWidgets(2));
+        expect(find.text("0 Minutes"), findsNWidgets(2));
+        expect(find.text("test url"), findsNWidgets(2));
+        expect(find.byIcon(Icons.edit), findsNWidgets(2));
+        expect(find.byIcon(Icons.delete), findsNWidgets(2));
+        await tester.tap(find.byIcon(Icons.delete).first);
+        await tester.pumpAndSettle();
+        expect(find.text("Feed deleted successfully"), findsWidgets);
+        await tester.tap(find.text("Dismiss").first);
         await tester.pumpAndSettle();
       },
     );
@@ -132,6 +145,7 @@ void main() {
         expect(find.byKey(Key('Url paste icon')), findsOneWidget);
         expect(find.text('Cancel'), findsOneWidget);
         expect(find.text('Save'), findsOneWidget);
+        await tester.tap(find.text('Save'));
         await tester.pumpAndSettle();
       },
     );
@@ -145,6 +159,7 @@ void main() {
       },
     );
   });
+
   group("Check Download Rules Tab", () {
     testWidgets(
       "Check existing rules are displayed",
@@ -155,6 +170,17 @@ void main() {
         expect(find.text('Existing Rules'), findsOneWidget);
         expect(find.byKey(Key('No rules defined')), findsNothing);
         expect(find.byKey(Key("Rules Displayed")), findsOneWidget);
+        expect(find.text('test label'), findsOneWidget);
+        expect(find.text('0 matches'), findsOneWidget);
+        expect(find.text('Tags: test tags'), findsOneWidget);
+        expect(find.text('Match: test match'), findsOneWidget);
+        expect(find.text('Exclude: test exclu...'), findsOneWidget);
+        expect(find.byIcon(Icons.edit), findsOneWidget);
+        expect(find.byIcon(Icons.delete), findsOneWidget);
+        await tester.tap(find.byIcon(Icons.delete));
+        await tester.pumpAndSettle();
+        expect(find.text('Rule deleted successfully'), findsOneWidget);
+        await tester.tap(find.text('Dismiss'));
         await tester.pumpAndSettle();
       },
     );
