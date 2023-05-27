@@ -19,9 +19,9 @@ jobs:
         with:
           flutter-version: '3.3.4'
       - run: flutter pub get
-      #       - run: flutter analyze
+      - run: flutter analyze
       - run: flutter format -n --set-exit-if-changed .
-      # - run: flutter test
+      - run: flutter test
       - run: flutter build apk
 
       - uses: actions/upload-artifact@v1
