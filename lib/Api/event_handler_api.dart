@@ -101,6 +101,11 @@ class EventHandlerApi {
       try {
         TorrentModel torrentModel = TorrentModel.fromJson(newTorrentList[hash]);
         torrentModel.tags = torrentModel.tags.toSet().toList();
+        if (torrentModel.status.contains('stopped') &&
+            torrentModel.status.contains('downloading')) {
+          torrentModel.status
+              .removeWhere((element) => element.contains('downloading'));
+        }
         torrentList.add(torrentModel);
       } catch (e) {
         print(e.toString());
