@@ -486,9 +486,8 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                 FlutterClipboard.paste()
                                                     .then((value) {
                                                   setState(() {
-                                                    magnetUrlController =
-                                                        TextEditingController(
-                                                            text: value);
+                                                    magnetUrlController.text =
+                                                        value;
                                                   });
                                                 });
                                               },
