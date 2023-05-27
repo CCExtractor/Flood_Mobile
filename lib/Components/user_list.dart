@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 class UsersListView extends StatelessWidget {
   final List<CurrentUserDetailModel> usersList;
   final String currentUsername;
-  final int index;
+  final int indexColour;
   const UsersListView({
     Key? key,
     required this.usersList,
     required this.currentUsername,
-    required this.index,
+    required this.indexColour,
   }) : super(key: key);
 
   @override
@@ -25,10 +25,10 @@ class UsersListView extends StatelessWidget {
           height: 50.0,
           padding: EdgeInsets.symmetric(vertical: 5),
           decoration: BoxDecoration(
-            color: ThemeProvider.theme(index).primaryColorLight,
+            color: ThemeProvider.theme(indexColour).primaryColorLight,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: ThemeProvider.theme(index).primaryColor,
+              color: ThemeProvider.theme(indexColour).primaryColor,
               width: 1.0,
             ),
           ),
@@ -39,26 +39,29 @@ class UsersListView extends StatelessWidget {
                 Text(
                   usersList[index].username,
                   style: TextStyle(
-                    color:
-                        ThemeProvider.theme(index).textTheme.bodyLarge?.color,
+                    color: ThemeProvider.theme(indexColour)
+                        .textTheme
+                        .bodyLarge
+                        ?.color,
                   ),
                 ),
                 Spacer(),
                 (usersList[index].username == currentUsername)
                     ? Container(
                         decoration: BoxDecoration(
-                          color: ThemeProvider.theme(index).highlightColor,
+                          color:
+                              ThemeProvider.theme(indexColour).highlightColor,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 6.0,
-                            vertical: 4.0,
+                            vertical: 3.0,
                           ),
                           child: Text(
                             'Current User',
                             style: TextStyle(
-                                color: ThemeProvider.theme(index).primaryColor),
+                                color: ThemeProvider.theme(1).primaryColor),
                           ),
                         ),
                       )

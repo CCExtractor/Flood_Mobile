@@ -655,7 +655,7 @@ class AuthenticationSection extends StatelessWidget {
               UsersListView(
                 usersList: usersList,
                 currentUsername: currentUsername,
-                index: index,
+                indexColour: index,
               ),
               SizedBox(height: 25),
               SText(text: 'Add User', index: index),
