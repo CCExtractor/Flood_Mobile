@@ -23,6 +23,7 @@ class SpeedGraphState extends State<SpeedGraph> {
       builder: (context, themeProvider, _) {
         graph.updateDataSource(widget.model);
         return SfCartesianChart(
+          key: Key('Speed Graph'),
           margin: EdgeInsets.all(0),
           borderWidth: 0,
           borderColor: Colors.transparent,

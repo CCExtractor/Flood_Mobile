@@ -119,6 +119,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   ),
                 ),
                 ListTile(
+                  key: Key('Downloading Torrent ListTile'),
                   leading: Icon(
                     Icons.download_sharp,
                     size: 20,
@@ -197,6 +198,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   ),
                 ),
                 ListTile(
+                  key: Key('Seeding Torrent ListTile'),
                   leading: Icon(
                     Icons.upload_sharp,
                     size: 20,
@@ -274,6 +276,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   ),
                 ),
                 ListTile(
+                  key: Key('Complete Torrent ListTile'),
                   leading: Icon(
                     Icons.done,
                     size: 20,
@@ -351,6 +354,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   ),
                 ),
                 ListTile(
+                  key: Key('Stopped Torrent ListTile'),
                   leading: Icon(
                     Icons.stop,
                     size: 20,
@@ -428,6 +432,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   ),
                 ),
                 ListTile(
+                  key: Key('Active Torrent ListTile'),
                   leading: Icon(
                     Icons.trending_up_outlined,
                     size: 20,
@@ -505,6 +510,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   ),
                 ),
                 ListTile(
+                  key: Key('Inactive Torrent ListTile'),
                   leading: Icon(
                     Icons.trending_down_outlined,
                     size: 20,
@@ -582,6 +588,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   ),
                 ),
                 ListTile(
+                  key: Key('Error Torrent ListTile'),
                   leading: Icon(
                     Icons.error,
                     size: 20,
@@ -790,10 +797,8 @@ class _FilterByStatusState extends State<FilterByStatus> {
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              filterModel.mapTags.values
-                                      .toList()[index][1]
-                                      .toString()
-                                      .contains('0.0')
+                              filterModel.mapTags.values.toList()[index][1] ==
+                                      0.0
                                   ? Container()
                                   : Text(
                                       humanReadableByteCountSI(filterModel
@@ -1033,10 +1038,9 @@ class _FilterByStatusState extends State<FilterByStatus> {
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            filterModel.maptrackerURIs.values
-                                    .toList()[index][1]
-                                    .toString()
-                                    .contains('0.0')
+                            filterModel.maptrackerURIs.values.toList()[index]
+                                        [1] ==
+                                    0.0
                                 ? Container()
                                 : Text(
                                     humanReadableByteCountSI(filterModel

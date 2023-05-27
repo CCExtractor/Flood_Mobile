@@ -1,11 +1,14 @@
 import 'package:flood_mobile/Constants/theme_provider.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
+import 'package:flood_mobile/Model/graph_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Pages/torrent_screen.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Provider/filter_provider.dart';
+import 'package:flood_mobile/Provider/graph_provider.dart';
 import 'package:flood_mobile/Provider/home_provider.dart';
+import 'package:flood_mobile/Provider/multiple_select_torrent_provider.dart';
 import 'package:flood_mobile/Provider/sse_provider.dart';
 import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Services/date_converter.dart';
@@ -21,8 +24,11 @@ class MockHomeProvider extends Mock implements HomeProvider {}
 class MockClientSettingsProvider extends Mock
     implements ClientSettingsProvider {}
 
+class MockGraphProvider extends Mock implements GraphProvider {}
+
 void main() {
   setUp(() {});
+  MockGraphProvider mockGraphProvider = MockGraphProvider();
   MockHomeProvider mockHomeProvider = MockHomeProvider();
   MockClientSettingsProvider mockClientSettingsProvider =
       MockClientSettingsProvider();
@@ -108,8 +114,27 @@ void main() {
         upTotal: 0.0)
   ]);
 
-  when(() => mockHomeProvider.upSpeed).thenReturn('test upSpeed');
-  when(() => mockHomeProvider.downSpeed).thenReturn('test downSpeed');
+  when(() => mockHomeProvider.upSpeed).thenReturn('10 Kb/s');
+  when(() => mockHomeProvider.downSpeed).thenReturn('20 Kb/s');
+
+  when(() => mockGraphProvider.uploadGraphData).thenReturn(
+    List<GraphModel>.generate(
+      30,
+      ((index) {
+        return GraphModel(0, index + 1);
+      }),
+    ),
+  );
+  when(() => mockGraphProvider.downloadGraphData).thenReturn(
+    List<GraphModel>.generate(
+      30,
+      ((index) {
+        return GraphModel(0, index + 1);
+      }),
+    ),
+  );
+  when(() => mockGraphProvider.fakeTime).thenReturn(31);
+  when(() => mockGraphProvider.showChart).thenReturn(true);
 
   Widget createWidgetUnderTest() {
     return MultiProvider(
@@ -135,6 +160,11 @@ void main() {
         ChangeNotifierProvider<FilterProvider>(
           create: (context) => FilterProvider(),
         ),
+        ChangeNotifierProvider<MultipleSelectTorrentProvider>(
+          create: ((context) => MultipleSelectTorrentProvider()),
+        ),
+        ChangeNotifierProvider<GraphProvider>(
+            create: (context) => mockGraphProvider)
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, _) {
@@ -149,6 +179,95 @@ void main() {
   }
 
   group("Check different widgets in torrent screen", () {
+    testWidgets(
+      "Check PullToRevealTopItemList widget",
+      (WidgetTester tester) async {
+        await tester.pumpWidget(createWidgetUnderTest());
+        await tester.drag(
+          find.byType(TorrentScreen),
+          Offset(0, 300),
+        );
+        await tester.pumpAndSettle();
+        expect(find.byIcon(Icons.arrow_upward_rounded), findsOneWidget);
+        expect(find.text('10 Kb/s'), findsOneWidget);
+        expect(find.byIcon(Icons.arrow_downward_rounded), findsOneWidget);
+        expect(find.text('20 Kb/s'), findsOneWidget);
+        expect(find.byKey(Key("Show Chart Button")), findsOneWidget);
+        await tester.tap(find.byKey(Key("Show Chart Button")));
+        await tester.pumpAndSettle();
+        expect(find.byKey(Key('Speed Graph')), findsOneWidget);
+        expect(find.byKey(Key('Search Torrent TextField')), findsOneWidget);
+        final torrentControllerFinder =
+            find.byKey(Key('Search Torrent TextField'));
+        expect(
+          find.descendant(
+            of: torrentControllerFinder,
+            matching: find.text('Search Torrent'),
+          ),
+          findsOneWidget,
+        );
+        final filterChipFinder = find.byKey(Key('Filter Torrent ActionChip'));
+        expect(filterChipFinder, findsOneWidget);
+        expect(
+          find.descendant(
+            of: filterChipFinder,
+            matching: find.byIcon(Icons.filter_list_alt),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: filterChipFinder,
+            matching: find.text('all'),
+          ),
+          findsOneWidget,
+        );
+        await tester.tap(filterChipFinder);
+        await tester.pumpAndSettle();
+        expect(
+            find.byKey(Key("Filter By Status Bottom Sheet")), findsOneWidget);
+
+        // Filter by status bottom sheet
+        expect(find.text('Filter by status'), findsOneWidget);
+        // All torrent filter option
+        expect(find.byIcon(Icons.star_sharp), findsOneWidget);
+        expect(find.text("All"), findsNWidgets(3));
+        expect(tester.widget<Text>(find.text("All").first).style!.color,
+            equals(Colors.blue));
+        // Downloading torrent filter option
+        expect(find.byIcon(Icons.download_sharp), findsOneWidget);
+        expect(find.byKey(Key("Downloading Torrent ListTile")), findsOneWidget);
+        // Seeding torrent filter option
+        expect(find.byIcon(Icons.upload_sharp), findsOneWidget);
+        expect(find.byKey(Key("Seeding Torrent ListTile")), findsOneWidget);
+        // Completed torrent filter option
+        expect(find.byIcon(Icons.done), findsOneWidget);
+        expect(find.byKey(Key("Complete Torrent ListTile")), findsOneWidget);
+        // Stopped torrent filter option
+        expect(find.byIcon(Icons.stop), findsNWidgets(3));
+        expect(find.byKey(Key("Stopped Torrent ListTile")), findsOneWidget);
+        // Active torrent filter option
+        expect(find.byIcon(Icons.trending_up_outlined), findsOneWidget);
+        expect(find.byKey(Key("Active Torrent ListTile")), findsOneWidget);
+        // Inactive torrent filter option
+        expect(find.byIcon(Icons.trending_down_outlined), findsOneWidget);
+        expect(find.byKey(Key("Inactive Torrent ListTile")), findsOneWidget);
+        // Error torrent filter option
+        expect(find.byIcon(Icons.error), findsOneWidget);
+        expect(find.byKey(Key("Error Torrent ListTile")), findsOneWidget);
+
+        // Filter by tags bottom sheet
+        expect(find.text('Filter by tags'), findsOneWidget);
+        expect(find.text('test1 tags'), findsOneWidget);
+        expect(find.text('100.0 B'), findsNWidgets(2));
+        expect(find.text('test2 tags'), findsOneWidget);
+
+        // Filter by trackers bottom sheet
+        expect(find.text('Filter by trackers'), findsOneWidget);
+        expect(find.text('test1 trackerURIs'), findsOneWidget);
+        expect(find.text('test2 trackerURIs'), findsOneWidget);
+      },
+    );
     testWidgets("Check torrent tile", (WidgetTester tester) async {
       await tester.pumpWidget(createWidgetUnderTest());
       expect(find.text('test1 name'), findsOneWidget);
@@ -161,6 +280,7 @@ void main() {
       expect(find.byKey(Key('download done data widget')), findsNWidgets(2));
       expect(find.byIcon(Icons.stop), findsNWidgets(2));
       expect(find.byIcon(Icons.keyboard_arrow_down_rounded), findsNWidgets(2));
+      await tester.pumpAndSettle(const Duration(seconds: 5));
     });
 
     testWidgets("Check torrent more info widgets", (WidgetTester tester) async {
@@ -211,17 +331,65 @@ void main() {
     testWidgets("Check long press torrent tile options",
         (WidgetTester tester) async {
       await tester.pumpWidget(createWidgetUnderTest());
+
+      //Test select torrent option
+      await tester.longPress(find.text('test1 name'));
+      await tester.pumpAndSettle();
+      expect(find.byKey(Key('Long Press Torrent Tile Menu')), findsWidgets);
+      expect(find.text("Select Torrent"), findsOneWidget);
+      expect(find.byIcon(FontAwesomeIcons.solidFile), findsOneWidget);
+      await tester.tap(find.byIcon(FontAwesomeIcons.solidFile));
+      await tester.pumpAndSettle();
+      expect(find.byType(Checkbox), findsNWidgets(2));
+      expect(tester.widget<Checkbox>(find.byType(Checkbox).first).value, true);
+      expect(tester.widget<Checkbox>(find.byType(Checkbox).last).value, false);
+      await tester.tap(find.byType(Checkbox).last);
+      await tester.pumpAndSettle();
+      expect(tester.widget<Checkbox>(find.byType(Checkbox).first).value, true);
+
+      // Test set tags option
       await tester.longPress(find.text('test1 name'));
       await tester.pumpAndSettle();
       expect(find.byKey(Key('Long Press Torrent Tile Menu')), findsWidgets);
       expect(find.text("Set Tags"), findsOneWidget);
       expect(find.byIcon(FontAwesomeIcons.tags), findsOneWidget);
+      await tester.tap(find.byIcon(FontAwesomeIcons.tags));
+      await tester.pumpAndSettle();
+      expect(find.byKey(Key("Add Tag AlertDialog")), findsOneWidget);
+      expect(find.byKey(Key('Set Tags Text')), findsOneWidget);
+      expect(find.byKey(Key('Tags Text Form Field')), findsOneWidget);
+      final tagControllerFinder = find.byKey(Key('Tags Text Form Field'));
+      var tagController =
+          tester.firstWidget(tagControllerFinder) as TextFormField;
+      expect(tagController.controller?.text, 'test1 tags');
+      await tester.enterText(tagControllerFinder, 'Tag1,Tag2,Tag3');
+      expect(find.byKey(Key('Show Arrow Down Icon')), findsOneWidget);
+      expect(find.byKey(Key('Show Arrow Up Icon')), findsNothing);
+      await tester.ensureVisible(find.byKey(Key('Show Arrow Down Icon')));
+      await tester.tap(find.byKey(Key('Show Arrow Down Icon')));
+      await tester.pumpAndSettle();
+      expect(
+          find.byKey(
+            Key('Tags List Container'),
+          ),
+          findsOneWidget);
+      await tester.tap(find.byType(TextButton).first);
+      await tester.pumpAndSettle();
+      expect(find.byType(AlertDialog), findsNothing);
+
+      // Test check hash option
+      await tester.longPress(find.text('test1 name'));
+      await tester.pumpAndSettle();
+      expect(find.byKey(Key('Long Press Torrent Tile Menu')), findsWidgets);
       expect(find.text("Check Hash"), findsOneWidget);
       expect(find.byIcon(Icons.tag), findsOneWidget);
+
+      // Test delete option
       expect(find.text("Delete"), findsOneWidget);
       expect(find.byIcon(Icons.delete), findsOneWidget);
       await tester.tap(find.byIcon(Icons.delete));
       await tester.pumpAndSettle();
+      expect(find.byType(BottomSheet), findsOneWidget);
       expect(find.text('Delete Torrent'), findsOneWidget);
       expect(find.text('Are you sure you want to delete the torrent?'),
           findsOneWidget);
@@ -229,6 +397,9 @@ void main() {
       expect(find.text('Delete with data'), findsOneWidget);
       expect(find.widgetWithText(ElevatedButton, 'No'), findsOneWidget);
       expect(find.widgetWithText(ElevatedButton, 'Yes'), findsOneWidget);
+      await tester.tap(find.widgetWithText(ElevatedButton, 'No'));
+      await tester.pumpAndSettle();
+      expect(find.byType(BottomSheet), findsNothing);
     });
 
     testWidgets(
@@ -238,28 +409,26 @@ void main() {
         expect(find.byKey(Key('Floating Action Button')), findsOneWidget);
         await tester.tap(find.byKey(Key('Floating Action Button')));
         await tester.pumpAndSettle();
-        expect(find.byKey(Key('Destination TextField')), findsOneWidget);
+        expect(find.byIcon(FontAwesomeIcons.solidFile), findsOneWidget);
+        expect(find.byIcon(FontAwesomeIcons.magnet), findsOneWidget);
+        await tester.tap(find.byIcon(FontAwesomeIcons.magnet));
+        await tester.pumpAndSettle();
+        expect(find.text('Selected Magnet Link'), findsOneWidget);
+        expect(find.byKey(Key('MagnetUrl TextFormField')), findsOneWidget);
+        expect(find.byIcon(Icons.link), findsOneWidget);
+        expect(find.byIcon(Icons.paste), findsOneWidget);
+        expect(find.byKey(Key('Destination TextFormField')), findsOneWidget);
         expect(
             find.text(
                 mockClientSettingsProvider.clientSettings.directoryDefault),
             findsOneWidget);
+        expect(find.byIcon(Icons.folder), findsOneWidget);
+        expect(find.byType(CheckboxListTile), findsNWidgets(3));
         expect(find.text('Use as Base Path'), findsOneWidget);
         expect(find.text('Sequential Download'), findsOneWidget);
         expect(find.text('Completed'), findsOneWidget);
-        expect(find.byType(CheckboxListTile), findsNWidgets(3));
-        expect(find.byIcon(FontAwesomeIcons.magnet), findsOneWidget);
-        expect(find.byIcon(FontAwesomeIcons.solidFile), findsOneWidget);
         expect(
             find.widgetWithText(ElevatedButton, 'Add Torrent'), findsOneWidget);
-        expect(find.byIcon(Icons.link), findsNothing);
-        expect(find.byKey(Key('Torrent magnet link textfield')), findsNothing);
-        await tester.tap(find.byIcon(FontAwesomeIcons.magnet));
-        expect(find.byIcon(Icons.paste), findsNothing);
-        await tester.pumpAndSettle();
-        expect(find.byIcon(Icons.link), findsOneWidget);
-        expect(
-            find.byKey(Key('Torrent magnet link textfield')), findsOneWidget);
-        expect(find.byIcon(Icons.paste), findsOneWidget);
       },
     );
   });
