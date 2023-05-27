@@ -118,4 +118,33 @@ class ClientApi {
       print(e.toString());
     }
   }
+
+  static Future<bool> checkClientOnline(BuildContext context) async {
+    try {
+      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
+          ApiProvider.getClientSettingsUrl;
+      print('---CHECK CLIENT ONLINE---');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          Provider.of<UserDetailProvider>(context, listen: false).token;
+      response = await dio.get(
+        url,
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print('--ERROR--');
+      print(e.toString());
+      return false;
+    }
+  }
 }
