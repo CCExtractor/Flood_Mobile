@@ -10,14 +10,19 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
+  final int? themeIndex;
+
+  const SplashScreen({Key? key, this.themeIndex}) : super(key: key);
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late int themeIndex;
   @override
   void initState() {
     super.initState();
+    themeIndex = widget.themeIndex ?? 2;
     new Timer(const Duration(seconds: 2), onEnd);
   }
 
@@ -28,6 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
     print('Token: ' + token);
     String baseUrl = prefs.getString('baseUrl') ?? '';
     String username = prefs.getString('floodUsername') ?? '';
+
     if (token != '' &&
         baseUrl != '' &&
         username != '' &&
@@ -38,7 +44,8 @@ class _SplashScreenState extends State<SplashScreen> {
       );
       Provider.of<ApiProvider>(context, listen: false).setBaseUrl(baseUrl);
       Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.homeScreenRoute, (Route<dynamic> route) => false);
+          Routes.homeScreenRoute, (Route<dynamic> route) => false,
+          arguments: themeIndex);
     }
     if (token == '' &&
         baseUrl == '' &&
@@ -54,7 +61,8 @@ class _SplashScreenState extends State<SplashScreen> {
         username == '' &&
         loggedInBefore == true) {
       Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.loginScreenRoute, (Route<dynamic> route) => false);
+          Routes.loginScreenRoute, (Route<dynamic> route) => false,
+          arguments: themeIndex);
     }
   }
 
@@ -63,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: ThemeProvider.theme(2).primaryColor,
+      color: ThemeProvider.theme(themeIndex).primaryColor,
       child: Center(
         child: Image(
           image: AssetImage(

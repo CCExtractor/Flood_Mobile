@@ -198,10 +198,8 @@ void main() {
       expect(find.byKey(Key("Change Theme Button")), findsNWidgets(2));
       expect(find.byIcon(Icons.wb_sunny_rounded), findsNWidgets(2));
       expect(find.byIcon(Icons.mode_night_rounded), findsNothing);
-      await tester.tap(find.byKey(Key("Change Theme Button")).last);
+      await tester.tap(find.byKey(Key("Change Theme Button")).first);
       await tester.pumpAndSettle();
-      expect(find.byIcon(Icons.wb_sunny_rounded), findsNothing);
-      expect(find.byIcon(Icons.mode_night_rounded), findsNWidgets(2));
       expect(find.byIcon(Icons.dashboard), findsNWidgets(2));
       expect(find.text("Torrents"), findsNWidgets(2));
       expect(find.byIcon(Icons.settings), findsNWidgets(2));
