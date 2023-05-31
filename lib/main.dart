@@ -1,4 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flood_mobile/Pages/splash_screen.dart';
 import 'package:flood_mobile/Provider/api_provider.dart';
 import 'package:flood_mobile/Provider/client_provider.dart';
 import 'package:flood_mobile/Constants/theme_provider.dart';
@@ -18,7 +19,6 @@ import 'Pages/home_screen.dart';
 import 'Provider/filter_provider.dart';
 import 'Provider/graph_provider.dart';
 import 'Route/route_generator.dart';
-import 'Route/routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,6 +66,7 @@ Future<void> main() async {
       AwesomeNotifications().requestPermissionToSendNotifications();
     }
   });
+  await ThemeProvider().getPreviousTheme();
   runApp(
     MyApp(),
   );
@@ -123,7 +124,14 @@ class MyApp extends StatelessWidget {
               navigatorKey: NavigationService.navigatorKey,
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
-              initialRoute: Routes.splashScreenRoute,
+              onGenerateInitialRoutes: (_) {
+                return [
+                  MaterialPageRoute(
+                    builder: (context) => SplashScreen(
+                        themeIndex: themeProvider.isDarkMode ? 2 : 1),
+                  ),
+                ];
+              },
               onGenerateRoute: RouteGenerator.generateRoute,
             ),
           );

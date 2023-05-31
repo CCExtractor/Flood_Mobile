@@ -42,8 +42,11 @@ import '../Constants/notification_keys.dart';
 import '../Components/RSSFeedButtonWidget.dart';
 
 class HomeScreen extends StatefulWidget {
+  final int? themeIndex;
   final GlobalKey<NavigatorState> navigatorKey =
       new GlobalKey<NavigatorState>();
+
+  HomeScreen({Key? key, this.themeIndex}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -147,6 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     return DarkTransition(
+        themeIndex: widget.themeIndex ?? 2,
         isDark: isDark,
         offset: Offset(mediaQuery.viewPadding.left + 115 + 23,
             mediaQuery.viewPadding.top + 35 + 25),
@@ -180,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     screenCurrent = AboutScreen(index: themeIndex);
                     break;
                 }
-                if (needsSetup && themeIndex == 1) {
+                if (needsSetup) {
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     controller.open();
                   });
@@ -530,8 +534,10 @@ class _MenuState extends State<Menu> {
                       Provider.of<UserDetailProvider>(context, listen: false)
                           .setUsersList(<CurrentUserDetailModel>[]);
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                          Routes.loginScreenRoute,
-                          (Route<dynamic> route) => false);
+                        Routes.loginScreenRoute,
+                        (Route<dynamic> route) => false,
+                        arguments: widget.index,
+                      );
                     },
                     index: widget.index,
                   ),

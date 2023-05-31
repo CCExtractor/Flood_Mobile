@@ -11,7 +11,8 @@ class DarkTransition extends StatefulWidget {
       this.themeController,
       this.radius,
       this.duration = const Duration(milliseconds: 400),
-      this.isDark = false})
+      this.isDark = false,
+      required this.themeIndex})
       : super(key: key);
 
   final Widget Function(BuildContext, int, bool, int, Function(int))
@@ -21,6 +22,7 @@ class DarkTransition extends StatefulWidget {
   final Offset offset;
   final double? radius;
   final Duration? duration;
+  final int themeIndex;
 
   @override
   _DarkTransitionState createState() => _DarkTransitionState();
@@ -139,11 +141,11 @@ class _DarkTransitionState extends State<DarkTransition>
         builder: (BuildContext context, Widget? child) {
           return Stack(
             children: [
-              _body(2, false),
+              _body(widget.themeIndex == 2 ? 2 : 1, false),
               ClipPath(
                   clipper: CircularClipper(
                       _animationController.value * radius, position),
-                  child: _body(1, _needsSetup)),
+                  child: _body(widget.themeIndex == 2 ? 1 : 2, _needsSetup)),
             ],
           );
         });

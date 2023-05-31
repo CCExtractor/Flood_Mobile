@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:clipboard/clipboard.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Components/toast_component.dart';
@@ -14,6 +16,9 @@ import '../Components/custom_dialog_animation.dart';
 import '../Provider/login_status_data_provider.dart';
 
 class LoginScreen extends StatefulWidget {
+  final int? themeIndex;
+
+  const LoginScreen({Key? key, this.themeIndex}) : super(key: key);
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -26,16 +31,23 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController urlController =
       new TextEditingController(text: 'http://localhost:3000');
   final _formKey = GlobalKey<FormState>();
+  late int themeIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    themeIndex = widget.themeIndex ?? 2;
+  }
 
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
     double wp = MediaQuery.of(context).size.width;
     return LoadingOverlay(
-      color: ThemeProvider.theme(2).primaryColor,
+      color: ThemeProvider.theme(themeIndex).primaryColor,
       isLoading: showSpinner,
       child: Scaffold(
-        backgroundColor: ThemeProvider.theme(2).primaryColor,
+        backgroundColor: ThemeProvider.theme(themeIndex).primaryColor,
         body: SafeArea(
           child: Form(
             key: _formKey,
@@ -59,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         'Welcome to Flood',
                         style: TextStyle(
-                            color: ThemeProvider.theme(2)
+                            color: ThemeProvider.theme(themeIndex)
                                 .textTheme
                                 .bodyLarge!
                                 .color!,
@@ -69,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         'Sign in to your account',
                         style: TextStyle(
-                            color: ThemeProvider.theme(2)
+                            color: ThemeProvider.theme(themeIndex)
                                 .textTheme
                                 .bodyLarge!
                                 .color!,
@@ -86,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               key: Key('Url TextField'),
                               controller: urlController,
                               style: TextStyle(
-                                color: ThemeProvider.theme(2)
+                                color: ThemeProvider.theme(themeIndex)
                                     .textTheme
                                     .bodyLarge
                                     ?.color,
@@ -94,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.link,
-                                  color: ThemeProvider.theme(2)
+                                  color: ThemeProvider.theme(themeIndex)
                                       .textTheme
                                       .bodyLarge!
                                       .color!,
@@ -103,19 +115,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                 labelStyle: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontWeight: FontWeight.bold,
-                                    color: ThemeProvider.theme(2)
+                                    color: ThemeProvider.theme(themeIndex)
                                         .textTheme
                                         .bodyLarge!
                                         .color!),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color:
-                                        ThemeProvider.theme(2).primaryColorDark,
+                                    color: ThemeProvider.theme(themeIndex)
+                                        .primaryColorDark,
                                   ),
                                 ),
                                 border: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: ThemeProvider.theme(2)
+                                    color: ThemeProvider.theme(themeIndex)
                                         .textTheme
                                         .bodyLarge!
                                         .color!,
@@ -123,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 disabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: ThemeProvider.theme(2)
+                                    color: ThemeProvider.theme(themeIndex)
                                         .textTheme
                                         .bodyLarge!
                                         .color!,
@@ -131,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: ThemeProvider.theme(2)
+                                    color: ThemeProvider.theme(themeIndex)
                                         .textTheme
                                         .bodyLarge!
                                         .color!,
@@ -157,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 icon: Icon(
                                   Icons.paste,
-                                  color: ThemeProvider.theme(2)
+                                  color: ThemeProvider.theme(themeIndex)
                                       .textTheme
                                       .bodyLarge!
                                       .color!,
@@ -176,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           key: Key('Username TextField'),
                           controller: usernameController,
                           style: TextStyle(
-                            color: ThemeProvider.theme(2)
+                            color: ThemeProvider.theme(themeIndex)
                                 .textTheme
                                 .bodyLarge!
                                 .color!,
@@ -184,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: InputDecoration(
                             prefixIcon: Icon(
                               Icons.person,
-                              color: ThemeProvider.theme(2)
+                              color: ThemeProvider.theme(themeIndex)
                                   .textTheme
                                   .bodyLarge!
                                   .color!,
@@ -193,18 +205,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             labelStyle: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
-                                color: ThemeProvider.theme(2)
+                                color: ThemeProvider.theme(themeIndex)
                                     .textTheme
                                     .bodyLarge!
                                     .color!),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: ThemeProvider.theme(2).primaryColorDark,
+                                color: ThemeProvider.theme(themeIndex)
+                                    .primaryColorDark,
                               ),
                             ),
                             border: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: ThemeProvider.theme(2)
+                                color: ThemeProvider.theme(themeIndex)
                                     .textTheme
                                     .bodyLarge!
                                     .color!,
@@ -212,7 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             disabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: ThemeProvider.theme(2)
+                                color: ThemeProvider.theme(themeIndex)
                                     .textTheme
                                     .bodyLarge!
                                     .color!,
@@ -220,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: ThemeProvider.theme(2)
+                                color: ThemeProvider.theme(themeIndex)
                                     .textTheme
                                     .bodyLarge!
                                     .color!,
@@ -245,7 +258,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               key: Key('Password TextField'),
                               controller: passwordController,
                               style: TextStyle(
-                                color: ThemeProvider.theme(2)
+                                color: ThemeProvider.theme(themeIndex)
                                     .textTheme
                                     .bodyLarge
                                     ?.color,
@@ -254,7 +267,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.lock_outline,
-                                  color: ThemeProvider.theme(2)
+                                  color: ThemeProvider.theme(themeIndex)
                                       .textTheme
                                       .bodyLarge!
                                       .color!,
@@ -262,19 +275,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                 labelText: 'Password',
                                 labelStyle: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: ThemeProvider.theme(2)
+                                    color: ThemeProvider.theme(themeIndex)
                                         .textTheme
                                         .bodyLarge!
                                         .color!),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color:
-                                        ThemeProvider.theme(2).primaryColorDark,
+                                    color: ThemeProvider.theme(themeIndex)
+                                        .primaryColorDark,
                                   ),
                                 ),
                                 border: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: ThemeProvider.theme(2)
+                                    color: ThemeProvider.theme(themeIndex)
                                         .textTheme
                                         .bodyLarge!
                                         .color!,
@@ -282,7 +295,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 disabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: ThemeProvider.theme(2)
+                                    color: ThemeProvider.theme(themeIndex)
                                         .textTheme
                                         .bodyLarge!
                                         .color!,
@@ -290,7 +303,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: ThemeProvider.theme(2)
+                                    color: ThemeProvider.theme(themeIndex)
                                         .textTheme
                                         .bodyLarge!
                                         .color!,
@@ -316,7 +329,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   (showPass)
                                       ? Icons.visibility
                                       : Icons.visibility_off,
-                                  color: ThemeProvider.theme(2)
+                                  color: ThemeProvider.theme(themeIndex)
                                       .textTheme
                                       .bodyLarge!
                                       .color!,
@@ -352,8 +365,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Toasts.showSuccessToast(
                                     msg: 'Login Successful');
                                 Navigator.of(context).pushNamedAndRemoveUntil(
-                                    Routes.homeScreenRoute,
-                                    (Route<dynamic> route) => false);
+                                  Routes.homeScreenRoute,
+                                  (Route<dynamic> route) => false,
+                                  arguments: themeIndex,
+                                );
                                 SharedPreferences prefs =
                                     await SharedPreferences.getInstance();
                                 bool batteryOptimizationInfoSeen =
@@ -407,8 +422,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(14.0),
                             ),
-                            backgroundColor:
-                                ThemeProvider.theme(2).primaryColorDark,
+                            backgroundColor: ThemeProvider.theme(themeIndex)
+                                .primaryColorDark,
                           ),
                           child: Center(
                             child: Text(

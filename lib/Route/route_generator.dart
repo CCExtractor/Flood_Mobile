@@ -15,11 +15,17 @@ class RouteGenerator {
     final args = settings.arguments;
     switch (settings.name) {
       case Routes.splashScreenRoute:
-        return MaterialPageRoute(builder: (context) => SplashScreen());
+        final args = settings.arguments as int?;
+        return MaterialPageRoute(
+            builder: (context) => SplashScreen(themeIndex: args));
       case Routes.loginScreenRoute:
-        return MaterialPageRoute(builder: (context) => LoginScreen());
+        final args = settings.arguments as int?;
+        return MaterialPageRoute(
+            builder: (context) => LoginScreen(themeIndex: args));
       case Routes.homeScreenRoute:
-        return MaterialPageRoute(builder: (context) => HomeScreen());
+        final args = settings.arguments as int?;
+        return MaterialPageRoute(
+            builder: (context) => HomeScreen(themeIndex: args));
       case Routes.torrentContentScreenRoute:
         return MaterialPageRoute(
           builder: (context) => MultiProvider(
@@ -39,7 +45,9 @@ class RouteGenerator {
                   args: args as VideoStreamScreenArguments,
                 ));
       default:
-        return MaterialPageRoute(builder: (context) => LoginScreen());
+        final args = settings.arguments as int?;
+        return MaterialPageRoute(
+            builder: (context) => LoginScreen(themeIndex: args));
     }
   }
 }
