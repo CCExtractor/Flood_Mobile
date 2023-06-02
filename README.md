@@ -16,7 +16,6 @@
       </ul>
     </li>
     <li><a href="#usage & screenshot">Usage & Screenshots</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
   </ol>
 </details>
 
@@ -57,24 +56,32 @@ found at [Flood](https://github.com/jesec/flood).
 
 ## Usage & Screenshots
 
-https://user-images.githubusercontent.com/52864956/125205014-c0f5a900-e29d-11eb-8e7e-4d8cb746d64e.mov
+https://github.com/CCExtractor/Flood_Mobile/assets/91112485/e69f26a0-7963-4a09-974f-b69cc54b7a26
 
 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/519aa928-87e1-41cd-bc79-d40c11f6a754' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/3cf8cbfd-75eb-4def-bfbe-1877b0864aab' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/36499835-c4d2-4ec7-b312-3b59d7fc5f6c' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/79f00aff-82f7-4743-b287-eddd37f8efec' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/f4729cb7-1a93-4ff3-81b6-3c9f8a42e226' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/ce6df151-8d1d-42d3-af82-4d48ff61bef9' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/7fc16471-52e7-4380-8bf7-91453293e97e' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/293b6e36-a495-4f47-a16a-bdc2ab2117b9' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/f6476aaf-c694-4619-b307-3312928e0335' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/1aa6023c-c48a-459d-ae36-52aa964de3e8' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/4054d836-f4a9-4a02-9eea-174bb7763571' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/7795c8ae-865a-4031-a208-fea0eaada108' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/da7330d3-2ed3-4edd-9d9b-8a67bcd09ae5' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/d5244d64-6232-4706-baaf-56240063b2e5' width=200></img> 
+<img src='https://github.com/CCExtractor/Flood_Mobile/assets/91112485/ad699d30-bb2c-4378-82dc-077c87dbd749' width=200></img>
 
-<img src="https://user-images.githubusercontent.com/52864956/119470520-0bf74380-bd66-11eb-8378-ee26877dcaf7.png" width=250>  <img src="https://user-images.githubusercontent.com/52864956/119470670-2e895c80-bd66-11eb-9aaa-6d6aa9659329.png" width=250>  <img src="https://user-images.githubusercontent.com/52864956/119470714-38ab5b00-bd66-11eb-9f7f-20eadd0c6a4f.png" width=250>  <img src="https://user-images.githubusercontent.com/52864956/119470671-2e895c80-bd66-11eb-8b86-c16ae139331e.png" width=250>  <img src="https://user-images.githubusercontent.com/52864956/119470337-de11ff00-bd65-11eb-951c-70db8aec0f52.png" width=250>  <img src="https://user-images.githubusercontent.com/52864956/119470372-e702d080-bd65-11eb-9565-d3ffe90a4599.png" width=250>  <img src="https://user-images.githubusercontent.com/52864956/119470428-f2ee9280-bd65-11eb-9073-f0fc7496888a.png" width=250>  <img src="https://user-images.githubusercontent.com/52864956/125205025-d8349680-e29d-11eb-8622-155fe991e925.png" width=250>  <img src="https://user-images.githubusercontent.com/52864956/125205029-dcf94a80-e29d-11eb-9c20-b4cefa9f0b73.png" width=250>  <img src="https://user-images.githubusercontent.com/52864956/125205030-dd91e100-e29d-11eb-9ac1-91ada8ec6e44.png" width=250>  <img src="https://user-images.githubusercontent.com/52864956/125205031-dec30e00-e29d-11eb-9fc8-54af3dfe1dbb.png" width=250>
-
-
-
-<!-- ROADMAP -->
-
-## Roadmap
-
-Coming Soon!
 
 <!-- CONTACT -->
 
 ## Contact
 
 [Pratik Baid](https://www.linkedin.com/in/pratik-baid-aa253980/)
-Project Link: [Flood_Mobile](https://github.com/CCExtractor/Flood_Mobile)
 
+[Akshat Tripathi](https://www.linkedin.com/in/akshat-tripathi-449a2922b/)
+
+Project Link: [Flood_Mobile](https://github.com/CCExtractor/Flood_Mobile)
