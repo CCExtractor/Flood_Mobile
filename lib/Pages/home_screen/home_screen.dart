@@ -244,9 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       icon: Icon(
                                         Icons.notifications,
                                       ),
-                                      onPressed: () async {
-                                        await NotificationApi.getNotifications(
-                                            context: context);
+                                      onPressed: () {
                                         showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
@@ -259,7 +257,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       .primaryColor,
                                               content:
                                                   NotificationPopupDialogueContainer(
-                                                // context: context,
                                                 themeIndex: themeIndex,
                                               ),
                                             );

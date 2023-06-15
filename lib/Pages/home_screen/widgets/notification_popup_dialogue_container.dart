@@ -14,6 +14,7 @@ class NotificationPopupDialogueContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeScreenBloc, HomeScreenState>(
       builder: (context, state) {
+        NotificationApi.getNotifications(context: context);
         final notifications = state.notificationModel.notifications;
         return (notifications.length == 0)
             ? Container(

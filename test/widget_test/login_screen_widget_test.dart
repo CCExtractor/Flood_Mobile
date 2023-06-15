@@ -1,48 +1,21 @@
 import 'dart:io';
-import 'package:flood_mobile/Constants/theme_provider.dart';
-import 'package:flood_mobile/Pages/login_screen.dart';
-import 'package:flood_mobile/Provider/api_provider.dart';
-import 'package:flood_mobile/Provider/client_provider.dart';
-import 'package:flood_mobile/Provider/home_provider.dart';
-import 'package:flood_mobile/Provider/sse_provider.dart';
-import 'package:flood_mobile/Provider/user_detail_provider.dart';
+import 'package:flood_mobile/Blocs/bloc_provider_list.dart';
+import 'package:flood_mobile/Pages/login_screen/login_screen.dart';
+import 'package:flood_mobile/Pages/login_screen/widgets/login_screen_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   setUp(() {});
   setUpAll(() => HttpOverrides.global = null);
   Widget createWidgetUnderTest() {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<UserDetailProvider>(
-          create: (context) => UserDetailProvider(),
+    return MultiBlocProvider(
+      providers: BlocProviders.multiBlocProviders,
+      child: MaterialApp(
+        home: Material(
+          child: LoginScreen(),
         ),
-        ChangeNotifierProvider<HomeProvider>(
-          create: (context) => HomeProvider(),
-        ),
-        ChangeNotifierProvider<SSEProvider>(
-          create: (context) => SSEProvider(),
-        ),
-        ChangeNotifierProvider<ApiProvider>(
-          create: (context) => ApiProvider(),
-        ),
-        ChangeNotifierProvider<ClientSettingsProvider>(
-          create: (context) => ClientSettingsProvider(),
-        ),
-        ChangeNotifierProvider<ThemeProvider>(
-          create: (context) => ThemeProvider(),
-        ),
-      ],
-      child: Consumer<ThemeProvider>(
-        builder: (context, themeProvider, _) {
-          print(ThemeProvider.themeMode);
-          return MaterialApp(
-              home: Material(
-            child: LoginScreen(),
-          ));
-        },
       ),
     );
   }
@@ -59,8 +32,8 @@ void main() {
       expect(find.byIcon(Icons.paste), findsOneWidget);
       final urlControllerFinder = find.byKey(Key('Url TextField'));
       var urlController =
-          tester.firstWidget(urlControllerFinder) as TextFormField;
-      expect(urlController.controller?.text, 'http://localhost:3000');
+          tester.firstWidget(urlControllerFinder) as LoginScreenTextField;
+      expect(urlController.controller.text, 'http://localhost:3000');
       expect(find.byKey(Key('Username TextField')), findsOneWidget);
       expect(find.byIcon(Icons.person), findsOneWidget);
       expect(find.text('Username'), findsOneWidget);
@@ -82,6 +55,7 @@ void main() {
       await tester.tap(find.widgetWithText(ElevatedButton, 'Login'));
       await tester.pumpAndSettle();
       expect(find.text('Field cannot be empty'), findsNWidgets(3));
+      await tester.pumpAndSettle();
       await tester.enterText(find.byKey(Key('Url TextField')), 'test url');
       await tester.tap(find.widgetWithText(ElevatedButton, 'Login'));
       await tester.pumpAndSettle();

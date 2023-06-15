@@ -1,89 +1,100 @@
 import 'dart:io';
-
-import 'package:flood_mobile/Components/RSSFeedHomePage.dart';
-import 'package:flood_mobile/Constants/theme_provider.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
+import 'package:flood_mobile/Model/notification_model.dart';
 import 'package:flood_mobile/Model/single_feed_and_response_model.dart';
 import 'package:flood_mobile/Model/single_rule_model.dart';
-import 'package:flood_mobile/Provider/api_provider.dart';
-import 'package:flood_mobile/Provider/client_provider.dart';
-import 'package:flood_mobile/Provider/home_provider.dart';
-import 'package:flood_mobile/Provider/sse_provider.dart';
-import 'package:flood_mobile/Provider/user_detail_provider.dart';
+import 'package:flood_mobile/Pages/home_screen/widgets/rss_feed_home_page.dart';
+import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
+import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
+import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import 'package:provider/provider.dart';
-
-class MockHomeProvider extends Mock implements HomeProvider {}
+class MockHomeScreenBloc extends MockBloc<HomeScreenEvent, HomeScreenState>
+    implements HomeScreenBloc {}
 
 void main() {
-  setUp(() {});
+  late HomeScreenBloc mockHomeScreenBloc;
   setUpAll(() => HttpOverrides.global = null);
-  MockHomeProvider mockHomeProvider = MockHomeProvider();
-  when(() => mockHomeProvider.rssFeedsList).thenReturn([
-    FeedsAndRulesModel(
-        type: 'test feed',
-        label: 'test label',
-        interval: 0,
-        id: 'test id',
-        url: 'test url',
-        count: 0),
-    FeedsAndRulesModel(
-        type: 'test feed',
-        label: 'test label',
-        interval: 0,
-        id: 'test id',
-        url: 'test url',
-        count: 0)
-  ]);
-  when(() => mockHomeProvider.rssRulesList).thenReturn([
-    RulesModel(
-      type: 'test rules',
-      label: 'test label',
-      feedIDs: ['test feedIDs'],
-      field: 'test field',
-      tags: ['test tags'],
-      match: 'test match',
-      exclude: 'test exclude',
-      destination: 'test destination',
-      id: 'test id',
-      isBasePath: true,
-      startOnLoad: true,
-      count: 0,
-    )
-  ]);
-
+  setUp(() {
+    mockHomeScreenBloc = MockHomeScreenBloc();
+    when(() => mockHomeScreenBloc.state).thenReturn(
+      HomeScreenState(
+        torrentList: [],
+        torrentListJson: {},
+        unreadNotifications: 1,
+        notificationModel:
+            NotificationModel(read: 1, notifications: [], total: 2, unread: 1),
+        rssFeedsListJson: {},
+        rssFeedsList: [
+          FeedsAndRulesModel(
+              type: "test feed",
+              label: "test label",
+              interval: 0,
+              id: "test id",
+              url: "test url",
+              count: 0),
+          FeedsAndRulesModel(
+              type: "test feed",
+              label: "test label",
+              interval: 0,
+              id: "test id",
+              url: "test url",
+              count: 0)
+        ],
+        rssRulesList: [
+          RulesModel(
+            type: "test rules",
+            label: "test label",
+            feedIDs: ["test feedIDs"],
+            field: "test field",
+            tags: ["test tags"],
+            match: "test match",
+            exclude: "test exclude",
+            destination: "test destination",
+            id: "test id",
+            isBasePath: true,
+            startOnLoad: true,
+            count: 0,
+          )
+        ],
+        rssFeedsContentsList: [],
+        upSpeed: '10 Kb/s',
+        downSpeed: '20 Kb/s',
+      ),
+    );
+  });
   Widget createWidgetUnderTest() {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider<UserDetailProvider>(
-          create: (context) => UserDetailProvider(),
+        BlocProvider<UserDetailBloc>(
+          create: (context) => UserDetailBloc(),
         ),
-        ChangeNotifierProvider<HomeProvider>(
-          create: (context) => mockHomeProvider,
+        BlocProvider<HomeScreenBloc>(
+          create: (context) => mockHomeScreenBloc,
         ),
-        ChangeNotifierProvider<SSEProvider>(
-          create: (context) => SSEProvider(),
+        BlocProvider<SSEBloc>(
+          create: (context) => SSEBloc(),
         ),
-        ChangeNotifierProvider<ApiProvider>(
-          create: (context) => ApiProvider(),
+        BlocProvider<ClientSettingsBloc>(
+          create: (context) => ClientSettingsBloc(),
         ),
-        ChangeNotifierProvider<ClientSettingsProvider>(
-          create: (context) => ClientSettingsProvider(),
+        BlocProvider<ThemeBloc>(
+          create: (context) => ThemeBloc(),
         ),
-        ChangeNotifierProvider<ThemeProvider>(
-          create: (context) => ThemeProvider(),
+        BlocProvider<ApiBloc>(
+          create: (context) => ApiBloc(),
         ),
       ],
-      child: Consumer<ThemeProvider>(
-        builder: (context, themeProvider, _) {
-          print(ThemeProvider.themeMode);
-          return MaterialApp(
-              home: Scaffold(
-            body: RSSFeedHomePage(index: 2),
-          ));
-        },
+      child: MaterialApp(
+        home: Scaffold(
+          body: RSSFeedHomePage(themeIndex: 2),
+        ),
       ),
     );
   }
