@@ -1,13 +1,14 @@
 import 'package:flood_mobile/Model/client_settings_model.dart';
-import 'package:flood_mobile/Provider/client_provider.dart';
+import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:bloc_test/bloc_test.dart';
 
 void main() {
-  late ClientSettingsProvider sut;
+  late ClientSettingsBloc sut;
   late ClientSettingsModel newClientSettings;
 
   setUp(() {
-    sut = ClientSettingsProvider();
+    sut = ClientSettingsBloc();
     newClientSettings = ClientSettingsModel(
       dht: false,
       dhtPort: 1234,
@@ -35,11 +36,14 @@ void main() {
     );
   });
 
-  test(
-    "initial values are correct",
-    () {
-      sut.setClientSettings(newClientSettings);
-      expect(sut.clientSettings, newClientSettings);
-    },
+  tearDown(() => sut.close());
+
+  blocTest<ClientSettingsBloc, ClientSettingsState>(
+    'initial values are correct',
+    build: () => sut,
+    act: (bloc) =>
+        bloc.add(SetClientSettingsEvent(clientSettings: newClientSettings)),
+    expect: () =>
+        [ClientSettingsUpdatedState(clientSettings: newClientSettings)],
   );
 }
