@@ -1,16 +1,16 @@
 import 'dart:convert';
-
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:dio/dio.dart';
+import 'package:flood_mobile/Constants/api_endpoints.dart';
 import 'package:flood_mobile/Model/torrent_content_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
-import 'package:flood_mobile/Provider/torrent_content_provider.dart';
-import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Services/file_folder_nester.dart';
+import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
+import 'package:flood_mobile/Blocs/torrent_content_screen_bloc/torrent_content_screen_bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../Provider/api_provider.dart';
+import '../Blocs/user_detail_bloc/user_detail_bloc.dart';
 
 class TorrentApi {
   // Gets list of torrents
@@ -21,13 +21,14 @@ class TorrentApi {
       try {
         Response response;
         Dio dio = new Dio();
-        String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-            ApiProvider.getTorrentListUrl;
+        String url =
+            BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+                ApiEndpoints.getTorrentListUrl;
         dio.options.headers['Accept'] = "application/json";
         dio.options.headers['Content-Type'] = "application/json";
         dio.options.headers['Connection'] = "keep-alive";
         dio.options.headers['Cookie'] =
-            Provider.of<UserDetailProvider>(context, listen: false).token;
+            BlocProvider.of<UserDetailBloc>(context, listen: false).token;
         response = await dio.get(url);
         List<TorrentModel> torrentList = <TorrentModel>[];
         for (var hash in response.data['torrents'].keys) {
@@ -35,13 +36,14 @@ class TorrentApi {
             TorrentModel torrentModel =
                 TorrentModel.fromJson(response.data['torrents'][hash]);
             torrentList.add(torrentModel);
-          } catch (e) {
-            print(e.toString());
+          } catch (error) {
+            print('--ERROR IN GET ALL TORRENTS LIST--');
+            print(error.toString());
           }
         }
         yield torrentList;
-      } catch (e) {
-        print('Exception caught in Api Request ' + e.toString());
+      } catch (error) {
+        print('--ERROR IN GET ALL TORRENTS LIST--' + error.toString());
         yield [];
       }
       await Future.delayed(Duration(seconds: 1), () {});
@@ -51,8 +53,9 @@ class TorrentApi {
   static Future<void> startTorrent(
       {required List<String> hashes, required BuildContext context}) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.startTorrentUrl;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.startTorrentUrl;
       print('---START TORRENT---');
       print(url);
       Response response;
@@ -62,7 +65,7 @@ class TorrentApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
       mp['hashes'] = hashes;
       String rawBody = json.encode(mp);
@@ -71,18 +74,20 @@ class TorrentApi {
         data: rawBody,
       );
       if (response.statusCode == 200) {
-      } else {}
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+        print('--TORRENT STARTED--');
+      }
+    } catch (error) {
+      print('--ERROR IN TORRENT START--');
+      print(error.toString());
     }
   }
 
   static Future<void> stopTorrent(
       {required List<String> hashes, required BuildContext context}) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.stopTorrentUrl;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.stopTorrentUrl;
       print('---STOP TORRENT---');
       print(url);
       Response response;
@@ -92,7 +97,7 @@ class TorrentApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
       mp['hashes'] = hashes;
       String rawBody = json.encode(mp);
@@ -101,10 +106,11 @@ class TorrentApi {
         data: rawBody,
       );
       if (response.statusCode == 200) {
-      } else {}
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+        print('--TORRENT STOPPED--');
+      }
+    } catch (error) {
+      print('--ERROR IN TORRENT STOP--');
+      print(error.toString());
     }
   }
 
@@ -117,8 +123,9 @@ class TorrentApi {
     required bool isSequential,
   }) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.addTorrentMagnet;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.addTorrentMagnet;
       print('---ADD TORRENT MAGNET---');
       print(url);
       Response response;
@@ -128,7 +135,7 @@ class TorrentApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
       mp['urls'] = [magnetUrl];
       mp['destination'] = destination;
@@ -143,11 +150,11 @@ class TorrentApi {
         data: rawBody,
       );
       if (response.statusCode == 200) {
-        print('--TORRENT ADDED--');
-      } else {}
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+        print('--TORRENT MEGNET ADDED--');
+      }
+    } catch (error) {
+      print('--ERROR IN ADD TORRENT MEGNET--');
+      print(error.toString());
     }
   }
 
@@ -160,8 +167,9 @@ class TorrentApi {
     required bool isCompleted,
   }) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.addTorrentFile;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.addTorrentFile;
       print('---ADD TORRENT FILE---');
       print(url);
       Response response;
@@ -171,7 +179,7 @@ class TorrentApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
       mp['files'] = [base64];
       mp['destination'] = destination;
@@ -186,11 +194,11 @@ class TorrentApi {
         data: rawBody,
       );
       if (response.statusCode == 200) {
-        print('--TORRENT ADDED--');
-      } else {}
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+        print('--TORRENT FILE ADDED--');
+      }
+    } catch (error) {
+      print('--ERROR IN ADD TORRENT FILE--');
+      print(error.toString());
     }
   }
 
@@ -201,8 +209,9 @@ class TorrentApi {
     required BuildContext context,
   }) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.deleteTorrent;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.deleteTorrent;
       print('---DELETE TORRENT---');
       print(url);
       Response response;
@@ -212,7 +221,7 @@ class TorrentApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
       mp['hashes'] = hashes;
       mp['deleteData'] = deleteWithData;
@@ -227,10 +236,10 @@ class TorrentApi {
         id.forEach((element) {
           AwesomeNotifications().dismiss(element);
         });
-      } else {}
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+      }
+    } catch (error) {
+      print('--ERROR IN TORRENT DELETE--');
+      print(error.toString());
     }
   }
 
@@ -244,15 +253,16 @@ class TorrentApi {
       try {
         Response response;
         Dio dio = new Dio();
-        String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-            ApiProvider.getTorrentContent +
-            hash +
-            '/contents';
+        String url =
+            BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+                ApiEndpoints.getTorrentContent +
+                hash +
+                '/contents';
         dio.options.headers['Accept'] = "application/json";
         dio.options.headers['Content-Type'] = "application/json";
         dio.options.headers['Connection'] = "keep-alive";
         dio.options.headers['Cookie'] =
-            Provider.of<UserDetailProvider>(context, listen: false).token;
+            BlocProvider.of<UserDetailBloc>(context, listen: false).token;
         response = await dio.get(url);
         List<TorrentContentModel> torrentContentList = <TorrentContentModel>[];
         for (var data in response.data) {
@@ -260,15 +270,16 @@ class TorrentApi {
             TorrentContentModel torrentContent =
                 TorrentContentModel.fromJson(data);
             torrentContentList.add(torrentContent);
-          } catch (e) {
-            print(e.toString());
+          } catch (error) {
+            print(error.toString());
           }
         }
-        Provider.of<TorrentContentProvider>(context, listen: false)
-            .setTorrentContentList(torrentContentList);
+        BlocProvider.of<TorrentContentScreenBloc>(context, listen: false).add(
+            SetTorrentContentListEvent(
+                newTorrentContentList: torrentContentList));
         yield convertToFolder(torrentContentList);
-      } catch (e) {
-        print('Exception caught in Api Request ' + e.toString());
+      } catch (error) {
+        print('--ERROR IN GET TORRENT CONTENT--' + error.toString());
         yield {};
       }
       await Future.delayed(Duration(seconds: 2), () {});
@@ -282,10 +293,11 @@ class TorrentApi {
     required List<int> indexList,
   }) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.setTorrentContentPriorityUrl +
-          hash +
-          '/contents';
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.setTorrentContentPriorityUrl +
+              hash +
+              '/contents';
       print('---SET TORRENT PRIORITY---');
       print(url);
       Response response;
@@ -295,7 +307,7 @@ class TorrentApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
       mp['indices'] = indexList;
       mp['priority'] = priorityType;
@@ -308,10 +320,10 @@ class TorrentApi {
       if (response.statusCode == 200) {
         print(response);
         print('--PRIORITY SET--');
-      } else {}
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+      }
+    } catch (error) {
+      print('--ERROR IN SET TORRENT PRIORITY--');
+      print(error.toString());
     }
   }
 
@@ -320,8 +332,9 @@ class TorrentApi {
     required BuildContext context,
   }) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.checkHash;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.checkHash;
       print('---CHECK TORRENT HASH---');
       print(url);
       Response response;
@@ -331,7 +344,7 @@ class TorrentApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
       mp['hashes'] = hashes;
       String rawBody = json.encode(mp);
@@ -341,13 +354,14 @@ class TorrentApi {
       );
       //if hashcheck is successful then return true else return false
       if (response.statusCode == 200) {
+        print('--HASH CHECKED--');
         return true;
       } else {
         return false;
       }
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+    } catch (error) {
+      print('--ERROR IN HASH CHECK--');
+      print(error.toString());
       //if error arises then return false
       return false;
     }
@@ -358,8 +372,9 @@ class TorrentApi {
       required String hashes,
       required BuildContext context}) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.setTags;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.setTags;
       print('---SET TAGS---');
       print(url);
       Response response;
@@ -369,7 +384,7 @@ class TorrentApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
       mp['hashes'] = [hashes];
       mp['tags'] = tagLits;
@@ -379,11 +394,11 @@ class TorrentApi {
         data: rawBody,
       );
       if (response.statusCode == 200) {
-      } else {
         print('--TAG ADDED--');
       }
-    } catch (e) {
-      print(e);
+    } catch (error) {
+      print('--ERROR IN TAG ADD--');
+      print(error);
     }
   }
 }
