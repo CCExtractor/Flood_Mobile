@@ -357,12 +357,12 @@ void main() {
         findsOneWidget);
     expect(find.byKey(Key('Select Language Dropdown')), findsOneWidget);
     expect(find.text('Language'), findsOneWidget);
-    expect(find.text('Automatic'), findsOneWidget);
-    await tester.tap(find.text('Automatic'));
-    await tester.pumpAndSettle();
     expect(find.text('English'), findsOneWidget);
-    expect(find.text('हिन्दी'), findsOneWidget);
-    await tester.tap(find.text('हिन्दी'));
+    await tester.tap(find.text('English'));
+    await tester.pumpAndSettle();
+    expect(find.text('English'), findsNWidgets(2));
+    expect(find.text('हिन्दी'), findsNWidgets(2));
+    await tester.tap(find.text('हिन्दी').last);
     await tester.pumpAndSettle();
     expect(find.text('हिन्दी'), findsOneWidget);
     expect(find.widgetWithText(ElevatedButton, 'Set'), findsOneWidget);
