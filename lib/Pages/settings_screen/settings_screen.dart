@@ -6,11 +6,13 @@ import 'package:flood_mobile/Pages/settings_screen/widgets/bandwidth_section.dar
 import 'package:flood_mobile/Pages/settings_screen/widgets/connectivity_section.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/resource_section.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/speed_limit_section.dart';
+import 'package:flood_mobile/Pages/settings_screen/widgets/user_interface_section.dart';
 import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/Pages/widgets/text_size.dart';
 import 'package:flood_mobile/Services/transfer_speed_manager.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -204,7 +206,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             });
 
             final changeSettingsSnackBar = addFloodSnackBar(
-                SnackbarType.success, 'Settings changed', 'Dismiss');
+                SnackbarType.success,
+                context.l10n.setting_button_save_snackbar,
+                context.l10n.button_dismiss);
 
             ScaffoldMessenger.of(context).clearSnackBars();
             ScaffoldMessenger.of(context).showSnackBar(changeSettingsSnackBar);
@@ -214,7 +218,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             color: Colors.white,
           ),
           label: Text(
-            "Save",
+            context.l10n.button_save,
             style: TextStyle(
                 color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
           ),
@@ -226,7 +230,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                LText(text: 'Settings'),
+                LText(text: context.l10n.setting_screen_heading),
                 SizedBox(height: 30),
                 // *Bandwidth Section
                 BandwidthSection(
@@ -338,6 +342,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   hp: hp,
                   authenticationformKey: _authenticationformKey,
                   themeIndex: widget.themeIndex,
+                ),
+                UserInterfaceSection(
+                  themeIndex: widget.themeIndex,
+                  hp: hp,
                 ),
                 SizedBox(
                   height: 200,
