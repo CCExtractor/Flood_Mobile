@@ -17,7 +17,7 @@ void main() {
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: Material(
+      home: Material(
           child: AboutScreen(themeIndex: 2),
         ),
       ),
