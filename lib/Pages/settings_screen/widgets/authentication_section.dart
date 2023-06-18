@@ -7,6 +7,7 @@ import 'package:flood_mobile/Pages/settings_screen/widgets/user_list.dart';
 import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/Pages/widgets/text_size.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -58,6 +59,7 @@ class AuthenticationSection extends StatelessWidget {
 
     return BlocBuilder<UserDetailBloc, UserDetailState>(
       builder: (context, state) {
+        final AppLocalizations l10n = context.l10n;
         if (state is UserDetailLoaded) {
           if (state.usersList.length == 0) {
             return ExpansionTileCard(
@@ -66,7 +68,7 @@ class AuthenticationSection extends StatelessWidget {
               elevation: 0,
               expandedColor: ThemeBloc.theme(themeIndex).primaryColor,
               baseColor: ThemeBloc.theme(themeIndex).primaryColor,
-              title: MText(text: 'Authentication'),
+              title: MText(text: l10n.settings_tabs_authentication),
               leading: Icon(Icons.security),
               contentPadding: EdgeInsets.all(0),
               children: [
@@ -82,7 +84,7 @@ class AuthenticationSection extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("User is not Admin"),
+                    child: Text(l10n.auth_message_not_admin),
                   ),
                 ),
               ],
@@ -96,7 +98,7 @@ class AuthenticationSection extends StatelessWidget {
               baseColor: ThemeBloc.theme(themeIndex).primaryColor,
               expandedTextColor:
                   ThemeBloc.theme(themeIndex).colorScheme.secondary,
-              title: MText(text: 'Authentication'),
+              title: MText(text: l10n.settings_tabs_authentication),
               leading: Icon(Icons.security),
               contentPadding: EdgeInsets.all(0),
               children: [
@@ -106,7 +108,9 @@ class AuthenticationSection extends StatelessWidget {
                     key: Key('Authentication option display column'),
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SText(text: 'User Accounts', themeIndex: themeIndex),
+                      SText(
+                          text: l10n.auth_user_accounts,
+                          themeIndex: themeIndex),
                       SizedBox(height: 25),
                       UsersListView(
                         usersList: state.usersList,
@@ -114,17 +118,17 @@ class AuthenticationSection extends StatelessWidget {
                         themeIndex: themeIndex,
                       ),
                       SizedBox(height: 25),
-                      SText(text: 'Add User', themeIndex: themeIndex),
+                      SText(text: l10n.auth_add_user, themeIndex: themeIndex),
                       SizedBox(height: 25),
                       SettingsTextField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Username cannot be empty.";
+                            return l10n.auth_error_username_empty;
                           }
                           return null;
                         },
-                        hintText: 'Username',
-                        labelText: 'Username',
+                        hintText: l10n.auth_username,
+                        labelText: l10n.auth_username,
                         controller: usernameController,
                         themeIndex: themeIndex,
                       ),
@@ -132,12 +136,12 @@ class AuthenticationSection extends StatelessWidget {
                       SettingsTextField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Password cannot be empty.";
+                            return l10n.auth_error_password_empty;
                           }
                           return null;
                         },
-                        hintText: 'Password',
-                        labelText: 'Password',
+                        hintText: l10n.auth_password,
+                        labelText: l10n.auth_password,
                         controller: passwordController,
                         themeIndex: themeIndex,
                       ),
@@ -158,7 +162,7 @@ class AuthenticationSection extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               title: Text(
-                                'Is Admin',
+                                l10n.is_admin_text,
                                 style: TextStyle(fontSize: 12),
                               ),
                               value: isAdmin,
@@ -192,9 +196,9 @@ class AuthenticationSection extends StatelessWidget {
                                   onChanged: setClient,
                                   underline: Container(),
                                   items: <String>[
-                                    'rTorrent',
-                                    'qBittorrent',
-                                    'Transmission',
+                                    l10n.connection_settings_rtorrent,
+                                    l10n.connection_settings_qbittorrent,
+                                    l10n.connection_settings_transmission,
                                   ].map<DropdownMenuItem<String>>(
                                       (String value) {
                                     return DropdownMenuItem<String>(
@@ -211,7 +215,7 @@ class AuthenticationSection extends StatelessWidget {
                       SizedBox(height: 20),
                       //Check if the client is rTorrent, qBittorrent or Transmission
 
-                      (client == 'rTorrent')
+                      (client == l10n.connection_settings_rtorrent)
                           ? Column(
                               children: [
                                 Row(
@@ -229,7 +233,7 @@ class AuthenticationSection extends StatelessWidget {
                                                 BorderRadius.circular(8),
                                           ),
                                           title: Text(
-                                            'Socket',
+                                            l10n.connection_settings_rtorrent_type_socket,
                                             style: TextStyle(fontSize: 12),
                                           ),
                                           value: socket,
@@ -250,7 +254,7 @@ class AuthenticationSection extends StatelessWidget {
                                               BorderRadius.circular(8),
                                         ),
                                         title: Text(
-                                          'TCP',
+                                          l10n.connection_settings_rtorrent_type_tcp,
                                           style: TextStyle(fontSize: 12),
                                         ),
                                         value: !socket,
@@ -264,12 +268,15 @@ class AuthenticationSection extends StatelessWidget {
                                     ? SettingsTextField(
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return "Path cannot be empty";
+                                            return l10n
+                                                .connection_settings_rtorrent_path_validator;
                                           }
                                           return null;
                                         },
-                                        hintText: 'eg. ~/.local/share/rtorrent',
-                                        labelText: 'Path',
+                                        hintText: l10n
+                                            .connection_settings_rtorrent_path_hint,
+                                        labelText: l10n
+                                            .connection_settings_rtorrent_socket,
                                         controller: pathController,
                                         themeIndex: themeIndex,
                                       )
@@ -278,12 +285,15 @@ class AuthenticationSection extends StatelessWidget {
                                           SettingsTextField(
                                             validator: (value) {
                                               if (value!.isEmpty) {
-                                                return "Host or IP cannot be empty";
+                                                return l10n
+                                                    .connection_settings_rtorrent_host_validator;
                                               }
                                               return null;
                                             },
-                                            hintText: 'Host or IP',
-                                            labelText: 'Host',
+                                            hintText: l10n
+                                                .connection_settings_rtorrent_host_input_placeholder,
+                                            labelText: l10n
+                                                .connection_settings_rtorrent_host,
                                             controller: hostController,
                                             themeIndex: themeIndex,
                                           ),
@@ -291,12 +301,15 @@ class AuthenticationSection extends StatelessWidget {
                                           SettingsTextField(
                                             validator: (value) {
                                               if (value!.isEmpty) {
-                                                return "Port cannot be empty";
+                                                return l10n
+                                                    .connection_settings_rtorrent_port_validator;
                                               }
                                               return null;
                                             },
-                                            hintText: 'Port',
-                                            labelText: 'Port',
+                                            hintText: l10n
+                                                .connection_settings_rtorrent_port,
+                                            labelText: l10n
+                                                .connection_settings_rtorrent_port,
                                             controller: portController,
                                             themeIndex: themeIndex,
                                           )
@@ -309,12 +322,15 @@ class AuthenticationSection extends StatelessWidget {
                                 SettingsTextField(
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return "Client Username cannot be empty.";
+                                      return l10n
+                                          .connection_settings_qbittorrent_client_username_validator;
                                     }
                                     return null;
                                   },
-                                  hintText: 'Client Username',
-                                  labelText: 'Username',
+                                  hintText: l10n
+                                      .connection_settings_qbittorrent_client_username,
+                                  labelText: l10n
+                                      .connection_settings_qbittorrent_username,
                                   controller: clientUsernameController,
                                   themeIndex: themeIndex,
                                 ),
@@ -322,12 +338,15 @@ class AuthenticationSection extends StatelessWidget {
                                 SettingsTextField(
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return "Client Password cannot be empty.";
+                                      return l10n
+                                          .connection_settings_qbittorrent_client_password_validator;
                                     }
                                     return null;
                                   },
-                                  hintText: 'Client Password',
-                                  labelText: 'Password',
+                                  hintText: l10n
+                                      .connection_settings_qbittorrent_client_password,
+                                  labelText: l10n
+                                      .connection_settings_qbittorrent_password,
                                   controller: clientPasswordController,
                                   themeIndex: themeIndex,
                                 ),
@@ -335,16 +354,22 @@ class AuthenticationSection extends StatelessWidget {
                                 SettingsTextField(
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return "URL cannot be empty";
+                                      return l10n
+                                          .connection_settings_qbittorrent_url_empty_error;
                                     } else if (!value.startsWith("http://")) {
-                                      return "Enter valid URL";
+                                      return l10n
+                                          .connection_settings_qbittorrent_url_validation_error;
                                     }
                                     return null;
                                   },
-                                  hintText: client == "qBittorrent"
-                                      ? 'eg. http://localhost:8080'
-                                      : 'eg. http://localhost:9091/transmission/rpc',
-                                  labelText: 'URL',
+                                  hintText: client ==
+                                          l10n.connection_settings_qbittorrent
+                                      ? l10n
+                                          .connection_settings_qbittorrent_url_input_placeholder
+                                      : l10n
+                                          .connection_settings_transmission_url_input_placeholder,
+                                  labelText:
+                                      l10n.connection_settings_qbittorrent_url,
                                   controller: urlController,
                                   themeIndex: themeIndex,
                                 ),
@@ -369,7 +394,8 @@ class AuthenticationSection extends StatelessWidget {
                                         username: usernameController.text,
                                         password: passwordController.text,
                                         client: client,
-                                        type: (client == 'rTorrent')
+                                        type: (client ==
+                                                l10n.connection_settings_rtorrent)
                                             ? (socket)
                                                 ? 'socket'
                                                 : 'tcp'
@@ -401,12 +427,13 @@ class AuthenticationSection extends StatelessWidget {
                                     portController.clear();
                                     setIsAdmin(false);
                                     setSocket(true);
-                                    setClient('rTorrent');
+                                    setClient(
+                                        l10n.connection_settings_rtorrent);
 
                                     final addNewUserSnackBar = addFloodSnackBar(
                                         SnackbarType.success,
-                                        'New user added',
-                                        'Dismiss');
+                                        l10n.new_user_added_snackbar,
+                                        l10n.button_dismiss);
 
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(addNewUserSnackBar);
@@ -422,7 +449,7 @@ class AuthenticationSection extends StatelessWidget {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    "Add",
+                                    l10n.button_add,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,

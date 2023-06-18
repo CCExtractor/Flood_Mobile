@@ -13,6 +13,7 @@ import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Model/single_feed_and_response_model.dart';
 import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,11 +27,6 @@ class RSSFeedHomePage extends StatefulWidget {
 
 class _RSSFeedHomePageState extends State<RSSFeedHomePage>
     with TickerProviderStateMixin {
-  final List<String> intervalunits = [
-    'Minutes',
-    'Hours',
-    'Days',
-  ];
   bool useAdBasePath = false;
   bool completed = false;
   bool sequentialDownload = false;
@@ -96,6 +92,12 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = context.l10n;
+    final List<String> intervalunits = [
+      l10n.feeds_time_minutes,
+      l10n.feeds_time_hours,
+      l10n.feeds_time_days,
+    ];
     return BlocBuilder<HomeScreenBloc, HomeScreenState>(
       builder: (context, state) {
         return Container(
@@ -110,8 +112,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
           child: ContainedTabBarView(
             key: Key('Tab view'),
             tabs: [
-              Tab(key: Key('Feeds Tab'), text: "Feeds"),
-              Tab(key: Key('Download Rules Tab'), text: "Download Rules"),
+              Tab(key: Key('Feeds Tab'), text: l10n.feeds_heading),
+              Tab(key: Key('Download Rules Tab'), text: l10n.rules_heading),
             ],
             tabBarProperties: TabBarProperties(
               indicatorColor:
@@ -130,7 +132,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Text(
-                          "Existing Feeds",
+                          l10n.feeds_existing_feeds,
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -192,8 +194,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                   index]
                                                               .count
                                                               .toString() +
-                                                          " matches"
-                                                      : "0 matches"),
+                                                          " ${l10n.torrent_matches_text}"
+                                                      : "0 ${l10n.torrent_matches_text}"),
                                                 ],
                                               ),
                                             ),
@@ -250,8 +252,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         addFloodSnackBar(
                                                             SnackbarType
                                                                 .information,
-                                                            'Feed deleted successfully',
-                                                            'Dismiss');
+                                                            l10n.feeds_delete_snackbar,
+                                                            l10n.button_dismiss);
 
                                                     ScaffoldMessenger.of(
                                                             context)
@@ -276,7 +278,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               ? (((state.rssFeedsList[index].interval! / 60) / 24)
                                                       .toString()
                                                       .split('.')[0] +
-                                                  ' Days')
+                                                  ' ${l10n.feeds_time_days}')
                                               : state.rssFeedsList[index].interval! / 60 < 24 &&
                                                       state.rssFeedsList[index].interval! / 60 >
                                                           1 &&
@@ -287,11 +289,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   ? ((state.rssFeedsList[index].interval! / 60))
                                                           .toString()
                                                           .split('.')[0] +
-                                                      ' Hours'
+                                                      ' ${l10n.feeds_time_hours}'
                                                   : state.rssFeedsList[index]
                                                           .interval
                                                           .toString() +
-                                                      ' Minutes'),
+                                                      ' ${l10n.feeds_time_minutes}'),
                                           SizedBox(width: 10),
                                           Text(state.rssFeedsList[index].url
                                                       .toString()
@@ -352,7 +354,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                       padding:
                                           const EdgeInsets.only(left: 10.0),
                                       child: Text(
-                                        "No feeds defined.",
+                                        l10n.feeds_no_feeds_defined,
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontFamily: 'Montserrat',
@@ -386,7 +388,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                           ),
                           child: Center(
                             child: Text(
-                              "New",
+                              l10n.button_new,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -416,8 +418,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         ),
                                         controller: labelController,
                                         decoration: InputDecoration(
-                                          labelText: 'Label',
-                                          hintText: 'Label',
+                                          labelText: l10n.feeds_label,
+                                          hintText: l10n.feeds_label,
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
                                               color: ThemeBloc.theme(
@@ -432,7 +434,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return "You must specify a label.";
+                                            return context
+                                                .l10n.feeds_label_validator;
                                           }
                                           return null;
                                         },
@@ -458,8 +461,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             ),
                                             keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
-                                                labelText: 'Interval',
-                                                hintText: 'Interval',
+                                                labelText: l10n.feeds_interval,
+                                                hintText: l10n.feeds_interval,
                                                 labelStyle: TextStyle(
                                                     fontFamily: 'Montserrat',
                                                     color: ThemeBloc.theme(
@@ -475,7 +478,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             validator: (value) {
                                               if (!RegExp(r'^[0-9]+$')
                                                   .hasMatch(value!)) {
-                                                return "The interval must be a positive number.";
+                                                return l10n
+                                                    .feeds_interval_validator;
                                               }
                                               return null;
                                             },
@@ -506,7 +510,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 ),
                                                 isExpanded: true,
                                                 hint: Text(
-                                                  'Interval Unit',
+                                                  context
+                                                      .l10n.feeds_interval_unit,
                                                   style: TextStyle(
                                                       color: ThemeBloc.theme(
                                                               widget.themeIndex)
@@ -514,7 +519,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                           .bodyLarge
                                                           ?.color),
                                                 ),
-                                                value: "Minutes",
+                                                value: context
+                                                    .l10n.feeds_time_minutes,
                                                 icon: Icon(
                                                   Icons.keyboard_arrow_down,
                                                   color: ThemeBloc.theme(
@@ -561,13 +567,14 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     .toList(),
                                                 validator: (value) {
                                                   if (value == null) {
-                                                    return 'Please select a unit';
+                                                    return l10n
+                                                        .feeds_interval_unit_validator;
                                                   }
                                                   return null;
                                                 },
                                                 onChanged: (value) {
                                                   if (value.toString() ==
-                                                      "Hours") {
+                                                      l10n.feeds_time_hours) {
                                                     intervalController
                                                         .text = (int.parse(
                                                                 intervalController
@@ -576,7 +583,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         .toString();
                                                   }
                                                   if (value.toString() ==
-                                                      "Days") {
+                                                      l10n.feeds_time_days) {
                                                     intervalController
                                                         .text = (int.parse(
                                                                 intervalController
@@ -607,8 +614,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   ?.color,
                                         ),
                                         decoration: InputDecoration(
-                                          labelText: 'URL',
-                                          hintText: 'URL',
+                                          labelText: l10n.feeds_url,
+                                          hintText: l10n.feeds_url,
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
                                               color: ThemeBloc.theme(
@@ -642,7 +649,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 r"^(http|https):\/\/[^\s/$.?#]+.[^\s]*$",
                                               ).hasMatch(value!) ||
                                               value.isEmpty) {
-                                            return "You must specify a valid feed URL.";
+                                            return context
+                                                .l10n.feeds_url_validator;
                                           }
                                           return null;
                                         },
@@ -673,7 +681,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               ),
                                               child: Center(
                                                 child: Text(
-                                                  "Cancel",
+                                                  l10n.button_cancel,
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 16,
@@ -719,8 +727,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                           addFloodSnackBar(
                                                               SnackbarType
                                                                   .information,
-                                                              'New Feed added successfully',
-                                                              'Dismiss');
+                                                              l10n.feeds_add_snackbar,
+                                                              l10n.button_dismiss);
 
                                                       ScaffoldMessenger.of(
                                                               context)
@@ -756,8 +764,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   final connectionCheckSnackbar =
                                                       addFloodSnackBar(
                                                           SnackbarType.caution,
-                                                          'Please check your backend connection',
-                                                          'Dismiss');
+                                                          l10n.connection_check_snackbar,
+                                                          l10n.button_dismiss);
 
                                                   ScaffoldMessenger.of(context)
                                                       .clearSnackBars();
@@ -780,7 +788,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               ),
                                               child: Center(
                                                 child: Text(
-                                                  "Save",
+                                                  l10n.button_save,
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 16,
@@ -804,7 +812,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                             )
                           : Container(),
                       Text(
-                        "Browse Feeds",
+                        l10n.feeds_browse_feeds,
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
@@ -844,7 +852,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                 ),
                                 isExpanded: true,
                                 hint: Text(
-                                  'Select Feed',
+                                  l10n.feeds_select_feed,
                                   style: TextStyle(
                                       color: ThemeBloc.theme(widget.themeIndex)
                                           .textTheme
@@ -888,7 +896,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                     .toList(),
                                 validator: (value) {
                                   if (value == null) {
-                                    return 'Please select a feed';
+                                    return l10n.feeds_select_feed_validator;
                                   }
                                   return null;
                                 },
@@ -928,8 +936,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             ),
                                             controller: searchTermController,
                                             decoration: InputDecoration(
-                                              labelText: 'Search Term',
-                                              hintText: 'Search Term',
+                                              labelText: l10n.feeds_search_term,
+                                              hintText: l10n.feeds_search_term,
                                               labelStyle: TextStyle(
                                                   fontFamily: 'Montserrat',
                                                   color: ThemeBloc.theme(
@@ -1018,7 +1026,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                       bottom:
                                                                           5),
                                                                   child: Text(
-                                                                    "Selected Magnet Link",
+                                                                    l10n.selected_magnet_link,
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             15,
@@ -1074,9 +1082,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                               },
                                                                             ),
                                                                             labelText:
-                                                                                'Torrent',
+                                                                                l10n.torrent_text,
                                                                             hintText:
-                                                                                'Torrent URL or Magnet Link',
+                                                                                l10n.torrent_magnet_link_textfield_hint,
                                                                             labelStyle:
                                                                                 TextStyle(
                                                                               fontFamily: 'Montserrat',
@@ -1091,7 +1099,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                               (String? value) {
                                                                             if (value == null ||
                                                                                 (value.isEmpty)) {
-                                                                              return 'Field cannot be empty';
+                                                                              return l10n.torrent_magnet_link_textfield_validator;
                                                                             }
                                                                             return null;
                                                                           },
@@ -1138,9 +1146,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                               color: ThemeBloc.theme(widget.themeIndex).textTheme.bodyLarge?.color,
                                                                             ),
                                                                             labelText:
-                                                                                'Destination',
+                                                                                l10n.textfield_destination_torrent,
                                                                             hintText:
-                                                                                'Destination',
+                                                                                l10n.textfield_destination_torrent,
                                                                             labelStyle:
                                                                                 TextStyle(fontFamily: 'Montserrat', color: ThemeBloc.theme(widget.themeIndex).textTheme.bodyLarge?.color),
                                                                             border:
@@ -1165,7 +1173,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                           ),
                                                                           title:
                                                                               Text(
-                                                                            'Use as Base Path',
+                                                                            l10n.torrents_destination_base_path,
                                                                             style:
                                                                                 TextStyle(fontSize: 14),
                                                                           ),
@@ -1190,7 +1198,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                           ),
                                                                           title:
                                                                               Text(
-                                                                            'Sequential Download',
+                                                                            l10n.torrents_destination_sequential,
                                                                             style:
                                                                                 TextStyle(fontSize: 14),
                                                                           ),
@@ -1215,7 +1223,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                           ),
                                                                           title:
                                                                               Text(
-                                                                            'Completed',
+                                                                            l10n.torrents_destination_completed,
                                                                             style:
                                                                                 TextStyle(fontSize: 14),
                                                                           ),
@@ -1257,7 +1265,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                             child:
                                                                                 Center(
                                                                               child: Text(
-                                                                                "Add Torrent",
+                                                                                l10n.add_torrent_button,
                                                                                 style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
                                                                               ),
                                                                             ),
@@ -1288,7 +1296,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               ),
                                               child: Center(
                                                 child: Text(
-                                                  "Download",
+                                                  l10n.button_download,
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 15,
@@ -1424,7 +1432,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Text(
-                          "Existing Rules",
+                          l10n.feeds_existing_rules,
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -1485,8 +1493,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                   index]
                                                               .count
                                                               .toString() +
-                                                          " matches"
-                                                      : "0 matches"),
+                                                          " ${l10n.torrent_matches_text}"
+                                                      : "0 ${l10n.torrent_matches_text}"),
                                                   SizedBox(width: 10),
                                                   Container(
                                                     decoration: BoxDecoration(
@@ -1510,7 +1518,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                           const EdgeInsets.all(
                                                               5.0),
                                                       child: Text(
-                                                        "Tags: " +
+                                                        "${l10n.feeds_tags}: " +
                                                             state
                                                                 .rssRulesList[
                                                                     index]
@@ -1607,8 +1615,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                         addFloodSnackBar(
                                                             SnackbarType
                                                                 .information,
-                                                            'Rule deleted successfully',
-                                                            'Dismiss');
+                                                            l10n.rules_deleted_snackbar,
+                                                            l10n.button_dismiss);
 
                                                     ScaffoldMessenger.of(
                                                             context)
@@ -1629,13 +1637,13 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       .toString()
                                                       .length >
                                                   10
-                                              ? "Match: " +
+                                              ? "${l10n.rules_match}: " +
                                                   state
                                                       .rssRulesList[index].match
                                                       .toString()
                                                       .substring(0, 10) +
                                                   "..."
-                                              : "Match: " +
+                                              : "${l10n.rules_match}: " +
                                                   state
                                                       .rssRulesList[index].match
                                                       .toString()),
@@ -1644,13 +1652,13 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       .toString()
                                                       .length >
                                                   10
-                                              ? "Exclude: " +
+                                              ? "${l10n.rules_exclude}: " +
                                                   state.rssRulesList[index]
                                                       .exclude
                                                       .toString()
                                                       .substring(0, 10) +
                                                   '...'
-                                              : "Exclude: " +
+                                              : "${l10n.rules_exclude}: " +
                                                   state.rssRulesList[index]
                                                       .exclude
                                                       .toString()),
@@ -1702,7 +1710,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                       padding:
                                           const EdgeInsets.only(left: 10.0),
                                       child: Text(
-                                        "No rules defined.",
+                                        l10n.feeds_no_rules_defined,
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontFamily: 'Montserrat',
@@ -1736,7 +1744,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                           ),
                           child: Center(
                             child: Text(
-                              "New",
+                              l10n.button_new,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -1766,8 +1774,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   ?.color,
                                         ),
                                         decoration: InputDecoration(
-                                          labelText: 'Label',
-                                          hintText: 'Label',
+                                          labelText: l10n.rules_textfield_lable,
+                                          hintText: l10n.rules_textfield_lable,
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
                                               color: ThemeBloc.theme(
@@ -1782,7 +1790,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                         ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return "You must specify a label.";
+                                            return l10n
+                                                .rules_textfield_validator;
                                           }
                                           return null;
                                         },
@@ -1818,7 +1827,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           key: Key('applicable feed dropdown'),
                                           isExpanded: true,
                                           hint: Text(
-                                            'Applicable Feed',
+                                            l10n.feeds_applicable_feed,
                                             style: TextStyle(
                                                 color: ThemeBloc.theme(
                                                         widget.themeIndex)
@@ -1869,7 +1878,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               .toList(),
                                           validator: (value) {
                                             if (value == null) {
-                                              return 'Please select a feed';
+                                              return l10n
+                                                  .feeds_applicable_feed_validator;
                                             }
                                             return null;
                                           },
@@ -1914,8 +1924,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     ?.color,
                                               ),
                                               decoration: InputDecoration(
-                                                  labelText: 'Match Pattern',
-                                                  hintText: 'RegEx',
+                                                  labelText:
+                                                      l10n.feeds_match_pattern,
+                                                  hintText: l10n.feeds_regEx,
                                                   labelStyle: TextStyle(
                                                       fontFamily: 'Montserrat',
                                                       color: ThemeBloc.theme(
@@ -1931,7 +1942,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   errorMaxLines: 2),
                                               validator: (value) {
                                                 if (value!.isEmpty) {
-                                                  return "Invalid regular expression.";
+                                                  return l10n
+                                                      .feeds_match_pattern_validator;
                                                 }
                                                 return null;
                                               },
@@ -1952,8 +1964,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     ?.color,
                                               ),
                                               decoration: InputDecoration(
-                                                labelText: 'Exclude Pattern',
-                                                hintText: 'RegEx',
+                                                labelText:
+                                                    l10n.rules_exclude_pattern,
+                                                hintText: l10n.feeds_regEx,
                                                 labelStyle: TextStyle(
                                                     fontFamily: 'Montserrat',
                                                     color: ThemeBloc.theme(
@@ -2004,8 +2017,10 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             ),
                                             onPressed: () {},
                                           ),
-                                          labelText: 'Torrent Destination',
-                                          hintText: 'Destination',
+                                          labelText:
+                                              l10n.feeds_torrent_destination,
+                                          hintText: l10n
+                                              .textfield_destination_torrent,
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
                                               color: ThemeBloc.theme(
@@ -2052,8 +2067,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                             ),
                                             onPressed: () {},
                                           ),
-                                          labelText: 'Apply Tags',
-                                          hintText: 'Tags',
+                                          labelText: l10n.feeds_apply_tags,
+                                          hintText: l10n.feeds_tags,
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
                                               color: ThemeBloc.theme(
@@ -2098,7 +2113,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               ),
                                             ),
                                             label: Text(
-                                              'Use as Base Path',
+                                              l10n.torrents_destination_base_path,
                                               style: TextStyle(
                                                   fontFamily: 'Montserrat',
                                                   fontSize: 13,
@@ -2156,7 +2171,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 left: 2,
                                                 right: 35),
                                             label: Text(
-                                              'Start on load',
+                                              l10n.feeds_rule_start_on_load,
                                               style: TextStyle(
                                                   fontFamily: 'Montserrat',
                                                   fontSize: 13,
@@ -2208,7 +2223,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               ),
                                               child: Center(
                                                 child: Text(
-                                                  "Cancel",
+                                                  l10n.button_cancel,
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 16,
@@ -2273,8 +2288,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                           addFloodSnackBar(
                                                               SnackbarType
                                                                   .information,
-                                                              'New Rule added successfully',
-                                                              'Dismiss');
+                                                              l10n.rules_added_snackbar,
+                                                              l10n.button_dismiss);
 
                                                       ScaffoldMessenger.of(
                                                               context)
@@ -2290,8 +2305,8 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                   final connectionCheckSnackbar =
                                                       addFloodSnackBar(
                                                           SnackbarType.caution,
-                                                          'Please check your backend connection',
-                                                          'Dismiss');
+                                                          l10n.connection_check_snackbar,
+                                                          l10n.button_dismiss);
 
                                                   ScaffoldMessenger.of(context)
                                                       .clearSnackBars();
@@ -2314,7 +2329,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                               ),
                                               child: Center(
                                                 child: Text(
-                                                  "Save",
+                                                  l10n.button_save,
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 16,

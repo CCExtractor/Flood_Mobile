@@ -2,6 +2,7 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/settings_text_field.dart';
 import 'package:flood_mobile/Pages/widgets/text_size.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class ResourceSection extends StatelessWidget {
@@ -24,6 +25,7 @@ class ResourceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = context.l10n;
     return ExpansionTileCard(
       key: Key('Resources Expansion Card'),
       onExpansionChanged: (value) {},
@@ -31,7 +33,7 @@ class ResourceSection extends StatelessWidget {
       expandedColor: ThemeBloc.theme(themeIndex).primaryColor,
       expandedTextColor: ThemeBloc.theme(themeIndex).colorScheme.secondary,
       baseColor: ThemeBloc.theme(themeIndex).primaryColor,
-      title: MText(text: 'Resources'),
+      title: MText(text: l10n.settings_tabs_resources),
       leading: Icon(Icons.settings),
       contentPadding: EdgeInsets.all(0),
       children: [
@@ -39,14 +41,16 @@ class ResourceSection extends StatelessWidget {
           key: Key('Resources options display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SText(text: 'Disk', themeIndex: themeIndex),
+            SText(
+                text: l10n.settings_resources_disk_heading,
+                themeIndex: themeIndex),
             SizedBox(height: 25),
             SettingsTextField(
               validator: (value) {
                 return null;
               },
-              hintText: 'Default Download Directory',
-              labelText: 'Default Download Directory',
+              hintText: l10n.settings_resources_disk_download_location_label,
+              labelText: l10n.settings_resources_disk_download_location_label,
               controller: defaultDownloadDirectoryController,
               themeIndex: themeIndex,
             ),
@@ -58,8 +62,8 @@ class ResourceSection extends StatelessWidget {
                     validator: (value) {
                       return null;
                     },
-                    hintText: 'Maximum Open Files',
-                    labelText: 'Maximum Open Files',
+                    hintText: l10n.settings_resources_max_open_files,
+                    labelText: l10n.settings_resources_max_open_files,
                     controller: maximumOpenFilesController,
                     isText: false,
                     themeIndex: themeIndex,
@@ -85,7 +89,7 @@ class ResourceSection extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         title: Text(
-                          'Verify Hash',
+                          l10n.settings_resources_disk_check_hash_label,
                           style: TextStyle(fontSize: 12),
                         ),
                         value: verifyHash,
@@ -97,14 +101,16 @@ class ResourceSection extends StatelessWidget {
               ],
             ),
             SizedBox(height: 25),
-            SText(text: 'Memory', themeIndex: themeIndex),
+            SText(
+                text: l10n.settings_resources_memory_heading,
+                themeIndex: themeIndex),
             SizedBox(height: 25),
             SettingsTextField(
               validator: (value) {
                 return null;
               },
-              hintText: 'Max Memory Usage (MB)',
-              labelText: 'Max Memory Usage (MB)',
+              hintText: l10n.settings_resources_memory_max_label,
+              labelText: l10n.settings_resources_memory_max_label,
               controller: maxMemoryUsageController,
               isText: false,
               themeIndex: themeIndex,

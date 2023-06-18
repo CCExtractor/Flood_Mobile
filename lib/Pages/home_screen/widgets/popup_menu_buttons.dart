@@ -4,6 +4,7 @@ import 'package:flood_mobile/Pages/widgets/delete_torrent_sheet.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +34,7 @@ class _PopupMenuButtonsState extends State<PopupMenuButtons> {
         selectedTorrent.state.selectedTorrentList.toList().forEach((element) {
           hash.add(element.hash);
         });
-        if (value == 'Select All') {
+        if (value == context.l10n.multi_torrents_actions_select_all) {
           selectedTorrent.add(RemoveAllItemsFromListEvent());
           selectedTorrent.add(RemoveAllIndexFromListEvent());
           selectedTorrent.add(AddAllItemsToListEvent(
@@ -50,15 +51,15 @@ class _PopupMenuButtonsState extends State<PopupMenuButtons> {
           }
           selectedTorrent.add(AddAllIndexToListEvent(index: index));
         }
-        if (value == 'Start') {
+        if (value == context.l10n.multi_torrents_actions_start) {
           TorrentApi.startTorrent(hashes: hash, context: context);
           selectedTorrent.add(ChangeSelectionModeEvent());
         }
-        if (value == 'Pause') {
+        if (value == context.l10n.multi_torrents_actions_pause) {
           TorrentApi.stopTorrent(hashes: hash, context: context);
           selectedTorrent.add(ChangeSelectionModeEvent());
         }
-        if (value == 'Delete') {
+        if (value == context.l10n.multi_torrents_actions_delete) {
           deleteTorrent(
             context: context,
             indexes: selectedTorrent.state.selectedTorrentIndex,
@@ -67,7 +68,7 @@ class _PopupMenuButtonsState extends State<PopupMenuButtons> {
           );
           selectedTorrent.add(ChangeSelectionModeEvent());
         }
-        if (value == "Set Tags") {
+        if (value == context.l10n.multi_torrents_actions_set_tags) {
           showDialog(
               context: context,
               builder: (context) => AddTagDialogue(
@@ -85,11 +86,11 @@ class _PopupMenuButtonsState extends State<PopupMenuButtons> {
       },
       itemBuilder: (BuildContext context) {
         return {
-          'Select All',
-          'Start',
-          'Pause',
-          'Delete',
-          'Set Tags',
+          context.l10n.multi_torrents_actions_select_all,
+          context.l10n.multi_torrents_actions_start,
+          context.l10n.multi_torrents_actions_pause,
+          context.l10n.multi_torrents_actions_delete,
+          context.l10n.multi_torrents_actions_set_tags,
         }.map((String choice) {
           return PopupMenuItem<String>(
             value: choice,

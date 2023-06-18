@@ -1,3 +1,4 @@
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:optimize_battery/optimize_battery.dart';
@@ -17,6 +18,7 @@ class CustomDialogAnimation extends StatelessWidget {
   }
 
   Widget _buildDialogContent(BuildContext context) {
+    final AppLocalizations l10n = context.l10n;
     return Stack(
       alignment: Alignment.topCenter,
       children: <Widget>[
@@ -57,7 +59,7 @@ class CustomDialogAnimation extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 8, right: 8, top: 20),
                 child: Column(
                   children: [
-                    new Text("Action Required",
+                    new Text(l10n.battery_optimization_dialog_title,
                         style: TextStyle(
                             fontSize: 20.0,
                             color: ThemeBloc.theme(themeIndex)
@@ -66,7 +68,7 @@ class CustomDialogAnimation extends StatelessWidget {
                                 ?.color,
                             fontWeight: FontWeight.bold)),
                     SizedBox(height: 10),
-                    Text("To make sure progress notification works smoothly.",
+                    Text(l10n.battery_optimization_dialog_desc1,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 14.0,
@@ -75,8 +77,7 @@ class CustomDialogAnimation extends StatelessWidget {
                                 .bodyLarge
                                 ?.color)),
                     SizedBox(height: 10),
-                    Text(
-                        "This might not be required for certain devices like MI/Redmi, etc as they don't have a rigorous battery optimization.",
+                    Text(l10n.battery_optimization_dialog_desc2,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 11.0,
@@ -117,7 +118,7 @@ class CustomDialogAnimation extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Remove battery \noptimisation",
+                                          "${l10n.remove_battery_text} \n${l10n.optimisation_text}",
                                           style: TextStyle(
                                               color: Colors.black87,
                                               fontSize: 17.0,
@@ -125,7 +126,7 @@ class CustomDialogAnimation extends StatelessWidget {
                                         ),
                                         SizedBox(height: 10),
                                         Text(
-                                          "All Apps > Flood > Don't \noptimize",
+                                          l10n.remove_battery_optimization_text,
                                           style: TextStyle(
                                               color: Colors.black54,
                                               fontSize: 14.0,
@@ -133,7 +134,7 @@ class CustomDialogAnimation extends StatelessWidget {
                                         ),
                                         SizedBox(height: 10),
                                         Text(
-                                          "OR",
+                                          l10n.or_text,
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 14.0,
@@ -141,7 +142,7 @@ class CustomDialogAnimation extends StatelessWidget {
                                         ),
                                         SizedBox(height: 10),
                                         Text(
-                                          "Long Press App Icon >\nApp Info > Battery usage >\nAllow background activity",
+                                          l10n.remove_battery_optimization_steps,
                                           style: TextStyle(
                                               color: Colors.black54,
                                               fontSize: 14.0,
@@ -165,33 +166,32 @@ class CustomDialogAnimation extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               left: 20.0, right: 20.0, top: 10),
                           child: ElevatedButton(
-                              onPressed: () {
-                                OptimizeBattery
-                                    .openBatteryOptimizationSettings();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                side:
-                                    BorderSide(width: 0.2, color: Colors.black),
-                                backgroundColor: ThemeBloc.theme(themeIndex)
-                                    .primaryColorDark,
-                                elevation: 0.5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
+                            onPressed: () {
+                              OptimizeBattery.openBatteryOptimizationSettings();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              side: BorderSide(width: 0.2, color: Colors.black),
+                              backgroundColor:
+                                  ThemeBloc.theme(themeIndex).primaryColorDark,
+                              elevation: 0.5,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                            ),
+                            child: Container(
+                              height: 45,
+                              child: Center(
+                                child: Text(
+                                  l10n.update_batter_settings_button,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w800),
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
-                              child: Container(
-                                height: 45,
-                                child: Center(
-                                  child: Text(
-                                    'UPDATE BATTERY SETTINGS',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.w800),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              )),
+                            ),
+                          ),
                         )
                       ],
                     ),

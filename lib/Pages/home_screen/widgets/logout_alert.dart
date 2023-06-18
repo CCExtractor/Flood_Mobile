@@ -1,3 +1,4 @@
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 
@@ -23,7 +24,7 @@ class LogOutAlert extends StatelessWidget {
       ),
       contentPadding: EdgeInsets.all(20),
       content: Text(
-        'Are you sure you want to\n Log out ?',
+        context.l10n.logout_confirm,
         textAlign: TextAlign.center,
         style: TextStyle(
           color: ThemeBloc.theme(themeIndex).textTheme.bodyLarge?.color,
@@ -52,7 +53,7 @@ class LogOutAlert extends StatelessWidget {
             Navigator.of(context, rootNavigator: true).pop();
           },
           child: Text(
-            'No',
+            context.l10n.button_no,
             style: TextStyle(
               color: Colors.white,
             ),
@@ -74,7 +75,7 @@ class LogOutAlert extends StatelessWidget {
           ),
           onPressed: logoutOnClick,
           child: Text(
-            'Yes',
+            context.l10n.button_yes,
             style: TextStyle(
               color: Colors.white,
             ),

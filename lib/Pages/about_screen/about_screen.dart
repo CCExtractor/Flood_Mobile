@@ -1,3 +1,4 @@
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -65,7 +66,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Flood is a monitoring service for various torrent clients. It\'s a Node.js service that communicates with your favorite torrent client and serves a decent mobile UI for administration. This project is based on the original Flood project.',
+                    context.l10n.app_info,
                     key: Key('App info text key'),
                     style: TextStyle(
                         color: ThemeBloc.theme(widget.themeIndex)
@@ -78,7 +79,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     height: 20,
                   ),
                   Text(
-                    'Feedback',
+                    context.l10n.feedback_heading,
                     style: TextStyle(
                         color: ThemeBloc.theme(widget.themeIndex)
                             .textTheme
@@ -91,7 +92,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     height: 10,
                   ),
                   Text(
-                    'If you have a specific issue or bug, please file a GitHub issue. Please join the Flood Discord server to discuss feature requests and implementation details.',
+                    context.l10n.feedback_text,
                     key: Key('Feedback text key'),
                     style: TextStyle(
                         color: ThemeBloc.theme(widget.themeIndex)
@@ -104,7 +105,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     height: 20,
                   ),
                   Text(
-                    'More Information',
+                    context.l10n.more_info_text,
                     style: TextStyle(
                         color: ThemeBloc.theme(widget.themeIndex)
                             .textTheme
@@ -117,7 +118,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     height: 10,
                   ),
                   Text(
-                    'Check out the Wiki for more information.',
+                    context.l10n.check_out_info,
                     key: Key('More info text key'),
                     style: TextStyle(
                         color: ThemeBloc.theme(widget.themeIndex)

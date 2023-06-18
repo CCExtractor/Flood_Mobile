@@ -5,6 +5,7 @@ import 'package:flood_mobile/Route/Arguments/video_stream_screen_arguments.dart'
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -82,12 +83,15 @@ class _VideoStreamScreenState extends State<VideoStreamScreen> {
                           .primaryColorDark,
                     ),
                     SizedBox(height: 20),
-                    Text('Loading',
-                        style: TextStyle(
-                            color: ThemeBloc.theme(widget.args.themeIndex)
-                                .textTheme
-                                .bodyLarge!
-                                .color)),
+                    Text(
+                      context.l10n.loading_text,
+                      style: TextStyle(
+                        color: ThemeBloc.theme(widget.args.themeIndex)
+                            .textTheme
+                            .bodyLarge!
+                            .color,
+                      ),
+                    ),
                   ],
                 ),
         ),

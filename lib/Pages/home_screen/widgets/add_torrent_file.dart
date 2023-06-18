@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,7 +49,7 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
             Padding(
               padding: const EdgeInsets.only(right: 20, left: 20, bottom: 5),
               child: Text(
-                "Selected Torrent File",
+                context.l10n.selected_torrent_file,
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
@@ -128,8 +129,8 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                               .bodyLarge
                               ?.color,
                         ),
-                        labelText: 'Destination',
-                        hintText: 'Destination',
+                        labelText: context.l10n.textfield_destination_torrent,
+                        hintText: context.l10n.textfield_destination_torrent,
                         labelStyle: TextStyle(
                             fontFamily: 'Montserrat',
                             color: ThemeBloc.theme(widget.themeIndex)
@@ -153,7 +154,7 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       title: Text(
-                        'Use as Base Path',
+                        context.l10n.torrents_destination_base_path,
                         style: TextStyle(fontSize: 14),
                       ),
                       value: useAdBasePath,
@@ -172,7 +173,7 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       title: Text(
-                        'Sequential Download',
+                        context.l10n.torrents_destination_sequential,
                         style: TextStyle(fontSize: 14),
                       ),
                       value: sequentialDownload,
@@ -191,7 +192,7 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       title: Text(
-                        'Completed',
+                        context.l10n.torrents_destination_completed,
                         style: TextStyle(fontSize: 14),
                       ),
                       value: completed,
@@ -231,7 +232,7 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                         ),
                         child: Center(
                           child: Text(
-                            "Add Torrent",
+                            context.l10n.add_torrent_button,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,

@@ -7,6 +7,7 @@ import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dar
 import 'package:flood_mobile/Pages/home_screen/widgets/add_torrent_file.dart';
 import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -39,6 +40,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = context.l10n;
     return SpeedDial(
       buttonSize: Size(60, 60),
       backgroundColor: ThemeBloc.theme(widget.themeIndex).primaryColorDark,
@@ -61,7 +63,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
           backgroundColor:
               ThemeBloc.theme(widget.themeIndex).textTheme.bodyLarge?.color,
           foregroundColor: ThemeBloc.theme(widget.themeIndex).primaryColorDark,
-          label: 'Torrent File',
+          label: l10n.floating_torrent_file,
           labelBackgroundColor: Colors.transparent,
           labelShadow: [
             BoxShadow(
@@ -130,7 +132,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
           backgroundColor:
               ThemeBloc.theme(widget.themeIndex).textTheme.bodyLarge?.color,
           foregroundColor: ThemeBloc.theme(widget.themeIndex).primaryColorDark,
-          label: 'Magnet Link',
+          label: l10n.floating_torrent_magnet,
           labelBackgroundColor: Colors.transparent,
           labelShadow: [
             BoxShadow(
@@ -177,7 +179,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                 padding: const EdgeInsets.only(
                                     right: 20, left: 20, bottom: 10),
                                 child: Text(
-                                  "Selected Magnet Link",
+                                  l10n.selected_magnet_link,
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -226,9 +228,9 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                               });
                                             },
                                           ),
-                                          labelText: 'Torrent',
-                                          hintText:
-                                              'Torrent URL or Magnet Link',
+                                          labelText: l10n.torrent_text,
+                                          hintText: l10n
+                                              .torrent_magnet_link_textfield_hint,
                                           labelStyle: TextStyle(
                                             fontFamily: 'Montserrat',
                                             color: ThemeBloc.theme(
@@ -246,7 +248,8 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                           if (value == null ||
                                               (value.isEmpty &&
                                                   isMagnetSelected)) {
-                                            return 'Field cannot be empty';
+                                            return l10n
+                                                .torrent_magnet_link_textfield_validator;
                                           }
                                           return null;
                                         },
@@ -286,8 +289,10 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                 .bodyLarge
                                                 ?.color,
                                           ),
-                                          labelText: 'Destination',
-                                          hintText: 'Destination',
+                                          labelText: l10n
+                                              .textfield_destination_torrent,
+                                          hintText: l10n
+                                              .textfield_destination_torrent,
                                           labelStyle: TextStyle(
                                               fontFamily: 'Montserrat',
                                               color: ThemeBloc.theme(
@@ -319,7 +324,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                 BorderRadius.circular(8),
                                           ),
                                           title: Text(
-                                            'Use as Base Path',
+                                            l10n.torrents_destination_base_path,
                                             style: TextStyle(fontSize: 14),
                                           ),
                                           value: useAdBasePath,
@@ -345,7 +350,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                 BorderRadius.circular(8),
                                           ),
                                           title: Text(
-                                            'Sequential Download',
+                                            l10n.torrents_destination_sequential,
                                             style: TextStyle(fontSize: 14),
                                           ),
                                           value: sequentialDownload,
@@ -372,7 +377,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                                 BorderRadius.circular(8),
                                           ),
                                           title: Text(
-                                            'Completed',
+                                            l10n.torrents_destination_completed,
                                             style: TextStyle(fontSize: 14),
                                           ),
                                           value: completed,
@@ -410,8 +415,8 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                               final addTorrentSnackbar =
                                                   addFloodSnackBar(
                                                       SnackbarType.information,
-                                                      'Torrent added successfully',
-                                                      'Dismiss');
+                                                      l10n.add_torrent_snackbar,
+                                                      l10n.button_dismiss);
 
                                               ScaffoldMessenger.of(context)
                                                   .clearSnackBars();
@@ -432,7 +437,7 @@ class _BottomFloatingMenuButtonState extends State<BottomFloatingMenuButton>
                                             ),
                                             child: Center(
                                               child: Text(
-                                                "Add Torrent",
+                                                l10n.add_torrent_button,
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 16,

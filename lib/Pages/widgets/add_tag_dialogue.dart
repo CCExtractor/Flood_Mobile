@@ -5,6 +5,7 @@ import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -106,7 +107,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
           child: Column(
             children: [
               Text(
-                'Set Tags',
+                context.l10n.torrents_set_tags_heading,
                 key: Key('Set Tags Text'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -171,7 +172,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                                         : Colors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w400),
-                                hintText: "Enter Tags",
+                                hintText: context.l10n.torrents_enter_tags_hint,
                               ),
                               style: TextStyle(
                                   color: ThemeBloc.theme(widget.themeIndex)
@@ -186,7 +187,8 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                               maxLines: 1,
                               validator: (String? newValue) {
                                 if (newValue == null || newValue.isEmpty)
-                                  return 'This field cannot be empty!';
+                                  return context.l10n
+                                      .torrents_set_tags_textfield_validator;
                                 return null;
                               },
                               inputFormatters: [
@@ -269,7 +271,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
             Navigator.of(context, rootNavigator: true).pop();
           },
           child: Text(
-            'Cancle',
+            context.l10n.button_cancel,
             style: TextStyle(
               color: Colors.white,
             ),
@@ -303,15 +305,15 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                     context);
                 final addTorrentSnackbar = addFloodSnackBar(
                     SnackbarType.information,
-                    'Tags added successfully',
-                    'Dismiss');
+                    context.l10n.torrents_set_tags_snackbar,
+                    context.l10n.button_dismiss);
                 Navigator.of(context, rootNavigator: true).pop();
                 ScaffoldMessenger.of(context).showSnackBar(addTorrentSnackbar);
               }
             });
           }),
           child: Text(
-            'Set Tags',
+            context.l10n.torrents_set_tags_heading,
             style: TextStyle(
               color: Colors.white,
             ),

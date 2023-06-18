@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,6 +17,7 @@ class FilterByStatus extends StatefulWidget {
 class _FilterByStatusState extends State<FilterByStatus> {
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = context.l10n;
     return BlocBuilder<FilterTorrentBloc, FilterTorrentState>(
       builder: (context, state) {
         final filterModel = BlocProvider.of<FilterTorrentBloc>(context);
@@ -33,7 +35,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Text("Filter by status",
+                Text(l10n.filter_status_title,
                     style: TextStyle(
                         color: ThemeBloc.theme(widget.themeIndex)
                             .textTheme
@@ -57,7 +59,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
                   title: Row(
                     children: [
-                      Text('All',
+                      Text(context.l10n.filter_all,
                           style: TextStyle(
                               color: state.filterStatus
                                           .toString()
@@ -126,7 +128,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
                   title: Row(
                     children: [
-                      Text('Downloading',
+                      Text(l10n.filter_status_downloading,
                           style: TextStyle(
                               color: state.filterStatus
                                           .toString()
@@ -195,7 +197,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
                   title: Row(
                     children: [
-                      Text('Seeding',
+                      Text(l10n.filter_status_seeding,
                           style: TextStyle(
                               color: state.filterStatus
                                           .toString()
@@ -262,7 +264,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
                   title: Row(
                     children: [
-                      Text('Complete',
+                      Text(l10n.filter_status_completed,
                           style: TextStyle(
                               color: state.filterStatus
                                           .toString()
@@ -329,7 +331,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
                   title: Row(
                     children: [
-                      Text('Stopped',
+                      Text(l10n.filter_status_stopped,
                           style: TextStyle(
                               color: state.filterStatus
                                           .toString()
@@ -396,7 +398,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
                   title: Row(
                     children: [
-                      Text('Active',
+                      Text(l10n.filter_status_active,
                           style: TextStyle(
                               color: state.filterStatus
                                           .toString()
@@ -463,7 +465,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
                   title: Row(
                     children: [
-                      Text('Inactive',
+                      Text(l10n.filter_status_inactive,
                           style: TextStyle(
                               color: state.filterStatus
                                           .toString()
@@ -530,7 +532,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
                   title: Row(
                     children: [
-                      Text('Error',
+                      Text(l10n.filter_status_error,
                           style: TextStyle(
                               color: state.filterStatus
                                           .toString()
@@ -583,7 +585,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                 SizedBox(
                   height: 20,
                 ),
-                Text("Filter by tags",
+                Text(l10n.filter_tag_title,
                     style: TextStyle(
                         color: ThemeBloc.theme(widget.themeIndex)
                             .textTheme
@@ -596,7 +598,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
                   title: Row(
                     children: [
-                      Text('All',
+                      Text(l10n.filter_all,
                           style: TextStyle(
                               color: state.filterStatus
                                           .toString()
@@ -749,7 +751,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                               VisualDensity(horizontal: -4, vertical: -2),
                           title: Row(
                             children: [
-                              Text('Untagged',
+                              Text(l10n.filter_untagged,
                                   style: TextStyle(
                                       color: state.tagSelected
                                                   .toString()
@@ -818,7 +820,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                 SizedBox(
                   height: 20,
                 ),
-                Text("Filter by trackers",
+                Text(l10n.filter_tracker_title,
                     style: TextStyle(
                         color: ThemeBloc.theme(widget.themeIndex)
                             .textTheme
@@ -831,7 +833,7 @@ class _FilterByStatusState extends State<FilterByStatus> {
                   visualDensity: VisualDensity(horizontal: -4, vertical: -2),
                   title: Row(
                     children: [
-                      Text('All',
+                      Text(l10n.filter_all,
                           style: TextStyle(
                               color: state.filterStatus
                                           .toString()
