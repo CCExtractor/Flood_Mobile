@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
 import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flood_mobile/Model/graph_model.dart';
@@ -14,6 +15,7 @@ import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart'
 import 'package:flood_mobile/Blocs/graph_bloc/graph_bloc.dart';
 import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -200,8 +202,12 @@ void main() {
             value: MultipleSelectTorrentBloc()),
         BlocProvider<ApiBloc>.value(value: ApiBloc()),
         BlocProvider<SpeedGraphBloc>.value(value: mockSpeedGraphBloc),
+        BlocProvider<LanguageBloc>.value(value: LanguageBloc()),
       ],
       child: MaterialApp(
+        locale: Locale('en'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Material(
           child: TorrentScreen(themeIndex: 2),
         ),
