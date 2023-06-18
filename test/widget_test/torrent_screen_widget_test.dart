@@ -242,6 +242,7 @@ void main() {
         BlocProvider<SpeedGraphBloc>.value(value: mockSpeedGraphBloc),
         BlocProvider<LanguageBloc>.value(value: LanguageBloc()),
         BlocProvider<UserInterfaceBloc>.value(value: mockUserInterfaceBloc),
+        BlocProvider<LanguageBloc>.value(value: LanguageBloc()),
       ],
       child: MaterialApp(
         locale: Locale('en'),
