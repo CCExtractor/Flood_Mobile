@@ -2,6 +2,7 @@ import "dart:io";
 import "package:bloc_test/bloc_test.dart";
 import "package:flood_mobile/Blocs/language_bloc/language_bloc.dart";
 import "package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart";
+import "package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart";
 import "package:flood_mobile/Model/notification_model.dart";
 import "package:flood_mobile/Model/single_feed_and_response_model.dart";
 import "package:flood_mobile/Model/single_rule_model.dart";
@@ -159,6 +160,7 @@ void main() {
               value: MultipleSelectTorrentBloc()),
           BlocProvider<SpeedGraphBloc>.value(value: SpeedGraphBloc()),
           BlocProvider<ApiBloc>.value(value: ApiBloc()),
+          BlocProvider<UserInterfaceBloc>.value(value: UserInterfaceBloc()),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
