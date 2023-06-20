@@ -2,7 +2,6 @@ import 'package:flood_mobile/Api/event_handler_api.dart';
 import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
-import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
@@ -10,25 +9,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddTagDialogue extends StatefulWidget {
+class AddTrackersDialogue extends StatefulWidget {
   final List<TorrentModel> torrents;
+  final List<String> trackers;
   final int themeIndex;
-  const AddTagDialogue(
-      {Key? key, required this.torrents, required this.themeIndex})
+  const AddTrackersDialogue(
+      {Key? key,
+      required this.torrents,
+      required this.themeIndex,
+      required this.trackers})
       : super(key: key);
   @override
-  State<AddTagDialogue> createState() => _AddTagDialogueState();
+  State<AddTrackersDialogue> createState() => _AddTrackersDialogueState();
 }
 
-class _AddTagDialogueState extends State<AddTagDialogue>
+class _AddTrackersDialogueState extends State<AddTrackersDialogue>
     with TickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _showdropdown = false;
   late TextEditingController _textController;
   int _itemsVisibleInDropdown = 1;
-  List<String> _inputTagList = [];
-  Map<String, bool> _existingTags = {};
-  Map<String, bool> _newEnterdTags = {};
+  List<String> _inputTrackersList = [];
+  Map<String, bool> _existingTrackers = {};
+  Map<String, bool> _newEnterdTrackers = {};
   late Animation _animation;
   late AnimationController _animationController;
   final ScrollController _scrollController = ScrollController();
@@ -36,30 +39,23 @@ class _AddTagDialogueState extends State<AddTagDialogue>
   @override
   void initState() {
     super.initState();
-    _textController =
-        TextEditingController(text: widget.torrents[0].tags.join(","));
+    _textController = TextEditingController(text: widget.trackers.join(","));
     _textController.addListener(_handleControllerChanged);
-    _inputTagList = _textController.text.split(',');
+    _inputTrackersList = _textController.text.split(',');
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _existingTags = Map.fromIterable(
-        BlocProvider.of<FilterTorrentBloc>(context, listen: false)
-            .state
-            .mapTags
-            .keys
-            .toList(),
-        key: (e) => e,
-        value: (e) => false);
+    _existingTrackers =
+        Map.fromIterable(widget.trackers, key: (e) => e, value: (e) => false);
 
-    _existingTags.forEach((key, value) {
-      if (_inputTagList.contains(key)) {
-        _existingTags[key] = true;
+    _existingTrackers.forEach((key, value) {
+      if (_inputTrackersList.contains(key)) {
+        _existingTrackers[key] = true;
       }
     });
-    _itemsVisibleInDropdown = _existingTags.length >= 4 ? 4 : 3;
+    _itemsVisibleInDropdown = _existingTrackers.length >= 4 ? 4 : 3;
 
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 200));
@@ -85,7 +81,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
     return AlertDialog(
       insetPadding: EdgeInsets.zero,
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      key: Key('Add Tag AlertDialog'),
+      key: Key('Add Trackers AlertDialog'),
       elevation: 0,
       backgroundColor: themeBloc.isDarkMode
           ? ThemeBloc.theme(widget.themeIndex).primaryColorLight
@@ -107,8 +103,8 @@ class _AddTagDialogueState extends State<AddTagDialogue>
           child: Column(
             children: [
               Text(
-                context.l10n.torrents_set_tags_heading,
-                key: Key('Set Tags Text'),
+                context.l10n.torrents_set_trackers_heading,
+                key: Key('Set Trackers Text'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: ThemeBloc.theme(widget.themeIndex)
@@ -132,7 +128,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                         children: <Widget>[
                           Expanded(
                             child: TextFormField(
-                              key: Key('Tags Text Form Field'),
+                              key: Key('Trackers Text Form Field'),
                               controller: _textController,
                               decoration: InputDecoration(
                                 fillColor: themeBloc.isDarkMode
@@ -172,7 +168,8 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                                         : Colors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w400),
-                                hintText: context.l10n.torrents_enter_tags_hint,
+                                hintText:
+                                    context.l10n.torrents_enter_trackers_hint,
                               ),
                               style: TextStyle(
                                   color: ThemeBloc.theme(widget.themeIndex)
@@ -200,7 +197,7 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                       ),
                     ),
                     Container(
-                      key: Key('Tags List Container'),
+                      key: Key('Trackers List Container'),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: themeBloc.isDarkMode
@@ -219,22 +216,22 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                               padding: EdgeInsets.symmetric(horizontal: 8),
                               separatorBuilder: (context, index) =>
                                   Divider(color: Colors.grey),
-                              itemCount:
-                                  _existingTags.length + _newEnterdTags.length,
+                              itemCount: _existingTrackers.length +
+                                  _newEnterdTrackers.length,
                               itemBuilder: (context, index) {
-                                if (index < _existingTags.length) {
+                                if (index < _existingTrackers.length) {
                                   return _getCheckBoxListTile(
-                                      _existingTags.keys.elementAt(index),
+                                      _existingTrackers.keys.elementAt(index),
                                       index,
                                       themeBloc,
-                                      _existingTags);
+                                      _existingTrackers);
                                 } else {
-                                  index -= _existingTags.length;
+                                  index -= _existingTrackers.length;
                                   return _getCheckBoxListTile(
-                                      _newEnterdTags.keys.elementAt(index),
+                                      _newEnterdTrackers.keys.elementAt(index),
                                       index,
                                       themeBloc,
-                                      _newEnterdTags);
+                                      _newEnterdTrackers);
                                 }
                               },
                             ),
@@ -295,25 +292,26 @@ class _AddTagDialogueState extends State<AddTagDialogue>
             setState(() {
               if (_formKey.currentState!.validate()) {
                 widget.torrents.forEach((element) {
-                  TorrentApi.setTags(
-                      tagList: _inputTagList.toList(),
-                      hashes: element.hash,
-                      context: context);
+                  TorrentApi.setTrackers(
+                    trackersList: _inputTrackersList,
+                    hashes: element.hash,
+                    context: context,
+                  );
                 });
                 EventHandlerApi.filterDataRephrasor(
                     BlocProvider.of<HomeScreenBloc>(context).state.torrentList,
                     context);
-                final addTagsSnackbar = addFloodSnackBar(
+                final addTorrentSnackbar = addFloodSnackBar(
                     SnackbarType.information,
-                    context.l10n.torrents_set_tags_snackbar,
+                    context.l10n.torrents_set_trackers_snackbar,
                     context.l10n.button_dismiss);
                 Navigator.of(context, rootNavigator: true).pop();
-                ScaffoldMessenger.of(context).showSnackBar(addTagsSnackbar);
+                ScaffoldMessenger.of(context).showSnackBar(addTorrentSnackbar);
               }
             });
           }),
           child: Text(
-            context.l10n.torrents_set_tags_heading,
+            context.l10n.torrents_set_trackers_heading,
             style: TextStyle(
               color: Colors.white,
             ),
@@ -324,31 +322,32 @@ class _AddTagDialogueState extends State<AddTagDialogue>
   }
 
   CheckboxListTile _getCheckBoxListTile(
-      String text, int index, ThemeBloc themeBloc, Map<String, bool> tags) {
+      String text, int index, ThemeBloc themeBloc, Map<String, bool> trackers) {
     return CheckboxListTile(
         dense: true,
         title: Text(
           text,
           style: TextStyle(
-              color: tags.values.elementAt(index) ? Colors.blue : Colors.black,
+              color:
+                  trackers.values.elementAt(index) ? Colors.blue : Colors.black,
               fontSize: 16),
         ),
         side: BorderSide.none,
         activeColor: themeBloc.isDarkMode ? Colors.white : Colors.black12,
         checkColor: Colors.blue,
-        value: tags.values.elementAt(index),
-        selected: tags.values.elementAt(index),
+        value: trackers.values.elementAt(index),
+        selected: trackers.values.elementAt(index),
         visualDensity: const VisualDensity(horizontal: -4.0, vertical: -4.0),
         onChanged: (val) {
           setState(() {
-            tags.update(text, (value) => !value);
-            if (tags.values.elementAt(index) == false) {
-              _inputTagList.removeWhere((element) => element == text);
+            trackers.update(text, (value) => !value);
+            if (trackers.values.elementAt(index) == false) {
+              _inputTrackersList.removeWhere((element) => element == text);
             } else {
-              _inputTagList.add(text);
+              _inputTrackersList.add(text);
             }
-            _inputTagList.removeWhere((element) => element == "");
-            _textController.text = _inputTagList.join(',');
+            _inputTrackersList.removeWhere((element) => element == "");
+            _textController.text = _inputTrackersList.join(',');
             _textController.selection = TextSelection.fromPosition(
                 TextPosition(offset: _textController.text.length));
           });
@@ -358,14 +357,14 @@ class _AddTagDialogueState extends State<AddTagDialogue>
   void reset() {
     setState(() {
       _textController.text = '';
-      _existingTags.updateAll((key, value) => value = false);
-      _inputTagList = [];
-      _newEnterdTags = {};
+      _existingTrackers.updateAll((key, value) => value = false);
+      _inputTrackersList = [];
+      _newEnterdTrackers = {};
     });
   }
 
   void _handleControllerChanged() {
-    _newEnterdTags = {};
+    _newEnterdTrackers = {};
     if (_textController.text.length > 0) {
       //avoid 2 comma continuously
       if (_textController.text.contains(",,")) {
@@ -373,31 +372,26 @@ class _AddTagDialogueState extends State<AddTagDialogue>
         _textController.selection = TextSelection.fromPosition(
             TextPosition(offset: _textController.text.length));
       }
-      _inputTagList = _textController.text.split(',');
-      _inputTagList.remove("");
-
-      //if user press Untagged
-      if (_inputTagList.last == 'Untagged') {
-        reset();
-      }
+      _inputTrackersList = _textController.text.split(',');
+      _inputTrackersList.remove("");
 
       //change color of CheckBoxListTile when input tag match existing tags
-      _existingTags.forEach((key, value) {
-        if (_inputTagList.contains(key)) {
+      _existingTrackers.forEach((key, value) {
+        if (_inputTrackersList.contains(key)) {
           setState(() {
-            _existingTags[key] = true;
+            _existingTrackers[key] = true;
           });
         } else {
           setState(() {
-            _existingTags[key] = false;
+            _existingTrackers[key] = false;
           });
         }
       });
 
       //Store new entered tag
-      _inputTagList.forEach((element) {
-        if (!_existingTags.containsKey(element)) {
-          _newEnterdTags.addAll({element: true});
+      _inputTrackersList.forEach((element) {
+        if (!_existingTrackers.containsKey(element)) {
+          _newEnterdTrackers.addAll({element: true});
           //Scroll bottom of listview
           _scrollController.animateTo(
             _scrollController.position.maxScrollExtent,
