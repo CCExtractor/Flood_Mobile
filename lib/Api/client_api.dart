@@ -126,7 +126,7 @@ class ClientApi {
     try {
       String url =
           BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
-              ApiEndpoints.getClientSettingsUrl;
+              ApiEndpoints.checkClientConeection;
       print('---CHECK CLIENT ONLINE---');
       print(url);
       Response response;
@@ -141,10 +141,11 @@ class ClientApi {
         url,
       );
       if (response.statusCode == 200) {
-        return true;
-      } else {
-        return false;
+        if (response.data['isConnected'] == true) {
+          return true;
+        }
       }
+      return false;
     } catch (error) {
       print('--ERROR IN CHECK CLIENT ONLINE--');
       print(error.toString());
