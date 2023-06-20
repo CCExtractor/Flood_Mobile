@@ -1,7 +1,7 @@
 import 'package:duration/duration.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Api/torrent_api.dart';
-import 'package:flood_mobile/Pages/torrent_screen/widgets/focused_menu_items_lis.dart';
+import 'package:flood_mobile/Pages/torrent_screen/widgets/focused_menu_items_list.dart';
 import 'package:flood_mobile/Pages/torrent_screen/widgets/torrent_description.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Pages/widgets/delete_torrent_sheet.dart';

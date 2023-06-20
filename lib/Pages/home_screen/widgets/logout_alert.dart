@@ -5,7 +5,7 @@ import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 class LogOutAlert extends StatelessWidget {
   final int themeIndex;
   const LogOutAlert(
-      {Key? key, @required this.logoutOnClick, required this.themeIndex})
+      {Key? key, required this.logoutOnClick, required this.themeIndex})
       : assert(logoutOnClick != null),
         super(key: key);
   final VoidCallback? logoutOnClick;
