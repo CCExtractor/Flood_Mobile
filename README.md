@@ -1,4 +1,4 @@
-# Flood Mobile App
+## Flood Mobile App
 
 ![Group 3](https://user-images.githubusercontent.com/52864956/118592164-24de8280-b7c3-11eb-95f3-f575fd75d356.png)
 
