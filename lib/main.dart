@@ -23,7 +23,7 @@ import 'Route/route_generator.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterDownloader.initialize(
-      debug: true // optional: set false to disable printing logs to console
+      debug: false // optional: set false to disable printing logs to console
       );
   await AwesomeNotifications().initialize(
     'resource://drawable/ic_launcher',
