@@ -35,7 +35,7 @@ class SSEBloc extends Bloc<SSEEvent, SSEState> {
             "Cookie": BlocProvider.of<UserDetailBloc>(event.context).token,
             "Accept": "text/event-stream",
             "Cache-Control": "no-cache",
-          }).listen((listenEvent) {
+          }).listen((listenEvent) async {
         if (listenEvent.id != '' &&
             listenEvent.data != '' &&
             listenEvent.event != '') {
@@ -62,6 +62,7 @@ class SSEBloc extends Bloc<SSEEvent, SSEState> {
             case Events.TORRENT_LIST_DIFF_CHANGE:
               EventHandlerApi.updateFullTorrentList(
                   model: listenEvent, context: event.context);
+              await Future.delayed(Duration.zero);
               for (int i = 0;
                   i <
                       BlocProvider.of<HomeScreenBloc>(event.context,
