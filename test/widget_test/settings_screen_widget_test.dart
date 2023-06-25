@@ -248,9 +248,9 @@ void main() {
     expect(find.byKey(Key('Download Speed Dropdown')), findsOneWidget);
     expect(find.byKey(Key('Upload Speed Dropdown')), findsOneWidget);
     expect(find.text('Download'), findsOneWidget);
-    expect(find.text('1 kB/s'), findsNWidgets(2));
+    expect(find.text('1 kB/s'), findsOneWidget);
     expect(find.text('Upload'), findsOneWidget);
-    expect(find.text('Unlimited'), findsNWidgets(2));
+    expect(find.text('Unlimited'), findsOneWidget);
     expect(find.widgetWithText(ElevatedButton, 'Set'), findsOneWidget);
   });
 
@@ -289,8 +289,8 @@ void main() {
     expect(find.text('rTorrent'), findsOneWidget);
     await tester.tap(find.text('rTorrent'));
     await tester.pumpAndSettle();
-    expect(find.text('qBittorrent'), findsNWidgets(2));
-    expect(find.text('Transmission'), findsNWidgets(2));
+    expect(find.text('qBittorrent'), findsOneWidget);
+    expect(find.text('Transmission'), findsOneWidget);
     await tester.tap(find.text('rTorrent').last);
     await tester.pumpAndSettle();
     expect(find.text('Socket'), findsOneWidget);
@@ -309,7 +309,7 @@ void main() {
     // For client qBittorrent select
     await tester.tap(find.text('rTorrent'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('qBittorrent').last);
+    await tester.tap(find.text('qBittorrent'));
     await tester.pumpAndSettle();
     expect(find.text('Username'), findsNWidgets(3));
     expect(find.text('Client Username'), findsOneWidget);
@@ -319,9 +319,9 @@ void main() {
     expect(find.text('eg. http://localhost:8080'), findsOneWidget);
 
     // For client Transmission select
-    await tester.tap(find.text('rTorrent'), warnIfMissed: false);
+    await tester.tap(find.text('qBittorrent'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Transmission').last);
+    await tester.tap(find.text('Transmission'));
     await tester.pumpAndSettle();
     expect(find.text('Username'), findsNWidgets(3));
     expect(find.text('Client Username'), findsOneWidget);

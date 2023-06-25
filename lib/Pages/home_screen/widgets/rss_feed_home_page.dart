@@ -1121,8 +1121,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                       mainAxisSize:
                                                                           MainAxisSize
                                                                               .min,
-                                                                      children: <
-                                                                          Widget>[
+                                                                      children: <Widget>[
                                                                         TextFormField(
                                                                           controller:
                                                                               directoryController,

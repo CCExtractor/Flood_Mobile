@@ -122,7 +122,7 @@ void main() {
             findsNothing);
         expect(find.byKey(Key("Feeds are fetched")), findsOneWidget);
         expect(find.byKey(Key("Feed displayed")), findsNWidgets(2));
-        expect(find.text("test label"), findsNWidgets(4));
+        expect(find.text("test label"), findsNWidgets(2));
         expect(find.text("0 matches"), findsNWidgets(2));
         expect(find.text("0 Minutes"), findsNWidgets(2));
         expect(find.text("test url"), findsNWidgets(2));
