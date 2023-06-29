@@ -1464,6 +1464,9 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                 physics: ClampingScrollPhysics(),
                                 itemCount: state.rssRulesList.length,
                                 itemBuilder: (context, index) {
+                                  String tagLable = "${l10n.feeds_tags}: " +
+                                      state.rssRulesList[index].tags[0]
+                                          .toString();
                                   return Column(
                                     children: [
                                       ListTile(
@@ -1518,12 +1521,12 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                           const EdgeInsets.all(
                                                               5.0),
                                                       child: Text(
-                                                        "${l10n.feeds_tags}: " +
-                                                            state
-                                                                .rssRulesList[
-                                                                    index]
-                                                                .tags[0]
-                                                                .toString(),
+                                                        tagLable.length <= 20
+                                                            ? tagLable
+                                                            : tagLable
+                                                                    .substring(
+                                                                        0, 20) +
+                                                                "..",
                                                         style: TextStyle(
                                                             fontSize: 12),
                                                       ),

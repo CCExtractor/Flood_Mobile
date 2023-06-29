@@ -84,8 +84,8 @@ class _AddAutoTorrentState extends State<AddAutoTorrent> {
                           Padding(
                             padding: const EdgeInsets.only(left: 5),
                             child: Text(
-                              fileSelectedName.length > 25
-                                  ? fileSelectedName.substring(0, 25) +
+                              fileSelectedName.length > 24
+                                  ? fileSelectedName.substring(0, 24) +
                                       '.torrent'
                                   : fileSelectedName + '.torrent',
                               style: TextStyle(
