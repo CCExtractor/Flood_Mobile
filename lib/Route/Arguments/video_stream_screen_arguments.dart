@@ -1,8 +1,8 @@
 class VideoStreamScreenArguments {
   String hash;
   String index;
-  final int myIndex;
+  final int themeIndex;
 
   VideoStreamScreenArguments(
-      {required this.hash, required this.index, required this.myIndex});
+      {required this.hash, required this.index, required this.themeIndex});
 }

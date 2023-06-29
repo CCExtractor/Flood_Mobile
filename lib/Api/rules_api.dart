@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flood_mobile/Constants/api_endpoints.dart';
+import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
+import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
-
-import '../Provider/api_provider.dart';
-import '../Provider/user_detail_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RulesApi {
   static Future<void> addRules({
@@ -23,8 +23,9 @@ class RulesApi {
     required int count,
   }) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.addRules;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.addRules;
       print('---ADD RSS RULES---');
       print(url);
       Response response;
@@ -34,7 +35,7 @@ class RulesApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
       mp['type'] = type;
       mp['label'] = label;
@@ -54,10 +55,10 @@ class RulesApi {
       );
       if (response.statusCode == 200) {
         print('--RULES ADDED--');
-      } else {}
-    } catch (e) {
+      }
+    } catch (error) {
       print('--ERROR IN ADDING RULES--');
-      print(e.toString());
+      print(error.toString());
     }
   }
 }

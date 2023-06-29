@@ -1,14 +1,13 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
+import 'package:flood_mobile/Constants/api_endpoints.dart';
 import 'package:flood_mobile/Model/register_user_model.dart';
-import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Model/current_user_detail_model.dart';
+import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
+import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../Provider/api_provider.dart';
 
 class AuthApi {
   static Future<bool> loginUser(
@@ -16,8 +15,8 @@ class AuthApi {
       required String password,
       required BuildContext context}) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.authenticateUrl;
+      String url = BlocProvider.of<ApiBloc>(context).state.baseUrl +
+          ApiEndpoints.authenticateUrl;
       print('---LOGIN USER---');
       print(url);
       Response response;
@@ -46,17 +45,17 @@ class AuthApi {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setString('floodToken', token);
           await prefs.setString('floodUsername', username);
-          Provider.of<UserDetailProvider>(context, listen: false)
-              .setUserDetails(token, username);
+          BlocProvider.of<UserDetailBloc>(context, listen: false)
+              .add(SetUserDetailsEvent(token: token, username: username));
           return true;
         }
         return false;
       } else {
         return false;
       }
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+    } catch (error) {
+      print('--ERROR IN LOGIN USER--');
+      print(error.toString());
       return false;
     }
   }
@@ -66,8 +65,9 @@ class AuthApi {
     required BuildContext context,
   }) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.registerUser;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.registerUser;
       print('---REGISTER USER---');
       print(url);
       Response response;
@@ -77,7 +77,7 @@ class AuthApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = model.toJson();
       String rawBody = json.encode(mp);
       print(rawBody);
@@ -86,17 +86,18 @@ class AuthApi {
       if (response.statusCode == 200) {
         print(response);
         getUsersList(context);
-      } else {}
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+      }
+    } catch (error) {
+      print('--ERROR IN REGISTER USER--');
+      print(error.toString());
     }
   }
 
   static getUsersList(BuildContext context) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.getUsersList;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.getUsersList;
       print('---GET USERS LIST---');
       print(url);
       Response response;
@@ -106,7 +107,7 @@ class AuthApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       response = await dio.get(
         url,
       );
@@ -115,23 +116,24 @@ class AuthApi {
         for (final user in response.data) {
           usersList.add(CurrentUserDetailModel.fromJson(user));
         }
-        Provider.of<UserDetailProvider>(context, listen: false)
-            .setUsersList(usersList);
+        BlocProvider.of<UserDetailBloc>(context, listen: false)
+            .add(SetUsersListEvent(usersList: usersList));
         print('---USERS LIST---');
         print(response);
-      } else {}
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+      }
+    } catch (error) {
+      print('--ERROR IN GET USER LIST--');
+      print(error.toString());
     }
   }
 
   static deleteUser(BuildContext context, String username) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.deleteUser +
-          "/" +
-          username;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.deleteUser +
+              "/" +
+              username;
       print('---DELETE USER---');
       print(url);
       Response response;
@@ -141,7 +143,7 @@ class AuthApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       response = await dio.delete(
         url,
       );
@@ -150,10 +152,10 @@ class AuthApi {
         print('---USER DELETED---');
         // *Getting the users list again
         getUsersList(context);
-      } else {}
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+      }
+    } catch (error) {
+      print('--ERROR IN DELETE USER--');
+      print(error.toString());
     }
   }
 }

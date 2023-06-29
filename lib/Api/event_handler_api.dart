@@ -4,14 +4,14 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:duration/duration.dart';
 import 'package:flood_mobile/Model/download_rate_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
-import 'package:flood_mobile/Provider/home_provider.dart';
 import 'package:flood_mobile/Services/file_size_helper.dart';
+import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
+import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_client_sse/flutter_client_sse.dart';
 import 'package:json_patch/json_patch.dart';
-import 'package:provider/provider.dart';
-import '../Constants/notification_keys.dart';
-import '../Provider/filter_provider.dart';
+import 'package:flood_mobile/Constants/notification_keys.dart';
 
 String torrentLength = '0';
 
@@ -25,8 +25,8 @@ class EventHandlerApi {
     RateModel rateModel = RateModel.fromJson(data);
     String downSpeed = filesize(rateModel.downRate.toString());
     String upSpeed = filesize(rateModel.upRate.toString());
-    Provider.of<HomeProvider>(context, listen: false)
-        .setSpeed(upSpeed, downSpeed);
+    BlocProvider.of<HomeScreenBloc>(context, listen: false)
+        .add(SetSpeedEvent(up: upSpeed, down: downSpeed));
   }
 
   //Getting full list of torrents
@@ -37,22 +37,22 @@ class EventHandlerApi {
     Map<String, dynamic> data = json.decode(model.data ?? '');
     if (data.isNotEmpty) {
       //Storing the full list of torrent is string to use it through PATCH
-      Provider.of<HomeProvider>(context, listen: false)
-          .setTorrentListJson(data);
+      BlocProvider.of<HomeScreenBloc>(context, listen: false)
+          .add(SetTorrentListJsonEvent(newTorrentListJson: data));
       print('---SET FULL TORRENT LIST---');
-      List<TorrentModel> torrentList = <TorrentModel>[];
+      List<TorrentModel> newTorrentList = <TorrentModel>[];
       for (var hash in data.keys) {
         try {
           TorrentModel torrentModel = TorrentModel.fromJson(data[hash]);
-          torrentList.add(torrentModel);
-        } catch (e) {
-          print(e.toString());
+          newTorrentList.add(torrentModel);
+        } catch (error) {
+          print(error.toString());
         }
       }
       //Setting the full list of torrent
-      Provider.of<HomeProvider>(context, listen: false)
-          .setTorrentList(torrentList);
-      filterDataRephrasor(torrentList, context);
+      BlocProvider.of<HomeScreenBloc>(context, listen: false)
+          .add(SetTorrentListEvent(newTorrentList: newTorrentList));
+      filterDataRephrasor(newTorrentList, context);
     }
   }
 
@@ -65,8 +65,8 @@ class EventHandlerApi {
     if (data.isNotEmpty) {
       print('---SET UNREAD NOTIFICATION COUNT---');
       //Set unread notification count
-      Provider.of<HomeProvider>(context, listen: false)
-          .setUnreadNotifications(data['unread']);
+      BlocProvider.of<HomeScreenBloc>(context, listen: false)
+          .add(SetUnreadNotificationsEvent(count: data['unread']));
     }
   }
 
@@ -76,7 +76,9 @@ class EventHandlerApi {
     required BuildContext context,
   }) {
     Map<String, dynamic> oldTorrentList =
-        Provider.of<HomeProvider>(context, listen: false).torrentListJson;
+        BlocProvider.of<HomeScreenBloc>(context, listen: false)
+            .state
+            .torrentListJson;
 
     //Parsing the patch in list<map<String, dynamic> format
     List<Map<String, dynamic>> newTorrentMap = [];
@@ -86,20 +88,20 @@ class EventHandlerApi {
     }
 
     //Applying patch
-    final newTorrentList = JsonPatch.apply(
+    final newTorrentListJson = JsonPatch.apply(
       oldTorrentList,
       newTorrentMap,
       strict: true,
     );
-
     //Updating data in provider
-    Provider.of<HomeProvider>(context, listen: false)
-        .setTorrentListJson(newTorrentList);
+    BlocProvider.of<HomeScreenBloc>(context, listen: false)
+        .add(SetTorrentListJsonEvent(newTorrentListJson: newTorrentListJson));
     print('---UPDATE TORRENT LIST---');
     List<TorrentModel> torrentList = <TorrentModel>[];
-    for (var hash in newTorrentList.keys) {
+    for (var hash in newTorrentListJson.keys) {
       try {
-        TorrentModel torrentModel = TorrentModel.fromJson(newTorrentList[hash]);
+        TorrentModel torrentModel =
+            TorrentModel.fromJson(newTorrentListJson[hash]);
         torrentModel.tags = torrentModel.tags.toSet().toList();
         if (torrentModel.status.contains('stopped') &&
             torrentModel.status.contains('downloading')) {
@@ -107,8 +109,8 @@ class EventHandlerApi {
               .removeWhere((element) => element.contains('downloading'));
         }
         torrentList.add(torrentModel);
-      } catch (e) {
-        print(e.toString());
+      } catch (error) {
+        print(error.toString());
       }
     }
 
@@ -118,15 +120,16 @@ class EventHandlerApi {
     }
 
     //Setting the full list of torrent
-    Provider.of<HomeProvider>(context, listen: false)
-        .setTorrentList(torrentList);
+    BlocProvider.of<HomeScreenBloc>(context, listen: false)
+        .add(SetTorrentListEvent(newTorrentList: torrentList));
   }
 
   static Future<void> showNotification(int id, BuildContext context) async {
     late bool displayNotification;
     late bool isPaused;
     isPaused = true;
-    HomeProvider homeModel = Provider.of<HomeProvider>(context, listen: false);
+    HomeScreenState homeModel =
+        BlocProvider.of<HomeScreenBloc>(context, listen: false).state;
 
     // Skip finished torrents
     if (homeModel.torrentList[id].status.contains('complete')) {
@@ -188,7 +191,6 @@ class EventHandlerApi {
 
   static Future<void> showEventNotification(
       int id, BuildContext context) async {
-    HomeProvider homeModel = Provider.of<HomeProvider>(context, listen: false);
     AwesomeNotifications().createNotification(
         content: NotificationContent(
       id: id,
@@ -196,15 +198,18 @@ class EventHandlerApi {
       channelKey: NotificationConstants.PUSH_NOTIFICATION_CHANNEL_KEY,
       category: NotificationCategory.Event,
       notificationLayout: NotificationLayout.Default,
-      title: homeModel.torrentList[id].name,
+      title: BlocProvider.of<HomeScreenBloc>(context, listen: false)
+          .state
+          .torrentList[id]
+          .name,
       body: "Download Finished",
     ));
   }
 
   static Future<void> filterDataRephrasor(
       List<TorrentModel> torrentList, context) async {
-    FilterProvider filterProvider =
-        Provider.of<FilterProvider>(context, listen: false);
+    FilterTorrentBloc filterBloc =
+        BlocProvider.of<FilterTorrentBloc>(context, listen: false);
     var maptrackerURIs = {};
     var mapStatus = {};
     List<String> statusList = [];
@@ -223,13 +228,14 @@ class EventHandlerApi {
           });
         }
       }
-      filterProvider.setTrackersSizeList(trackersSizeList);
-    } catch (e) {
-      print(e);
+      filterBloc
+          .add(SetTrackersSizeListEvent(trackersSizeList: trackersSizeList));
+    } catch (error) {
+      print(error);
     }
     //make a map of trackerURIs and their corresponding status
     try {
-      filterProvider.trackersSizeList.forEach((element) {
+      filterBloc.state.trackersSizeList.forEach((element) {
         if (!maptrackerURIs.containsKey(element.keys.first)) {
           maptrackerURIs[element.keys.first] = [
             1,
@@ -245,9 +251,9 @@ class EventHandlerApi {
         }
       });
       maptrackerURIs = SplayTreeMap<String, dynamic>.from(maptrackerURIs);
-      filterProvider.setmaptrackerURIs(maptrackerURIs);
-    } catch (e) {
-      print(e);
+      filterBloc.add(SetMapTrackerURIsEvent(maptrackerURIs: maptrackerURIs));
+    } catch (error) {
+      print(error);
     }
 
     //For torrent tags
@@ -265,13 +271,13 @@ class EventHandlerApi {
           }
         }
       }
-      filterProvider.setTagsSizeList(tagsSizeList);
-    } catch (e) {
-      print(e);
+      filterBloc.add(SetTagsSizeListEvent(tagsSizeList: tagsSizeList));
+    } catch (error) {
+      print(error);
     }
     //make a map of tags and their corresponding status
     try {
-      filterProvider.tagsSizeList.forEach((element) {
+      filterBloc.state.tagsSizeList.forEach((element) {
         if (!mapTags.containsKey(element.keys.first)) {
           mapTags[element.keys.first] = [1, double.parse(element.values.first)];
         } else {
@@ -284,9 +290,9 @@ class EventHandlerApi {
         }
       });
       mapTags = SplayTreeMap<String, dynamic>.from(mapTags);
-      filterProvider.setmapTags(mapTags);
-    } catch (e) {
-      print(e);
+      filterBloc.add(SetMapTagsEvent(mapTags: mapTags));
+    } catch (error) {
+      print(error);
     }
 
     //For torrent status
@@ -296,9 +302,9 @@ class EventHandlerApi {
           statusList.add(torrentList[i].status[j].toString());
         }
       }
-      filterProvider.setstatusList(statusList);
-    } catch (e) {
-      print(e);
+      filterBloc.add(SetStatusListEvent(statusList: statusList));
+    } catch (error) {
+      print(error);
     }
 
     try {
@@ -309,7 +315,7 @@ class EventHandlerApi {
           mapStatus[element] += 1;
         }
       });
-      filterProvider.setmapStatus(mapStatus);
+      filterBloc.add(SetMapStatusEvent(mapStatus: mapStatus));
     } catch (error) {
       print(error);
     }

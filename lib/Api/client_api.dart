@@ -1,19 +1,20 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
+import 'package:flood_mobile/Constants/api_endpoints.dart';
+import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
-import 'package:flood_mobile/Provider/api_provider.dart';
-import 'package:flood_mobile/Provider/client_provider.dart';
-import 'package:flood_mobile/Provider/user_detail_provider.dart';
 import 'package:flood_mobile/Services/transfer_speed_manager.dart';
+import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
+import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ClientApi {
   static getClientSettings(BuildContext context) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.getClientSettingsUrl;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.getClientSettingsUrl;
       print('---GET CLIENT SETTINGS---');
       print(url);
       Response response;
@@ -23,21 +24,21 @@ class ClientApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       response = await dio.get(
         url,
       );
       if (response.statusCode == 200) {
         ClientSettingsModel clientSetting =
             ClientSettingsModel.fromJson(response.data);
-        Provider.of<ClientSettingsProvider>(context, listen: false)
-            .setClientSettings(clientSetting);
+        BlocProvider.of<ClientSettingsBloc>(context, listen: false)
+            .add(SetClientSettingsEvent(clientSettings: clientSetting));
         print('---CLIENT SETTINGS---');
         print(response);
-      } else {}
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+      }
+    } catch (error) {
+      print('--ERROR IN GET CLIENT SETTINGS--');
+      print(error.toString());
     }
   }
 
@@ -45,8 +46,9 @@ class ClientApi {
       {required BuildContext context,
       required ClientSettingsModel model}) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.setClientSettingsUrl;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.setClientSettingsUrl;
       print('---SET TORRENT SETTINGS---');
       print(url);
       Response response;
@@ -56,7 +58,7 @@ class ClientApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = model.toJson();
       String rawBody = json.encode(mp);
       print(rawBody);
@@ -72,9 +74,9 @@ class ClientApi {
       } else {
         print('Error');
       }
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+    } catch (error) {
+      print('--ERROR IN SET CLIENT SETTINGS--');
+      print(error.toString());
     }
   }
 
@@ -83,8 +85,9 @@ class ClientApi {
       required String downSpeed,
       required String upSpeed}) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.setClientSettingsUrl;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.setClientSettingsUrl;
       print('---SET SPEED LIMIT SETTINGS---');
       print(url);
       Response response;
@@ -94,7 +97,7 @@ class ClientApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
       mp['throttleGlobalDownSpeed'] =
           TransferSpeedManager.speedToValMap[downSpeed];
@@ -113,16 +116,17 @@ class ClientApi {
       } else {
         print('Error');
       }
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+    } catch (error) {
+      print('--ERROR IN SPEED LIMIT CHANGED--');
+      print(error.toString());
     }
   }
 
   static Future<bool> checkClientOnline(BuildContext context) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.getClientSettingsUrl;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.getClientSettingsUrl;
       print('---CHECK CLIENT ONLINE---');
       print(url);
       Response response;
@@ -132,7 +136,7 @@ class ClientApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       response = await dio.get(
         url,
       );
@@ -141,9 +145,9 @@ class ClientApi {
       } else {
         return false;
       }
-    } catch (e) {
-      print('--ERROR--');
-      print(e.toString());
+    } catch (error) {
+      print('--ERROR IN CHECK CLIENT ONLINE--');
+      print(error.toString());
       return false;
     }
   }

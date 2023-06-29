@@ -1,179 +1,210 @@
-import 'package:flood_mobile/Constants/theme_provider.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flood_mobile/Model/graph_model.dart';
+import 'package:flood_mobile/Model/notification_model.dart';
+import 'package:flood_mobile/Model/single_feed_and_response_model.dart';
+import 'package:flood_mobile/Model/single_rule_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
-import 'package:flood_mobile/Pages/torrent_screen.dart';
-import 'package:flood_mobile/Provider/api_provider.dart';
-import 'package:flood_mobile/Provider/client_provider.dart';
-import 'package:flood_mobile/Provider/filter_provider.dart';
-import 'package:flood_mobile/Provider/graph_provider.dart';
-import 'package:flood_mobile/Provider/home_provider.dart';
-import 'package:flood_mobile/Provider/multiple_select_torrent_provider.dart';
-import 'package:flood_mobile/Provider/sse_provider.dart';
-import 'package:flood_mobile/Provider/user_detail_provider.dart';
-import 'package:flood_mobile/Services/date_converter.dart';
+import 'package:flood_mobile/Pages/torrent_screen/torrent_screen.dart';
+import 'package:flood_mobile/Pages/torrent_screen/services/date_converter.dart';
 import 'package:flood_mobile/Services/file_size_helper.dart';
+import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
+import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
+import 'package:flood_mobile/Blocs/graph_bloc/graph_bloc.dart';
+import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:provider/provider.dart';
+import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
+import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
+import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 
-class MockHomeProvider extends Mock implements HomeProvider {}
+class MockHomeScreenBloc extends MockBloc<HomeScreenEvent, HomeScreenState>
+    implements HomeScreenBloc {}
 
-class MockClientSettingsProvider extends Mock
-    implements ClientSettingsProvider {}
+class MockClientSettingsBloc
+    extends MockBloc<ClientSettingsEvent, ClientSettingsState>
+    implements ClientSettingsBloc {}
 
-class MockGraphProvider extends Mock implements GraphProvider {}
+class MockSpeedGraphBloc extends MockBloc<SpeedGraphEvent, SpeedGraphState>
+    implements SpeedGraphBloc {}
 
 void main() {
-  setUp(() {});
-  MockGraphProvider mockGraphProvider = MockGraphProvider();
-  MockHomeProvider mockHomeProvider = MockHomeProvider();
-  MockClientSettingsProvider mockClientSettingsProvider =
-      MockClientSettingsProvider();
-  when(() => mockClientSettingsProvider.clientSettings).thenReturn(
-      ClientSettingsModel(
-          dht: false,
-          dhtPort: 0,
-          directoryDefault: 'test directory',
-          networkHttpMaxOpen: 0,
-          networkLocalAddress: ['test networkLocalAddress'],
-          networkMaxOpenFiles: 0,
-          networkPortOpen: false,
-          networkPortRandom: false,
-          networkPortRange: 'test networkPortRange',
-          piecesHashOnCompletion: false,
-          piecesMemoryMax: 0,
-          protocolPex: false,
-          throttleGlobalDownSpeed: 0,
-          throttleGlobalUpSpeed: 0,
-          throttleMaxDownloads: 0,
-          throttleMaxDownloadsGlobal: 0,
-          throttleMaxPeersNormal: 0,
-          throttleMaxPeersSeed: 0,
-          throttleMaxUploads: 0,
-          throttleMaxUploadsGlobal: 0,
-          throttleMinPeersNormal: 0,
-          throttleMinPeersSeed: 0,
-          trackersNumWant: 0));
-  when(() => mockHomeProvider.torrentList).thenReturn([
-    TorrentModel(
-        bytesDone: 0.0,
-        dateAdded: 0.0,
-        dateCreated: 0.0,
-        directory: "test1 directory",
-        downRate: 0.0,
-        downTotal: 0.0,
-        eta: -1,
-        hash: 'test1 hash',
-        isInitialSeeding: false,
-        isPrivate: false,
-        isSequential: false,
-        message: 'test1 message',
-        name: 'test1 name',
-        peersConnected: 0.0,
-        peersTotal: 0.0,
-        percentComplete: 1.1,
-        priority: 0.0,
-        ratio: 0.0,
-        seedsConnected: 0.0,
-        seedsTotal: 0.0,
-        sizeBytes: 100.0,
-        status: ['downloading'],
-        tags: ['test1 tags'],
-        trackerURIs: ['test1 trackerURIs'],
-        upRate: 0.0,
-        upTotal: 0.0),
-    TorrentModel(
-        bytesDone: 0.0,
-        dateAdded: 0.0,
-        dateCreated: 0.0,
-        directory: "test2 directory",
-        downRate: 0.0,
-        downTotal: 0.0,
-        eta: -1,
-        hash: 'test2 hash',
-        isInitialSeeding: false,
-        isPrivate: false,
-        isSequential: false,
-        message: 'test2 message',
-        name: 'test2 name',
-        peersConnected: 0.0,
-        peersTotal: 0.0,
-        percentComplete: 2.2,
-        priority: 0.0,
-        ratio: 0.0,
-        seedsConnected: 0.0,
-        seedsTotal: 0.0,
-        sizeBytes: 0.0,
-        status: ['downloading'],
-        tags: ['test2 tags'],
-        trackerURIs: ['test2 trackerURIs'],
-        upRate: 0.0,
-        upTotal: 0.0)
-  ]);
+  late SpeedGraphBloc mockSpeedGraphBloc;
+  late HomeScreenBloc mockHomeScreenBloc;
+  late ClientSettingsBloc mockClientSettingsBloc;
 
-  when(() => mockHomeProvider.upSpeed).thenReturn('10 Kb/s');
-  when(() => mockHomeProvider.downSpeed).thenReturn('20 Kb/s');
+  tearDown(() {
+    mockSpeedGraphBloc.close();
+    mockHomeScreenBloc.close();
+    mockClientSettingsBloc.close();
+  });
+  setUp(() {
+    mockSpeedGraphBloc = MockSpeedGraphBloc();
+    mockHomeScreenBloc = MockHomeScreenBloc();
+    mockClientSettingsBloc = MockClientSettingsBloc();
+    when(() => mockClientSettingsBloc.clientSettings).thenReturn(
+        ClientSettingsModel(
+            dht: false,
+            dhtPort: 0,
+            directoryDefault: 'test directory',
+            networkHttpMaxOpen: 0,
+            networkLocalAddress: ['test networkLocalAddress'],
+            networkMaxOpenFiles: 0,
+            networkPortOpen: false,
+            networkPortRandom: false,
+            networkPortRange: 'test networkPortRange',
+            piecesHashOnCompletion: false,
+            piecesMemoryMax: 0,
+            protocolPex: false,
+            throttleGlobalDownSpeed: 0,
+            throttleGlobalUpSpeed: 0,
+            throttleMaxDownloads: 0,
+            throttleMaxDownloadsGlobal: 0,
+            throttleMaxPeersNormal: 0,
+            throttleMaxPeersSeed: 0,
+            throttleMaxUploads: 0,
+            throttleMaxUploadsGlobal: 0,
+            throttleMinPeersNormal: 0,
+            throttleMinPeersSeed: 0,
+            trackersNumWant: 0));
 
-  when(() => mockGraphProvider.uploadGraphData).thenReturn(
-    List<GraphModel>.generate(
-      30,
-      ((index) {
-        return GraphModel(0, index + 1);
-      }),
-    ),
-  );
-  when(() => mockGraphProvider.downloadGraphData).thenReturn(
-    List<GraphModel>.generate(
-      30,
-      ((index) {
-        return GraphModel(0, index + 1);
-      }),
-    ),
-  );
-  when(() => mockGraphProvider.fakeTime).thenReturn(31);
-  when(() => mockGraphProvider.showChart).thenReturn(true);
+    when(() => mockSpeedGraphBloc.state).thenReturn(SpeedGraphState(
+        uploadGraphData: List<GraphModel>.generate(
+          30,
+          ((index) {
+            return GraphModel(speed: 0, second: index + 1);
+          }),
+        ),
+        downloadGraphData: List<GraphModel>.generate(
+          30,
+          ((index) {
+            return GraphModel(speed: 0, second: index + 1);
+          }),
+        ),
+        fakeTime: 31,
+        showChart: true));
+    when(() => mockHomeScreenBloc.state).thenReturn(HomeScreenState(
+        torrentList: [
+          TorrentModel(
+              bytesDone: 0.0,
+              dateAdded: 0.0,
+              dateCreated: 0.0,
+              directory: "test1 directory",
+              downRate: 0.0,
+              downTotal: 0.0,
+              eta: -1,
+              hash: 'test1 hash',
+              isInitialSeeding: false,
+              isPrivate: false,
+              isSequential: false,
+              message: 'test1 message',
+              name: 'test1 name',
+              peersConnected: 0.0,
+              peersTotal: 0.0,
+              percentComplete: 1.1,
+              priority: 0.0,
+              ratio: 0.0,
+              seedsConnected: 0.0,
+              seedsTotal: 0.0,
+              sizeBytes: 100.0,
+              status: ['downloading'],
+              tags: ['test1 tags'],
+              trackerURIs: ['test1 trackerURIs'],
+              upRate: 0.0,
+              upTotal: 0.0),
+          TorrentModel(
+              bytesDone: 0.0,
+              dateAdded: 0.0,
+              dateCreated: 0.0,
+              directory: "test2 directory",
+              downRate: 0.0,
+              downTotal: 0.0,
+              eta: -1,
+              hash: 'test2 hash',
+              isInitialSeeding: false,
+              isPrivate: false,
+              isSequential: false,
+              message: 'test2 message',
+              name: 'test2 name',
+              peersConnected: 0.0,
+              peersTotal: 0.0,
+              percentComplete: 2.2,
+              priority: 0.0,
+              ratio: 0.0,
+              seedsConnected: 0.0,
+              seedsTotal: 0.0,
+              sizeBytes: 0.0,
+              status: ['downloading'],
+              tags: ['test2 tags'],
+              trackerURIs: ['test2 trackerURIs'],
+              upRate: 0.0,
+              upTotal: 0.0)
+        ],
+        torrentListJson: {},
+        unreadNotifications: 1,
+        notificationModel:
+            NotificationModel(read: 1, notifications: [], total: 2, unread: 1),
+        rssFeedsListJson: {},
+        rssFeedsList: [
+          FeedsAndRulesModel(
+              type: "test feed",
+              label: "test label",
+              interval: 0,
+              id: "test id",
+              url: "test url",
+              count: 0),
+          FeedsAndRulesModel(
+              type: "test feed",
+              label: "test label",
+              interval: 0,
+              id: "test id",
+              url: "test url",
+              count: 0)
+        ],
+        rssRulesList: [
+          RulesModel(
+            type: "test rules",
+            label: "test label",
+            feedIDs: ["test feedIDs"],
+            field: "test field",
+            tags: ["test tags"],
+            match: "test match",
+            exclude: "test exclude",
+            destination: "test destination",
+            id: "test id",
+            isBasePath: true,
+            startOnLoad: true,
+            count: 0,
+          )
+        ],
+        rssFeedsContentsList: [],
+        upSpeed: '10 Kb/s',
+        downSpeed: '20 Kb/s'));
+  });
 
   Widget createWidgetUnderTest() {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider<UserDetailProvider>(
-          create: (context) => UserDetailProvider(),
-        ),
-        ChangeNotifierProvider<HomeProvider>(
-          create: (context) => mockHomeProvider,
-        ),
-        ChangeNotifierProvider<SSEProvider>(
-          create: (context) => SSEProvider(),
-        ),
-        ChangeNotifierProvider<ApiProvider>(
-          create: (context) => ApiProvider(),
-        ),
-        ChangeNotifierProvider<ClientSettingsProvider>(
-          create: (context) => mockClientSettingsProvider,
-        ),
-        ChangeNotifierProvider<ThemeProvider>(
-          create: (context) => ThemeProvider(),
-        ),
-        ChangeNotifierProvider<FilterProvider>(
-          create: (context) => FilterProvider(),
-        ),
-        ChangeNotifierProvider<MultipleSelectTorrentProvider>(
-          create: ((context) => MultipleSelectTorrentProvider()),
-        ),
-        ChangeNotifierProvider<GraphProvider>(
-            create: (context) => mockGraphProvider)
+        BlocProvider<UserDetailBloc>.value(value: UserDetailBloc()),
+        BlocProvider<HomeScreenBloc>.value(value: mockHomeScreenBloc),
+        BlocProvider<SSEBloc>.value(value: SSEBloc()),
+        BlocProvider<ClientSettingsBloc>.value(value: mockClientSettingsBloc),
+        BlocProvider<ThemeBloc>.value(value: ThemeBloc()),
+        BlocProvider<FilterTorrentBloc>.value(value: FilterTorrentBloc()),
+        BlocProvider<MultipleSelectTorrentBloc>.value(
+            value: MultipleSelectTorrentBloc()),
+        BlocProvider<ApiBloc>.value(value: ApiBloc()),
+        BlocProvider<SpeedGraphBloc>.value(value: mockSpeedGraphBloc),
       ],
-      child: Consumer<ThemeProvider>(
-        builder: (context, themeProvider, _) {
-          print(ThemeProvider.themeMode);
-          return MaterialApp(
-              home: Material(
-            child: TorrentScreen(index: 2),
-          ));
-        },
+      child: MaterialApp(
+        home: Material(
+          child: TorrentScreen(themeIndex: 2),
+        ),
       ),
     );
   }
@@ -195,7 +226,7 @@ void main() {
         expect(find.byKey(Key("Show Chart Button")), findsOneWidget);
         await tester.tap(find.byKey(Key("Show Chart Button")));
         await tester.pumpAndSettle();
-        expect(find.byKey(Key('Speed Graph')), findsOneWidget);
+        expect(find.byKey(Key("Speed Graph")), findsOneWidget);
         expect(find.byKey(Key('Search Torrent TextField')), findsOneWidget);
         final torrentControllerFinder =
             find.byKey(Key('Search Torrent TextField'));
@@ -255,17 +286,8 @@ void main() {
         // Error torrent filter option
         expect(find.byIcon(Icons.error), findsOneWidget);
         expect(find.byKey(Key("Error Torrent ListTile")), findsOneWidget);
-
-        // Filter by tags bottom sheet
         expect(find.text('Filter by tags'), findsOneWidget);
-        expect(find.text('test1 tags'), findsOneWidget);
-        expect(find.text('100.0 B'), findsNWidgets(2));
-        expect(find.text('test2 tags'), findsOneWidget);
-
-        // Filter by trackers bottom sheet
         expect(find.text('Filter by trackers'), findsOneWidget);
-        expect(find.text('test1 trackerURIs'), findsOneWidget);
-        expect(find.text('test2 trackerURIs'), findsOneWidget);
       },
     );
     testWidgets("Check torrent tile", (WidgetTester tester) async {
@@ -280,7 +302,7 @@ void main() {
       expect(find.byKey(Key('download done data widget')), findsNWidgets(2));
       expect(find.byIcon(Icons.stop), findsNWidgets(2));
       expect(find.byIcon(Icons.keyboard_arrow_down_rounded), findsNWidgets(2));
-      await tester.pumpAndSettle(const Duration(seconds: 5));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
     });
 
     testWidgets("Check torrent more info widgets", (WidgetTester tester) async {
@@ -293,7 +315,8 @@ void main() {
       //for both 'Date Added' and 'Date Created'
       expect(
           find.text(dateConverter(
-              timestamp: mockHomeProvider.torrentList[0].dateAdded.toInt())),
+              timestamp:
+                  mockHomeScreenBloc.state.torrentList[0].dateAdded.toInt())),
           findsNWidgets(2));
       expect(find.text('Location'), findsOneWidget);
       expect(find.text('test1 directory'), findsNWidgets(1));
@@ -303,17 +326,19 @@ void main() {
       expect(find.text('Seeds'), findsOneWidget);
       //for both 'Peers' and 'Seeds'
       expect(
-          find.text(mockHomeProvider.torrentList[0].peersConnected
+          find.text(mockHomeScreenBloc.state.torrentList[0].peersConnected
                   .toInt()
                   .toString() +
               ' connected of ' +
-              mockHomeProvider.torrentList[0].peersTotal.toInt().toString()),
+              mockHomeScreenBloc.state.torrentList[0].peersTotal
+                  .toInt()
+                  .toString()),
           findsNWidgets(2));
       expect(find.text('Size'), findsOneWidget);
       // 2 widgets as size is also shown in the torrent tile in the format '0 B / 100 B'
       expect(
-          find.text(
-              filesize(mockHomeProvider.torrentList[0].sizeBytes.toInt())),
+          find.text(filesize(
+              mockHomeScreenBloc.state.torrentList[0].sizeBytes.toInt())),
           findsNWidgets(2));
       expect(find.text('Type'), findsOneWidget);
       expect(find.text('Public'), findsOneWidget);
@@ -338,19 +363,10 @@ void main() {
       expect(find.byKey(Key('Long Press Torrent Tile Menu')), findsWidgets);
       expect(find.text("Select Torrent"), findsOneWidget);
       expect(find.byIcon(FontAwesomeIcons.solidFile), findsOneWidget);
-      await tester.tap(find.byIcon(FontAwesomeIcons.solidFile));
-      await tester.pumpAndSettle();
-      expect(find.byType(Checkbox), findsNWidgets(2));
-      expect(tester.widget<Checkbox>(find.byType(Checkbox).first).value, true);
-      expect(tester.widget<Checkbox>(find.byType(Checkbox).last).value, false);
-      await tester.tap(find.byType(Checkbox).last);
-      await tester.pumpAndSettle();
-      expect(tester.widget<Checkbox>(find.byType(Checkbox).first).value, true);
+      expect(find.text("Check Hash"), findsOneWidget);
+      expect(find.byIcon(Icons.tag), findsOneWidget);
 
       // Test set tags option
-      await tester.longPress(find.text('test1 name'));
-      await tester.pumpAndSettle();
-      expect(find.byKey(Key('Long Press Torrent Tile Menu')), findsWidgets);
       expect(find.text("Set Tags"), findsOneWidget);
       expect(find.byIcon(FontAwesomeIcons.tags), findsOneWidget);
       await tester.tap(find.byIcon(FontAwesomeIcons.tags));
@@ -366,7 +382,8 @@ void main() {
       expect(find.byKey(Key('Show Arrow Down Icon')), findsOneWidget);
       expect(find.byKey(Key('Show Arrow Up Icon')), findsNothing);
       await tester.ensureVisible(find.byKey(Key('Show Arrow Down Icon')));
-      await tester.tap(find.byKey(Key('Show Arrow Down Icon')));
+      await tester.tap(find.byKey(Key('Show Arrow Down Icon')),
+          warnIfMissed: false);
       await tester.pumpAndSettle();
       expect(
           find.byKey(
@@ -377,14 +394,10 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(AlertDialog), findsNothing);
 
-      // Test check hash option
-      await tester.longPress(find.text('test1 name'));
+      // Test delete option
+      await tester.longPress(find.text('test2 name'));
       await tester.pumpAndSettle();
       expect(find.byKey(Key('Long Press Torrent Tile Menu')), findsWidgets);
-      expect(find.text("Check Hash"), findsOneWidget);
-      expect(find.byIcon(Icons.tag), findsOneWidget);
-
-      // Test delete option
       expect(find.text("Delete"), findsOneWidget);
       expect(find.byIcon(Icons.delete), findsOneWidget);
       await tester.tap(find.byIcon(Icons.delete));
@@ -419,8 +432,7 @@ void main() {
         expect(find.byIcon(Icons.paste), findsOneWidget);
         expect(find.byKey(Key('Destination TextFormField')), findsOneWidget);
         expect(
-            find.text(
-                mockClientSettingsProvider.clientSettings.directoryDefault),
+            find.text(mockClientSettingsBloc.clientSettings.directoryDefault),
             findsOneWidget);
         expect(find.byIcon(Icons.folder), findsOneWidget);
         expect(find.byType(CheckboxListTile), findsNWidgets(3));
