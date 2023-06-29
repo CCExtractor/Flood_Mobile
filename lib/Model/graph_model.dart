@@ -1,5 +1,10 @@
-class GraphModel {
-  double speed = 0.00;
-  int second = 0;
-  GraphModel(this.speed, this.second);
+import 'package:equatable/equatable.dart';
+
+class GraphModel extends Equatable {
+  final double speed;
+  final int second;
+  GraphModel({required this.speed, required this.second});
+
+  @override
+  List<Object> get props => [speed, second];
 }

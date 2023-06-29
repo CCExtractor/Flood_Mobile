@@ -1,8 +1,10 @@
-class NotificationModel {
-  List<NotificationContentModel> notifications = [];
-  int read;
-  int total;
-  int unread;
+import 'package:equatable/equatable.dart';
+
+class NotificationModel extends Equatable {
+  final List<NotificationContentModel> notifications;
+  final int read;
+  final int total;
+  final int unread;
 
   NotificationModel({
     required this.read,
@@ -25,6 +27,8 @@ class NotificationModel {
       unread: json['count']['unread'],
     );
   }
+  @override
+  List<Object?> get props => [read, unread, notifications, total];
 }
 
 class NotificationContentModel {

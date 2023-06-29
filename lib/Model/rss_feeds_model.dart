@@ -1,7 +1,6 @@
 import 'package:flood_mobile/Model/single_feed_and_response_model.dart';
 import 'package:flood_mobile/Model/single_rule_model.dart';
 import 'package:json_annotation/json_annotation.dart';
-
 part 'rss_feeds_model.g.dart';
 
 @JsonSerializable()

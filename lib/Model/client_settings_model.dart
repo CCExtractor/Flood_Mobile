@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-
 part 'client_settings_model.g.dart';
 
 @JsonSerializable()

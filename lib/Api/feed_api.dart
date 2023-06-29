@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:flood_mobile/Constants/api_endpoints.dart';
 import 'package:flood_mobile/Model/rss_feeds_model.dart';
+import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
+import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
+import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../Model/single_feed_and_response_model.dart';
-import '../Model/single_rule_model.dart';
-import '../Provider/api_provider.dart';
-import '../Provider/user_detail_provider.dart';
-import 'package:flood_mobile/Provider/home_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flood_mobile/Model/single_feed_and_response_model.dart';
+import 'package:flood_mobile/Model/single_rule_model.dart';
 
 class FeedsApi {
   static Future<void> addFeeds({
@@ -20,8 +21,9 @@ class FeedsApi {
     required int count,
   }) async {
     try {
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.addFeeds;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.addFeeds;
       print('---ADD RSS FEED---');
       print(url);
       Response response;
@@ -31,7 +33,7 @@ class FeedsApi {
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
       mp['type'] = type;
       mp['_id'] = id;
@@ -46,10 +48,10 @@ class FeedsApi {
       );
       if (response.statusCode == 200) {
         print('--FEED ADDED--');
-      } else {}
-    } catch (e) {
+      }
+    } catch (error) {
       print('--ERROR IN ADDING FEEDS--');
-      print(e.toString());
+      print(error.toString());
     }
   }
 
@@ -61,26 +63,29 @@ class FeedsApi {
     try {
       Response response;
       Dio dio = new Dio();
-      String url = Provider.of<ApiProvider>(context, listen: false).baseUrl +
-          ApiProvider.listAllFeedsAndRules;
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.listAllFeedsAndRules;
       dio.options.headers['Accept'] = "application/json";
       dio.options.headers['Content-Type'] = "application/json";
       dio.options.headers['Connection'] = "keep-alive";
       dio.options.headers['Cookie'] =
-          Provider.of<UserDetailProvider>(context, listen: false).token;
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       response = await dio.get(url);
       if (response.statusCode == 200) {
         rssfeedsmodel = RssFeedsModel.fromJson(response.data);
         feedsandrules = rssfeedsmodel.feeds;
         rssrules = rssfeedsmodel.rules;
-        Provider.of<HomeProvider>(context, listen: false)
-            .setRssFeedsList(feedsandrules, rssrules);
+        BlocProvider.of<HomeScreenBloc>(context, listen: false).add(
+            SetRssFeedsListEvent(
+                newRssFeedsList: feedsandrules, newRssRulesList: rssrules));
+
         print("Feeds and Rules Listed");
       } else {
         print("There is some problem status code not 200");
       }
-    } catch (e) {
-      print('Exception caught in Api Request ' + e.toString());
+    } catch (error) {
+      print('--ERROR IN LIST FEEDS AND RULES-- ' + error.toString());
     }
   }
 }

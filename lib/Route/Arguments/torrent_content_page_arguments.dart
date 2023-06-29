@@ -1,8 +1,8 @@
 class TorrentContentPageArguments {
   String hash;
   String directory;
-  final int index;
+  final int themeIndex;
 
   TorrentContentPageArguments(
-      {required this.hash, required this.directory, required this.index});
+      {required this.hash, required this.directory, required this.themeIndex});
 }
