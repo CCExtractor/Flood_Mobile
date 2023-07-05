@@ -25,7 +25,6 @@ class AddTrackersDialogue extends StatefulWidget {
 
 class _AddTrackersDialogueState extends State<AddTrackersDialogue>
     with TickerProviderStateMixin {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _showdropdown = false;
   late TextEditingController _textController;
   int _itemsVisibleInDropdown = 1;
@@ -79,6 +78,16 @@ class _AddTrackersDialogueState extends State<AddTrackersDialogue>
     final hp = MediaQuery.of(context).size.height;
     final wp = MediaQuery.of(context).size.width;
     return AlertDialog(
+      title: Text(
+        context.l10n.torrents_set_trackers_heading,
+        key: Key('Set Trackers Text'),
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: ThemeBloc.theme(widget.themeIndex).textTheme.bodyLarge?.color,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+      ),
       insetPadding: EdgeInsets.zero,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       key: Key('Add Trackers AlertDialog'),
@@ -91,158 +100,120 @@ class _AddTrackersDialogueState extends State<AddTrackersDialogue>
           Radius.circular(20),
         ),
       ),
-      contentPadding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
+      contentPadding: EdgeInsets.only(left: 20, right: 20, top: 20),
       content: Builder(builder: (context) {
         return AnimatedContainer(
           duration: Duration(milliseconds: 200),
           constraints: BoxConstraints(),
           height: _showdropdown
-              ? hp - (600 - (50 * _itemsVisibleInDropdown - 1))
-              : hp - 650,
+              ? hp - (700 - (50 * _itemsVisibleInDropdown - 1))
+              : hp - 700,
           width: wp - 100,
-          child: Column(
-            children: [
-              Text(
-                context.l10n.torrents_set_trackers_heading,
-                key: Key('Set Trackers Text'),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: ThemeBloc.theme(widget.themeIndex)
-                      .textTheme
-                      .bodyLarge
-                      ?.color,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              SizedBox(height: 40),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  children: <Widget>[
-                    Form(
-                      key: _formKey,
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextFormField(
-                              key: Key('Trackers Text Form Field'),
-                              controller: _textController,
-                              decoration: InputDecoration(
-                                fillColor: themeBloc.isDarkMode
-                                    ? ThemeBloc.theme(widget.themeIndex)
-                                        .primaryColor
-                                    : Colors.black45,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 17.0, horizontal: 15.0),
-                                filled: true,
-                                suffixIcon: IconButton(
-                                    splashColor: Colors.transparent,
-                                    icon: _showdropdown
-                                        ? Icon(
-                                            Icons.keyboard_arrow_up_rounded,
-                                            key: Key('Show Arrow Up Icon'),
-                                          )
-                                        : Icon(
-                                            Icons.keyboard_arrow_down_rounded,
-                                            key: Key('Show Arrow Down Icon'),
-                                          ),
-                                    onPressed: () {
-                                      SystemChannels.textInput
-                                          .invokeMethod('TextInput.hide');
-                                      setState(() {
-                                        _showdropdown = !_showdropdown;
-                                        _showdropdown
-                                            ? _animationController.forward()
-                                            : _animationController.reverse();
-                                      });
-                                    }),
-                                hintStyle: TextStyle(
-                                    color: themeBloc.isDarkMode
-                                        ? Colors.grey
-                                        : Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400),
-                                hintText:
-                                    context.l10n.torrents_enter_trackers_hint,
-                              ),
-                              style: TextStyle(
-                                  color: ThemeBloc.theme(widget.themeIndex)
-                                      .textTheme
-                                      .bodyLarge
-                                      ?.color,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400),
-                              autocorrect: false,
-                              textAlign: TextAlign.start,
-                              autofocus: false,
-                              maxLines: 1,
-                              validator: (String? newValue) {
-                                if (newValue == null || newValue.isEmpty)
-                                  return context.l10n
-                                      .torrents_set_tags_textfield_validator;
-                                return null;
-                              },
-                              inputFormatters: [
-                                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  key: Key('Trackers Text Form Field'),
+                  controller: _textController,
+                  decoration: InputDecoration(
+                    fillColor: themeBloc.isDarkMode
+                        ? ThemeBloc.theme(widget.themeIndex).primaryColor
+                        : Colors.black45,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                    Container(
-                      key: Key('Trackers List Container'),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: themeBloc.isDarkMode
-                            ? Colors.white
-                            : Colors.black12,
-                      ),
-                      margin: EdgeInsets.only(top: 3),
-                      padding: EdgeInsets.only(top: 8),
-                      height: _animation.value,
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: ListView.separated(
-                              controller: _scrollController,
-                              padding: EdgeInsets.symmetric(horizontal: 8),
-                              separatorBuilder: (context, index) =>
-                                  Divider(color: Colors.grey),
-                              itemCount: _existingTrackers.length +
-                                  _newEnterdTrackers.length,
-                              itemBuilder: (context, index) {
-                                if (index < _existingTrackers.length) {
-                                  return _getCheckBoxListTile(
-                                      _existingTrackers.keys.elementAt(index),
-                                      index,
-                                      themeBloc,
-                                      _existingTrackers);
-                                } else {
-                                  index -= _existingTrackers.length;
-                                  return _getCheckBoxListTile(
-                                      _newEnterdTrackers.keys.elementAt(index),
-                                      index,
-                                      themeBloc,
-                                      _newEnterdTrackers);
-                                }
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 17.0, horizontal: 15.0),
+                    filled: true,
+                    suffixIcon: IconButton(
+                        splashColor: Colors.transparent,
+                        icon: _showdropdown
+                            ? Icon(
+                                Icons.keyboard_arrow_up_rounded,
+                                key: Key('Show Arrow Up Icon'),
+                              )
+                            : Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                key: Key('Show Arrow Down Icon'),
+                              ),
+                        onPressed: () {
+                          SystemChannels.textInput
+                              .invokeMethod('TextInput.hide');
+                          setState(() {
+                            _showdropdown = !_showdropdown;
+                            _showdropdown
+                                ? _animationController.forward()
+                                : _animationController.reverse();
+                          });
+                        }),
+                    hintStyle: TextStyle(
+                        color:
+                            themeBloc.isDarkMode ? Colors.grey : Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400),
+                    hintText: context.l10n.torrents_enter_trackers_hint,
+                  ),
+                  style: TextStyle(
+                      color: ThemeBloc.theme(widget.themeIndex)
+                          .textTheme
+                          .bodyLarge
+                          ?.color,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400),
+                  autocorrect: false,
+                  textAlign: TextAlign.start,
+                  autofocus: false,
+                  maxLines: 1,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.deny(RegExp(r'\s')),
                   ],
                 ),
-              )
-            ],
+                Container(
+                  key: Key('Trackers List Container'),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: themeBloc.isDarkMode ? Colors.white : Colors.black12,
+                  ),
+                  margin: EdgeInsets.only(top: 3),
+                  padding: EdgeInsets.only(top: 8),
+                  height: _animation.value,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.separated(
+                          controller: _scrollController,
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          separatorBuilder: (context, index) =>
+                              Divider(color: Colors.grey),
+                          itemCount: _existingTrackers.length +
+                              _newEnterdTrackers.length,
+                          itemBuilder: (context, index) {
+                            if (index < _existingTrackers.length) {
+                              return _getCheckBoxListTile(
+                                  _existingTrackers.keys.elementAt(index),
+                                  index,
+                                  themeBloc,
+                                  _existingTrackers);
+                            } else {
+                              index -= _existingTrackers.length;
+                              return _getCheckBoxListTile(
+                                  _newEnterdTrackers.keys.elementAt(index),
+                                  index,
+                                  themeBloc,
+                                  _newEnterdTrackers);
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         );
       }),
@@ -290,24 +261,22 @@ class _AddTrackersDialogueState extends State<AddTrackersDialogue>
           ),
           onPressed: (() {
             setState(() {
-              if (_formKey.currentState!.validate()) {
-                widget.torrents.forEach((element) {
-                  TorrentApi.setTrackers(
-                    trackersList: _inputTrackersList,
-                    hashes: element.hash,
-                    context: context,
-                  );
-                });
-                EventHandlerApi.filterDataRephrasor(
-                    BlocProvider.of<HomeScreenBloc>(context).state.torrentList,
-                    context);
-                final addTorrentSnackbar = addFloodSnackBar(
-                    SnackbarType.information,
-                    context.l10n.torrents_set_trackers_snackbar,
-                    context.l10n.button_dismiss);
-                Navigator.of(context, rootNavigator: true).pop();
-                ScaffoldMessenger.of(context).showSnackBar(addTorrentSnackbar);
-              }
+              widget.torrents.forEach((element) {
+                TorrentApi.setTrackers(
+                  trackersList: _inputTrackersList,
+                  hashes: element.hash,
+                  context: context,
+                );
+              });
+              EventHandlerApi.filterDataRephrasor(
+                  BlocProvider.of<HomeScreenBloc>(context).state.torrentList,
+                  context);
+              final addTorrentSnackbar = addFloodSnackBar(
+                  SnackbarType.information,
+                  context.l10n.torrents_set_trackers_snackbar,
+                  context.l10n.button_dismiss);
+              Navigator.of(context, rootNavigator: true).pop();
+              ScaffoldMessenger.of(context).showSnackBar(addTorrentSnackbar);
             });
           }),
           child: Text(

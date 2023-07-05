@@ -459,7 +459,8 @@ void main() {
         expect(find.byKey(Key('Long Press Torrent Tile Menu')), findsWidgets);
         expect(find.text("Reannounce"), findsOneWidget);
         expect(find.byIcon(FontAwesomeIcons.bullhorn), findsOneWidget);
-        await tester.drag(find.text("Reannounce"), const Offset(0.0, -1500.0));
+        expect(find.text("Set Trackers"), findsOneWidget);
+        await tester.drag(find.text("Reannounce"), const Offset(0.0, -150.0));
         await tester.pumpAndSettle();
         expect(find.text("Genrate Magnet Link"), findsOneWidget);
         expect(find.byIcon(FontAwesomeIcons.link), findsOneWidget);
@@ -477,7 +478,7 @@ void main() {
         await tester.pumpWidget(createWidgetUnderTest());
         await tester.longPress(find.text('test2 name'));
         await tester.pumpAndSettle();
-        await tester.drag(find.text("Reannounce"), const Offset(0.0, -1500.0));
+        await tester.drag(find.text("Reannounce"), const Offset(0.0, -300.0));
         await tester.pumpAndSettle();
         expect(find.text("Initial Seeding"), findsOneWidget);
         expect(find.byIcon(FontAwesomeIcons.checkSquare), findsOneWidget);
@@ -491,6 +492,8 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.byKey(Key('Set priority dialogue')), findsOneWidget);
         expect(find.text("Set Priority"), findsOneWidget);
+        await tester.tap(find.text("Set Priority"));
+        await tester.pumpAndSettle();
         expect(find.byType(Slider), findsOneWidget);
         expect(find.widgetWithText(TextButton, 'Close'), findsOneWidget);
         expect(find.widgetWithText(TextButton, 'Set'), findsOneWidget);
@@ -498,7 +501,7 @@ void main() {
         await tester.pumpAndSettle();
         await tester.longPress(find.text('test1 name'));
         await tester.pumpAndSettle();
-        await tester.drag(find.text("Reannounce"), const Offset(0.0, -1500.0));
+        await tester.drag(find.text("Reannounce"), const Offset(0.0, -400.0));
         await tester.pumpAndSettle();
         expect(find.text("Delete"), findsOneWidget);
         expect(find.byIcon(Icons.delete), findsOneWidget);

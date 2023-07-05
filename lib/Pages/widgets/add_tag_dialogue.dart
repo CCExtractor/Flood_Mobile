@@ -83,6 +83,16 @@ class _AddTagDialogueState extends State<AddTagDialogue>
     final hp = MediaQuery.of(context).size.height;
     final wp = MediaQuery.of(context).size.width;
     return AlertDialog(
+      title: Text(
+        context.l10n.torrents_set_tags_heading,
+        key: Key('Set Tags Text'),
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: ThemeBloc.theme(widget.themeIndex).textTheme.bodyLarge?.color,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+      ),
       insetPadding: EdgeInsets.zero,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       key: Key('Add Tag AlertDialog'),
@@ -95,157 +105,129 @@ class _AddTagDialogueState extends State<AddTagDialogue>
           Radius.circular(20),
         ),
       ),
-      contentPadding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
+      contentPadding: EdgeInsets.only(left: 20, right: 20, top: 20),
       content: Builder(builder: (context) {
         return AnimatedContainer(
           duration: Duration(milliseconds: 200),
           constraints: BoxConstraints(),
           height: _showdropdown
-              ? hp - (600 - (50 * _itemsVisibleInDropdown - 1))
-              : hp - 650,
+              ? hp - (700 - (50 * _itemsVisibleInDropdown - 1))
+              : hp - 700,
           width: wp - 100,
-          child: Column(
-            children: [
-              Text(
-                context.l10n.torrents_set_tags_heading,
-                key: Key('Set Tags Text'),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: ThemeBloc.theme(widget.themeIndex)
-                      .textTheme
-                      .bodyLarge
-                      ?.color,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              SizedBox(height: 40),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  children: <Widget>[
-                    Form(
-                      key: _formKey,
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextFormField(
-                              key: Key('Tags Text Form Field'),
-                              controller: _textController,
-                              decoration: InputDecoration(
-                                fillColor: themeBloc.isDarkMode
-                                    ? ThemeBloc.theme(widget.themeIndex)
-                                        .primaryColor
-                                    : Colors.black45,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              children: <Widget>[
+                Form(
+                  key: _formKey,
+                  child: TextFormField(
+                    key: Key('Tags Text Form Field'),
+                    controller: _textController,
+                    decoration: InputDecoration(
+                      fillColor: themeBloc.isDarkMode
+                          ? ThemeBloc.theme(widget.themeIndex).primaryColor
+                          : Colors.black45,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 17.0, horizontal: 15.0),
+                      filled: true,
+                      suffixIcon: IconButton(
+                          splashColor: Colors.transparent,
+                          icon: _showdropdown
+                              ? Icon(
+                                  Icons.keyboard_arrow_up_rounded,
+                                  key: Key('Show Arrow Up Icon'),
+                                )
+                              : Icon(
+                                  Icons.keyboard_arrow_down_rounded,
+                                  key: Key('Show Arrow Down Icon'),
                                 ),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 17.0, horizontal: 15.0),
-                                filled: true,
-                                suffixIcon: IconButton(
-                                    splashColor: Colors.transparent,
-                                    icon: _showdropdown
-                                        ? Icon(
-                                            Icons.keyboard_arrow_up_rounded,
-                                            key: Key('Show Arrow Up Icon'),
-                                          )
-                                        : Icon(
-                                            Icons.keyboard_arrow_down_rounded,
-                                            key: Key('Show Arrow Down Icon'),
-                                          ),
-                                    onPressed: () {
-                                      SystemChannels.textInput
-                                          .invokeMethod('TextInput.hide');
-                                      setState(() {
-                                        _showdropdown = !_showdropdown;
-                                        _showdropdown
-                                            ? _animationController.forward()
-                                            : _animationController.reverse();
-                                      });
-                                    }),
-                                hintStyle: TextStyle(
-                                    color: themeBloc.isDarkMode
-                                        ? Colors.grey
-                                        : Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400),
-                                hintText: context.l10n.torrents_enter_tags_hint,
-                              ),
-                              style: TextStyle(
-                                  color: ThemeBloc.theme(widget.themeIndex)
-                                      .textTheme
-                                      .bodyLarge
-                                      ?.color,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400),
-                              autocorrect: false,
-                              textAlign: TextAlign.start,
-                              autofocus: false,
-                              maxLines: 1,
-                              validator: (String? newValue) {
-                                if (newValue == null || newValue.isEmpty)
-                                  return context.l10n
-                                      .torrents_set_tags_textfield_validator;
-                                return null;
-                              },
-                              inputFormatters: [
-                                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                          onPressed: () {
+                            SystemChannels.textInput
+                                .invokeMethod('TextInput.hide');
+                            setState(() {
+                              _showdropdown = !_showdropdown;
+                              _showdropdown
+                                  ? _animationController.forward()
+                                  : _animationController.reverse();
+                            });
+                          }),
+                      hintStyle: TextStyle(
+                          color:
+                              themeBloc.isDarkMode ? Colors.grey : Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400),
+                      hintText: context.l10n.torrents_enter_tags_hint,
                     ),
-                    Container(
-                      key: Key('Tags List Container'),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: themeBloc.isDarkMode
-                            ? Colors.white
-                            : Colors.black12,
-                      ),
-                      margin: EdgeInsets.only(top: 3),
-                      padding: EdgeInsets.only(top: 8),
-                      height: _animation.value,
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: ListView.separated(
-                              controller: _scrollController,
-                              padding: EdgeInsets.symmetric(horizontal: 8),
-                              separatorBuilder: (context, index) =>
-                                  Divider(color: Colors.grey),
-                              itemCount:
-                                  _existingTags.length + _newEnterdTags.length,
-                              itemBuilder: (context, index) {
-                                if (index < _existingTags.length) {
-                                  return _getCheckBoxListTile(
-                                      _existingTags.keys.elementAt(index),
-                                      index,
-                                      themeBloc,
-                                      _existingTags);
-                                } else {
-                                  index -= _existingTags.length;
-                                  return _getCheckBoxListTile(
-                                      _newEnterdTags.keys.elementAt(index),
-                                      index,
-                                      themeBloc,
-                                      _newEnterdTags);
-                                }
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                    style: TextStyle(
+                        color: ThemeBloc.theme(widget.themeIndex)
+                            .textTheme
+                            .bodyLarge
+                            ?.color,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400),
+                    autocorrect: false,
+                    textAlign: TextAlign.start,
+                    autofocus: false,
+                    maxLines: 1,
+                    validator: (String? newValue) {
+                      if (newValue == null || newValue.isEmpty)
+                        return context
+                            .l10n.torrents_set_tags_textfield_validator;
+                      return null;
+                    },
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    ],
+                  ),
                 ),
-              )
-            ],
+                Container(
+                  key: Key('Tags List Container'),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: themeBloc.isDarkMode ? Colors.white : Colors.black12,
+                  ),
+                  margin: EdgeInsets.only(top: 3),
+                  padding: EdgeInsets.only(top: 8),
+                  height: _animation.value,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.separated(
+                          controller: _scrollController,
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          separatorBuilder: (context, index) =>
+                              Divider(color: Colors.grey),
+                          itemCount:
+                              _existingTags.length + _newEnterdTags.length,
+                          itemBuilder: (context, index) {
+                            if (index < _existingTags.length) {
+                              return _getCheckBoxListTile(
+                                  _existingTags.keys.elementAt(index),
+                                  index,
+                                  themeBloc,
+                                  _existingTags);
+                            } else {
+                              index -= _existingTags.length;
+                              return _getCheckBoxListTile(
+                                  _newEnterdTags.keys.elementAt(index),
+                                  index,
+                                  themeBloc,
+                                  _newEnterdTags);
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         );
       }),
