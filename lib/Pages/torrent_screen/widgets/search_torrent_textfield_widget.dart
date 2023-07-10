@@ -1,5 +1,6 @@
 import 'package:flood_mobile/Pages/torrent_screen/widgets/filter_by_bottom_sheet.dart';
 import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +37,7 @@ class _SearchTorrentTextFieldState extends State<SearchTorrentTextField> {
           decoration: InputDecoration(
             isDense: true,
             contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            hintText: 'Search Torrent',
+            hintText: context.l10n.search_torrent_text,
             suffixIcon: Padding(
               key: Key("Filter Torrent ActionChip"),
               padding: const EdgeInsets.only(right: 5),

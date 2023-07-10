@@ -8,6 +8,7 @@ import 'package:flood_mobile/Route/Arguments/torrent_content_page_arguments.dart
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -106,7 +107,8 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                             final Directory? externalDir =
                                 await getExternalStorageDirectory();
                             if (externalDir == null) {
-                              Toasts.showFailToast(msg: 'File not present');
+                              Toasts.showFailToast(
+                                  msg: context.l10n.toast_file_not_present);
                             } else {
                               FlutterDownloader.enqueue(
                                   url:
@@ -122,7 +124,8 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                                   });
                             }
                           } else {
-                            Toasts.showFailToast(msg: 'Permission Denied');
+                            Toasts.showFailToast(
+                                msg: context.l10n.toast_permission_denied);
                           }
                         } catch (error) {
                           print(error);
@@ -140,7 +143,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                             ?.color,
                       ),
                       onSelected: (value) {
-                        if (value == 'High Priority') {
+                        if (value == context.l10n.torrent_high_priority) {
                           TorrentApi.setTorrentContentPriority(
                               context: context,
                               hash: widget.arguments.hash,
@@ -150,7 +153,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                           torrentContentBloc
                               .add(SetSelectionModeEvent(newIsSelected: false));
                         }
-                        if (value == 'Normal Priority') {
+                        if (value == context.l10n.torrent_normal_priority) {
                           TorrentApi.setTorrentContentPriority(
                               context: context,
                               hash: widget.arguments.hash,
@@ -160,7 +163,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                           torrentContentBloc
                               .add(SetSelectionModeEvent(newIsSelected: false));
                         }
-                        if (value == 'Don\'t Download') {
+                        if (value == context.l10n.torrent_dont_download) {
                           TorrentApi.setTorrentContentPriority(
                               context: context,
                               hash: widget.arguments.hash,
@@ -173,9 +176,9 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                       },
                       itemBuilder: (BuildContext context) {
                         return {
-                          'High Priority',
-                          'Normal Priority',
-                          'Don\'t Download'
+                          context.l10n.torrent_high_priority,
+                          context.l10n.torrent_normal_priority,
+                          context.l10n.torrent_dont_download,
                         }.map((String choice) {
                           return PopupMenuItem<String>(
                             value: choice,
@@ -220,7 +223,7 @@ class _TorrentContentScreenState extends State<TorrentContentScreen> {
                         Padding(
                           padding: const EdgeInsets.all(15),
                           child: Text(
-                            'Files',
+                            context.l10n.torrents_details_files,
                             style: GoogleFonts.notoSans(
                               color:
                                   ThemeBloc.theme(widget.arguments.themeIndex)

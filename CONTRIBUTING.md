@@ -68,14 +68,20 @@ flutter doctor
 flutter pub get
 ```
 
-5. Installing packages (**IOS ONLY**)
+5. Initialize localization for multi-language support.
+
+```bash
+flutter gen-l10n --arb-dir=lib/l10n/arb
+```
+
+6. Installing packages (**IOS ONLY**)
 
 ```bash
 cd ios
 pod install --verbose
 ```
 
-6. Run the app:
+7. Run the app:
 
 ```bash
 flutter run

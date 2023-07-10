@@ -12,6 +12,7 @@ import 'package:flood_mobile/Pages/widgets/text_size.dart';
 import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -68,7 +69,8 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                               MainAxisAlignment.center,
                                           children: [
                                             SText(
-                                              text: "No torrents to display.",
+                                              text: context.l10n
+                                                  .torrents_list_no_torrents,
                                               themeIndex: widget.themeIndex,
                                             ),
                                             SizedBox(
@@ -99,7 +101,8 @@ class _TorrentScreenState extends State<TorrentScreen> {
                                                     );
                                                   });
                                                 },
-                                                child: Text("Clear Filter"))
+                                                child: Text(context
+                                                    .l10n.clear_filter_text))
                                           ],
                                         ),
                                       )

@@ -1,6 +1,7 @@
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Model/current_user_detail_model.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class UsersListView extends StatelessWidget {
@@ -56,7 +57,7 @@ class UsersListView extends StatelessWidget {
                             vertical: 3.0,
                           ),
                           child: Text(
-                            'Current User',
+                            context.l10n.auth_current_user,
                             style: TextStyle(
                                 color: ThemeBloc.theme(1).primaryColor),
                           ),

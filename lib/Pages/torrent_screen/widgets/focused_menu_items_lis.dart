@@ -1,6 +1,7 @@
 import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Pages/widgets/delete_torrent_sheet.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,8 +20,8 @@ List<FocusedMenuItem> getFocusedMenuItems(BuildContext context,
         BlocProvider.of<MultipleSelectTorrentBloc>(context)
                 .state
                 .isSelectionMode
-            ? 'Unselect Torrent'
-            : 'Select Torrent',
+            ? context.l10n.unselect_torrent
+            : context.l10n.select_torrent,
         style: TextStyle(
           color: Colors.black,
         ),
@@ -41,7 +42,7 @@ List<FocusedMenuItem> getFocusedMenuItems(BuildContext context,
     ),
     FocusedMenuItem(
       title: Text(
-        'Set Tags',
+        context.l10n.torrents_set_tags_heading,
         style: TextStyle(
           color: Colors.black,
         ),
@@ -63,7 +64,7 @@ List<FocusedMenuItem> getFocusedMenuItems(BuildContext context,
     ),
     FocusedMenuItem(
       title: Text(
-        'Check Hash',
+        context.l10n.torrent_check_hash,
         style: TextStyle(
           color: Colors.black,
         ),
@@ -78,13 +79,17 @@ List<FocusedMenuItem> getFocusedMenuItems(BuildContext context,
         if (result) {
           if (kDebugMode) print("check hash performed successfully");
           final addTorrentSnackbar = addFloodSnackBar(
-              SnackbarType.success, 'Hash check successful', 'Dismiss');
+              SnackbarType.success,
+              context.l10n.torrent_check_hash_success,
+              context.l10n.button_dismiss);
 
           ScaffoldMessenger.of(context).showSnackBar(addTorrentSnackbar);
         } else {
           if (kDebugMode) print("Error check hash failed");
           final addTorrentSnackbar = addFloodSnackBar(
-              SnackbarType.caution, 'Torrent hash failed', 'Dismiss');
+              SnackbarType.caution,
+              context.l10n.torrent_check_hash_failed,
+              context.l10n.button_dismiss);
 
           ScaffoldMessenger.of(context).showSnackBar(addTorrentSnackbar);
         }
@@ -93,7 +98,7 @@ List<FocusedMenuItem> getFocusedMenuItems(BuildContext context,
     FocusedMenuItem(
       backgroundColor: Colors.redAccent,
       title: Text(
-        'Delete',
+        context.l10n.button_delete,
       ),
       trailingIcon: Icon(
         Icons.delete,

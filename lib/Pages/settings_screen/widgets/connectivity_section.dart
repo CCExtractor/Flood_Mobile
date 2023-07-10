@@ -2,6 +2,7 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/settings_text_field.dart';
 import 'package:flood_mobile/Pages/widgets/text_size.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -50,6 +51,7 @@ class ConnectivitySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = context.l10n;
     return ExpansionTileCard(
       key: Key('Connectivity Expansion Card'),
       elevation: 0,
@@ -57,21 +59,23 @@ class ConnectivitySection extends StatelessWidget {
       baseColor: ThemeBloc.theme(themeIndex).primaryColor,
       expandedTextColor: ThemeBloc.theme(themeIndex).colorScheme.secondary,
       leading: Icon(FontAwesomeIcons.connectdevelop),
-      title: MText(text: 'Connectivity'),
+      title: MText(text: l10n.settings_tabs_connectivity),
       contentPadding: EdgeInsets.all(0),
       children: [
         Column(
           key: Key('Connectivity option display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SText(text: 'Incoming Connections', themeIndex: themeIndex),
+            SText(
+                text: l10n.settings_connectivity_incoming_heading,
+                themeIndex: themeIndex),
             SizedBox(height: 15),
             SettingsTextField(
               validator: (value) {
                 return null;
               },
-              hintText: 'Port Range',
-              labelText: 'Port Range',
+              hintText: l10n.settings_connectivity_port_range_label,
+              labelText: l10n.settings_connectivity_port_range_label,
               isText: false,
               controller: portRangeController,
               themeIndex: themeIndex,
@@ -88,7 +92,7 @@ class ConnectivitySection extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     title: Text(
-                      'Randomize Port',
+                      l10n.settings_connectivity_port_randomize_label,
                       style: TextStyle(fontSize: 12),
                     ),
                     value: randomizePort,
@@ -107,7 +111,7 @@ class ConnectivitySection extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     title: Text(
-                      'Open Port',
+                      l10n.settings_connectivity_port_open_label,
                       style: TextStyle(fontSize: 12),
                     ),
                     value: openPort,
@@ -121,21 +125,23 @@ class ConnectivitySection extends StatelessWidget {
               validator: (value) {
                 return null;
               },
-              hintText: 'Maximum HTTP Connections',
-              labelText: 'Maximum HTTP Connections',
+              hintText: l10n.settings_connectivity_max_http_connections,
+              labelText: l10n.settings_connectivity_max_http_connections,
               isText: false,
               controller: maxHttpConnectionsController,
               themeIndex: themeIndex,
             ),
             SizedBox(height: 25),
-            SText(text: 'Decentralized Peer Discovery', themeIndex: themeIndex),
+            SText(
+                text: l10n.settings_connectivity_dpd_heading,
+                themeIndex: themeIndex),
             SizedBox(height: 15),
             SettingsTextField(
               validator: (value) {
                 return null;
               },
-              hintText: 'DHT Port',
-              labelText: 'DHT Port',
+              hintText: l10n.settings_connectivity_dht_port_label,
+              labelText: l10n.settings_connectivity_dht_port_label,
               controller: dhtPortController,
               isText: false,
               themeIndex: themeIndex,
@@ -152,7 +158,7 @@ class ConnectivitySection extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     title: Text(
-                      'Enable DHT',
+                      l10n.settings_connectivity_dht_label,
                       style: TextStyle(fontSize: 12),
                     ),
                     value: enableDht,
@@ -175,7 +181,7 @@ class ConnectivitySection extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     title: Text(
-                      'Enable Peer Exchange',
+                      l10n.settings_connectivity_peer_exchange_label,
                       style: TextStyle(fontSize: 12),
                     ),
                     value: enablePeerExchange,
@@ -189,14 +195,16 @@ class ConnectivitySection extends StatelessWidget {
               ],
             ),
             SizedBox(height: 25),
-            SText(text: 'Peers', themeIndex: themeIndex),
+            SText(
+                text: l10n.settings_connectivity_peers_heading,
+                themeIndex: themeIndex),
             SizedBox(height: 15),
             SettingsTextField(
                 validator: (value) {
                   return null;
                 },
-                hintText: 'Minimum Peers',
-                labelText: 'Minimum Peers',
+                hintText: l10n.settings_connectivity_peers_min_label,
+                labelText: l10n.settings_connectivity_peers_min_label,
                 controller: minimumPeerController,
                 isText: false,
                 themeIndex: themeIndex),
@@ -205,8 +213,8 @@ class ConnectivitySection extends StatelessWidget {
               validator: (value) {
                 return null;
               },
-              hintText: 'Maximum Peers',
-              labelText: 'Maximum Peers',
+              hintText: l10n.settings_connectivity_peers_max_label,
+              labelText: l10n.settings_connectivity_peers_max_label,
               controller: maximumPeerController,
               isText: false,
               themeIndex: themeIndex,
@@ -216,8 +224,8 @@ class ConnectivitySection extends StatelessWidget {
                 validator: (value) {
                   return null;
                 },
-                hintText: 'Minimum Peers Seeding',
-                labelText: 'Minimum Peers Seeding',
+                hintText: l10n.settings_connectivity_peers_seeding_min_label,
+                labelText: l10n.settings_connectivity_peers_seeding_min_label,
                 controller: minimumPeerSeedingController,
                 isText: false,
                 themeIndex: themeIndex),
@@ -226,8 +234,8 @@ class ConnectivitySection extends StatelessWidget {
                 validator: (value) {
                   return null;
                 },
-                hintText: 'Maximum Peers Seeding',
-                labelText: 'Maximum Peers Seeding',
+                hintText: l10n.settings_connectivity_peers_seeding_max_label,
+                labelText: l10n.settings_connectivity_peers_seeding_max_label,
                 controller: maximumPeerSeedingController,
                 isText: false,
                 themeIndex: themeIndex),
@@ -236,8 +244,8 @@ class ConnectivitySection extends StatelessWidget {
                 validator: (value) {
                   return null;
                 },
-                hintText: 'Peers Desired',
-                labelText: 'Peers Desired',
+                hintText: l10n.settings_connectivity_peers_desired_label,
+                labelText: l10n.settings_connectivity_peers_desired_label,
                 controller: peerDesiredController,
                 isText: false,
                 themeIndex: themeIndex),

@@ -1,3 +1,4 @@
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 
@@ -29,7 +30,7 @@ class LoginScreenTextField extends StatelessWidget {
             obscureText: obscureText,
             validator: (String? value) {
               if (value != null && value.isEmpty) {
-                return 'Field cannot be empty';
+                return context.l10n.login_screen_textfield_validator;
               }
               return null;
             },

@@ -1,5 +1,6 @@
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -89,7 +90,7 @@ class _MenuState extends State<Menu> {
                 widget.updatePosition(0);
                 controller.toggle();
               },
-              title: 'Torrents',
+              title: context.l10n.menu_torrent_lable,
               themeIndex: widget.themeIndex,
             ),
             NavDrawerListTile(
@@ -99,7 +100,7 @@ class _MenuState extends State<Menu> {
                 widget.updatePosition(2);
                 controller.toggle();
               },
-              title: 'Settings',
+              title: context.l10n.menu_settings_lable,
               themeIndex: widget.themeIndex,
             ),
             NavDrawerListTile(
@@ -129,7 +130,7 @@ class _MenuState extends State<Menu> {
                   ),
                 );
               },
-              title: 'Logout',
+              title: context.l10n.menu_logout_lable,
               themeIndex: widget.themeIndex,
             ),
             NavDrawerListTile(
@@ -140,7 +141,7 @@ class _MenuState extends State<Menu> {
                   'https://github.com/CCExtractor/Flood_Mobile#usage--screenshots',
                 ));
               },
-              title: 'GitHub',
+              title: context.l10n.menu_github_lable,
               themeIndex: widget.themeIndex,
             ),
             NavDrawerListTile(
@@ -150,7 +151,7 @@ class _MenuState extends State<Menu> {
                 widget.updatePosition(4);
                 controller.toggle();
               },
-              title: 'About',
+              title: context.l10n.menu_about_lable,
               themeIndex: widget.themeIndex,
             ),
           ],

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flood_mobile/Blocs/bloc_provider_list.dart';
 import 'package:flood_mobile/Pages/login_screen/login_screen.dart';
 import 'package:flood_mobile/Pages/login_screen/widgets/login_screen_textfield.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,6 +14,9 @@ void main() {
     return MultiBlocProvider(
       providers: BlocProviders.multiBlocProviders,
       child: MaterialApp(
+        locale: Locale('en'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Material(
           child: LoginScreen(),
         ),

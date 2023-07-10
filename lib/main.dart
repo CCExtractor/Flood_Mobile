@@ -1,4 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
 import 'package:flood_mobile/Notifications/notification_controller.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Notifications/notification_channels.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flood_mobile/Route/route_generator.dart';
 import 'package:flood_mobile/Blocs/bloc_provider_list.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,14 +42,23 @@ class MyApp extends StatelessWidget {
     ]);
     return MultiBlocProvider(
       providers: BlocProviders.multiBlocProviders,
-      child: KeyboardDismissOnTap(
-        child: MaterialApp(
-          navigatorKey: NavigationService.navigatorKey,
-          debugShowCheckedModeBanner: false,
-          title: 'Flood Mobile',
-          onGenerateInitialRoutes: RouteGenerator.onGenerateInitialRoutes,
-          onGenerateRoute: RouteGenerator.generateRoute,
-        ),
+      child: BlocBuilder<LanguageBloc, LanguageState>(
+        builder: (context, state) {
+          BlocProvider.of<LanguageBloc>(context, listen: false)
+              .add(GetPreviousLanguageEvent());
+          return KeyboardDismissOnTap(
+            child: MaterialApp(
+              locale: state.locale,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              navigatorKey: NavigationService.navigatorKey,
+              debugShowCheckedModeBanner: false,
+              title: 'Flood Mobile',
+              onGenerateInitialRoutes: RouteGenerator.onGenerateInitialRoutes,
+              onGenerateRoute: RouteGenerator.generateRoute,
+            ),
+          );
+        },
       ),
     );
   }

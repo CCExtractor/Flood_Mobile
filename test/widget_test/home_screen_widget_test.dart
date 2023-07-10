@@ -1,5 +1,6 @@
 import "dart:io";
 import "package:bloc_test/bloc_test.dart";
+import "package:flood_mobile/Blocs/language_bloc/language_bloc.dart";
 import "package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart";
 import "package:flood_mobile/Model/notification_model.dart";
 import "package:flood_mobile/Model/single_feed_and_response_model.dart";
@@ -14,6 +15,7 @@ import "package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart";
 import "package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart";
 import "package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart";
 import "package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart";
+import "package:flood_mobile/l10n/l10n.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
@@ -144,9 +146,9 @@ void main() {
         downSpeed: '20 Kb/s'));
   });
   Widget createWidgetUnderTest() {
-    // print(mockHomeScreenBloc.state);
     return MultiBlocProvider(
         providers: [
+          BlocProvider<LanguageBloc>.value(value: LanguageBloc()),
           BlocProvider<UserDetailBloc>.value(value: UserDetailBloc()),
           BlocProvider<HomeScreenBloc>.value(value: mockHomeScreenBloc),
           BlocProvider<ClientSettingsBloc>.value(value: mockClientSettingsBloc),
@@ -161,6 +163,9 @@ void main() {
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
             return MaterialApp(
+              locale: Locale('en'),
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
               home: Material(
                 child: HomeScreen(themeIndex: 2),
               ),

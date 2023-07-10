@@ -1,10 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
 import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flood_mobile/Model/current_user_detail_model.dart';
 import 'package:flood_mobile/Pages/settings_screen/settings_screen.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/settings_text_field.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -79,27 +81,35 @@ void main() {
 
   Widget createWidgetUnderTest() {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider<UserDetailBloc>.value(
-            value: mockUserDetailBloc,
-          ),
-          BlocProvider<HomeScreenBloc>.value(
-            value: HomeScreenBloc(),
-          ),
-          BlocProvider<SSEBloc>.value(
-            value: SSEBloc(),
-          ),
-          BlocProvider<ClientSettingsBloc>.value(
-            value: mockClientSettingsBloc,
-          ),
-          BlocProvider<ThemeBloc>.value(
-            value: ThemeBloc(),
-          ),
-        ],
-        child: MaterialApp(
-            home: Material(
+      providers: [
+        BlocProvider<UserDetailBloc>.value(
+          value: mockUserDetailBloc,
+        ),
+        BlocProvider<HomeScreenBloc>.value(
+          value: HomeScreenBloc(),
+        ),
+        BlocProvider<SSEBloc>.value(
+          value: SSEBloc(),
+        ),
+        BlocProvider<ClientSettingsBloc>.value(
+          value: mockClientSettingsBloc,
+        ),
+        BlocProvider<ThemeBloc>.value(
+          value: ThemeBloc(),
+        ),
+        BlocProvider<LanguageBloc>.value(
+          value: LanguageBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        locale: Locale('en'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Material(
           child: SettingsScreen(themeIndex: 2),
-        )));
+        ),
+      ),
+    );
   }
 
   testWidgets("Check if initial options displayed",
@@ -332,5 +342,32 @@ void main() {
         findsOneWidget);
 
     expect(find.widgetWithText(ElevatedButton, 'Add'), findsOneWidget);
+  });
+
+  testWidgets('Check User Interface Section', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetUnderTest());
+    expect(find.text('Bandwidth'), findsOneWidget);
+    await tester.tap(find.text('Bandwidth'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('User Interface'));
+    await tester.tap(find.text('User Interface'));
+    await tester.pumpAndSettle();
+    expect(find.byKey(Key('User Interface Expansion Card')), findsOneWidget);
+    expect(find.byKey(Key('User Interface options display column')),
+        findsOneWidget);
+    expect(find.byKey(Key('Select Language Dropdown')), findsOneWidget);
+    expect(find.text('Language'), findsOneWidget);
+    expect(find.text('Automatic'), findsOneWidget);
+    await tester.tap(find.text('Automatic'));
+    await tester.pumpAndSettle();
+    expect(find.text('English'), findsOneWidget);
+    expect(find.text('हिन्दी'), findsOneWidget);
+    await tester.tap(find.text('हिन्दी'));
+    await tester.pumpAndSettle();
+    expect(find.text('हिन्दी'), findsOneWidget);
+    expect(find.widgetWithText(ElevatedButton, 'Set'), findsOneWidget);
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Set'));
+    await tester.pumpAndSettle();
+    expect(find.text('Language Set Successfully'), findsOneWidget);
   });
 }

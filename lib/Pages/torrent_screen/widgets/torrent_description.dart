@@ -4,6 +4,7 @@ import 'package:flood_mobile/Route/routes.dart';
 import 'package:flood_mobile/Pages/torrent_screen/services/date_converter.dart';
 import 'package:flood_mobile/Services/file_size_helper.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class TorrentDescription extends StatelessWidget {
@@ -11,16 +12,17 @@ class TorrentDescription extends StatelessWidget {
   final int themeIndex;
   final double hp;
   final double wp;
-  const TorrentDescription(
-      {Key? key,
-      required this.model,
-      required this.themeIndex,
-      required this.hp,
-      required this.wp})
-      : super(key: key);
+  const TorrentDescription({
+    Key? key,
+    required this.model,
+    required this.themeIndex,
+    required this.hp,
+    required this.wp,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = context.l10n;
     return Card(
       color: ThemeBloc.theme(themeIndex).primaryColorLight,
       child: Padding(
@@ -32,7 +34,7 @@ class TorrentDescription extends StatelessWidget {
               width: double.infinity,
             ),
             Text(
-              'General',
+              l10n.torrent_description_general,
               style: TextStyle(
                   color: ThemeBloc.theme(themeIndex).textTheme.bodyLarge?.color,
                   fontWeight: FontWeight.bold),
@@ -43,7 +45,7 @@ class TorrentDescription extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Date Added'),
+                Text(l10n.torrent_description_date_added),
                 Text(dateConverter(timestamp: model.dateAdded.toInt())),
               ],
             ),
@@ -53,7 +55,7 @@ class TorrentDescription extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Date Created'),
+                Text(l10n.torrent_description_date_created),
                 Text(dateConverter(timestamp: model.dateCreated.toInt())),
               ],
             ),
@@ -63,7 +65,7 @@ class TorrentDescription extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Location'),
+                Text(l10n.torrent_description_location),
                 Flexible(
                   child: Container(
                     padding: EdgeInsets.only(left: wp * 0.1),
@@ -79,14 +81,14 @@ class TorrentDescription extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Tags',
+                  l10n.torrents_add_tags,
                 ),
                 Flexible(
                   child: Container(
                     padding: EdgeInsets.only(left: wp * 0.17),
                     child: Text((model.tags.length != 0)
                         ? model.tags.toList().toString()
-                        : 'None'),
+                        : l10n.torrent_description_tags_none),
                   ),
                 ),
               ],
@@ -95,7 +97,7 @@ class TorrentDescription extends StatelessWidget {
               height: hp * 0.03,
             ),
             Text(
-              'Transfer',
+              l10n.torrent_description_transfer,
               style: TextStyle(
                   color: ThemeBloc.theme(themeIndex).textTheme.bodyLarge?.color,
                   fontWeight: FontWeight.bold),
@@ -106,9 +108,9 @@ class TorrentDescription extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Peers'),
+                Text(l10n.torrent_description_peers),
                 Text(model.peersConnected.toInt().toString() +
-                    ' connected of ' +
+                    l10n.torrent_description_connected_of +
                     model.peersTotal.toInt().toString()),
               ],
             ),
@@ -118,9 +120,9 @@ class TorrentDescription extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Seeds'),
+                Text(l10n.torrent_description_seeds),
                 Text(model.seedsConnected.toInt().toString() +
-                    ' connected of ' +
+                    l10n.torrent_description_connected_of +
                     model.seedsTotal.toInt().toString()),
               ],
             ),
@@ -128,7 +130,7 @@ class TorrentDescription extends StatelessWidget {
               height: hp * 0.03,
             ),
             Text(
-              'Torrent',
+              l10n.menu_torrent_lable,
               style: TextStyle(
                   color: ThemeBloc.theme(themeIndex).textTheme.bodyLarge?.color,
                   fontWeight: FontWeight.bold),
@@ -139,7 +141,7 @@ class TorrentDescription extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Size'),
+                Text(l10n.torrent_description_size),
                 Text(filesize(model.sizeBytes.toInt())),
               ],
             ),
@@ -150,9 +152,11 @@ class TorrentDescription extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Type',
+                  l10n.torrent_description_type,
                 ),
-                Text(model.isPrivate ? 'Private' : 'Public'),
+                Text(model.isPrivate
+                    ? l10n.torrent_description_type_private
+                    : l10n.torrent_description_type_public),
               ],
             ),
             SizedBox(
@@ -195,7 +199,7 @@ class TorrentDescription extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                      "Files",
+                      l10n.torrent_description_Files,
                       style: TextStyle(
                         color: ThemeBloc.theme(themeIndex)
                             .textTheme

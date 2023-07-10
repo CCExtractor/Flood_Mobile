@@ -1,6 +1,7 @@
 import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 
@@ -33,7 +34,7 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
             height: 5,
           ),
           Text(
-            'Delete Torrent',
+            context.l10n.delete_torrent,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
           ),
           SizedBox(
@@ -41,8 +42,8 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
           ),
           Text(
             widget.torrents.length > 1
-                ? 'Are you sure you want to delete ${widget.torrents.length} torrents?'
-                : 'Are you sure you want to delete the torrent?',
+                ? context.l10n.multi_torrent_delete_info(widget.torrents.length)
+                : context.l10n.single_torrent_delete_info,
             style: TextStyle(fontSize: 16),
           ),
           SizedBox(
@@ -64,7 +65,7 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                 },
               ),
               Text(
-                'Delete with data',
+                context.l10n.delete_with_data_text,
                 style: TextStyle(fontSize: 16),
               )
             ],
@@ -92,7 +93,7 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                     ),
                     child: Center(
                       child: Text(
-                        "No",
+                        context.l10n.button_no,
                         style: TextStyle(
                           color: ThemeBloc.theme(widget.themeIndex)
                               .textTheme
@@ -130,8 +131,8 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
 
                       final deleteTorrentSnackBar = addFloodSnackBar(
                           SnackbarType.caution,
-                          'Torrent deleted successfuly',
-                          'Dismiss');
+                          context.l10n.torrent_delete_snackbar,
+                          context.l10n.button_dismiss);
 
                       ScaffoldMessenger.of(context).clearSnackBars();
                       ScaffoldMessenger.of(context)
@@ -146,7 +147,7 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                     ),
                     child: Center(
                       child: Text(
-                        "Yes",
+                        context.l10n.button_yes,
                         style: TextStyle(
                           color: ThemeBloc.theme(widget.themeIndex)
                               .textTheme

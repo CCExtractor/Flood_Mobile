@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
 import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
 import 'package:flood_mobile/Model/notification_model.dart';
 import 'package:flood_mobile/Model/single_feed_and_response_model.dart';
@@ -10,6 +11,7 @@ import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dar
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -90,8 +92,12 @@ void main() {
         BlocProvider<ApiBloc>(
           create: (context) => ApiBloc(),
         ),
+        BlocProvider<LanguageBloc>.value(value: LanguageBloc()),
       ],
       child: MaterialApp(
+        locale: Locale('en'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
           body: RSSFeedHomePage(themeIndex: 2),
         ),

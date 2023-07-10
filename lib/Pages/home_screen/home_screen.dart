@@ -10,6 +10,7 @@ import 'package:flood_mobile/Pages/widgets/toast_component.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -156,7 +157,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     screenCurrent = SettingsScreen(themeIndex: themeIndex);
                     break;
                   case 4:
-                    print(position);
                     screenCurrent = AboutScreen(themeIndex: themeIndex);
                     break;
                 }
@@ -175,7 +175,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             BlocProvider.of<MultipleSelectTorrentBloc>(context,
                                 listen: false);
                         return WillPopScope(
-                          onWillPop: () => onBackPressed(timeBackPressed),
+                          onWillPop: () =>
+                              onBackPressed(timeBackPressed, context),
                           child: Scaffold(
                             appBar: AppBar(
                               key: Key('AppBar $themeIndex'),
@@ -285,13 +286,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-Future<bool> onBackPressed(DateTime timeBackPressed) async {
+Future<bool> onBackPressed(
+    DateTime timeBackPressed, BuildContext context) async {
   final differnce = DateTime.now().difference(timeBackPressed);
   final isExitWarning = differnce >= Duration(seconds: 2);
   timeBackPressed = DateTime.now();
 
   if (isExitWarning) {
-    Toasts.showExitWarningToast(msg: 'Press back button again to exit');
+    Toasts.showExitWarningToast(msg: context.l10n.home_screen_back_press_toast);
     return false;
   } else {
     Fluttertoast.cancel();
