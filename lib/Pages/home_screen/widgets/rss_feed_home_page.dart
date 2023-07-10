@@ -1521,11 +1521,11 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                           const EdgeInsets.all(
                                                               5.0),
                                                       child: Text(
-                                                        tagLable.length <= 20
+                                                        tagLable.length <= 17
                                                             ? tagLable
                                                             : tagLable
                                                                     .substring(
-                                                                        0, 20) +
+                                                                        0, 17) +
                                                                 "..",
                                                         style: TextStyle(
                                                             fontSize: 12),
