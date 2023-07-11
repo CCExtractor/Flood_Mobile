@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
 import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
+import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flood_mobile/Model/current_user_detail_model.dart';
 import 'package:flood_mobile/Pages/settings_screen/settings_screen.dart';
@@ -99,6 +100,9 @@ void main() {
         ),
         BlocProvider<LanguageBloc>.value(
           value: LanguageBloc(),
+        ),
+        BlocProvider<UserInterfaceBloc>.value(
+          value: UserInterfaceBloc(),
         ),
       ],
       child: MaterialApp(
@@ -357,10 +361,9 @@ void main() {
         findsOneWidget);
     expect(find.byKey(Key('Select Language Dropdown')), findsOneWidget);
     expect(find.text('Language'), findsOneWidget);
-    expect(find.text('Automatic'), findsOneWidget);
     await tester.tap(find.text('Automatic'));
     await tester.pumpAndSettle();
-    expect(find.text('English'), findsOneWidget);
+    expect(find.text('Automatic'), findsNWidgets(2));
     expect(find.text('हिन्दी'), findsOneWidget);
     await tester.tap(find.text('हिन्दी'));
     await tester.pumpAndSettle();
@@ -369,5 +372,44 @@ void main() {
     await tester.tap(find.widgetWithText(ElevatedButton, 'Set'));
     await tester.pumpAndSettle();
     expect(find.text('Language Set Successfully'), findsOneWidget);
+    await tester.drag(find.text('Torrent Screen Items'), Offset(0.0, -300.0));
+    await tester.pumpAndSettle();
+    expect(find.byType(CheckboxListTile), findsNWidgets(10));
+    expect(find.text('Torrent Screen Items'), findsOneWidget);
+    expect(find.text('Date Added'), findsOneWidget);
+    expect(tester.widget<CheckboxListTile>(find.byKey(Key('Date Added'))).value,
+        true);
+    expect(find.text('Date Created'), findsOneWidget);
+    expect(
+        tester.widget<CheckboxListTile>(find.byKey(Key('Date Created'))).value,
+        true);
+    expect(find.text('Ratio'), findsOneWidget);
+    expect(
+        tester.widget<CheckboxListTile>(find.byKey(Key('Ratio'))).value, false);
+
+    expect(find.text('Location'), findsOneWidget);
+    expect(tester.widget<CheckboxListTile>(find.byKey(Key('Location'))).value,
+        true);
+    expect(find.text('Tags'), findsOneWidget);
+    expect(
+        tester.widget<CheckboxListTile>(find.byKey(Key('Tags'))).value, true);
+    await tester.drag(find.text('Context Menu Items'), Offset(0.0, -300.0));
+    await tester.pumpAndSettle();
+    expect(find.text('Delete'), findsOneWidget);
+    expect(
+        tester.widget<CheckboxListTile>(find.byKey(Key('Delete'))).value, true);
+    expect(find.text('Set Tags'), findsOneWidget);
+    expect(tester.widget<CheckboxListTile>(find.byKey(Key('Set Tags'))).value,
+        true);
+    expect(find.text('Check Hash'), findsOneWidget);
+    expect(tester.widget<CheckboxListTile>(find.byKey(Key('Check Hash'))).value,
+        true);
+    expect(find.text('Reannounce'), findsOneWidget);
+    expect(tester.widget<CheckboxListTile>(find.byKey(Key('Reannounce'))).value,
+        false);
+    expect(find.text('Set Trackers'), findsOneWidget);
+    expect(
+        tester.widget<CheckboxListTile>(find.byKey(Key('Set Trackers'))).value,
+        false);
   });
 }

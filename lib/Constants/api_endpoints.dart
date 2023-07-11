@@ -15,10 +15,17 @@ class ApiEndpoints {
   static String addTorrentFile = '/api/torrents/add-files';
   static String deleteTorrent = '/api/torrents/delete';
   static String setTags = '/api/torrents/tags';
+  static String setTrackers = '/api/torrents/trackers';
+  static String updateInitialSeeding = '/api/torrents/initial-seeding';
+  static String updateSequential = '/api/torrents/sequential';
+  static String reannouncesTorrents = '/api/torrents/reannounce';
+  static String updatePriority = '/api/torrents/priority';
+  static String getTrackersList = '/api/torrents/';
 
   // Client settings endpoints
   static String getClientSettingsUrl = '/api/client/settings';
   static String setClientSettingsUrl = '/api/client/settings';
+  static String checkClientConeection = '/api/client/connection-test';
 
   // Torrent content endpoint
   // api/torrents/{hash}/contents

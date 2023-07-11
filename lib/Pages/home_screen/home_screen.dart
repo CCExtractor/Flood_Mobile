@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:badges/badges.dart';
+import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
 import 'package:flood_mobile/Notifications/notification_controller.dart';
 import 'package:flood_mobile/Pages/home_screen/widgets/add_torrent_file.dart';
 import 'package:flood_mobile/Pages/home_screen/widgets/menu_widget.dart';
@@ -55,6 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
     _processInitialUri();
     _listenForUri();
     AuthApi.getUsersList(context);
+    BlocProvider.of<UserInterfaceBloc>(context, listen: false)
+        .add(GetPreviousSetUserInterfaceEvent());
   }
 
   @override

@@ -1,6 +1,8 @@
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
+import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
+import 'package:flood_mobile/Model/user_interface_model.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/authentication_section.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/bandwidth_section.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/connectivity_section.dart';
@@ -11,7 +13,6 @@ import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/Pages/widgets/text_size.dart';
 import 'package:flood_mobile/Services/transfer_speed_manager.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
-import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,7 +71,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String downSpeed = '1 kB/s';
 
   // *Authentication
-  String currentUsername = '';
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   TextEditingController pathController = new TextEditingController();
@@ -84,10 +84,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String client = 'rTorrent';
   GlobalKey<FormState> _authenticationformKey = GlobalKey<FormState>();
 
+  // *User Interface
+  Map<String, bool> torrentInfo = {};
+  Map<String, bool> contextMenuInfo = {};
+
   @override
   void didChangeDependencies() {
     ClientSettingsModel model =
         BlocProvider.of<ClientSettingsBloc>(context).clientSettings;
+    final UserInterfaceModel userInterfaceModel =
+        BlocProvider.of<UserInterfaceBloc>(context).state.model;
     setState(() {
       // *Bandwidth Initialization
       globalDownloadRateController = new TextEditingController(
@@ -142,10 +148,43 @@ class _SettingsScreenState extends State<SettingsScreen> {
           TransferSpeedManager.valToSpeedMap[model.throttleGlobalUpSpeed] ??
               'Unlimited';
 
-      // Authentication Initialization
+      // *User Interface Initialization
+      final AppLocalizations l10n = context.l10n;
+      torrentInfo = {
+        l10n.torrent_description_date_added: userInterfaceModel.showDateAdded,
+        l10n.torrent_description_date_created:
+            userInterfaceModel.showDateCreated,
+        l10n.torrent_description_ratio: userInterfaceModel.showRatio,
+        l10n.torrent_description_location: userInterfaceModel.showLocation,
+        l10n.torrents_add_tags: userInterfaceModel.showTags,
+        l10n.torrent_description_trackers: userInterfaceModel.showTrackers,
+        l10n.torrent_description_trackers_message:
+            userInterfaceModel.showTrackersMessage,
+        l10n.torrent_description_download_speed:
+            userInterfaceModel.showDownloadSpeed,
+        l10n.torrent_description_upload_speed:
+            userInterfaceModel.showUploadSpeed,
+        l10n.torrent_description_peers: userInterfaceModel.showPeers,
+        l10n.torrent_description_seeds: userInterfaceModel.showSeeds,
+        l10n.torrent_description_size: userInterfaceModel.showSize,
+        l10n.torrent_description_type: userInterfaceModel.showType,
+        l10n.torrent_description_hash: userInterfaceModel.showHash,
+      };
 
-      currentUsername =
-          BlocProvider.of<UserDetailBloc>(context, listen: false).username;
+      contextMenuInfo = {
+        l10n.multi_torrents_actions_delete: userInterfaceModel.showDelete,
+        l10n.torrents_set_tags_heading: userInterfaceModel.showSetTags,
+        l10n.torrent_check_hash: userInterfaceModel.showCheckHash,
+        l10n.torrents_reannounce: userInterfaceModel.showReannounce,
+        l10n.torrents_set_trackers_heading: userInterfaceModel.showSetTrackers,
+        l10n.torrents_genrate_magnet_link:
+            userInterfaceModel.showGenerateMagnetLink,
+        l10n.set_priority_heading: userInterfaceModel.showPriority,
+        l10n.torrents_initial_seeding: userInterfaceModel.showInitialSeeding,
+        l10n.torrents_sequential_download:
+            userInterfaceModel.showSequentialDownload,
+        l10n.torrents_download_torrent: userInterfaceModel.showDownloadTorrent,
+      };
     });
     super.didChangeDependencies();
   }
@@ -153,12 +192,51 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     double hp = MediaQuery.of(context).size.height;
+    final AppLocalizations l10n = context.l10n;
     return KeyboardDismissOnTap(
       child: Scaffold(
         floatingActionButton: FloatingActionButton.extended(
           elevation: 0,
           backgroundColor: ThemeBloc.theme(widget.themeIndex).primaryColorDark,
           onPressed: () {
+            BlocProvider.of<UserInterfaceBloc>(context, listen: false)
+                .add(UpdateUserInterfaceEvent(
+                    model: UserInterfaceModel(
+              showDateAdded: torrentInfo[l10n.torrent_description_date_added]!,
+              showDateCreated:
+                  torrentInfo[l10n.torrent_description_date_created]!,
+              showRatio: torrentInfo[l10n.torrent_description_ratio]!,
+              showLocation: torrentInfo[l10n.torrent_description_location]!,
+              showTags: torrentInfo[l10n.torrents_add_tags]!,
+              showTrackers: torrentInfo[l10n.torrent_description_trackers]!,
+              showTrackersMessage:
+                  torrentInfo[l10n.torrent_description_trackers_message]!,
+              showDownloadSpeed:
+                  torrentInfo[l10n.torrent_description_download_speed]!,
+              showUploadSpeed:
+                  torrentInfo[l10n.torrent_description_upload_speed]!,
+              showPeers: torrentInfo[l10n.torrent_description_peers]!,
+              showSeeds: torrentInfo[l10n.torrent_description_seeds]!,
+              showSize: torrentInfo[l10n.torrent_description_size]!,
+              showType: torrentInfo[l10n.torrent_description_type]!,
+              showHash: torrentInfo[l10n.torrent_description_hash]!,
+              showDelete: contextMenuInfo[l10n.multi_torrents_actions_delete]!,
+              showSetTags: contextMenuInfo[l10n.torrents_set_tags_heading]!,
+              showCheckHash: contextMenuInfo[l10n.torrent_check_hash]!,
+              showReannounce: contextMenuInfo[l10n.torrents_reannounce]!,
+              showSetTrackers:
+                  contextMenuInfo[l10n.torrents_set_trackers_heading]!,
+              showGenerateMagnetLink:
+                  contextMenuInfo[l10n.torrents_genrate_magnet_link]!,
+              showPriority: contextMenuInfo[l10n.set_priority_heading]!,
+              showInitialSeeding:
+                  contextMenuInfo[l10n.torrents_initial_seeding]!,
+              showSequentialDownload:
+                  contextMenuInfo[l10n.torrents_sequential_download]!,
+              showDownloadTorrent:
+                  contextMenuInfo[l10n.torrents_download_torrent]!,
+            )));
+
             ClientSettingsModel clientSettingsModel =
                 BlocProvider.of<ClientSettingsBloc>(context).clientSettings;
             ClientSettingsModel newClientSettingsModel =
@@ -207,8 +285,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
             final changeSettingsSnackBar = addFloodSnackBar(
                 SnackbarType.success,
-                context.l10n.setting_button_save_snackbar,
-                context.l10n.button_dismiss);
+                l10n.setting_button_save_snackbar,
+                l10n.button_dismiss);
 
             ScaffoldMessenger.of(context).clearSnackBars();
             ScaffoldMessenger.of(context).showSnackBar(changeSettingsSnackBar);
@@ -218,7 +296,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             color: Colors.white,
           ),
           label: Text(
-            context.l10n.button_save,
+            l10n.button_save,
             style: TextStyle(
                 color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
           ),
@@ -230,7 +308,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                LText(text: context.l10n.setting_screen_heading),
+                LText(text: l10n.setting_screen_heading),
                 SizedBox(height: 30),
                 // *Bandwidth Section
                 BandwidthSection(
@@ -346,6 +424,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 UserInterfaceSection(
                   themeIndex: widget.themeIndex,
                   hp: hp,
+                  torrentScreenItems: torrentInfo,
+                  contextMenuItems: contextMenuInfo,
                 ),
                 SizedBox(
                   height: 200,
