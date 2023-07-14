@@ -1,16 +1,30 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:badges/badges.dart';
-import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
-import 'package:flood_mobile/Notifications/notification_controller.dart';
-import 'package:flood_mobile/Pages/home_screen/widgets/add_torrent_file.dart';
-import 'package:flood_mobile/Pages/home_screen/widgets/menu_widget.dart';
-import 'package:flood_mobile/Pages/home_screen/widgets/popup_menu_buttons.dart';
-import 'package:flood_mobile/Pages/widgets/toast_component.dart';
+import 'package:battery_plus/battery_plus.dart';
+import 'package:flood_mobile/Api/auth_api.dart';
+import 'package:flood_mobile/Api/client_api.dart';
+import 'package:flood_mobile/Api/notifications_api.dart';
+import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
+import 'package:flood_mobile/Blocs/power_management_bloc/power_management_bloc.dart';
+import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
+import 'package:flood_mobile/Notifications/notification_controller.dart';
+import 'package:flood_mobile/Pages/about_screen/about_screen.dart';
+import 'package:flood_mobile/Pages/home_screen/widgets/add_torrent_file.dart';
+import 'package:flood_mobile/Pages/home_screen/widgets/dark_transition.dart';
+import 'package:flood_mobile/Pages/home_screen/widgets/menu_widget.dart';
+import 'package:flood_mobile/Pages/home_screen/widgets/notification_popup_dialogue_container.dart';
+import 'package:flood_mobile/Pages/home_screen/widgets/popup_menu_buttons.dart';
+import 'package:flood_mobile/Pages/home_screen/widgets/rss_feed_button_widget.dart';
+import 'package:flood_mobile/Pages/settings_screen/settings_screen.dart';
+import 'package:flood_mobile/Pages/torrent_screen/torrent_screen.dart';
+import 'package:flood_mobile/Pages/widgets/toast_component.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter/scheduler.dart';
@@ -18,16 +32,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
-import 'package:flood_mobile/Api/auth_api.dart';
-import 'package:flood_mobile/Api/client_api.dart';
-import 'package:flood_mobile/Api/notifications_api.dart';
-import 'package:flood_mobile/Pages/about_screen/about_screen.dart';
-import 'package:flood_mobile/Pages/settings_screen/settings_screen.dart';
-import 'package:flood_mobile/Pages/torrent_screen/torrent_screen.dart';
-import 'package:flood_mobile/Pages/home_screen/widgets/rss_feed_button_widget.dart';
-import 'package:flood_mobile/Pages/home_screen/widgets/dark_transition.dart';
-import 'package:flood_mobile/Pages/home_screen/widgets/notification_popup_dialogue_container.dart';
-import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:uri_to_file/uri_to_file.dart';
 
@@ -47,6 +51,32 @@ class _HomeScreenState extends State<HomeScreen> {
   late String directoryDefault;
   DateTime timeBackPressed = DateTime.now();
   bool isDark = false;
+  final Battery _battery = Battery();
+  BatteryState? _batteryState;
+  StreamSubscription<BatteryState>? _batteryStateSubscription;
+
+  Future<void> _updateBatteryState(BatteryState state) async {
+    if (_batteryState == state) return;
+    _batteryState = state;
+    BlocProvider.of<PowerManagementBloc>(context, listen: false).add(
+      SetDownloadChargingConnectedEvent(currentBatteryState: _batteryState),
+    );
+
+    bool isChargingConnected = BlocProvider.of<PowerManagementBloc>(context)
+        .state
+        .downloadChargingConnected;
+    if (isChargingConnected && !(_batteryState == BatteryState.charging)) {
+      BlocProvider.of<HomeScreenBloc>(context, listen: false)
+          .state
+          .torrentList
+          .forEach((element) {
+        if (element.status.contains('downloading')) {
+          TorrentApi.stopTorrent(hashes: [element.hash], context: context);
+        }
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -61,12 +91,22 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void dispose() {
+    if (_batteryStateSubscription != null) {
+      _batteryStateSubscription!.cancel();
+    }
+    super.dispose();
+  }
+
+  @override
   void didChangeDependencies() {
     //Initialize the app
     BlocProvider.of<SSEBloc>(context, listen: false)
         .add(SetSSEListenEvent(context: context));
     ClientApi.getClientSettings(context);
     NotificationApi.getNotifications(context: context);
+    _batteryStateSubscription =
+        _battery.onBatteryStateChanged.listen(_updateBatteryState);
     super.didChangeDependencies();
   }
 
