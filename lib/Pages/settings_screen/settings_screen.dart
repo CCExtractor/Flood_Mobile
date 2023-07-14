@@ -88,6 +88,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   // *User Interface
   Map<String, bool> torrentInfo = {};
   Map<String, bool> contextMenuInfo = {};
+  TagPreferenceButtonValue tagPreferenceButtonValue =
+      TagPreferenceButtonValue.multiSelection;
 
   @override
   void didChangeDependencies() {
@@ -152,6 +154,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       // *User Interface Initialization
       final AppLocalizations l10n = context.l10n;
       torrentInfo = {
+        l10n.show_progress_bar_option: userInterfaceModel.showProgressBar,
         l10n.torrent_description_date_added: userInterfaceModel.showDateAdded,
         l10n.torrent_description_date_created:
             userInterfaceModel.showDateCreated,
@@ -186,6 +189,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             userInterfaceModel.showSequentialDownload,
         l10n.torrents_download_torrent: userInterfaceModel.showDownloadTorrent,
       };
+
+      tagPreferenceButtonValue = userInterfaceModel.tagPreferenceButtonValue;
     });
     super.didChangeDependencies();
   }
@@ -200,43 +205,53 @@ class _SettingsScreenState extends State<SettingsScreen> {
           elevation: 0,
           backgroundColor: ThemeBloc.theme(widget.themeIndex).primaryColorDark,
           onPressed: () {
-            BlocProvider.of<UserInterfaceBloc>(context, listen: false)
-                .add(UpdateUserInterfaceEvent(
+            BlocProvider.of<UserInterfaceBloc>(context, listen: false).add(
+                UpdateUserInterfaceEvent(
                     model: UserInterfaceModel(
-              showDateAdded: torrentInfo[l10n.torrent_description_date_added]!,
-              showDateCreated:
-                  torrentInfo[l10n.torrent_description_date_created]!,
-              showRatio: torrentInfo[l10n.torrent_description_ratio]!,
-              showLocation: torrentInfo[l10n.torrent_description_location]!,
-              showTags: torrentInfo[l10n.torrents_add_tags]!,
-              showTrackers: torrentInfo[l10n.torrent_description_trackers]!,
-              showTrackersMessage:
-                  torrentInfo[l10n.torrent_description_trackers_message]!,
-              showDownloadSpeed:
-                  torrentInfo[l10n.torrent_description_download_speed]!,
-              showUploadSpeed:
-                  torrentInfo[l10n.torrent_description_upload_speed]!,
-              showPeers: torrentInfo[l10n.torrent_description_peers]!,
-              showSeeds: torrentInfo[l10n.torrent_description_seeds]!,
-              showSize: torrentInfo[l10n.torrent_description_size]!,
-              showType: torrentInfo[l10n.torrent_description_type]!,
-              showHash: torrentInfo[l10n.torrent_description_hash]!,
-              showDelete: contextMenuInfo[l10n.multi_torrents_actions_delete]!,
-              showSetTags: contextMenuInfo[l10n.torrents_set_tags_heading]!,
-              showCheckHash: contextMenuInfo[l10n.torrent_check_hash]!,
-              showReannounce: contextMenuInfo[l10n.torrents_reannounce]!,
-              showSetTrackers:
-                  contextMenuInfo[l10n.torrents_set_trackers_heading]!,
-              showGenerateMagnetLink:
-                  contextMenuInfo[l10n.torrents_genrate_magnet_link]!,
-              showPriority: contextMenuInfo[l10n.set_priority_heading]!,
-              showInitialSeeding:
-                  contextMenuInfo[l10n.torrents_initial_seeding]!,
-              showSequentialDownload:
-                  contextMenuInfo[l10n.torrents_sequential_download]!,
-              showDownloadTorrent:
-                  contextMenuInfo[l10n.torrents_download_torrent]!,
-            )));
+                        showProgressBar:
+                            torrentInfo[l10n.show_progress_bar_option]!,
+                        showDateAdded:
+                            torrentInfo[l10n.torrent_description_date_added]!,
+                        showDateCreated:
+                            torrentInfo[l10n.torrent_description_date_created]!,
+                        showRatio: torrentInfo[l10n.torrent_description_ratio]!,
+                        showLocation:
+                            torrentInfo[l10n.torrent_description_location]!,
+                        showTags: torrentInfo[l10n.torrents_add_tags]!,
+                        showTrackers:
+                            torrentInfo[l10n.torrent_description_trackers]!,
+                        showTrackersMessage: torrentInfo[
+                            l10n.torrent_description_trackers_message]!,
+                        showDownloadSpeed: torrentInfo[
+                            l10n.torrent_description_download_speed]!,
+                        showUploadSpeed:
+                            torrentInfo[l10n.torrent_description_upload_speed]!,
+                        showPeers: torrentInfo[l10n.torrent_description_peers]!,
+                        showSeeds: torrentInfo[l10n.torrent_description_seeds]!,
+                        showSize: torrentInfo[l10n.torrent_description_size]!,
+                        showType: torrentInfo[l10n.torrent_description_type]!,
+                        showHash: torrentInfo[l10n.torrent_description_hash]!,
+                        showDelete: contextMenuInfo[
+                            l10n.multi_torrents_actions_delete]!,
+                        showSetTags:
+                            contextMenuInfo[l10n.torrents_set_tags_heading]!,
+                        showCheckHash:
+                            contextMenuInfo[l10n.torrent_check_hash]!,
+                        showReannounce:
+                            contextMenuInfo[l10n.torrents_reannounce]!,
+                        showSetTrackers: contextMenuInfo[
+                            l10n.torrents_set_trackers_heading]!,
+                        showGenerateMagnetLink:
+                            contextMenuInfo[l10n.torrents_genrate_magnet_link]!,
+                        showPriority:
+                            contextMenuInfo[l10n.set_priority_heading]!,
+                        showInitialSeeding:
+                            contextMenuInfo[l10n.torrents_initial_seeding]!,
+                        showSequentialDownload:
+                            contextMenuInfo[l10n.torrents_sequential_download]!,
+                        showDownloadTorrent:
+                            contextMenuInfo[l10n.torrents_download_torrent]!,
+                        tagPreferenceButtonValue: tagPreferenceButtonValue)));
 
             ClientSettingsModel clientSettingsModel =
                 BlocProvider.of<ClientSettingsBloc>(context).clientSettings;
@@ -428,6 +443,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   hp: hp,
                   torrentScreenItems: torrentInfo,
                   contextMenuItems: contextMenuInfo,
+                  selectedRadioButton: tagPreferenceButtonValue,
+                  tagSelectionOnChange: (value) {
+                    setState(() {
+                      tagPreferenceButtonValue = value!;
+                    });
+                  },
                 ),
                 // *Power Management Section
                 PowerManagementSection(

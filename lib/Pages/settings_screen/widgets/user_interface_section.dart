@@ -5,6 +5,7 @@ import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
 import 'package:flood_mobile/Constants/languages.dart';
+import 'package:flood_mobile/Model/user_interface_model.dart';
 import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/Pages/widgets/text_size.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
@@ -15,6 +16,8 @@ class UserInterfaceSection extends StatefulWidget {
   final double hp;
   Map<String, bool> torrentScreenItems;
   Map<String, bool> contextMenuItems;
+  final TagPreferenceButtonValue selectedRadioButton;
+  final void Function(TagPreferenceButtonValue? value) tagSelectionOnChange;
 
   UserInterfaceSection({
     Key? key,
@@ -22,6 +25,8 @@ class UserInterfaceSection extends StatefulWidget {
     required this.hp,
     required this.torrentScreenItems,
     required this.contextMenuItems,
+    required this.selectedRadioButton,
+    required this.tagSelectionOnChange,
   }) : super(key: key);
 
   @override
@@ -259,6 +264,38 @@ class _UserInterfaceSectionState extends State<UserInterfaceSection> {
                       itemCount: widget.contextMenuItems.length,
                     ),
                   ),
+                  SizedBox(height: widget.hp * 0.02),
+                  SText(
+                    text: l10n.tag_selection_heading,
+                    themeIndex: widget.themeIndex,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          horizontalTitleGap: 0,
+                          title: Text(l10n.single_selection_radio_button),
+                          leading: Radio<TagPreferenceButtonValue>(
+                            value: TagPreferenceButtonValue.singleSelection,
+                            groupValue: widget.selectedRadioButton,
+                            onChanged: widget.tagSelectionOnChange,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          horizontalTitleGap: 0,
+                          title: Text(l10n.multi_selection_radio_button),
+                          leading: Radio<TagPreferenceButtonValue>(
+                              value: TagPreferenceButtonValue.multiSelection,
+                              groupValue: widget.selectedRadioButton,
+                              onChanged: widget.tagSelectionOnChange),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               )
             ],
