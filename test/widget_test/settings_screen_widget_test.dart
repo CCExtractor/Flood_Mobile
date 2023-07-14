@@ -376,9 +376,9 @@ void main() {
     await tester.tap(find.widgetWithText(ElevatedButton, 'Set'));
     await tester.pumpAndSettle();
     expect(find.text('Language Set Successfully'), findsOneWidget);
-    await tester.drag(find.text('Torrent Screen Items'), Offset(0.0, -300.0));
+    await tester.drag(find.text('Set'), Offset(0.0, -500.0));
     await tester.pumpAndSettle();
-    expect(find.byType(CheckboxListTile), findsNWidgets(10));
+    expect(find.byType(CheckboxListTile), findsNWidgets(12));
     expect(find.text('Torrent Screen Items'), findsOneWidget);
     expect(find.text('Date Added'), findsOneWidget);
     expect(tester.widget<CheckboxListTile>(find.byKey(Key('Date Added'))).value,
@@ -415,6 +415,9 @@ void main() {
     expect(
         tester.widget<CheckboxListTile>(find.byKey(Key('Set Trackers'))).value,
         false);
+    expect(find.text('Tag Selector Preference'), findsOneWidget);
+    expect(find.text('Single Selection'), findsOneWidget);
+    expect(find.text('Multi Selection'), findsOneWidget);
   });
 
   testWidgets('Check Power Management Section', (WidgetTester tester) async {
