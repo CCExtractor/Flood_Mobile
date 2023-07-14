@@ -283,5 +283,21 @@
     "button_copy": "Kopieren",
     "torrent_screen_items_heading": "Torrent-Bildschirmelemente",
     "torrents_set_trackers_snackbar": "Tracker erfolgreich festgelegt",
-    "context_menu_items_heading": "Elemente im Kontextmenü"    
+    "context_menu_items_heading": "Elemente im Kontextmenü",
+    "wifi_only_title" : "Nur WLAN",
+    "wifi_only_subtitle" : "Torrents werden nur herunter- und hochgeladen, wenn WLAN verbunden ist.",
+    "shutdown_when_download_completes_title" : "Herunterfahren nach Abschluss des Downloads",
+    "shutdown_when_download_completes_subtitle" : "Die App wird heruntergefahren, sobald alle Downloads im Hintergrund abgeschlossen sind.",
+    "keep_CPU_awake_title" : "CPU aktiv halten",
+    "keep_CPU_awake_subtitle" : "Der Bildschirm bleibt immer aktiv. Durch Aktivieren dieser Option wird der Batterieverbrauch erhöht.",
+    "charging_only_title" : "Nur bei angeschlossenem Ladekabel herunterladen",
+    "charging_only_subtitle" : "Torrents werden nur herunter- und hochgeladen, wenn das Gerät an das Ladekabel angeschlossen ist. Alle  Torrents werden angehalten, wenn keine Verbindung zum Ladekabel besteht.",
+    "shut_down_wifi_title" : "WLAN ausschalten",
+    "shut_down_wifi_subtitle" : "Diese Einstellung schaltet WLAN automatisch aus, sobald alle Torrents den Download abgeschlossen haben.",
+    "battery_optimization_title" : "Batterieoptimierung ändern",
+    "battery_optimization_subtitle" : "Diese Einstellung ist erforderlich, um sicherzustellen, dass Benachrichtigungen über den Fortschritt  reibungslos funktionieren.",
+    "battery_low_title": "Downloads bei niedrigem Batteriestand stoppen",
+    "settings_tabs_power_management": "Energiemanagement",
+    "download_chanrging_only_snackbar": "Die Option \"Download nur bei angeschlossenem Ladekabel\" ist aktiviert.\nDeaktivieren Sie diese  Option und versuchen Sie es erneut.",
+    "wifi_only_snackbar": "Die Option \"Nur WLAN\" ist aktiviert.\nDeaktivieren Sie diese Option und versuchen Sie es erneut."    
 }

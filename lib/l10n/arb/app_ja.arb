@@ -284,5 +284,21 @@
     "button_copy": "コピー",
     "torrent_screen_items_heading": "トレント画面の項目",
     "torrents_set_trackers_snackbar": "トラッカーが正常に設定されました",
-    "context_menu_items_heading": "コンテキストメニューの項目"
+    "context_menu_items_heading": "コンテキストメニューの項目",
+    "wifi_only_title" : "Wi-Fiのみ",
+    "wifi_only_subtitle" : "Wi-Fiに接続されている場合のみ、トレントをダウンロードおよびアップロードします。",
+    "shutdown_when_download_completes_title" : "ダウンロード完了時にシャットダウン",
+    "shutdown_when_download_completes_subtitle" : "すべてのダウンロードがバックグラウンドで完了すると、アプリはシャットダウンされます。",
+    "keep_CPU_awake_title" : "CPUを常に起動",
+    "keep_CPU_awake_subtitle" : "画面が決してスリープ状態になりません。これを有効にするとバッテリーの使用量が増えます。",
+    "charging_only_title" : "充電中のみダウンロード",
+    "charging_only_subtitle" : "トレントは充電中のみダウンロード/アップロードされます。充電器に接続されていない場合、すべてのトレントが一時停止されます。",
+    "shut_down_wifi_title" : "Wi-Fiをシャットダウン",
+    "shut_down_wifi_subtitle" : "この設定は、すべてのトレントのダウンロードが完了した後に自動的にWi-Fiをシャットダウンします。",
+    "battery_optimization_title" : "バッテリー最適化の変更",
+    "battery_optimization_subtitle" : "この設定は、進行状況の通知がスムーズに動作するようにするために必要です。",
+    "battery_low_title": "バッテリーレベルが低い場合はダウンロードを停止",
+    "settings_tabs_power_management": "電源管理",
+    "download_chanrging_only_snackbar": "充電中のみダウンロード設定が有効になっています。\nこの設定をオフにしてもう一度試してください。",
+    "wifi_only_snackbar": "Wi-Fiのみ設定が有効になっています。\nこの設定をオフにしてもう一度試してください。"
 }

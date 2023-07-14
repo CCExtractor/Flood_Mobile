@@ -283,5 +283,21 @@
     "button_copy": "Kopírovat",
     "torrent_screen_items_heading": "Položky obrazovky torrentu",
     "torrents_set_trackers_snackbar": "Trackery úspěšně nastaveny",
-    "context_menu_items_heading": "Položky kontextového menu"
+    "context_menu_items_heading": "Položky kontextového menu",
+    "wifi_only_title" : "Pouze Wi-Fi",
+    "wifi_only_subtitle" : "Torrenty budou stahovány a nahrávány pouze při připojení k Wi-Fi.",
+    "shutdown_when_download_completes_title" : "Vypnout po dokončení stahování",
+    "shutdown_when_download_completes_subtitle" : "Aplikace se vypne poté, co všechna stahování dokončí v pozadí.",
+    "keep_CPU_awake_title" : "Udržovat CPU aktivní",
+    "keep_CPU_awake_subtitle" : "Obrazovka nikdy neusne. Zapnutí této volby zvýší spotřebu baterie.",
+    "charging_only_title" : "Stahovat pouze při připojení k nabíječce",
+    "charging_only_subtitle" : "Torrenty budou stahovány/nahrávány pouze při připojení k nabíječce. Všechny torrenty se pozastaví, když není připojena nabíječka.",
+    "shut_down_wifi_title" : "Vypnout Wi-Fi",
+    "shut_down_wifi_subtitle" : "Tato nastavení automaticky vypnou Wi-Fi poté, co všechny torrenty dokončí stahování.",
+    "battery_optimization_title" : "Změnit optimalizaci baterie",
+    "battery_optimization_subtitle" : "Toto nastavení je nutné zajistit plynulé fungování oznámení o průběhu.",
+    "battery_low_title": "Zastavit stahování při nízké úrovni baterie",
+    "settings_tabs_power_management": "Správa napájení",
+    "download_chanrging_only_snackbar": "Stahování při nabíjení je povoleno.\nVypněte toto nastavení a zkuste to znovu.",
+    "wifi_only_snackbar": "Nastavení pouze Wi-Fi je povoleno.\nVypněte toto nastavení a zkuste to znovu."
 }

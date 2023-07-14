@@ -283,5 +283,21 @@
     "button_copy": "Másolás",
     "torrent_screen_items_heading": "Torrent Képernyő Elemek",
     "torrents_set_trackers_snackbar": "Trackerek sikeresen beállítva",
-    "context_menu_items_heading": "Kontext Menü Elemek"
+    "context_menu_items_heading": "Kontext Menü Elemek",
+    "wifi_only_title" : "Csak WiFi",
+    "wifi_only_subtitle" : "A torrentek csak akkor lesznek letöltve és feltöltve, ha van WiFi kapcsolat.",
+    "shutdown_when_download_completes_title" : "Kikapcsolás, ha a letöltés befejeződik",
+    "shutdown_when_download_completes_subtitle" : "Az alkalmazás leáll, amikor az összes letöltés befejeződik a háttérben.",
+    "keep_CPU_awake_title" : "Tartsa az CPU ébren",
+    "keep_CPU_awake_subtitle" : "A képernyő soha nem alszik el. Az opció engedélyezése növeli az akkumulátor használatot.",
+    "charging_only_title" : "Csak töltéskor történjen letöltés",
+    "charging_only_subtitle" : "A torrentek csak töltéskor lesznek letöltve/feltöltve. Az összes torrent szünetel, ha nincs csatlakoztatva a töltőhöz.",
+    "shut_down_wifi_title" : "WiFi kikapcsolása",
+    "shut_down_wifi_subtitle" : "Ez a beállítás automatikusan kikapcsolja a WiFi-t, amikor az összes torrent letöltése befejeződik.",
+    "battery_optimization_title" : "Akku optimalizálás megváltoztatása",
+    "battery_optimization_subtitle" : "Ez a beállítás szükséges ahhoz, hogy a haladás értesítés zökkenőmentesen működjön.",
+    "battery_low_title": "Letöltés szüneteljen, ha az akkumulátor szint alacsony",
+    "settings_tabs_power_management": "Energiagazdálkodás",
+    "download_chanrging_only_snackbar": "A letöltés töltéskor engedélyezett.\nKapcsolja ki ezt a beállítást, és próbálja újra.",
+    "wifi_only_snackbar": "A csak WiFi beállítás engedélyezett.\nKapcsolja ki ezt a beállítást, és próbálja újra."
 }

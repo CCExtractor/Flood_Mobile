@@ -283,5 +283,21 @@
     "button_copy": "कॉपी करें",
     "torrent_screen_items_heading": "टोरेंट स्क्रीन आइटम्स",
     "context_menu_items_heading": "संदर्भ मेनू आइटम्स",
-    "torrents_set_trackers_snackbar": "ट्रैकर सफलतापूर्वक सेट किए गए"
+    "torrents_set_trackers_snackbar": "ट्रैकर सफलतापूर्वक सेट किए गए",
+    "wifi_only_title" : "केवल WiFi",
+    "wifi_only_subtitle" : "टोरेंट केवल जब WiFi कनेक्ट हो तब ही डाउनलोड और अपलोड करेंगे",
+    "shutdown_when_download_completes_title" : "डाउनलोड पूर्ण होने पर शटडाउन करें",
+    "shutdown_when_download_completes_subtitle" : "सभी डाउनलोड बैकग्राउंड में पूर्ण होने पर ऐप बंद हो जाएगा।",
+    "keep_CPU_awake_title" : "CPU जाग्रत रखें",
+    "keep_CPU_awake_subtitle" : "स्क्रीन कभी नहीं सोएगी। इसे सक्षम करने से बैटरी का उपयोग बढ़ जाएगा।",
+    "charging_only_title" : "केवल चार्जिंग कनेक्ट होने पर डाउनलोड करें",
+    "charging_only_subtitle" : "टोरेंट केवल चार्जिंग के समय ही डाउनलोड/अपलोड करेंगे। सभी टोरेंट चार्जर से जुड़े न होने पर रुक जाएंगे।",
+    "shut_down_wifi_title" : "WiFi बंद करें",
+    "shut_down_wifi_subtitle" : "यह सेटिंग ऑटोमेटिक रूप से WiFi बंद करेगी जब सभी टोरेंट डाउनलोड पूर्ण होंगे।",
+    "battery_optimization_title" : "बैटरी ऑप्टिमाइज़ेशन बदलें",
+    "battery_optimization_subtitle" : "यदि आप प्रगति सूचना को सहजता से काम करना चाहते हैं तो इस सेटिंग की आवश्यकता होती है।",
+    "battery_low_title": "बैटरी स्तर कम होने पर डाउनलोड रोकें",
+    "settings_tabs_power_management": "बिजली प्रबंधन",
+    "download_chanrging_only_snackbar": "चार्जिंग के समय डाउनलोड सेटिंग सक्षम है।\nइस सेटिंग को बंद करें और पुन: प्रयास करें",
+    "wifi_only_snackbar": "केवल WiFi सेटिंग सक्षम है।\nइस सेटिंग को बंद करें और पुन: प्रयास करें"
 }
