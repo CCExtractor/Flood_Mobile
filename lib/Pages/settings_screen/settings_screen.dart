@@ -1,22 +1,23 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
 import 'package:flood_mobile/Model/user_interface_model.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/authentication_section.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/bandwidth_section.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/connectivity_section.dart';
+import 'package:flood_mobile/Pages/settings_screen/widgets/power_management_section.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/resource_section.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/speed_limit_section.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/user_interface_section.dart';
 import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/Pages/widgets/text_size.dart';
 import 'package:flood_mobile/Services/transfer_speed_manager.dart';
-import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 class SettingsScreen extends StatefulWidget {
   final int themeIndex;
@@ -421,11 +422,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   authenticationformKey: _authenticationformKey,
                   themeIndex: widget.themeIndex,
                 ),
+                // *User Interface Section
                 UserInterfaceSection(
                   themeIndex: widget.themeIndex,
                   hp: hp,
                   torrentScreenItems: torrentInfo,
                   contextMenuItems: contextMenuInfo,
+                ),
+                // *Power Management Section
+                PowerManagementSection(
+                  themeIndex: widget.themeIndex,
                 ),
                 SizedBox(
                   height: 200,
