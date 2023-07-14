@@ -378,8 +378,14 @@ void main() {
     expect(find.text('Language Set Successfully'), findsOneWidget);
     await tester.drag(find.text('Set'), Offset(0.0, -500.0));
     await tester.pumpAndSettle();
-    expect(find.byType(CheckboxListTile), findsNWidgets(12));
+    expect(find.byType(CheckboxListTile), findsNWidgets(10));
     expect(find.text('Torrent Screen Items'), findsOneWidget);
+    expect(find.text('Show Progress Bar'), findsOneWidget);
+    expect(
+        tester
+            .widget<CheckboxListTile>(find.byKey(Key('Show Progress Bar')))
+            .value,
+        true);
     expect(find.text('Date Added'), findsOneWidget);
     expect(tester.widget<CheckboxListTile>(find.byKey(Key('Date Added'))).value,
         true);
@@ -394,9 +400,6 @@ void main() {
     expect(find.text('Location'), findsOneWidget);
     expect(tester.widget<CheckboxListTile>(find.byKey(Key('Location'))).value,
         true);
-    expect(find.text('Tags'), findsOneWidget);
-    expect(
-        tester.widget<CheckboxListTile>(find.byKey(Key('Tags'))).value, true);
     await tester.drag(find.text('Context Menu Items'), Offset(0.0, -300.0));
     await tester.pumpAndSettle();
     expect(find.text('Delete'), findsOneWidget);

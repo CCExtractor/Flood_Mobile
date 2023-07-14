@@ -322,5 +322,10 @@
     "notification_stopped": "Arrêté",
     "notification_downloading": "Téléchargement",
     "notification_error": "Erreur de téléchargement",
-    "notification_finished": "Téléchargement terminé"
+    "notification_finished": "Téléchargement terminé",
+    "tag_selection_heading": "Préférence du sélecteur de balises",
+    "single_selection_radio_button": "Sélection unique",
+    "multi_selection_radio_button": "Sélection multiple",
+    "show_progress_bar_option": "Afficher la barre de progression"
+    
 }

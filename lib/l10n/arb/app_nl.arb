@@ -321,5 +321,9 @@
     "notification_stopped": "Gestopt",
     "notification_downloading": "Downloaden",
     "notification_error": "Downloadfout",
-    "notification_finished": "Download voltooid"
+    "notification_finished": "Download voltooid",
+    "tag_selection_heading": "Voorkeur voor tagselectie",
+    "single_selection_radio_button": "Enkele selectie",
+    "multi_selection_radio_button": "Meervoudige selectie",
+    "show_progress_bar_option": "Voortgangsbalk weergeven"
 }

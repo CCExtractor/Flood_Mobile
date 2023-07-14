@@ -272,26 +272,21 @@ class _UserInterfaceSectionState extends State<UserInterfaceSection> {
                   Row(
                     children: [
                       Expanded(
-                        child: ListTile(
+                        child: RadioListTile(
                           contentPadding: EdgeInsets.zero,
-                          horizontalTitleGap: 0,
                           title: Text(l10n.single_selection_radio_button),
-                          leading: Radio<TagPreferenceButtonValue>(
-                            value: TagPreferenceButtonValue.singleSelection,
-                            groupValue: widget.selectedRadioButton,
-                            onChanged: widget.tagSelectionOnChange,
-                          ),
+                          value: TagPreferenceButtonValue.singleSelection,
+                          groupValue: widget.selectedRadioButton,
+                          onChanged: widget.tagSelectionOnChange,
                         ),
                       ),
                       Expanded(
-                        child: ListTile(
+                        child: RadioListTile(
                           contentPadding: EdgeInsets.zero,
-                          horizontalTitleGap: 0,
                           title: Text(l10n.multi_selection_radio_button),
-                          leading: Radio<TagPreferenceButtonValue>(
-                              value: TagPreferenceButtonValue.multiSelection,
-                              groupValue: widget.selectedRadioButton,
-                              onChanged: widget.tagSelectionOnChange),
+                          value: TagPreferenceButtonValue.multiSelection,
+                          groupValue: widget.selectedRadioButton,
+                          onChanged: widget.tagSelectionOnChange,
                         ),
                       ),
                     ],

@@ -5,6 +5,7 @@ void main() {
   group('UserInterfaceModel', () {
     test('fromJson should return a valid UserInterfaceModel object', () {
       final json = {
+        'showProgressBar': true,
         'showDateAdded': true,
         'showDateCreated': false,
         'showRatio': true,
@@ -33,6 +34,7 @@ void main() {
 
       final model = UserInterfaceModel.fromJson(json);
 
+      expect(model.showProgressBar, true);
       expect(model.showDateAdded, true);
       expect(model.showDateCreated, false);
       expect(model.showRatio, true);

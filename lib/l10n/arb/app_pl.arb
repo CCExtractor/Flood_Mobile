@@ -321,5 +321,9 @@
     "notification_stopped": "Zatrzymano",
     "notification_downloading": "Pobieranie",
     "notification_error": "Błąd pobierania",
-    "notification_finished": "Pobieranie zakończone"
+    "notification_finished": "Pobieranie zakończone",
+    "tag_selection_heading": "Preferencje wyboru tagów",
+    "single_selection_radio_button": "Pojedynczy wybór",
+    "multi_selection_radio_button": "Wielokrotny wybór",
+    "show_progress_bar_option": "Pokaż pasek postępu"
 }
