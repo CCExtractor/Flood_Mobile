@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'package:clipboard/clipboard.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
+import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
+import 'package:flood_mobile/Blocs/api_bloc/api_bloc_event.dart';
+import 'package:flood_mobile/Blocs/login_screen_bloc/login_screen_bloc.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Pages/login_screen/widgets/custom_dialog_animation.dart';
 import 'package:flood_mobile/Pages/login_screen/widgets/login_screen_textfield.dart';
 import 'package:flood_mobile/Pages/widgets/toast_component.dart';
 import 'package:flood_mobile/Route/routes.dart';
-import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
-import 'package:flood_mobile/Blocs/api_bloc/api_bloc_event.dart';
-import 'package:flood_mobile/Blocs/login_screen_bloc/login_screen_bloc.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
   final int? themeIndex;

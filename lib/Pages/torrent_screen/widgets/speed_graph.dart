@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:flood_mobile/Model/graph_model.dart';
 import 'package:flood_mobile/Blocs/graph_bloc/graph_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/Model/graph_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';

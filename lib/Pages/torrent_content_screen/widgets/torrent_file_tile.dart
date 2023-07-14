@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/Blocs/torrent_content_screen_bloc/torrent_content_screen_bloc.dart';
 import 'package:flood_mobile/Model/torrent_content_model.dart';
 import 'package:flood_mobile/Route/Arguments/video_stream_screen_arguments.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flood_mobile/Services/file_size_helper.dart';
-import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
-import 'package:flood_mobile/Blocs/torrent_content_screen_bloc/torrent_content_screen_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class TorrentFileTile extends StatefulWidget {
   final TorrentContentModel model;

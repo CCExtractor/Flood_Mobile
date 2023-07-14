@@ -1,17 +1,17 @@
 import 'package:equatable/equatable.dart';
-import 'package:flood_mobile/Constants/api_endpoints.dart';
-import 'package:flood_mobile/Api/event_handler_api.dart';
-import 'package:flood_mobile/Constants/event_names.dart';
-import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
-import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
-import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_client_sse/constants/sse_request_type_enum.dart';
 import 'package:flutter_client_sse/flutter_client_sse.dart';
+import 'package:flood_mobile/Api/event_handler_api.dart';
+import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
+import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
+import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
+import 'package:flood_mobile/Constants/api_endpoints.dart';
+import 'package:flood_mobile/Constants/event_names.dart';
 
-part 'sse_state.dart';
 part 'sse_event.dart';
+part 'sse_state.dart';
 
 class SSEBloc extends Bloc<SSEEvent, SSEState> {
   SSEModel sseModel = SSEModel(data: '', id: '', event: '');

@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flood_mobile/Blocs/onboarding_main_page_bloc/on_boarding_page_color_bloc.dart';
 import 'package:flood_mobile/Model/onboard_page_model.dart';
 import 'package:flood_mobile/Pages/onboarding_main_screen/data/onboard_page_data.dart';
 import 'package:flood_mobile/Pages/onboarding_main_screen/widgets/onboard_page.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Onboarding extends StatefulWidget {
   @override

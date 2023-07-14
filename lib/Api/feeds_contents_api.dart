@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:flood_mobile/Constants/api_endpoints.dart';
-import 'package:flood_mobile/Model/feeds_content_model.dart';
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
+import 'package:flood_mobile/Constants/api_endpoints.dart';
+import 'package:flood_mobile/Model/feeds_content_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

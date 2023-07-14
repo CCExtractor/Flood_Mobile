@@ -1,7 +1,7 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Pages/home_screen/widgets/rss_feed_home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
-import 'package:bottom_sheet/bottom_sheet.dart';
 
 class RSSFeedButtonWidget extends StatefulWidget {
   final int themeIndex;

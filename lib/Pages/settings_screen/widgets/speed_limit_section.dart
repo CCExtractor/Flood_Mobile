@@ -1,8 +1,8 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
-import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/Pages/widgets/text_size.dart';
 import 'package:flood_mobile/Services/transfer_speed_manager.dart';
 import 'package:flood_mobile/l10n/l10n.dart';

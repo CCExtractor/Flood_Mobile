@@ -15,8 +15,8 @@ void main() {
     return MultiBlocProvider(
       providers: BlocProviders.multiBlocProviders,
       child: MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Material(
           child: AboutScreen(themeIndex: 2),
         ),

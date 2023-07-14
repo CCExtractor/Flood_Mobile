@@ -1,5 +1,5 @@
-import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 
 class SettingsTextField extends StatefulWidget {
   final String labelText;

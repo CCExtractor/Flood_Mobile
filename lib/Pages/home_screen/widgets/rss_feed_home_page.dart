@@ -1,6 +1,8 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flood_mobile/Api/client_api.dart';
 import 'package:flood_mobile/Api/delete_feeds_and_rules.dart';
 import 'package:flood_mobile/Api/feed_api.dart';
@@ -14,8 +16,6 @@ import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Model/single_feed_and_response_model.dart';
 import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RSSFeedHomePage extends StatefulWidget {
   final int themeIndex;

@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'dart:math' as math;
 import 'package:flood_mobile/Api/torrent_api.dart';
+import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flood_mobile/Pages/torrent_content_screen/widgets/folder_file_list_view.dart';
 import 'package:flood_mobile/Pages/widgets/base_app_bar.dart';
 import 'package:flood_mobile/Pages/widgets/toast_component.dart';
 import 'package:flood_mobile/Route/Arguments/torrent_content_page_arguments.dart';
-import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
-import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
-import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,8 +16,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-import '../../Blocs/torrent_content_screen_bloc/torrent_content_screen_bloc.dart';
+import 'package:flood_mobile/Blocs/torrent_content_screen_bloc/torrent_content_screen_bloc.dart';
 
 class TorrentContentScreen extends StatefulWidget {
   final TorrentContentPageArguments arguments;

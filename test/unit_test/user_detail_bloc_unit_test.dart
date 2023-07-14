@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flood_mobile/Model/current_user_detail_model.dart';
-import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
+import 'package:flood_mobile/Model/current_user_detail_model.dart';
 
 void main() {
   group('UserDetailBloc', () {
