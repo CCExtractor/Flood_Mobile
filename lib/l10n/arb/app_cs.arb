@@ -299,5 +299,19 @@
     "battery_low_title": "Zastavit stahování při nízké úrovni baterie",
     "settings_tabs_power_management": "Správa napájení",
     "download_chanrging_only_snackbar": "Stahování při nabíjení je povoleno.\nVypněte toto nastavení a zkuste to znovu.",
-    "wifi_only_snackbar": "Nastavení pouze Wi-Fi je povoleno.\nVypněte toto nastavení a zkuste to znovu."
+    "wifi_only_snackbar": "Nastavení pouze Wi-Fi je povoleno.\nVypněte toto nastavení a zkuste to znovu.",
+    "sort_by_heading": "Seřadit podle",
+    "sort_by_name": "Název",
+    "sort_by_size": "Velikost",
+    "sort_by_date_added": "Datum přidání",
+    "sort_by_date_created": "Datum vytvoření",
+    "sort_by_ratio": "Poměr",
+    "sort_by_peers": "Peery",
+    "sort_by_seeds": "Seedery",
+    "sort_by_download_speed": "Rychlost stahování",
+    "sort_by_downloaded": "Staženo",
+    "sort_by_uploaded": "Nahráno",
+    "sort_by_upload_speed": "Rychlost nahrávání",
+    "sort_by_file_size": "Velikost souboru",
+    "sort_by_percent_completed": "Procento dokončení"
 }

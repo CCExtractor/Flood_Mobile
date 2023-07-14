@@ -299,5 +299,19 @@
     "battery_low_title": "Stopp nedlastinger ved lavt batterinivå",
     "settings_tabs_power_management": "Energiadministrasjon",
     "download_chanrging_only_snackbar": "Nedlasting når lader er tilkoblet er aktivert.\nSlå av denne innstillingen og prøv igjen.",
-    "wifi_only_snackbar": "Bare WiFi-innstillingen er aktivert.\nSlå av denne innstillingen og prøv igjen."
+    "wifi_only_snackbar": "Bare WiFi-innstillingen er aktivert.\nSlå av denne innstillingen og prøv igjen.",
+    "sort_by_heading": "Sorter etter",
+    "sort_by_name": "Navn",
+    "sort_by_size": "Størrelse",
+    "sort_by_date_added": "Dato lagt til",
+    "sort_by_date_created": "Dato opprettet",
+    "sort_by_ratio": "Forhold",
+    "sort_by_peers": "Peers",
+    "sort_by_seeds": "Seeders",
+    "sort_by_download_speed": "Nedlastingshastighet",
+    "sort_by_downloaded": "Nedlastet",
+    "sort_by_uploaded": "Opplastet",
+    "sort_by_upload_speed": "Opplastingshastighet",
+    "sort_by_file_size": "Filstørrelse",
+    "sort_by_percent_completed": "Prosent fullført"
 }

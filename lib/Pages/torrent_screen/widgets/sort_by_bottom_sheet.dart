@@ -1,9 +1,9 @@
-import 'package:flood_mobile/Blocs/sort_by_torrent_bloc/sort_by_torrent_bloc.dart';
-import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
-import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flood_mobile/Blocs/sort_by_torrent_bloc/sort_by_torrent_bloc.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 
 class SortByBottomSheet extends StatelessWidget {
   final int themeIndex;
@@ -15,7 +15,8 @@ class SortByBottomSheet extends StatelessWidget {
     final AppLocalizations l10n = context.l10n;
     return BlocBuilder<SortByTorrentBloc, SortByTorrentState>(
       builder: (context, state) {
-        var sortByTorrentBloc = BlocProvider.of<SortByTorrentBloc>(context,listen: false);
+        var sortByTorrentBloc =
+            BlocProvider.of<SortByTorrentBloc>(context, listen: false);
         return Container(
           key: Key('Sort by bottom sheet'),
           decoration: BoxDecoration(

@@ -299,5 +299,19 @@
     "battery_low_title": "Interromper os downloads se o nível da bateria estiver baixo",
     "settings_tabs_power_management": "Gerenciamento de energia",
     "download_chanrging_only_snackbar": "A configuração de download apenas quando conectado ao carregador está habilitada.\nDesative essa configuração e tente novamente.",
-    "wifi_only_snackbar": "A configuração de apenas Wi-Fi está habilitada.\nDesative essa configuração e tente novamente." 
+    "wifi_only_snackbar": "A configuração de apenas Wi-Fi está habilitada.\nDesative essa configuração e tente novamente." ,
+    "sort_by_heading": "Sortuj według",
+    "sort_by_name": "Nazwa",
+    "sort_by_size": "Rozmiar",
+    "sort_by_date_added": "Data dodania",
+    "sort_by_date_created": "Data utworzenia",
+    "sort_by_ratio": "Współczynnik",
+    "sort_by_peers": "Peers",
+    "sort_by_seeds": "Seeders",
+    "sort_by_download_speed": "Prędkość pobierania",
+    "sort_by_downloaded": "Pobrane",
+    "sort_by_uploaded": "Wgrane",
+    "sort_by_upload_speed": "Prędkość wysyłania",
+    "sort_by_file_size": "Rozmiar pliku",
+    "sort_by_percent_completed": "Procent ukończony"
 }

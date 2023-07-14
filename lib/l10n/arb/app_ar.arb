@@ -299,5 +299,19 @@
     "battery_low_title": "إيقاف التنزيل عند انخفاض مستوى البطارية",
     "settings_tabs_power_management": "إدارة الطاقة",
     "download_chanrging_only_snackbar": "تم تمكين إعداد التنزيل فقط عند الاتصال بالشاحن.\nقم بإيقاف هذا الإعداد وحاول مرة أخرى.",
-    "wifi_only_snackbar": "تم تمكين إعداد Wi-Fi فقط.\nقم بإيقاف هذا الإعداد وحاول مرة أخرى."
+    "wifi_only_snackbar": "تم تمكين إعداد Wi-Fi فقط.\nقم بإيقاف هذا الإعداد وحاول مرة أخرى.",
+    "sort_by_heading": "الترتيب حسب",
+    "sort_by_name": "الاسم",
+    "sort_by_size": "الحجم",
+    "sort_by_date_added": "تاريخ الإضافة",
+    "sort_by_date_created": "تاريخ الإنشاء",
+    "sort_by_ratio": "النسبة",
+    "sort_by_peers": "الزملاء",
+    "sort_by_seeds": "السيدرز",
+    "sort_by_download_speed": "سرعة التحميل",
+    "sort_by_downloaded": "تم التحميل",
+    "sort_by_uploaded": "تم الرفع",
+    "sort_by_upload_speed": "سرعة الرفع",
+    "sort_by_file_size": "حجم الملف",
+    "sort_by_percent_completed": "نسبة الانتهاء"
 }

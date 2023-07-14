@@ -1,5 +1,6 @@
 import "dart:io";
 import "package:bloc_test/bloc_test.dart";
+import "package:flood_mobile/Blocs/sort_by_torrent_bloc/sort_by_torrent_bloc.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
@@ -161,6 +162,7 @@ void main() {
           BlocProvider<SpeedGraphBloc>.value(value: SpeedGraphBloc()),
           BlocProvider<ApiBloc>.value(value: ApiBloc()),
           BlocProvider<UserInterfaceBloc>.value(value: UserInterfaceBloc()),
+          BlocProvider<SortByTorrentBloc>.value(value: SortByTorrentBloc()),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {

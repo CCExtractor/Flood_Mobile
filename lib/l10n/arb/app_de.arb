@@ -299,5 +299,19 @@
     "battery_low_title": "Downloads bei niedrigem Batteriestand stoppen",
     "settings_tabs_power_management": "Energiemanagement",
     "download_chanrging_only_snackbar": "Die Option \"Download nur bei angeschlossenem Ladekabel\" ist aktiviert.\nDeaktivieren Sie diese  Option und versuchen Sie es erneut.",
-    "wifi_only_snackbar": "Die Option \"Nur WLAN\" ist aktiviert.\nDeaktivieren Sie diese Option und versuchen Sie es erneut."    
+    "wifi_only_snackbar": "Die Option \"Nur WLAN\" ist aktiviert.\nDeaktivieren Sie diese Option und versuchen Sie es erneut.",    
+    "sort_by_heading": "Sortieren nach",
+    "sort_by_name": "Name",
+    "sort_by_size": "Größe",
+    "sort_by_date_added": "Hinzugefügt am",
+    "sort_by_date_created": "Erstellt am",
+    "sort_by_ratio": "Verhältnis",
+    "sort_by_peers": "Peers",
+    "sort_by_seeds": "Seeders",
+    "sort_by_download_speed": "Download-Geschwindigkeit",
+    "sort_by_downloaded": "Heruntergeladen",
+    "sort_by_uploaded": "Hochgeladen",
+    "sort_by_upload_speed": "Upload-Geschwindigkeit",
+    "sort_by_file_size": "Dateigröße",
+    "sort_by_percent_completed": "Prozent abgeschlossen"
 }
