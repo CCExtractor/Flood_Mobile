@@ -1,4 +1,6 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flood_mobile/Api/auth_api.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
@@ -8,8 +10,6 @@ import 'package:flood_mobile/Pages/settings_screen/widgets/user_list.dart';
 import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/Pages/widgets/text_size.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthenticationSection extends StatelessWidget {
   AuthenticationSection({

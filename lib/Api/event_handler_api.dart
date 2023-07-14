@@ -4,12 +4,13 @@ import 'dart:io';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:battery_plus/battery_plus.dart';
 import 'package:duration/duration.dart';
-import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_client_sse/flutter_client_sse.dart';
 import 'package:json_patch/json_patch.dart';
+import 'package:wifi_iot/wifi_iot.dart';
+import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/power_management_bloc/power_management_bloc.dart';
@@ -17,7 +18,6 @@ import 'package:flood_mobile/Constants/notification_keys.dart';
 import 'package:flood_mobile/Model/download_rate_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Services/file_size_helper.dart';
-import 'package:wifi_iot/wifi_iot.dart';
 
 String torrentLength = '0';
 

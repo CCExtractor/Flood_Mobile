@@ -1,3 +1,10 @@
+import 'package:flutter/material.dart' hide Badge;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flood_mobile/Model/current_user_detail_model.dart';
@@ -6,13 +13,6 @@ import 'package:flood_mobile/Pages/home_screen/widgets/logout_alert.dart';
 import 'package:flood_mobile/Pages/home_screen/widgets/nav_drawer_list_tile.dart';
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
-import 'package:flutter/material.dart' hide Badge;
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Menu extends StatefulWidget {
   final Function toggleTheme;

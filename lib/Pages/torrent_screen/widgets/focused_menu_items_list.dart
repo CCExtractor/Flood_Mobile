@@ -1,4 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:focused_menu/modals.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
 import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
@@ -13,13 +20,6 @@ import 'package:flood_mobile/Pages/widgets/delete_torrent_sheet.dart';
 import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/Pages/widgets/toast_component.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:focused_menu/modals.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 List<FocusedMenuItem> getFocusedMenuItems(BuildContext context,
     List<int> indexes, TorrentModel model, int themeIndex) {

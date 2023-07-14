@@ -1,4 +1,8 @@
 import 'package:chewie/chewie.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:video_player/video_player.dart';
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
@@ -6,10 +10,6 @@ import 'package:flood_mobile/Constants/api_endpoints.dart';
 import 'package:flood_mobile/Pages/widgets/base_app_bar.dart';
 import 'package:flood_mobile/Route/Arguments/video_stream_screen_arguments.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:video_player/video_player.dart';
 
 class VideoStreamScreen extends StatefulWidget {
   final VideoStreamScreenArguments args;

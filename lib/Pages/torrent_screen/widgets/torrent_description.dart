@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
@@ -6,8 +8,6 @@ import 'package:flood_mobile/Route/Arguments/torrent_content_page_arguments.dart
 import 'package:flood_mobile/Route/routes.dart';
 import 'package:flood_mobile/Services/file_size_helper.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TorrentDescription extends StatelessWidget {
   final TorrentModel model;

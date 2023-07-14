@@ -1,4 +1,9 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flood_mobile/Blocs/bloc_provider_list.dart';
 import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
@@ -6,11 +11,6 @@ import 'package:flood_mobile/Notifications/notification_channels.dart';
 import 'package:flood_mobile/Notifications/notification_controller.dart';
 import 'package:flood_mobile/Route/route_generator.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
