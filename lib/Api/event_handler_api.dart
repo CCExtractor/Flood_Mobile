@@ -1,17 +1,23 @@
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:io';
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:battery_plus/battery_plus.dart';
 import 'package:duration/duration.dart';
-import 'package:flood_mobile/Model/download_rate_model.dart';
-import 'package:flood_mobile/Model/torrent_model.dart';
-import 'package:flood_mobile/Services/file_size_helper.dart';
-import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
-import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
+import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_client_sse/flutter_client_sse.dart';
 import 'package:json_patch/json_patch.dart';
+import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
+import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
+import 'package:flood_mobile/Blocs/power_management_bloc/power_management_bloc.dart';
 import 'package:flood_mobile/Constants/notification_keys.dart';
+import 'package:flood_mobile/Model/download_rate_model.dart';
+import 'package:flood_mobile/Model/torrent_model.dart';
+import 'package:flood_mobile/Services/file_size_helper.dart';
+import 'package:wifi_iot/wifi_iot.dart';
 
 String torrentLength = '0';
 
@@ -71,10 +77,10 @@ class EventHandlerApi {
   }
 
   //Updating the full list of torrent
-  static void updateFullTorrentList({
+  static Future<void> updateFullTorrentList({
     required SSEModel model,
     required BuildContext context,
-  }) {
+  }) async {
     Map<String, dynamic> oldTorrentList =
         BlocProvider.of<HomeScreenBloc>(context, listen: false)
             .state
@@ -122,6 +128,38 @@ class EventHandlerApi {
     //Setting the full list of torrent
     BlocProvider.of<HomeScreenBloc>(context, listen: false)
         .add(SetTorrentListEvent(newTorrentList: torrentList));
+
+    final PowerManagementBloc powerManagementBloc =
+        BlocProvider.of<PowerManagementBloc>(context, listen: false);
+    //Exit screen on all download finished
+    if (powerManagementBloc.state.shutDownWhenFinishDownload &&
+        isAllDownloadFinished(context)) {
+      SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+      exit(0);
+    }
+
+    //Turn off wifi on all download finished
+    if (powerManagementBloc.state.shutDownWifi &&
+        isAllDownloadFinished(context)) {
+      turnOffWiFi(powerManagementBloc.state.shutDownWifi);
+    }
+
+    // Stop all download on low battery
+    Battery _battery = Battery();
+    int currentBatteryLevel = await _battery.batteryLevel;
+    bool isBatteryLimitSet =
+        powerManagementBloc.state.batteryLimitLevel > 0 ? true : false;
+    if (isBatteryLimitSet &&
+        currentBatteryLevel <= powerManagementBloc.state.batteryLimitLevel) {
+      BlocProvider.of<HomeScreenBloc>(context, listen: false)
+          .state
+          .torrentList
+          .forEach((element) {
+        if (element.status.contains('downloading')) {
+          TorrentApi.stopTorrent(hashes: [element.hash], context: context);
+        }
+      });
+    }
   }
 
   static Future<void> showNotification(int id, BuildContext context) async {
@@ -320,4 +358,19 @@ class EventHandlerApi {
       print(error);
     }
   }
+}
+
+bool isAllDownloadFinished(BuildContext context) {
+  return BlocProvider.of<HomeScreenBloc>(context, listen: false)
+      .state
+      .torrentList
+      .every(
+    (element) {
+      return element.status.contains('complete');
+    },
+  );
+}
+
+void turnOffWiFi(bool wifiStatus) async {
+  WiFiForIoTPlugin.setEnabled(!wifiStatus);
 }
