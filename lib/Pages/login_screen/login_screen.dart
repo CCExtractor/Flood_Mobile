@@ -8,6 +8,7 @@ import 'package:flood_mobile/Route/routes.dart';
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc_event.dart';
 import 'package:flood_mobile/Blocs/login_screen_bloc/login_screen_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -42,6 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = context.l10n;
     double hp = MediaQuery.of(context).size.height;
     double wp = MediaQuery.of(context).size.width;
     return LoadingOverlay(
@@ -70,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 100,
                       ),
                       Text(
-                        'Welcome to Flood',
+                        l10n.login_screen_welcome,
                         style: TextStyle(
                             color: ThemeBloc.theme(themeIndex)
                                 .textTheme
@@ -80,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontSize: 28),
                       ),
                       Text(
-                        'Sign in to your account',
+                        l10n.login_screen_sign_in,
                         style: TextStyle(
                             color: ThemeBloc.theme(themeIndex)
                                 .textTheme
@@ -95,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       LoginScreenTextField(
                         key: Key('Url TextField'),
                         controller: urlController,
-                        labelText: 'URL',
+                        labelText: l10n.login_screen_url,
                         prefixIcon: Icons.link,
                         themeIndex: themeIndex,
                         trailingIconButton: Align(
@@ -125,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       LoginScreenTextField(
                         key: Key('Username TextField'),
                         controller: usernameController,
-                        labelText: 'Username',
+                        labelText: l10n.login_screen_username,
                         prefixIcon: Icons.person,
                         themeIndex: themeIndex,
                       ),
@@ -135,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       LoginScreenTextField(
                         key: Key('Password TextField'),
                         controller: passwordController,
-                        labelText: 'Password',
+                        labelText: l10n.login_screen_password,
                         prefixIcon: Icons.lock_outline,
                         themeIndex: themeIndex,
                         obscureText: showPass,
@@ -186,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   context: context);
                               if (isLoginSuccessful) {
                                 Toasts.showSuccessToast(
-                                    msg: 'Login Successful');
+                                    msg: l10n.login_success);
                                 Navigator.of(context).pushNamedAndRemoveUntil(
                                   Routes.homeScreenRoute,
                                   (Route<dynamic> route) => false,
@@ -237,7 +239,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   );
                                 }
                               } else {
-                                Toasts.showFailToast(msg: 'Login Error');
+                                Toasts.showFailToast(msg: l10n.login_fail);
                               }
                               setState(() {
                                 showSpinner = false;
@@ -253,7 +255,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           child: Center(
                             child: Text(
-                              "Login",
+                              l10n.login_button,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,

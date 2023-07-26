@@ -5,6 +5,7 @@ import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Pages/widgets/text_size.dart';
 import 'package:flood_mobile/Services/transfer_speed_manager.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class SpeedLimitSection extends StatelessWidget {
@@ -29,6 +30,7 @@ class SpeedLimitSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = context.l10n;
     return ExpansionTileCard(
       key: Key('Speed Limit Expansion Card'),
       onExpansionChanged: (value) {},
@@ -36,7 +38,7 @@ class SpeedLimitSection extends StatelessWidget {
       expandedColor: ThemeBloc.theme(themeIndex).primaryColor,
       baseColor: ThemeBloc.theme(themeIndex).primaryColor,
       expandedTextColor: ThemeBloc.theme(themeIndex).colorScheme.secondary,
-      title: MText(text: 'Speed Limit'),
+      title: MText(text: l10n.settings_speed_limit_heading),
       leading: Icon(Icons.speed_rounded),
       contentPadding: EdgeInsets.all(0),
       children: [
@@ -48,7 +50,9 @@ class SpeedLimitSection extends StatelessWidget {
             Container(
               width: double.infinity,
             ),
-            SText(text: 'Download', themeIndex: themeIndex),
+            SText(
+                text: l10n.settings_speed_limit_download,
+                themeIndex: themeIndex),
             SizedBox(height: 15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +83,7 @@ class SpeedLimitSection extends StatelessWidget {
                               ?.color,
                           size: 25,
                         ),
-                        hint: Text("Download Speed"),
+                        hint: Text(l10n.settings_speed_limit_download_speed),
                         items: TransferSpeedManager.speedToValMap.keys
                             .map((e) => DropdownMenuItem(
                                   value: e,
@@ -97,7 +101,8 @@ class SpeedLimitSection extends StatelessWidget {
               ],
             ),
             SizedBox(height: 25),
-            SText(text: 'Upload', themeIndex: themeIndex),
+            SText(
+                text: l10n.settings_speed_limit_upload, themeIndex: themeIndex),
             SizedBox(height: 15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,7 +133,7 @@ class SpeedLimitSection extends StatelessWidget {
                               ?.color,
                           size: 25,
                         ),
-                        hint: Text("Upload Speed"),
+                        hint: Text(l10n.settings_speed_limit_upload_speed),
                         items: TransferSpeedManager.speedToValMap.keys
                             .map((e) => DropdownMenuItem(
                                   value: e,
@@ -162,8 +167,8 @@ class SpeedLimitSection extends StatelessWidget {
                             upSpeed: upSpeed);
                         final setSpeedSnackbar = addFloodSnackBar(
                             SnackbarType.information,
-                            'Speed set successfully',
-                            'Dismiss');
+                            l10n.settings_speed_set_snackbar,
+                            l10n.button_dismiss);
                         ScaffoldMessenger.of(context).clearSnackBars();
                         ScaffoldMessenger.of(context)
                             .showSnackBar(setSpeedSnackbar);
@@ -177,7 +182,7 @@ class SpeedLimitSection extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "Set",
+                          l10n.button_set,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,

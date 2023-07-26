@@ -368,7 +368,7 @@ class TorrentApi {
   }
 
   static Future<void> setTags(
-      {required List<String> tagLits,
+      {required List<String> tagList,
       required String hashes,
       required BuildContext context}) async {
     try {
@@ -387,7 +387,7 @@ class TorrentApi {
           BlocProvider.of<UserDetailBloc>(context, listen: false).token;
       Map<String, dynamic> mp = Map();
       mp['hashes'] = [hashes];
-      mp['tags'] = tagLits;
+      mp['tags'] = tagList;
       String rawBody = json.encode(mp);
       response = await dio.patch(
         url,
@@ -399,6 +399,221 @@ class TorrentApi {
     } catch (error) {
       print('--ERROR IN TAG ADD--');
       print(error);
+    }
+  }
+
+  static Future<void> setTrackers({
+    required List<String> trackersList,
+    required String hashes,
+    required BuildContext context,
+  }) async {
+    try {
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.setTrackers;
+      print('---SET TRACKERS---');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
+      Map<String, dynamic> mp = Map();
+      mp['trackers'] = trackersList;
+      mp['hashes'] = [hashes];
+      String rawBody = json.encode(mp);
+      response = await dio.patch(
+        url,
+        data: rawBody,
+      );
+      if (response.statusCode == 200) {
+        print('--TRACKERS ADDED--');
+      }
+    } catch (error) {
+      print('--ERROR IN TRACKERS ADD--');
+      print(error);
+    }
+  }
+
+  static Future<void> updateInitialSeeding({
+    required String hash,
+    required bool updatedValue,
+    required BuildContext context,
+  }) async {
+    try {
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.updateInitialSeeding;
+      print('---UPDATE INITIAL SEEDING---');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
+      Map<String, dynamic> mp = Map();
+      mp['hashes'] = [hash];
+      mp['isInitialSeeding'] = updatedValue;
+      String rawBody = json.encode(mp);
+      response = await dio.patch(
+        url,
+        data: rawBody,
+      );
+      if (response.statusCode == 200) {
+        print('--INITIAL SEEDING UPDATED--');
+      }
+    } catch (error) {
+      print('--ERROR IN INITIAL SEEDING UPDATE--');
+      print(error);
+    }
+  }
+
+  static Future<void> updateSequentialMode({
+    required String hash,
+    required bool updatedValue,
+    required BuildContext context,
+  }) async {
+    try {
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.updateSequential;
+      print('---UPDATE SEQUENTIAL MODE---');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
+      Map<String, dynamic> mp = Map();
+      mp['hashes'] = [hash];
+      mp['isSequential'] = updatedValue;
+      String rawBody = json.encode(mp);
+      response = await dio.patch(
+        url,
+        data: rawBody,
+      );
+      if (response.statusCode == 200) {
+        print('--SEQUENTIAL MODE UPDATED--');
+      }
+    } catch (error) {
+      print('--ERROR IN UPDATE SEQUENTIAL MODE--');
+      print(error);
+    }
+  }
+
+  static Future<bool> reannounceTorrents({
+    required List<String> hashes,
+    required BuildContext context,
+  }) async {
+    try {
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.reannouncesTorrents;
+      print('--TORRENT REANNOUNCES--');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
+      Map<String, dynamic> mp = Map();
+      mp['hashes'] = hashes;
+      String rawBody = json.encode(mp);
+      response = await dio.post(
+        url,
+        data: rawBody,
+      );
+      if (response.statusCode == 200) {
+        print('--TORRENT REANNOUNCED--');
+        return true;
+      }
+      return false;
+    } catch (error) {
+      print('--ERROR IN TORRENT REANNOUNCES--');
+      print(error);
+      return false;
+    }
+  }
+
+  static Future<void> updatePriority({
+    required List<String> hashes,
+    required BuildContext context,
+    required int priority,
+  }) async {
+    try {
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.updatePriority;
+      print('--UPDATE PRIORITY--');
+      print(url);
+      Response response;
+      Dio dio = new Dio();
+      //Headers
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
+      Map<String, dynamic> mp = Map();
+      mp['hashes'] = hashes;
+      mp['priority'] = priority;
+      String rawBody = json.encode(mp);
+      response = await dio.patch(
+        url,
+        data: rawBody,
+      );
+      if (response.statusCode == 200) {
+        print('--UPDATED PRIORITY--');
+      }
+    } catch (error) {
+      print('--ERROR IN UPDATED PRIORITY--');
+      print(error);
+    }
+  }
+
+  static Future<List<String>> getTrackersList(
+      {required BuildContext context, required String hash}) async {
+    try {
+      print('--GET TRACKERS LIST--');
+      Response response;
+      Dio dio = new Dio();
+      String url =
+          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+              ApiEndpoints.getTrackersList +
+              hash +
+              '/trackers';
+      dio.options.headers['Accept'] = "application/json";
+      dio.options.headers['Content-Type'] = "application/json";
+      dio.options.headers['Connection'] = "keep-alive";
+      dio.options.headers['Cookie'] =
+          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
+      response = await dio.get(url);
+      List<dynamic> responseData = [];
+      List<String> trackers = <String>[];
+      if (response.statusCode == 200) {
+        responseData = response.data;
+        trackers = responseData
+            .where((item) => item['type'] == 1 || item['type'] == 2)
+            .map<String>((item) => item['url'])
+            .toList();
+      }
+      return trackers;
+    } catch (error) {
+      print('--ERROR IN GET TRACKERS LIST--');
+      print(error);
+      return [];
     }
   }
 }

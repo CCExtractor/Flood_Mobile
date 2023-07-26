@@ -1,3 +1,5 @@
+import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
+import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
 import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
@@ -50,6 +52,13 @@ class BlocProviders {
     ),
     BlocProvider<OnBoardingPageColorBloc>(
       create: (context) => OnBoardingPageColorBloc(),
+    ),
+    BlocProvider<LanguageBloc>(
+      create: (context) => LanguageBloc(),
+      lazy: false,
+    ),
+    BlocProvider<UserInterfaceBloc>(
+      create: (context) => UserInterfaceBloc(),
     ),
   ];
 }

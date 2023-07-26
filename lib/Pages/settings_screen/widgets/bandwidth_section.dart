@@ -1,6 +1,7 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flood_mobile/Pages/settings_screen/widgets/settings_text_field.dart';
 import 'package:flood_mobile/Pages/widgets/text_size.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 
@@ -26,6 +27,7 @@ class BandwidthSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = context.l10n;
     return ExpansionTileCard(
       key: Key('Bandwidth Expansion Card'),
       initiallyExpanded: true,
@@ -33,7 +35,7 @@ class BandwidthSection extends StatelessWidget {
       elevation: 0,
       expandedColor: ThemeBloc.theme(themeIndex).primaryColor,
       baseColor: ThemeBloc.theme(themeIndex).primaryColor,
-      title: MText(text: 'Bandwidth'),
+      title: MText(text: l10n.settings_tabs_bandwidth),
       leading: Icon(Icons.wifi_rounded),
       contentPadding: EdgeInsets.all(0),
       expandedTextColor: ThemeBloc.theme(themeIndex).colorScheme.secondary,
@@ -42,14 +44,18 @@ class BandwidthSection extends StatelessWidget {
           key: Key('Bandwidth option display column'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SText(text: 'Transfer Rate Throttles', themeIndex: themeIndex),
+            SText(
+                text: l10n.settings_bandwidth_transferrate_heading,
+                themeIndex: themeIndex),
             SizedBox(height: 15),
             SettingsTextField(
                 validator: (value) {
                   return null;
                 },
-                hintText: 'Global Download Rate Throttle',
-                labelText: 'Global Download Rate Throttle',
+                hintText: l10n
+                    .settings_bandwidth_transferrate_global_throttle_download,
+                labelText: l10n
+                    .settings_bandwidth_transferrate_global_throttle_download,
                 isText: false,
                 controller: globalDownloadRateController,
                 themeIndex: themeIndex),
@@ -58,20 +64,24 @@ class BandwidthSection extends StatelessWidget {
                 validator: (value) {
                   return null;
                 },
-                hintText: 'Global Upload Rate Throttle',
-                labelText: 'Global Upload Rate Throttle',
+                hintText:
+                    l10n.settings_bandwidth_transferrate_global_throttle_upload,
+                labelText:
+                    l10n.settings_bandwidth_transferrate_global_throttle_upload,
                 isText: false,
                 controller: globalUploadRateController,
                 themeIndex: themeIndex),
             SizedBox(height: 25),
-            SText(text: 'Slot Availability', themeIndex: themeIndex),
+            SText(
+                text: l10n.settings_bandwidth_slots_heading,
+                themeIndex: themeIndex),
             SizedBox(height: 15),
             SettingsTextField(
                 validator: (value) {
                   return null;
                 },
-                hintText: 'Upload Slots Per Torrent',
-                labelText: 'Upload Slots Per Torrent',
+                hintText: l10n.settings_bandwidth_slots_upload_label,
+                labelText: l10n.settings_bandwidth_slots_upload_label,
                 isText: false,
                 controller: uploadSlotPerTorrentController,
                 themeIndex: themeIndex),
@@ -80,8 +90,8 @@ class BandwidthSection extends StatelessWidget {
                 validator: (value) {
                   return null;
                 },
-                hintText: 'Upload Slots Global',
-                labelText: 'Upload Slots Global',
+                hintText: l10n.settings_bandwidth_slots_upload_global_label,
+                labelText: l10n.settings_bandwidth_slots_upload_global_label,
                 controller: uploadSlotGlobalController,
                 isText: false,
                 themeIndex: themeIndex),
@@ -90,8 +100,8 @@ class BandwidthSection extends StatelessWidget {
                 validator: (value) {
                   return null;
                 },
-                hintText: 'Download Slots Per Torrent',
-                labelText: 'Download Slots Per Torrent',
+                hintText: l10n.settings_bandwidth_slots_download_label,
+                labelText: l10n.settings_bandwidth_slots_download_label,
                 controller: downloadSlotPerTorrentController,
                 isText: false,
                 themeIndex: themeIndex),
@@ -100,8 +110,8 @@ class BandwidthSection extends StatelessWidget {
               validator: (value) {
                 return null;
               },
-              hintText: 'Download Slots Global',
-              labelText: 'Download Slots Global',
+              hintText: l10n.settings_bandwidth_slots_download_global_label,
+              labelText: l10n.settings_bandwidth_slots_download_global_label,
               controller: downloadSlotGlobalController,
               isText: false,
               themeIndex: themeIndex,

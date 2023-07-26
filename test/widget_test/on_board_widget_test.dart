@@ -1,7 +1,7 @@
 import 'package:flood_mobile/Blocs/onboarding_main_page_bloc/on_boarding_page_color_bloc.dart';
 import 'package:flood_mobile/Pages/login_screen/login_screen.dart';
-import 'package:flood_mobile/Pages/onboarding_main_screen/data/onboard_page_data.dart';
 import 'package:flood_mobile/Route/route_generator.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -25,6 +25,9 @@ void main() {
         BlocProvider<OnBoardingPageColorBloc>.value(
           value: colorBloc,
           child: MaterialApp(
+            locale: Locale('en'),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             home: OnboardingMainPage(),
             onGenerateRoute: RouteGenerator.generateRoute,
           ),
@@ -35,19 +38,19 @@ void main() {
       expect(find.byType(SmoothPageIndicator), findsOneWidget);
 
       // Check initial color
-      expect(colorBloc.state, equals(OnBoardingPageColorInitial()));
+      expect(colorBloc.state, equals(OnBoardingPageColorState.initial()));
 
       // Tap next button and check color change
       await tester.tap(find.byIcon(Icons.arrow_back));
       await tester.pumpAndSettle();
       expect(colorBloc.state,
-          equals(ColorUpdated(color: onboardData[0].nextAccentColor)));
+          equals(OnBoardingPageColorState(color: Color(0xFFFFE074))));
 
       // Tap next button and check color change
       await tester.tap(find.byIcon(Icons.arrow_back));
       await tester.pumpAndSettle();
       expect(colorBloc.state,
-          equals(ColorUpdated(color: onboardData[1].nextAccentColor)));
+          equals(OnBoardingPageColorState(color: Color(0xFFE6E6E6))));
 
       // Tap skip button and check navigation to login screen
       await tester.tap(find.byKey(ValueKey('skipButton')));

@@ -1,5 +1,6 @@
 import 'package:flood_mobile/Api/notifications_api.dart';
 import 'package:flood_mobile/Model/notification_model.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
@@ -21,7 +22,7 @@ class NotificationPopupDialogueContainer extends StatelessWidget {
                 color: ThemeBloc.theme(themeIndex).primaryColor,
                 width: 300,
                 child: Text(
-                  'No notifications to display',
+                  context.l10n.notification_no_notification,
                   style: TextStyle(
                     color:
                         ThemeBloc.theme(themeIndex).textTheme.bodyLarge?.color,
@@ -46,16 +47,14 @@ class NotificationPopupDialogueContainer extends StatelessWidget {
                           Divider(),
                           TextButton(
                             onPressed: () {
-                              // setState(() {
                               NotificationApi.clearNotification(
                                   context: context);
-                              // });
                             },
                             style: TextButton.styleFrom(
                               fixedSize: Size(200, 50),
                             ),
                             child: Text(
-                              'Clear All',
+                              context.l10n.notification_clear_all,
                               style: TextStyle(
                                 color: ThemeBloc.theme(themeIndex)
                                     .textTheme

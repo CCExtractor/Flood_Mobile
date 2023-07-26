@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'package:flood_mobile/Blocs/bloc_provider_list.dart';
 import 'package:flood_mobile/Pages/about_screen/about_screen.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 
@@ -9,9 +12,14 @@ void main() {
   });
   setUpAll(() => HttpOverrides.global = null);
   Widget createWidgetUnderTest() {
-    return MaterialApp(
-      home: Material(
-        child: AboutScreen(themeIndex: 2),
+    return MultiBlocProvider(
+      providers: BlocProviders.multiBlocProviders,
+      child: MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Material(
+          child: AboutScreen(themeIndex: 2),
+        ),
       ),
     );
   }
