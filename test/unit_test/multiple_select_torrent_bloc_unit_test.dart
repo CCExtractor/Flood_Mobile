@@ -1,7 +1,7 @@
-import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
+import 'package:flood_mobile/Model/torrent_model.dart';
 
 void main() {
   group('MultipleSelectTorrentBloc', () {

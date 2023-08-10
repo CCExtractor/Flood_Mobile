@@ -1,16 +1,20 @@
 import 'dart:convert';
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:battery_plus/battery_plus.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
+import 'package:flood_mobile/Blocs/power_management_bloc/power_management_bloc.dart';
+import 'package:flood_mobile/Blocs/torrent_content_screen_bloc/torrent_content_screen_bloc.dart';
+import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flood_mobile/Constants/api_endpoints.dart';
 import 'package:flood_mobile/Model/torrent_content_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
+import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/Services/file_folder_nester.dart';
-import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
-import 'package:flood_mobile/Blocs/torrent_content_screen_bloc/torrent_content_screen_bloc.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../Blocs/user_detail_bloc/user_detail_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 
 class TorrentApi {
   // Gets list of torrents
@@ -50,35 +54,64 @@ class TorrentApi {
     }
   }
 
-  static Future<void> startTorrent(
-      {required List<String> hashes, required BuildContext context}) async {
-    try {
-      String url =
-          BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
-              ApiEndpoints.startTorrentUrl;
-      print('---START TORRENT---');
-      print(url);
-      Response response;
-      Dio dio = new Dio();
-      //Headers
-      dio.options.headers['Accept'] = "application/json";
-      dio.options.headers['Content-Type'] = "application/json";
-      dio.options.headers['Connection'] = "keep-alive";
-      dio.options.headers['Cookie'] =
-          BlocProvider.of<UserDetailBloc>(context, listen: false).token;
-      Map<String, dynamic> mp = Map();
-      mp['hashes'] = hashes;
-      String rawBody = json.encode(mp);
-      response = await dio.post(
-        url,
-        data: rawBody,
-      );
-      if (response.statusCode == 200) {
-        print('--TORRENT STARTED--');
+  static Future<void> startTorrent({
+    required List<String> hashes,
+    required BuildContext context,
+  }) async {
+    final powerState = BlocProvider.of<PowerManagementBloc>(context).state;
+    final connectivityResult = await Connectivity().checkConnectivity();
+
+    if (!powerState.wifiOnlyDownload ||
+        connectivityResult == ConnectivityResult.wifi) {
+      final chargingConnected = powerState.downloadChargingConnected;
+      final batteryState = powerState.currentBatteryState;
+
+      if (chargingConnected && batteryState == BatteryState.charging ||
+          !chargingConnected) {
+        try {
+          String url =
+              BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
+                  ApiEndpoints.startTorrentUrl;
+          print('---START TORRENT---');
+          print(url);
+          Response response;
+          Dio dio = new Dio();
+          //Headers
+          dio.options.headers['Accept'] = "application/json";
+          dio.options.headers['Content-Type'] = "application/json";
+          dio.options.headers['Connection'] = "keep-alive";
+          dio.options.headers['Cookie'] =
+              BlocProvider.of<UserDetailBloc>(context, listen: false).token;
+          Map<String, dynamic> mp = {'hashes': hashes};
+          String rawBody = json.encode(mp);
+          response = await dio.post(
+            url,
+            data: rawBody,
+          );
+          if (response.statusCode == 200) {
+            print('--TORRENT STARTED--');
+          }
+        } catch (error) {
+          print('--ERROR IN TORRENT START--');
+          print(error.toString());
+        }
+      } else {
+        final warningSnackbar = addFloodSnackBar(
+            SnackbarType.caution,
+            context.l10n.download_chanrging_only_snackbar,
+            context.l10n.button_dismiss);
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(
+          warningSnackbar,
+        );
       }
-    } catch (error) {
-      print('--ERROR IN TORRENT START--');
-      print(error.toString());
+    } else {
+      final warningSnackbar = addFloodSnackBar(SnackbarType.caution,
+          context.l10n.wifi_only_snackbar, context.l10n.button_dismiss);
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        warningSnackbar,
+      );
     }
   }
 

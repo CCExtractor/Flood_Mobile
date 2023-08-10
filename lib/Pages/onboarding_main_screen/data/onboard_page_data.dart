@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flood_mobile/Model/onboard_page_model.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
-import 'package:flutter/material.dart';
 
 List<OnboardPageModel> onboardData(BuildContext context) {
   return [

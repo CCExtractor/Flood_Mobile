@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
 
 void main() {
   group('LanguageBloc', () {

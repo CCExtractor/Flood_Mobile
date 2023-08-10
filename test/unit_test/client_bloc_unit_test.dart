@@ -1,7 +1,7 @@
-import 'package:flood_mobile/Model/client_settings_model.dart';
-import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
+import 'package:flood_mobile/Model/client_settings_model.dart';
 
 void main() {
   late ClientSettingsBloc sut;

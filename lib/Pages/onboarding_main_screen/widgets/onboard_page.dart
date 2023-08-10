@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flood_mobile/Blocs/onboarding_main_page_bloc/on_boarding_page_color_bloc.dart';
 import 'package:flood_mobile/Model/onboard_page_model.dart';
 import 'package:flood_mobile/Pages/onboarding_main_screen/widgets/drawer_paint.dart';
 import 'package:flood_mobile/Route/routes.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnboardPage extends StatefulWidget {
   final PageController pageController;

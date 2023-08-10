@@ -283,5 +283,21 @@
     "button_copy": "Copiar",
     "torrent_screen_items_heading": "Elementos de la Pantalla de Torrents",
     "torrents_set_trackers_snackbar": "Trackers establecidos exitosamente",
-    "context_menu_items_heading": "Elementos del Menú Contextual"
+    "context_menu_items_heading": "Elementos del Menú Contextual",
+    "wifi_only_title" : "Solo WiFi",
+    "wifi_only_subtitle" : "Los torrents se descargarán y cargarán solo si hay una conexión WiFi.",
+    "shutdown_when_download_completes_title" : "Apagar al completar la descarga",
+    "shutdown_when_download_completes_subtitle" : "La aplicación se apagará cuando todas las descargas se hayan completado en segundo plano.",
+    "keep_CPU_awake_title" : "Mantener el CPU activo",
+    "keep_CPU_awake_subtitle" : "La pantalla nunca se apagará. Habilitar esta opción aumentará el consumo de batería.",
+    "charging_only_title" : "Descargar solo cuando está conectado a la carga",
+    "charging_only_subtitle" : "Los torrents se descargarán/cargarán solo cuando esté conectado a la carga. Todos los torrents se pausarán cuando no esté conectado al cargador.",
+    "shut_down_wifi_title" : "Apagar WiFi",
+    "shut_down_wifi_subtitle" : "Esta configuración apagará automáticamente el WiFi cuando todos los torrents hayan completado la descarga.",
+    "battery_optimization_title" : "Cambiar optimización de batería",
+    "battery_optimization_subtitle" : "Esta configuración es necesaria para asegurarse de que las notificaciones de progreso funcionen correctamente.",
+    "battery_low_title": "Detener descargas si el nivel de batería es bajo",
+    "settings_tabs_power_management": "Gestión de energía",
+    "download_chanrging_only_snackbar": "La configuración de descarga cuando se está cargando está habilitada.\nDesactive esta configuración y vuelva a intentarlo.",
+    "wifi_only_snackbar": "La configuración de solo WiFi está habilitada.\nDesactive esta configuración y vuelva a intentarlo."
 }

@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Pages/home_screen/home_screen.dart';
 import 'package:flood_mobile/Pages/login_screen/login_screen.dart';
 import 'package:flood_mobile/Pages/onboarding_main_screen/onboarding_main_screen.dart';
@@ -6,12 +9,9 @@ import 'package:flood_mobile/Pages/splash_screen/splash_screen.dart';
 import 'package:flood_mobile/Pages/torrent_content_screen/torrent_content_screen.dart';
 import 'package:flood_mobile/Pages/torrent_screen/torrent_screen.dart';
 import 'package:flood_mobile/Pages/video_stream_screen/video_stream_screen.dart';
-import 'package:flood_mobile/Route/routes.dart';
-import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flood_mobile/Route/Arguments/torrent_content_page_arguments.dart';
 import 'package:flood_mobile/Route/Arguments/video_stream_screen_arguments.dart';
+import 'package:flood_mobile/Route/routes.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

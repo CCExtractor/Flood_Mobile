@@ -283,5 +283,21 @@
     "button_copy": "نسخ",
     "torrent_screen_items_heading": "عناصر شاشة التورنت",
     "context_menu_items_heading": "عناصر قائمة السياق",
-    "torrents_set_trackers_snackbar": "تم تعيين المتتبعين بنجاح"
+    "torrents_set_trackers_snackbar": "تم تعيين المتتبعين بنجاح",
+    "wifi_only_title" : "Wi-Fi فقط",
+    "wifi_only_subtitle" : "سيتم تنزيل التورنتات وتحميلها فقط إذا كانت متصلاً بشبكة Wi-Fi.",
+    "shutdown_when_download_completes_title" : "إيقاف التشغيل عند انتهاء التنزيل",
+    "shutdown_when_download_completes_subtitle" : "سيتم إيقاف تشغيل التطبيق عند اكتمال جميع التنزيلات في الخلفية.",
+    "keep_CPU_awake_title" : "إبقاء وحدة المعالجة المركزية في وضع التشغيل",
+    "keep_CPU_awake_subtitle" : "لن ينام الشاشة أبدًا. تمكين هذا سيزيد من استخدام البطارية.",
+    "charging_only_title" : "التنزيل فقط عند الاتصال بالشاحن",
+    "charging_only_subtitle" : "سيتم تنزيل وتحميل التورنتات فقط عند الاتصال بالشاحن. ستتوقف جميع التورنتات عن العمل عند عدم الاتصال بالشاحن.",
+    "shut_down_wifi_title" : "إيقاف تشغيل Wi-Fi",
+    "shut_down_wifi_subtitle" : "تقوم هذه الإعدادات بإيقاف Wi-Fi تلقائيًا عند اكتمال تنزيل جميع التورنتات.",
+    "battery_optimization_title" : "تغيير تحسين البطارية",
+    "battery_optimization_subtitle" : "هذا الإعداد مطلوب إذا كنت ترغب في التأكد من سلسية عمل إشعارات التقدم.",
+    "battery_low_title": "إيقاف التنزيل عند انخفاض مستوى البطارية",
+    "settings_tabs_power_management": "إدارة الطاقة",
+    "download_chanrging_only_snackbar": "تم تمكين إعداد التنزيل فقط عند الاتصال بالشاحن.\nقم بإيقاف هذا الإعداد وحاول مرة أخرى.",
+    "wifi_only_snackbar": "تم تمكين إعداد Wi-Fi فقط.\nقم بإيقاف هذا الإعداد وحاول مرة أخرى."
 }

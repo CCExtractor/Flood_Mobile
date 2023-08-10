@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc_event.dart';
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc_state.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiBloc extends Bloc<ApiEvent, ApiState> {
   ApiBloc() : super(ApiState(baseUrl: 'http://localhost:3000')) {

@@ -1,8 +1,7 @@
-import 'package:flood_mobile/Model/torrent_content_model.dart';
-import 'package:flood_mobile/Blocs/torrent_content_screen_bloc/torrent_content_screen_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flood_mobile/Blocs/torrent_content_screen_bloc/torrent_content_screen_bloc.dart';
+import 'package:flood_mobile/Model/torrent_content_model.dart';
 
 void main() {
   late TorrentContentScreenBloc sut;

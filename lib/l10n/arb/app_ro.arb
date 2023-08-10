@@ -283,5 +283,21 @@
     "button_copy": "Copiere",
     "torrent_screen_items_heading": "Elemente Ecran Torrent",
     "torrents_set_trackers_snackbar": "Trackere setate cu succes",
-    "context_menu_items_heading": "Elemente Meniu Contextual"
+    "context_menu_items_heading": "Elemente Meniu Contextual",
+    "wifi_only_title" : "Doar Wi-Fi",
+    "wifi_only_subtitle" : "Torrentele vor fi descărcate și încărcate doar dacă este conectat Wi-Fi.",
+    "shutdown_when_download_completes_title" : "Oprire la finalizarea descărcării",
+    "shutdown_when_download_completes_subtitle" : "Aplicația se va opri când toate descărcările vor fi finalizate în fundal.",
+    "keep_CPU_awake_title" : "Mențineți CPU activ",
+    "keep_CPU_awake_subtitle" : "Ecranul nu va intra niciodată în repaus. Activarea acestei opțiuni va crește consumul bateriei.",
+    "charging_only_title" : "Descărcare doar când este conectat la încărcător",
+    "charging_only_subtitle" : "Torrentele vor fi descărcate/încărcate doar când este conectat la încărcător. Toate torrentele vor fi puse pe pauză când nu este conectat la încărcător.",
+    "shut_down_wifi_title" : "Dezactivați Wi-Fi",
+    "shut_down_wifi_subtitle" : "Această setare dezactivează automat Wi-Fi-ul când toate torrentele au terminat de descărcat.",
+    "battery_optimization_title" : "Schimbați optimizarea bateriei",
+    "battery_optimization_subtitle" : "Această setare este necesară pentru a vă asigura că notificările despre progres funcționează fără probleme.",
+    "battery_low_title": "Opriți descărcările dacă nivelul bateriei este scăzut",
+    "settings_tabs_power_management": "Administrare energie",
+    "download_chanrging_only_snackbar": "Setarea de descărcare doar când este conectat la încărcător este activată.\nDezactivați această setare și încercați din nou.",
+    "wifi_only_snackbar": "Setarea doar Wi-Fi este activată.\nDezactivați această setare și încercați din nou."
 }

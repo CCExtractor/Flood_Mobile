@@ -2,16 +2,16 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:clipboard/clipboard.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flood_mobile/Api/torrent_api.dart';
-import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
-import 'package:flood_mobile/Pages/home_screen/widgets/add_torrent_file.dart';
-import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
-import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
-import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flood_mobile/Api/torrent_api.dart';
+import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/Pages/home_screen/widgets/add_torrent_file.dart';
+import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 
 class BottomFloatingMenuButton extends StatefulWidget {
   final int themeIndex;

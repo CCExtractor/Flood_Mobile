@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
+import 'package:flood_mobile/Blocs/power_management_bloc/power_management_bloc.dart';
 import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
 import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
 import 'package:flood_mobile/Model/client_settings_model.dart';
@@ -103,6 +104,9 @@ void main() {
         ),
         BlocProvider<UserInterfaceBloc>.value(
           value: UserInterfaceBloc(),
+        ),
+        BlocProvider<PowerManagementBloc>.value(
+          value: PowerManagementBloc(),
         ),
       ],
       child: MaterialApp(
@@ -411,5 +415,51 @@ void main() {
     expect(
         tester.widget<CheckboxListTile>(find.byKey(Key('Set Trackers'))).value,
         false);
+  });
+
+  testWidgets('Check Power Management Section', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetUnderTest());
+    expect(find.text('Bandwidth'), findsOneWidget);
+    await tester.tap(find.text('Bandwidth'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Power Management'));
+    await tester.tap(find.text('Power Management'));
+    await tester.pumpAndSettle();
+    expect(find.byKey(Key('Power Management Expansion Card')), findsOneWidget);
+    expect(find.byType(SwitchListTile), findsNWidgets(5));
+    expect(find.text('Wifi Only'), findsOneWidget);
+    expect(
+        find.text(
+            'Torrents will download and upload only if WiFi is connected'),
+        findsOneWidget);
+    expect(find.text('Shutdown when download completes'), findsOneWidget);
+    expect(
+        find.text(
+            'The app will shutdown when all downloads have completed in the background.'),
+        findsOneWidget);
+    expect(find.text('Keep CPU awake'), findsOneWidget);
+    expect(
+        find.text(
+            'Screen never sleep. Enabling this will increase the battery usage.'),
+        findsOneWidget);
+    expect(
+        find.text('Download only when charging is connected'), findsOneWidget);
+    expect(
+        find.text(
+            'Torrents will download/upload only when charging. All torrents will pause when not connected to the charger.'),
+        findsOneWidget);
+    expect(find.text('Shut down Wifi'), findsOneWidget);
+    expect(
+        find.text(
+            'This setting automatically shut down wifi when all torrents complete download.'),
+        findsOneWidget);
+    expect(find.text('Change battery optimization'), findsOneWidget);
+    expect(
+        find.text(
+            'This setting is required if you want to make sure progress notification works smoothly.'),
+        findsOneWidget);
+    expect(find.text('Stop downloads if battery level is low'), findsOneWidget);
+    expect(find.text('0 %'), findsOneWidget);
+    expect(find.byType(Slider), findsOneWidget);
   });
 }

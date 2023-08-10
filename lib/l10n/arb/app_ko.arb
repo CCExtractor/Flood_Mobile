@@ -283,5 +283,21 @@
     "button_copy": "복사",
     "torrent_screen_items_heading": "토렌트 화면 항목",
     "torrents_set_trackers_snackbar": "트래커 설정 성공",
-    "context_menu_items_heading": "컨텍스트 메뉴 항목"
+    "context_menu_items_heading": "컨텍스트 메뉴 항목",
+    "wifi_only_title" : "와이파이 전용",
+    "wifi_only_subtitle" : "와이파이에 연결되어 있는 경우에만 토렌트를 다운로드하고 업로드합니다.",
+    "shutdown_when_download_completes_title" : "다운로드 완료 시 종료",
+    "shutdown_when_download_completes_subtitle" : "모든 다운로드가 백그라운드에서 완료되면 앱이 종료됩니다.",
+    "keep_CPU_awake_title" : "CPU 활성 상태 유지",
+    "keep_CPU_awake_subtitle" : "화면이 절대로 꺼지지 않습니다. 이를 활성화하면 배터리 사용량이 증가합니다.",
+    "charging_only_title" : "충전 중에만 다운로드",
+    "charging_only_subtitle" : "토렌트는 충전 중에만 다운로드/업로드됩니다. 충전기에 연결되지 않았을 때 모든 토렌트가 일시 정지됩니다.",
+    "shut_down_wifi_title" : "와이파이 종료",
+    "shut_down_wifi_subtitle" : "이 설정은 모든 토렌트가 다운로드를 완료한 후 자동으로 와이파이를 종료합니다.",
+    "battery_optimization_title" : "배터리 최적화 변경",
+    "battery_optimization_subtitle" : "이 설정은 진행 상태 알림이 원활하게 작동하도록 필요합니다.",
+    "battery_low_title": "배터리 수준이 낮을 때 다운로드 중지",
+    "settings_tabs_power_management": "전원 관리",
+    "download_chanrging_only_snackbar": "충전 중에만 다운로드 설정이 활성화되어 있습니다.\n이 설정을 해제한 후 다시 시도하세요.",
+    "wifi_only_snackbar": "와이파이 전용 설정이 활성화되어 있습니다.\n이 설정을 해제한 후 다시 시도하세요."
 }

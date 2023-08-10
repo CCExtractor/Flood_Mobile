@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
 import 'package:test/test.dart';
+import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
 
 void main() {
   group('FilterTorrentBloc', () {

@@ -1,27 +1,27 @@
 import "dart:io";
 import "package:bloc_test/bloc_test.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_test/flutter_test.dart";
+import "package:font_awesome_flutter/font_awesome_flutter.dart";
+import "package:mocktail/mocktail.dart";
+import "package:flood_mobile/Blocs/api_bloc/api_bloc.dart";
+import "package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart";
+import "package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart";
+import "package:flood_mobile/Blocs/graph_bloc/graph_bloc.dart";
+import "package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart";
 import "package:flood_mobile/Blocs/language_bloc/language_bloc.dart";
+import "package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart";
 import "package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart";
+import "package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart";
+import "package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart";
 import "package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart";
 import "package:flood_mobile/Model/notification_model.dart";
 import "package:flood_mobile/Model/single_feed_and_response_model.dart";
 import "package:flood_mobile/Model/single_rule_model.dart";
 import "package:flood_mobile/Model/torrent_model.dart";
 import "package:flood_mobile/Pages/home_screen/home_screen.dart";
-import "package:flood_mobile/Blocs/api_bloc/api_bloc.dart";
-import "package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart";
-import "package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart";
-import "package:flood_mobile/Blocs/graph_bloc/graph_bloc.dart";
-import "package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart";
-import "package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart";
-import "package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart";
-import "package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart";
 import "package:flood_mobile/l10n/l10n.dart";
-import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_test/flutter_test.dart";
-import "package:font_awesome_flutter/font_awesome_flutter.dart";
-import "package:mocktail/mocktail.dart";
 
 class MockHomeScreenBloc extends MockBloc<HomeScreenEvent, HomeScreenState>
     implements HomeScreenBloc {}

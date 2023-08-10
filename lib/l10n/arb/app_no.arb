@@ -283,5 +283,21 @@
     "button_copy": "Kopier",
     "torrent_screen_items_heading": "Torrent-skjermelementer",
     "torrents_set_trackers_snackbar": "Trackers satt",
-    "context_menu_items_heading": "Elementer i kontekstmenyen"
+    "context_menu_items_heading": "Elementer i kontekstmenyen",
+    "wifi_only_title" : "Bare WiFi",
+    "wifi_only_subtitle" : "Torrenter blir kun lastet ned og lastet opp hvis WiFi er tilkoblet.",
+    "shutdown_when_download_completes_title" : "Slå av når nedlasting er fullført",
+    "shutdown_when_download_completes_subtitle" : "Appen vil slå av når alle nedlastinger er fullført i bakgrunnen.",
+    "keep_CPU_awake_title" : "Hold CPU aktiv",
+    "keep_CPU_awake_subtitle" : "Skjermen vil aldri gå i dvale. Aktivering av denne funksjonen vil øke batteribruken.",
+    "charging_only_title" : "Last ned kun når lader er tilkoblet",
+    "charging_only_subtitle" : "Torrenter vil kun lastes ned/opplastes når laderen er tilkoblet. Alle torrenter vil bli satt på pause når ikke tilkoblet laderen.",
+    "shut_down_wifi_title" : "Slå av WiFi",
+    "shut_down_wifi_subtitle" : "Denne innstillingen slår automatisk av WiFi når alle torrenter er ferdig nedlastet.",
+    "battery_optimization_title" : "Endre batterioptimalisering",
+    "battery_optimization_subtitle" : "Denne innstillingen er nødvendig for å sikre at fremdriftsmeldinger fungerer problemfritt.",
+    "battery_low_title": "Stopp nedlastinger ved lavt batterinivå",
+    "settings_tabs_power_management": "Energiadministrasjon",
+    "download_chanrging_only_snackbar": "Nedlasting når lader er tilkoblet er aktivert.\nSlå av denne innstillingen og prøv igjen.",
+    "wifi_only_snackbar": "Bare WiFi-innstillingen er aktivert.\nSlå av denne innstillingen og prøv igjen."
 }
