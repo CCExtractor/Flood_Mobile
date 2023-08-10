@@ -13,6 +13,7 @@ class HomeScreenState extends Equatable {
   final List<FeedsContentsModel> rssFeedsContentsList;
   String upSpeed;
   String downSpeed;
+  final Map<String, bool> notificationCancel;
 
   HomeScreenState({
     required this.torrentList,
@@ -25,6 +26,7 @@ class HomeScreenState extends Equatable {
     required this.rssFeedsContentsList,
     required this.upSpeed,
     required this.downSpeed,
+    required this.notificationCancel,
   });
 
   HomeScreenState copyWith({
@@ -38,19 +40,20 @@ class HomeScreenState extends Equatable {
     List<FeedsContentsModel>? rssFeedsContentsList,
     String? upSpeed,
     String? downSpeed,
+    Map<String, bool>? notificationCancel,
   }) {
     return HomeScreenState(
-      torrentList: torrentList ?? this.torrentList,
-      torrentListJson: torrentListJson ?? this.torrentListJson,
-      unreadNotifications: unreadNotifications ?? this.unreadNotifications,
-      notificationModel: notificationModel ?? this.notificationModel,
-      rssFeedsListJson: rssFeedsListJson ?? this.rssFeedsListJson,
-      rssFeedsList: rssFeedsList ?? this.rssFeedsList,
-      rssRulesList: rssRulesList ?? this.rssRulesList,
-      rssFeedsContentsList: rssFeedsContentsList ?? this.rssFeedsContentsList,
-      upSpeed: upSpeed ?? this.upSpeed,
-      downSpeed: downSpeed ?? this.downSpeed,
-    );
+        torrentList: torrentList ?? this.torrentList,
+        torrentListJson: torrentListJson ?? this.torrentListJson,
+        unreadNotifications: unreadNotifications ?? this.unreadNotifications,
+        notificationModel: notificationModel ?? this.notificationModel,
+        rssFeedsListJson: rssFeedsListJson ?? this.rssFeedsListJson,
+        rssFeedsList: rssFeedsList ?? this.rssFeedsList,
+        rssRulesList: rssRulesList ?? this.rssRulesList,
+        rssFeedsContentsList: rssFeedsContentsList ?? this.rssFeedsContentsList,
+        upSpeed: upSpeed ?? this.upSpeed,
+        downSpeed: downSpeed ?? this.downSpeed,
+        notificationCancel: notificationCancel ?? this.notificationCancel);
   }
 
   @override
@@ -65,6 +68,7 @@ class HomeScreenState extends Equatable {
         rssFeedsContentsList,
         upSpeed,
         downSpeed,
+        notificationCancel,
       ];
 }
 
@@ -82,6 +86,7 @@ class HomeScreenInitial extends HomeScreenState {
           rssFeedsContentsList: [],
           upSpeed: '0 KB/s',
           downSpeed: '0 KB/s',
+          notificationCancel: {},
         );
 
   @override
