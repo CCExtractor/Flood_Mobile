@@ -34,7 +34,6 @@ class ClientApi {
         BlocProvider.of<ClientSettingsBloc>(context, listen: false)
             .add(SetClientSettingsEvent(clientSettings: clientSetting));
         print('---CLIENT SETTINGS---');
-        print(response);
       }
     } catch (error) {
       print('--ERROR IN GET CLIENT SETTINGS--');

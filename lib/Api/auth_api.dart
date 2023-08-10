@@ -119,7 +119,6 @@ class AuthApi {
         BlocProvider.of<UserDetailBloc>(context, listen: false)
             .add(SetUsersListEvent(usersList: usersList));
         print('---USERS LIST---');
-        print(response);
       }
     } catch (error) {
       print('--ERROR IN GET USER LIST--');
