@@ -313,5 +313,13 @@
     "sort_by_uploaded": "Nahráno",
     "sort_by_upload_speed": "Rychlost nahrávání",
     "sort_by_file_size": "Velikost souboru",
-    "sort_by_percent_completed": "Procento dokončení"
+    "sort_by_percent_completed": "Procento dokončení",
+    "notification_resume": "Pokračovat",
+    "notification_pause": "Pozastavit",
+    "notification_stop": "Zastavit",
+    "notification_cancel": "Zrušit",
+    "notification_stopped": "Zastaveno",
+    "notification_downloading": "Stahování",
+    "notification_error": "Chyba při stahování",
+    "notification_finished": "Stahování dokončeno"
 }

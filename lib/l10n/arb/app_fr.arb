@@ -314,5 +314,13 @@
     "sort_by_upload_speed": "Vitesse d'envoi",
     "sort_by_file_size": "Taille du fichier",
     "sort_by_percent_completed": "Pourcentage accompli"
-  
+  ,
+    "notification_resume": "Reprendre",
+    "notification_pause": "Pause",
+    "notification_stop": "Arrêter",
+    "notification_cancel": "Annuler",
+    "notification_stopped": "Arrêté",
+    "notification_downloading": "Téléchargement",
+    "notification_error": "Erreur de téléchargement",
+    "notification_finished": "Téléchargement terminé"
 }

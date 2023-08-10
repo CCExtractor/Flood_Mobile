@@ -326,6 +326,15 @@
    "shut_down_wifi_subtitle" : "This setting automatically shut down wifi when all torrents complete download.",
    "battery_optimization_title" : "Change battery optimization",
    "battery_optimization_subtitle" : "This setting is required if you want to make sure progress notification works smoothly.",
-   "battery_low_title": "Stop downloads if battery level is low"
+   "battery_low_title": "Stop downloads if battery level is low",
+
+   "notification_resume" : "Resume",
+   "notification_pause": "Pause",
+   "notification_stop": "Stop",
+   "notification_cancel": "Cancel",
+   "notification_stopped": "Stopped",
+   "notification_downloading": "Downloading",
+   "notification_error": "Download Error",
+   "notification_finished": "Download Finished"
 }
   

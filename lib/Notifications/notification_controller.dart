@@ -1,5 +1,3 @@
-
-
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:duration/duration.dart';
 import 'package:flutter/material.dart';
@@ -128,7 +126,9 @@ Future<void> createTorrentDownloadNotification(
           key: isPaused
               ? NotificationConstants.RESUME_ACTION_KEY
               : NotificationConstants.PAUSE_ACTION_KEY,
-          label: isPaused ? context.l10n.notification_resume : context.l10n.notification_pause,
+          label: isPaused
+              ? context.l10n.notification_resume
+              : context.l10n.notification_pause,
           actionType: ActionType.KeepOnTop,
           enabled: true,
           autoDismissible: false,
@@ -137,7 +137,9 @@ Future<void> createTorrentDownloadNotification(
           key: isPaused
               ? NotificationConstants.CANCEL_ACTION_KEY
               : NotificationConstants.STOP_ACTION_KEY,
-          label: isPaused ? context.l10n.notification_cancel : context.l10n.notification_stop,
+          label: isPaused
+              ? context.l10n.notification_cancel
+              : context.l10n.notification_stop,
           actionType: ActionType.KeepOnTop,
           enabled: true,
           autoDismissible: true,

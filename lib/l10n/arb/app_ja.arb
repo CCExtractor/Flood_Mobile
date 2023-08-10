@@ -314,5 +314,13 @@
     "sort_by_uploaded": "업로드됨",
     "sort_by_upload_speed": "업로드 속도",
     "sort_by_file_size": "파일 크기",
-    "sort_by_percent_completed": "완료된 비율"
+    "sort_by_percent_completed": "완료된 비율",
+    "notification_resume": "再開",
+    "notification_pause": "一時停止",
+    "notification_stop": "停止",
+    "notification_cancel": "キャンセル",
+    "notification_stopped": "停止",
+    "notification_downloading": "ダウンロード中",
+    "notification_error": "ダウンロードエラー",
+    "notification_finished": "ダウンロード完了"
 }

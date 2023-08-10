@@ -313,5 +313,13 @@
     "sort_by_uploaded": "Caricato",
     "sort_by_upload_speed": "Velocità di upload",
     "sort_by_file_size": "Dimensione del file",
-    "sort_by_percent_completed": "Percentuale completata"
+    "sort_by_percent_completed": "Percentuale completata",
+    "notification_resume": "Riprendi",
+    "notification_pause": "Pausa",
+    "notification_stop": "Fermare",
+    "notification_cancel": "Annulla",
+    "notification_stopped": "Fermato",
+    "notification_downloading": "Download",
+    "notification_error": "Errore di download",
+    "notification_finished": "Download completato"
 }

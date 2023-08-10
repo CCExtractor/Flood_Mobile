@@ -313,5 +313,13 @@
     "sort_by_uploaded": "अपलोड किया गया",
     "sort_by_upload_speed": "अपलोड स्पीड",
     "sort_by_file_size": "फ़ाइल का आकार",
-    "sort_by_percent_completed": "प्रतिशत पूर्ण"
+    "sort_by_percent_completed": "प्रतिशत पूर्ण",
+    "notification_resume": "पुनरारंभ करें",
+    "notification_pause": "रुकें",
+    "notification_stop": "शुरू करें",
+    "notification_cancel": "रद्द करें",
+    "notification_stopped": "रुक गया",
+    "notification_downloading": "डाउनलोड हो रहा है",
+    "notification_error": "डाउनलोड त्रुटि",
+    "notification_finished": "डाउनलोड समाप्त"
 }

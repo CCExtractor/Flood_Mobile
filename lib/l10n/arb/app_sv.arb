@@ -314,5 +314,13 @@
     "settings_tabs_power_management": "Strömhantering",
     "download_chanrging_only_snackbar": "Nerladdning när laddaren är ansluten är aktiverat.\nInaktivera denna inställning och försök igen.",
     "wifi_only_snackbar": "Endast WiFi-inställningen är aktiverad.\nInaktivera denna inställning och försök igen."
- 
+ ,
+    "notification_resume": "Fortsätt",
+    "notification_pause": "Paus",
+    "notification_stop": "Stoppa",
+    "notification_cancel": "Avbryt",
+    "notification_stopped": "Stoppad",
+    "notification_downloading": "Laddar ner",
+    "notification_error": "Nedladdningsfel",
+    "notification_finished": "Nedladdning klar"
 }
