@@ -1,5 +1,5 @@
-import 'package:flood_mobile/Model/torrent_content_model.dart';
 import 'package:test/test.dart';
+import 'package:flood_mobile/Model/torrent_content_model.dart';
 
 void main() {
   group('TorrentContentModel', () {

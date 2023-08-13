@@ -1,6 +1,6 @@
-import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 
 class LoginScreenTextField extends StatelessWidget {
   final TextEditingController controller;

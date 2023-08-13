@@ -1,5 +1,5 @@
-import 'package:flood_mobile/Pages/onboarding_main_screen/widgets/onboarding.dart';
 import 'package:flutter/material.dart';
+import 'package:flood_mobile/Pages/onboarding_main_screen/widgets/onboarding.dart';
 
 class OnboardingMainPage extends StatelessWidget {
   @override

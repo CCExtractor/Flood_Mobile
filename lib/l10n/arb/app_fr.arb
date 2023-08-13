@@ -283,5 +283,21 @@
     "button_copy": "Copier",
     "torrent_screen_items_heading": "Éléments de l'écran Torrent",
     "torrents_set_trackers_snackbar": "Trackers définis avec succès",
-    "context_menu_items_heading": "Éléments du menu contextuel"
+    "context_menu_items_heading": "Éléments du menu contextuel",
+    "wifi_only_title" : "Uniquement WiFi",
+    "wifi_only_subtitle" : "Les torrents seront téléchargés et chargés uniquement si le WiFi est connecté.",
+    "shutdown_when_download_completes_title" : "Arrêt à la fin du téléchargement",
+    "shutdown_when_download_completes_subtitle" : "L'application s'arrêtera lorsque tous les téléchargements seront terminés en arrière-plan.",
+    "keep_CPU_awake_title" : "Maintenir le processeur actif",
+    "keep_CPU_awake_subtitle" : "L'écran ne s'éteindra jamais. Activer cette option augmentera la consommation de batterie.",
+    "charging_only_title" : "Téléchargement uniquement lorsqu'il est connecté à une source d'alimentation",
+    "charging_only_subtitle" : "Les torrents seront téléchargés/chargés uniquement lorsqu'il est connecté à une source d'alimentation. Tous les torrents seront en pause lorsqu'il n'est pas connecté au chargeur.",
+    "shut_down_wifi_title" : "Éteindre le WiFi",
+    "shut_down_wifi_subtitle" : "Ce paramètre éteindra automatiquement le WiFi lorsque tous les torrents auront terminé leur téléchargement.",
+    "battery_optimization_title" : "Modifier l'optimisation de la batterie",
+    "battery_optimization_subtitle" : "Ce paramètre est nécessaire pour vous assurer que les notifications de progression fonctionnent correctement.",
+    "battery_low_title": "Arrêter les téléchargements si le niveau de la batterie est faible",
+    "settings_tabs_power_management": "Gestion de l'alimentation",
+    "download_chanrging_only_snackbar": "La fonction de téléchargement lorsqu'il est en charge est activée.\nDésactivez cette fonctionnalité et réessayez.",
+    "wifi_only_snackbar": "Le paramètre de WiFi uniquement est activé.\nDésactivez ce paramètre et réessayez."
 }

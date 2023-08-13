@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flood_mobile/Model/user_interface_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flood_mobile/Model/user_interface_model.dart';
 
 part 'user_interface_event.dart';
 part 'user_interface_state.dart';

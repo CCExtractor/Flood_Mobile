@@ -1,19 +1,19 @@
 import 'package:duration/duration.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
-import 'package:flood_mobile/Api/torrent_api.dart';
-import 'package:flood_mobile/Pages/torrent_screen/widgets/focused_menu_items_list.dart';
-import 'package:flood_mobile/Pages/torrent_screen/widgets/torrent_description.dart';
-import 'package:flood_mobile/Model/torrent_model.dart';
-import 'package:flood_mobile/Pages/widgets/delete_torrent_sheet.dart';
-import 'package:flood_mobile/Services/file_size_helper.dart';
-import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
-import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
-import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:flood_mobile/Api/torrent_api.dart';
+import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/Model/torrent_model.dart';
+import 'package:flood_mobile/Pages/torrent_screen/widgets/focused_menu_items_list.dart';
+import 'package:flood_mobile/Pages/torrent_screen/widgets/torrent_description.dart';
+import 'package:flood_mobile/Pages/widgets/delete_torrent_sheet.dart';
+import 'package:flood_mobile/Services/file_size_helper.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 
 class TorrentTile extends StatefulWidget {
   final TorrentModel model;

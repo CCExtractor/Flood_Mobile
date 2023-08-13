@@ -71,6 +71,10 @@ dependencies:
   equatable: ^2.0.5
   google_fonts: ^4.0.4
   awesome_notifications: ^0.7.4+1
+  connectivity_plus: ^2.1.0
+  wakelock: ^0.6.2
+  battery_plus: ^2.0.2
+  wifi_iot: ^0.3.18
 
 dependency_overrides:
   meta: ^1.7.0

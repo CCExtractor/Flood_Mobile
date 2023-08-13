@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:flood_mobile/Constants/api_endpoints.dart';
-import 'package:flood_mobile/Model/notification_model.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flood_mobile/Constants/api_endpoints.dart';
+import 'package:flood_mobile/Model/notification_model.dart';
 
 class NotificationApi {
   static Future<void> getNotifications({required BuildContext context}) async {
@@ -61,7 +61,7 @@ class NotificationApi {
         print(response);
         await getNotifications(context: context);
       } else {
-        print('---ERROR---');
+        print('---ERROR IN CLEAR NOTIFICATION---');
       }
     } catch (error) {
       print('--ERROR IN CLEAR NOTIFICATION--');

@@ -284,5 +284,21 @@
     "button_copy": "複製",
     "torrent_screen_items_heading": "種子螢幕項目",
     "context_menu_items_heading": "內容選單項目",
-    "torrents_set_trackers_snackbar": "成功設定追蹤器"
+    "torrents_set_trackers_snackbar": "成功設定追蹤器",
+    "wifi_only_title" : "僅限 WiFi",
+    "wifi_only_subtitle" : "只有連接 WiFi 時才會下載和上傳 Torrent。",
+    "shutdown_when_download_completes_title" : "下載完成後關閉",
+    "shutdown_when_download_completes_subtitle" : "所有下載在背景完成後將關閉應用程式。",
+    "keep_CPU_awake_title" : "保持 CPU 開啟",
+    "keep_CPU_awake_subtitle" : "螢幕永不休眠。啟用此功能將增加電池使用量。",
+    "charging_only_title" : "僅在連接充電器時下載",
+    "charging_only_subtitle" : "僅當連接充電器時才會下載/上傳 Torrent。未連接充電器時將暫停所有 Torrent。",
+    "shut_down_wifi_title" : "關閉 WiFi",
+    "shut_down_wifi_subtitle" : "此設定將在所有 Torrent 完成下載後自動關閉 WiFi。",
+    "battery_optimization_title" : "更改電池優化設定",
+    "battery_optimization_subtitle" : "如果要確保進度通知順利運作，則需要此設定。",
+    "battery_low_title": "如果電池電量低，停止下載",
+    "settings_tabs_power_management": "電源管理",
+    "download_chanrging_only_snackbar": "已啟用僅在連接充電器時下載設定。\n關閉此設定並重試。",
+    "wifi_only_snackbar": "已啟用僅限 WiFi 設定。\n關閉此設定並重試。"
 }

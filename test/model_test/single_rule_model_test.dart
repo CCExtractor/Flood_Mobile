@@ -1,5 +1,5 @@
-import 'package:flood_mobile/Model/single_rule_model.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flood_mobile/Model/single_rule_model.dart';
 
 void main() {
   group('Test RulesModel', () {

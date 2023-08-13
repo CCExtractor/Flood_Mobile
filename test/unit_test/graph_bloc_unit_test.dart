@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:flood_mobile/Blocs/graph_bloc/graph_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('SpeedGraphBloc', () {

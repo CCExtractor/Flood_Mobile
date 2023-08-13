@@ -1,13 +1,13 @@
 import 'dart:async';
-import 'package:flood_mobile/Route/routes.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc_event.dart';
 import 'package:flood_mobile/Blocs/login_screen_bloc/login_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flood_mobile/Route/routes.dart';
 
 class SplashScreen extends StatefulWidget {
   final int? themeIndex;

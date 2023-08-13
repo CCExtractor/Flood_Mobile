@@ -1,6 +1,6 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:flood_mobile/Constants/notification_keys.dart';
 import 'package:flutter/material.dart';
+import 'package:flood_mobile/Constants/notification_keys.dart';
 
 List<NotificationChannel> notificationChannelsList = [
   NotificationChannel(

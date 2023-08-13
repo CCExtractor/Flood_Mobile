@@ -283,5 +283,21 @@
     "button_copy": "Kopioi",
     "torrent_screen_items_heading": "Torrent-näytön kohteet",
     "torrents_set_trackers_snackbar": "Seurantapalvelimet asetettu onnistuneesti",
-    "context_menu_items_heading": "Kontekstivalikon kohteet"
+    "context_menu_items_heading": "Kontekstivalikon kohteet",
+    "wifi_only_title" : "Vain WiFi",
+    "wifi_only_subtitle" : "Torrentit ladataan ja lähetetään vain silloin, kun WiFi on yhdistetty.",
+    "shutdown_when_download_completes_title" : "Sammuta kun lataus on valmis",
+    "shutdown_when_download_completes_subtitle" : "Sovellus sammutetaan, kun kaikki lataukset on suoritettu taustalla.",
+    "keep_CPU_awake_title" : "Pidä CPU aktiivisena",
+    "keep_CPU_awake_subtitle" : "Näyttö ei koskaan mene lepotilaan. Tämän ominaisuuden käyttöönotto lisää akun käyttöä.",
+    "charging_only_title" : "Lataa vain, kun laturi on kytketty",
+    "charging_only_subtitle" : "Torrentit ladataan/lähetetään vain, kun laturi on kytketty. Kaikki torrentit keskeytetään, kun laturi ei ole kytkettynä.",
+    "shut_down_wifi_title" : "Sammuta WiFi",
+    "shut_down_wifi_subtitle" : "Tämä asetus sammuttaa WiFi:n automaattisesti, kun kaikki torrentit ovat valmiita lataukseen.",
+    "battery_optimization_title" : "Muuta akun optimointia",
+    "battery_optimization_subtitle" : "Tämä asetus on tarpeen, jotta edistymisilmoitukset toimivat saumattomasti.",
+    "battery_low_title": "Keskeytä lataukset, jos akun varaus on matala",
+    "settings_tabs_power_management": "Virranhallinta",
+    "download_chanrging_only_snackbar": "Lataa vain, kun laturi on kytketty -asetus on käytössä.\nPoista tämä asetus käytöstä ja yritä uudelleen.",
+    "wifi_only_snackbar": "Vain WiFi -asetus on käytössä.\nPoista tämä asetus käytöstä ja yritä uudelleen."
 }

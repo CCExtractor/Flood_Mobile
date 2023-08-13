@@ -283,5 +283,21 @@
     "button_copy": "Kopiëren",
     "torrent_screen_items_heading": "Torrent Schermitems",
     "torrents_set_trackers_snackbar": "Trackers succesvol ingesteld",
-    "context_menu_items_heading": "Contextmenu-items"
+    "context_menu_items_heading": "Contextmenu-items",
+    "wifi_only_title" : "Alleen WiFi",
+    "wifi_only_subtitle" : "Torrents worden alleen gedownload en geüpload als er een WiFi-verbinding is.",
+    "shutdown_when_download_completes_title" : "Afsluiten wanneer download is voltooid",
+    "shutdown_when_download_completes_subtitle" : "De app wordt afgesloten wanneer alle downloads op de achtergrond zijn voltooid.",
+    "keep_CPU_awake_title" : "CPU actief houden",
+    "keep_CPU_awake_subtitle" : "Het scherm gaat nooit in slaap. Het inschakelen hiervan verhoogt het batterijverbruik.",
+    "charging_only_title" : "Alleen downloaden bij aansluiting op oplader",
+    "charging_only_subtitle" : "Torrents worden alleen gedownload/geüpload wanneer de oplader is aangesloten. Alle torrents worden gepauzeerd wanneer er geen verbinding is met de oplader.",
+    "shut_down_wifi_title" : "WiFi uitschakelen",
+    "shut_down_wifi_subtitle" : "Deze instelling schakelt WiFi automatisch uit wanneer alle torrents zijn gedownload.",
+    "battery_optimization_title" : "Batterijoptimalisatie wijzigen",
+    "battery_optimization_subtitle" : "Deze instelling is vereist om ervoor te zorgen dat meldingen over de voortgang soepel werken.",
+    "battery_low_title": "Downloads stoppen bij een laag batterijniveau",
+    "settings_tabs_power_management": "Energiemanagement",
+    "download_chanrging_only_snackbar": "Downloaden bij opladen is ingeschakeld.\nSchakel deze instelling uit en probeer het opnieuw.",
+    "wifi_only_snackbar": "Alleen WiFi-instelling is ingeschakeld.\nSchakel deze instelling uit en probeer het opnieuw."
 }

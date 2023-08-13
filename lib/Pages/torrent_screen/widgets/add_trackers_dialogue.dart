@@ -1,13 +1,13 @@
-import 'package:flood_mobile/Api/event_handler_api.dart';
-import 'package:flood_mobile/Api/torrent_api.dart';
-import 'package:flood_mobile/Model/torrent_model.dart';
-import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
-import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
-import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
-import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flood_mobile/Api/event_handler_api.dart';
+import 'package:flood_mobile/Api/torrent_api.dart';
+import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/Model/torrent_model.dart';
+import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 
 class AddTrackersDialogue extends StatefulWidget {
   final List<TorrentModel> torrents;

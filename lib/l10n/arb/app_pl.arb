@@ -283,5 +283,21 @@
     "button_copy": "Kopiuj",
     "torrent_screen_items_heading": "Elementy ekranu Torrenta",
     "torrents_set_trackers_snackbar": "Trackery pomyślnie ustawione",
-    "context_menu_items_heading": "Elementy menu kontekstowego"
+    "context_menu_items_heading": "Elementy menu kontekstowego",
+    "wifi_only_title" : "Tylko WiFi",
+    "wifi_only_subtitle" : "Torrenty będą pobierane i przesyłane tylko wtedy, gdy jest połączenie WiFi.",
+    "shutdown_when_download_completes_title" : "Wyłącz po zakończeniu pobierania",
+    "shutdown_when_download_completes_subtitle" : "Aplikacja zostanie wyłączona, gdy wszystkie pobierania zostaną zakończone w tle.",
+    "keep_CPU_awake_title" : "Utrzymuj procesor włączony",
+    "keep_CPU_awake_subtitle" : "Ekran nigdy się nie wyłączy. Włączenie tej opcji zwiększy zużycie baterii.",
+    "charging_only_title" : "Pobieraj tylko przy podłączonym ładowaniu",
+    "charging_only_subtitle" : "Torrenty będą pobierane/przesyłane tylko przy podłączonym ładowaniu. Wszystkie torrenty zostaną wstrzymane, gdy nie będzie podłączonego ładowania.",
+    "shut_down_wifi_title" : "Wyłącz WiFi",
+    "shut_down_wifi_subtitle" : "To ustawienie automatycznie wyłączy WiFi, gdy wszystkie torrenty zakończą pobieranie.",
+    "battery_optimization_title" : "Zmień optymalizację baterii",
+    "battery_optimization_subtitle" : "To ustawienie jest wymagane, aby zapewnić płynne działanie powiadomień o postępie.",
+    "battery_low_title": "Zatrzymaj pobieranie przy niskim poziomie baterii",
+    "settings_tabs_power_management": "Zarządzanie zasilaniem",
+    "download_chanrging_only_snackbar": "Opcja pobierania przy ładowaniu jest włączona.\nWyłącz tę opcję i spróbuj ponownie.",
+    "wifi_only_snackbar": "Opcja tylko WiFi jest włączona.\nWyłącz tę opcję i spróbuj ponownie."
 }

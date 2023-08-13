@@ -1,5 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flood_mobile/Api/event_handler_api.dart';
+import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/graph_bloc/graph_bloc.dart';
+import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Pages/torrent_screen/services/filtered_torrent_list.dart';
 import 'package:flood_mobile/Pages/torrent_screen/widgets/bottom_floating_menu_button.dart';
 import 'package:flood_mobile/Pages/torrent_screen/widgets/pull_to_reveal.dart';
@@ -9,14 +16,7 @@ import 'package:flood_mobile/Pages/torrent_screen/widgets/speed_graph.dart';
 import 'package:flood_mobile/Pages/torrent_screen/widgets/speed_text_icon_widget.dart';
 import 'package:flood_mobile/Pages/torrent_screen/widgets/torrent_tile.dart';
 import 'package:flood_mobile/Pages/widgets/text_size.dart';
-import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
-import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
-import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:flutter_svg/svg.dart';
 
 class TorrentScreen extends StatefulWidget {
   final int themeIndex;

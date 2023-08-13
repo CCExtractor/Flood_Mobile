@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flood_mobile/Model/graph_model.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
+import 'package:flood_mobile/Model/graph_model.dart';
 
 part 'graph_event.dart';
 part 'graph_state.dart';

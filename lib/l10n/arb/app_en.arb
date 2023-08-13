@@ -86,7 +86,8 @@
    "button_close": "Close",
    "button_download": "Download",
    "button_save_feed": "Save",
-    
+   "download_chanrging_only_snackbar": "Download when charging setting is enabled.\nTurn off this setting and try again",
+   "wifi_only_snackbar": "Wifi only setting is enabled.\nTurn off this setting and try again",
     
    "login_screen" : "Login Screen",
    "login_screen_welcome": "Welcome to Flood",
@@ -240,6 +241,7 @@
    "settings_tabs_authentication": "Authentication",
    "settings_tabs_connectivity": "Connectivity",
    "settings_tabs_user_interface": "User Interface",
+   "settings_tabs_power_management": "Power Management",
    "settings_tabs_heading": "Settings",
    "auth_message_not_admin": "User is not Admin",
    "auth_user_accounts": "User Accounts",
@@ -297,6 +299,19 @@
    "button_save": "Save",
    "setting_button_save_snackbar": "Settings changed successfully",
    "torrent_screen_items_heading" : "Torrent Screen Items",
-   "context_menu_items_heading" : "Context Menu Items"
+   "context_menu_items_heading" : "Context Menu Items",
+   "wifi_only_title" : "Wifi Only",
+   "wifi_only_subtitle" : "Torrents will download and upload only if WiFi is connected",
+   "shutdown_when_download_completes_title" : "Shutdown when download completes",
+   "shutdown_when_download_completes_subtitle" : "The app will shutdown when all downloads have completed in the background.",
+   "keep_CPU_awake_title" : "Keep CPU awake",
+   "keep_CPU_awake_subtitle" : "Screen never sleep. Enabling this will increase the battery usage.",
+   "charging_only_title" : "Download only when charging is connected",
+   "charging_only_subtitle" : "Torrents will download/upload only when charging. All torrents will pause when not connected to the charger.",
+   "shut_down_wifi_title" : "Shut down Wifi",
+   "shut_down_wifi_subtitle" : "This setting automatically shut down wifi when all torrents complete download.",
+   "battery_optimization_title" : "Change battery optimization",
+   "battery_optimization_subtitle" : "This setting is required if you want to make sure progress notification works smoothly.",
+   "battery_low_title": "Stop downloads if battery level is low"
 }
   
