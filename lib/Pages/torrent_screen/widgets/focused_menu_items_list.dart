@@ -249,7 +249,7 @@ List<FocusedMenuItem> getFocusedMenuItems(BuildContext context,
         },
         trailingIcon: Icon(
           model.isInitialSeeding
-              ? FontAwesomeIcons.checkSquare
+              ? FontAwesomeIcons.squareCheck
               : FontAwesomeIcons.square,
           color: Colors.black,
           size: 20,
@@ -266,7 +266,7 @@ List<FocusedMenuItem> getFocusedMenuItems(BuildContext context,
         },
         trailingIcon: Icon(
           model.isSequential
-              ? FontAwesomeIcons.checkSquare
+              ? FontAwesomeIcons.squareCheck
               : FontAwesomeIcons.square,
           color: Colors.black,
           size: 20,
@@ -293,7 +293,7 @@ List<FocusedMenuItem> getFocusedMenuItems(BuildContext context,
           }
         },
         trailingIcon: Icon(
-          FontAwesomeIcons.fileDownload,
+          FontAwesomeIcons.fileArrowDown,
           color: Colors.black,
           size: 20,
         ),

@@ -41,7 +41,7 @@ class _VideoStreamScreenState extends State<VideoStreamScreen> {
         ApiEndpoints.playTorrentVideo +
         '${widget.args.hash}/contents/${widget.args.index}/data';
 
-    videoPlayerController = VideoPlayerController.network(url, httpHeaders: {
+    videoPlayerController = VideoPlayerController.networkUrl(url as Uri, httpHeaders: {
       'Cookie': BlocProvider.of<UserDetailBloc>(context, listen: false).token
     })
       ..initialize().then((_) {
