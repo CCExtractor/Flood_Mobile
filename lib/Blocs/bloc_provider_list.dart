@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flood_mobile/Blocs/api_bloc/api_bloc.dart';
 import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
 import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
@@ -8,12 +9,12 @@ import 'package:flood_mobile/Blocs/login_screen_bloc/login_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/onboarding_main_page_bloc/on_boarding_page_color_bloc.dart';
 import 'package:flood_mobile/Blocs/power_management_bloc/power_management_bloc.dart';
+import 'package:flood_mobile/Blocs/sort_by_torrent_bloc/sort_by_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/torrent_content_screen_bloc/torrent_content_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BlocProviders {
   static List<BlocProvider> multiBlocProviders = [
@@ -60,6 +61,9 @@ class BlocProviders {
     ),
     BlocProvider<UserInterfaceBloc>(
       create: (context) => UserInterfaceBloc(),
+    ),
+    BlocProvider<SortByTorrentBloc>(
+      create: (context) => SortByTorrentBloc(),
     ),
     BlocProvider<PowerManagementBloc>(
       create: (context) => PowerManagementBloc(),

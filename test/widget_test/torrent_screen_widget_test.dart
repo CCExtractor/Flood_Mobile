@@ -11,6 +11,7 @@ import 'package:flood_mobile/Blocs/graph_bloc/graph_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
 import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
+import 'package:flood_mobile/Blocs/sort_by_torrent_bloc/sort_by_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
@@ -242,6 +243,7 @@ void main() {
         BlocProvider<SpeedGraphBloc>.value(value: mockSpeedGraphBloc),
         BlocProvider<LanguageBloc>.value(value: LanguageBloc()),
         BlocProvider<UserInterfaceBloc>.value(value: mockUserInterfaceBloc),
+        BlocProvider<SortByTorrentBloc>.value(value: SortByTorrentBloc()),
         BlocProvider<LanguageBloc>.value(value: LanguageBloc()),
       ],
       child: MaterialApp(
@@ -337,6 +339,29 @@ void main() {
           expect(find.byKey(Key("Error Torrent ListTile")), findsOneWidget);
           expect(find.text('Filter by tags'), findsOneWidget);
           expect(find.text('Filter by trackers'), findsOneWidget);
+          await tester.tap(find.byKey(Key("Show Chart Button")));
+          await tester.pumpAndSettle();
+          expect(find.byIcon(FontAwesomeIcons.sortAlphaUp), findsOneWidget);
+          await tester.tap(find.byIcon(FontAwesomeIcons.sortAlphaUp));
+          await tester.pumpAndSettle();
+          expect(
+              find.byKey(Key("Sort By Status Bottom Sheet")), findsOneWidget);
+          expect(find.text('Sort By'), findsOneWidget);
+          expect(find.byIcon(FontAwesomeIcons.sortUp), findsOneWidget);
+          expect(find.text('Name'), findsOneWidget);
+          expect(find.text('Percent Complete'), findsOneWidget);
+          expect(find.text('Downloaded'), findsOneWidget);
+          expect(find.text('Download Speed'), findsOneWidget);
+          expect(find.text('Uploaded'), findsOneWidget);
+          expect(find.text('Upload Speed'), findsOneWidget);
+          expect(find.text('Ratio'), findsOneWidget);
+          expect(find.text('File Size'), findsOneWidget);
+          expect(find.text('Peers'), findsOneWidget);
+          await tester.drag(find.text('Ratio'), const Offset(0.0, -300.0));
+          await tester.pumpAndSettle();
+          expect(find.text('Seeds'), findsOneWidget);
+          expect(find.text('Date Added'), findsOneWidget);
+          expect(find.text('Date Created'), findsOneWidget);
         },
       );
       testWidgets("Check torrent tile", (WidgetTester tester) async {

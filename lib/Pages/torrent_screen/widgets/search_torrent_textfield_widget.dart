@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Pages/torrent_screen/widgets/filter_by_bottom_sheet.dart';
+import 'package:flood_mobile/Pages/torrent_screen/widgets/sort_by_bottom_sheet.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
 
 class SearchTorrentTextField extends StatefulWidget {
@@ -38,6 +40,33 @@ class _SearchTorrentTextFieldState extends State<SearchTorrentTextField> {
             isDense: true,
             contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             hintText: context.l10n.search_torrent_text,
+            prefixIcon: IconButton(
+              icon: Icon(
+                FontAwesomeIcons.sortAlphaUp,
+                color: ThemeBloc.theme(widget.themeIndex).primaryColorDark,
+                size: 22,
+              ),
+              onPressed: () {
+                showModalBottomSheet(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(15),
+                      topLeft: Radius.circular(15),
+                    ),
+                  ),
+                  isScrollControlled: true,
+                  context: context,
+                  backgroundColor:
+                      ThemeBloc.theme(widget.themeIndex).colorScheme.background,
+                  builder: (context) {
+                    return SortByBottomSheet(
+                      key: Key("Sort By Status Bottom Sheet"),
+                      themeIndex: widget.themeIndex,
+                    );
+                  },
+                );
+              },
+            ),
             suffixIcon: Padding(
               key: Key("Filter Torrent ActionChip"),
               padding: const EdgeInsets.only(right: 5),
@@ -81,8 +110,9 @@ class _SearchTorrentTextFieldState extends State<SearchTorrentTextField> {
                         .background,
                     builder: (context) {
                       return FilterByStatus(
-                          key: Key("Filter By Status Bottom Sheet"),
-                          themeIndex: widget.themeIndex);
+                        key: Key("Filter By Status Bottom Sheet"),
+                        themeIndex: widget.themeIndex,
+                      );
                     },
                   );
                 },

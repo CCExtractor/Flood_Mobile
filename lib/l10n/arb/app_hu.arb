@@ -299,5 +299,19 @@
     "battery_low_title": "Letöltés szüneteljen, ha az akkumulátor szint alacsony",
     "settings_tabs_power_management": "Energiagazdálkodás",
     "download_chanrging_only_snackbar": "A letöltés töltéskor engedélyezett.\nKapcsolja ki ezt a beállítást, és próbálja újra.",
-    "wifi_only_snackbar": "A csak WiFi beállítás engedélyezett.\nKapcsolja ki ezt a beállítást, és próbálja újra."
+    "wifi_only_snackbar": "A csak WiFi beállítás engedélyezett.\nKapcsolja ki ezt a beállítást, és próbálja újra.",
+    "sort_by_heading": "Rendezés",
+    "sort_by_name": "Név",
+    "sort_by_size": "Méret",
+    "sort_by_date_added": "Hozzáadás dátuma",
+    "sort_by_date_created": "Létrehozás dátuma",
+    "sort_by_ratio": "Arány",
+    "sort_by_peers": "Peers",
+    "sort_by_seeds": "Seeders",
+    "sort_by_download_speed": "Letöltési sebesség",
+    "sort_by_downloaded": "Letöltve",
+    "sort_by_uploaded": "Feltöltve",
+    "sort_by_upload_speed": "Feltöltési sebesség",
+    "sort_by_file_size": "Fájlméret",
+    "sort_by_percent_completed": "Százalékban elkészült"
 }

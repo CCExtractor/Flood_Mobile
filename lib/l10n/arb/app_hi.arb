@@ -299,5 +299,19 @@
     "battery_low_title": "बैटरी स्तर कम होने पर डाउनलोड रोकें",
     "settings_tabs_power_management": "बिजली प्रबंधन",
     "download_chanrging_only_snackbar": "चार्जिंग के समय डाउनलोड सेटिंग सक्षम है।\nइस सेटिंग को बंद करें और पुन: प्रयास करें",
-    "wifi_only_snackbar": "केवल WiFi सेटिंग सक्षम है।\nइस सेटिंग को बंद करें और पुन: प्रयास करें"
+    "wifi_only_snackbar": "केवल WiFi सेटिंग सक्षम है।\nइस सेटिंग को बंद करें और पुन: प्रयास करें",
+    "sort_by_heading": "इसके अनुसार क्रमबद्ध करें",
+    "sort_by_name": "नाम",
+    "sort_by_size": "आकार",
+    "sort_by_date_added": "जोड़ने की तारीख",
+    "sort_by_date_created": "बनाने की तारीख",
+    "sort_by_ratio": "अनुपात",
+    "sort_by_peers": "पीर्स",
+    "sort_by_seeds": "सीड्स",
+    "sort_by_download_speed": "डाउनलोड स्पीड",
+    "sort_by_downloaded": "डाउनलोड किया गया",
+    "sort_by_uploaded": "अपलोड किया गया",
+    "sort_by_upload_speed": "अपलोड स्पीड",
+    "sort_by_file_size": "फ़ाइल का आकार",
+    "sort_by_percent_completed": "प्रतिशत पूर्ण"
 }

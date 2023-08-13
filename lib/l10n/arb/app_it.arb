@@ -299,5 +299,19 @@
     "battery_low_title": "Interrompi i download se il livello della batteria è basso",
     "settings_tabs_power_management": "Gestione dell'alimentazione",
     "download_chanrging_only_snackbar": "L'impostazione di scarica solo durante la ricarica è abilitata.\nDisattiva questa impostazione e riprova.",
-    "wifi_only_snackbar": "L'impostazione di solo WiFi è abilitata.\nDisattiva questa impostazione e riprova."
+    "wifi_only_snackbar": "L'impostazione di solo WiFi è abilitata.\nDisattiva questa impostazione e riprova.",
+    "sort_by_heading": "Ordina per",
+    "sort_by_name": "Nome",
+    "sort_by_size": "Dimensione",
+    "sort_by_date_added": "Data di aggiunta",
+    "sort_by_date_created": "Data di creazione",
+    "sort_by_ratio": "Rapporto",
+    "sort_by_peers": "Peers",
+    "sort_by_seeds": "Seeders",
+    "sort_by_download_speed": "Velocità di download",
+    "sort_by_downloaded": "Scaricato",
+    "sort_by_uploaded": "Caricato",
+    "sort_by_upload_speed": "Velocità di upload",
+    "sort_by_file_size": "Dimensione del file",
+    "sort_by_percent_completed": "Percentuale completata"
 }
