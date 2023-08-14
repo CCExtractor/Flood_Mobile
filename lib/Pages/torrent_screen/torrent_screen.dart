@@ -51,9 +51,8 @@ class _TorrentScreenState extends State<TorrentScreen> {
                           builder: (context, sortByState) {
                             List<TorrentModel> torrentList = sortTorrents(
                               torrents: state.torrentList,
-                              sortState:
-                                  BlocProvider.of<SortByTorrentBloc>(context)
-                                      .state,
+                              sortState: sortByState,
+                              context: context,
                             );
                             return BlocBuilder<SpeedGraphBloc, SpeedGraphState>(
                               builder: (context, graphSstate) {

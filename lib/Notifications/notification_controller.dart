@@ -35,31 +35,32 @@ class NotificationController {
       await TorrentApi.startTorrent(
           hashes: [homeModel.state.torrentList[receivedAction.id!].hash],
           context: NavigationService.navigatorKey.currentContext!);
-    } else if (actionKey == NotificationConstants.CANCEL_ACTION_KEY) {
+    }
+
+    // Cancel downloads
+    else if (actionKey == NotificationConstants.CANCEL_ACTION_KEY) {
       BlocProvider.of<HomeScreenBloc>(
               NavigationService.navigatorKey.currentContext!,
               listen: false)
-          .add(
-        UpdateNotificationCancelEvent(
-          newNotificationCancel: {
-            homeModel.state.torrentList[receivedAction.id!].hash: true
-          },
-        ),
-      );
-    } else if (actionKey == NotificationConstants.STOP_ACTION_KEY) {
+          .state
+          .notificationCancel
+          .putIfAbsent(
+              homeModel.state.torrentList[receivedAction.id!].hash, () => true);
+    }
+
+    // Stop downloads
+    else if (actionKey == NotificationConstants.STOP_ACTION_KEY) {
       await TorrentApi.stopTorrent(
           hashes: [homeModel.state.torrentList[receivedAction.id!].hash],
           context: NavigationService.navigatorKey.currentContext!);
+
       BlocProvider.of<HomeScreenBloc>(
               NavigationService.navigatorKey.currentContext!,
               listen: false)
-          .add(
-        UpdateNotificationCancelEvent(
-          newNotificationCancel: {
-            homeModel.state.torrentList[receivedAction.id!].hash: true
-          },
-        ),
-      );
+          .state
+          .notificationCancel
+          .putIfAbsent(
+              homeModel.state.torrentList[receivedAction.id!].hash, () => true);
     }
   }
 }
