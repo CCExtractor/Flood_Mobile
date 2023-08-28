@@ -313,5 +313,13 @@
     "sort_by_uploaded": "Opplastet",
     "sort_by_upload_speed": "Opplastingshastighet",
     "sort_by_file_size": "Filstørrelse",
-    "sort_by_percent_completed": "Prosent fullført"
+    "sort_by_percent_completed": "Prosent fullført",
+    "notification_resume": "Fortsett",
+    "notification_pause": "Pause",
+    "notification_stop": "Stopp",
+    "notification_cancel": "Avbryt",
+    "notification_stopped": "Stoppet",
+    "notification_downloading": "Laster ned",
+    "notification_error": "Nedlastingsfeil",
+    "notification_finished": "Nedlasting fullført"
 }

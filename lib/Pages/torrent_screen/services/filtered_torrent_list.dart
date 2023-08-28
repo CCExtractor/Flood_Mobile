@@ -2,6 +2,8 @@ import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart'
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/sort_by_torrent_bloc/sort_by_torrent_bloc.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 bool isFilteredTorrent(
     TorrentModel torrentModel, FilterTorrentState stateFilterBloc) {
@@ -58,7 +60,8 @@ int countDisplayTorrent(HomeScreenState model, FilterTorrentState filterModel) {
 
 List<TorrentModel> sortTorrents(
     {required List<TorrentModel> torrents,
-    required SortByTorrentState sortState}) {
+    required SortByTorrentState sortState,
+    required BuildContext context}) {
   switch (sortState.sortByStatus) {
     case SortByValue.name:
       torrents.sort((a, b) {
@@ -171,5 +174,7 @@ List<TorrentModel> sortTorrents(
     default:
       throw Exception('Unsupported sort criteria');
   }
+  BlocProvider.of<HomeScreenBloc>(context)
+      .add(SetTorrentListEvent(newTorrentList: torrents));
   return torrents;
 }

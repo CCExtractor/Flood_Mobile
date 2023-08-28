@@ -77,6 +77,7 @@ void main() {
           rssFeedsContentsList: [],
           upSpeed: '0 KB/s',
           downSpeed: '0 KB/s',
+          notificationCancel: {},
         ),
       ],
     );
@@ -103,6 +104,7 @@ void main() {
           rssFeedsContentsList: [],
           upSpeed: '0 KB/s',
           downSpeed: '0 KB/s',
+          notificationCancel: {},
         ),
       ],
     );
@@ -136,6 +138,7 @@ void main() {
           rssFeedsContentsList: [],
           upSpeed: '0 KB/s',
           downSpeed: '0 KB/s',
+          notificationCancel: {},
         ),
       ],
     );
@@ -163,6 +166,7 @@ void main() {
           rssFeedsContentsList: [],
           upSpeed: newUpSpeed + '/s',
           downSpeed: newDownSpeed + '/s',
+          notificationCancel: {},
         ),
       ],
     );
@@ -217,6 +221,7 @@ void main() {
           rssFeedsContentsList: [],
           upSpeed: '0 KB/s',
           downSpeed: '0 KB/s',
+          notificationCancel: {},
         ),
       ],
     );
@@ -245,6 +250,7 @@ void main() {
           rssFeedsContentsList: newRssFeedsContentsList,
           upSpeed: '0 KB/s',
           downSpeed: '0 KB/s',
+          notificationCancel: {},
         ),
       ],
     );
@@ -271,6 +277,7 @@ void main() {
           rssFeedsContentsList: [],
           upSpeed: '0 KB/s',
           downSpeed: '0 KB/s',
+          notificationCancel: {},
         ),
       ],
     );
@@ -297,6 +304,7 @@ void main() {
           rssFeedsContentsList: [],
           upSpeed: '0 KB/s',
           downSpeed: '0 KB/s',
+          notificationCancel: {},
         ),
       ],
     );
@@ -323,6 +331,34 @@ void main() {
           rssFeedsContentsList: [],
           upSpeed: '0 KB/s',
           downSpeed: '0 KB/s',
+          notificationCancel: {},
+        ),
+      ],
+    );
+  });
+
+  group('notificationCancel', () {
+    final newNotificationCancel = {'test': true};
+
+    blocTest<HomeScreenBloc, HomeScreenState>(
+      'emits updated state when updateTorrentList is called',
+      build: () => sut,
+      act: (bloc) => bloc.add(UpdateNotificationCancelEvent(
+          newNotificationCancel: newNotificationCancel)),
+      expect: () => [
+        HomeScreenState(
+          torrentList: [],
+          torrentListJson: {},
+          unreadNotifications: 0,
+          notificationModel: NotificationModel(
+              read: 0, unread: 0, notifications: [], total: 0),
+          rssFeedsListJson: {},
+          rssFeedsList: [],
+          rssRulesList: [],
+          rssFeedsContentsList: [],
+          upSpeed: '0 KB/s',
+          downSpeed: '0 KB/s',
+          notificationCancel: {'test': true},
         ),
       ],
     );

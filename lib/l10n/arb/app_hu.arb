@@ -313,5 +313,13 @@
     "sort_by_uploaded": "Feltöltve",
     "sort_by_upload_speed": "Feltöltési sebesség",
     "sort_by_file_size": "Fájlméret",
-    "sort_by_percent_completed": "Százalékban elkészült"
+    "sort_by_percent_completed": "Százalékban elkészült",
+    "notification_resume": "Folytatás",
+    "notification_pause": "Szünet",
+    "notification_stop": "Megállítás",
+    "notification_cancel": "Mégse",
+    "notification_stopped": "Megállt",
+    "notification_downloading": "Letöltés",
+    "notification_error": "Letöltési hiba",
+    "notification_finished": "Letöltés kész"
 }

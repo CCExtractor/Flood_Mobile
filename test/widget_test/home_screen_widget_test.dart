@@ -38,7 +38,8 @@ void main() {
   setUp(() {
     mockHomeScreenBloc = MockHomeScreenBloc();
     mockClientSettingsBloc = MockClientSettingsBloc();
-    when(() => mockHomeScreenBloc.state).thenReturn(HomeScreenState(
+    when(() => mockHomeScreenBloc.state).thenReturn(
+      HomeScreenState(
         torrentList: [
           TorrentModel(
               bytesDone: 0.0,
@@ -145,7 +146,10 @@ void main() {
         ],
         rssFeedsContentsList: [],
         upSpeed: '10 Kb/s',
-        downSpeed: '20 Kb/s'));
+        downSpeed: '20 Kb/s',
+        notificationCancel: {},
+      ),
+    );
   });
   Widget createWidgetUnderTest() {
     return MultiBlocProvider(

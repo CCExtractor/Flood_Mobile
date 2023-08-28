@@ -314,5 +314,13 @@
     "settings_tabs_power_management": "Керування живленням",
     "download_chanrging_only_snackbar": "Ввімкнено опцію завантаження при підключенні до зарядного пристрою.\nВимкніть цю опцію та спробуйте ще раз.",
     "wifi_only_snackbar": "Ввімкнено опцію тільки WiFi.\nВимкніть цю опцію та спробуйте ще раз."
- 
+ ,
+    "notification_resume": "Продовжити",
+    "notification_pause": "Пауза",
+    "notification_stop": "Зупинити",
+    "notification_cancel": "Скасувати",
+    "notification_stopped": "Зупинено",
+    "notification_downloading": "Завантаження",
+    "notification_error": "Помилка завантаження",
+    "notification_finished": "Завантаження завершено"
 }

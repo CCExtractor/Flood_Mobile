@@ -314,5 +314,13 @@
     "battery_low_title": "如果電池電量低，停止下載",
     "settings_tabs_power_management": "電源管理",
     "download_chanrging_only_snackbar": "已啟用僅在連接充電器時下載設定。\n關閉此設定並重試。",
-    "wifi_only_snackbar": "已啟用僅限 WiFi 設定。\n關閉此設定並重試。"
+    "wifi_only_snackbar": "已啟用僅限 WiFi 設定。\n關閉此設定並重試。",
+    "notification_resume": "繼續",
+    "notification_pause": "暫停",
+    "notification_stop": "停止",
+    "notification_cancel": "取消",
+    "notification_stopped": "已停止",
+    "notification_downloading": "下載中",
+    "notification_error": "下載錯誤",
+    "notification_finished": "下載完成" 
 }

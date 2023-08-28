@@ -313,5 +313,13 @@
     "sort_by_uploaded": "Wgrane",
     "sort_by_upload_speed": "Prędkość wysyłania",
     "sort_by_file_size": "Rozmiar pliku",
-    "sort_by_percent_completed": "Procent ukończony"
+    "sort_by_percent_completed": "Procent ukończony",
+    "notification_resume": "Wznów",
+    "notification_pause": "Pauza",
+    "notification_stop": "Zatrzymaj",
+    "notification_cancel": "Anuluj",
+    "notification_stopped": "Zatrzymano",
+    "notification_downloading": "Pobieranie",
+    "notification_error": "Błąd pobierania",
+    "notification_finished": "Pobieranie zakończone"
 }

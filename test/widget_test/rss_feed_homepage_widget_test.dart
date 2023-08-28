@@ -27,48 +27,48 @@ void main() {
     mockHomeScreenBloc = MockHomeScreenBloc();
     when(() => mockHomeScreenBloc.state).thenReturn(
       HomeScreenState(
-        torrentList: [],
-        torrentListJson: {},
-        unreadNotifications: 1,
-        notificationModel:
-            NotificationModel(read: 1, notifications: [], total: 2, unread: 1),
-        rssFeedsListJson: {},
-        rssFeedsList: [
-          FeedsAndRulesModel(
-              type: "test feed",
+          torrentList: [],
+          torrentListJson: {},
+          unreadNotifications: 1,
+          notificationModel: NotificationModel(
+              read: 1, notifications: [], total: 2, unread: 1),
+          rssFeedsListJson: {},
+          rssFeedsList: [
+            FeedsAndRulesModel(
+                type: "test feed",
+                label: "test label",
+                interval: 0,
+                id: "test id",
+                url: "test url",
+                count: 0),
+            FeedsAndRulesModel(
+                type: "test feed",
+                label: "test label",
+                interval: 0,
+                id: "test id",
+                url: "test url",
+                count: 0)
+          ],
+          rssRulesList: [
+            RulesModel(
+              type: "test rules",
               label: "test label",
-              interval: 0,
+              feedIDs: ["test feedIDs"],
+              field: "test field",
+              tags: ["test tags"],
+              match: "test match",
+              exclude: "test exclude",
+              destination: "test destination",
               id: "test id",
-              url: "test url",
-              count: 0),
-          FeedsAndRulesModel(
-              type: "test feed",
-              label: "test label",
-              interval: 0,
-              id: "test id",
-              url: "test url",
-              count: 0)
-        ],
-        rssRulesList: [
-          RulesModel(
-            type: "test rules",
-            label: "test label",
-            feedIDs: ["test feedIDs"],
-            field: "test field",
-            tags: ["test tags"],
-            match: "test match",
-            exclude: "test exclude",
-            destination: "test destination",
-            id: "test id",
-            isBasePath: true,
-            startOnLoad: true,
-            count: 0,
-          )
-        ],
-        rssFeedsContentsList: [],
-        upSpeed: '10 Kb/s',
-        downSpeed: '20 Kb/s',
-      ),
+              isBasePath: true,
+              startOnLoad: true,
+              count: 0,
+            )
+          ],
+          rssFeedsContentsList: [],
+          upSpeed: '10 Kb/s',
+          downSpeed: '20 Kb/s',
+          notificationCancel: {}),
     );
   });
   Widget createWidgetUnderTest() {

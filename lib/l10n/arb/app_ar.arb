@@ -313,5 +313,13 @@
     "sort_by_uploaded": "تم الرفع",
     "sort_by_upload_speed": "سرعة الرفع",
     "sort_by_file_size": "حجم الملف",
-    "sort_by_percent_completed": "نسبة الانتهاء"
+    "sort_by_percent_completed": "نسبة الانتهاء",
+    "notification_resume": "استئناف",
+    "notification_pause": "إيقاف مؤقت",
+    "notification_stop": "توقف",
+    "notification_cancel": "إلغاء",
+    "notification_stopped": "تم الإيقاف",
+    "notification_downloading": "جاري التنزيل",
+    "notification_error": "خطأ في التنزيل",
+    "notification_finished": "تم التنزيل"
 }
