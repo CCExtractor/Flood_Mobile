@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flood_mobile/Model/feeds_content_model.dart';
@@ -20,6 +22,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     on<SetTorrentListJsonEvent>(_setTorrentListJson);
     on<SetFeedsAndRulesListJsonEvent>(_setFeedsAndRulesListJson);
     on<UpdateTorrentListEvent>(_updateTorrentList);
+    on<UpdateNotificationCancelEvent>(_updateNotificationCancel);
   }
 
   // Handle the SetUnreadNotifications event
@@ -80,5 +83,11 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   void _updateTorrentList(
       UpdateTorrentListEvent event, Emitter<HomeScreenState> emit) {
     emit(state.copyWith(torrentListJson: event.newTorrentListJson));
+  }
+
+  // Handle the UpdateNotificationCancel event
+  FutureOr<void> _updateNotificationCancel(
+      UpdateNotificationCancelEvent event, Emitter<HomeScreenState> emit) {
+    emit(state.copyWith(notificationCancel: event.newNotificationCancel));
   }
 }

@@ -200,6 +200,20 @@
    "torrents_donwload_file_snackbar": "Torrent downloaded successfully \n Go to Downloads to open it",
    "torrents_donwload_file_fail_snackbar": "Torrent downloaded Failed",
    "button_copy": "Copy",
+   "sort_by_heading" : "Sort By",
+   "sort_by_name" : "Name",
+   "sort_by_size" : "Size",
+   "sort_by_date_added" : "Date Added",
+   "sort_by_date_created" : "Date Created",
+   "sort_by_ratio" : "Ratio",
+   "sort_by_peers" : "Peers",
+   "sort_by_seeds" : "Seeds",
+   "sort_by_download_speed" : "Download Speed",
+   "sort_by_downloaded" : "Downloaded",
+   "sort_by_uploaded" : "Uploaded",
+   "sort_by_upload_speed" : "Upload Speed",
+   "sort_by_file_size" : "File Size",
+   "sort_by_percent_completed" : "Percent Complete",
 
 
    "torrent_content_screen" : "Torrent content Screen",
@@ -312,6 +326,15 @@
    "shut_down_wifi_subtitle" : "This setting automatically shut down wifi when all torrents complete download.",
    "battery_optimization_title" : "Change battery optimization",
    "battery_optimization_subtitle" : "This setting is required if you want to make sure progress notification works smoothly.",
-   "battery_low_title": "Stop downloads if battery level is low"
+   "battery_low_title": "Stop downloads if battery level is low",
+
+   "notification_resume" : "Resume",
+   "notification_pause": "Pause",
+   "notification_stop": "Stop",
+   "notification_cancel": "Cancel",
+   "notification_stopped": "Stopped",
+   "notification_downloading": "Downloading",
+   "notification_error": "Download Error",
+   "notification_finished": "Download Finished"
 }
   

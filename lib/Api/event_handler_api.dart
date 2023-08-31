@@ -1,9 +1,7 @@
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:battery_plus/battery_plus.dart';
-import 'package:duration/duration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +12,6 @@ import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/power_management_bloc/power_management_bloc.dart';
-import 'package:flood_mobile/Constants/notification_keys.dart';
 import 'package:flood_mobile/Model/download_rate_model.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Services/file_size_helper.dart';
@@ -160,88 +157,6 @@ class EventHandlerApi {
         }
       });
     }
-  }
-
-  static Future<void> showNotification(int id, BuildContext context) async {
-    late bool displayNotification;
-    late bool isPaused;
-    isPaused = true;
-    HomeScreenState homeModel =
-        BlocProvider.of<HomeScreenBloc>(context, listen: false).state;
-
-    // Skip finished torrents
-    if (homeModel.torrentList[id].status.contains('complete')) {
-      displayNotification = false;
-    } else {
-      displayNotification = true;
-    }
-
-    // Torrent not being downloaded
-    if (homeModel.torrentList[id].status.contains('downloading')) {
-      // Change to the 'RESUME' action
-      isPaused = false;
-    }
-
-    // Torrent Paused
-    else {
-      isPaused = true;
-    }
-
-    // Create notification for unfinished downloads
-    if (displayNotification) {
-      AwesomeNotifications().createNotification(
-        content: NotificationContent(
-          id: id,
-          actionType: ActionType.Default,
-          channelKey: NotificationConstants.DOWNLOADS_CHANNEL_KEY,
-          category: NotificationCategory.Progress,
-          notificationLayout: NotificationLayout.ProgressBar,
-          title: homeModel.torrentList[id].name,
-          body: isPaused
-              ? "Stopped ETA: ∞"
-              : "Downloading ETA: " +
-                  prettyDuration(
-                    Duration(
-                      seconds: homeModel.torrentList[id].eta.toInt(),
-                    ),
-                    abbreviated: true,
-                  ),
-          progress: homeModel.torrentList[id].percentComplete.round(),
-          summary: isPaused ? 'Paused' : 'Downloading',
-          locked: true,
-          autoDismissible: false,
-          showWhen: false,
-        ),
-        actionButtons: [
-          NotificationActionButton(
-            key: isPaused
-                ? NotificationConstants.RESUME_ACTION_KEY
-                : NotificationConstants.PAUSE_ACTION_KEY,
-            label: isPaused ? 'Resume' : 'Pause',
-            actionType: ActionType.KeepOnTop,
-            enabled: true,
-            autoDismissible: false,
-          ),
-        ],
-      );
-    }
-  }
-
-  static Future<void> showEventNotification(
-      int id, BuildContext context) async {
-    AwesomeNotifications().createNotification(
-        content: NotificationContent(
-      id: id,
-      autoDismissible: false,
-      channelKey: NotificationConstants.PUSH_NOTIFICATION_CHANNEL_KEY,
-      category: NotificationCategory.Event,
-      notificationLayout: NotificationLayout.Default,
-      title: BlocProvider.of<HomeScreenBloc>(context, listen: false)
-          .state
-          .torrentList[id]
-          .name,
-      body: "Download Finished",
-    ));
   }
 
   static Future<void> filterDataRephrasor(

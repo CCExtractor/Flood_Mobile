@@ -9,6 +9,7 @@ import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
 import 'package:flood_mobile/Constants/api_endpoints.dart';
 import 'package:flood_mobile/Constants/event_names.dart';
+import 'package:flood_mobile/Notifications/notification_controller.dart';
 
 part 'sse_event.dart';
 part 'sse_state.dart';
@@ -56,22 +57,20 @@ class SSEBloc extends Bloc<SSEEvent, SSEState> {
                           .torrentList
                           .length;
                   i++) {
-                EventHandlerApi.showNotification(i, event.context);
+                createTorrentDownloadNotification(i, event.context);
               }
               break;
             case Events.TORRENT_LIST_DIFF_CHANGE:
+              var homeScreenBloc =
+                  BlocProvider.of<HomeScreenBloc>(event.context, listen: false)
+                      .state;
               EventHandlerApi.updateFullTorrentList(
                   model: listenEvent, context: event.context);
               await Future.delayed(Duration.zero);
-              for (int i = 0;
-                  i <
-                      BlocProvider.of<HomeScreenBloc>(event.context,
-                              listen: false)
-                          .state
-                          .torrentList
-                          .length;
-                  i++) {
-                EventHandlerApi.showNotification(i, event.context);
+              for (int i = 0; i < homeScreenBloc.torrentList.length; i++) {
+                if (!homeScreenBloc.notificationCancel
+                    .containsKey(homeScreenBloc.torrentList[i].hash))
+                  await createTorrentDownloadNotification(i, event.context);
               }
               break;
             case Events.NOTIFICATION_COUNT_CHANGE:
@@ -91,7 +90,14 @@ class SSEBloc extends Bloc<SSEEvent, SSEState> {
                     .torrentList[j]
                     .status
                     .contains('complete')) {
-                  EventHandlerApi.showEventNotification(j, event.context);
+                  createDownloadFinishedNotification(j, event.context);
+                } else if (BlocProvider.of<HomeScreenBloc>(event.context,
+                        listen: false)
+                    .state
+                    .torrentList[j]
+                    .status
+                    .contains('error')) {
+                  createDownloadErrorNotification(j, event.context);
                 }
               }
               break;

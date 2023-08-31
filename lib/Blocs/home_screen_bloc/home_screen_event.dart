@@ -90,3 +90,12 @@ class UpdateTorrentListEvent extends HomeScreenEvent {
   @override
   List<Object> get props => [newTorrentListJson];
 }
+
+class UpdateNotificationCancelEvent extends HomeScreenEvent {
+  final Map<String, bool> newNotificationCancel;
+
+  UpdateNotificationCancelEvent({required this.newNotificationCancel});
+
+  @override
+  List<Object> get props => [newNotificationCancel];
+}

@@ -1,10 +1,10 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:flood_mobile/Blocs/bloc_provider_list.dart';
 import 'package:flood_mobile/Pages/about_screen/about_screen.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart';
 
 void main() {
   setUp(() {

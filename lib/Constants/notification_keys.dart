@@ -9,4 +9,7 @@ class NotificationConstants {
   // Notification Action Button Keys
   static const String PAUSE_ACTION_KEY = 'PAUSE';
   static const String RESUME_ACTION_KEY = 'RESUME';
+
+  static const String CANCEL_ACTION_KEY = 'CANCEL';
+  static const String STOP_ACTION_KEY = 'STOP';
 }

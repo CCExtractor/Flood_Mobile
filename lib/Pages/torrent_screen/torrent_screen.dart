@@ -6,7 +6,9 @@ import 'package:flood_mobile/Api/event_handler_api.dart';
 import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/graph_bloc/graph_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
+import 'package:flood_mobile/Blocs/sort_by_torrent_bloc/sort_by_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Pages/torrent_screen/services/filtered_torrent_list.dart';
 import 'package:flood_mobile/Pages/torrent_screen/widgets/bottom_floating_menu_button.dart';
 import 'package:flood_mobile/Pages/torrent_screen/widgets/pull_to_reveal.dart';
@@ -45,131 +47,142 @@ class _TorrentScreenState extends State<TorrentScreen> {
                   width: double.infinity,
                   color: ThemeBloc.theme(widget.themeIndex).primaryColor,
                   child: (state.torrentList.length != 0)
-                      ? BlocBuilder<SpeedGraphBloc, SpeedGraphState>(
-                          builder: (context, graphSstate) {
-                            return PullToRevealTopItemList(
-                              itemCount: showTorrentCount == 0
-                                  ? 1
-                                  : state.torrentList.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                if (isFilteredTorrent(
-                                    state.torrentList[index], stateFilterBloc))
-                                  return TorrentTile(
-                                    indexes: [index],
-                                    model: state.torrentList[index],
-                                    themeIndex: widget.themeIndex,
-                                  );
-                                return showTorrentCount == 0
-                                    ? Container(
-                                        height: 300,
-                                        width: double.infinity,
-                                        alignment: Alignment.center,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            SText(
-                                              text: context.l10n
-                                                  .torrents_list_no_torrents,
-                                              themeIndex: widget.themeIndex,
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                    backgroundColor:
-                                                        ThemeBloc.theme(widget
-                                                                .themeIndex)
+                      ? BlocBuilder<SortByTorrentBloc, SortByTorrentState>(
+                          builder: (context, sortByState) {
+                            List<TorrentModel> torrentList = sortTorrents(
+                              torrents: state.torrentList,
+                              sortState: sortByState,
+                              context: context,
+                            );
+                            return BlocBuilder<SpeedGraphBloc, SpeedGraphState>(
+                              builder: (context, graphSstate) {
+                                return PullToRevealTopItemList(
+                                  itemCount: showTorrentCount == 0
+                                      ? 1
+                                      : torrentList.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    if (isFilteredTorrent(
+                                        torrentList[index], stateFilterBloc))
+                                      return TorrentTile(
+                                        indexes: [index],
+                                        model: torrentList[index],
+                                        themeIndex: widget.themeIndex,
+                                      );
+                                    return showTorrentCount == 0
+                                        ? Container(
+                                            height: 300,
+                                            width: double.infinity,
+                                            alignment: Alignment.center,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SText(
+                                                  text: context.l10n
+                                                      .torrents_list_no_torrents,
+                                                  themeIndex: widget.themeIndex,
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                ElevatedButton(
+                                                    style: ElevatedButton.styleFrom(
+                                                        backgroundColor: ThemeBloc
+                                                                .theme(widget
+                                                                    .themeIndex)
                                                             .primaryColorLight,
-                                                    foregroundColor:
-                                                        ThemeBloc.theme(widget
-                                                                .themeIndex)
-                                                            .textTheme
-                                                            .bodyLarge
-                                                            ?.color),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    BlocProvider.of<
-                                                                FilterTorrentBloc>(
-                                                            context)
-                                                        .add(
-                                                      SetFilterSelectedEvent(
-                                                        filterStatus:
-                                                            FilterValue.all,
-                                                      ),
-                                                    );
-                                                  });
-                                                },
-                                                child: Text(context
-                                                    .l10n.clear_filter_text))
-                                          ],
-                                        ),
-                                      )
-                                    : Container();
-                              },
-                              revealableHeight:
-                                  graphSstate.showChart ? hp / 3 : hp / 4.87,
-                              revealableBuilder: (BuildContext context,
-                                  RevealableToggler opener,
-                                  RevealableToggler closer,
-                                  BoxConstraints constraints) {
-                                return Column(
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            right: wp * 0.05,
-                                            left: wp * 0.05,
-                                            top: hp * 0.01,
-                                            bottom: hp * 0.02),
-                                        child: Row(
-                                          children: [
-                                            SpeedTextIconWidget(
-                                              themeIndex: widget.themeIndex,
-                                              speedIcon:
-                                                  Icons.arrow_upward_rounded,
-                                              speedText: state.upSpeed,
-                                              speedColor: ThemeBloc.theme(
-                                                      widget.themeIndex)
-                                                  .primaryColorDark,
+                                                        foregroundColor:
+                                                            ThemeBloc.theme(widget
+                                                                    .themeIndex)
+                                                                .textTheme
+                                                                .bodyLarge
+                                                                ?.color),
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        BlocProvider.of<
+                                                                    FilterTorrentBloc>(
+                                                                context)
+                                                            .add(
+                                                          SetFilterSelectedEvent(
+                                                            filterStatus:
+                                                                FilterValue.all,
+                                                          ),
+                                                        );
+                                                      });
+                                                    },
+                                                    child: Text(context.l10n
+                                                        .clear_filter_text))
+                                              ],
                                             ),
-                                            ShowChartButton(),
-                                            SpeedTextIconWidget(
-                                              themeIndex: widget.themeIndex,
-                                              speedIcon:
-                                                  Icons.arrow_downward_rounded,
-                                              speedText: state.downSpeed,
-                                              speedColor: ThemeBloc.theme(
-                                                      widget.themeIndex)
-                                                  .colorScheme
-                                                  .secondary,
+                                          )
+                                        : Container();
+                                  },
+                                  revealableHeight: graphSstate.showChart
+                                      ? hp / 3
+                                      : hp / 4.87,
+                                  revealableBuilder: (BuildContext context,
+                                      RevealableToggler opener,
+                                      RevealableToggler closer,
+                                      BoxConstraints constraints) {
+                                    return Column(
+                                      children: [
+                                        Expanded(
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                right: wp * 0.05,
+                                                left: wp * 0.05,
+                                                top: hp * 0.01,
+                                                bottom: hp * 0.02),
+                                            child: Row(
+                                              children: [
+                                                SpeedTextIconWidget(
+                                                  themeIndex: widget.themeIndex,
+                                                  speedIcon: Icons
+                                                      .arrow_upward_rounded,
+                                                  speedText: state.upSpeed,
+                                                  speedColor: ThemeBloc.theme(
+                                                          widget.themeIndex)
+                                                      .primaryColorDark,
+                                                ),
+                                                ShowChartButton(),
+                                                SpeedTextIconWidget(
+                                                  themeIndex: widget.themeIndex,
+                                                  speedIcon: Icons
+                                                      .arrow_downward_rounded,
+                                                  speedText: state.downSpeed,
+                                                  speedColor: ThemeBloc.theme(
+                                                          widget.themeIndex)
+                                                      .colorScheme
+                                                      .secondary,
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    if (graphSstate.showChart)
-                                      Expanded(
-                                        flex: 2,
-                                        child: Container(
-                                          padding: EdgeInsets.only(
-                                              right: wp * 0.01,
-                                              left: wp * 0.01,
-                                              bottom: hp * 0.025),
-                                          width: double.infinity,
-                                          child: SpeedGraph(
-                                            model:
-                                                BlocProvider.of<HomeScreenBloc>(
-                                                    context),
-                                            themeIndex: widget.themeIndex,
                                           ),
                                         ),
-                                      ),
-                                    SearchTorrentTextField(
-                                        themeIndex: widget.themeIndex,
-                                        stateFilterBlocState: stateFilterBloc)
-                                  ],
+                                        if (graphSstate.showChart)
+                                          Expanded(
+                                            flex: 2,
+                                            child: Container(
+                                              padding: EdgeInsets.only(
+                                                  right: wp * 0.01,
+                                                  left: wp * 0.01,
+                                                  bottom: hp * 0.025),
+                                              width: double.infinity,
+                                              child: SpeedGraph(
+                                                model: BlocProvider.of<
+                                                    HomeScreenBloc>(context),
+                                                themeIndex: widget.themeIndex,
+                                              ),
+                                            ),
+                                          ),
+                                        SearchTorrentTextField(
+                                            themeIndex: widget.themeIndex,
+                                            stateFilterBlocState:
+                                                stateFilterBloc)
+                                      ],
+                                    );
+                                  },
                                 );
                               },
                             );

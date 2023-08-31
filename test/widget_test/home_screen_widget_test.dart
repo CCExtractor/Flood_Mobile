@@ -1,5 +1,6 @@
 import "dart:io";
 import "package:bloc_test/bloc_test.dart";
+import "package:flood_mobile/Blocs/sort_by_torrent_bloc/sort_by_torrent_bloc.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
@@ -37,7 +38,8 @@ void main() {
   setUp(() {
     mockHomeScreenBloc = MockHomeScreenBloc();
     mockClientSettingsBloc = MockClientSettingsBloc();
-    when(() => mockHomeScreenBloc.state).thenReturn(HomeScreenState(
+    when(() => mockHomeScreenBloc.state).thenReturn(
+      HomeScreenState(
         torrentList: [
           TorrentModel(
               bytesDone: 0.0,
@@ -144,7 +146,10 @@ void main() {
         ],
         rssFeedsContentsList: [],
         upSpeed: '10 Kb/s',
-        downSpeed: '20 Kb/s'));
+        downSpeed: '20 Kb/s',
+        notificationCancel: {},
+      ),
+    );
   });
   Widget createWidgetUnderTest() {
     return MultiBlocProvider(
@@ -161,6 +166,7 @@ void main() {
           BlocProvider<SpeedGraphBloc>.value(value: SpeedGraphBloc()),
           BlocProvider<ApiBloc>.value(value: ApiBloc()),
           BlocProvider<UserInterfaceBloc>.value(value: UserInterfaceBloc()),
+          BlocProvider<SortByTorrentBloc>.value(value: SortByTorrentBloc()),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {

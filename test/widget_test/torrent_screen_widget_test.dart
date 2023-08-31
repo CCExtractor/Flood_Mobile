@@ -11,6 +11,7 @@ import 'package:flood_mobile/Blocs/graph_bloc/graph_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
 import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
+import 'package:flood_mobile/Blocs/sort_by_torrent_bloc/sort_by_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
@@ -128,103 +129,106 @@ void main() {
         ),
         fakeTime: 31,
         showChart: true));
-    when(() => mockHomeScreenBloc.state).thenReturn(HomeScreenState(
-        torrentList: [
-          TorrentModel(
-              bytesDone: 0.0,
-              dateAdded: 0.0,
-              dateCreated: 0.0,
-              directory: "test1 directory",
-              downRate: 0.0,
-              downTotal: 0.0,
-              eta: -1,
-              hash: 'test1 hash',
-              isInitialSeeding: false,
-              isPrivate: false,
-              isSequential: false,
-              message: 'test1 message',
-              name: 'test1 name',
-              peersConnected: 0.0,
-              peersTotal: 0.0,
-              percentComplete: 1.1,
-              priority: 0.0,
-              ratio: 0.0,
-              seedsConnected: 0.0,
-              seedsTotal: 0.0,
-              sizeBytes: 100.0,
-              status: ['downloading'],
-              tags: ['test1 tags'],
-              trackerURIs: ['test1 trackerURIs'],
-              upRate: 0.0,
-              upTotal: 0.0),
-          TorrentModel(
-              bytesDone: 0.0,
-              dateAdded: 0.0,
-              dateCreated: 0.0,
-              directory: "test2 directory",
-              downRate: 0.0,
-              downTotal: 0.0,
-              eta: -1,
-              hash: 'test2 hash',
-              isInitialSeeding: true,
-              isPrivate: false,
-              isSequential: false,
-              message: 'test2 message',
-              name: 'test2 name',
-              peersConnected: 0.0,
-              peersTotal: 0.0,
-              percentComplete: 2.2,
-              priority: 0.0,
-              ratio: 0.0,
-              seedsConnected: 0.0,
-              seedsTotal: 0.0,
-              sizeBytes: 0.0,
-              status: ['downloading'],
-              tags: ['test2 tags'],
-              trackerURIs: ['test2 trackerURIs'],
-              upRate: 0.0,
-              upTotal: 0.0)
-        ],
-        torrentListJson: {},
-        unreadNotifications: 1,
-        notificationModel:
-            NotificationModel(read: 1, notifications: [], total: 2, unread: 1),
-        rssFeedsListJson: {},
-        rssFeedsList: [
-          FeedsAndRulesModel(
-              type: "test feed",
+    when(() => mockHomeScreenBloc.state).thenReturn(
+      HomeScreenState(
+          torrentList: [
+            TorrentModel(
+                bytesDone: 0.0,
+                dateAdded: 0.0,
+                dateCreated: 0.0,
+                directory: "test1 directory",
+                downRate: 0.0,
+                downTotal: 0.0,
+                eta: -1,
+                hash: 'test1 hash',
+                isInitialSeeding: false,
+                isPrivate: false,
+                isSequential: false,
+                message: 'test1 message',
+                name: 'test1 name',
+                peersConnected: 0.0,
+                peersTotal: 0.0,
+                percentComplete: 1.1,
+                priority: 0.0,
+                ratio: 0.0,
+                seedsConnected: 0.0,
+                seedsTotal: 0.0,
+                sizeBytes: 100.0,
+                status: ['downloading'],
+                tags: ['test1 tags'],
+                trackerURIs: ['test1 trackerURIs'],
+                upRate: 0.0,
+                upTotal: 0.0),
+            TorrentModel(
+                bytesDone: 0.0,
+                dateAdded: 0.0,
+                dateCreated: 0.0,
+                directory: "test2 directory",
+                downRate: 0.0,
+                downTotal: 0.0,
+                eta: -1,
+                hash: 'test2 hash',
+                isInitialSeeding: true,
+                isPrivate: false,
+                isSequential: false,
+                message: 'test2 message',
+                name: 'test2 name',
+                peersConnected: 0.0,
+                peersTotal: 0.0,
+                percentComplete: 2.2,
+                priority: 0.0,
+                ratio: 0.0,
+                seedsConnected: 0.0,
+                seedsTotal: 0.0,
+                sizeBytes: 0.0,
+                status: ['downloading'],
+                tags: ['test2 tags'],
+                trackerURIs: ['test2 trackerURIs'],
+                upRate: 0.0,
+                upTotal: 0.0)
+          ],
+          torrentListJson: {},
+          unreadNotifications: 1,
+          notificationModel: NotificationModel(
+              read: 1, notifications: [], total: 2, unread: 1),
+          rssFeedsListJson: {},
+          rssFeedsList: [
+            FeedsAndRulesModel(
+                type: "test feed",
+                label: "test label",
+                interval: 0,
+                id: "test id",
+                url: "test url",
+                count: 0),
+            FeedsAndRulesModel(
+                type: "test feed",
+                label: "test label",
+                interval: 0,
+                id: "test id",
+                url: "test url",
+                count: 0)
+          ],
+          rssRulesList: [
+            RulesModel(
+              type: "test rules",
               label: "test label",
-              interval: 0,
+              feedIDs: ["test feedIDs"],
+              field: "test field",
+              tags: ["test tags"],
+              match: "test match",
+              exclude: "test exclude",
+              destination: "test destination",
               id: "test id",
-              url: "test url",
-              count: 0),
-          FeedsAndRulesModel(
-              type: "test feed",
-              label: "test label",
-              interval: 0,
-              id: "test id",
-              url: "test url",
-              count: 0)
-        ],
-        rssRulesList: [
-          RulesModel(
-            type: "test rules",
-            label: "test label",
-            feedIDs: ["test feedIDs"],
-            field: "test field",
-            tags: ["test tags"],
-            match: "test match",
-            exclude: "test exclude",
-            destination: "test destination",
-            id: "test id",
-            isBasePath: true,
-            startOnLoad: true,
-            count: 0,
-          )
-        ],
-        rssFeedsContentsList: [],
-        upSpeed: '10 Kb/s',
-        downSpeed: '20 Kb/s'));
+              isBasePath: true,
+              startOnLoad: true,
+              count: 0,
+            )
+          ],
+          rssFeedsContentsList: [],
+          upSpeed: '10 Kb/s',
+          downSpeed: '20 Kb/s',
+          notificationCancel: {}),
+    );
   });
 
   Widget createWidgetUnderTest() {
@@ -242,6 +246,7 @@ void main() {
         BlocProvider<SpeedGraphBloc>.value(value: mockSpeedGraphBloc),
         BlocProvider<LanguageBloc>.value(value: LanguageBloc()),
         BlocProvider<UserInterfaceBloc>.value(value: mockUserInterfaceBloc),
+        BlocProvider<SortByTorrentBloc>.value(value: SortByTorrentBloc()),
         BlocProvider<LanguageBloc>.value(value: LanguageBloc()),
       ],
       child: MaterialApp(
@@ -337,6 +342,29 @@ void main() {
           expect(find.byKey(Key("Error Torrent ListTile")), findsOneWidget);
           expect(find.text('Filter by tags'), findsOneWidget);
           expect(find.text('Filter by trackers'), findsOneWidget);
+          await tester.tap(find.byKey(Key("Show Chart Button")));
+          await tester.pumpAndSettle();
+          expect(find.byIcon(FontAwesomeIcons.sortAlphaUp), findsOneWidget);
+          await tester.tap(find.byIcon(FontAwesomeIcons.sortAlphaUp));
+          await tester.pumpAndSettle();
+          expect(
+              find.byKey(Key("Sort By Status Bottom Sheet")), findsOneWidget);
+          expect(find.text('Sort By'), findsOneWidget);
+          expect(find.byIcon(FontAwesomeIcons.sortUp), findsOneWidget);
+          expect(find.text('Name'), findsOneWidget);
+          expect(find.text('Percent Complete'), findsOneWidget);
+          expect(find.text('Downloaded'), findsOneWidget);
+          expect(find.text('Download Speed'), findsOneWidget);
+          expect(find.text('Uploaded'), findsOneWidget);
+          expect(find.text('Upload Speed'), findsOneWidget);
+          expect(find.text('Ratio'), findsOneWidget);
+          expect(find.text('File Size'), findsOneWidget);
+          expect(find.text('Peers'), findsOneWidget);
+          await tester.drag(find.text('Ratio'), const Offset(0.0, -300.0));
+          await tester.pumpAndSettle();
+          expect(find.text('Seeds'), findsOneWidget);
+          expect(find.text('Date Added'), findsOneWidget);
+          expect(find.text('Date Created'), findsOneWidget);
         },
       );
       testWidgets("Check torrent tile", (WidgetTester tester) async {

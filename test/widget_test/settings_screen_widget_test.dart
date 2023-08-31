@@ -1,14 +1,4 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
-import 'package:flood_mobile/Blocs/power_management_bloc/power_management_bloc.dart';
-import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
-import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
-import 'package:flood_mobile/Model/client_settings_model.dart';
-import 'package:flood_mobile/Model/current_user_detail_model.dart';
-import 'package:flood_mobile/Pages/settings_screen/settings_screen.dart';
-import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
-import 'package:flood_mobile/Pages/settings_screen/widgets/settings_text_field.dart';
-import 'package:flood_mobile/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,7 +6,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flood_mobile/Blocs/client_settings_bloc/client_settings_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
+import 'package:flood_mobile/Blocs/language_bloc/language_bloc.dart';
+import 'package:flood_mobile/Blocs/power_management_bloc/power_management_bloc.dart';
+import 'package:flood_mobile/Blocs/sse_bloc/sse_bloc.dart';
+import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Blocs/user_detail_bloc/user_detail_bloc.dart';
+import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
+import 'package:flood_mobile/Model/client_settings_model.dart';
+import 'package:flood_mobile/Model/current_user_detail_model.dart';
+import 'package:flood_mobile/Pages/settings_screen/settings_screen.dart';
+import 'package:flood_mobile/Pages/settings_screen/widgets/settings_text_field.dart';
+import 'package:flood_mobile/l10n/l10n.dart';
 
 class MockUserDetailBloc extends MockBloc<UserDetailEvent, UserDetailState>
     implements UserDetailBloc {}
