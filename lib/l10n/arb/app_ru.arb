@@ -321,5 +321,6 @@
     "sort_by_uploaded": "Wgrane",
     "sort_by_upload_speed": "Prędkość wysyłania",
     "sort_by_file_size": "Rozmiar pliku",
-    "sort_by_percent_completed": "Procent ukończony"
+    "sort_by_percent_completed": "Procent ukończony",
+    "login_field_tooltip_message": "URL для вашего экземпляра Flood (локальный, seedbox...)"
 }

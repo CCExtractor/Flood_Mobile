@@ -335,6 +335,7 @@
    "notification_stopped": "Stopped",
    "notification_downloading": "Downloading",
    "notification_error": "Download Error",
-   "notification_finished": "Download Finished"
+   "notification_finished": "Download Finished",
+   "login_field_tooltip_message" : "URL for your Flood instance (local, seedbox...)."
 }
   

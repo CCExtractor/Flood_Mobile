@@ -321,5 +321,6 @@
     "notification_stopped": "Megállt",
     "notification_downloading": "Letöltés",
     "notification_error": "Letöltési hiba",
-    "notification_finished": "Letöltés kész"
+    "notification_finished": "Letöltés kész",
+    "login_field_tooltip_message": "URL a Flood példányához (helyi, seedbox...)"
 }

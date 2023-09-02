@@ -17,7 +17,7 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '3.10.5'
+          flutter-version: '3.13.1'
       - run: flutter pub get
       - run: flutter gen-l10n --arb-dir=lib/l10n/arb
       - run: flutter analyze

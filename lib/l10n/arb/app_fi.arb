@@ -321,5 +321,6 @@
     "notification_stopped": "Pysähtynyt",
     "notification_downloading": "Lataaminen",
     "notification_error": "Latausvirhe",
-    "notification_finished": "Lataus valmis"
+    "notification_finished": "Lataus valmis",
+    "login_field_tooltip_message": "URL Flood-instanssillesi (paikallinen, seedbox...)"
 }

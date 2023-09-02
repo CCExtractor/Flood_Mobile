@@ -322,5 +322,6 @@
     "notification_stopped": "已停止",
     "notification_downloading": "下載中",
     "notification_error": "下載錯誤",
-    "notification_finished": "下載完成" 
+    "notification_finished": "下載完成",
+    "login_field_tooltip_message": "您的 Flood 实例 URL（本地，种子盒...）"
 }

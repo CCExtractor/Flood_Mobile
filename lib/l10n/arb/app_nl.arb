@@ -321,5 +321,6 @@
     "notification_stopped": "Gestopt",
     "notification_downloading": "Downloaden",
     "notification_error": "Downloadfout",
-    "notification_finished": "Download voltooid"
+    "notification_finished": "Download voltooid",
+    "login_field_tooltip_message": "URL voor uw Flood-instantie (lokaal, seedbox...)"
 }

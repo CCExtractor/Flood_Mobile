@@ -321,5 +321,6 @@
     "notification_stopped": "Zastaveno",
     "notification_downloading": "Stahování",
     "notification_error": "Chyba při stahování",
-    "notification_finished": "Stahování dokončeno"
+    "notification_finished": "Stahování dokončeno",
+    "login_field_tooltip_message": "URL pro vaši Flood instanci (lokální, seedbox...)"
 }

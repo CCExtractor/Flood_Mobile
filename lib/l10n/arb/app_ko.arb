@@ -321,5 +321,6 @@
     "notification_stopped": "정지됨",
     "notification_downloading": "다운로드 중",
     "notification_error": "다운로드 오류",
-    "notification_finished": "다운로드 완료"
+    "notification_finished": "다운로드 완료",
+    "login_field_tooltip_message": "귀하의 Flood 인스턴스 URL (로컬, 시드박스...)"
 }

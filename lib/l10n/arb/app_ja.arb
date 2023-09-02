@@ -322,5 +322,6 @@
     "notification_stopped": "停止",
     "notification_downloading": "ダウンロード中",
     "notification_error": "ダウンロードエラー",
-    "notification_finished": "ダウンロード完了"
+    "notification_finished": "ダウンロード完了",
+    "login_field_tooltip_message": "Flood インスタンスの URL（ローカル、シードボックス...）"
 }

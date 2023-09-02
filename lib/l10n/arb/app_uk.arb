@@ -322,5 +322,6 @@
     "notification_stopped": "Зупинено",
     "notification_downloading": "Завантаження",
     "notification_error": "Помилка завантаження",
-    "notification_finished": "Завантаження завершено"
+    "notification_finished": "Завантаження завершено",
+    "login_field_tooltip_message": "URL для вашого екземпляра Flood (локальний, seedbox...)"
 }

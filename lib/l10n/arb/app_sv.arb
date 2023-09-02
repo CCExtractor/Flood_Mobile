@@ -322,5 +322,6 @@
     "notification_stopped": "Stoppad",
     "notification_downloading": "Laddar ner",
     "notification_error": "Nedladdningsfel",
-    "notification_finished": "Nedladdning klar"
+    "notification_finished": "Nedladdning klar",
+    "login_field_tooltip_message": "URL för din Flood-instans (lokal, seedbox...)"
 }

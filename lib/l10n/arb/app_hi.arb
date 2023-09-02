@@ -321,5 +321,6 @@
     "notification_stopped": "रुक गया",
     "notification_downloading": "डाउनलोड हो रहा है",
     "notification_error": "डाउनलोड त्रुटि",
-    "notification_finished": "डाउनलोड समाप्त"
+    "notification_finished": "डाउनलोड समाप्त",
+    "login_field_tooltip_message": "आपके फ्लड इंस्टेंस के लिए URL (स्थानीय, सीडबॉक्स...)"
 }

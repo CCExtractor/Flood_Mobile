@@ -321,5 +321,6 @@
     "notification_stopped": "Detenido",
     "notification_downloading": "Descargando",
     "notification_error": "Error de descarga",
-    "notification_finished": "Descarga finalizada"
+    "notification_finished": "Descarga finalizada",
+    "login_field_tooltip_message": "URL para su instancia de Flood (local, seedbox...)"
 }
