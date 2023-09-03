@@ -344,8 +344,8 @@ void main() {
           expect(find.text('Filter by trackers'), findsOneWidget);
           await tester.tap(find.byKey(Key("Show Chart Button")));
           await tester.pumpAndSettle();
-          expect(find.byIcon(FontAwesomeIcons.sortAlphaUp), findsOneWidget);
-          await tester.tap(find.byIcon(FontAwesomeIcons.sortAlphaUp));
+          expect(find.byIcon(FontAwesomeIcons.arrowUpAZ), findsOneWidget);
+          await tester.tap(find.byIcon(FontAwesomeIcons.arrowUpAZ));
           await tester.pumpAndSettle();
           expect(
               find.byKey(Key("Sort By Status Bottom Sheet")), findsOneWidget);
