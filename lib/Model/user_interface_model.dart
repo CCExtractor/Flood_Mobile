@@ -1,6 +1,9 @@
 import 'package:equatable/equatable.dart';
 
+enum TagPreferenceButtonValue { singleSelection, multiSelection }
+
 class UserInterfaceModel extends Equatable {
+  final bool showProgressBar;
   final bool showDateAdded;
   final bool showDateCreated;
   final bool showRatio;
@@ -25,8 +28,10 @@ class UserInterfaceModel extends Equatable {
   final bool showInitialSeeding;
   final bool showSequentialDownload;
   final bool showDownloadTorrent;
+  final TagPreferenceButtonValue tagPreferenceButtonValue;
 
   const UserInterfaceModel({
+    required this.showProgressBar,
     required this.showDateAdded,
     required this.showDateCreated,
     required this.showRatio,
@@ -51,10 +56,12 @@ class UserInterfaceModel extends Equatable {
     required this.showInitialSeeding,
     required this.showSequentialDownload,
     required this.showDownloadTorrent,
+    required this.tagPreferenceButtonValue,
   });
 
   factory UserInterfaceModel.fromJson(Map<String, dynamic> json) {
     return UserInterfaceModel(
+      showProgressBar: json['showProgressBar'] as bool,
       showDateAdded: json['showDateAdded'] as bool,
       showDateCreated: json['showDateCreated'] as bool,
       showRatio: json['showRatio'] as bool,
@@ -79,11 +86,16 @@ class UserInterfaceModel extends Equatable {
       showInitialSeeding: json['showInitialSeeding'] as bool,
       showSequentialDownload: json['showSequentialDownload'] as bool,
       showDownloadTorrent: json['showDownloadTorrent'] as bool,
+      tagPreferenceButtonValue:
+          json['tagPreferenceButtonValue'] == 'singleSelection'
+              ? TagPreferenceButtonValue.singleSelection
+              : TagPreferenceButtonValue.multiSelection,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'showProgressBar': showProgressBar,
       'showDateAdded': showDateAdded,
       'showDateCreated': showDateCreated,
       'showRatio': showRatio,
@@ -108,11 +120,16 @@ class UserInterfaceModel extends Equatable {
       'showInitialSeeding': showInitialSeeding,
       'showSequentialDownload': showSequentialDownload,
       'showDownloadTorrent': showDownloadTorrent,
+      'tagPreferenceButtonValue':
+          tagPreferenceButtonValue == TagPreferenceButtonValue.singleSelection
+              ? 'singleSelection'
+              : 'multiSelection',
     };
   }
 
   @override
   List<Object?> get props => [
+        showProgressBar,
         showDateAdded,
         showDateCreated,
         showRatio,
@@ -136,6 +153,7 @@ class UserInterfaceModel extends Equatable {
         showPriority,
         showInitialSeeding,
         showSequentialDownload,
-        showDownloadTorrent
+        showDownloadTorrent,
+        tagPreferenceButtonValue,
       ];
 }

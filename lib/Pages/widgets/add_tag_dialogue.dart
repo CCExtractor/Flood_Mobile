@@ -6,7 +6,9 @@ import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Blocs/filter_torrent_bloc/filter_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/home_screen_bloc/home_screen_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
+import 'package:flood_mobile/Model/user_interface_model.dart';
 import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
 
@@ -79,6 +81,11 @@ class _AddTagDialogueState extends State<AddTagDialogue>
 
   @override
   Widget build(BuildContext context) {
+    final tagPreferenceButtonValue =
+        BlocProvider.of<UserInterfaceBloc>(context, listen: false)
+            .state
+            .model
+            .tagPreferenceButtonValue;
     final themeBloc = BlocProvider.of<ThemeBloc>(context);
     final hp = MediaQuery.of(context).size.height;
     final wp = MediaQuery.of(context).size.width;
@@ -208,17 +215,21 @@ class _AddTagDialogueState extends State<AddTagDialogue>
                           itemBuilder: (context, index) {
                             if (index < _existingTags.length) {
                               return _getCheckBoxListTile(
-                                  _existingTags.keys.elementAt(index),
-                                  index,
-                                  themeBloc,
-                                  _existingTags);
+                                _existingTags.keys.elementAt(index),
+                                index,
+                                themeBloc,
+                                _existingTags,
+                                tagPreferenceButtonValue,
+                              );
                             } else {
                               index -= _existingTags.length;
                               return _getCheckBoxListTile(
-                                  _newEnterdTags.keys.elementAt(index),
-                                  index,
-                                  themeBloc,
-                                  _newEnterdTags);
+                                _newEnterdTags.keys.elementAt(index),
+                                index,
+                                themeBloc,
+                                _newEnterdTags,
+                                tagPreferenceButtonValue,
+                              );
                             }
                           },
                         ),
@@ -306,7 +317,11 @@ class _AddTagDialogueState extends State<AddTagDialogue>
   }
 
   CheckboxListTile _getCheckBoxListTile(
-      String text, int index, ThemeBloc themeBloc, Map<String, bool> tags) {
+      String text,
+      int index,
+      ThemeBloc themeBloc,
+      Map<String, bool> tags,
+      TagPreferenceButtonValue tagPreferenceButtonValue) {
     return CheckboxListTile(
         dense: true,
         title: Text(
@@ -333,6 +348,11 @@ class _AddTagDialogueState extends State<AddTagDialogue>
             _textController.text = _inputTagList.join(',');
             _textController.selection = TextSelection.fromPosition(
                 TextPosition(offset: _textController.text.length));
+            if (tagPreferenceButtonValue ==
+                TagPreferenceButtonValue.singleSelection) {
+              _showdropdown = false;
+              _animationController.reverse();
+            }
           });
         });
   }

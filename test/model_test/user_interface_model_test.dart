@@ -5,6 +5,7 @@ void main() {
   group('UserInterfaceModel', () {
     test('fromJson should return a valid UserInterfaceModel object', () {
       final json = {
+        'showProgressBar': true,
         'showDateAdded': true,
         'showDateCreated': false,
         'showRatio': true,
@@ -33,6 +34,7 @@ void main() {
 
       final model = UserInterfaceModel.fromJson(json);
 
+      expect(model.showProgressBar, true);
       expect(model.showDateAdded, true);
       expect(model.showDateCreated, false);
       expect(model.showRatio, true);
@@ -57,35 +59,39 @@ void main() {
       expect(model.showInitialSeeding, false);
       expect(model.showSequentialDownload, true);
       expect(model.showDownloadTorrent, false);
+      expect(model.showProgressBar, true);
+      expect(model.tagPreferenceButtonValue,
+          TagPreferenceButtonValue.multiSelection);
     });
 
     test('toJson should return a valid JSON map', () {
       final model = UserInterfaceModel(
-        showDateAdded: true,
-        showDateCreated: false,
-        showRatio: true,
-        showLocation: false,
-        showTags: true,
-        showTrackers: false,
-        showTrackersMessage: true,
-        showDownloadSpeed: false,
-        showUploadSpeed: true,
-        showPeers: false,
-        showSeeds: true,
-        showSize: false,
-        showType: true,
-        showHash: false,
-        showDelete: true,
-        showSetTags: false,
-        showCheckHash: true,
-        showReannounce: false,
-        showSetTrackers: true,
-        showGenerateMagnetLink: false,
-        showPriority: true,
-        showInitialSeeding: false,
-        showSequentialDownload: true,
-        showDownloadTorrent: false,
-      );
+          showDateAdded: true,
+          showDateCreated: false,
+          showRatio: true,
+          showLocation: false,
+          showTags: true,
+          showTrackers: false,
+          showTrackersMessage: true,
+          showDownloadSpeed: false,
+          showUploadSpeed: true,
+          showPeers: false,
+          showSeeds: true,
+          showSize: false,
+          showType: true,
+          showHash: false,
+          showDelete: true,
+          showSetTags: false,
+          showCheckHash: true,
+          showReannounce: false,
+          showSetTrackers: true,
+          showGenerateMagnetLink: false,
+          showPriority: true,
+          showInitialSeeding: false,
+          showSequentialDownload: true,
+          showDownloadTorrent: false,
+          showProgressBar: true,
+          tagPreferenceButtonValue: TagPreferenceButtonValue.multiSelection);
 
       final json = model.toJson();
 
@@ -113,6 +119,7 @@ void main() {
       expect(json['showInitialSeeding'], false);
       expect(json['showSequentialDownload'], true);
       expect(json['showDownloadTorrent'], false);
+      expect(json['showProgressBar'], true);
     });
   });
 }

@@ -323,4 +323,8 @@
     "notification_error": "Latausvirhe",
     "notification_finished": "Lataus valmis",
     "login_field_tooltip_message": "URL Flood-instanssillesi (paikallinen, seedbox...)"
+    "tag_selection_heading": "Tunnistevalitsimen asetukset",
+    "single_selection_radio_button": "Yksittäinen valinta",
+    "multi_selection_radio_button": "Useita valintoja",
+    "show_progress_bar_option": "Näytä edistymispalkki"
 }

@@ -324,4 +324,8 @@
     "notification_error": "下載錯誤",
     "notification_finished": "下載完成",
     "login_field_tooltip_message": "您的 Flood 实例 URL（本地，种子盒...）"
+    "tag_selection_heading": "标签选择器优先级",
+    "single_selection_radio_button": "单选",
+    "multi_selection_radio_button": "多选",
+    "show_progress_bar_option": "显示进度条"
 }

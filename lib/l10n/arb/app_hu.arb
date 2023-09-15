@@ -323,4 +323,8 @@
     "notification_error": "Letöltési hiba",
     "notification_finished": "Letöltés kész",
     "login_field_tooltip_message": "URL a Flood példányához (helyi, seedbox...)"
+    "tag_selection_heading": "Címkeválasztó előnyben részesítése",
+    "single_selection_radio_button": "Egyszeres kiválasztás",
+    "multi_selection_radio_button": "Többszörös kiválasztás",
+    "show_progress_bar_option": "Folyamatjelző megjelenítése"
 }

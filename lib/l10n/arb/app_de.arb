@@ -284,6 +284,9 @@
     "torrent_screen_items_heading": "Torrent-Bildschirmelemente",
     "torrents_set_trackers_snackbar": "Tracker erfolgreich festgelegt",
     "context_menu_items_heading": "Elemente im Kontextmenü",
+    "tag_selection_heading": "Tag-Auswahlpräferenz",
+    "single_selection_radio_button": "Einzelne Auswahl",
+    "multi_selection_radio_button": "Mehrfachauswahl",
     "notification_resume": "Fortsetzen",
     "notification_pause": "Pause",
     "notification_stop": "Stop",
@@ -321,6 +324,6 @@
     "sort_by_uploaded": "Hochgeladen",
     "sort_by_upload_speed": "Upload-Geschwindigkeit",
     "sort_by_file_size": "Dateigröße",
-    "sort_by_percent_completed": "Prozent abgeschlossen",
     "login_field_tooltip_message": "URL für Ihre Flood-Instanz (lokal, seedbox...)"
+    "sort_by_percent_completed": "Prozent abgeschlossen","show_progress_bar_option": "Fortschrittsbalken anzeigen"
 }
