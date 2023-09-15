@@ -322,5 +322,9 @@
     "notification_stopped": "Stoppad",
     "notification_downloading": "Laddar ner",
     "notification_error": "Nedladdningsfel",
-    "notification_finished": "Nedladdning klar"
+    "notification_finished": "Nedladdning klar",
+    "tag_selection_heading": "Taggväljarinställning",
+    "single_selection_radio_button": "Enkelval",
+    "multi_selection_radio_button": "Flerval",
+    "show_progress_bar_option": "Visa framstegsindikator"
 }

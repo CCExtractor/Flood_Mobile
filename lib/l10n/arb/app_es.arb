@@ -321,5 +321,9 @@
     "notification_stopped": "Detenido",
     "notification_downloading": "Descargando",
     "notification_error": "Error de descarga",
-    "notification_finished": "Descarga finalizada"
+    "notification_finished": "Descarga finalizada",
+    "tag_selection_heading": "Preferencia del selector de etiquetas",
+    "single_selection_radio_button": "Selección única",
+    "multi_selection_radio_button": "Selección múltiple",
+    "show_progress_bar_option": "Mostrar barra de progreso"
 }

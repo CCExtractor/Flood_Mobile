@@ -322,5 +322,9 @@
     "notification_stopped": "Зупинено",
     "notification_downloading": "Завантаження",
     "notification_error": "Помилка завантаження",
-    "notification_finished": "Завантаження завершено"
+    "notification_finished": "Завантаження завершено",
+    "tag_selection_heading": "Пріоритет вибору тегів",
+    "single_selection_radio_button": "Одиночний вибір",
+    "multi_selection_radio_button": "Множинний вибір",
+    "show_progress_bar_option": "Показати панель прогресу"
 }

@@ -321,5 +321,9 @@
     "sort_by_uploaded": "Wgrane",
     "sort_by_upload_speed": "Prędkość wysyłania",
     "sort_by_file_size": "Rozmiar pliku",
-    "sort_by_percent_completed": "Procent ukończony"
+    "sort_by_percent_completed": "Procent ukończony",
+    "tag_selection_heading": "Предпочтение селектора тегов",
+    "single_selection_radio_button": "Одиночный выбор",
+    "multi_selection_radio_button": "Множественный выбор",
+    "show_progress_bar_option": "Показывать полосу прогресса"
 }

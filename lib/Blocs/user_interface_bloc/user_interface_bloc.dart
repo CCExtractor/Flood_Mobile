@@ -19,6 +19,7 @@ class UserInterfaceBloc extends Bloc<UserInterfaceEvent, UserInterfaceState> {
     Emitter<UserInterfaceState> emit,
   ) {
     UserInterfaceModel model = UserInterfaceModel(
+      showProgressBar: event.model.showProgressBar,
       showDateAdded: event.model.showDateAdded,
       showDateCreated: event.model.showDateCreated,
       showRatio: event.model.showRatio,
@@ -43,6 +44,7 @@ class UserInterfaceBloc extends Bloc<UserInterfaceEvent, UserInterfaceState> {
       showInitialSeeding: event.model.showInitialSeeding,
       showSequentialDownload: event.model.showSequentialDownload,
       showDownloadTorrent: event.model.showDownloadTorrent,
+      tagPreferenceButtonValue: event.model.tagPreferenceButtonValue,
     );
 
     saveUserInterfaceModel(model);

@@ -8,6 +8,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:flood_mobile/Api/torrent_api.dart';
 import 'package:flood_mobile/Blocs/multiple_select_torrent_bloc/multiple_select_torrent_bloc.dart';
 import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
+import 'package:flood_mobile/Blocs/user_interface_bloc/user_interface_bloc.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Pages/torrent_screen/widgets/focused_menu_items_list.dart';
 import 'package:flood_mobile/Pages/torrent_screen/widgets/torrent_description.dart';
@@ -133,41 +134,51 @@ class _TorrentTileState extends State<TorrentTile> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: LinearPercentIndicator(
-                                      key: Key('Linear Progress Indicator'),
-                                      padding: EdgeInsets.all(0),
-                                      lineHeight: 5.0,
-                                      percent: widget.model.percentComplete
-                                              .roundToDouble() /
-                                          100,
-                                      backgroundColor:
-                                          ThemeBloc.theme(widget.themeIndex)
-                                              .colorScheme
-                                              .secondary
-                                              .withAlpha(80),
-                                      progressColor: (widget
-                                                  .model.percentComplete
-                                                  .toStringAsFixed(1) ==
-                                              '100.0')
-                                          ? ThemeBloc.theme(widget.themeIndex)
-                                              .primaryColorDark
-                                          : Colors.blue,
+                              if (BlocProvider.of<UserInterfaceBloc>(context,
+                                      listen: false)
+                                  .state
+                                  .model
+                                  .showProgressBar)
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: LinearPercentIndicator(
+                                        key: Key('Linear Progress Indicator'),
+                                        padding: EdgeInsets.all(0),
+                                        lineHeight: 5.0,
+                                        percent: widget.model.percentComplete
+                                                .roundToDouble() /
+                                            100,
+                                        backgroundColor:
+                                            ThemeBloc.theme(widget.themeIndex)
+                                                .colorScheme
+                                                .secondary
+                                                .withAlpha(80),
+                                        progressColor: (widget
+                                                    .model.percentComplete
+                                                    .toStringAsFixed(1) ==
+                                                '100.0')
+                                            ? ThemeBloc.theme(widget.themeIndex)
+                                                .primaryColorDark
+                                            : Colors.blue,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 30,
-                                  ),
-                                  Text(widget.model.percentComplete
-                                          .toStringAsFixed(1) +
-                                      " %"),
-                                ],
-                              ),
-                              SizedBox(
-                                height: hp * 0.01,
-                              ),
+                                    SizedBox(
+                                      width: 30,
+                                    ),
+                                    Text(widget.model.percentComplete
+                                            .toStringAsFixed(1) +
+                                        " %"),
+                                  ],
+                                ),
+                              if (BlocProvider.of<UserInterfaceBloc>(context,
+                                      listen: false)
+                                  .state
+                                  .model
+                                  .showProgressBar)
+                                SizedBox(
+                                  height: hp * 0.01,
+                                ),
                               Row(
                                 children: [
                                   Text(
@@ -322,7 +333,7 @@ class _TorrentTileState extends State<TorrentTile> {
                   ),
                 ],
               ),
-            ),
+            )
           ],
         );
       },

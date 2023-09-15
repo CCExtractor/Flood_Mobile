@@ -321,5 +321,9 @@
     "notification_stopped": "Pysähtynyt",
     "notification_downloading": "Lataaminen",
     "notification_error": "Latausvirhe",
-    "notification_finished": "Lataus valmis"
+    "notification_finished": "Lataus valmis",
+    "tag_selection_heading": "Tunnistevalitsimen asetukset",
+    "single_selection_radio_button": "Yksittäinen valinta",
+    "multi_selection_radio_button": "Useita valintoja",
+    "show_progress_bar_option": "Näytä edistymispalkki"
 }
