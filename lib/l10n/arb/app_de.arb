@@ -324,5 +324,6 @@
     "sort_by_uploaded": "Hochgeladen",
     "sort_by_upload_speed": "Upload-Geschwindigkeit",
     "sort_by_file_size": "Dateigröße",
+    "login_field_tooltip_message": "URL für Ihre Flood-Instanz (lokal, seedbox...)"
     "sort_by_percent_completed": "Prozent abgeschlossen","show_progress_bar_option": "Fortschrittsbalken anzeigen"
 }

@@ -322,6 +322,7 @@
     "notification_downloading": "Descărcare",
     "notification_error": "Eroare de descărcare",
     "notification_finished": "Descărcare finalizată",
+    "login_field_tooltip_message": "URL pentru instanța ta Flood (locală, seedbox...)"
     "tag_selection_heading": "Preferință pentru selector de etichete",
     "single_selection_radio_button": "Selecție unică",
     "multi_selection_radio_button": "Selecție multiplă",

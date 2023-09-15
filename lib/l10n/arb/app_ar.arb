@@ -322,6 +322,7 @@
     "notification_downloading": "جاري التنزيل",
     "notification_error": "خطأ في التنزيل",
     "notification_finished": "تم التنزيل",
+    "login_field_tooltip_message": "عنوان URL للمثيل الخاص بك في Flood (محلي، seedbox...)"
     "tag_selection_heading": "تفضيلات محدد الوسوم",
     "single_selection_radio_button": "اختيار واحد",
     "multi_selection_radio_button": "اختيار متعدد",

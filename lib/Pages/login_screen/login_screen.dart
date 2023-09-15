@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   TextEditingController urlController =
-      new TextEditingController(text: 'http://localhost:3000');
+      new TextEditingController(text: 'https://yourserver.xirvik.com');
   final _formKey = GlobalKey<FormState>();
   late int themeIndex;
 
@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         labelText: l10n.login_screen_url,
                         prefixIcon: Icons.link,
                         themeIndex: themeIndex,
-                        trailingIconButton: Align(
+                        trailingIconButton1: Align(
                           alignment: Alignment.centerRight,
                           child: IconButton(
                             onPressed: () {
@@ -112,6 +112,23 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             icon: Icon(
                               Icons.paste,
+                              color: ThemeBloc.theme(themeIndex)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .color!,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                        trailingIconButton2: Align(
+                          alignment: Alignment.centerRight,
+                          child: Tooltip(
+                            triggerMode: TooltipTriggerMode.tap,
+                            message:
+                                "URL for your Flood instance (local, seedbox...).",
+                            showDuration: Duration(seconds: 3),
+                            child: Icon(
+                              Icons.info_outline,
                               color: ThemeBloc.theme(themeIndex)
                                   .textTheme
                                   .bodyLarge!
@@ -141,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         prefixIcon: Icons.lock_outline,
                         themeIndex: themeIndex,
                         obscureText: showPass,
-                        trailingIconButton: Align(
+                        trailingIconButton1: Align(
                           alignment: Alignment.centerRight,
                           child: IconButton(
                             onPressed: () {

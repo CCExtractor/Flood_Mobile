@@ -7,7 +7,8 @@ class LoginScreenTextField extends StatelessWidget {
   final String labelText;
   final IconData prefixIcon;
   final bool obscureText;
-  final Widget? trailingIconButton;
+  final Widget? trailingIconButton1;
+  final Widget? trailingIconButton2;
   final int themeIndex;
 
   const LoginScreenTextField({
@@ -15,7 +16,8 @@ class LoginScreenTextField extends StatelessWidget {
     required this.labelText,
     required this.prefixIcon,
     required this.themeIndex,
-    this.trailingIconButton,
+    this.trailingIconButton1,
+    this.trailingIconButton2,
     this.obscureText = false,
     Key? key,
   }) : super(key: key);
@@ -73,7 +75,13 @@ class LoginScreenTextField extends StatelessWidget {
               ),
             ),
           ),
-          trailingIconButton ?? Container()
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              trailingIconButton1 ?? Container(),
+              trailingIconButton2 ?? Container(),
+            ],
+          )
         ],
       ),
     );

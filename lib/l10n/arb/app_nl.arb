@@ -322,6 +322,7 @@
     "notification_downloading": "Downloaden",
     "notification_error": "Downloadfout",
     "notification_finished": "Download voltooid",
+    "login_field_tooltip_message": "URL voor uw Flood-instantie (lokaal, seedbox...)"
     "tag_selection_heading": "Voorkeur voor tagselectie",
     "single_selection_radio_button": "Enkele selectie",
     "multi_selection_radio_button": "Meervoudige selectie",

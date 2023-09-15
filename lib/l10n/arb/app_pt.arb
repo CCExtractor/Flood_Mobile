@@ -322,6 +322,7 @@
     "notification_downloading": "Download",
     "notification_error": "Erro de download",
     "notification_finished": "Download concluído",
+    "login_field_tooltip_message": "URL para a sua instância do Flood (local, seedbox...)"
     "tag_selection_heading": "Preferência do seletor de tags",
     "single_selection_radio_button": "Seleção única",
     "multi_selection_radio_button": "Seleção múltipla",

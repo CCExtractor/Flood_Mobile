@@ -322,6 +322,7 @@
     "notification_downloading": "डाउनलोड हो रहा है",
     "notification_error": "डाउनलोड त्रुटि",
     "notification_finished": "डाउनलोड समाप्त",
+    "login_field_tooltip_message": "आपके फ्लड इंस्टेंस के लिए URL (स्थानीय, सीडबॉक्स...)"
     "tag_selection_heading": "टैग सिलेक्शन प्राथमिकता",
     "single_selection_radio_button": "एकल चयन",
     "multi_selection_radio_button": "बहुविकल्पी चयन",
