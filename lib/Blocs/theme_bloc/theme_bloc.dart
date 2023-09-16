@@ -19,9 +19,10 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   Future<void> getPreviousTheme() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final storedThemeMode = prefs.getString('themeMode');
-
-      themeMode = _convertStringToThemeMode(storedThemeMode);
+      if (prefs.containsKey('themeMode')) {
+        final storedThemeMode = prefs.getString('themeMode');
+        themeMode = _convertStringToThemeMode(storedThemeMode);
+      }
     } catch (error) {
       print('Error retrieving theme mode from SharedPreferences: $error');
     }

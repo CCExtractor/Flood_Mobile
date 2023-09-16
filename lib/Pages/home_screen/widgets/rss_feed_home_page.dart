@@ -737,7 +737,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       FeedsApi
                                                           .listAllFeedsAndRules(
                                                               context: context);
-                                                      clearFeedsFields();
+
                                                       if (isUpdateFeedSelected) {
                                                         UpdateFeedApi.updateFeed(
                                                             type: "feed",
@@ -758,6 +758,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                 context:
                                                                     context);
                                                       }
+                                                      clearFeedsFields();
                                                     });
                                                   }
                                                 } else {
