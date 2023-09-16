@@ -322,7 +322,7 @@
     "notification_downloading": "Descargando",
     "notification_error": "Error de descarga",
     "notification_finished": "Descarga finalizada",
-    "login_field_tooltip_message": "URL para su instancia de Flood (local, seedbox...)"
+    "login_field_tooltip_message": "URL para su instancia de Flood (local, seedbox...)",
     "tag_selection_heading": "Preferencia del selector de etiquetas",
     "single_selection_radio_button": "Selección única",
     "multi_selection_radio_button": "Selección múltiple",

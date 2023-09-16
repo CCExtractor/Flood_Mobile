@@ -323,7 +323,7 @@
     "notification_downloading": "Завантаження",
     "notification_error": "Помилка завантаження",
     "notification_finished": "Завантаження завершено",
-    "login_field_tooltip_message": "URL для вашого екземпляра Flood (локальний, seedbox...)"
+    "login_field_tooltip_message": "URL для вашого екземпляра Flood (локальний, seedbox...)",
     "tag_selection_heading": "Пріоритет вибору тегів",
     "single_selection_radio_button": "Одиночний вибір",
     "multi_selection_radio_button": "Множинний вибір",

@@ -323,7 +323,7 @@
     "notification_downloading": "ダウンロード中",
     "notification_error": "ダウンロードエラー",
     "notification_finished": "ダウンロード完了",
-    "login_field_tooltip_message": "Flood インスタンスの URL（ローカル、シードボックス...）"
+    "login_field_tooltip_message": "Flood インスタンスの URL（ローカル、シードボックス...）",
     "tag_selection_heading": "タグセレクターの設定",
     "single_selection_radio_button": "単一選択",
     "multi_selection_radio_button": "複数選択",
