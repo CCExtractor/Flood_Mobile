@@ -27,7 +27,8 @@ class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
   Future<Locale?> getPreviousLang() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      if (prefs.getString('languageCode') != 'null')
+      if (prefs.containsKey('languageCode') &&
+          prefs.getString('languageCode') != 'null')
         return Locale(prefs.getString('languageCode')!);
       else {
         return null;
