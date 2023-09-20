@@ -345,8 +345,8 @@ void main() {
           expect(find.text('Filter by trackers'), findsOneWidget);
           await tester.tap(find.byKey(Key("Show Chart Button")));
           await tester.pumpAndSettle();
-          expect(find.byIcon(FontAwesomeIcons.sortAlphaUp), findsOneWidget);
-          await tester.tap(find.byIcon(FontAwesomeIcons.sortAlphaUp));
+          expect(find.byIcon(FontAwesomeIcons.arrowUpAZ), findsOneWidget);
+          await tester.tap(find.byIcon(FontAwesomeIcons.arrowUpAZ));
           await tester.pumpAndSettle();
           expect(
               find.byKey(Key("Sort By Status Bottom Sheet")), findsOneWidget);
@@ -511,11 +511,11 @@ void main() {
         await tester.drag(find.text("Reannounce"), const Offset(0.0, -300.0));
         await tester.pumpAndSettle();
         expect(find.text("Initial Seeding"), findsOneWidget);
-        expect(find.byIcon(FontAwesomeIcons.checkSquare), findsOneWidget);
+        expect(find.byIcon(FontAwesomeIcons.squareCheck), findsOneWidget);
         expect(find.text("Sequential Download"), findsOneWidget);
         expect(find.byIcon(FontAwesomeIcons.square), findsOneWidget);
         expect(find.text("Download .Torrent"), findsOneWidget);
-        expect(find.byIcon(FontAwesomeIcons.fileDownload), findsOneWidget);
+        expect(find.byIcon(FontAwesomeIcons.fileArrowDown), findsOneWidget);
         expect(find.text("Set Priority"), findsOneWidget);
         expect(find.byIcon(Icons.file_upload_outlined), findsOneWidget);
         await tester.tap(find.byIcon(Icons.file_upload_outlined));

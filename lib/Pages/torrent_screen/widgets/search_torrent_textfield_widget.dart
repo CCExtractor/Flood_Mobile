@@ -42,7 +42,7 @@ class _SearchTorrentTextFieldState extends State<SearchTorrentTextField> {
             hintText: context.l10n.search_torrent_text,
             prefixIcon: IconButton(
               icon: Icon(
-                FontAwesomeIcons.sortAlphaUp,
+                FontAwesomeIcons.arrowUpAZ,
                 color: ThemeBloc.theme(widget.themeIndex).primaryColorDark,
                 size: 22,
               ),
