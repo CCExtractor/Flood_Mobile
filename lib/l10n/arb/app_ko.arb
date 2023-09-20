@@ -321,5 +321,10 @@
     "notification_stopped": "정지됨",
     "notification_downloading": "다운로드 중",
     "notification_error": "다운로드 오류",
-    "notification_finished": "다운로드 완료"
+    "notification_finished": "다운로드 완료",
+    "login_field_tooltip_message": "귀하의 Flood 인스턴스 URL (로컬, 시드박스...)",
+    "tag_selection_heading": "태그 선택기 기본 설정",
+    "single_selection_radio_button": "단일 선택",
+    "multi_selection_radio_button": "다중 선택",
+    "show_progress_bar_option": "진행 상황 표시"
 }

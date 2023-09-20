@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 import 'package:battery_plus/battery_plus.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,6 +97,7 @@ class EventHandlerApi {
       newTorrentMap,
       strict: true,
     );
+
     //Updating data in provider
     BlocProvider.of<HomeScreenBloc>(context, listen: false)
         .add(SetTorrentListJsonEvent(newTorrentListJson: newTorrentListJson));
@@ -119,7 +121,7 @@ class EventHandlerApi {
 
     if (torrentList.length > int.parse(torrentLength) ||
         torrentList.length < int.parse(torrentLength)) {
-      filterDataRephrasor(torrentList, context);
+      await filterDataRephrasor(torrentList, context);
     }
 
     //Setting the full list of torrent
@@ -128,6 +130,7 @@ class EventHandlerApi {
 
     final PowerManagementBloc powerManagementBloc =
         BlocProvider.of<PowerManagementBloc>(context, listen: false);
+
     //Exit screen on all download finished
     if (powerManagementBloc.state.shutDownWhenFinishDownload &&
         isAllDownloadFinished(context)) {
@@ -138,7 +141,15 @@ class EventHandlerApi {
     //Turn off wifi on all download finished
     if (powerManagementBloc.state.shutDownWifi &&
         isAllDownloadFinished(context)) {
-      turnOffWiFi(powerManagementBloc.state.shutDownWifi);
+      await turnOffWiFi(powerManagementBloc.state.shutDownWifi);
+    }
+
+    //Stop all download on wifi disconnect
+    if (powerManagementBloc.state.wifiOnlyDownload) {
+      final connectivityResult = await Connectivity().checkConnectivity();
+      if (connectivityResult != ConnectivityResult.wifi) {
+        await stopAllDownload(context);
+      }
     }
 
     // Stop all download on low battery
@@ -148,14 +159,7 @@ class EventHandlerApi {
         powerManagementBloc.state.batteryLimitLevel > 0 ? true : false;
     if (isBatteryLimitSet &&
         currentBatteryLevel <= powerManagementBloc.state.batteryLimitLevel) {
-      BlocProvider.of<HomeScreenBloc>(context, listen: false)
-          .state
-          .torrentList
-          .forEach((element) {
-        if (element.status.contains('downloading')) {
-          TorrentApi.stopTorrent(hashes: [element.hash], context: context);
-        }
-      });
+      await stopAllDownload(context);
     }
   }
 
@@ -286,6 +290,17 @@ bool isAllDownloadFinished(BuildContext context) {
   );
 }
 
-void turnOffWiFi(bool wifiStatus) async {
-  WiFiForIoTPlugin.setEnabled(!wifiStatus);
+Future<void> turnOffWiFi(bool wifiStatus) async {
+  await WiFiForIoTPlugin.setEnabled(!wifiStatus);
+}
+
+Future<void> stopAllDownload(BuildContext context) async {
+  BlocProvider.of<HomeScreenBloc>(context, listen: false)
+      .state
+      .torrentList
+      .forEach((element) async {
+    if (element.status.contains('downloading')) {
+      await TorrentApi.stopTorrent(hashes: [element.hash], context: context);
+    }
+  });
 }

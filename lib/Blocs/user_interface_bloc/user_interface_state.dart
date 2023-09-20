@@ -9,6 +9,7 @@ class UserInterfaceState extends Equatable {
 
   factory UserInterfaceState.initial() => UserInterfaceState(
         model: UserInterfaceModel(
+          showProgressBar: true,
           showDateAdded: true,
           showDateCreated: true,
           showRatio: false,
@@ -33,6 +34,7 @@ class UserInterfaceState extends Equatable {
           showInitialSeeding: false,
           showSequentialDownload: false,
           showDownloadTorrent: false,
+          tagPreferenceButtonValue: TagPreferenceButtonValue.multiSelection,
         ),
       );
 

@@ -737,7 +737,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                       FeedsApi
                                                           .listAllFeedsAndRules(
                                                               context: context);
-                                                      clearFeedsFields();
+
                                                       if (isUpdateFeedSelected) {
                                                         UpdateFeedApi.updateFeed(
                                                             type: "feed",
@@ -758,6 +758,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                 context:
                                                                     context);
                                                       }
+                                                      clearFeedsFields();
                                                     });
                                                   }
                                                 } else {
@@ -1011,7 +1012,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     top: 20),
                                                             child: Column(
                                                               crossAxisAlignment:
@@ -1019,12 +1020,15 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                       .start,
                                                               children: [
                                                                 Padding(
-                                                                  padding: const EdgeInsets
+                                                                  padding:
+                                                                      const EdgeInsets
                                                                           .only(
-                                                                      right: 20,
-                                                                      left: 20,
-                                                                      bottom:
-                                                                          5),
+                                                                          right:
+                                                                              20,
+                                                                          left:
+                                                                              20,
+                                                                          bottom:
+                                                                              5),
                                                                   child: Text(
                                                                     l10n.selected_magnet_link,
                                                                     style: TextStyle(
@@ -1043,7 +1047,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                                 ),
                                                                 Padding(
                                                                   padding: const EdgeInsets
-                                                                          .only(
+                                                                      .only(
                                                                       left:
                                                                           20.0,
                                                                       right:
@@ -1384,7 +1388,7 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                           ? Padding(
                                                               padding:
                                                                   const EdgeInsets
-                                                                          .only(
+                                                                      .only(
                                                                       top: 8.0),
                                                               child: Container(
                                                                 height: 1,

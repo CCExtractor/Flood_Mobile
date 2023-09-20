@@ -335,6 +335,11 @@
    "notification_stopped": "Stopped",
    "notification_downloading": "Downloading",
    "notification_error": "Download Error",
-   "notification_finished": "Download Finished"
+   "notification_finished": "Download Finished",
+   "login_field_tooltip_message" : "URL for your Flood instance (local, seedbox...).",
+   "tag_selection_heading": "Tag Selector Preference",
+   "single_selection_radio_button":"Single Selection",
+   "multi_selection_radio_button":"Multi Selection",
+   "show_progress_bar_option":"Show Progress Bar"
 }
   

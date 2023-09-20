@@ -33,11 +33,16 @@ void main() {
       expect(find.text('Sign in to your account'), findsOneWidget);
       expect(find.byKey(Key('Url TextField')), findsOneWidget);
       expect(find.byIcon(Icons.link), findsOneWidget);
+      expect(find.byIcon(Icons.info_outline), findsOneWidget);
+      await tester.tap(find.byIcon(Icons.info_outline));
+      await tester.pumpAndSettle();
+      expect(find.text('URL for your Flood instance (local, seedbox...).'),
+          findsOneWidget);
       expect(find.byIcon(Icons.paste), findsOneWidget);
       final urlControllerFinder = find.byKey(Key('Url TextField'));
       var urlController =
           tester.firstWidget(urlControllerFinder) as LoginScreenTextField;
-      expect(urlController.controller.text, 'http://localhost:3000');
+      expect(urlController.controller.text, 'https://yourserver.xirvik.com');
       expect(find.byKey(Key('Username TextField')), findsOneWidget);
       expect(find.byIcon(Icons.person), findsOneWidget);
       expect(find.text('Username'), findsOneWidget);

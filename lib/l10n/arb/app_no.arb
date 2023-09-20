@@ -321,5 +321,10 @@
     "notification_stopped": "Stoppet",
     "notification_downloading": "Laster ned",
     "notification_error": "Nedlastingsfeil",
-    "notification_finished": "Nedlasting fullført"
+    "notification_finished": "Nedlasting fullført",
+    "login_field_tooltip_message": "URL for din Flood-instans (lokal, seedbox...)",
+    "tag_selection_heading": "Foretrukket tagvelger",
+    "single_selection_radio_button": "Enkeltvalg",
+    "multi_selection_radio_button": "Flervalg",
+    "show_progress_bar_option": "Vis fremdriftslinje"
 }

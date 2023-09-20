@@ -321,5 +321,10 @@
     "notification_stopped": "Zastaveno",
     "notification_downloading": "Stahování",
     "notification_error": "Chyba při stahování",
-    "notification_finished": "Stahování dokončeno"
+    "notification_finished": "Stahování dokončeno",
+    "login_field_tooltip_message": "URL pro vaši Flood instanci (lokální, seedbox...)",
+    "tag_selection_heading": "Předvolba výběru značek",
+    "single_selection_radio_button": "Jednoduchý výběr",
+    "multi_selection_radio_button": "Více výběrů",
+    "show_progress_bar_option": "Zobrazovat pruh postupu"
 }
