@@ -326,5 +326,6 @@
     "tag_selection_heading": "Preferință pentru selector de etichete",
     "single_selection_radio_button": "Selecție unică",
     "multi_selection_radio_button": "Selecție multiplă",
-    "show_progress_bar_option": "Afișează bara de progres"
+    "show_progress_bar_option": "Afișează bara de progres",
+    "button_undo": "Anulează" 
 }

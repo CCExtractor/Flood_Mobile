@@ -327,5 +327,6 @@
     "tag_selection_heading": "タグセレクターの設定",
     "single_selection_radio_button": "単一選択",
     "multi_selection_radio_button": "複数選択",
-    "show_progress_bar_option": "プログレスバーを表示"
+    "show_progress_bar_option": "プログレスバーを表示",
+    "button_undo": "元に戻す" 
 }

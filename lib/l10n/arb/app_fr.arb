@@ -327,5 +327,6 @@
     "tag_selection_heading": "Préférence du sélecteur de balises",
     "single_selection_radio_button": "Sélection unique",
     "multi_selection_radio_button": "Sélection multiple",
-    "show_progress_bar_option": "Afficher la barre de progression"
+    "show_progress_bar_option": "Afficher la barre de progression",
+    "button_undo": "Annuler" 
 }

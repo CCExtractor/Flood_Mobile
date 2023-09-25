@@ -327,5 +327,6 @@
     "tag_selection_heading": "Taggväljarinställning",
     "single_selection_radio_button": "Enkelval",
     "multi_selection_radio_button": "Flerval",
-    "show_progress_bar_option": "Visa framstegsindikator"
+    "show_progress_bar_option": "Visa framstegsindikator",
+    "button_undo": "Ångra" 
 }
