@@ -17,6 +17,8 @@ import 'package:flood_mobile/Services/file_folder_nester.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
 
 class TorrentApi {
+  static List<int>? undoDeletes;
+
   // Gets list of torrents
   static Stream<List<TorrentModel>> getAllTorrents(
       {required BuildContext context}) async* {
@@ -245,7 +247,7 @@ class TorrentApi {
       String url =
           BlocProvider.of<ApiBloc>(context, listen: false).state.baseUrl +
               ApiEndpoints.deleteTorrent;
-      print('---DELETE TORRENT---');
+      print('---STARTING DELETE---');
       print(url);
       Response response;
       Dio dio = new Dio();
@@ -260,6 +262,9 @@ class TorrentApi {
       mp['deleteData'] = deleteWithData;
       String rawBody = json.encode(mp);
       print(rawBody);
+      await Future.delayed(Duration(seconds: 4));
+      if (undoDeletes == id) return;
+      print('---DELETING TORRENT---');
       response = await dio.post(
         url,
         data: rawBody,
@@ -274,6 +279,14 @@ class TorrentApi {
       print('--ERROR IN TORRENT DELETE--');
       print(error.toString());
     }
+    undoDeletes = null;
+  }
+
+  static Future<void> undoDelete({
+    required List<int> id,
+  }) async {
+    print('---UNDO DELETE---');
+    undoDeletes = id;
   }
 
   static Stream<Map<String, dynamic>> getTorrentContent({

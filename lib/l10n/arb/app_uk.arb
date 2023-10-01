@@ -327,5 +327,6 @@
     "tag_selection_heading": "Пріоритет вибору тегів",
     "single_selection_radio_button": "Одиночний вибір",
     "multi_selection_radio_button": "Множинний вибір",
-    "show_progress_bar_option": "Показати панель прогресу"
+    "show_progress_bar_option": "Показати панель прогресу",
+    "button_undo": "Скасувати" 
 }

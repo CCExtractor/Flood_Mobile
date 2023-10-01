@@ -340,6 +340,7 @@
    "tag_selection_heading": "Tag Selector Preference",
    "single_selection_radio_button":"Single Selection",
    "multi_selection_radio_button":"Multi Selection",
-   "show_progress_bar_option":"Show Progress Bar"
+   "show_progress_bar_option":"Show Progress Bar",
+    "button_undo": "Undo" 
 }
   

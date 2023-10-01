@@ -327,5 +327,6 @@
     "tag_selection_heading": "标签选择器优先级",
     "single_selection_radio_button": "单选",
     "multi_selection_radio_button": "多选",
-    "show_progress_bar_option": "显示进度条"
+    "show_progress_bar_option": "显示进度条",
+    "button_undo": "撤销" 
 }

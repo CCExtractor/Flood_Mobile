@@ -326,5 +326,6 @@
     "tag_selection_heading": "تفضيلات محدد الوسوم",
     "single_selection_radio_button": "اختيار واحد",
     "multi_selection_radio_button": "اختيار متعدد",
-    "show_progress_bar_option": "عرض شريط التقدم"
+    "show_progress_bar_option": "عرض شريط التقدم",
+    "button_undo": "تراجع" 
 }

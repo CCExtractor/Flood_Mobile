@@ -4,6 +4,9 @@ import 'package:flood_mobile/Blocs/theme_bloc/theme_bloc.dart';
 import 'package:flood_mobile/Model/torrent_model.dart';
 import 'package:flood_mobile/Pages/widgets/flood_snackbar.dart';
 import 'package:flood_mobile/l10n/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../Blocs/home_screen_bloc/home_screen_bloc.dart';
 
 class DeleteTorrentSheet extends StatefulWidget {
   final int themeIndex;
@@ -118,6 +121,21 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                   ),
                   child: ElevatedButton(
                     onPressed: () {
+                      final homeScreenBloc =
+                          BlocProvider.of<HomeScreenBloc>(context);
+                      List<TorrentModel> torrentList =
+                          homeScreenBloc.state.torrentList;
+
+                      List<TorrentModel> remainingTorrents = torrentList
+                          .where((torrent) => !widget.torrents.any(
+                              (deletedTorrent) => deletedTorrent == torrent))
+                          .toList();
+
+                      final SetTorrentListEvent setTorrentListEvent =
+                          SetTorrentListEvent(
+                              newTorrentList: remainingTorrents);
+                      homeScreenBloc.add(setTorrentListEvent);
+
                       List<String> hashes = [];
                       widget.torrents.forEach((element) {
                         hashes.add(element.hash);
@@ -132,7 +150,13 @@ class _DeleteTorrentSheetState extends State<DeleteTorrentSheet> {
                       final deleteTorrentSnackBar = addFloodSnackBar(
                           SnackbarType.caution,
                           context.l10n.torrent_delete_snackbar,
-                          context.l10n.button_dismiss);
+                          context.l10n.button_dismiss,
+                          undoText: context.l10n.button_undo, undoFunction: () {
+                        final SetTorrentListEvent setTorrentListEvent =
+                            SetTorrentListEvent(newTorrentList: torrentList);
+                        homeScreenBloc.add(setTorrentListEvent);
+                        TorrentApi.undoDelete(id: widget.indexes);
+                      });
 
                       ScaffoldMessenger.of(context).clearSnackBars();
                       ScaffoldMessenger.of(context)

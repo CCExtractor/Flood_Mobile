@@ -326,5 +326,6 @@
     "tag_selection_heading": "टैग सिलेक्शन प्राथमिकता",
     "single_selection_radio_button": "एकल चयन",
     "multi_selection_radio_button": "बहुविकल्पी चयन",
-    "show_progress_bar_option": "प्रगति संकेतक दिखाएं"
+    "show_progress_bar_option": "प्रगति संकेतक दिखाएं",
+    "button_undo": "पूर्ववत करें" 
 }

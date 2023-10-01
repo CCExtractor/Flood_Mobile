@@ -326,5 +326,6 @@
     "tag_selection_heading": "Preferencje wyboru tagów",
     "single_selection_radio_button": "Pojedynczy wybór",
     "multi_selection_radio_button": "Wielokrotny wybór",
-    "show_progress_bar_option": "Pokaż pasek postępu"
+    "show_progress_bar_option": "Pokaż pasek postępu",
+    "button_undo": "Cofnij" 
 }

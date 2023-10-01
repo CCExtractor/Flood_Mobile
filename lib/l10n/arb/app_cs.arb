@@ -326,5 +326,6 @@
     "tag_selection_heading": "Předvolba výběru značek",
     "single_selection_radio_button": "Jednoduchý výběr",
     "multi_selection_radio_button": "Více výběrů",
-    "show_progress_bar_option": "Zobrazovat pruh postupu"
+    "show_progress_bar_option": "Zobrazovat pruh postupu",
+    "button_undo": "Zpět" 
 }

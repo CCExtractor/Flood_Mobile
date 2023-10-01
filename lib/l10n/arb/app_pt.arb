@@ -326,5 +326,6 @@
     "tag_selection_heading": "Preferência do seletor de tags",
     "single_selection_radio_button": "Seleção única",
     "multi_selection_radio_button": "Seleção múltipla",
-    "show_progress_bar_option": "Mostrar barra de progresso"
+    "show_progress_bar_option": "Mostrar barra de progresso",
+    "button_undo": "Desfazer" 
 }

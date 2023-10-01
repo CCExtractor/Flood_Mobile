@@ -326,5 +326,6 @@
     "tag_selection_heading": "Címkeválasztó előnyben részesítése",
     "single_selection_radio_button": "Egyszeres kiválasztás",
     "multi_selection_radio_button": "Többszörös kiválasztás",
-    "show_progress_bar_option": "Folyamatjelző megjelenítése"
+    "show_progress_bar_option": "Folyamatjelző megjelenítése",
+    "button_undo": "Visszavonás" 
 }

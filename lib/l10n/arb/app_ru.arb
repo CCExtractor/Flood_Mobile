@@ -326,5 +326,6 @@
     "tag_selection_heading": "Предпочтение селектора тегов",
     "single_selection_radio_button": "Одиночный выбор",
     "multi_selection_radio_button": "Множественный выбор",
-    "show_progress_bar_option": "Показывать полосу прогресса"
+    "show_progress_bar_option": "Показывать полосу прогресса",
+    "button_undo": "Отменить" 
 }
