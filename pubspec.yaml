@@ -74,6 +74,7 @@ dependencies:
   wakelock: ^0.6.2
   battery_plus: ^2.0.2
   wifi_iot: ^0.3.18
+  animate_do: ^3.1.2
 
 dependency_overrides:
   meta: ^1.7.0

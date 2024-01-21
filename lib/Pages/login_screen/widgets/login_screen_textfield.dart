@@ -25,11 +25,25 @@ class LoginScreenTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        color: ThemeBloc.theme(themeIndex).primaryColor,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
       child: Stack(
         children: [
           TextFormField(
             controller: controller,
             obscureText: obscureText,
+            cursorColor:
+                ThemeBloc.theme(themeIndex).textTheme.bodyLarge!.color!,
             validator: (String? value) {
               if (value != null && value.isEmpty) {
                 return context.l10n.login_screen_textfield_validator;
@@ -46,42 +60,31 @@ class LoginScreenTextField extends StatelessWidget {
               ),
               labelText: labelText,
               labelStyle: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.bold,
-                  color:
-                      ThemeBloc.theme(themeIndex).textTheme.bodyLarge!.color!),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: ThemeBloc.theme(themeIndex).primaryColorDark,
-                ),
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold,
+                color: ThemeBloc.theme(themeIndex).textTheme.bodyLarge!.color!,
               ),
-              border: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color:
-                      ThemeBloc.theme(themeIndex).textTheme.bodyLarge!.color!,
-                ),
-              ),
-              disabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color:
-                      ThemeBloc.theme(themeIndex).textTheme.bodyLarge!.color!,
-                ),
-              ),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color:
-                      ThemeBloc.theme(themeIndex).textTheme.bodyLarge!.color!,
-                ),
-              ),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color:
+                        ThemeBloc.theme(themeIndex).textTheme.bodyLarge!.color!,
+                  ),
+                  borderRadius: BorderRadius.circular(10)),
+              enabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              disabledBorder: InputBorder.none,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              trailingIconButton1 ?? Container(),
-              trailingIconButton2 ?? Container(),
-            ],
-          )
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                trailingIconButton1 ?? Container(),
+                trailingIconButton2 ?? Container(),
+              ],
+            ),
+          ),
         ],
       ),
     );
