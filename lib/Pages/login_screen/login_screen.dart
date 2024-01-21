@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:animate_do/animate_do.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,87 +95,93 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: hp * 0.06,
                       ),
-                      LoginScreenTextField(
-                        key: Key('Url TextField'),
-                        controller: urlController,
-                        labelText: l10n.login_screen_url,
-                        prefixIcon: Icons.link,
-                        themeIndex: themeIndex,
-                        trailingIconButton1: Align(
-                          alignment: Alignment.centerRight,
-                          child: IconButton(
-                            onPressed: () {
-                              FlutterClipboard.paste().then((value) {
-                                setState(() {
-                                  urlController.text = value;
+                      FadeInLeft(
+                        child: LoginScreenTextField(
+                          key: Key('Url TextField'),
+                          controller: urlController,
+                          labelText: l10n.login_screen_url,
+                          prefixIcon: Icons.link,
+                          themeIndex: themeIndex,
+                          trailingIconButton1: Align(
+                            alignment: Alignment.centerRight,
+                            child: IconButton(
+                              onPressed: () {
+                                FlutterClipboard.paste().then((value) {
+                                  setState(() {
+                                    urlController.text = value;
+                                  });
                                 });
-                              });
-                            },
-                            icon: Icon(
-                              Icons.paste,
-                              color: ThemeBloc.theme(themeIndex)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .color!,
-                              size: 20,
+                              },
+                              icon: Icon(
+                                Icons.paste,
+                                color: ThemeBloc.theme(themeIndex)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .color!,
+                                size: 20,
+                              ),
                             ),
                           ),
-                        ),
-                        trailingIconButton2: Align(
-                          alignment: Alignment.centerRight,
-                          child: Tooltip(
-                            triggerMode: TooltipTriggerMode.tap,
-                            message:
-                                "URL for your Flood instance (local, seedbox...).",
-                            showDuration: Duration(seconds: 3),
-                            child: Icon(
-                              Icons.info_outline,
-                              color: ThemeBloc.theme(themeIndex)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .color!,
-                              size: 20,
+                          trailingIconButton2: Align(
+                            alignment: Alignment.centerRight,
+                            child: Tooltip(
+                              triggerMode: TooltipTriggerMode.tap,
+                              message:
+                                  "URL for your Flood instance (local, seedbox...).",
+                              showDuration: Duration(seconds: 3),
+                              child: Icon(
+                                Icons.info_outline,
+                                color: ThemeBloc.theme(themeIndex)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .color!,
+                                size: 20,
+                              ),
                             ),
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: hp * 0.01,
+                        height: hp * 0.02,
                       ),
-                      LoginScreenTextField(
-                        key: Key('Username TextField'),
-                        controller: usernameController,
-                        labelText: l10n.login_screen_username,
-                        prefixIcon: Icons.person,
-                        themeIndex: themeIndex,
+                      FadeInRight(
+                        child: LoginScreenTextField(
+                          key: Key('Username TextField'),
+                          controller: usernameController,
+                          labelText: l10n.login_screen_username,
+                          prefixIcon: Icons.person,
+                          themeIndex: themeIndex,
+                        ),
                       ),
                       SizedBox(
-                        height: hp * 0.01,
+                        height: hp * 0.02,
                       ),
-                      LoginScreenTextField(
-                        key: Key('Password TextField'),
-                        controller: passwordController,
-                        labelText: l10n.login_screen_password,
-                        prefixIcon: Icons.lock_outline,
-                        themeIndex: themeIndex,
-                        obscureText: showPass,
-                        trailingIconButton1: Align(
-                          alignment: Alignment.centerRight,
-                          child: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                showPass = !showPass;
-                              });
-                            },
-                            icon: Icon(
-                              (showPass)
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: ThemeBloc.theme(themeIndex)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .color!,
-                              size: 20,
+                      FadeInLeft(
+                        child: LoginScreenTextField(
+                          key: Key('Password TextField'),
+                          controller: passwordController,
+                          labelText: l10n.login_screen_password,
+                          prefixIcon: Icons.lock_outline,
+                          themeIndex: themeIndex,
+                          obscureText: showPass,
+                          trailingIconButton1: Align(
+                            alignment: Alignment.centerRight,
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  showPass = !showPass;
+                                });
+                              },
+                              icon: Icon(
+                                (showPass)
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: ThemeBloc.theme(themeIndex)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .color!,
+                                size: 20,
+                              ),
                             ),
                           ),
                         ),
@@ -182,101 +189,104 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: hp * 0.06,
                       ),
-                      Container(
-                        height: hp * 0.07,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20)),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            if (_formKey.currentState != null &&
-                                _formKey.currentState!.validate()) {
-                              BlocProvider.of<ApiBloc>(context, listen: false)
-                                  .add(
-                                SetBaseUrlEvent(url: urlController.text),
-                              );
-                              await Future.delayed(Duration.zero);
-                              setState(() {
-                                showSpinner = true;
-                              });
-                              bool isLoginSuccessful = await AuthApi.loginUser(
-                                  username: usernameController.text,
-                                  password: passwordController.text,
-                                  context: context);
-                              if (isLoginSuccessful) {
-                                Toasts.showSuccessToast(
-                                    msg: l10n.login_success);
-                                Navigator.of(context).pushNamedAndRemoveUntil(
-                                  Routes.homeScreenRoute,
-                                  (Route<dynamic> route) => false,
-                                  arguments: themeIndex,
+                      FadeInUp(
+                        child: Container(
+                          height: hp * 0.07,
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20)),
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (_formKey.currentState != null &&
+                                  _formKey.currentState!.validate()) {
+                                BlocProvider.of<ApiBloc>(context, listen: false)
+                                    .add(
+                                  SetBaseUrlEvent(url: urlController.text),
                                 );
-                                SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
-                                bool batteryOptimizationInfoSeen =
-                                    prefs.getBool(
-                                            'batteryOptimizationInfoSeen') ??
-                                        false;
-                                if (batteryOptimizationInfoSeen == false) {
-                                  BlocProvider.of<LoginScreenBloc>(context,
-                                          listen: false)
-                                      .add(
-                                          SetBatteryOptimizationInfoStatusEvent(
-                                              seen: true));
-
-                                  Future.delayed(
-                                    Duration.zero,
-                                    () => showGeneralDialog(
-                                      barrierDismissible: false,
-                                      context: context,
-                                      barrierColor: Colors.black54,
-                                      // space around dialog
-                                      transitionDuration:
-                                          Duration(milliseconds: 1000),
-                                      transitionBuilder:
-                                          (context, a1, a2, child) {
-                                        return ScaleTransition(
-                                          scale: CurvedAnimation(
-                                              parent: a1,
-                                              curve: Curves.elasticOut,
-                                              reverseCurve:
-                                                  Curves.easeOutCubic),
-                                          child: CustomDialogAnimation(
-                                            themeIndex: 2,
-                                          ),
-                                        );
-                                      },
-                                      pageBuilder: (BuildContext context,
-                                          Animation<double> animation,
-                                          Animation<double>
-                                              secondaryAnimation) {
-                                        return Container();
-                                      },
-                                    ),
+                                await Future.delayed(Duration.zero);
+                                setState(() {
+                                  showSpinner = true;
+                                });
+                                bool isLoginSuccessful =
+                                    await AuthApi.loginUser(
+                                        username: usernameController.text,
+                                        password: passwordController.text,
+                                        context: context);
+                                if (isLoginSuccessful) {
+                                  Toasts.showSuccessToast(
+                                      msg: l10n.login_success);
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                    Routes.homeScreenRoute,
+                                    (Route<dynamic> route) => false,
+                                    arguments: themeIndex,
                                   );
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  bool batteryOptimizationInfoSeen =
+                                      prefs.getBool(
+                                              'batteryOptimizationInfoSeen') ??
+                                          false;
+                                  if (batteryOptimizationInfoSeen == false) {
+                                    BlocProvider.of<LoginScreenBloc>(context,
+                                            listen: false)
+                                        .add(
+                                            SetBatteryOptimizationInfoStatusEvent(
+                                                seen: true));
+
+                                    Future.delayed(
+                                      Duration.zero,
+                                      () => showGeneralDialog(
+                                        barrierDismissible: false,
+                                        context: context,
+                                        barrierColor: Colors.black54,
+                                        // space around dialog
+                                        transitionDuration:
+                                            Duration(milliseconds: 1000),
+                                        transitionBuilder:
+                                            (context, a1, a2, child) {
+                                          return ScaleTransition(
+                                            scale: CurvedAnimation(
+                                                parent: a1,
+                                                curve: Curves.elasticOut,
+                                                reverseCurve:
+                                                    Curves.easeOutCubic),
+                                            child: CustomDialogAnimation(
+                                              themeIndex: 2,
+                                            ),
+                                          );
+                                        },
+                                        pageBuilder: (BuildContext context,
+                                            Animation<double> animation,
+                                            Animation<double>
+                                                secondaryAnimation) {
+                                          return Container();
+                                        },
+                                      ),
+                                    );
+                                  }
+                                } else {
+                                  Toasts.showFailToast(msg: l10n.login_fail);
                                 }
-                              } else {
-                                Toasts.showFailToast(msg: l10n.login_fail);
+                                setState(() {
+                                  showSpinner = false;
+                                });
                               }
-                              setState(() {
-                                showSpinner = false;
-                              });
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14.0),
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14.0),
+                              ),
+                              backgroundColor:
+                                  ThemeBloc.theme(themeIndex).primaryColorDark,
                             ),
-                            backgroundColor:
-                                ThemeBloc.theme(themeIndex).primaryColorDark,
-                          ),
-                          child: Center(
-                            child: Text(
-                              l10n.login_button,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
+                            child: Center(
+                              child: Text(
+                                l10n.login_button,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ),
                           ),
                         ),
