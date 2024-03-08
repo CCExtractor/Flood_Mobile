@@ -217,9 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         final selectedTorrent =
                             BlocProvider.of<MultipleSelectTorrentBloc>(context,
                                 listen: false);
-                        return WillPopScope(
-                          onWillPop: () =>
-                              onBackPressed(timeBackPressed, context),
+                        return PopScope(
                           child: Scaffold(
                             appBar: AppBar(
                               key: Key('AppBar $themeIndex'),
